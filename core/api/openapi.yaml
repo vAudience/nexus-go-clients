@@ -1,0 +1,4727 @@
+openapi: 3.0.1
+info:
+  contact: {}
+  description: API for the Vaudience AI Core
+  license:
+    name: Copyrighted
+    url: https://www.vaudience.ai
+  title: Vaudience AI Core API
+  version: 0.2.0
+servers:
+- url: https://core.dev.ai.vaud.one/
+tags:
+- description: anything related to the Health route
+  name: Health
+- description: anything related to the Metrics route
+  name: Metrics
+- description: anything related to the Version route
+  name: Version
+- description: anything related to the Auth route
+  name: Auth
+- description: anything related to the Entitlements route
+  name: Entitlements
+- description: anything related to the Organizations route
+  name: Organizations
+- description: anything related to the Roles route
+  name: Roles
+- description: anything related to the Stripe route
+  name: Stripe
+- description: anything related to the Users route
+  name: Users
+- description: anything related to the UserSettings route
+  name: UserSettings
+paths:
+  /info/health:
+    get:
+      description: a simple 200 return endpoint to ensure the service is responsive
+      operationId: HealthGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+          description: OK
+      summary: checks for service health
+      tags:
+      - Health
+  /info/metrics:
+    get:
+      description: go prometheus client provides this standard (basic) metrics endpoint
+      operationId: MetricsGet
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "500":
+          content: {}
+          description: Internal Server Error
+      summary: Prometheus provided metrics endpoint
+      tags:
+      - Metrics
+  /info/version:
+    get:
+      description: returns the version number of this service
+      operationId: VersionGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+          description: OK
+      summary: returns the service version
+      tags:
+      - Version
+  /v1/auth/authenticated:
+    get:
+      description: Authenticated
+      operationId: Authenticated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedResponse'
+          description: OK
+      security:
+      - AccessToken: []
+      summary: Authenticated
+      tags:
+      - Auth
+  /v1/auth/login:
+    get:
+      description: Login
+      operationId: Login
+      parameters:
+      - description: encoded return to url after login
+        in: query
+        name: returnTo
+        required: true
+        schema:
+          type: string
+      responses:
+        "302":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Redirect to OIDC Login
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      summary: Login
+      tags:
+      - Auth
+  /v1/auth/logout:
+    post:
+      description: Logout
+      operationId: Logout
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - RefreshToken: []
+      summary: Logout
+      tags:
+      - Auth
+  /v1/auth/refresh:
+    post:
+      description: Refresh
+      operationId: Refresh
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - RefreshToken: []
+      summary: Refresh
+      tags:
+      - Auth
+  /v1/entitlements/me:
+    get:
+      description: Get entitlements for the current user
+      operationId: GetMyEntitlements
+      parameters:
+      - description: Organization ID
+        in: query
+        name: organizationId
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/EntitlementResponse'
+                type: object
+          description: OK
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get my entitlements
+      tags:
+      - Entitlements
+  /v1/organizations:
+    post:
+      description: Create an Organization
+      operationId: CreateOrganization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPostRequest'
+        description: organization object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organization
+  /v1/organizations/me:
+    get:
+      description: Get all my organizations (owner or member)
+      operationId: GetAllMyOrganizations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationResponse'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all my organizations
+      tags:
+      - Organizations
+  /v1/organizations/{id}:
+    delete:
+      description: Delete Organizations by ID
+      operationId: DeleteOrganization
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete Organization by ID
+      tags:
+      - Organizations
+    get:
+      description: Get an Organization by id
+      operationId: GetOrganization
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Organization\tNot\tFound"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get an Organization by id
+      tags:
+      - Organizations
+    patch:
+      description: Patch an Organization by ID
+      operationId: PatchOrganization
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPatchRequest'
+        description: organization object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch an Organization by ID
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organization
+  /v1/organizations/{id}/checkout-sessions/{productId}:
+    get:
+      description: Get a checkout session for an Organization
+      operationId: GetCheckoutSession
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the product
+        in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - description: The URL to which Stripe should send customers when payment is
+          complete
+        in: query
+        name: successUrl
+        required: true
+        schema:
+          type: string
+      - description: "If set, Checkout displays a back button and customers will be\
+          \ directed to this URL if they decide to cancel payment"
+        in: query
+        name: cancelUrl
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCheckoutSessionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a checkout session for an Organization
+      tags:
+      - Organizations
+  /v1/organizations/{id}/credits-payments:
+    get:
+      description: Get all credits payments for an Organization
+      operationId: GetCreditsPayments
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationCreditsPaymentResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all credits payments for an Organization
+      tags:
+      - Organizations
+  /v1/organizations/{id}/customer-portal-sessions/{typeId}:
+    get:
+      description: Get a stripe customer portal session for an Organization
+      operationId: GetCustomerPortalSession
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: type of the customer portal session
+        in: path
+        name: typeId
+        required: true
+        schema:
+          type: string
+      - description: The URL to redirect customers to when they click on the portal’s
+          link to return to the website.
+        in: query
+        name: returnUrl
+        required: true
+        schema:
+          type: string
+      - description: The URL to redirect customers to when they successfully complete
+          the flow.
+        in: query
+        name: successUrl
+        schema:
+          type: string
+      - description: The product id to switch to.
+        in: query
+        name: productId
+        schema:
+          type: string
+      - description: The number of seats.
+        in: query
+        name: seats
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCustomerPortalSessionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a stripe customer portal session for an Organization
+      tags:
+      - Organizations
+  /v1/organizations/{id}/invites:
+    get:
+      description: Get all invites for an Organization
+      operationId: GetInvites
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationInviteResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all invites for an Organization
+      tags:
+      - Organizations
+    post:
+      description: Invite a user to an Organization
+      operationId: Invite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationInviteRequest'
+        description: organization invite object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationInviteResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invite Already Exists
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Invite a user to an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organizationInvite
+  /v1/organizations/{id}/invites/{inviteId}:
+    delete:
+      description: Delete Organization Invite by ID
+      operationId: DeleteInvite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the invite
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invite Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete Organization Invite by ID
+      tags:
+      - Organizations
+    get:
+      description: Get an invite for an Organization
+      operationId: GetInvite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the invite
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationInviteResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Invite Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get an invite for an Organization
+      tags:
+      - Organizations
+  /v1/organizations/{id}/invites/{inviteId}/accept:
+    post:
+      description: Accept Organization Invite
+      operationId: AcceptInvite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the invite
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMemberResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invite Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invite Already Accepted
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Accept Organization Invite
+      tags:
+      - Organizations
+  /v1/organizations/{id}/invites/{inviteId}/resend:
+    post:
+      description: Resend Organization Invite by ID
+      operationId: ResendInvite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the invite
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationInviteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invite Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Resend Organization Invite by ID
+      tags:
+      - Organizations
+  /v1/organizations/{id}/keys:
+    get:
+      description: Get all api keys for an Organization
+      operationId: GetOrganizationApiKeys
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationApiKeyResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all api keys for an Organization
+      tags:
+      - Organizations
+    post:
+      description: Create an api key for an Organization
+      operationId: CreateOrganizationApiKey
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationApiKeyPostRequest'
+        description: api key object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create an api key for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: key
+  /v1/organizations/{id}/keys/{keyId}:
+    delete:
+      description: Delete an api key for an Organization
+      operationId: DeleteOrganizationApiKey
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the key
+        in: path
+        name: keyId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Api Key Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete an api key for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch an api key for an Organization
+      operationId: PatchOrganizationApiKey
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the key
+        in: path
+        name: keyId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationApiKeyPatchRequest'
+        description: api key object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Api Key Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch an api key for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: key
+  /v1/organizations/{id}/members:
+    get:
+      description: Get all members for an Organization
+      operationId: GetMembers
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationMemberResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all members for an Organization
+      tags:
+      - Organizations
+    post:
+      description: Create a member for an Organization
+      operationId: CreateMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberPostRequest'
+        description: member object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMemberResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create a member for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: member
+  /v1/organizations/{id}/members/{memberId}:
+    delete:
+      description: Delete a member for an Organization
+      operationId: DeleteMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      - description: action to take on resources owned by the member
+        in: query
+        name: resourcesAction
+        schema:
+          enum:
+          - delete
+          - transfer
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MemberDeleteResponse'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Member Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete a member for an Organization
+      tags:
+      - Organizations
+    get:
+      description: Get a member for an Organization
+      operationId: GetMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMemberResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Member Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a member for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch a member for an Organization
+      operationId: PatchMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberPatchRequest'
+        description: member object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMemberResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Member Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch a member for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: member
+  /v1/organizations/{id}/roles:
+    get:
+      description: Get all roles for an Organization
+      operationId: GetOrganizationRoles
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationRoleResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all roles for an Organization
+      tags:
+      - Organizations
+    post:
+      description: Create a role for an Organization
+      operationId: CreateOrganizationRole
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RolePostRequest'
+        description: role object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationRoleResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create a role for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: role
+  /v1/organizations/{id}/roles/{roleId}:
+    delete:
+      description: Delete a role for an Organization
+      operationId: DeleteOrganizationRole
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the role
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Role Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete a role for an Organization
+      tags:
+      - Organizations
+    get:
+      description: Get a role for an Organization
+      operationId: GetOrganizationRole
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the role
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationRoleResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Role Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a role for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch a role for an Organization
+      operationId: PatchOrganizationRole
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the role
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RolePatchRequest'
+        description: role object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationRoleResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Role Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch a role for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: role
+  /v1/organizations/{id}/settings:
+    delete:
+      description: Delete settings for an Organization
+      operationId: DeleteOrganizationSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete settings for an Organization
+      tags:
+      - Organizations
+    get:
+      description: Get settings for an Organization
+      operationId: GetOrganizationSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get settings for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch settings for an Organization
+      operationId: PatchOrganizationSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationSettingsPatchRequest'
+        description: settings object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch settings for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: settings
+    post:
+      description: Create settings for an Organization
+      operationId: CreateOrganizationSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationSettingsPostRequest'
+        description: settings object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Settings Exists
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create settings for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: settings
+  /v1/organizations/{id}/subscription:
+    delete:
+      description: Delete a subscription for an Organization
+      operationId: DeleteSubscription
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete a subscription for an Organization
+      tags:
+      - Organizations
+    get:
+      description: Get a subscription for an Organization
+      operationId: GetSubscription
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSubscriptionResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a subscription for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Update a subscription for an Organization
+      operationId: UpdateSubscription
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationSubscriptionPatchRequest'
+        description: organization subscription object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSubscriptionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Update a subscription for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organization
+    post:
+      description: Create a subscription for an Organization
+      operationId: CreateSubscription
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationSubscriptionPostRequest'
+        description: organization subscription object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSubscriptionResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create a subscription for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organization
+  /v1/organizations/{id}/subscription/reactivate:
+    patch:
+      description: Reactivate a subscription for an Organization
+      operationId: ReactivateSubscription
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSubscriptionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Reactivate a subscription for an Organization
+      tags:
+      - Organizations
+  /v1/organizations/{id}/teams:
+    get:
+      description: Get all teams for an Organization
+      operationId: GetTeams
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TeamResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all teams for an Organization
+      tags:
+      - Organizations
+    post:
+      description: Create a team for an Organization
+      operationId: CreateTeam
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamPostRequest'
+        description: team object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create a team for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: team
+  /v1/organizations/{id}/teams/{teamId}:
+    delete:
+      description: Delete a team for an Organization
+      operationId: DeleteTeam
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Team Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete a team for an Organization
+      tags:
+      - Organizations
+    get:
+      description: Get a team for an Organization
+      operationId: GetTeam
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Team Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a team for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch a team for an Organization
+      operationId: PatchTeam
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamPatchRequest'
+        description: team object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Team Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch a team for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: team
+  /v1/organizations/{id}/teams/{teamId}/members:
+    get:
+      description: Get all members for a team
+      operationId: GetTeamMembers
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TeamMemberResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all members for a team
+      tags:
+      - Organizations
+    post:
+      description: Add a member to a team
+      operationId: CreateTeamMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberPostRequest'
+        description: member object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMemberResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization or Team Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Add a member to a team
+      tags:
+      - Organizations
+      x-codegen-request-body-name: member
+  /v1/organizations/{id}/teams/{teamId}/members/{memberId}:
+    delete:
+      description: Remove a member from a team
+      operationId: DeleteTeamMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Member Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Remove a member from a team
+      tags:
+      - Organizations
+    get:
+      description: Get a member for a team
+      operationId: GetTeamMember
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the team
+        in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMemberResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Member Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a member for a team
+      tags:
+      - Organizations
+  /v1/roles:
+    get:
+      description: Get all Roles
+      operationId: GetAllRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoleResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get all Roles
+      tags:
+      - Roles
+  /v1/roles/{id}:
+    get:
+      description: Get a Role
+      operationId: GetRole
+      parameters:
+      - description: role id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a Role
+      tags:
+      - Roles
+  /v1/roles/{id}/users/{userId}:
+    delete:
+      description: Revoke a Role from a User
+      operationId: RevokeRole
+      parameters:
+      - description: role id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: user id
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Revoke a Role from a User
+      tags:
+      - Roles
+    post:
+      description: Assign a Role to a User
+      operationId: AssignRole
+      parameters:
+      - description: role id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: user id
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRoleResponse'
+          description: Created
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Assign a Role to a User
+      tags:
+      - Roles
+  /v1/stripe/webhook:
+    post:
+      description: Stripe Webhook
+      operationId: StripeWebhook
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      summary: Stripe Webhook
+      tags:
+      - Stripe
+  /v1/user-settings:
+    post:
+      description: Create a UserSettings
+      operationId: CreateUserSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingsPostRequest'
+        description: userSettings object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Create a UserSettings
+      tags:
+      - UserSettings
+      x-codegen-request-body-name: userSettings
+  /v1/user-settings/me:
+    get:
+      description: Get UserSettings for the authenticated user
+      operationId: GetForUserSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get UserSettings for the authenticated user
+      tags:
+      - UserSettings
+  /v1/user-settings/{id}:
+    delete:
+      description: Delete a UserSettings by ID
+      operationId: DeleteUserSettings
+      parameters:
+      - description: UserSettings ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Delete a UserSettings by ID
+      tags:
+      - UserSettings
+    get:
+      description: Get a UserSettings by ID
+      operationId: GetUserSettings
+      parameters:
+      - description: UserSettings ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a UserSettings by ID
+      tags:
+      - UserSettings
+    patch:
+      description: Patch a UserSettings
+      operationId: PatchUserSettings
+      parameters:
+      - description: UserSettings ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSettingsPatchRequest'
+        description: userSettings object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Patch a UserSettings
+      tags:
+      - UserSettings
+      x-codegen-request-body-name: userSettings
+  /v1/users/email/{email}:
+    get:
+      description: Get a user by email
+      operationId: GetUserByEmail
+      parameters:
+      - description: User email
+        in: path
+        name: email
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a user by email
+      tags:
+      - Users
+  /v1/users/username/{username}:
+    get:
+      description: Get a user by username
+      operationId: GetUserByUsername
+      parameters:
+      - description: User username
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a user by username
+      tags:
+      - Users
+  /v1/users/{id}:
+    get:
+      description: Get a user by ID
+      operationId: GetUser
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      security:
+      - AccessToken: []
+        ApiKey: []
+      summary: Get a user by ID
+      tags:
+      - Users
+components:
+  schemas:
+    AuthenticatedResponse:
+      example:
+        authenticated: true
+        tokenExpiresInSec: 0
+        name: name
+        userId: userId
+        email: email
+        username: username
+      properties:
+        authenticated:
+          type: boolean
+        email:
+          type: string
+        name:
+          type: string
+        tokenExpiresInSec:
+          type: integer
+        userId:
+          type: string
+        username:
+          type: string
+      required:
+      - authenticated
+      type: object
+    EntitlementResponse:
+      properties:
+        enabled:
+          type: boolean
+        status:
+          type: string
+      required:
+      - enabled
+      - status
+      type: object
+    ErrorCode:
+      enum:
+      - permission_denied
+      - request_body_invalid
+      - unknown
+      - unauthorized
+      - user_email_not_in_token
+      - user_id_not_in_token
+      - validation_failed
+      - association_id_invalid
+      - association_role_id_invalid
+      - created_by_invalid
+      - member_id_invalid
+      - organization_id_invalid
+      - organization_api_key_id_invalid
+      - organization_invite_id_invalid
+      - organization_role_id_invalid
+      - product_role_id_invalid
+      - role_id_invalid
+      - team_id_invalid
+      - user_id_invalid
+      - user_settings_id_invalid
+      - association_member_not_found
+      - association_role_not_found
+      - organization_not_found
+      - organization_api_key_not_found
+      - organization_invite_not_found
+      - organization_subscription_not_found
+      - product_not_found
+      - role_not_found
+      - team_not_found
+      - user_role_not_found
+      - user_settings_not_found
+      - user_not_found
+      - auth_state_mismatch
+      - auth_code_is_required
+      - auth_return_to_is_required
+      - auth_refresh_token_is_required
+      - auth_verifier_is_required
+      - association_role_is_default
+      - association_role_in_use
+      - association_member_has_role
+      - association_member_has_not_role
+      - organization_has_subscription
+      - organization_has_subscription_plan
+      - organization_has_subscription_seats
+      - organization_has_active_subscription
+      - organization_has_no_active_subscription
+      - organization_has_no_customer
+      - organization_seats_maximum_reached
+      - organization_seats_minimum_required
+      - organization_user_is_not_member
+      - organization_subscription_cancel_at_period_end
+      - organization_subscription_canceled
+      - organization_subscription_inactive
+      - organization_subscription_incomplete_past_due
+      - organization_subscription_period_end_invalid
+      - organization_subscription_requires_payment_method
+      - organization_subscription_requires_action
+      - organization_subscription_not_canceled_at
+      - organization_invite_expired
+      - organization_invite_email_mismatch
+      - organization_invite_org_id_mismatch
+      - organization_invite_self_invite
+      - product_type_invalid
+      - stripe_signature_header_missing
+      - stripe_event_construction_failed
+      - organization_api_key_exists
+      - organization_member_exists
+      - organization_invite_email_exists
+      - organization_invite_member_exists
+      - organization_invite_accept_member_exists
+      - organization_settings_exists
+      - user_role_exists
+      type: string
+      x-enum-varnames:
+      - ErrCodePermissionDenied
+      - ErrCodeRequestBodyInvalid
+      - ErrCodeUnknown
+      - ErrCodeUnauthorized
+      - ErrCodeUserEmailNotInToken
+      - ErrCodeUserIdNotInToken
+      - ErrCodeValidationFailed
+      - ErrCodeAssociationIdInvalid
+      - ErrCodeAssociationRoleIdInvalid
+      - ErrCodeCreatedByInvalid
+      - ErrCodeMemberIdInvalid
+      - ErrCodeOrganizationIdInvalid
+      - ErrCodeOrganizationApiKeyIdInvalid
+      - ErrCodeOrganizationInviteIdInvalid
+      - ErrCodeOrganizationRoleIdInvalid
+      - ErrCodeProductRoleIdInvalid
+      - ErrCodeRoleIdInvalid
+      - ErrCodeTeamIdInvalid
+      - ErrCodeUserIdInvalid
+      - ErrCodeUserSettingsIdInvalid
+      - ErrCodeAssociationMemberNotFound
+      - ErrCodeAssociationRoleNotFound
+      - ErrCodeOrganizationNotFound
+      - ErrCodeOrganizationApiKeyNotFound
+      - ErrCodeOrganizationInviteNotFound
+      - ErrCodeOrganizationSubscriptionNotFound
+      - ErrCodeProductNotFound
+      - ErrCodeRoleNotFound
+      - ErrCodeTeamNotFound
+      - ErrCodeUserRoleNotFound
+      - ErrCodeUserSettingsNotFound
+      - ErrCodeUserNotFound
+      - ErrCodeAuthStateMismatch
+      - ErrCodeAuthCodeIsRequired
+      - ErrCodeAuthReturnToIsRequired
+      - ErrCodeAuthRefreshTokenIsRequired
+      - ErrCodeAuthVerifierIsRequired
+      - ErrCodeAssociationRoleIsDefault
+      - ErrCodeAssociationRoleInUse
+      - ErrCodeAssociationMemberHasRole
+      - ErrCodeAssociationMemberHasNotRole
+      - ErrCodeOrganizationHasSubscription
+      - ErrCodeOrganizationHasSubscriptionPlan
+      - ErrCodeOrganizationHasSubscriptionSeats
+      - ErrCodeOrganizationHasActiveSubscription
+      - ErrCodeOrganizationHasNoActiveSubscription
+      - ErrCodeOrganizationHasNoCustomer
+      - ErrCodeOrganizationMaximumSeatsReached
+      - ErrCodeOrganizationMinimumSeatsRequired
+      - ErrCodeOrganizationUserIsNotMember
+      - ErrCodeOrganizationSubscriptionCancelAtPeriodEnd
+      - ErrCodeOrganizationSubscriptionCanceled
+      - ErrCodeOrganizationSubscriptionInactive
+      - ErrCodeOrganizationSubscriptionIncompletePastDue
+      - ErrCodeOrganizationSubscriptionPeriodEndInvalid
+      - ErrCodeOrganizationSubscriptionRequiresPaymentMethod
+      - ErrCodeOrganizationSubscriptionRequiresAction
+      - ErrCodeOrganizationSubscriptionNotCanceledAt
+      - ErrCodeOrganizationInviteExpired
+      - ErrCodeOrganizationInviteEmailMismatch
+      - ErrCodeOrganizationInviteOrgIdMismatch
+      - ErrCodeOrganizationInviteSelfInvite
+      - ErrCodeProductTypeInvalid
+      - ErrCodeStripeSignatureHeaderMissing
+      - ErrCodeStripeEventConstructionFailed
+      - ErrCodeOrganizationApiKeyExists
+      - ErrCodeOrganizationMemberExists
+      - ErrCodeOrganizationInviteEmailExists
+      - ErrCodeOrganizationInviteMemberExists
+      - ErrCodeOrganizationInviteAcceptMemberExists
+      - ErrCodeOrganizationSettingsExists
+      - ErrCodeUserRoleExists
+    ErrorDetail:
+      example:
+        field: field
+        tag: tag
+        value: value
+      properties:
+        field:
+          type: string
+        tag:
+          type: string
+        value:
+          type: string
+      type: object
+    ErrorResponse:
+      example:
+        code: permission_denied
+        details:
+        - field: field
+          tag: tag
+          value: value
+        - field: field
+          tag: tag
+          value: value
+        message: message
+        status: 0
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        details:
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+        message:
+          type: string
+        status:
+          type: integer
+      type: object
+    HealthResponse:
+      example:
+        health: health
+      properties:
+        health:
+          type: string
+      required:
+      - health
+      type: object
+    MemberDeleteResponse:
+      example:
+        resourcesAction: resourcesAction
+        id: id
+        resourceIds:
+        - resourceIds
+        - resourceIds
+      properties:
+        id:
+          type: string
+        resourceIds:
+          items:
+            type: string
+          type: array
+        resourcesAction:
+          type: string
+      required:
+      - id
+      - resourceIds
+      - resourcesAction
+      type: object
+    MemberPatchRequest:
+      example:
+        roleId: roleId
+      properties:
+        roleId:
+          type: string
+      required:
+      - roleId
+      type: object
+    MemberPostRequest:
+      example:
+        userId: userId
+      properties:
+        userId:
+          type: string
+      required:
+      - userId
+      type: object
+    OrganizationApiKeyPatchRequest:
+      example:
+        roleIds:
+        - roleIds
+        - roleIds
+        name: name
+        userFullName: userFullName
+        userEmail: userEmail
+        userName: userName
+        organizationRoleId: organizationRoleId
+      properties:
+        name:
+          minLength: 1
+          type: string
+        organizationRoleId:
+          type: string
+        roleIds:
+          items:
+            type: string
+          type: array
+        userEmail:
+          type: string
+        userFullName:
+          minLength: 1
+          type: string
+        userName:
+          minLength: 1
+          type: string
+      type: object
+    OrganizationApiKeyPostRequest:
+      example:
+        roleIds:
+        - roleIds
+        - roleIds
+        name: name
+        userFullName: userFullName
+        userEmail: userEmail
+        userName: userName
+        organizationRoleId: organizationRoleId
+      properties:
+        name:
+          minLength: 1
+          type: string
+        organizationRoleId:
+          type: string
+        roleIds:
+          items:
+            type: string
+          type: array
+        userEmail:
+          type: string
+        userFullName:
+          minLength: 1
+          type: string
+        userName:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    OrganizationApiKeyResponse:
+      example:
+        apiKey: apiKey
+        roles:
+        - createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        - createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        userFullName: userFullName
+        userName: userName
+        userId: userId
+        organizationId: organizationId
+        createdAt: createdAt
+        apiKeyHint: apiKeyHint
+        createdBy: createdBy
+        organizationRole:
+          organizationId: organizationId
+          createdAt: createdAt
+          defaultMemberRole: true
+          name: name
+          id: id
+          updatedAt: updatedAt
+        name: name
+        userEmail: userEmail
+        id: id
+        updatedAt: updatedAt
+      properties:
+        apiKey:
+          type: string
+        apiKeyHint:
+          type: string
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        organizationRole:
+          $ref: '#/components/schemas/OrganizationRoleReducedResponse'
+        roles:
+          items:
+            $ref: '#/components/schemas/RoleReducedResponse'
+          type: array
+        updatedAt:
+          type: string
+        userEmail:
+          type: string
+        userFullName:
+          type: string
+        userId:
+          type: string
+        userName:
+          type: string
+      required:
+      - apiKey
+      - apiKeyHint
+      - createdAt
+      - createdBy
+      - id
+      - name
+      - organizationId
+      - organizationRole
+      - roles
+      - updatedAt
+      - userEmail
+      - userFullName
+      - userId
+      - userName
+      type: object
+    OrganizationCheckoutSessionResponse:
+      example:
+        url: url
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+    OrganizationCreditsPaymentResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        totalAmount: 6
+        credits: 0.8008281904610115
+        name: name
+        currency: currency
+        id: id
+        creditsBudgetUpdated: true
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        credits:
+          type: number
+        creditsBudgetUpdated:
+          type: boolean
+        currency:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        totalAmount:
+          type: integer
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - credits
+      - creditsBudgetUpdated
+      - currency
+      - id
+      - name
+      - organizationId
+      - totalAmount
+      - updatedAt
+      type: object
+    OrganizationCustomerPortalSessionResponse:
+      example:
+        url: url
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+    OrganizationInviteRequest:
+      example:
+        email: email
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
+    OrganizationInviteResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        createdByName: createdByName
+        createdBy: createdBy
+        emailSent: true
+        id: id
+        email: email
+        expiresAt: expiresAt
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+        email:
+          type: string
+        emailSent:
+          type: boolean
+        expiresAt:
+          type: string
+        id:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - createdBy
+      - createdByName
+      - email
+      - emailSent
+      - expiresAt
+      - id
+      - organizationId
+      - updatedAt
+      type: object
+    OrganizationMemberResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        createdByName: createdByName
+        createdBy: createdBy
+        organizationRole:
+          organizationId: organizationId
+          createdAt: createdAt
+          defaultMemberRole: true
+          name: name
+          id: id
+          updatedAt: updatedAt
+        id: id
+        user:
+          createdAt: createdAt
+          fullname: fullname
+          id: id
+          email: email
+          updatedAt: updatedAt
+          username: username
+        invitedAt: invitedAt
+        organizationOwner: true
+        organizationProductRoles:
+        - createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        - createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+        id:
+          type: string
+        invitedAt:
+          type: string
+        organizationId:
+          type: string
+        organizationOwner:
+          type: boolean
+        organizationProductRoles:
+          items:
+            $ref: '#/components/schemas/RoleReducedResponse'
+          type: array
+        organizationRole:
+          $ref: '#/components/schemas/OrganizationRoleReducedResponse'
+        updatedAt:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserResponse'
+      required:
+      - createdAt
+      - createdBy
+      - createdByName
+      - id
+      - invitedAt
+      - organizationId
+      - organizationOwner
+      - organizationProductRoles
+      - organizationRole
+      - updatedAt
+      - user
+      type: object
+    OrganizationPatchRequest:
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    OrganizationPostRequest:
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    OrganizationResponse:
+      example:
+        owner: owner
+        createdAt: createdAt
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - name
+      - owner
+      - updatedAt
+      type: object
+    OrganizationRoleReducedResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        defaultMemberRole: true
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        defaultMemberRole:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - defaultMemberRole
+      - id
+      - name
+      - organizationId
+      - updatedAt
+      type: object
+    OrganizationRoleResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        defaultMemberRole: true
+        permissions:
+        - permissions
+        - permissions
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        defaultMemberRole:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - defaultMemberRole
+      - id
+      - name
+      - organizationId
+      - permissions
+      - updatedAt
+      type: object
+    OrganizationSettingsPatchRequest:
+      example:
+        defaultAgentId: defaultAgentId
+      properties:
+        defaultAgentId:
+          type: string
+      type: object
+    OrganizationSettingsPostRequest:
+      example:
+        defaultAgentId: defaultAgentId
+      properties:
+        defaultAgentId:
+          type: string
+      type: object
+    OrganizationSettingsResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        defaultAgentId: defaultAgentId
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        defaultAgentId:
+          type: string
+        id:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - defaultAgentId
+      - id
+      - organizationId
+      - updatedAt
+      type: object
+    OrganizationSubscriptionPatchRequest:
+      example:
+        seats: 1
+        periodEnd: 2024-12-24
+      properties:
+        periodEnd:
+          example: 2024-12-24
+          type: string
+        seats:
+          minimum: 1
+          type: integer
+      required:
+      - seats
+      type: object
+    OrganizationSubscriptionPostRequest:
+      example:
+        productId: vaudEnterprise
+        seats: 1
+        periodEnd: 2024-12-24
+      properties:
+        periodEnd:
+          example: 2024-12-24
+          type: string
+        productId:
+          enum:
+          - vaudEnterprise
+          type: string
+        seats:
+          minimum: 1
+          type: integer
+      required:
+      - productId
+      - seats
+      type: object
+    OrganizationSubscriptionResponse:
+      example:
+        productId: productId
+        currentPeriodEnd: currentPeriodEnd
+        active: true
+        seats: 0
+        organizationId: organizationId
+        createdAt: createdAt
+        totalAmount: 1
+        seatsTaken: 6
+        cancelAtPeriodEnd: true
+        name: name
+        currency: currency
+        id: id
+        productType: payment
+        status: status
+        updatedAt: updatedAt
+      properties:
+        active:
+          type: boolean
+        cancelAtPeriodEnd:
+          type: boolean
+        createdAt:
+          type: string
+        currency:
+          type: string
+        currentPeriodEnd:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        productId:
+          type: string
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        seats:
+          type: integer
+        seatsTaken:
+          type: integer
+        status:
+          type: string
+        totalAmount:
+          type: integer
+        updatedAt:
+          type: string
+      required:
+      - active
+      - cancelAtPeriodEnd
+      - createdAt
+      - currency
+      - currentPeriodEnd
+      - id
+      - name
+      - organizationId
+      - productId
+      - productType
+      - seats
+      - seatsTaken
+      - status
+      - totalAmount
+      - updatedAt
+      type: object
+    ProductType:
+      enum:
+      - payment
+      - stripeSubscription
+      - vaudSubscription
+      type: string
+      x-enum-varnames:
+      - ProductTypePayment
+      - ProductTypeStripeSubscription
+      - ProductTypeVaudSubscription
+    RefreshResponse:
+      example:
+        tokenExpiresInSec: 0
+      properties:
+        tokenExpiresInSec:
+          type: integer
+      required:
+      - tokenExpiresInSec
+      type: object
+    RolePatchRequest:
+      example:
+        defaultMemberRole: true
+        permissions:
+        - permissions
+        - permissions
+        name: name
+      properties:
+        defaultMemberRole:
+          type: boolean
+        name:
+          minLength: 1
+          type: string
+        permissions:
+          items:
+            type: string
+          minItems: 1
+          type: array
+      type: object
+    RolePostRequest:
+      example:
+        defaultMemberRole: true
+        permissions:
+        - permissions
+        - permissions
+        name: name
+      properties:
+        defaultMemberRole:
+          type: boolean
+        name:
+          minLength: 1
+          type: string
+        permissions:
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - name
+      - permissions
+      type: object
+    RoleReducedResponse:
+      example:
+        createdAt: createdAt
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - name
+      - updatedAt
+      type: object
+    RoleResponse:
+      example:
+        createdAt: createdAt
+        permissions:
+        - permissions
+        - permissions
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - name
+      - permissions
+      - updatedAt
+      type: object
+    TeamMemberResponse:
+      example:
+        teamOwner: true
+        createdAt: createdAt
+        teamId: teamId
+        teamRole:
+          createdAt: createdAt
+          defaultMemberRole: true
+          teamId: teamId
+          name: name
+          id: id
+          updatedAt: updatedAt
+        id: id
+        user:
+          createdAt: createdAt
+          fullname: fullname
+          id: id
+          email: email
+          updatedAt: updatedAt
+          username: username
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        teamId:
+          type: string
+        teamOwner:
+          type: boolean
+        teamRole:
+          $ref: '#/components/schemas/TeamRoleReducedResponse'
+        updatedAt:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserResponse'
+      required:
+      - createdAt
+      - id
+      - teamId
+      - teamOwner
+      - teamRole
+      - updatedAt
+      - user
+      type: object
+    TeamPatchRequest:
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      type: object
+    TeamPostRequest:
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    TeamResponse:
+      example:
+        organizationId: organizationId
+        owner: owner
+        createdAt: createdAt
+        members:
+        - teamOwner: true
+          createdAt: createdAt
+          teamId: teamId
+          teamRole:
+            createdAt: createdAt
+            defaultMemberRole: true
+            teamId: teamId
+            name: name
+            id: id
+            updatedAt: updatedAt
+          id: id
+          user:
+            createdAt: createdAt
+            fullname: fullname
+            id: id
+            email: email
+            updatedAt: updatedAt
+            username: username
+          updatedAt: updatedAt
+        - teamOwner: true
+          createdAt: createdAt
+          teamId: teamId
+          teamRole:
+            createdAt: createdAt
+            defaultMemberRole: true
+            teamId: teamId
+            name: name
+            id: id
+            updatedAt: updatedAt
+          id: id
+          user:
+            createdAt: createdAt
+            fullname: fullname
+            id: id
+            email: email
+            updatedAt: updatedAt
+            username: username
+          updatedAt: updatedAt
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        members:
+          items:
+            $ref: '#/components/schemas/TeamMemberResponse'
+          type: array
+        name:
+          type: string
+        organizationId:
+          type: string
+        owner:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - members
+      - name
+      - organizationId
+      - owner
+      - updatedAt
+      type: object
+    TeamRoleReducedResponse:
+      example:
+        createdAt: createdAt
+        defaultMemberRole: true
+        teamId: teamId
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        defaultMemberRole:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        teamId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - defaultMemberRole
+      - id
+      - name
+      - teamId
+      - updatedAt
+      type: object
+    UserResponse:
+      example:
+        createdAt: createdAt
+        fullname: fullname
+        id: id
+        email: email
+        updatedAt: updatedAt
+        username: username
+      properties:
+        createdAt:
+          type: string
+        email:
+          type: string
+        fullname:
+          type: string
+        id:
+          type: string
+        updatedAt:
+          type: string
+        username:
+          type: string
+      required:
+      - createdAt
+      - email
+      - fullname
+      - id
+      - updatedAt
+      - username
+      type: object
+    UserRoleResponse:
+      example:
+        createdAt: createdAt
+        roleId: roleId
+        id: id
+        userId: userId
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        roleId:
+          type: string
+        updatedAt:
+          type: string
+        userId:
+          type: string
+      required:
+      - createdAt
+      - id
+      - roleId
+      - updatedAt
+      - userId
+      type: object
+    UserSettingsPatchRequest:
+      example:
+        language: language
+        colorScheme: colorScheme
+      properties:
+        colorScheme:
+          minLength: 1
+          type: string
+        language:
+          minLength: 1
+          type: string
+      type: object
+    UserSettingsPostRequest:
+      example:
+        language: language
+        userId: userId
+        colorScheme: colorScheme
+      properties:
+        colorScheme:
+          minLength: 1
+          type: string
+        language:
+          minLength: 1
+          type: string
+        userId:
+          minLength: 1
+          type: string
+      required:
+      - colorScheme
+      - language
+      type: object
+    UserSettingsResponse:
+      example:
+        language: language
+        id: id
+        userId: userId
+        colorScheme: colorScheme
+      properties:
+        colorScheme:
+          type: string
+        id:
+          type: string
+        language:
+          type: string
+        userId:
+          type: string
+      required:
+      - colorScheme
+      - id
+      - language
+      - userId
+      type: object
+    VersionResponse:
+      example:
+        version: version
+      properties:
+        version:
+          type: string
+      required:
+      - version
+      type: object
+  securitySchemes:
+    ApiKey:
+      in: header
+      name: x-api-key
+      type: apiKey
+x-original-swagger-version: "2.0"

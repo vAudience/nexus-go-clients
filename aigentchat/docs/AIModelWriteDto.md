@@ -1,0 +1,420 @@
+# AIModelWriteDto
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
+**Constraints** | Pointer to [**[]AIModelConstraint**](AIModelConstraint.md) |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
+**DocumentationUrl** | Pointer to **string** |  | [optional] 
+**Features** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
+**InternalId** | Pointer to **string** |  | [optional] 
+**IsPublic** | Pointer to **bool** |  | [optional] 
+**MaxInputTokens** | Pointer to **int32** |  | [optional] 
+**MaxOutputTokens** | Pointer to **int32** |  | [optional] 
+**ModelId** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
+**Parameters** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**ServiceHostLocations** | Pointer to [**[]HostingLocation**](HostingLocation.md) |  | [optional] 
+**ServiceId** | Pointer to **string** |  | [optional] 
+
+## Methods
+
+### NewAIModelWriteDto
+
+`func NewAIModelWriteDto() *AIModelWriteDto`
+
+NewAIModelWriteDto instantiates a new AIModelWriteDto object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAIModelWriteDtoWithDefaults
+
+`func NewAIModelWriteDtoWithDefaults() *AIModelWriteDto`
+
+NewAIModelWriteDtoWithDefaults instantiates a new AIModelWriteDto object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetAcceptedFileMimetypes
+
+`func (o *AIModelWriteDto) GetAcceptedFileMimetypes() []string`
+
+GetAcceptedFileMimetypes returns the AcceptedFileMimetypes field if non-nil, zero value otherwise.
+
+### GetAcceptedFileMimetypesOk
+
+`func (o *AIModelWriteDto) GetAcceptedFileMimetypesOk() (*[]string, bool)`
+
+GetAcceptedFileMimetypesOk returns a tuple with the AcceptedFileMimetypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcceptedFileMimetypes
+
+`func (o *AIModelWriteDto) SetAcceptedFileMimetypes(v []string)`
+
+SetAcceptedFileMimetypes sets AcceptedFileMimetypes field to given value.
+
+### HasAcceptedFileMimetypes
+
+`func (o *AIModelWriteDto) HasAcceptedFileMimetypes() bool`
+
+HasAcceptedFileMimetypes returns a boolean if a field has been set.
+
+### GetConstraints
+
+`func (o *AIModelWriteDto) GetConstraints() []AIModelConstraint`
+
+GetConstraints returns the Constraints field if non-nil, zero value otherwise.
+
+### GetConstraintsOk
+
+`func (o *AIModelWriteDto) GetConstraintsOk() (*[]AIModelConstraint, bool)`
+
+GetConstraintsOk returns a tuple with the Constraints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConstraints
+
+`func (o *AIModelWriteDto) SetConstraints(v []AIModelConstraint)`
+
+SetConstraints sets Constraints field to given value.
+
+### HasConstraints
+
+`func (o *AIModelWriteDto) HasConstraints() bool`
+
+HasConstraints returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *AIModelWriteDto) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *AIModelWriteDto) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *AIModelWriteDto) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *AIModelWriteDto) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetDocumentationUrl
+
+`func (o *AIModelWriteDto) GetDocumentationUrl() string`
+
+GetDocumentationUrl returns the DocumentationUrl field if non-nil, zero value otherwise.
+
+### GetDocumentationUrlOk
+
+`func (o *AIModelWriteDto) GetDocumentationUrlOk() (*string, bool)`
+
+GetDocumentationUrlOk returns a tuple with the DocumentationUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentationUrl
+
+`func (o *AIModelWriteDto) SetDocumentationUrl(v string)`
+
+SetDocumentationUrl sets DocumentationUrl field to given value.
+
+### HasDocumentationUrl
+
+`func (o *AIModelWriteDto) HasDocumentationUrl() bool`
+
+HasDocumentationUrl returns a boolean if a field has been set.
+
+### GetFeatures
+
+`func (o *AIModelWriteDto) GetFeatures() []AIModelFeature`
+
+GetFeatures returns the Features field if non-nil, zero value otherwise.
+
+### GetFeaturesOk
+
+`func (o *AIModelWriteDto) GetFeaturesOk() (*[]AIModelFeature, bool)`
+
+GetFeaturesOk returns a tuple with the Features field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatures
+
+`func (o *AIModelWriteDto) SetFeatures(v []AIModelFeature)`
+
+SetFeatures sets Features field to given value.
+
+### HasFeatures
+
+`func (o *AIModelWriteDto) HasFeatures() bool`
+
+HasFeatures returns a boolean if a field has been set.
+
+### GetInternalId
+
+`func (o *AIModelWriteDto) GetInternalId() string`
+
+GetInternalId returns the InternalId field if non-nil, zero value otherwise.
+
+### GetInternalIdOk
+
+`func (o *AIModelWriteDto) GetInternalIdOk() (*string, bool)`
+
+GetInternalIdOk returns a tuple with the InternalId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalId
+
+`func (o *AIModelWriteDto) SetInternalId(v string)`
+
+SetInternalId sets InternalId field to given value.
+
+### HasInternalId
+
+`func (o *AIModelWriteDto) HasInternalId() bool`
+
+HasInternalId returns a boolean if a field has been set.
+
+### GetIsPublic
+
+`func (o *AIModelWriteDto) GetIsPublic() bool`
+
+GetIsPublic returns the IsPublic field if non-nil, zero value otherwise.
+
+### GetIsPublicOk
+
+`func (o *AIModelWriteDto) GetIsPublicOk() (*bool, bool)`
+
+GetIsPublicOk returns a tuple with the IsPublic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPublic
+
+`func (o *AIModelWriteDto) SetIsPublic(v bool)`
+
+SetIsPublic sets IsPublic field to given value.
+
+### HasIsPublic
+
+`func (o *AIModelWriteDto) HasIsPublic() bool`
+
+HasIsPublic returns a boolean if a field has been set.
+
+### GetMaxInputTokens
+
+`func (o *AIModelWriteDto) GetMaxInputTokens() int32`
+
+GetMaxInputTokens returns the MaxInputTokens field if non-nil, zero value otherwise.
+
+### GetMaxInputTokensOk
+
+`func (o *AIModelWriteDto) GetMaxInputTokensOk() (*int32, bool)`
+
+GetMaxInputTokensOk returns a tuple with the MaxInputTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxInputTokens
+
+`func (o *AIModelWriteDto) SetMaxInputTokens(v int32)`
+
+SetMaxInputTokens sets MaxInputTokens field to given value.
+
+### HasMaxInputTokens
+
+`func (o *AIModelWriteDto) HasMaxInputTokens() bool`
+
+HasMaxInputTokens returns a boolean if a field has been set.
+
+### GetMaxOutputTokens
+
+`func (o *AIModelWriteDto) GetMaxOutputTokens() int32`
+
+GetMaxOutputTokens returns the MaxOutputTokens field if non-nil, zero value otherwise.
+
+### GetMaxOutputTokensOk
+
+`func (o *AIModelWriteDto) GetMaxOutputTokensOk() (*int32, bool)`
+
+GetMaxOutputTokensOk returns a tuple with the MaxOutputTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxOutputTokens
+
+`func (o *AIModelWriteDto) SetMaxOutputTokens(v int32)`
+
+SetMaxOutputTokens sets MaxOutputTokens field to given value.
+
+### HasMaxOutputTokens
+
+`func (o *AIModelWriteDto) HasMaxOutputTokens() bool`
+
+HasMaxOutputTokens returns a boolean if a field has been set.
+
+### GetModelId
+
+`func (o *AIModelWriteDto) GetModelId() string`
+
+GetModelId returns the ModelId field if non-nil, zero value otherwise.
+
+### GetModelIdOk
+
+`func (o *AIModelWriteDto) GetModelIdOk() (*string, bool)`
+
+GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelId
+
+`func (o *AIModelWriteDto) SetModelId(v string)`
+
+SetModelId sets ModelId field to given value.
+
+### HasModelId
+
+`func (o *AIModelWriteDto) HasModelId() bool`
+
+HasModelId returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *AIModelWriteDto) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *AIModelWriteDto) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *AIModelWriteDto) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *AIModelWriteDto) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetParameterDefinitions
+
+`func (o *AIModelWriteDto) GetParameterDefinitions() map[string]interface{}`
+
+GetParameterDefinitions returns the ParameterDefinitions field if non-nil, zero value otherwise.
+
+### GetParameterDefinitionsOk
+
+`func (o *AIModelWriteDto) GetParameterDefinitionsOk() (*map[string]interface{}, bool)`
+
+GetParameterDefinitionsOk returns a tuple with the ParameterDefinitions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParameterDefinitions
+
+`func (o *AIModelWriteDto) SetParameterDefinitions(v map[string]interface{})`
+
+SetParameterDefinitions sets ParameterDefinitions field to given value.
+
+### HasParameterDefinitions
+
+`func (o *AIModelWriteDto) HasParameterDefinitions() bool`
+
+HasParameterDefinitions returns a boolean if a field has been set.
+
+### GetParameters
+
+`func (o *AIModelWriteDto) GetParameters() map[string]map[string]interface{}`
+
+GetParameters returns the Parameters field if non-nil, zero value otherwise.
+
+### GetParametersOk
+
+`func (o *AIModelWriteDto) GetParametersOk() (*map[string]map[string]interface{}, bool)`
+
+GetParametersOk returns a tuple with the Parameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParameters
+
+`func (o *AIModelWriteDto) SetParameters(v map[string]map[string]interface{})`
+
+SetParameters sets Parameters field to given value.
+
+### HasParameters
+
+`func (o *AIModelWriteDto) HasParameters() bool`
+
+HasParameters returns a boolean if a field has been set.
+
+### GetServiceHostLocations
+
+`func (o *AIModelWriteDto) GetServiceHostLocations() []HostingLocation`
+
+GetServiceHostLocations returns the ServiceHostLocations field if non-nil, zero value otherwise.
+
+### GetServiceHostLocationsOk
+
+`func (o *AIModelWriteDto) GetServiceHostLocationsOk() (*[]HostingLocation, bool)`
+
+GetServiceHostLocationsOk returns a tuple with the ServiceHostLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceHostLocations
+
+`func (o *AIModelWriteDto) SetServiceHostLocations(v []HostingLocation)`
+
+SetServiceHostLocations sets ServiceHostLocations field to given value.
+
+### HasServiceHostLocations
+
+`func (o *AIModelWriteDto) HasServiceHostLocations() bool`
+
+HasServiceHostLocations returns a boolean if a field has been set.
+
+### GetServiceId
+
+`func (o *AIModelWriteDto) GetServiceId() string`
+
+GetServiceId returns the ServiceId field if non-nil, zero value otherwise.
+
+### GetServiceIdOk
+
+`func (o *AIModelWriteDto) GetServiceIdOk() (*string, bool)`
+
+GetServiceIdOk returns a tuple with the ServiceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceId
+
+`func (o *AIModelWriteDto) SetServiceId(v string)`
+
+SetServiceId sets ServiceId field to given value.
+
+### HasServiceId
+
+`func (o *AIModelWriteDto) HasServiceId() bool`
+
+HasServiceId returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
