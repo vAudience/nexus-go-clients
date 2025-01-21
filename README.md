@@ -10,8 +10,8 @@ This repository contains the source code for the Nexus GO clients. Currently, tw
 To install the clients, execute the following commands:
 
 ```bash
-go get github.com/vAudience/nexus-go-clients/core
-go get github.com/vAudience/nexus-go-clients/aigentchat
+go get github.com/vaudience/nexus-go-clients/core
+go get github.com/vaudience/nexus-go-clients/aigentchat
 ```
 
 ## Updating Clients
