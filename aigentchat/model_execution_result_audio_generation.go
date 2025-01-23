@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.13.3
+API version: 0.14.0
 Contact: contact@vaudience.ai
 */
 
@@ -26,7 +26,7 @@ type ExecutionResultAudioGeneration struct {
 	// maps to CompletionID for Text2Text
 	ExecutionId *string `json:"execution_id,omitempty"`
 	FeaturesUsed []AIModelFeature `json:"features_used,omitempty"`
-	FinishReason *string `json:"finish_reason,omitempty"`
+	FinishReason *FinishReason `json:"finish_reason,omitempty"`
 	InputTokens *int32 `json:"input_tokens,omitempty"`
 	ModelId *string `json:"model_id,omitempty"`
 	ResultingFiles []FilemanagerManagedFile `json:"resulting_files,omitempty"`
@@ -186,9 +186,9 @@ func (o *ExecutionResultAudioGeneration) SetFeaturesUsed(v []AIModelFeature) {
 }
 
 // GetFinishReason returns the FinishReason field value if set, zero value otherwise.
-func (o *ExecutionResultAudioGeneration) GetFinishReason() string {
+func (o *ExecutionResultAudioGeneration) GetFinishReason() FinishReason {
 	if o == nil || IsNil(o.FinishReason) {
-		var ret string
+		var ret FinishReason
 		return ret
 	}
 	return *o.FinishReason
@@ -196,7 +196,7 @@ func (o *ExecutionResultAudioGeneration) GetFinishReason() string {
 
 // GetFinishReasonOk returns a tuple with the FinishReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExecutionResultAudioGeneration) GetFinishReasonOk() (*string, bool) {
+func (o *ExecutionResultAudioGeneration) GetFinishReasonOk() (*FinishReason, bool) {
 	if o == nil || IsNil(o.FinishReason) {
 		return nil, false
 	}
@@ -212,8 +212,8 @@ func (o *ExecutionResultAudioGeneration) HasFinishReason() bool {
 	return false
 }
 
-// SetFinishReason gets a reference to the given string and assigns it to the FinishReason field.
-func (o *ExecutionResultAudioGeneration) SetFinishReason(v string) {
+// SetFinishReason gets a reference to the given FinishReason and assigns it to the FinishReason field.
+func (o *ExecutionResultAudioGeneration) SetFinishReason(v FinishReason) {
 	o.FinishReason = &v
 }
 

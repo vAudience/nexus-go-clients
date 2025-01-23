@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Error** | Pointer to **map[string]interface{}** |  | [optional] 
 **ExecutionId** | Pointer to **string** | maps to CompletionID for Text2Text | [optional] 
 **FeaturesUsed** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
-**FinishReason** | Pointer to **string** |  | [optional] 
+**FinishReason** | Pointer to [**FinishReason**](FinishReason.md) |  | [optional] 
 **InputTokens** | Pointer to **int32** |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
 **ResultingFiles** | Pointer to [**[]FilemanagerManagedFile**](FilemanagerManagedFile.md) |  | [optional] 
@@ -137,20 +137,20 @@ HasFeaturesUsed returns a boolean if a field has been set.
 
 ### GetFinishReason
 
-`func (o *ExecutionResultAudioGeneration) GetFinishReason() string`
+`func (o *ExecutionResultAudioGeneration) GetFinishReason() FinishReason`
 
 GetFinishReason returns the FinishReason field if non-nil, zero value otherwise.
 
 ### GetFinishReasonOk
 
-`func (o *ExecutionResultAudioGeneration) GetFinishReasonOk() (*string, bool)`
+`func (o *ExecutionResultAudioGeneration) GetFinishReasonOk() (*FinishReason, bool)`
 
 GetFinishReasonOk returns a tuple with the FinishReason field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFinishReason
 
-`func (o *ExecutionResultAudioGeneration) SetFinishReason(v string)`
+`func (o *ExecutionResultAudioGeneration) SetFinishReason(v FinishReason)`
 
 SetFinishReason sets FinishReason field to given value.
 

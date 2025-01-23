@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.13.3
+API version: 0.14.0
 Contact: contact@vaudience.ai
 */
 
@@ -33,6 +33,7 @@ type AgentWriteDto struct {
 	Name *string `json:"name,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
+	UseTools *bool `json:"use_tools,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -471,6 +472,38 @@ func (o *AgentWriteDto) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
+// GetUseTools returns the UseTools field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetUseTools() bool {
+	if o == nil || IsNil(o.UseTools) {
+		var ret bool
+		return ret
+	}
+	return *o.UseTools
+}
+
+// GetUseToolsOk returns a tuple with the UseTools field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetUseToolsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseTools) {
+		return nil, false
+	}
+	return o.UseTools, true
+}
+
+// HasUseTools returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasUseTools() bool {
+	if o != nil && !IsNil(o.UseTools) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseTools gets a reference to the given bool and assigns it to the UseTools field.
+func (o *AgentWriteDto) SetUseTools(v bool) {
+	o.UseTools = &v
+}
+
 func (o AgentWriteDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -520,6 +553,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
+	if !IsNil(o.UseTools) {
+		toSerialize["use_tools"] = o.UseTools
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -555,6 +591,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "system_messages")
+		delete(additionalProperties, "use_tools")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.13.3
+API version: 0.14.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,8 @@ type ChatCompletionRequestDto struct {
 	AgentId string `json:"agent_id"`
 	AttachedTemporaryFiles []string `json:"attached_temporary_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
+	ContinueInstructionOnMaxTokens *string `json:"continue_instruction_on_max_tokens,omitempty"`
+	ContinueOnMaxTokens *bool `json:"continue_on_max_tokens,omitempty"`
 	ExpireMessages *bool `json:"expire_messages,omitempty"`
 	Message string `json:"message"`
 	MessageReferenceId *string `json:"message_reference_id,omitempty"`
@@ -146,6 +148,70 @@ func (o *ChatCompletionRequestDto) HasChannelId() bool {
 // SetChannelId gets a reference to the given string and assigns it to the ChannelId field.
 func (o *ChatCompletionRequestDto) SetChannelId(v string) {
 	o.ChannelId = &v
+}
+
+// GetContinueInstructionOnMaxTokens returns the ContinueInstructionOnMaxTokens field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetContinueInstructionOnMaxTokens() string {
+	if o == nil || IsNil(o.ContinueInstructionOnMaxTokens) {
+		var ret string
+		return ret
+	}
+	return *o.ContinueInstructionOnMaxTokens
+}
+
+// GetContinueInstructionOnMaxTokensOk returns a tuple with the ContinueInstructionOnMaxTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetContinueInstructionOnMaxTokensOk() (*string, bool) {
+	if o == nil || IsNil(o.ContinueInstructionOnMaxTokens) {
+		return nil, false
+	}
+	return o.ContinueInstructionOnMaxTokens, true
+}
+
+// HasContinueInstructionOnMaxTokens returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasContinueInstructionOnMaxTokens() bool {
+	if o != nil && !IsNil(o.ContinueInstructionOnMaxTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetContinueInstructionOnMaxTokens gets a reference to the given string and assigns it to the ContinueInstructionOnMaxTokens field.
+func (o *ChatCompletionRequestDto) SetContinueInstructionOnMaxTokens(v string) {
+	o.ContinueInstructionOnMaxTokens = &v
+}
+
+// GetContinueOnMaxTokens returns the ContinueOnMaxTokens field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetContinueOnMaxTokens() bool {
+	if o == nil || IsNil(o.ContinueOnMaxTokens) {
+		var ret bool
+		return ret
+	}
+	return *o.ContinueOnMaxTokens
+}
+
+// GetContinueOnMaxTokensOk returns a tuple with the ContinueOnMaxTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetContinueOnMaxTokensOk() (*bool, bool) {
+	if o == nil || IsNil(o.ContinueOnMaxTokens) {
+		return nil, false
+	}
+	return o.ContinueOnMaxTokens, true
+}
+
+// HasContinueOnMaxTokens returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasContinueOnMaxTokens() bool {
+	if o != nil && !IsNil(o.ContinueOnMaxTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetContinueOnMaxTokens gets a reference to the given bool and assigns it to the ContinueOnMaxTokens field.
+func (o *ChatCompletionRequestDto) SetContinueOnMaxTokens(v bool) {
+	o.ContinueOnMaxTokens = &v
 }
 
 // GetExpireMessages returns the ExpireMessages field value if set, zero value otherwise.
@@ -477,6 +543,12 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
 	}
+	if !IsNil(o.ContinueInstructionOnMaxTokens) {
+		toSerialize["continue_instruction_on_max_tokens"] = o.ContinueInstructionOnMaxTokens
+	}
+	if !IsNil(o.ContinueOnMaxTokens) {
+		toSerialize["continue_on_max_tokens"] = o.ContinueOnMaxTokens
+	}
 	if !IsNil(o.ExpireMessages) {
 		toSerialize["expire_messages"] = o.ExpireMessages
 	}
@@ -552,6 +624,8 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "attached_temporary_files")
 		delete(additionalProperties, "channel_id")
+		delete(additionalProperties, "continue_instruction_on_max_tokens")
+		delete(additionalProperties, "continue_on_max_tokens")
 		delete(additionalProperties, "expire_messages")
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "message_reference_id")

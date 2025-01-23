@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
+**UseTools** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -361,6 +362,31 @@ SetSystemMessages sets SystemMessages field to given value.
 `func (o *AgentWriteDto) HasSystemMessages() bool`
 
 HasSystemMessages returns a boolean if a field has been set.
+
+### GetUseTools
+
+`func (o *AgentWriteDto) GetUseTools() bool`
+
+GetUseTools returns the UseTools field if non-nil, zero value otherwise.
+
+### GetUseToolsOk
+
+`func (o *AgentWriteDto) GetUseToolsOk() (*bool, bool)`
+
+GetUseToolsOk returns a tuple with the UseTools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTools
+
+`func (o *AgentWriteDto) SetUseTools(v bool)`
+
+SetUseTools sets UseTools field to given value.
+
+### HasUseTools
+
+`func (o *AgentWriteDto) HasUseTools() bool`
+
+HasUseTools returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

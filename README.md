@@ -19,8 +19,8 @@ go get github.com/vaudience/nexus-go-clients/aigentchat
 To update the clients, execute the following commands:
 
 ```bash
-./generateCoreClient
-./generateAigenChatClient
+./generateCoreClient.sh
+./generateAigentChatClient.sh
 ```
 
 ## Tags

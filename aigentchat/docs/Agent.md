@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
+**Capabilities** | [**[]AgentCapability**](AgentCapability.md) |  | 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
@@ -23,12 +24,13 @@ Name | Type | Description | Notes
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
+**UseTools** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
 ### NewAgent
 
-`func NewAgent(id string, modelId string, name string, ownerId string, ownerOrganizationId string, ) *Agent`
+`func NewAgent(capabilities []AgentCapability, id string, modelId string, name string, ownerId string, ownerOrganizationId string, ) *Agent`
 
 NewAgent instantiates a new Agent object
 This constructor will assign default values to properties that have it defined,
@@ -117,6 +119,26 @@ SetAvatarUrl sets AvatarUrl field to given value.
 `func (o *Agent) HasAvatarUrl() bool`
 
 HasAvatarUrl returns a boolean if a field has been set.
+
+### GetCapabilities
+
+`func (o *Agent) GetCapabilities() []AgentCapability`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *Agent) GetCapabilitiesOk() (*[]AgentCapability, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *Agent) SetCapabilities(v []AgentCapability)`
+
+SetCapabilities sets Capabilities field to given value.
+
 
 ### GetCreatedAt
 
@@ -492,6 +514,31 @@ SetUpdatedBy sets UpdatedBy field to given value.
 `func (o *Agent) HasUpdatedBy() bool`
 
 HasUpdatedBy returns a boolean if a field has been set.
+
+### GetUseTools
+
+`func (o *Agent) GetUseTools() bool`
+
+GetUseTools returns the UseTools field if non-nil, zero value otherwise.
+
+### GetUseToolsOk
+
+`func (o *Agent) GetUseToolsOk() (*bool, bool)`
+
+GetUseToolsOk returns a tuple with the UseTools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTools
+
+`func (o *Agent) SetUseTools(v bool)`
+
+SetUseTools sets UseTools field to given value.
+
+### HasUseTools
+
+`func (o *Agent) HasUseTools() bool`
+
+HasUseTools returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

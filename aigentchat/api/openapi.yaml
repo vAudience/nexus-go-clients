@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.13.3
+  version: 0.14.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/api/v1
 tags:
@@ -80,8 +80,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List AI model services
       tags:
       - AIModelService
@@ -127,8 +126,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new AI model service
       tags:
       - AIModelService
@@ -182,8 +180,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an AI model service
       tags:
       - AIModelService
@@ -235,8 +232,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an AI model service by ID
       tags:
       - AIModelService
@@ -295,8 +291,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update an AI model service
       tags:
       - AIModelService
@@ -352,8 +347,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List AI models for a service
       tags:
       - AIModelService
@@ -389,8 +383,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List AI services with models
       tags:
       - AIModelService
@@ -420,8 +413,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List AI models
       tags:
       - AIModel
@@ -467,8 +459,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new AI model
       tags:
       - AIModel
@@ -522,8 +513,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an AI model
       tags:
       - AIModel
@@ -575,8 +565,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an AI model by ID
       tags:
       - AIModel
@@ -635,8 +624,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update an AI model
       tags:
       - AIModel
@@ -722,8 +710,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List agent teams
       tags:
       - AgentTeam
@@ -776,8 +763,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new agent team
       tags:
       - AgentTeam
@@ -837,8 +823,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an agent team
       tags:
       - AgentTeam
@@ -896,8 +881,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an agent team
       tags:
       - AgentTeam
@@ -962,8 +946,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update an agent team
       tags:
       - AgentTeam
@@ -1029,8 +1012,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add an agent to a team
       tags:
       - AgentTeam
@@ -1089,8 +1071,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a full agent team
       tags:
       - AgentTeam
@@ -1152,8 +1133,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update system messages
       tags:
       - AgentTeam
@@ -1222,8 +1202,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update user messages
       tags:
       - AgentTeam
@@ -1289,8 +1268,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove an agent from a team
       tags:
       - AgentTeam
@@ -1349,8 +1327,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List agent prompts
       tags:
       - AgentPrompts
@@ -1403,8 +1380,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new agent prompt
       tags:
       - AgentPrompts
@@ -1521,8 +1497,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an agent prompt
       tags:
       - AgentPrompts
@@ -1580,8 +1555,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a specific agent prompt
       tags:
       - AgentPrompts
@@ -1646,8 +1620,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update an agent prompt
       tags:
       - AgentPrompts
@@ -1708,8 +1681,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List agents
       tags:
       - Agent
@@ -1762,8 +1734,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new agent
       tags:
       - Agent
@@ -1823,8 +1794,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Search agents
       tags:
       - Agent
@@ -1883,8 +1853,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an agent
       tags:
       - Agent
@@ -1942,8 +1911,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an agent
       tags:
       - Agent
@@ -2008,8 +1976,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update an agent
       tags:
       - Agent
@@ -2075,8 +2042,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add an attached file ID to an agent
       tags:
       - Agent
@@ -2141,8 +2107,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add an assigned tool to an agent
       tags:
       - Agent
@@ -2208,8 +2173,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add a system message to an agent
       tags:
       - Agent
@@ -2276,8 +2240,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add an initial user message to an agent
       tags:
       - Agent
@@ -2344,8 +2307,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove a system message from an agent
       tags:
       - Agent
@@ -2412,8 +2374,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove an initial user message from an agent
       tags:
       - Agent
@@ -2479,8 +2440,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove an attached file ID from an agent
       tags:
       - Agent
@@ -2545,8 +2505,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove an assigned tool from an agent
       tags:
       - Agent
@@ -2601,8 +2560,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Text-To-Speech
       tags:
       - Audio
@@ -2657,8 +2615,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Transcribe speech to text
       tags:
       - Audio
@@ -2712,8 +2669,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get organization cost budget
       tags:
       - OrgCostBudget
@@ -2766,8 +2722,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add new organization cost budget
       tags:
       - OrgCostBudget
@@ -2827,8 +2782,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update organization cost budget
       tags:
       - OrgCostBudget
@@ -2883,8 +2837,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Check organization cost budget
       tags:
       - OrgCostBudget
@@ -2927,8 +2880,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List channels by organization ID
       tags:
       - Channel
@@ -2981,8 +2933,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new channel
       tags:
       - Channel
@@ -3015,8 +2966,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get active channels
       tags:
       - Channel
@@ -3059,8 +3009,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List channels by owner ID
       tags:
       - Channel
@@ -3104,8 +3053,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get user's subscribed channels
       tags:
       - Channel
@@ -3161,8 +3109,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get channel presence
       tags:
       - Channel
@@ -3221,8 +3168,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a channel
       tags:
       - Channel
@@ -3280,8 +3226,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a channel by ID
       tags:
       - Channel
@@ -3346,8 +3291,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update a channel
       tags:
       - Channel
@@ -3416,8 +3360,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a chat-completion
       tags:
       - ChatCompletions
@@ -3462,8 +3405,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Cancel a chat-completion
       tags:
       - ChatCompletions
@@ -3531,8 +3473,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a streaming chat-completion
       tags:
       - ChatCompletions
@@ -3580,8 +3521,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: internal error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a connection token for SSE
       tags:
       - ConnectionTokens
@@ -3628,15 +3568,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
           description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
         "500":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Service Unavailable
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get the embeddings for the texts
       tags:
       - Embeddings
@@ -3693,8 +3644,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get execution logs costs
       tags:
       - ExecutionLogs
@@ -3761,8 +3711,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Search execution logs
       tags:
       - ExecutionLogs
@@ -3821,8 +3770,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Forbidden
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Upload and process a file
       tags:
       - Files
@@ -3859,8 +3807,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Forbidden
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List accessible function calls
       tags:
       - FunctionCalls
@@ -3907,8 +3854,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Not Found
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get function call definition
       tags:
       - FunctionCalls
@@ -3973,8 +3919,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Execute a function call
       tags:
       - FunctionCalls
@@ -4029,8 +3974,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Generates an image
       tags:
       - Image
@@ -4085,8 +4029,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new message
       tags:
       - Messages
@@ -4136,8 +4079,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get messages for a channel
       tags:
       - Messages
@@ -4205,8 +4147,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Search messages
       tags:
       - Messages
@@ -4265,8 +4206,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a message
       tags:
       - Messages
@@ -4324,8 +4264,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a message by ID
       tags:
       - Messages
@@ -4390,8 +4329,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update a message
       tags:
       - Messages
@@ -4451,8 +4389,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List all missions of an organization and owned by the current user
       tags:
       - Missions
@@ -4517,8 +4454,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: List all missions by a executorID (Agent Team or Agent)
       tags:
       - Missions
@@ -4584,8 +4520,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a new mission
       tags:
       - Missions
@@ -4642,8 +4577,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a mission
       tags:
       - Missions
@@ -4701,8 +4635,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a mission
       tags:
       - Missions
@@ -4758,8 +4691,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Cancel a mission
       tags:
       - Missions
@@ -4846,16 +4778,14 @@ components:
         - ""
         - ""
         owner_organization_id: owner_organization_id
-        updated_at: 2
+        updated_at: 9
         service_id: service_id
         is_public: true
         name: name
         updated_by: updated_by
         parameter_definitions: "{}"
         id: id
-        max_input_tokens: 0
         parameters: "{}"
-        max_output_tokens: 0
       properties:
         accepted_file_mimetypes:
           items:
@@ -4885,12 +4815,6 @@ components:
           type: string
         is_public:
           type: boolean
-        max_input_tokens:
-          minimum: 0
-          type: integer
-        max_output_tokens:
-          minimum: 0
-          type: integer
         model_id:
           maxLength: 64
           minLength: 1
@@ -5245,16 +5169,14 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 2
+          updated_at: 9
           service_id: service_id
           is_public: true
           name: name
           updated_by: updated_by
           parameter_definitions: "{}"
           id: id
-          max_input_tokens: 0
           parameters: "{}"
-          max_output_tokens: 0
         - internal_id: internal_id
           owner_id: owner_id
           created_at: 1
@@ -5334,16 +5256,14 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 2
+          updated_at: 9
           service_id: service_id
           is_public: true
           name: name
           updated_by: updated_by
           parameter_definitions: "{}"
           id: id
-          max_input_tokens: 0
           parameters: "{}"
-          max_output_tokens: 0
         service:
           internal_id: internal_id
           owner_id: owner_id
@@ -5488,10 +5408,8 @@ components:
         is_public: true
         name: name
         parameter_definitions: "{}"
-        max_input_tokens: 0
         parameters:
           key: "{}"
-        max_output_tokens: 0
       properties:
         accepted_file_mimetypes:
           items:
@@ -5514,12 +5432,6 @@ components:
           type: string
         is_public:
           type: boolean
-        max_input_tokens:
-          minimum: 0
-          type: integer
-        max_output_tokens:
-          minimum: 0
-          type: integer
         model_id:
           maxLength: 64
           minLength: 1
@@ -5663,6 +5575,7 @@ components:
           full_text: full_text
         sender_id: sender_id
         token_count: 5
+        finish_reason: ""
         updated_at: 2
         sender_conversation_role: "{}"
         meta_data: "{}"
@@ -5739,6 +5652,8 @@ components:
           $ref: '#/components/schemas/AIModelFeature'
         error:
           $ref: '#/components/schemas/AiServiceError'
+        finish_reason:
+          $ref: '#/components/schemas/FinishReason'
         id:
           maxLength: 64
           minLength: 1
@@ -5793,6 +5708,7 @@ components:
       - channel_id
       - channel_name
       - created_at
+      - finish_reason
       - id
       - owner_organization_id
       - sender_conversation_role
@@ -6139,6 +6055,9 @@ components:
       type: object
     Agent:
       example:
+        capabilities:
+        - chat
+        - chat
         internal_id: internal_id
         system_messages:
         - system_messages
@@ -6159,6 +6078,7 @@ components:
         owner_organization_id: owner_organization_id
         avatar_url: avatar_url
         updated_at: 6
+        use_tools: true
         is_public: true
         meta_data: "{}"
         name: name
@@ -6179,6 +6099,10 @@ components:
           uniqueItems: true
         avatar_url:
           type: string
+        capabilities:
+          items:
+            $ref: '#/components/schemas/AgentCapability'
+          type: array
         created_at:
           format: int64
           type: integer
@@ -6234,13 +6158,26 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        use_tools:
+          type: boolean
       required:
+      - capabilities
       - id
       - model_id
       - name
       - owner_id
       - owner_organization_id
       type: object
+    AgentCapability:
+      enum:
+      - chat
+      - embedding
+      - image
+      type: string
+      x-enum-varnames:
+      - AgentCapabilityChat
+      - AgentCapabilityEmbedding
+      - AgentCapabilityImage
     AgentPrompt:
       example:
         visibility: private
@@ -6517,6 +6454,7 @@ components:
         - attached_file_ids
         - attached_file_ids
         avatar_url: avatar_url
+        use_tools: true
         is_public: true
         meta_data: "{}"
         name: name
@@ -6568,6 +6506,8 @@ components:
             type: string
           type: array
           uniqueItems: true
+        use_tools:
+          type: boolean
       type: object
     AiServiceError:
       example:
@@ -7060,6 +7000,7 @@ components:
         agent_id: agent_id
         var_replacements:
           key: var_replacements
+        continue_on_max_tokens: true
         message_response_to_id: message_response_to_id
         mission_id: mission_id
         message: message
@@ -7067,6 +7008,7 @@ components:
         - set_message_history_ids
         - set_message_history_ids
         expire_messages: true
+        continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
         use_tools: true
         message_reference_id: message_reference_id
         use_channel_messages_as_history: true
@@ -7084,6 +7026,10 @@ components:
           type: array
         channel_id:
           type: string
+        continue_instruction_on_max_tokens:
+          type: string
+        continue_on_max_tokens:
+          type: boolean
         expire_messages:
           type: boolean
         message:
@@ -7292,7 +7238,7 @@ components:
     ExecutionResultAudioGeneration:
       example:
         execution_id: execution_id
-        finish_reason: finish_reason
+        finish_reason: ""
         features_used:
         - capability: ""
           cost_items:
@@ -7392,7 +7338,7 @@ components:
             $ref: '#/components/schemas/AIModelFeature'
           type: array
         finish_reason:
-          type: string
+          $ref: '#/components/schemas/FinishReason'
         input_tokens:
           type: integer
         model_id:
@@ -7459,6 +7405,24 @@ components:
             $ref: '#/components/schemas/filemanager.ProcessingResultFile'
           type: array
       type: object
+    FinishReason:
+      enum:
+      - ""
+      - error
+      - content_filter
+      - max_tokens
+      - stop
+      - tool_calls
+      - unknown
+      type: string
+      x-enum-varnames:
+      - FinishReasonNil
+      - FinishReasonError
+      - FinishReasonContentFilter
+      - FinishReasonMaxTokens
+      - FinishReasonStop
+      - FinishReasonToolCalls
+      - FinishReasonUnknown
     FunctionCall:
       example:
         name: name

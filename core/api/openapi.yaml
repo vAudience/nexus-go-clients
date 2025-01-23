@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.0
+  version: 0.2.1
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -84,8 +84,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthenticatedResponse'
           description: OK
-      security:
-      - AccessToken: []
       summary: Authenticated
       tags:
       - Auth
@@ -142,8 +140,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
-      security:
-      - RefreshToken: []
       summary: Logout
       tags:
       - Auth
@@ -170,8 +166,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
-      security:
-      - RefreshToken: []
       summary: Refresh
       tags:
       - Auth
@@ -195,8 +189,7 @@ paths:
                 type: object
           description: OK
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get my entitlements
       tags:
       - Entitlements
@@ -243,8 +236,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create an Organization
       tags:
       - Organizations
@@ -287,8 +279,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all my organizations
       tags:
       - Organizations
@@ -338,8 +329,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete Organization by ID
       tags:
       - Organizations
@@ -391,8 +381,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an Organization by id
       tags:
       - Organizations
@@ -451,8 +440,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch an Organization by ID
       tags:
       - Organizations
@@ -525,8 +513,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a checkout session for an Organization
       tags:
       - Organizations
@@ -575,8 +562,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all credits payments for an Organization
       tags:
       - Organizations
@@ -658,8 +644,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a stripe customer portal session for an Organization
       tags:
       - Organizations
@@ -708,8 +693,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all invites for an Organization
       tags:
       - Organizations
@@ -774,8 +758,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Invite a user to an Organization
       tags:
       - Organizations
@@ -832,8 +815,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete Organization Invite by ID
       tags:
       - Organizations
@@ -885,8 +867,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get an invite for an Organization
       tags:
       - Organizations
@@ -945,8 +926,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Accept Organization Invite
       tags:
       - Organizations
@@ -1005,8 +985,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Resend Organization Invite by ID
       tags:
       - Organizations
@@ -1055,8 +1034,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all api keys for an Organization
       tags:
       - Organizations
@@ -1115,8 +1093,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create an api key for an Organization
       tags:
       - Organizations
@@ -1173,8 +1150,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete an api key for an Organization
       tags:
       - Organizations
@@ -1239,8 +1215,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch an api key for an Organization
       tags:
       - Organizations
@@ -1290,8 +1265,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all members for an Organization
       tags:
       - Organizations
@@ -1350,8 +1324,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a member for an Organization
       tags:
       - Organizations
@@ -1419,8 +1392,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a member for an Organization
       tags:
       - Organizations
@@ -1472,8 +1444,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a member for an Organization
       tags:
       - Organizations
@@ -1538,8 +1509,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch a member for an Organization
       tags:
       - Organizations
@@ -1589,8 +1559,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all roles for an Organization
       tags:
       - Organizations
@@ -1649,8 +1618,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a role for an Organization
       tags:
       - Organizations
@@ -1707,8 +1675,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a role for an Organization
       tags:
       - Organizations
@@ -1760,8 +1727,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a role for an Organization
       tags:
       - Organizations
@@ -1826,8 +1792,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch a role for an Organization
       tags:
       - Organizations
@@ -1878,8 +1843,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete settings for an Organization
       tags:
       - Organizations
@@ -1925,8 +1889,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get settings for an Organization
       tags:
       - Organizations
@@ -1985,8 +1948,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch settings for an Organization
       tags:
       - Organizations
@@ -2052,8 +2014,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create settings for an Organization
       tags:
       - Organizations
@@ -2098,8 +2059,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a subscription for an Organization
       tags:
       - Organizations
@@ -2145,8 +2105,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a subscription for an Organization
       tags:
       - Organizations
@@ -2205,8 +2164,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Update a subscription for an Organization
       tags:
       - Organizations
@@ -2266,8 +2224,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a subscription for an Organization
       tags:
       - Organizations
@@ -2321,8 +2278,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Reactivate a subscription for an Organization
       tags:
       - Organizations
@@ -2371,8 +2327,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all teams for an Organization
       tags:
       - Organizations
@@ -2431,8 +2386,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a team for an Organization
       tags:
       - Organizations
@@ -2489,8 +2443,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a team for an Organization
       tags:
       - Organizations
@@ -2542,8 +2495,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a team for an Organization
       tags:
       - Organizations
@@ -2608,8 +2560,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch a team for an Organization
       tags:
       - Organizations
@@ -2665,8 +2616,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all members for a team
       tags:
       - Organizations
@@ -2731,8 +2681,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Add a member to a team
       tags:
       - Organizations
@@ -2795,8 +2744,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Remove a member from a team
       tags:
       - Organizations
@@ -2854,8 +2802,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a member for a team
       tags:
       - Organizations
@@ -2891,8 +2838,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get all Roles
       tags:
       - Roles
@@ -2945,8 +2891,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a Role
       tags:
       - Roles
@@ -2996,8 +2941,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Revoke a Role from a User
       tags:
       - Roles
@@ -3055,8 +2999,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Assign a Role to a User
       tags:
       - Roles
@@ -3126,8 +3069,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Create a UserSettings
       tags:
       - UserSettings
@@ -3162,8 +3104,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get UserSettings for the authenticated user
       tags:
       - UserSettings
@@ -3213,8 +3154,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Delete a UserSettings by ID
       tags:
       - UserSettings
@@ -3266,8 +3206,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a UserSettings by ID
       tags:
       - UserSettings
@@ -3326,8 +3265,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Server or Database Internal Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Patch a UserSettings
       tags:
       - UserSettings
@@ -3381,8 +3319,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a user by email
       tags:
       - Users
@@ -3435,8 +3372,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a user by username
       tags:
       - Users
@@ -3489,8 +3425,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal Server Error
       security:
-      - AccessToken: []
-        ApiKey: []
+      - ApiKey: []
       summary: Get a user by ID
       tags:
       - Users

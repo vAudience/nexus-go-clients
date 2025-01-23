@@ -52,6 +52,7 @@ docs/AdapterExecutionState.md
 docs/AdapterFileInfo.md
 docs/Agent.md
 docs/AgentAPI.md
+docs/AgentCapability.md
 docs/AgentPrompt.md
 docs/AgentPromptRenderDto.md
 docs/AgentPromptRenderedDto.md
@@ -88,6 +89,7 @@ docs/FileUploadResponse.md
 docs/FilemanagerManagedFile.md
 docs/FilemanagerProcessingResultFile.md
 docs/FilesAPI.md
+docs/FinishReason.md
 docs/FunctionCall.md
 docs/FunctionCallsAPI.md
 docs/HealthAPI.md
@@ -133,6 +135,7 @@ model_adapter_execution_results.go
 model_adapter_execution_state.go
 model_adapter_file_info.go
 model_agent.go
+model_agent_capability.go
 model_agent_prompt.go
 model_agent_prompt_render_dto.go
 model_agent_prompt_rendered_dto.go
@@ -171,6 +174,7 @@ model_execution_usage_cost.go
 model_file_upload_response.go
 model_filemanager_managed_file.go
 model_filemanager_processing_result_file.go
+model_finish_reason.go
 model_function_call.go
 model_health_response.go
 model_hosting_location.go

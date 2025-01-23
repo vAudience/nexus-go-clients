@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **Features** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**MaxInputTokens** | Pointer to **int32** |  | [optional] 
-**MaxOutputTokens** | Pointer to **int32** |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -213,56 +211,6 @@ SetIsPublic sets IsPublic field to given value.
 `func (o *AIModelWriteDto) HasIsPublic() bool`
 
 HasIsPublic returns a boolean if a field has been set.
-
-### GetMaxInputTokens
-
-`func (o *AIModelWriteDto) GetMaxInputTokens() int32`
-
-GetMaxInputTokens returns the MaxInputTokens field if non-nil, zero value otherwise.
-
-### GetMaxInputTokensOk
-
-`func (o *AIModelWriteDto) GetMaxInputTokensOk() (*int32, bool)`
-
-GetMaxInputTokensOk returns a tuple with the MaxInputTokens field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxInputTokens
-
-`func (o *AIModelWriteDto) SetMaxInputTokens(v int32)`
-
-SetMaxInputTokens sets MaxInputTokens field to given value.
-
-### HasMaxInputTokens
-
-`func (o *AIModelWriteDto) HasMaxInputTokens() bool`
-
-HasMaxInputTokens returns a boolean if a field has been set.
-
-### GetMaxOutputTokens
-
-`func (o *AIModelWriteDto) GetMaxOutputTokens() int32`
-
-GetMaxOutputTokens returns the MaxOutputTokens field if non-nil, zero value otherwise.
-
-### GetMaxOutputTokensOk
-
-`func (o *AIModelWriteDto) GetMaxOutputTokensOk() (*int32, bool)`
-
-GetMaxOutputTokensOk returns a tuple with the MaxOutputTokens field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxOutputTokens
-
-`func (o *AIModelWriteDto) SetMaxOutputTokens(v int32)`
-
-SetMaxOutputTokens sets MaxOutputTokens field to given value.
-
-### HasMaxOutputTokens
-
-`func (o *AIModelWriteDto) HasMaxOutputTokens() bool`
-
-HasMaxOutputTokens returns a boolean if a field has been set.
 
 ### GetModelId
 

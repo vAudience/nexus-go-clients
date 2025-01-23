@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.13.3
+API version: 0.14.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type Agent struct {
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
+	Capabilities []AgentCapability `json:"capabilities"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
@@ -40,6 +41,7 @@ type Agent struct {
 	SystemMessages []string `json:"system_messages,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
+	UseTools *bool `json:"use_tools,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,8 +51,9 @@ type _Agent Agent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAgent(id string, modelId string, name string, ownerId string, ownerOrganizationId string) *Agent {
+func NewAgent(capabilities []AgentCapability, id string, modelId string, name string, ownerId string, ownerOrganizationId string) *Agent {
 	this := Agent{}
+	this.Capabilities = capabilities
 	this.Id = id
 	this.ModelId = modelId
 	this.Name = name
@@ -161,6 +164,30 @@ func (o *Agent) HasAvatarUrl() bool {
 // SetAvatarUrl gets a reference to the given string and assigns it to the AvatarUrl field.
 func (o *Agent) SetAvatarUrl(v string) {
 	o.AvatarUrl = &v
+}
+
+// GetCapabilities returns the Capabilities field value
+func (o *Agent) GetCapabilities() []AgentCapability {
+	if o == nil {
+		var ret []AgentCapability
+		return ret
+	}
+
+	return o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value
+// and a boolean to check if the value has been set.
+func (o *Agent) GetCapabilitiesOk() ([]AgentCapability, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// SetCapabilities sets field value
+func (o *Agent) SetCapabilities(v []AgentCapability) {
+	o.Capabilities = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -635,6 +662,38 @@ func (o *Agent) SetUpdatedBy(v string) {
 	o.UpdatedBy = &v
 }
 
+// GetUseTools returns the UseTools field value if set, zero value otherwise.
+func (o *Agent) GetUseTools() bool {
+	if o == nil || IsNil(o.UseTools) {
+		var ret bool
+		return ret
+	}
+	return *o.UseTools
+}
+
+// GetUseToolsOk returns a tuple with the UseTools field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetUseToolsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseTools) {
+		return nil, false
+	}
+	return o.UseTools, true
+}
+
+// HasUseTools returns a boolean if a field has been set.
+func (o *Agent) HasUseTools() bool {
+	if o != nil && !IsNil(o.UseTools) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseTools gets a reference to the given bool and assigns it to the UseTools field.
+func (o *Agent) SetUseTools(v bool) {
+	o.UseTools = &v
+}
+
 func (o Agent) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -654,6 +713,7 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AvatarUrl) {
 		toSerialize["avatar_url"] = o.AvatarUrl
 	}
+	toSerialize["capabilities"] = o.Capabilities
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -692,6 +752,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedBy) {
 		toSerialize["updated_by"] = o.UpdatedBy
 	}
+	if !IsNil(o.UseTools) {
+		toSerialize["use_tools"] = o.UseTools
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -705,6 +768,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"capabilities",
 		"id",
 		"model_id",
 		"name",
@@ -742,6 +806,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
+		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
@@ -758,6 +823,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "system_messages")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "updated_by")
+		delete(additionalProperties, "use_tools")
 		o.AdditionalProperties = additionalProperties
 	}
 

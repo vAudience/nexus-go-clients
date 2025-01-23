@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **AgentId** | **string** |  | 
 **AttachedTemporaryFiles** | Pointer to **[]string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
+**ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
+**ContinueOnMaxTokens** | Pointer to **bool** |  | [optional] 
 **ExpireMessages** | Pointer to **bool** |  | [optional] 
 **Message** | **string** |  | 
 **MessageReferenceId** | Pointer to **string** |  | [optional] 
@@ -106,6 +108,56 @@ SetChannelId sets ChannelId field to given value.
 `func (o *ChatCompletionRequestDto) HasChannelId() bool`
 
 HasChannelId returns a boolean if a field has been set.
+
+### GetContinueInstructionOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) GetContinueInstructionOnMaxTokens() string`
+
+GetContinueInstructionOnMaxTokens returns the ContinueInstructionOnMaxTokens field if non-nil, zero value otherwise.
+
+### GetContinueInstructionOnMaxTokensOk
+
+`func (o *ChatCompletionRequestDto) GetContinueInstructionOnMaxTokensOk() (*string, bool)`
+
+GetContinueInstructionOnMaxTokensOk returns a tuple with the ContinueInstructionOnMaxTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContinueInstructionOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) SetContinueInstructionOnMaxTokens(v string)`
+
+SetContinueInstructionOnMaxTokens sets ContinueInstructionOnMaxTokens field to given value.
+
+### HasContinueInstructionOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) HasContinueInstructionOnMaxTokens() bool`
+
+HasContinueInstructionOnMaxTokens returns a boolean if a field has been set.
+
+### GetContinueOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) GetContinueOnMaxTokens() bool`
+
+GetContinueOnMaxTokens returns the ContinueOnMaxTokens field if non-nil, zero value otherwise.
+
+### GetContinueOnMaxTokensOk
+
+`func (o *ChatCompletionRequestDto) GetContinueOnMaxTokensOk() (*bool, bool)`
+
+GetContinueOnMaxTokensOk returns a tuple with the ContinueOnMaxTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContinueOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) SetContinueOnMaxTokens(v bool)`
+
+SetContinueOnMaxTokens sets ContinueOnMaxTokens field to given value.
+
+### HasContinueOnMaxTokens
+
+`func (o *ChatCompletionRequestDto) HasContinueOnMaxTokens() bool`
+
+HasContinueOnMaxTokens returns a boolean if a field has been set.
 
 ### GetExpireMessages
 

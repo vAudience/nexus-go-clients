@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **int64** |  | 
 **CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) |  | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
+**FinishReason** | [**FinishReason**](FinishReason.md) |  | 
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
@@ -34,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessage
 
-`func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
+`func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, finishReason FinishReason, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
 
 NewAIgencyMessage instantiates a new AIgencyMessage object
 This constructor will assign default values to properties that have it defined,
@@ -298,6 +299,26 @@ SetError sets Error field to given value.
 `func (o *AIgencyMessage) HasError() bool`
 
 HasError returns a boolean if a field has been set.
+
+### GetFinishReason
+
+`func (o *AIgencyMessage) GetFinishReason() FinishReason`
+
+GetFinishReason returns the FinishReason field if non-nil, zero value otherwise.
+
+### GetFinishReasonOk
+
+`func (o *AIgencyMessage) GetFinishReasonOk() (*FinishReason, bool)`
+
+GetFinishReasonOk returns a tuple with the FinishReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFinishReason
+
+`func (o *AIgencyMessage) SetFinishReason(v FinishReason)`
+
+SetFinishReason sets FinishReason field to given value.
+
 
 ### GetId
 

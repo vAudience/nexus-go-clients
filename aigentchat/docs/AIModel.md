@@ -13,8 +13,6 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**MaxInputTokens** | Pointer to **int32** |  | [optional] 
-**MaxOutputTokens** | Pointer to **int32** |  | [optional] 
 **ModelId** | **string** |  | 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
@@ -264,56 +262,6 @@ SetIsPublic sets IsPublic field to given value.
 `func (o *AIModel) HasIsPublic() bool`
 
 HasIsPublic returns a boolean if a field has been set.
-
-### GetMaxInputTokens
-
-`func (o *AIModel) GetMaxInputTokens() int32`
-
-GetMaxInputTokens returns the MaxInputTokens field if non-nil, zero value otherwise.
-
-### GetMaxInputTokensOk
-
-`func (o *AIModel) GetMaxInputTokensOk() (*int32, bool)`
-
-GetMaxInputTokensOk returns a tuple with the MaxInputTokens field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxInputTokens
-
-`func (o *AIModel) SetMaxInputTokens(v int32)`
-
-SetMaxInputTokens sets MaxInputTokens field to given value.
-
-### HasMaxInputTokens
-
-`func (o *AIModel) HasMaxInputTokens() bool`
-
-HasMaxInputTokens returns a boolean if a field has been set.
-
-### GetMaxOutputTokens
-
-`func (o *AIModel) GetMaxOutputTokens() int32`
-
-GetMaxOutputTokens returns the MaxOutputTokens field if non-nil, zero value otherwise.
-
-### GetMaxOutputTokensOk
-
-`func (o *AIModel) GetMaxOutputTokensOk() (*int32, bool)`
-
-GetMaxOutputTokensOk returns a tuple with the MaxOutputTokens field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxOutputTokens
-
-`func (o *AIModel) SetMaxOutputTokens(v int32)`
-
-SetMaxOutputTokens sets MaxOutputTokens field to given value.
-
-### HasMaxOutputTokens
-
-`func (o *AIModel) HasMaxOutputTokens() bool`
-
-HasMaxOutputTokens returns a boolean if a field has been set.
 
 ### GetModelId
 

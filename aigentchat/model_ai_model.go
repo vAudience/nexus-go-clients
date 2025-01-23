@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.13.3
+API version: 0.14.0
 Contact: contact@vaudience.ai
 */
 
@@ -30,8 +30,6 @@ type AIModel struct {
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
-	MaxInputTokens *int32 `json:"max_input_tokens,omitempty"`
-	MaxOutputTokens *int32 `json:"max_output_tokens,omitempty"`
 	ModelId string `json:"model_id"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
@@ -350,70 +348,6 @@ func (o *AIModel) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
-// GetMaxInputTokens returns the MaxInputTokens field value if set, zero value otherwise.
-func (o *AIModel) GetMaxInputTokens() int32 {
-	if o == nil || IsNil(o.MaxInputTokens) {
-		var ret int32
-		return ret
-	}
-	return *o.MaxInputTokens
-}
-
-// GetMaxInputTokensOk returns a tuple with the MaxInputTokens field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetMaxInputTokensOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxInputTokens) {
-		return nil, false
-	}
-	return o.MaxInputTokens, true
-}
-
-// HasMaxInputTokens returns a boolean if a field has been set.
-func (o *AIModel) HasMaxInputTokens() bool {
-	if o != nil && !IsNil(o.MaxInputTokens) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxInputTokens gets a reference to the given int32 and assigns it to the MaxInputTokens field.
-func (o *AIModel) SetMaxInputTokens(v int32) {
-	o.MaxInputTokens = &v
-}
-
-// GetMaxOutputTokens returns the MaxOutputTokens field value if set, zero value otherwise.
-func (o *AIModel) GetMaxOutputTokens() int32 {
-	if o == nil || IsNil(o.MaxOutputTokens) {
-		var ret int32
-		return ret
-	}
-	return *o.MaxOutputTokens
-}
-
-// GetMaxOutputTokensOk returns a tuple with the MaxOutputTokens field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetMaxOutputTokensOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxOutputTokens) {
-		return nil, false
-	}
-	return o.MaxOutputTokens, true
-}
-
-// HasMaxOutputTokens returns a boolean if a field has been set.
-func (o *AIModel) HasMaxOutputTokens() bool {
-	if o != nil && !IsNil(o.MaxOutputTokens) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxOutputTokens gets a reference to the given int32 and assigns it to the MaxOutputTokens field.
-func (o *AIModel) SetMaxOutputTokens(v int32) {
-	o.MaxOutputTokens = &v
-}
-
 // GetModelId returns the ModelId field value
 func (o *AIModel) GetModelId() string {
 	if o == nil {
@@ -729,12 +663,6 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	if !IsNil(o.MaxInputTokens) {
-		toSerialize["max_input_tokens"] = o.MaxInputTokens
-	}
-	if !IsNil(o.MaxOutputTokens) {
-		toSerialize["max_output_tokens"] = o.MaxOutputTokens
-	}
 	toSerialize["model_id"] = o.ModelId
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
@@ -812,8 +740,6 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
-		delete(additionalProperties, "max_input_tokens")
-		delete(additionalProperties, "max_output_tokens")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
