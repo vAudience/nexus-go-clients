@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
-**Capabilities** | [**[]AgentCapability**](AgentCapability.md) |  | 
+**Capabilities** | Pointer to [**[]AgentCapability**](AgentCapability.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewAgent
 
-`func NewAgent(capabilities []AgentCapability, id string, modelId string, name string, ownerId string, ownerOrganizationId string, ) *Agent`
+`func NewAgent(id string, modelId string, name string, ownerId string, ownerOrganizationId string, ) *Agent`
 
 NewAgent instantiates a new Agent object
 This constructor will assign default values to properties that have it defined,
@@ -139,6 +139,11 @@ and a boolean to check if the value has been set.
 
 SetCapabilities sets Capabilities field to given value.
 
+### HasCapabilities
+
+`func (o *Agent) HasCapabilities() bool`
+
+HasCapabilities returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

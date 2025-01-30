@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **int64** |  | 
 **CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) |  | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
-**FinishReason** | [**FinishReason**](FinishReason.md) |  | 
+**FinishReason** | Pointer to [**FinishReason**](FinishReason.md) |  | [optional] 
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessage
 
-`func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, finishReason FinishReason, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
+`func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
 
 NewAIgencyMessage instantiates a new AIgencyMessage object
 This constructor will assign default values to properties that have it defined,
@@ -319,6 +319,11 @@ and a boolean to check if the value has been set.
 
 SetFinishReason sets FinishReason field to given value.
 
+### HasFinishReason
+
+`func (o *AIgencyMessage) HasFinishReason() bool`
+
+HasFinishReason returns a boolean if a field has been set.
 
 ### GetId
 

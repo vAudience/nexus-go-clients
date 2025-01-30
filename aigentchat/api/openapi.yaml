@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.14.0
+  version: 0.14.1
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/api/v1
 tags:
@@ -5708,7 +5708,6 @@ components:
       - channel_id
       - channel_name
       - created_at
-      - finish_reason
       - id
       - owner_organization_id
       - sender_conversation_role
@@ -6161,7 +6160,6 @@ components:
         use_tools:
           type: boolean
       required:
-      - capabilities
       - id
       - model_id
       - name

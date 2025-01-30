@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.0
+API version: 0.14.1
 Contact: contact@vaudience.ai
 */
 
@@ -24,7 +24,7 @@ type Agent struct {
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
-	Capabilities []AgentCapability `json:"capabilities"`
+	Capabilities []AgentCapability `json:"capabilities,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
@@ -51,9 +51,8 @@ type _Agent Agent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAgent(capabilities []AgentCapability, id string, modelId string, name string, ownerId string, ownerOrganizationId string) *Agent {
+func NewAgent(id string, modelId string, name string, ownerId string, ownerOrganizationId string) *Agent {
 	this := Agent{}
-	this.Capabilities = capabilities
 	this.Id = id
 	this.ModelId = modelId
 	this.Name = name
@@ -166,26 +165,34 @@ func (o *Agent) SetAvatarUrl(v string) {
 	o.AvatarUrl = &v
 }
 
-// GetCapabilities returns the Capabilities field value
+// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
 func (o *Agent) GetCapabilities() []AgentCapability {
-	if o == nil {
+	if o == nil || IsNil(o.Capabilities) {
 		var ret []AgentCapability
 		return ret
 	}
-
 	return o.Capabilities
 }
 
-// GetCapabilitiesOk returns a tuple with the Capabilities field value
+// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Agent) GetCapabilitiesOk() ([]AgentCapability, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Capabilities) {
 		return nil, false
 	}
 	return o.Capabilities, true
 }
 
-// SetCapabilities sets field value
+// HasCapabilities returns a boolean if a field has been set.
+func (o *Agent) HasCapabilities() bool {
+	if o != nil && !IsNil(o.Capabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilities gets a reference to the given []AgentCapability and assigns it to the Capabilities field.
 func (o *Agent) SetCapabilities(v []AgentCapability) {
 	o.Capabilities = v
 }
@@ -713,7 +720,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AvatarUrl) {
 		toSerialize["avatar_url"] = o.AvatarUrl
 	}
-	toSerialize["capabilities"] = o.Capabilities
+	if !IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -768,7 +777,6 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"capabilities",
 		"id",
 		"model_id",
 		"name",

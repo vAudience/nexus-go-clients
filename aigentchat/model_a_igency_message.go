@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.0
+API version: 0.14.1
 Contact: contact@vaudience.ai
 */
 
@@ -32,7 +32,7 @@ type AIgencyMessage struct {
 	CreatedAt int64 `json:"created_at"`
 	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
 	Error *AiServiceError `json:"error,omitempty"`
-	FinishReason FinishReason `json:"finish_reason"`
+	FinishReason *FinishReason `json:"finish_reason,omitempty"`
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	MissionId *string `json:"mission_id,omitempty"`
@@ -56,14 +56,13 @@ type _AIgencyMessage AIgencyMessage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, finishReason FinishReason, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AIgencyMessage {
+func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AIgencyMessage {
 	this := AIgencyMessage{}
 	this.AiModelId = aiModelId
 	this.AiServiceId = aiServiceId
 	this.ChannelId = channelId
 	this.ChannelName = channelName
 	this.CreatedAt = createdAt
-	this.FinishReason = finishReason
 	this.Id = id
 	this.OwnerOrganizationId = ownerOrganizationId
 	this.SenderConversationRole = senderConversationRole
@@ -395,28 +394,36 @@ func (o *AIgencyMessage) SetError(v AiServiceError) {
 	o.Error = &v
 }
 
-// GetFinishReason returns the FinishReason field value
+// GetFinishReason returns the FinishReason field value if set, zero value otherwise.
 func (o *AIgencyMessage) GetFinishReason() FinishReason {
-	if o == nil {
+	if o == nil || IsNil(o.FinishReason) {
 		var ret FinishReason
 		return ret
 	}
-
-	return o.FinishReason
+	return *o.FinishReason
 }
 
-// GetFinishReasonOk returns a tuple with the FinishReason field value
+// GetFinishReasonOk returns a tuple with the FinishReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessage) GetFinishReasonOk() (*FinishReason, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FinishReason) {
 		return nil, false
 	}
-	return &o.FinishReason, true
+	return o.FinishReason, true
 }
 
-// SetFinishReason sets field value
+// HasFinishReason returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasFinishReason() bool {
+	if o != nil && !IsNil(o.FinishReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinishReason gets a reference to the given FinishReason and assigns it to the FinishReason field.
 func (o *AIgencyMessage) SetFinishReason(v FinishReason) {
-	o.FinishReason = v
+	o.FinishReason = &v
 }
 
 // GetId returns the Id field value
@@ -836,7 +843,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
-	toSerialize["finish_reason"] = o.FinishReason
+	if !IsNil(o.FinishReason) {
+		toSerialize["finish_reason"] = o.FinishReason
+	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
@@ -881,7 +890,6 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		"channel_id",
 		"channel_name",
 		"created_at",
-		"finish_reason",
 		"id",
 		"owner_organization_id",
 		"sender_conversation_role",
