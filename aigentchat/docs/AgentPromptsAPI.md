@@ -1,15 +1,15 @@
 # \AgentPromptsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAgentPrompt**](AgentPromptsAPI.md#CreateAgentPrompt) | **Post** /organizations/{org_id}/agentprompts | Create a new agent prompt
-[**DeleteAgentPrompt**](AgentPromptsAPI.md#DeleteAgentPrompt) | **Delete** /organizations/{org_id}/agentprompts/{prompt_id} | Delete an agent prompt
-[**GetAgentPrompt**](AgentPromptsAPI.md#GetAgentPrompt) | **Get** /organizations/{org_id}/agentprompts/{prompt_id} | Get a specific agent prompt
-[**ListAgentPrompts**](AgentPromptsAPI.md#ListAgentPrompts) | **Get** /organizations/{org_id}/agentprompts | List agent prompts
-[**RenderAgentPrompt**](AgentPromptsAPI.md#RenderAgentPrompt) | **Post** /organizations/{org_id}/agentprompts/render | Render Agent Prompt
-[**UpdateAgentPrompt**](AgentPromptsAPI.md#UpdateAgentPrompt) | **Put** /organizations/{org_id}/agentprompts/{prompt_id} | Update an agent prompt
+[**CreateAgentPrompt**](AgentPromptsAPI.md#CreateAgentPrompt) | **Post** /v1/organizations/{org_id}/agent-prompts | Create a new agent prompt
+[**DeleteAgentPrompt**](AgentPromptsAPI.md#DeleteAgentPrompt) | **Delete** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Delete an agent prompt
+[**GetAgentPrompt**](AgentPromptsAPI.md#GetAgentPrompt) | **Get** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Get a specific agent prompt
+[**ListAgentPrompts**](AgentPromptsAPI.md#ListAgentPrompts) | **Get** /v1/organizations/{org_id}/agent-prompts | List agent prompts
+[**RenderAgentPrompt**](AgentPromptsAPI.md#RenderAgentPrompt) | **Post** /v1/organizations/{org_id}/agent-prompts/render | Render Agent Prompt
+[**UpdateAgentPrompt**](AgentPromptsAPI.md#UpdateAgentPrompt) | **Put** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Update an agent prompt
 
 
 

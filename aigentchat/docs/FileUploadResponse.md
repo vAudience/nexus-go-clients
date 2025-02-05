@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IncomingFileName** | Pointer to **string** |  | [optional] 
-**ProcessingError** | Pointer to **string** |  | [optional] 
-**ResultingFiles** | Pointer to [**[]FilemanagerProcessingResultFile**](FilemanagerProcessingResultFile.md) |  | [optional] 
+**Id** | **string** |  | 
+**ResultingFiles** | [**[]ResultFile**](ResultFile.md) |  | 
 
 ## Methods
 
 ### NewFileUploadResponse
 
-`func NewFileUploadResponse() *FileUploadResponse`
+`func NewFileUploadResponse(id string, resultingFiles []ResultFile, ) *FileUploadResponse`
 
 NewFileUploadResponse instantiates a new FileUploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -27,80 +26,45 @@ NewFileUploadResponseWithDefaults instantiates a new FileUploadResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetIncomingFileName
+### GetId
 
-`func (o *FileUploadResponse) GetIncomingFileName() string`
+`func (o *FileUploadResponse) GetId() string`
 
-GetIncomingFileName returns the IncomingFileName field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetIncomingFileNameOk
+### GetIdOk
 
-`func (o *FileUploadResponse) GetIncomingFileNameOk() (*string, bool)`
+`func (o *FileUploadResponse) GetIdOk() (*string, bool)`
 
-GetIncomingFileNameOk returns a tuple with the IncomingFileName field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIncomingFileName
+### SetId
 
-`func (o *FileUploadResponse) SetIncomingFileName(v string)`
+`func (o *FileUploadResponse) SetId(v string)`
 
-SetIncomingFileName sets IncomingFileName field to given value.
+SetId sets Id field to given value.
 
-### HasIncomingFileName
-
-`func (o *FileUploadResponse) HasIncomingFileName() bool`
-
-HasIncomingFileName returns a boolean if a field has been set.
-
-### GetProcessingError
-
-`func (o *FileUploadResponse) GetProcessingError() string`
-
-GetProcessingError returns the ProcessingError field if non-nil, zero value otherwise.
-
-### GetProcessingErrorOk
-
-`func (o *FileUploadResponse) GetProcessingErrorOk() (*string, bool)`
-
-GetProcessingErrorOk returns a tuple with the ProcessingError field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessingError
-
-`func (o *FileUploadResponse) SetProcessingError(v string)`
-
-SetProcessingError sets ProcessingError field to given value.
-
-### HasProcessingError
-
-`func (o *FileUploadResponse) HasProcessingError() bool`
-
-HasProcessingError returns a boolean if a field has been set.
 
 ### GetResultingFiles
 
-`func (o *FileUploadResponse) GetResultingFiles() []FilemanagerProcessingResultFile`
+`func (o *FileUploadResponse) GetResultingFiles() []ResultFile`
 
 GetResultingFiles returns the ResultingFiles field if non-nil, zero value otherwise.
 
 ### GetResultingFilesOk
 
-`func (o *FileUploadResponse) GetResultingFilesOk() (*[]FilemanagerProcessingResultFile, bool)`
+`func (o *FileUploadResponse) GetResultingFilesOk() (*[]ResultFile, bool)`
 
 GetResultingFilesOk returns a tuple with the ResultingFiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResultingFiles
 
-`func (o *FileUploadResponse) SetResultingFiles(v []FilemanagerProcessingResultFile)`
+`func (o *FileUploadResponse) SetResultingFiles(v []ResultFile)`
 
 SetResultingFiles sets ResultingFiles field to given value.
 
-### HasResultingFiles
-
-`func (o *FileUploadResponse) HasResultingFiles() bool`
-
-HasResultingFiles returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

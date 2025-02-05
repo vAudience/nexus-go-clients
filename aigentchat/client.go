@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the vAudience AIgentChat API API v0.14.1
+// APIClient manages communication with the vAudience AIgentChat API API v0.15.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -50,19 +50,19 @@ type APIClient struct {
 
 	// API Services
 
-	AIModelAPI *AIModelAPIService
+	AIModelServicesAPI *AIModelServicesAPIService
 
-	AIModelServiceAPI *AIModelServiceAPIService
-
-	AgentAPI *AgentAPIService
+	AIModelsAPI *AIModelsAPIService
 
 	AgentPromptsAPI *AgentPromptsAPIService
 
-	AgentTeamAPI *AgentTeamAPIService
+	AgentTeamsAPI *AgentTeamsAPIService
+
+	AgentsAPI *AgentsAPIService
 
 	AudioAPI *AudioAPIService
 
-	ChannelAPI *ChannelAPIService
+	ChannelsAPI *ChannelsAPIService
 
 	ChatCompletionsAPI *ChatCompletionsAPIService
 
@@ -72,13 +72,11 @@ type APIClient struct {
 
 	ExecutionLogsAPI *ExecutionLogsAPIService
 
-	FilesAPI *FilesAPIService
-
 	FunctionCallsAPI *FunctionCallsAPIService
 
 	HealthAPI *HealthAPIService
 
-	ImageAPI *ImageAPIService
+	ImagesAPI *ImagesAPIService
 
 	MessagesAPI *MessagesAPIService
 
@@ -86,7 +84,7 @@ type APIClient struct {
 
 	MissionsAPI *MissionsAPIService
 
-	OrgCostBudgetAPI *OrgCostBudgetAPIService
+	OrgCostBudgetsAPI *OrgCostBudgetsAPIService
 
 	VersionAPI *VersionAPIService
 }
@@ -107,25 +105,24 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.AIModelAPI = (*AIModelAPIService)(&c.common)
-	c.AIModelServiceAPI = (*AIModelServiceAPIService)(&c.common)
-	c.AgentAPI = (*AgentAPIService)(&c.common)
+	c.AIModelServicesAPI = (*AIModelServicesAPIService)(&c.common)
+	c.AIModelsAPI = (*AIModelsAPIService)(&c.common)
 	c.AgentPromptsAPI = (*AgentPromptsAPIService)(&c.common)
-	c.AgentTeamAPI = (*AgentTeamAPIService)(&c.common)
+	c.AgentTeamsAPI = (*AgentTeamsAPIService)(&c.common)
+	c.AgentsAPI = (*AgentsAPIService)(&c.common)
 	c.AudioAPI = (*AudioAPIService)(&c.common)
-	c.ChannelAPI = (*ChannelAPIService)(&c.common)
+	c.ChannelsAPI = (*ChannelsAPIService)(&c.common)
 	c.ChatCompletionsAPI = (*ChatCompletionsAPIService)(&c.common)
 	c.ConnectionTokensAPI = (*ConnectionTokensAPIService)(&c.common)
 	c.EmbeddingsAPI = (*EmbeddingsAPIService)(&c.common)
 	c.ExecutionLogsAPI = (*ExecutionLogsAPIService)(&c.common)
-	c.FilesAPI = (*FilesAPIService)(&c.common)
 	c.FunctionCallsAPI = (*FunctionCallsAPIService)(&c.common)
 	c.HealthAPI = (*HealthAPIService)(&c.common)
-	c.ImageAPI = (*ImageAPIService)(&c.common)
+	c.ImagesAPI = (*ImagesAPIService)(&c.common)
 	c.MessagesAPI = (*MessagesAPIService)(&c.common)
 	c.MetricsAPI = (*MetricsAPIService)(&c.common)
 	c.MissionsAPI = (*MissionsAPIService)(&c.common)
-	c.OrgCostBudgetAPI = (*OrgCostBudgetAPIService)(&c.common)
+	c.OrgCostBudgetsAPI = (*OrgCostBudgetsAPIService)(&c.common)
 	c.VersionAPI = (*VersionAPIService)(&c.common)
 
 	return c

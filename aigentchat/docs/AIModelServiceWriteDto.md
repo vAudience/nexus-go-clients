@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CostMultiplier** | Pointer to **float64** | 1.0 is default, we use this to adjust our margin | [optional] 
+**CostMultiplier** | Pointer to **float64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Name** | **string** |  | 
-**ServiceImpl** | **string** | this is used for internal identification! | 
+**ServiceImpl** | **string** |  | 
 
 ## Methods
 

@@ -1,11 +1,11 @@
 # \ExecutionLogsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetExecutionLogsCosts**](ExecutionLogsAPI.md#GetExecutionLogsCosts) | **Get** /organizations/{org_id}/executionlogs/costs | Get execution logs costs
-[**SearchExecutionLogs**](ExecutionLogsAPI.md#SearchExecutionLogs) | **Get** /organizations/{org_id}/executionlogs/search | Search execution logs
+[**GetExecutionLogsCosts**](ExecutionLogsAPI.md#GetExecutionLogsCosts) | **Get** /v1/organizations/{org_id}/execution-logs/costs | Get execution logs costs
+[**SearchExecutionLogs**](ExecutionLogsAPI.md#SearchExecutionLogs) | **Get** /v1/organizations/{org_id}/execution-logs/search | Search execution logs
 
 
 

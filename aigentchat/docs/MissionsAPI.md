@@ -1,15 +1,15 @@
 # \MissionsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelMission**](MissionsAPI.md#CancelMission) | **Post** /organizations/{org_id}/missions/{mission_id}/cancel | Cancel a mission
-[**CreateMission**](MissionsAPI.md#CreateMission) | **Post** /organizations/{org_id}/missions/{mission_executor_id} | Create a new mission
-[**DeleteMission**](MissionsAPI.md#DeleteMission) | **Delete** /organizations/{org_id}/missions/{mission_id} | Delete a mission
-[**GetMission**](MissionsAPI.md#GetMission) | **Get** /organizations/{org_id}/missions/{mission_id} | Get a mission
-[**ListMissionsByExecutorID**](MissionsAPI.md#ListMissionsByExecutorID) | **Get** /organizations/{org_id}/missions/byexecutor/{mission_executor_id} | List all missions by a executorID (Agent Team or Agent)
-[**ListMissionsByOrg**](MissionsAPI.md#ListMissionsByOrg) | **Get** /organizations/{org_id}/missions | List all missions of an organization and owned by the current user
+[**CancelMission**](MissionsAPI.md#CancelMission) | **Post** /v1/organizations/{org_id}/missions/{mission_id}/cancel | Cancel a mission
+[**CreateMission**](MissionsAPI.md#CreateMission) | **Post** /v1/organizations/{org_id}/missions/{mission_executor_id} | Create a new mission
+[**DeleteMission**](MissionsAPI.md#DeleteMission) | **Delete** /v1/organizations/{org_id}/missions/{mission_id} | Delete a mission
+[**GetMission**](MissionsAPI.md#GetMission) | **Get** /v1/organizations/{org_id}/missions/{mission_id} | Get a mission
+[**ListMissionsByExecutorID**](MissionsAPI.md#ListMissionsByExecutorID) | **Get** /v1/organizations/{org_id}/missions/executor/{mission_executor_id} | List all missions by a executorID (Agent Team or Agent)
+[**ListMissionsByOrg**](MissionsAPI.md#ListMissionsByOrg) | **Get** /v1/organizations/{org_id}/missions | List all missions of an organization and owned by the current user
 
 
 

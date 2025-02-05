@@ -10,25 +10,25 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.14.1
+  version: 0.15.0
 servers:
-- url: https://aigentchat.dev.ai.vaud.one/api/v1
+- url: https://aigentchat.dev.ai.vaud.one/
 tags:
 - description: anything related to ai agents
-  name: Agent
+  name: Agents
 - description: anything related to agent prompts
   name: AgentPrompts
 - description: anything related to agent teams
-  name: AgentTeam
+  name: AgentTeams
 - description: anything related to the AI models
-  name: AIModel
+  name: AIModels
 - description: anything related to the AI model services
-  name: AIModelService
+  name: AIModelServices
 - description: "anything related to audio files and processing such as text-to-speech,\
     \ speech-to-text etc."
   name: Audio
 - description: anything related to the chat channels
-  name: Channel
+  name: Channels
 - description: anything related to the chat completions
   name: ChatCompletions
 - description: anything related to connection tokens for SSE
@@ -37,18 +37,60 @@ tags:
   name: Embeddings
 - description: anything related to execution logs (cost and usage)
   name: ExecutionLogs
-- description: anything related to file uploads and processing
-  name: Files
 - description: anything related to function calls
   name: FunctionCalls
+- description: anything related to images
+  name: Images
 - description: anything related to the chat messages
   name: Messages
 - description: anything related to aigency missions
   name: Missions
-- description: anything related to the organization cost budget
-  name: OrgCostBudget
+- description: anything related to the organization cost budgets
+  name: OrgCostBudgets
 paths:
-  /ai_model_services:
+  /info/health:
+    get:
+      description: a simple 200 return endpoint to ensure the service is responsive
+      operationId: HealthGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+          description: OK
+      summary: checks for service health
+      tags:
+      - Health
+  /info/metrics:
+    get:
+      description: go prometheus client provides this standard (basic) metrics endpoint
+      operationId: MetricsGet
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "500":
+          content: {}
+          description: Internal Server Error
+      summary: Prometheus provided metrics endpoint
+      tags:
+      - Metrics
+  /info/version:
+    get:
+      description: returns the version number of this service
+      operationId: VersionGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+          description: OK
+      summary: returns the service version
+      tags:
+      - Version
+  /v1/ai-model-services:
     get:
       description: Retrieve a list of AI model services
       operationId: ListAIModelServices
@@ -83,7 +125,7 @@ paths:
       - ApiKey: []
       summary: List AI model services
       tags:
-      - AIModelService
+      - AIModelServices
     post:
       description: Create a new AI model service with the provided details
       operationId: CreateAIModelService
@@ -129,9 +171,45 @@ paths:
       - ApiKey: []
       summary: Create a new AI model service
       tags:
-      - AIModelService
+      - AIModelServices
       x-codegen-request-body-name: service
-  /ai_model_services/{id}:
+  /v1/ai-model-services-with-models:
+    get:
+      description: Retrieve a list of AI services with their associated models
+      operationId: ListAIModelServicesWithModels
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIModelServiceWithModels'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List AI services with models
+      tags:
+      - AIModelServices
+  /v1/ai-model-services/{id}:
     delete:
       description: Delete an AI model service by its ID
       operationId: DeleteAIModelService
@@ -183,7 +261,7 @@ paths:
       - ApiKey: []
       summary: Delete an AI model service
       tags:
-      - AIModelService
+      - AIModelServices
     get:
       description: Retrieve an AI model service by its ID
       operationId: GetAIModelService
@@ -235,7 +313,7 @@ paths:
       - ApiKey: []
       summary: Get an AI model service by ID
       tags:
-      - AIModelService
+      - AIModelServices
     put:
       description: Update an AI model service by its ID
       operationId: UpdateAIModelService
@@ -294,9 +372,9 @@ paths:
       - ApiKey: []
       summary: Update an AI model service
       tags:
-      - AIModelService
+      - AIModelServices
       x-codegen-request-body-name: service
-  /ai_model_services/{id}/models:
+  /v1/ai-model-services/{id}/models:
     get:
       description: Retrieve a list of AI models for a specific AI model service
       operationId: ListAIModelsForService
@@ -350,44 +428,8 @@ paths:
       - ApiKey: []
       summary: List AI models for a service
       tags:
-      - AIModelService
-  /ai_model_services_with_models:
-    get:
-      description: Retrieve a list of AI services with their associated models
-      operationId: ListAIModelServicesWithModels
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AIModelServiceWithModels'
-                type: array
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: List AI services with models
-      tags:
-      - AIModelService
-  /ai_models:
+      - AIModelServices
+  /v1/ai-models:
     get:
       description: Retrieve a list of AI models
       operationId: ListAIModels
@@ -416,7 +458,7 @@ paths:
       - ApiKey: []
       summary: List AI models
       tags:
-      - AIModel
+      - AIModels
     post:
       description: Create a new AI model with the provided details
       operationId: CreateAIModel
@@ -462,9 +504,9 @@ paths:
       - ApiKey: []
       summary: Create a new AI model
       tags:
-      - AIModel
+      - AIModels
       x-codegen-request-body-name: aiModel
-  /ai_models/{id}:
+  /v1/ai-models/{id}:
     delete:
       description: Delete an AI model by its ID
       operationId: DeleteAIModel
@@ -516,7 +558,7 @@ paths:
       - ApiKey: []
       summary: Delete an AI model
       tags:
-      - AIModel
+      - AIModels
     get:
       description: Retrieve an AI model by its ID
       operationId: GetAIModel
@@ -568,7 +610,7 @@ paths:
       - ApiKey: []
       summary: Get an AI model by ID
       tags:
-      - AIModel
+      - AIModels
     put:
       description: Update an AI model by its ID
       operationId: UpdateAIModel
@@ -627,652 +669,9 @@ paths:
       - ApiKey: []
       summary: Update an AI model
       tags:
-      - AIModel
+      - AIModels
       x-codegen-request-body-name: aiModel
-  /info/health:
-    get:
-      description: a simple 200 return endpoint to ensure the service is responsive
-      operationId: HealthGet
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthResponse'
-          description: OK
-      summary: checks for service health
-      tags:
-      - Health
-  /info/metrics:
-    get:
-      description: go prometheus client provides this standard (basic) metrics endpoint
-      operationId: MetricsGet
-      responses:
-        "200":
-          content: {}
-          description: OK
-        "500":
-          content: {}
-          description: Internal Server Error
-      summary: Prometheus provided metrics endpoint
-      tags:
-      - Metrics
-  /info/version:
-    get:
-      description: returns the version number of this service
-      operationId: VersionGet
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VersionResponse'
-          description: OK
-      summary: returns the service version
-      tags:
-      - Version
-  /organizations/{org_id}/agent_teams:
-    get:
-      description: Retrieve a list of agent teams by ownership and organization
-      operationId: ListAgentTeams
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AgentTeam'
-                type: array
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: List agent teams
-      tags:
-      - AgentTeam
-    post:
-      description: Create a new agent team with the provided details
-      operationId: CreateAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentTeamWriteDto'
-        description: Agent Team
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a new agent team
-      tags:
-      - AgentTeam
-      x-codegen-request-body-name: agentTeam
-  /organizations/{org_id}/agent_teams/{team_id}:
-    delete:
-      description: Delete an agent team by its ID
-      operationId: DeleteAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Delete an agent team
-      tags:
-      - AgentTeam
-    get:
-      description: Retrieve an agent team by its ID
-      operationId: GetAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get an agent team
-      tags:
-      - AgentTeam
-    put:
-      description: Update an agent team by its ID
-      operationId: UpdateAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentTeamWriteDto'
-        description: Agent Team
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update an agent team
-      tags:
-      - AgentTeam
-      x-codegen-request-body-name: agentTeam
-  /organizations/{org_id}/agent_teams/{team_id}/addagent/{agent_id}:
-    patch:
-      description: Add an agent to an agent team
-      operationId: AddAgentToTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: agent_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Add an agent to a team
-      tags:
-      - AgentTeam
-  /organizations/{org_id}/agent_teams/{team_id}/full:
-    get:
-      description: Retrieve an agent team with full details of associated agents
-      operationId: GetFullAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get a full agent team
-      tags:
-      - AgentTeam
-  /organizations/{org_id}/agent_teams/{team_id}/messages/system:
-    patch:
-      description: Update the system messages of an agent team
-      operationId: UpdateSystemMessages
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: string
-              type: array
-        description: System Messages
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update system messages
-      tags:
-      - AgentTeam
-      x-codegen-request-body-name: messages
-  /organizations/{org_id}/agent_teams/{team_id}/messages/user:
-    patch:
-      description: Update the user messages of an agent team
-      operationId: UpdateUserMessages
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: string
-              type: array
-        description: User Messages
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update user messages
-      tags:
-      - AgentTeam
-      x-codegen-request-body-name: messages
-  /organizations/{org_id}/agent_teams/{team_id}/removeagent/{agent_id}:
-    patch:
-      description: Remove an agent from an agent team
-      operationId: RemoveAgentFromTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: agent_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Remove an agent from a team
-      tags:
-      - AgentTeam
-  /organizations/{org_id}/agentprompts:
+  /v1/organizations/{org_id}/agent-prompts:
     get:
       description: List agent prompts for an organization
       operationId: ListAgentPrompts
@@ -1385,7 +784,7 @@ paths:
       tags:
       - AgentPrompts
       x-codegen-request-body-name: prompt
-  /organizations/{org_id}/agentprompts/render:
+  /v1/organizations/{org_id}/agent-prompts/render:
     post:
       description: Renders an agent prompt by resolving references and replacing variables
         in the prompt content.
@@ -1445,7 +844,7 @@ paths:
       tags:
       - AgentPrompts
       x-codegen-request-body-name: renderDto
-  /organizations/{org_id}/agentprompts/{prompt_id}:
+  /v1/organizations/{org_id}/agent-prompts/{prompt_id}:
     delete:
       description: Delete an existing agent prompt
       operationId: DeleteAgentPrompt
@@ -1625,7 +1024,608 @@ paths:
       tags:
       - AgentPrompts
       x-codegen-request-body-name: prompt
-  /organizations/{org_id}/agents:
+  /v1/organizations/{org_id}/agent-teams:
+    get:
+      description: Retrieve a list of agent teams by ownership and organization
+      operationId: ListAgentTeams
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AgentTeam'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List agent teams
+      tags:
+      - AgentTeams
+    post:
+      description: Create a new agent team with the provided details
+      operationId: CreateAgentTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentTeamWriteDto'
+        description: Agent Team
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a new agent team
+      tags:
+      - AgentTeams
+      x-codegen-request-body-name: agentTeam
+  /v1/organizations/{org_id}/agent-teams/{team_id}:
+    delete:
+      description: Delete an agent team by its ID
+      operationId: DeleteAgentTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete an agent team
+      tags:
+      - AgentTeams
+    get:
+      description: Retrieve an agent team by its ID
+      operationId: GetAgentTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get an agent team
+      tags:
+      - AgentTeams
+    put:
+      description: Update an agent team by its ID
+      operationId: UpdateAgentTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentTeamWriteDto'
+        description: Agent Team
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update an agent team
+      tags:
+      - AgentTeams
+      x-codegen-request-body-name: agentTeam
+  /v1/organizations/{org_id}/agent-teams/{team_id}/add-agent/{agent_id}:
+    patch:
+      description: Add an agent to an agent team
+      operationId: AddAgentToTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: Agent ID
+        in: path
+        name: agent_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Add an agent to a team
+      tags:
+      - AgentTeams
+  /v1/organizations/{org_id}/agent-teams/{team_id}/full:
+    get:
+      description: Retrieve an agent team with full details of associated agents
+      operationId: GetFullAgentTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get a full agent team
+      tags:
+      - AgentTeams
+  /v1/organizations/{org_id}/agent-teams/{team_id}/messages/system:
+    patch:
+      description: Update the system messages of an agent team
+      operationId: UpdateSystemMessages
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        description: System Messages
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update system messages
+      tags:
+      - AgentTeams
+      x-codegen-request-body-name: messages
+  /v1/organizations/{org_id}/agent-teams/{team_id}/messages/user:
+    patch:
+      description: Update the user messages of an agent team
+      operationId: UpdateUserMessages
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        description: User Messages
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update user messages
+      tags:
+      - AgentTeams
+      x-codegen-request-body-name: messages
+  /v1/organizations/{org_id}/agent-teams/{team_id}/remove-agent/{agent_id}:
+    patch:
+      description: Remove an agent from an agent team
+      operationId: RemoveAgentFromTeam
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Agent Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: Agent ID
+        in: path
+        name: agent_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeam'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Remove an agent from a team
+      tags:
+      - AgentTeams
+  /v1/organizations/{org_id}/agents:
     get:
       description: Retrieve a list of agents by ownership and organization
       operationId: ListAgents
@@ -1684,7 +1684,7 @@ paths:
       - ApiKey: []
       summary: List agents
       tags:
-      - Agent
+      - Agents
     post:
       description: Create a new agent with the provided details
       operationId: CreateAgent
@@ -1737,9 +1737,9 @@ paths:
       - ApiKey: []
       summary: Create a new agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: agent
-  /organizations/{org_id}/agents/search:
+  /v1/organizations/{org_id}/agents/search:
     get:
       description: Search agents based on criteria
       operationId: SearchAgents
@@ -1797,8 +1797,8 @@ paths:
       - ApiKey: []
       summary: Search agents
       tags:
-      - Agent
-  /organizations/{org_id}/agents/{id}:
+      - Agents
+  /v1/organizations/{org_id}/agents/{id}:
     delete:
       description: Delete an agent by its ID
       operationId: DeleteAgent
@@ -1856,7 +1856,7 @@ paths:
       - ApiKey: []
       summary: Delete an agent
       tags:
-      - Agent
+      - Agents
     get:
       description: Retrieve an agent by its ID
       operationId: GetAgent
@@ -1914,7 +1914,7 @@ paths:
       - ApiKey: []
       summary: Get an agent
       tags:
-      - Agent
+      - Agents
     put:
       description: Update an agent by its ID
       operationId: UpdateAgent
@@ -1979,9 +1979,9 @@ paths:
       - ApiKey: []
       summary: Update an agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: agent
-  /organizations/{org_id}/agents/{id}/addfile/{file_id}:
+  /v1/organizations/{org_id}/agents/{id}/add-file/{file_id}:
     patch:
       description: Add an attached file ID to an agent
       operationId: AddAttachedFileID
@@ -2045,8 +2045,8 @@ paths:
       - ApiKey: []
       summary: Add an attached file ID to an agent
       tags:
-      - Agent
-  /organizations/{org_id}/agents/{id}/addtool/{tool_id}:
+      - Agents
+  /v1/organizations/{org_id}/agents/{id}/add-tool/{tool_id}:
     patch:
       description: Add an assigned tool to an agent
       operationId: AddAssignedTool
@@ -2110,8 +2110,8 @@ paths:
       - ApiKey: []
       summary: Add an assigned tool to an agent
       tags:
-      - Agent
-  /organizations/{org_id}/agents/{id}/messages/addsystemmessage:
+      - Agents
+  /v1/organizations/{org_id}/agents/{id}/messages/add-system-message:
     patch:
       description: Add a system message to an agent
       operationId: AddSystemMessage
@@ -2176,9 +2176,9 @@ paths:
       - ApiKey: []
       summary: Add a system message to an agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: message
-  /organizations/{org_id}/agents/{id}/messages/addusermessage:
+  /v1/organizations/{org_id}/agents/{id}/messages/add-user-message:
     patch:
       description: Add an initial user message to an agent
       operationId: AddInitialUserMessage
@@ -2243,9 +2243,9 @@ paths:
       - ApiKey: []
       summary: Add an initial user message to an agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: message
-  /organizations/{org_id}/agents/{id}/messages/removesystemmessage:
+  /v1/organizations/{org_id}/agents/{id}/messages/remove-system-message:
     patch:
       description: Remove a system message from an agent
       operationId: RemoveSystemMessage
@@ -2310,9 +2310,9 @@ paths:
       - ApiKey: []
       summary: Remove a system message from an agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: message
-  /organizations/{org_id}/agents/{id}/messages/removeusermessage:
+  /v1/organizations/{org_id}/agents/{id}/messages/remove-user-message:
     patch:
       description: Remove an initial user message from an agent
       operationId: RemoveInitialUserMessage
@@ -2377,9 +2377,9 @@ paths:
       - ApiKey: []
       summary: Remove an initial user message from an agent
       tags:
-      - Agent
+      - Agents
       x-codegen-request-body-name: message
-  /organizations/{org_id}/agents/{id}/removefile/{file_id}:
+  /v1/organizations/{org_id}/agents/{id}/remove-file/{file_id}:
     patch:
       description: Remove an attached file ID from an agent
       operationId: RemoveAttachedFileID
@@ -2443,8 +2443,8 @@ paths:
       - ApiKey: []
       summary: Remove an attached file ID from an agent
       tags:
-      - Agent
-  /organizations/{org_id}/agents/{id}/removetool/{tool_id}:
+      - Agents
+  /v1/organizations/{org_id}/agents/{id}/remove-tool/{tool_id}:
     patch:
       description: Remove an assigned tool from an agent
       operationId: RemoveAssignedTool
@@ -2508,64 +2508,8 @@ paths:
       - ApiKey: []
       summary: Remove an assigned tool from an agent
       tags:
-      - Agent
-  /organizations/{org_id}/audio/texttospeech:
-    post:
-      description: Generates an audio file from text. attaches the resulting audiofile
-        to the incoming message
-      operationId: CreateTextToSpeech
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AudioGenerationRequest'
-        description: Audio-Generation Request
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecutionResultAudioGeneration'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Text-To-Speech
-      tags:
-      - Audio
-      x-codegen-request-body-name: request
-  /organizations/{org_id}/audio/transcribe:
+      - Agents
+  /v1/organizations/{org_id}/audio/transcribe:
     post:
       description: Reads an audio file and transcribes text from it
       operationId: CreateAudioTranscription
@@ -2620,7 +2564,63 @@ paths:
       tags:
       - Audio
       x-codegen-request-body-name: request
-  /organizations/{org_id}/budget:
+  /v1/organizations/{org_id}/audio/tts:
+    post:
+      description: Generates an audio file from text. attaches the resulting audiofile
+        to the incoming message
+      operationId: CreateTextToSpeech
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioGenerationRequest'
+        description: Audio-Generation Request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIgencyMessage'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Text-To-Speech
+      tags:
+      - Audio
+      x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/budgets:
     get:
       description: Retrieve the cost budget for a specific organization
       operationId: GetOrgCostBudget
@@ -2672,7 +2672,7 @@ paths:
       - ApiKey: []
       summary: Get organization cost budget
       tags:
-      - OrgCostBudget
+      - OrgCostBudgets
     post:
       description: Create a new cost budget for a specific organization
       operationId: AddNewOrgCostBudget
@@ -2725,7 +2725,7 @@ paths:
       - ApiKey: []
       summary: Add new organization cost budget
       tags:
-      - OrgCostBudget
+      - OrgCostBudgets
       x-codegen-request-body-name: budget
     put:
       description: Update the cost budget for a specific organization
@@ -2785,9 +2785,9 @@ paths:
       - ApiKey: []
       summary: Update organization cost budget
       tags:
-      - OrgCostBudget
+      - OrgCostBudgets
       x-codegen-request-body-name: budget
-  /organizations/{org_id}/budget/check:
+  /v1/organizations/{org_id}/budgets/check:
     get:
       description: Check if the cost budget for a specific organization is sufficient
         to start a chat completion
@@ -2840,8 +2840,8 @@ paths:
       - ApiKey: []
       summary: Check organization cost budget
       tags:
-      - OrgCostBudget
-  /organizations/{org_id}/channels:
+      - OrgCostBudgets
+  /v1/organizations/{org_id}/channels:
     get:
       description: Retrieve a list of channels belonging to a specific organization
       operationId: ListChannelsByOrgId
@@ -2883,7 +2883,7 @@ paths:
       - ApiKey: []
       summary: List channels by organization ID
       tags:
-      - Channel
+      - Channels
     post:
       description: Create a new channel with the provided details
       operationId: CreateChannel
@@ -2936,9 +2936,9 @@ paths:
       - ApiKey: []
       summary: Create a new channel
       tags:
-      - Channel
+      - Channels
       x-codegen-request-body-name: channel
-  /organizations/{org_id}/channels/active:
+  /v1/organizations/{org_id}/channels/active:
     get:
       description: Retrieve a list of active channels based on subscribed clients
         across all instances
@@ -2969,10 +2969,51 @@ paths:
       - ApiKey: []
       summary: Get active channels
       tags:
-      - Channel
-  /organizations/{org_id}/channels/owner:
+      - Channels
+  /v1/organizations/{org_id}/channels/file-settings:
     get:
-      description: Retrieve a list of channels owned by a specific user
+      description: Get channel file settings
+      operationId: GetChannelFileSettings
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSettings'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Get channel file settings
+      tags:
+      - Channels
+  /v1/organizations/{org_id}/channels/me:
+    get:
+      description: Retrieve a list of channels owned by the current user
       operationId: ListChannelsByOwnerId
       parameters:
       - description: organization ID
@@ -3010,10 +3051,10 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: List channels by owner ID
+      summary: List channels owned by the current user
       tags:
-      - Channel
-  /organizations/{org_id}/channels/subscribed/{user_id}:
+      - Channels
+  /v1/organizations/{org_id}/channels/subscribed/{user_id}:
     get:
       description: "Retrieve a list of channels a user was subscribed to, sorted by\
         \ last activity"
@@ -3056,8 +3097,8 @@ paths:
       - ApiKey: []
       summary: Get user's subscribed channels
       tags:
-      - Channel
-  /organizations/{org_id}/channels/{channel_id}/presence:
+      - Channels
+  /v1/organizations/{org_id}/channels/{channel_id}/presence:
     get:
       description: Retrieve a list of connected subscribers for a channel across all
         instances
@@ -3112,8 +3153,8 @@ paths:
       - ApiKey: []
       summary: Get channel presence
       tags:
-      - Channel
-  /organizations/{org_id}/channels/{id}:
+      - Channels
+  /v1/organizations/{org_id}/channels/{id}:
     delete:
       description: Delete a channel by its ID
       operationId: DeleteChannel
@@ -3171,7 +3212,7 @@ paths:
       - ApiKey: []
       summary: Delete a channel
       tags:
-      - Channel
+      - Channels
     get:
       description: Retrieve a channel by its ID
       operationId: GetChannel
@@ -3229,7 +3270,7 @@ paths:
       - ApiKey: []
       summary: Get a channel by ID
       tags:
-      - Channel
+      - Channels
     put:
       description: Update a channel by its ID
       operationId: UpdateChannel
@@ -3294,9 +3335,74 @@ paths:
       - ApiKey: []
       summary: Update a channel
       tags:
-      - Channel
+      - Channels
       x-codegen-request-body-name: channel
-  /organizations/{org_id}/completions:
+  /v1/organizations/{org_id}/channels/{id}/files:
+    post:
+      description: Create a file for a channel
+      operationId: CreateChannelFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateChannelFile_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a file for a channel
+      tags:
+      - Channels
+  /v1/organizations/{org_id}/completions:
     post:
       description: Create a new chat-completion for a specific channel
       operationId: CreateChatCompletion
@@ -3365,7 +3471,7 @@ paths:
       tags:
       - ChatCompletions
       x-codegen-request-body-name: request
-  /organizations/{org_id}/completions/cancel/{channel_id}:
+  /v1/organizations/{org_id}/completions/cancel/{channel_id}:
     post:
       description: Cancel an ongoing chat-completion for a specific channel
       operationId: CancelChatCompletion
@@ -3409,7 +3515,7 @@ paths:
       summary: Cancel a chat-completion
       tags:
       - ChatCompletions
-  /organizations/{org_id}/completions/stream:
+  /v1/organizations/{org_id}/completions/stream:
     post:
       description: Create a new streaming chat-completion for a specific channel
       operationId: CreateChatCompletionStreaming
@@ -3478,7 +3584,7 @@ paths:
       tags:
       - ChatCompletions
       x-codegen-request-body-name: request
-  /organizations/{org_id}/connection_token/{channel_id}:
+  /v1/organizations/{org_id}/connection-tokens/{channel_id}:
     post:
       description: Create a connection token for Server-Sent Events (SSE) subscription
       operationId: CreateConnectionTokenHandler
@@ -3525,7 +3631,7 @@ paths:
       summary: Create a connection token for SSE
       tags:
       - ConnectionTokens
-  /organizations/{org_id}/embeddings/text:
+  /v1/organizations/{org_id}/embeddings/text:
     post:
       description: Get the embeddings for the texts
       operationId: EmbedText
@@ -3592,7 +3698,7 @@ paths:
       tags:
       - Embeddings
       x-codegen-request-body-name: request
-  /organizations/{org_id}/executionlogs/costs:
+  /v1/organizations/{org_id}/execution-logs/costs:
     get:
       description: "Get the total costs of execution logs by user, org, and date range."
       operationId: GetExecutionLogsCosts
@@ -3648,7 +3754,7 @@ paths:
       summary: Get execution logs costs
       tags:
       - ExecutionLogs
-  /organizations/{org_id}/executionlogs/search:
+  /v1/organizations/{org_id}/execution-logs/search:
     get:
       description: "Search for execution logs by user, org, API key, and date range.\
         \ leave any field empty to no limit by that field."
@@ -3715,66 +3821,7 @@ paths:
       summary: Search execution logs
       tags:
       - ExecutionLogs
-  /organizations/{org_id}/files/{recipe_name}/{channel_id}:
-    post:
-      description: Uploads a file and processes it using the specified recipe
-      operationId: HandleFileUpload
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: channelID to receive updates
-        in: path
-        name: channel_id
-        required: true
-        schema:
-          type: string
-      - description: Recipe name
-        in: path
-        name: recipe_name
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/HandleFileUpload_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileUploadResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-      security:
-      - ApiKey: []
-      summary: Upload and process a file
-      tags:
-      - Files
-  /organizations/{org_id}/functioncalls:
+  /v1/organizations/{org_id}/function-calls:
     get:
       description: Returns a list of function calls
       operationId: GetFunctionCalls
@@ -3811,7 +3858,7 @@ paths:
       summary: List accessible function calls
       tags:
       - FunctionCalls
-  /organizations/{org_id}/functioncalls/{name}:
+  /v1/organizations/{org_id}/function-calls/{name}:
     get:
       description: Returns the definition of a function call
       operationId: GetFunctionCall
@@ -3886,7 +3933,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AdapterExecutionResults'
+                $ref: '#/components/schemas/FunctionCallResults'
           description: OK
         "400":
           content:
@@ -3924,7 +3971,7 @@ paths:
       tags:
       - FunctionCalls
       x-codegen-request-body-name: arguments
-  /organizations/{org_id}/image/generate:
+  /v1/organizations/{org_id}/images/generate:
     post:
       description: Generates an image using a model and service
       operationId: CreateImage
@@ -3977,9 +4024,9 @@ paths:
       - ApiKey: []
       summary: Generates an image
       tags:
-      - Image
+      - Images
       x-codegen-request-body-name: request
-  /organizations/{org_id}/messages:
+  /v1/organizations/{org_id}/messages:
     post:
       description: Create a new message with the provided details
       operationId: CreateMessage
@@ -4034,7 +4081,7 @@ paths:
       tags:
       - Messages
       x-codegen-request-body-name: message
-  /organizations/{org_id}/messages/channel/{channel_id}:
+  /v1/organizations/{org_id}/messages/channel/{channel_id}:
     get:
       description: Retrieve all messages for a specific channel
       operationId: GetChannelMessages
@@ -4083,7 +4130,7 @@ paths:
       summary: Get messages for a channel
       tags:
       - Messages
-  /organizations/{org_id}/messages/search:
+  /v1/organizations/{org_id}/messages/search:
     get:
       description: "Search for messages based on content, sender ID, and date range"
       operationId: SearchMessages
@@ -4151,7 +4198,7 @@ paths:
       summary: Search messages
       tags:
       - Messages
-  /organizations/{org_id}/messages/{id}:
+  /v1/organizations/{org_id}/messages/{id}:
     delete:
       description: Delete a message by its ID
       operationId: DeleteMessage
@@ -4334,7 +4381,7 @@ paths:
       tags:
       - Messages
       x-codegen-request-body-name: message
-  /organizations/{org_id}/missions:
+  /v1/organizations/{org_id}/missions:
     get:
       description: List all missions of an organization and owned by the current user
       operationId: ListMissionsByOrg
@@ -4393,7 +4440,7 @@ paths:
       summary: List all missions of an organization and owned by the current user
       tags:
       - Missions
-  /organizations/{org_id}/missions/byexecutor/{mission_executor_id}:
+  /v1/organizations/{org_id}/missions/executor/{mission_executor_id}:
     get:
       description: List all missions by a a executorID (Agent Team or Agent)
       operationId: ListMissionsByExecutorID
@@ -4458,7 +4505,7 @@ paths:
       summary: List all missions by a executorID (Agent Team or Agent)
       tags:
       - Missions
-  /organizations/{org_id}/missions/{mission_executor_id}:
+  /v1/organizations/{org_id}/missions/{mission_executor_id}:
     post:
       description: Create a new mission
       operationId: CreateMission
@@ -4525,7 +4572,7 @@ paths:
       tags:
       - Missions
       x-codegen-request-body-name: mission
-  /organizations/{org_id}/missions/{mission_id}:
+  /v1/organizations/{org_id}/missions/{mission_id}:
     delete:
       description: Delete a mission
       operationId: DeleteMission
@@ -4639,7 +4686,7 @@ paths:
       summary: Get a mission
       tags:
       - Missions
-  /organizations/{org_id}/missions/{mission_id}/cancel:
+  /v1/organizations/{org_id}/missions/{mission_id}/cancel:
     post:
       description: Cancel a mission
       operationId: CancelMission
@@ -4928,8 +4975,8 @@ components:
       - output
       type: string
       x-enum-varnames:
-      - AIModelConstraintDirectionMin
-      - AIModelConstraintDirectionMax
+      - AIModelConstraintDirectionInput
+      - AIModelConstraintDirectionOutput
     AIModelCostUnit:
       enum:
       - input-tokens-per-million
@@ -5038,7 +5085,6 @@ components:
         service_impl: service_impl
       properties:
         cost_multiplier:
-          description: "1.0 is default, we use this to adjust our margin"
           type: number
         created_at:
           format: int64
@@ -5071,7 +5117,6 @@ components:
           minLength: 1
           type: string
         service_impl:
-          description: this is used for internal identification!
           maxLength: 64
           minLength: 1
           type: string
@@ -5299,7 +5344,6 @@ components:
         service_impl: service_impl
       properties:
         cost_multiplier:
-          description: "1.0 is default, we use this to adjust our margin"
           format: double
           type: number
         description:
@@ -5318,7 +5362,6 @@ components:
           minLength: 1
           type: string
         service_impl:
-          description: this is used for internal identification!
           maxLength: 64
           minLength: 1
           type: string
@@ -5458,46 +5501,28 @@ components:
       type: object
     AIgencyImage:
       example:
-        fileName: fileName
-        agent_id: agent_id
-        processingErrors:
-        - processingErrors
-        - processingErrors
-        message_response_to_id: message_response_to_id
-        mission_id: mission_id
-        url: url
-        metaData:
-          key: "{}"
         org_owner_id: org_owner_id
-        fileSize: 0
+        agent_id: agent_id
+        mime_type: mime_type
         user_id: user_id
         message_reference_id: message_reference_id
-        mimetype: mimetype
+        message_response_to_id: message_response_to_id
+        mission_id: mission_id
         channel_id: channel_id
         parameters:
           key: ""
-        localFilePath: localFilePath
+        url: url
         username: username
       properties:
         agent_id:
           type: string
         channel_id:
           type: string
-        fileName:
-          type: string
-        fileSize:
-          type: integer
-        localFilePath:
-          type: string
         message_reference_id:
           type: string
         message_response_to_id:
           type: string
-        metaData:
-          additionalProperties:
-            type: object
-          type: object
-        mimetype:
+        mime_type:
           type: string
         mission_id:
           type: string
@@ -5506,10 +5531,6 @@ components:
         parameters:
           additionalProperties: true
           type: object
-        processingErrors:
-          items:
-            type: string
-          type: array
         url:
           type: string
         user_id:
@@ -5521,21 +5542,21 @@ components:
       example:
         attachments:
           files:
-          - metaData:
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
-          - metaData:
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
         reference_id: reference_id
         mission_id: mission_id
@@ -5551,24 +5572,24 @@ components:
         content:
           data:
           - file:
-              metaData:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
                 key: "{}"
-              fileName: fileName
-              fileSize: 0
-              mimetype: mimetype
               id: id
-              localFilePath: localFilePath
+              file_size: 0
               url: url
             text: text
             type: text
           - file:
-              metaData:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
                 key: "{}"
-              fileName: fileName
-              fileSize: 0
-              mimetype: mimetype
               id: id
-              localFilePath: localFilePath
+              file_size: 0
               url: url
             text: text
             type: text
@@ -5616,7 +5637,6 @@ components:
         owner_organization_id: owner_organization_id
         aigent_thread_id: aigent_thread_id
         channel_id: channel_id
-        chat_completion_config: "{}"
         parameters: "{}"
       properties:
         ai_model_id:
@@ -5640,9 +5660,6 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        chat_completion_config:
-          properties: {}
-          type: object
         content:
           $ref: '#/components/schemas/AIgencyMessageContentList'
         created_at:
@@ -5720,13 +5737,13 @@ components:
     AIgencyMessageContent:
       example:
         file:
-          metaData:
+          embedded_content: embedded_content
+          mime_type: mime_type
+          file_name: file_name
+          meta_data:
             key: "{}"
-          fileName: fileName
-          fileSize: 0
-          mimetype: mimetype
           id: id
-          localFilePath: localFilePath
+          file_size: 0
           url: url
         text: text
         type: text
@@ -5742,24 +5759,24 @@ components:
       example:
         data:
         - file:
-            metaData:
+            embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
           text: text
           type: text
         - file:
-            metaData:
+            embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
           text: text
           type: text
@@ -5782,29 +5799,28 @@ components:
       - AIgencyMessageContentTypeFile
     AIgencyMessageFile:
       example:
-        metaData:
+        embedded_content: embedded_content
+        mime_type: mime_type
+        file_name: file_name
+        meta_data:
           key: "{}"
-        fileName: fileName
-        fileSize: 0
-        mimetype: mimetype
         id: id
-        localFilePath: localFilePath
+        file_size: 0
         url: url
       properties:
-        fileName:
+        embedded_content:
           type: string
-        fileSize:
+        file_name:
+          type: string
+        file_size:
           type: integer
         id:
           type: string
-        localFilePath:
-          description: "TODO: filter out when returning to client"
-          type: string
-        metaData:
+        meta_data:
           additionalProperties:
             type: object
           type: object
-        mimetype:
+        mime_type:
           type: string
         url:
           type: string
@@ -5812,21 +5828,21 @@ components:
     AIgencyMessageFileList:
       example:
         files:
-        - metaData:
+        - embedded_content: embedded_content
+          mime_type: mime_type
+          file_name: file_name
+          meta_data:
             key: "{}"
-          fileName: fileName
-          fileSize: 0
-          mimetype: mimetype
           id: id
-          localFilePath: localFilePath
+          file_size: 0
           url: url
-        - metaData:
+        - embedded_content: embedded_content
+          mime_type: mime_type
+          file_name: file_name
+          meta_data:
             key: "{}"
-          fileName: fileName
-          fileSize: 0
-          mimetype: mimetype
           id: id
-          localFilePath: localFilePath
+          file_size: 0
           url: url
       properties:
         files:
@@ -5854,21 +5870,21 @@ components:
         response_to_id: response_to_id
         attachments:
           files:
-          - metaData:
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
-          - metaData:
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data:
               key: "{}"
-            fileName: fileName
-            fileSize: 0
-            mimetype: mimetype
             id: id
-            localFilePath: localFilePath
+            file_size: 0
             url: url
         reference_id: reference_id
         mission_id: mission_id
@@ -5879,24 +5895,24 @@ components:
         content:
           data:
           - file:
-              metaData:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
                 key: "{}"
-              fileName: fileName
-              fileSize: 0
-              mimetype: mimetype
               id: id
-              localFilePath: localFilePath
+              file_size: 0
               url: url
             text: text
             type: text
           - file:
-              metaData:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
                 key: "{}"
-              fileName: fileName
-              fileSize: 0
-              mimetype: mimetype
               id: id
-              localFilePath: localFilePath
+              file_size: 0
               url: url
             text: text
             type: text
@@ -5905,7 +5921,6 @@ components:
         aigent_thread_id: aigent_thread_id
         meta_data: "{}"
         channel_id: channel_id
-        chat_completion_config: "{}"
         parameters: "{}"
       properties:
         ai_model_id:
@@ -5930,9 +5945,6 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        chat_completion_config:
-          properties: {}
-          type: object
         content:
           $ref: '#/components/schemas/AIgencyMessageContentList'
         meta_data:
@@ -5975,82 +5987,6 @@ components:
       - sender_conversation_role
       - sender_name
       - type
-      type: object
-    AdapterExecutionResults:
-      example:
-        result_files:
-        - mime_type: mime_type
-          file_name: file_name
-          local_path: local_path
-          file_size: 0
-          url: url
-        - mime_type: mime_type
-          file_name: file_name
-          local_path: local_path
-          file_size: 0
-          url: url
-        err: "{}"
-        adapter_name: adapter_name
-        job_id: job_id
-        final_state: Queued
-        result_texts:
-        - result_texts
-        - result_texts
-      properties:
-        adapter_name:
-          type: string
-        err:
-          type: object
-        final_state:
-          $ref: '#/components/schemas/AdapterExecutionState'
-        job_id:
-          type: string
-        result_files:
-          items:
-            $ref: '#/components/schemas/AdapterFileInfo'
-          type: array
-        result_texts:
-          items:
-            type: string
-          type: array
-      type: object
-    AdapterExecutionState:
-      enum:
-      - Queued
-      - Running
-      - Completed
-      - Cancelled
-      - Failed
-      - Timeout
-      - Unknown
-      type: string
-      x-enum-varnames:
-      - AdapterExecutionState_Queued
-      - AdapterExecutionState_Running
-      - AdapterExecutionState_Completed
-      - AdapterExecutionState_Cancelled
-      - AdapterExecutionState_Failed
-      - AdapterExecutionState_Timeout
-      - AdapterExecutionState_Unknown
-    AdapterFileInfo:
-      example:
-        mime_type: mime_type
-        file_name: file_name
-        local_path: local_path
-        file_size: 0
-        url: url
-      properties:
-        file_name:
-          type: string
-        file_size:
-          format: int64
-          type: integer
-        local_path:
-          type: string
-        mime_type:
-          type: string
-        url:
-          type: string
       type: object
     Agent:
       example:
@@ -6599,6 +6535,7 @@ components:
       - failed_to_remove_presence
       - failed_to_fetch_presence
       - failed_to_fetch_subscribed_channels
+      - failed_to_upload_channel_file
       - failed_to_retrieve_dependencies
       - failed_to_store_chat_completion_user
       - failed_to_create_chat_context
@@ -6609,11 +6546,19 @@ components:
       - capability_not_available
       - no_messages_found
       - failed_to_validate_request_parameters
+      - chat_completion_too_many_temporary_files
+      - chat_completion_exceeds_total_temporary_file_size
+      - chat_completion_exceeds_max_input_tokens
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
       - start_date_must_be_before_end_date
       - invalid_file_id
+      - invalid_storage_url
+      - file_upload_info_not_found
+      - invalid_file_upload_size
+      - invalid_file_upload_mime_type
+      - processing_checks_failed
       - functioncall_not_found
       - invalid_message_id
       - message_not_found
@@ -6710,6 +6655,7 @@ components:
       - ErrCodeFailedToRemovePresence
       - ErrCodeFailedToFetchPresence
       - ErrCodeFailedToFetchSubscribed
+      - ErrCodeFailedToUploadChannelFile
       - ErrCodeFailedToRetrieveDependencies
       - ErrCodeFailedToStoreChatCompletionUser
       - ErrCodeFailedToCreateChatContext
@@ -6720,11 +6666,19 @@ components:
       - ErrCodeCapabilityNotAvailable
       - ErrCodeNoMessagesFound
       - ErrCodeFailedToValidateRequestParameters
+      - ErrCodeChatCompletionTooManyTempFiles
+      - ErrCodeChatCompletionExceedsTotalTempFileSize
+      - ErrCodeChatCompletionExceedsMaxInputTokens
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
       - ErrCodeExecutionLogStartMustBeBeforeEnd
       - ErrCodeInvalidFileID
+      - ErrCodeInvalidStorageUrl
+      - ErrCodeFileUploadInfoNotFound
+      - ErrCodeInvalidFileUploadSize
+      - ErrCodeInvalidFileUploadMimeType
+      - ErrCodeProcessingChecksFailed
       - ErrCodeFunctionCallNotFound
       - ErrCodeInvalidMessageID
       - ErrCodeMessageNotFound
@@ -6844,13 +6798,13 @@ components:
         transcription_format: transcription_format
         user_id: user_id
         audio_file:
-          metaData:
+          embedded_content: embedded_content
+          mime_type: mime_type
+          file_name: file_name
+          meta_data:
             key: "{}"
-          fileName: fileName
-          fileSize: 0
-          mimetype: mimetype
           id: id
-          localFilePath: localFilePath
+          file_size: 0
           url: url
         org_id: org_id
         message_reference_id: message_reference_id
@@ -6911,7 +6865,6 @@ components:
         id: id
       properties:
         created_at:
-          description: in milliseconds since epoch format
           format: int64
           type: integer
         description:
@@ -6926,7 +6879,6 @@ components:
         is_public:
           type: boolean
         last_message_at:
-          description: in milliseconds since epoch format
           format: int64
           type: integer
         metadata:
@@ -6952,7 +6904,6 @@ components:
           maxLength: 1024
           type: string
         updated_at:
-          description: in milliseconds since epoch format
           format: int64
           type: integer
       required:
@@ -7233,129 +7184,6 @@ components:
           format: int64
           type: integer
       type: object
-    ExecutionResultAudioGeneration:
-      example:
-        execution_id: execution_id
-        finish_reason: ""
-        features_used:
-        - capability: ""
-          cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          cost_item_templates:
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          constraints:
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-        - capability: ""
-          cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          cost_item_templates:
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          constraints:
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-        service_id: service_id
-        resulting_files:
-        - metaData:
-            key: "{}"
-          fileName: fileName
-          fileSize: 6
-          processingErrors:
-          - processingErrors
-          - processingErrors
-          mimetype: mimetype
-          localFilePath: localFilePath
-          url: url
-        - metaData:
-            key: "{}"
-          fileName: fileName
-          fileSize: 6
-          processingErrors:
-          - processingErrors
-          - processingErrors
-          mimetype: mimetype
-          localFilePath: localFilePath
-          url: url
-        time_needed: 1
-        model_id: model_id
-        error: "{}"
-        input_tokens: 0
-        content: content
-        timestamp: 5
-      properties:
-        content:
-          description: "LocalFilePaths []string `json:\"media_file_paths\"`"
-          type: string
-        error:
-          type: object
-        execution_id:
-          description: maps to CompletionID for Text2Text
-          type: string
-        features_used:
-          items:
-            $ref: '#/components/schemas/AIModelFeature'
-          type: array
-        finish_reason:
-          $ref: '#/components/schemas/FinishReason'
-        input_tokens:
-          type: integer
-        model_id:
-          type: string
-        resulting_files:
-          items:
-            $ref: '#/components/schemas/filemanager.ManagedFile'
-          type: array
-        service_id:
-          type: string
-        time_needed:
-          description: in Milliseconds
-          format: int64
-          type: integer
-        timestamp:
-          description: in Milliseconds unix epoch
-          format: int64
-          type: integer
-      type: object
     ExecutionUsageCost:
       example:
         resulting_cost_in_euro: 2.3021358869347655
@@ -7378,30 +7206,76 @@ components:
           format: double
           type: number
       type: object
+    FileChatSettings:
+      example:
+        max_files: 0
+        max_total_file_size: 6
+      properties:
+        max_files:
+          format: int
+          type: integer
+        max_total_file_size:
+          format: int64
+          type: integer
+      type: object
+    FileSettings:
+      example:
+        upload:
+          min_file_size: 5
+          max_file_size: 1
+          accepted_mime_types:
+          - accepted_mime_types
+          - accepted_mime_types
+        chat:
+          max_files: 0
+          max_total_file_size: 6
+      properties:
+        chat:
+          $ref: '#/components/schemas/FileChatSettings'
+        upload:
+          $ref: '#/components/schemas/FileUploadSettings'
+      type: object
     FileUploadResponse:
       example:
-        incomingFileName: incomingFileName
-        processingError: processingError
-        resultingFiles:
-        - fileName: fileName
-          fileSize: 0
-          mimeType: mimeType
-          localFilePath: localFilePath
+        resulting_files:
+        - mime_type: mime_type
+          file_name: file_name
+          file_size: 0
           url: url
-        - fileName: fileName
-          fileSize: 0
-          mimeType: mimeType
-          localFilePath: localFilePath
+        - mime_type: mime_type
+          file_name: file_name
+          file_size: 0
           url: url
+        id: id
       properties:
-        incomingFileName:
+        id:
           type: string
-        processingError:
-          type: string
-        resultingFiles:
+        resulting_files:
           items:
-            $ref: '#/components/schemas/filemanager.ProcessingResultFile'
+            $ref: '#/components/schemas/ResultFile'
           type: array
+      required:
+      - id
+      - resulting_files
+      type: object
+    FileUploadSettings:
+      example:
+        min_file_size: 5
+        max_file_size: 1
+        accepted_mime_types:
+        - accepted_mime_types
+        - accepted_mime_types
+      properties:
+        accepted_mime_types:
+          items:
+            type: string
+          type: array
+        max_file_size:
+          format: int64
+          type: integer
+        min_file_size:
+          format: int64
+          type: integer
       type: object
     FinishReason:
       enum:
@@ -7436,6 +7310,42 @@ components:
           type: string
         version:
           type: string
+      type: object
+    FunctionCallResults:
+      example:
+        result_files:
+        - mime_type: mime_type
+          file_name: file_name
+          file_size: 0
+          url: url
+        - mime_type: mime_type
+          file_name: file_name
+          file_size: 0
+          url: url
+        final_state: final_state
+        name: name
+        id: id
+        error: error
+        result_texts:
+        - result_texts
+        - result_texts
+      properties:
+        error:
+          type: string
+        final_state:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        result_files:
+          items:
+            $ref: '#/components/schemas/ResultFile'
+          type: array
+        result_texts:
+          items:
+            type: string
+          type: array
       type: object
     HealthResponse:
       example:
@@ -7782,6 +7692,27 @@ components:
         version:
           type: integer
       type: object
+    ResultFile:
+      example:
+        mime_type: mime_type
+        file_name: file_name
+        file_size: 0
+        url: url
+      properties:
+        file_name:
+          type: string
+        file_size:
+          type: integer
+        mime_type:
+          type: string
+        url:
+          type: string
+      required:
+      - file_name
+      - file_size
+      - mime_type
+      - url
+      type: object
     TextEmbedding:
       example:
         embeddings:
@@ -7877,58 +7808,7 @@ components:
         version:
           type: string
       type: object
-    filemanager.ManagedFile:
-      example:
-        metaData:
-          key: "{}"
-        fileName: fileName
-        fileSize: 6
-        processingErrors:
-        - processingErrors
-        - processingErrors
-        mimetype: mimetype
-        localFilePath: localFilePath
-        url: url
-      properties:
-        fileName:
-          type: string
-        fileSize:
-          type: integer
-        localFilePath:
-          type: string
-        metaData:
-          additionalProperties:
-            type: object
-          type: object
-        mimetype:
-          type: string
-        processingErrors:
-          items:
-            type: string
-          type: array
-        url:
-          type: string
-      type: object
-    filemanager.ProcessingResultFile:
-      example:
-        fileName: fileName
-        fileSize: 0
-        mimeType: mimeType
-        localFilePath: localFilePath
-        url: url
-      properties:
-        fileName:
-          type: string
-        fileSize:
-          type: integer
-        localFilePath:
-          type: string
-        mimeType:
-          type: string
-        url:
-          type: string
-      type: object
-    HandleFileUpload_request:
+    CreateChannelFile_request:
       properties:
         file:
           description: File to upload

@@ -6,17 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | Pointer to **string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
-**FileName** | Pointer to **string** |  | [optional] 
-**FileSize** | Pointer to **int32** |  | [optional] 
-**LocalFilePath** | Pointer to **string** |  | [optional] 
 **MessageReferenceId** | Pointer to **string** |  | [optional] 
 **MessageResponseToId** | Pointer to **string** |  | [optional] 
-**MetaData** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**Mimetype** | Pointer to **string** |  | [optional] 
+**MimeType** | Pointer to **string** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
 **OrgOwnerId** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**ProcessingErrors** | Pointer to **[]string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
 **Username** | Pointer to **string** |  | [optional] 
@@ -90,81 +85,6 @@ SetChannelId sets ChannelId field to given value.
 
 HasChannelId returns a boolean if a field has been set.
 
-### GetFileName
-
-`func (o *AIgencyImage) GetFileName() string`
-
-GetFileName returns the FileName field if non-nil, zero value otherwise.
-
-### GetFileNameOk
-
-`func (o *AIgencyImage) GetFileNameOk() (*string, bool)`
-
-GetFileNameOk returns a tuple with the FileName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFileName
-
-`func (o *AIgencyImage) SetFileName(v string)`
-
-SetFileName sets FileName field to given value.
-
-### HasFileName
-
-`func (o *AIgencyImage) HasFileName() bool`
-
-HasFileName returns a boolean if a field has been set.
-
-### GetFileSize
-
-`func (o *AIgencyImage) GetFileSize() int32`
-
-GetFileSize returns the FileSize field if non-nil, zero value otherwise.
-
-### GetFileSizeOk
-
-`func (o *AIgencyImage) GetFileSizeOk() (*int32, bool)`
-
-GetFileSizeOk returns a tuple with the FileSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFileSize
-
-`func (o *AIgencyImage) SetFileSize(v int32)`
-
-SetFileSize sets FileSize field to given value.
-
-### HasFileSize
-
-`func (o *AIgencyImage) HasFileSize() bool`
-
-HasFileSize returns a boolean if a field has been set.
-
-### GetLocalFilePath
-
-`func (o *AIgencyImage) GetLocalFilePath() string`
-
-GetLocalFilePath returns the LocalFilePath field if non-nil, zero value otherwise.
-
-### GetLocalFilePathOk
-
-`func (o *AIgencyImage) GetLocalFilePathOk() (*string, bool)`
-
-GetLocalFilePathOk returns a tuple with the LocalFilePath field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLocalFilePath
-
-`func (o *AIgencyImage) SetLocalFilePath(v string)`
-
-SetLocalFilePath sets LocalFilePath field to given value.
-
-### HasLocalFilePath
-
-`func (o *AIgencyImage) HasLocalFilePath() bool`
-
-HasLocalFilePath returns a boolean if a field has been set.
-
 ### GetMessageReferenceId
 
 `func (o *AIgencyImage) GetMessageReferenceId() string`
@@ -215,55 +135,30 @@ SetMessageResponseToId sets MessageResponseToId field to given value.
 
 HasMessageResponseToId returns a boolean if a field has been set.
 
-### GetMetaData
+### GetMimeType
 
-`func (o *AIgencyImage) GetMetaData() map[string]map[string]interface{}`
+`func (o *AIgencyImage) GetMimeType() string`
 
-GetMetaData returns the MetaData field if non-nil, zero value otherwise.
+GetMimeType returns the MimeType field if non-nil, zero value otherwise.
 
-### GetMetaDataOk
+### GetMimeTypeOk
 
-`func (o *AIgencyImage) GetMetaDataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *AIgencyImage) GetMimeTypeOk() (*string, bool)`
 
-GetMetaDataOk returns a tuple with the MetaData field if it's non-nil, zero value otherwise
+GetMimeTypeOk returns a tuple with the MimeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMetaData
+### SetMimeType
 
-`func (o *AIgencyImage) SetMetaData(v map[string]map[string]interface{})`
+`func (o *AIgencyImage) SetMimeType(v string)`
 
-SetMetaData sets MetaData field to given value.
+SetMimeType sets MimeType field to given value.
 
-### HasMetaData
+### HasMimeType
 
-`func (o *AIgencyImage) HasMetaData() bool`
+`func (o *AIgencyImage) HasMimeType() bool`
 
-HasMetaData returns a boolean if a field has been set.
-
-### GetMimetype
-
-`func (o *AIgencyImage) GetMimetype() string`
-
-GetMimetype returns the Mimetype field if non-nil, zero value otherwise.
-
-### GetMimetypeOk
-
-`func (o *AIgencyImage) GetMimetypeOk() (*string, bool)`
-
-GetMimetypeOk returns a tuple with the Mimetype field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMimetype
-
-`func (o *AIgencyImage) SetMimetype(v string)`
-
-SetMimetype sets Mimetype field to given value.
-
-### HasMimetype
-
-`func (o *AIgencyImage) HasMimetype() bool`
-
-HasMimetype returns a boolean if a field has been set.
+HasMimeType returns a boolean if a field has been set.
 
 ### GetMissionId
 
@@ -339,31 +234,6 @@ SetParameters sets Parameters field to given value.
 `func (o *AIgencyImage) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
-
-### GetProcessingErrors
-
-`func (o *AIgencyImage) GetProcessingErrors() []string`
-
-GetProcessingErrors returns the ProcessingErrors field if non-nil, zero value otherwise.
-
-### GetProcessingErrorsOk
-
-`func (o *AIgencyImage) GetProcessingErrorsOk() (*[]string, bool)`
-
-GetProcessingErrorsOk returns a tuple with the ProcessingErrors field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessingErrors
-
-`func (o *AIgencyImage) SetProcessingErrors(v []string)`
-
-SetProcessingErrors sets ProcessingErrors field to given value.
-
-### HasProcessingErrors
-
-`func (o *AIgencyImage) HasProcessingErrors() bool`
-
-HasProcessingErrors returns a boolean if a field has been set.
 
 ### GetUrl
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -73,7 +73,7 @@ func (a *AgentPromptsAPIService) CreateAgentPromptExecute(r ApiCreateAgentPrompt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -239,7 +239,7 @@ func (a *AgentPromptsAPIService) DeleteAgentPromptExecute(r ApiDeleteAgentPrompt
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 
@@ -405,7 +405,7 @@ func (a *AgentPromptsAPIService) GetAgentPromptExecute(r ApiGetAgentPromptReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 
@@ -591,7 +591,7 @@ func (a *AgentPromptsAPIService) ListAgentPromptsExecute(r ApiListAgentPromptsRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -764,7 +764,7 @@ func (a *AgentPromptsAPIService) RenderAgentPromptExecute(r ApiRenderAgentPrompt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts/render"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/render"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -936,7 +936,7 @@ func (a *AgentPromptsAPIService) UpdateAgentPromptExecute(r ApiUpdateAgentPrompt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/agentprompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 

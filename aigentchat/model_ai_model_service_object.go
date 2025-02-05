@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &AIModelServiceObject{}
 
 // AIModelServiceObject struct for AIModelServiceObject
 type AIModelServiceObject struct {
-	// 1.0 is default, we use this to adjust our margin
 	CostMultiplier *float32 `json:"cost_multiplier,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -32,7 +31,6 @@ type AIModelServiceObject struct {
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	// this is used for internal identification!
 	ServiceImpl string `json:"service_impl"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`

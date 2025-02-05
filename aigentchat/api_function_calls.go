@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -38,7 +38,7 @@ func (r ApiExecuteFunctionCallRequest) Arguments(arguments map[string]interface{
 	return r
 }
 
-func (r ApiExecuteFunctionCallRequest) Execute() (*AdapterExecutionResults, *http.Response, error) {
+func (r ApiExecuteFunctionCallRequest) Execute() (*FunctionCallResults, *http.Response, error) {
 	return r.ApiService.ExecuteFunctionCallExecute(r)
 }
 
@@ -62,13 +62,13 @@ func (a *FunctionCallsAPIService) ExecuteFunctionCall(ctx context.Context, orgId
 }
 
 // Execute executes the request
-//  @return AdapterExecutionResults
-func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctionCallRequest) (*AdapterExecutionResults, *http.Response, error) {
+//  @return FunctionCallResults
+func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctionCallRequest) (*FunctionCallResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AdapterExecutionResults
+		localVarReturnValue  *FunctionCallResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionCallsAPIService.ExecuteFunctionCall")
@@ -76,7 +76,7 @@ func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/functioncalls/{name}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
@@ -256,7 +256,7 @@ func (a *FunctionCallsAPIService) GetFunctionCallExecute(r ApiGetFunctionCallReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/functioncalls/{name}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
@@ -406,7 +406,7 @@ func (a *FunctionCallsAPIService) GetFunctionCallsExecute(r ApiGetFunctionCallsR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/functioncalls"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

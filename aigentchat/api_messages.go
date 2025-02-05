@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -73,7 +73,7 @@ func (a *MessagesAPIService) CreateMessageExecute(r ApiCreateMessageRequest) (*A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -241,7 +241,7 @@ func (a *MessagesAPIService) DeleteMessageExecute(r ApiDeleteMessageRequest) (*A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
@@ -416,7 +416,7 @@ func (a *MessagesAPIService) GetChannelMessagesExecute(r ApiGetChannelMessagesRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages/channel/{channel_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/channel/{channel_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"channel_id"+"}", url.PathEscape(parameterValueToString(r.channelId, "channelId")), -1)
 
@@ -569,7 +569,7 @@ func (a *MessagesAPIService) GetMessageExecute(r ApiGetMessageRequest) (*AIgency
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
@@ -776,7 +776,7 @@ func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages/search"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/search"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -950,7 +950,7 @@ func (a *MessagesAPIService) UpdateMessageExecute(r ApiUpdateMessageRequest) (*A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/messages/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 

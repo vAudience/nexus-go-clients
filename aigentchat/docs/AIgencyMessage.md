@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | [optional] 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
-**ChatCompletionConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 **Content** | Pointer to [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | [optional] 
 **CreatedAt** | **int64** |  | 
 **CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) |  | [optional] 
@@ -179,31 +178,6 @@ and a boolean to check if the value has been set.
 
 SetChannelName sets ChannelName field to given value.
 
-
-### GetChatCompletionConfig
-
-`func (o *AIgencyMessage) GetChatCompletionConfig() map[string]interface{}`
-
-GetChatCompletionConfig returns the ChatCompletionConfig field if non-nil, zero value otherwise.
-
-### GetChatCompletionConfigOk
-
-`func (o *AIgencyMessage) GetChatCompletionConfigOk() (*map[string]interface{}, bool)`
-
-GetChatCompletionConfigOk returns a tuple with the ChatCompletionConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChatCompletionConfig
-
-`func (o *AIgencyMessage) SetChatCompletionConfig(v map[string]interface{})`
-
-SetChatCompletionConfig sets ChatCompletionConfig field to given value.
-
-### HasChatCompletionConfig
-
-`func (o *AIgencyMessage) HasChatCompletionConfig() bool`
-
-HasChatCompletionConfig returns a boolean if a field has been set.
 
 ### GetContent
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -67,7 +67,7 @@ func (a *MissionsAPIService) CancelMissionExecute(r ApiCancelMissionRequest) (*h
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions/{mission_id}/cancel"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
 
@@ -240,7 +240,7 @@ func (a *MissionsAPIService) CreateMissionExecute(r ApiCreateMissionRequest) (*M
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions/{mission_executor_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_executor_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mission_executor_id"+"}", url.PathEscape(parameterValueToString(r.missionExecutorId, "missionExecutorId")), -1)
 
@@ -418,7 +418,7 @@ func (a *MissionsAPIService) DeleteMissionExecute(r ApiDeleteMissionRequest) (*h
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions/{mission_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
 
@@ -584,7 +584,7 @@ func (a *MissionsAPIService) GetMissionExecute(r ApiGetMissionRequest) (*Mission
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions/{mission_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
 
@@ -773,7 +773,7 @@ func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsBy
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions/byexecutor/{mission_executor_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/executor/{mission_executor_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mission_executor_id"+"}", url.PathEscape(parameterValueToString(r.missionExecutorId, "missionExecutorId")), -1)
 
@@ -954,7 +954,7 @@ func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/missions"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

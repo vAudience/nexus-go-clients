@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -87,7 +87,7 @@ func (a *ExecutionLogsAPIService) GetExecutionLogsCostsExecute(r ApiGetExecution
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/executionlogs/costs"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/execution-logs/costs"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -280,7 +280,7 @@ func (a *ExecutionLogsAPIService) SearchExecutionLogsExecute(r ApiSearchExecutio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/executionlogs/search"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/execution-logs/search"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

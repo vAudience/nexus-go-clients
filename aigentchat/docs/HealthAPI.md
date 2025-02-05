@@ -1,6 +1,6 @@
 # \HealthAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

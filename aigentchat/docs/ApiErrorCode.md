@@ -121,6 +121,8 @@
 
 * `ErrCodeFailedToFetchSubscribed` (value: `"failed_to_fetch_subscribed_channels"`)
 
+* `ErrCodeFailedToUploadChannelFile` (value: `"failed_to_upload_channel_file"`)
+
 * `ErrCodeFailedToRetrieveDependencies` (value: `"failed_to_retrieve_dependencies"`)
 
 * `ErrCodeFailedToStoreChatCompletionUser` (value: `"failed_to_store_chat_completion_user"`)
@@ -141,6 +143,12 @@
 
 * `ErrCodeFailedToValidateRequestParameters` (value: `"failed_to_validate_request_parameters"`)
 
+* `ErrCodeChatCompletionTooManyTempFiles` (value: `"chat_completion_too_many_temporary_files"`)
+
+* `ErrCodeChatCompletionExceedsTotalTempFileSize` (value: `"chat_completion_exceeds_total_temporary_file_size"`)
+
+* `ErrCodeChatCompletionExceedsMaxInputTokens` (value: `"chat_completion_exceeds_max_input_tokens"`)
+
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 
 * `ErrCodeFailedToEmbedText` (value: `"failed_to_embed_text"`)
@@ -150,6 +158,16 @@
 * `ErrCodeExecutionLogStartMustBeBeforeEnd` (value: `"start_date_must_be_before_end_date"`)
 
 * `ErrCodeInvalidFileID` (value: `"invalid_file_id"`)
+
+* `ErrCodeInvalidStorageUrl` (value: `"invalid_storage_url"`)
+
+* `ErrCodeFileUploadInfoNotFound` (value: `"file_upload_info_not_found"`)
+
+* `ErrCodeInvalidFileUploadSize` (value: `"invalid_file_upload_size"`)
+
+* `ErrCodeInvalidFileUploadMimeType` (value: `"invalid_file_upload_mime_type"`)
+
+* `ErrCodeProcessingChecksFailed` (value: `"processing_checks_failed"`)
 
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 

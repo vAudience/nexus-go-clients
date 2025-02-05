@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -20,13 +20,12 @@ var _ MappedNullable = &AIgencyMessageFile{}
 
 // AIgencyMessageFile struct for AIgencyMessageFile
 type AIgencyMessageFile struct {
-	FileName *string `json:"fileName,omitempty"`
-	FileSize *int32 `json:"fileSize,omitempty"`
+	EmbeddedContent *string `json:"embedded_content,omitempty"`
+	FileName *string `json:"file_name,omitempty"`
+	FileSize *int32 `json:"file_size,omitempty"`
 	Id *string `json:"id,omitempty"`
-	// TODO: filter out when returning to client
-	LocalFilePath *string `json:"localFilePath,omitempty"`
-	MetaData map[string]map[string]interface{} `json:"metaData,omitempty"`
-	Mimetype *string `json:"mimetype,omitempty"`
+	MetaData map[string]map[string]interface{} `json:"meta_data,omitempty"`
+	MimeType *string `json:"mime_type,omitempty"`
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -48,6 +47,38 @@ func NewAIgencyMessageFile() *AIgencyMessageFile {
 func NewAIgencyMessageFileWithDefaults() *AIgencyMessageFile {
 	this := AIgencyMessageFile{}
 	return &this
+}
+
+// GetEmbeddedContent returns the EmbeddedContent field value if set, zero value otherwise.
+func (o *AIgencyMessageFile) GetEmbeddedContent() string {
+	if o == nil || IsNil(o.EmbeddedContent) {
+		var ret string
+		return ret
+	}
+	return *o.EmbeddedContent
+}
+
+// GetEmbeddedContentOk returns a tuple with the EmbeddedContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageFile) GetEmbeddedContentOk() (*string, bool) {
+	if o == nil || IsNil(o.EmbeddedContent) {
+		return nil, false
+	}
+	return o.EmbeddedContent, true
+}
+
+// HasEmbeddedContent returns a boolean if a field has been set.
+func (o *AIgencyMessageFile) HasEmbeddedContent() bool {
+	if o != nil && !IsNil(o.EmbeddedContent) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbeddedContent gets a reference to the given string and assigns it to the EmbeddedContent field.
+func (o *AIgencyMessageFile) SetEmbeddedContent(v string) {
+	o.EmbeddedContent = &v
 }
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
@@ -146,38 +177,6 @@ func (o *AIgencyMessageFile) SetId(v string) {
 	o.Id = &v
 }
 
-// GetLocalFilePath returns the LocalFilePath field value if set, zero value otherwise.
-func (o *AIgencyMessageFile) GetLocalFilePath() string {
-	if o == nil || IsNil(o.LocalFilePath) {
-		var ret string
-		return ret
-	}
-	return *o.LocalFilePath
-}
-
-// GetLocalFilePathOk returns a tuple with the LocalFilePath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessageFile) GetLocalFilePathOk() (*string, bool) {
-	if o == nil || IsNil(o.LocalFilePath) {
-		return nil, false
-	}
-	return o.LocalFilePath, true
-}
-
-// HasLocalFilePath returns a boolean if a field has been set.
-func (o *AIgencyMessageFile) HasLocalFilePath() bool {
-	if o != nil && !IsNil(o.LocalFilePath) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocalFilePath gets a reference to the given string and assigns it to the LocalFilePath field.
-func (o *AIgencyMessageFile) SetLocalFilePath(v string) {
-	o.LocalFilePath = &v
-}
-
 // GetMetaData returns the MetaData field value if set, zero value otherwise.
 func (o *AIgencyMessageFile) GetMetaData() map[string]map[string]interface{} {
 	if o == nil || IsNil(o.MetaData) {
@@ -210,36 +209,36 @@ func (o *AIgencyMessageFile) SetMetaData(v map[string]map[string]interface{}) {
 	o.MetaData = v
 }
 
-// GetMimetype returns the Mimetype field value if set, zero value otherwise.
-func (o *AIgencyMessageFile) GetMimetype() string {
-	if o == nil || IsNil(o.Mimetype) {
+// GetMimeType returns the MimeType field value if set, zero value otherwise.
+func (o *AIgencyMessageFile) GetMimeType() string {
+	if o == nil || IsNil(o.MimeType) {
 		var ret string
 		return ret
 	}
-	return *o.Mimetype
+	return *o.MimeType
 }
 
-// GetMimetypeOk returns a tuple with the Mimetype field value if set, nil otherwise
+// GetMimeTypeOk returns a tuple with the MimeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessageFile) GetMimetypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Mimetype) {
+func (o *AIgencyMessageFile) GetMimeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.MimeType) {
 		return nil, false
 	}
-	return o.Mimetype, true
+	return o.MimeType, true
 }
 
-// HasMimetype returns a boolean if a field has been set.
-func (o *AIgencyMessageFile) HasMimetype() bool {
-	if o != nil && !IsNil(o.Mimetype) {
+// HasMimeType returns a boolean if a field has been set.
+func (o *AIgencyMessageFile) HasMimeType() bool {
+	if o != nil && !IsNil(o.MimeType) {
 		return true
 	}
 
 	return false
 }
 
-// SetMimetype gets a reference to the given string and assigns it to the Mimetype field.
-func (o *AIgencyMessageFile) SetMimetype(v string) {
-	o.Mimetype = &v
+// SetMimeType gets a reference to the given string and assigns it to the MimeType field.
+func (o *AIgencyMessageFile) SetMimeType(v string) {
+	o.MimeType = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -284,23 +283,23 @@ func (o AIgencyMessageFile) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyMessageFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EmbeddedContent) {
+		toSerialize["embedded_content"] = o.EmbeddedContent
+	}
 	if !IsNil(o.FileName) {
-		toSerialize["fileName"] = o.FileName
+		toSerialize["file_name"] = o.FileName
 	}
 	if !IsNil(o.FileSize) {
-		toSerialize["fileSize"] = o.FileSize
+		toSerialize["file_size"] = o.FileSize
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.LocalFilePath) {
-		toSerialize["localFilePath"] = o.LocalFilePath
-	}
 	if !IsNil(o.MetaData) {
-		toSerialize["metaData"] = o.MetaData
+		toSerialize["meta_data"] = o.MetaData
 	}
-	if !IsNil(o.Mimetype) {
-		toSerialize["mimetype"] = o.Mimetype
+	if !IsNil(o.MimeType) {
+		toSerialize["mime_type"] = o.MimeType
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
@@ -327,12 +326,12 @@ func (o *AIgencyMessageFile) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "fileName")
-		delete(additionalProperties, "fileSize")
+		delete(additionalProperties, "embedded_content")
+		delete(additionalProperties, "file_name")
+		delete(additionalProperties, "file_size")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "localFilePath")
-		delete(additionalProperties, "metaData")
-		delete(additionalProperties, "mimetype")
+		delete(additionalProperties, "meta_data")
+		delete(additionalProperties, "mime_type")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

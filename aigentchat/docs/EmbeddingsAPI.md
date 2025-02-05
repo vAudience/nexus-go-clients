@@ -1,10 +1,10 @@
 # \EmbeddingsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EmbedText**](EmbeddingsAPI.md#EmbedText) | **Post** /organizations/{org_id}/embeddings/text | Get the embeddings for the texts
+[**EmbedText**](EmbeddingsAPI.md#EmbedText) | **Post** /v1/organizations/{org_id}/embeddings/text | Get the embeddings for the texts
 
 
 

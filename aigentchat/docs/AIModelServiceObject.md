@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CostMultiplier** | Pointer to **float32** | 1.0 is default, we use this to adjust our margin | [optional] 
+**CostMultiplier** | Pointer to **float32** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
-**ServiceImpl** | **string** | this is used for internal identification! | 
+**ServiceImpl** | **string** |  | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 

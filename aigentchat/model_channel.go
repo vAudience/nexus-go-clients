@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,13 +21,11 @@ var _ MappedNullable = &Channel{}
 
 // Channel struct for Channel
 type Channel struct {
-	// in milliseconds since epoch format
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
 	IsOrgPublic *bool `json:"is_org_public,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
-	// in milliseconds since epoch format
 	LastMessageAt *int64 `json:"last_message_at,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	MissionId *string `json:"mission_id,omitempty"`
@@ -35,7 +33,6 @@ type Channel struct {
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Summary *string `json:"summary,omitempty"`
-	// in milliseconds since epoch format
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

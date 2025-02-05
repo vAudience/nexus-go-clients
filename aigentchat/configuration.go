@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -94,7 +94,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://aigentchat.dev.ai.vaud.one/api/v1",
+				URL: "https://aigentchat.dev.ai.vaud.one",
 				Description: "No description provided",
 			},
 		},

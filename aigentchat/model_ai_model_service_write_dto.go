@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,14 +21,12 @@ var _ MappedNullable = &AIModelServiceWriteDto{}
 
 // AIModelServiceWriteDto struct for AIModelServiceWriteDto
 type AIModelServiceWriteDto struct {
-	// 1.0 is default, we use this to adjust our margin
 	CostMultiplier *float64 `json:"cost_multiplier,omitempty"`
 	Description *string `json:"description,omitempty"`
 	HostingLocations *map[string]HostingLocation `json:"hosting_locations,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	Name string `json:"name"`
-	// this is used for internal identification!
 	ServiceImpl string `json:"service_impl"`
 	AdditionalProperties map[string]interface{}
 }

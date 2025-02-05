@@ -1,18 +1,18 @@
 # \FunctionCallsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ExecuteFunctionCall**](FunctionCallsAPI.md#ExecuteFunctionCall) | **Post** /organizations/{org_id}/functioncalls/{name} | Execute a function call
-[**GetFunctionCall**](FunctionCallsAPI.md#GetFunctionCall) | **Get** /organizations/{org_id}/functioncalls/{name} | Get function call definition
-[**GetFunctionCalls**](FunctionCallsAPI.md#GetFunctionCalls) | **Get** /organizations/{org_id}/functioncalls | List accessible function calls
+[**ExecuteFunctionCall**](FunctionCallsAPI.md#ExecuteFunctionCall) | **Post** /v1/organizations/{org_id}/function-calls/{name} | Execute a function call
+[**GetFunctionCall**](FunctionCallsAPI.md#GetFunctionCall) | **Get** /v1/organizations/{org_id}/function-calls/{name} | Get function call definition
+[**GetFunctionCalls**](FunctionCallsAPI.md#GetFunctionCalls) | **Get** /v1/organizations/{org_id}/function-calls | List accessible function calls
 
 
 
 ## ExecuteFunctionCall
 
-> AdapterExecutionResults ExecuteFunctionCall(ctx, orgId, name).Arguments(arguments).Execute()
+> FunctionCallResults ExecuteFunctionCall(ctx, orgId, name).Arguments(arguments).Execute()
 
 Execute a function call
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionCallsAPI.ExecuteFunctionCall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ExecuteFunctionCall`: AdapterExecutionResults
+	// response from `ExecuteFunctionCall`: FunctionCallResults
 	fmt.Fprintf(os.Stdout, "Response from `FunctionCallsAPI.ExecuteFunctionCall`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterExecutionResults**](AdapterExecutionResults.md)
+[**FunctionCallResults**](FunctionCallResults.md)
 
 ### Authorization
 

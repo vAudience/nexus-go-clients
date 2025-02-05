@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -27,7 +27,6 @@ type AIgencyMessage struct {
 	Attachments *AIgencyMessageFileList `json:"attachments,omitempty"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
-	ChatCompletionConfig map[string]interface{} `json:"chat_completion_config,omitempty"`
 	Content *AIgencyMessageContentList `json:"content,omitempty"`
 	CreatedAt int64 `json:"created_at"`
 	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
@@ -240,38 +239,6 @@ func (o *AIgencyMessage) GetChannelNameOk() (*string, bool) {
 // SetChannelName sets field value
 func (o *AIgencyMessage) SetChannelName(v string) {
 	o.ChannelName = v
-}
-
-// GetChatCompletionConfig returns the ChatCompletionConfig field value if set, zero value otherwise.
-func (o *AIgencyMessage) GetChatCompletionConfig() map[string]interface{} {
-	if o == nil || IsNil(o.ChatCompletionConfig) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.ChatCompletionConfig
-}
-
-// GetChatCompletionConfigOk returns a tuple with the ChatCompletionConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessage) GetChatCompletionConfigOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ChatCompletionConfig) {
-		return map[string]interface{}{}, false
-	}
-	return o.ChatCompletionConfig, true
-}
-
-// HasChatCompletionConfig returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasChatCompletionConfig() bool {
-	if o != nil && !IsNil(o.ChatCompletionConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetChatCompletionConfig gets a reference to the given map[string]interface{} and assigns it to the ChatCompletionConfig field.
-func (o *AIgencyMessage) SetChatCompletionConfig(v map[string]interface{}) {
-	o.ChatCompletionConfig = v
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
@@ -830,9 +797,6 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["channel_name"] = o.ChannelName
-	if !IsNil(o.ChatCompletionConfig) {
-		toSerialize["chat_completion_config"] = o.ChatCompletionConfig
-	}
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
 	}
@@ -933,7 +897,6 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")
-		delete(additionalProperties, "chat_completion_config")
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "created_for_feature")

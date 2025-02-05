@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**EmbeddedContent** | Pointer to **string** |  | [optional] 
 **FileName** | Pointer to **string** |  | [optional] 
 **FileSize** | Pointer to **int32** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
-**LocalFilePath** | Pointer to **string** | TODO: filter out when returning to client | [optional] 
 **MetaData** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**Mimetype** | Pointer to **string** |  | [optional] 
+**MimeType** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -30,6 +30,31 @@ will change when the set of required properties is changed
 NewAIgencyMessageFileWithDefaults instantiates a new AIgencyMessageFile object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEmbeddedContent
+
+`func (o *AIgencyMessageFile) GetEmbeddedContent() string`
+
+GetEmbeddedContent returns the EmbeddedContent field if non-nil, zero value otherwise.
+
+### GetEmbeddedContentOk
+
+`func (o *AIgencyMessageFile) GetEmbeddedContentOk() (*string, bool)`
+
+GetEmbeddedContentOk returns a tuple with the EmbeddedContent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmbeddedContent
+
+`func (o *AIgencyMessageFile) SetEmbeddedContent(v string)`
+
+SetEmbeddedContent sets EmbeddedContent field to given value.
+
+### HasEmbeddedContent
+
+`func (o *AIgencyMessageFile) HasEmbeddedContent() bool`
+
+HasEmbeddedContent returns a boolean if a field has been set.
 
 ### GetFileName
 
@@ -106,31 +131,6 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetLocalFilePath
-
-`func (o *AIgencyMessageFile) GetLocalFilePath() string`
-
-GetLocalFilePath returns the LocalFilePath field if non-nil, zero value otherwise.
-
-### GetLocalFilePathOk
-
-`func (o *AIgencyMessageFile) GetLocalFilePathOk() (*string, bool)`
-
-GetLocalFilePathOk returns a tuple with the LocalFilePath field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLocalFilePath
-
-`func (o *AIgencyMessageFile) SetLocalFilePath(v string)`
-
-SetLocalFilePath sets LocalFilePath field to given value.
-
-### HasLocalFilePath
-
-`func (o *AIgencyMessageFile) HasLocalFilePath() bool`
-
-HasLocalFilePath returns a boolean if a field has been set.
-
 ### GetMetaData
 
 `func (o *AIgencyMessageFile) GetMetaData() map[string]map[string]interface{}`
@@ -156,30 +156,30 @@ SetMetaData sets MetaData field to given value.
 
 HasMetaData returns a boolean if a field has been set.
 
-### GetMimetype
+### GetMimeType
 
-`func (o *AIgencyMessageFile) GetMimetype() string`
+`func (o *AIgencyMessageFile) GetMimeType() string`
 
-GetMimetype returns the Mimetype field if non-nil, zero value otherwise.
+GetMimeType returns the MimeType field if non-nil, zero value otherwise.
 
-### GetMimetypeOk
+### GetMimeTypeOk
 
-`func (o *AIgencyMessageFile) GetMimetypeOk() (*string, bool)`
+`func (o *AIgencyMessageFile) GetMimeTypeOk() (*string, bool)`
 
-GetMimetypeOk returns a tuple with the Mimetype field if it's non-nil, zero value otherwise
+GetMimeTypeOk returns a tuple with the MimeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMimetype
+### SetMimeType
 
-`func (o *AIgencyMessageFile) SetMimetype(v string)`
+`func (o *AIgencyMessageFile) SetMimeType(v string)`
 
-SetMimetype sets Mimetype field to given value.
+SetMimeType sets MimeType field to given value.
 
-### HasMimetype
+### HasMimeType
 
-`func (o *AIgencyMessageFile) HasMimetype() bool`
+`func (o *AIgencyMessageFile) HasMimeType() bool`
 
-HasMimetype returns a boolean if a field has been set.
+HasMimeType returns a boolean if a field has been set.
 
 ### GetUrl
 

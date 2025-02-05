@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,8 +21,8 @@ type AIModelConstraintDirection string
 
 // List of AIModelConstraintDirection
 const (
-	AIModelConstraintDirectionMin AIModelConstraintDirection = "input"
-	AIModelConstraintDirectionMax AIModelConstraintDirection = "output"
+	AIModelConstraintDirectionInput AIModelConstraintDirection = "input"
+	AIModelConstraintDirectionOutput AIModelConstraintDirection = "output"
 )
 
 // All allowed values of AIModelConstraintDirection enum

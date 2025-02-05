@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,17 +22,12 @@ var _ MappedNullable = &AIgencyImage{}
 type AIgencyImage struct {
 	AgentId *string `json:"agent_id,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
-	FileName *string `json:"fileName,omitempty"`
-	FileSize *int32 `json:"fileSize,omitempty"`
-	LocalFilePath *string `json:"localFilePath,omitempty"`
 	MessageReferenceId *string `json:"message_reference_id,omitempty"`
 	MessageResponseToId *string `json:"message_response_to_id,omitempty"`
-	MetaData map[string]map[string]interface{} `json:"metaData,omitempty"`
-	Mimetype *string `json:"mimetype,omitempty"`
+	MimeType *string `json:"mime_type,omitempty"`
 	MissionId *string `json:"mission_id,omitempty"`
 	OrgOwnerId *string `json:"org_owner_id,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
-	ProcessingErrors []string `json:"processingErrors,omitempty"`
 	Url *string `json:"url,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
 	Username *string `json:"username,omitempty"`
@@ -122,102 +117,6 @@ func (o *AIgencyImage) SetChannelId(v string) {
 	o.ChannelId = &v
 }
 
-// GetFileName returns the FileName field value if set, zero value otherwise.
-func (o *AIgencyImage) GetFileName() string {
-	if o == nil || IsNil(o.FileName) {
-		var ret string
-		return ret
-	}
-	return *o.FileName
-}
-
-// GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetFileNameOk() (*string, bool) {
-	if o == nil || IsNil(o.FileName) {
-		return nil, false
-	}
-	return o.FileName, true
-}
-
-// HasFileName returns a boolean if a field has been set.
-func (o *AIgencyImage) HasFileName() bool {
-	if o != nil && !IsNil(o.FileName) {
-		return true
-	}
-
-	return false
-}
-
-// SetFileName gets a reference to the given string and assigns it to the FileName field.
-func (o *AIgencyImage) SetFileName(v string) {
-	o.FileName = &v
-}
-
-// GetFileSize returns the FileSize field value if set, zero value otherwise.
-func (o *AIgencyImage) GetFileSize() int32 {
-	if o == nil || IsNil(o.FileSize) {
-		var ret int32
-		return ret
-	}
-	return *o.FileSize
-}
-
-// GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetFileSizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.FileSize) {
-		return nil, false
-	}
-	return o.FileSize, true
-}
-
-// HasFileSize returns a boolean if a field has been set.
-func (o *AIgencyImage) HasFileSize() bool {
-	if o != nil && !IsNil(o.FileSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetFileSize gets a reference to the given int32 and assigns it to the FileSize field.
-func (o *AIgencyImage) SetFileSize(v int32) {
-	o.FileSize = &v
-}
-
-// GetLocalFilePath returns the LocalFilePath field value if set, zero value otherwise.
-func (o *AIgencyImage) GetLocalFilePath() string {
-	if o == nil || IsNil(o.LocalFilePath) {
-		var ret string
-		return ret
-	}
-	return *o.LocalFilePath
-}
-
-// GetLocalFilePathOk returns a tuple with the LocalFilePath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetLocalFilePathOk() (*string, bool) {
-	if o == nil || IsNil(o.LocalFilePath) {
-		return nil, false
-	}
-	return o.LocalFilePath, true
-}
-
-// HasLocalFilePath returns a boolean if a field has been set.
-func (o *AIgencyImage) HasLocalFilePath() bool {
-	if o != nil && !IsNil(o.LocalFilePath) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocalFilePath gets a reference to the given string and assigns it to the LocalFilePath field.
-func (o *AIgencyImage) SetLocalFilePath(v string) {
-	o.LocalFilePath = &v
-}
-
 // GetMessageReferenceId returns the MessageReferenceId field value if set, zero value otherwise.
 func (o *AIgencyImage) GetMessageReferenceId() string {
 	if o == nil || IsNil(o.MessageReferenceId) {
@@ -282,68 +181,36 @@ func (o *AIgencyImage) SetMessageResponseToId(v string) {
 	o.MessageResponseToId = &v
 }
 
-// GetMetaData returns the MetaData field value if set, zero value otherwise.
-func (o *AIgencyImage) GetMetaData() map[string]map[string]interface{} {
-	if o == nil || IsNil(o.MetaData) {
-		var ret map[string]map[string]interface{}
-		return ret
-	}
-	return o.MetaData
-}
-
-// GetMetaDataOk returns a tuple with the MetaData field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetMetaDataOk() (map[string]map[string]interface{}, bool) {
-	if o == nil || IsNil(o.MetaData) {
-		return map[string]map[string]interface{}{}, false
-	}
-	return o.MetaData, true
-}
-
-// HasMetaData returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMetaData() bool {
-	if o != nil && !IsNil(o.MetaData) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetaData gets a reference to the given map[string]map[string]interface{} and assigns it to the MetaData field.
-func (o *AIgencyImage) SetMetaData(v map[string]map[string]interface{}) {
-	o.MetaData = v
-}
-
-// GetMimetype returns the Mimetype field value if set, zero value otherwise.
-func (o *AIgencyImage) GetMimetype() string {
-	if o == nil || IsNil(o.Mimetype) {
+// GetMimeType returns the MimeType field value if set, zero value otherwise.
+func (o *AIgencyImage) GetMimeType() string {
+	if o == nil || IsNil(o.MimeType) {
 		var ret string
 		return ret
 	}
-	return *o.Mimetype
+	return *o.MimeType
 }
 
-// GetMimetypeOk returns a tuple with the Mimetype field value if set, nil otherwise
+// GetMimeTypeOk returns a tuple with the MimeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetMimetypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Mimetype) {
+func (o *AIgencyImage) GetMimeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.MimeType) {
 		return nil, false
 	}
-	return o.Mimetype, true
+	return o.MimeType, true
 }
 
-// HasMimetype returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMimetype() bool {
-	if o != nil && !IsNil(o.Mimetype) {
+// HasMimeType returns a boolean if a field has been set.
+func (o *AIgencyImage) HasMimeType() bool {
+	if o != nil && !IsNil(o.MimeType) {
 		return true
 	}
 
 	return false
 }
 
-// SetMimetype gets a reference to the given string and assigns it to the Mimetype field.
-func (o *AIgencyImage) SetMimetype(v string) {
-	o.Mimetype = &v
+// SetMimeType gets a reference to the given string and assigns it to the MimeType field.
+func (o *AIgencyImage) SetMimeType(v string) {
+	o.MimeType = &v
 }
 
 // GetMissionId returns the MissionId field value if set, zero value otherwise.
@@ -440,38 +307,6 @@ func (o *AIgencyImage) HasParameters() bool {
 // SetParameters gets a reference to the given map[string]interface{} and assigns it to the Parameters field.
 func (o *AIgencyImage) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
-}
-
-// GetProcessingErrors returns the ProcessingErrors field value if set, zero value otherwise.
-func (o *AIgencyImage) GetProcessingErrors() []string {
-	if o == nil || IsNil(o.ProcessingErrors) {
-		var ret []string
-		return ret
-	}
-	return o.ProcessingErrors
-}
-
-// GetProcessingErrorsOk returns a tuple with the ProcessingErrors field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetProcessingErrorsOk() ([]string, bool) {
-	if o == nil || IsNil(o.ProcessingErrors) {
-		return nil, false
-	}
-	return o.ProcessingErrors, true
-}
-
-// HasProcessingErrors returns a boolean if a field has been set.
-func (o *AIgencyImage) HasProcessingErrors() bool {
-	if o != nil && !IsNil(o.ProcessingErrors) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessingErrors gets a reference to the given []string and assigns it to the ProcessingErrors field.
-func (o *AIgencyImage) SetProcessingErrors(v []string) {
-	o.ProcessingErrors = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -586,26 +421,14 @@ func (o AIgencyImage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
 	}
-	if !IsNil(o.FileName) {
-		toSerialize["fileName"] = o.FileName
-	}
-	if !IsNil(o.FileSize) {
-		toSerialize["fileSize"] = o.FileSize
-	}
-	if !IsNil(o.LocalFilePath) {
-		toSerialize["localFilePath"] = o.LocalFilePath
-	}
 	if !IsNil(o.MessageReferenceId) {
 		toSerialize["message_reference_id"] = o.MessageReferenceId
 	}
 	if !IsNil(o.MessageResponseToId) {
 		toSerialize["message_response_to_id"] = o.MessageResponseToId
 	}
-	if !IsNil(o.MetaData) {
-		toSerialize["metaData"] = o.MetaData
-	}
-	if !IsNil(o.Mimetype) {
-		toSerialize["mimetype"] = o.Mimetype
+	if !IsNil(o.MimeType) {
+		toSerialize["mime_type"] = o.MimeType
 	}
 	if !IsNil(o.MissionId) {
 		toSerialize["mission_id"] = o.MissionId
@@ -615,9 +438,6 @@ func (o AIgencyImage) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
-	}
-	if !IsNil(o.ProcessingErrors) {
-		toSerialize["processingErrors"] = o.ProcessingErrors
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
@@ -652,17 +472,12 @@ func (o *AIgencyImage) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "channel_id")
-		delete(additionalProperties, "fileName")
-		delete(additionalProperties, "fileSize")
-		delete(additionalProperties, "localFilePath")
 		delete(additionalProperties, "message_reference_id")
 		delete(additionalProperties, "message_response_to_id")
-		delete(additionalProperties, "metaData")
-		delete(additionalProperties, "mimetype")
+		delete(additionalProperties, "mime_type")
 		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "org_owner_id")
 		delete(additionalProperties, "parameters")
-		delete(additionalProperties, "processingErrors")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "username")

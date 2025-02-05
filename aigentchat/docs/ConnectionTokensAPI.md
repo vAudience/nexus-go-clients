@@ -1,10 +1,10 @@
 # \ConnectionTokensAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateConnectionTokenHandler**](ConnectionTokensAPI.md#CreateConnectionTokenHandler) | **Post** /organizations/{org_id}/connection_token/{channel_id} | Create a connection token for SSE
+[**CreateConnectionTokenHandler**](ConnectionTokensAPI.md#CreateConnectionTokenHandler) | **Post** /v1/organizations/{org_id}/connection-tokens/{channel_id} | Create a connection token for SSE
 
 
 

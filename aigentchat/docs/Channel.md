@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **int64** | in milliseconds since epoch format | [optional] 
+**CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
 **IsOrgPublic** | Pointer to **bool** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**LastMessageAt** | Pointer to **int64** | in milliseconds since epoch format | [optional] 
+**LastMessageAt** | Pointer to **int64** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
 **Summary** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **int64** | in milliseconds since epoch format | [optional] 
+**UpdatedAt** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 

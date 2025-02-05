@@ -1,15 +1,15 @@
 # \MessagesAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateMessage**](MessagesAPI.md#CreateMessage) | **Post** /organizations/{org_id}/messages | Create a new message
-[**DeleteMessage**](MessagesAPI.md#DeleteMessage) | **Delete** /organizations/{org_id}/messages/{id} | Delete a message
-[**GetChannelMessages**](MessagesAPI.md#GetChannelMessages) | **Get** /organizations/{org_id}/messages/channel/{channel_id} | Get messages for a channel
-[**GetMessage**](MessagesAPI.md#GetMessage) | **Get** /organizations/{org_id}/messages/{id} | Get a message by ID
-[**SearchMessages**](MessagesAPI.md#SearchMessages) | **Get** /organizations/{org_id}/messages/search | Search messages
-[**UpdateMessage**](MessagesAPI.md#UpdateMessage) | **Put** /organizations/{org_id}/messages/{id} | Update a message
+[**CreateMessage**](MessagesAPI.md#CreateMessage) | **Post** /v1/organizations/{org_id}/messages | Create a new message
+[**DeleteMessage**](MessagesAPI.md#DeleteMessage) | **Delete** /v1/organizations/{org_id}/messages/{id} | Delete a message
+[**GetChannelMessages**](MessagesAPI.md#GetChannelMessages) | **Get** /v1/organizations/{org_id}/messages/channel/{channel_id} | Get messages for a channel
+[**GetMessage**](MessagesAPI.md#GetMessage) | **Get** /v1/organizations/{org_id}/messages/{id} | Get a message by ID
+[**SearchMessages**](MessagesAPI.md#SearchMessages) | **Get** /v1/organizations/{org_id}/messages/search | Search messages
+[**UpdateMessage**](MessagesAPI.md#UpdateMessage) | **Put** /v1/organizations/{org_id}/messages/{id} | Update a message
 
 
 

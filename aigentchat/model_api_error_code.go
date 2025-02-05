@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -80,6 +80,7 @@ const (
 	ErrCodeFailedToRemovePresence ApiErrorCode = "failed_to_remove_presence"
 	ErrCodeFailedToFetchPresence ApiErrorCode = "failed_to_fetch_presence"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
+	ErrCodeFailedToUploadChannelFile ApiErrorCode = "failed_to_upload_channel_file"
 	ErrCodeFailedToRetrieveDependencies ApiErrorCode = "failed_to_retrieve_dependencies"
 	ErrCodeFailedToStoreChatCompletionUser ApiErrorCode = "failed_to_store_chat_completion_user"
 	ErrCodeFailedToCreateChatContext ApiErrorCode = "failed_to_create_chat_context"
@@ -90,11 +91,19 @@ const (
 	ErrCodeCapabilityNotAvailable ApiErrorCode = "capability_not_available"
 	ErrCodeNoMessagesFound ApiErrorCode = "no_messages_found"
 	ErrCodeFailedToValidateRequestParameters ApiErrorCode = "failed_to_validate_request_parameters"
+	ErrCodeChatCompletionTooManyTempFiles ApiErrorCode = "chat_completion_too_many_temporary_files"
+	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
+	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
 	ErrCodeExecutionLogStartMustBeBeforeEnd ApiErrorCode = "start_date_must_be_before_end_date"
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
+	ErrCodeInvalidStorageUrl ApiErrorCode = "invalid_storage_url"
+	ErrCodeFileUploadInfoNotFound ApiErrorCode = "file_upload_info_not_found"
+	ErrCodeInvalidFileUploadSize ApiErrorCode = "invalid_file_upload_size"
+	ErrCodeInvalidFileUploadMimeType ApiErrorCode = "invalid_file_upload_mime_type"
+	ErrCodeProcessingChecksFailed ApiErrorCode = "processing_checks_failed"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
 	ErrCodeInvalidMessageID ApiErrorCode = "invalid_message_id"
 	ErrCodeMessageNotFound ApiErrorCode = "message_not_found"
@@ -193,6 +202,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_remove_presence",
 	"failed_to_fetch_presence",
 	"failed_to_fetch_subscribed_channels",
+	"failed_to_upload_channel_file",
 	"failed_to_retrieve_dependencies",
 	"failed_to_store_chat_completion_user",
 	"failed_to_create_chat_context",
@@ -203,11 +213,19 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"capability_not_available",
 	"no_messages_found",
 	"failed_to_validate_request_parameters",
+	"chat_completion_too_many_temporary_files",
+	"chat_completion_exceeds_total_temporary_file_size",
+	"chat_completion_exceeds_max_input_tokens",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",
 	"start_date_must_be_before_end_date",
 	"invalid_file_id",
+	"invalid_storage_url",
+	"file_upload_info_not_found",
+	"invalid_file_upload_size",
+	"invalid_file_upload_mime_type",
+	"processing_checks_failed",
 	"functioncall_not_found",
 	"invalid_message_id",
 	"message_not_found",

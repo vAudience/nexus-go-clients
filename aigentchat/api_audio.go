@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -73,7 +73,7 @@ func (a *AudioAPIService) CreateAudioTranscriptionExecute(r ApiCreateAudioTransc
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/audio/transcribe"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/audio/transcribe"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -209,7 +209,7 @@ func (r ApiCreateTextToSpeechRequest) Request(request AudioGenerationRequest) Ap
 	return r
 }
 
-func (r ApiCreateTextToSpeechRequest) Execute() (*ExecutionResultAudioGeneration, *http.Response, error) {
+func (r ApiCreateTextToSpeechRequest) Execute() (*AIgencyMessage, *http.Response, error) {
 	return r.ApiService.CreateTextToSpeechExecute(r)
 }
 
@@ -231,13 +231,13 @@ func (a *AudioAPIService) CreateTextToSpeech(ctx context.Context, orgId string) 
 }
 
 // Execute executes the request
-//  @return ExecutionResultAudioGeneration
-func (a *AudioAPIService) CreateTextToSpeechExecute(r ApiCreateTextToSpeechRequest) (*ExecutionResultAudioGeneration, *http.Response, error) {
+//  @return AIgencyMessage
+func (a *AudioAPIService) CreateTextToSpeechExecute(r ApiCreateTextToSpeechRequest) (*AIgencyMessage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ExecutionResultAudioGeneration
+		localVarReturnValue  *AIgencyMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.CreateTextToSpeech")
@@ -245,7 +245,7 @@ func (a *AudioAPIService) CreateTextToSpeechExecute(r ApiCreateTextToSpeechReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{org_id}/audio/texttospeech"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/audio/tts"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

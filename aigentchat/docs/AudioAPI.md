@@ -1,11 +1,11 @@
 # \AudioAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAudioTranscription**](AudioAPI.md#CreateAudioTranscription) | **Post** /organizations/{org_id}/audio/transcribe | Transcribe speech to text
-[**CreateTextToSpeech**](AudioAPI.md#CreateTextToSpeech) | **Post** /organizations/{org_id}/audio/texttospeech | Text-To-Speech
+[**CreateAudioTranscription**](AudioAPI.md#CreateAudioTranscription) | **Post** /v1/organizations/{org_id}/audio/transcribe | Transcribe speech to text
+[**CreateTextToSpeech**](AudioAPI.md#CreateTextToSpeech) | **Post** /v1/organizations/{org_id}/audio/tts | Text-To-Speech
 
 
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## CreateTextToSpeech
 
-> ExecutionResultAudioGeneration CreateTextToSpeech(ctx, orgId).Request(request).Execute()
+> AIgencyMessage CreateTextToSpeech(ctx, orgId).Request(request).Execute()
 
 Text-To-Speech
 
@@ -112,7 +112,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AudioAPI.CreateTextToSpeech``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateTextToSpeech`: ExecutionResultAudioGeneration
+	// response from `CreateTextToSpeech`: AIgencyMessage
 	fmt.Fprintf(os.Stdout, "Response from `AudioAPI.CreateTextToSpeech`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExecutionResultAudioGeneration**](ExecutionResultAudioGeneration.md)
+[**AIgencyMessage**](AIgencyMessage.md)
 
 ### Authorization
 

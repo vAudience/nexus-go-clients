@@ -1,12 +1,12 @@
 # \ChatCompletionsAPI
 
-All URIs are relative to *https://aigentchat.dev.ai.vaud.one/api/v1*
+All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelChatCompletion**](ChatCompletionsAPI.md#CancelChatCompletion) | **Post** /organizations/{org_id}/completions/cancel/{channel_id} | Cancel a chat-completion
-[**CreateChatCompletion**](ChatCompletionsAPI.md#CreateChatCompletion) | **Post** /organizations/{org_id}/completions | Create a chat-completion
-[**CreateChatCompletionStreaming**](ChatCompletionsAPI.md#CreateChatCompletionStreaming) | **Post** /organizations/{org_id}/completions/stream | Create a streaming chat-completion
+[**CancelChatCompletion**](ChatCompletionsAPI.md#CancelChatCompletion) | **Post** /v1/organizations/{org_id}/completions/cancel/{channel_id} | Cancel a chat-completion
+[**CreateChatCompletion**](ChatCompletionsAPI.md#CreateChatCompletion) | **Post** /v1/organizations/{org_id}/completions | Create a chat-completion
+[**CreateChatCompletionStreaming**](ChatCompletionsAPI.md#CreateChatCompletionStreaming) | **Post** /v1/organizations/{org_id}/completions/stream | Create a streaming chat-completion
 
 
 

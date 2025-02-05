@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.14.1
+API version: 0.15.0
 Contact: contact@vaudience.ai
 */
 
@@ -13,6 +13,7 @@ package aigentchat
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FileUploadResponse type satisfies the MappedNullable interface at compile time
@@ -20,9 +21,8 @@ var _ MappedNullable = &FileUploadResponse{}
 
 // FileUploadResponse struct for FileUploadResponse
 type FileUploadResponse struct {
-	IncomingFileName *string `json:"incomingFileName,omitempty"`
-	ProcessingError *string `json:"processingError,omitempty"`
-	ResultingFiles []FilemanagerProcessingResultFile `json:"resultingFiles,omitempty"`
+	Id string `json:"id"`
+	ResultingFiles []ResultFile `json:"resulting_files"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,8 +32,10 @@ type _FileUploadResponse FileUploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileUploadResponse() *FileUploadResponse {
+func NewFileUploadResponse(id string, resultingFiles []ResultFile) *FileUploadResponse {
 	this := FileUploadResponse{}
+	this.Id = id
+	this.ResultingFiles = resultingFiles
 	return &this
 }
 
@@ -45,99 +47,51 @@ func NewFileUploadResponseWithDefaults() *FileUploadResponse {
 	return &this
 }
 
-// GetIncomingFileName returns the IncomingFileName field value if set, zero value otherwise.
-func (o *FileUploadResponse) GetIncomingFileName() string {
-	if o == nil || IsNil(o.IncomingFileName) {
+// GetId returns the Id field value
+func (o *FileUploadResponse) GetId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.IncomingFileName
+
+	return o.Id
 }
 
-// GetIncomingFileNameOk returns a tuple with the IncomingFileName field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *FileUploadResponse) GetIncomingFileNameOk() (*string, bool) {
-	if o == nil || IsNil(o.IncomingFileName) {
+func (o *FileUploadResponse) GetIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IncomingFileName, true
+	return &o.Id, true
 }
 
-// HasIncomingFileName returns a boolean if a field has been set.
-func (o *FileUploadResponse) HasIncomingFileName() bool {
-	if o != nil && !IsNil(o.IncomingFileName) {
-		return true
-	}
-
-	return false
+// SetId sets field value
+func (o *FileUploadResponse) SetId(v string) {
+	o.Id = v
 }
 
-// SetIncomingFileName gets a reference to the given string and assigns it to the IncomingFileName field.
-func (o *FileUploadResponse) SetIncomingFileName(v string) {
-	o.IncomingFileName = &v
-}
-
-// GetProcessingError returns the ProcessingError field value if set, zero value otherwise.
-func (o *FileUploadResponse) GetProcessingError() string {
-	if o == nil || IsNil(o.ProcessingError) {
-		var ret string
+// GetResultingFiles returns the ResultingFiles field value
+func (o *FileUploadResponse) GetResultingFiles() []ResultFile {
+	if o == nil {
+		var ret []ResultFile
 		return ret
 	}
-	return *o.ProcessingError
-}
 
-// GetProcessingErrorOk returns a tuple with the ProcessingError field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FileUploadResponse) GetProcessingErrorOk() (*string, bool) {
-	if o == nil || IsNil(o.ProcessingError) {
-		return nil, false
-	}
-	return o.ProcessingError, true
-}
-
-// HasProcessingError returns a boolean if a field has been set.
-func (o *FileUploadResponse) HasProcessingError() bool {
-	if o != nil && !IsNil(o.ProcessingError) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessingError gets a reference to the given string and assigns it to the ProcessingError field.
-func (o *FileUploadResponse) SetProcessingError(v string) {
-	o.ProcessingError = &v
-}
-
-// GetResultingFiles returns the ResultingFiles field value if set, zero value otherwise.
-func (o *FileUploadResponse) GetResultingFiles() []FilemanagerProcessingResultFile {
-	if o == nil || IsNil(o.ResultingFiles) {
-		var ret []FilemanagerProcessingResultFile
-		return ret
-	}
 	return o.ResultingFiles
 }
 
-// GetResultingFilesOk returns a tuple with the ResultingFiles field value if set, nil otherwise
+// GetResultingFilesOk returns a tuple with the ResultingFiles field value
 // and a boolean to check if the value has been set.
-func (o *FileUploadResponse) GetResultingFilesOk() ([]FilemanagerProcessingResultFile, bool) {
-	if o == nil || IsNil(o.ResultingFiles) {
+func (o *FileUploadResponse) GetResultingFilesOk() ([]ResultFile, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return o.ResultingFiles, true
 }
 
-// HasResultingFiles returns a boolean if a field has been set.
-func (o *FileUploadResponse) HasResultingFiles() bool {
-	if o != nil && !IsNil(o.ResultingFiles) {
-		return true
-	}
-
-	return false
-}
-
-// SetResultingFiles gets a reference to the given []FilemanagerProcessingResultFile and assigns it to the ResultingFiles field.
-func (o *FileUploadResponse) SetResultingFiles(v []FilemanagerProcessingResultFile) {
+// SetResultingFiles sets field value
+func (o *FileUploadResponse) SetResultingFiles(v []ResultFile) {
 	o.ResultingFiles = v
 }
 
@@ -151,15 +105,8 @@ func (o FileUploadResponse) MarshalJSON() ([]byte, error) {
 
 func (o FileUploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncomingFileName) {
-		toSerialize["incomingFileName"] = o.IncomingFileName
-	}
-	if !IsNil(o.ProcessingError) {
-		toSerialize["processingError"] = o.ProcessingError
-	}
-	if !IsNil(o.ResultingFiles) {
-		toSerialize["resultingFiles"] = o.ResultingFiles
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["resulting_files"] = o.ResultingFiles
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -169,6 +116,28 @@ func (o FileUploadResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"resulting_files",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varFileUploadResponse := _FileUploadResponse{}
 
 	err = json.Unmarshal(data, &varFileUploadResponse)
@@ -182,9 +151,8 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "incomingFileName")
-		delete(additionalProperties, "processingError")
-		delete(additionalProperties, "resultingFiles")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "resulting_files")
 		o.AdditionalProperties = additionalProperties
 	}
 
