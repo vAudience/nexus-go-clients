@@ -9,6 +9,6 @@ openapi-generator generate \
   --git-user-id vaudience \
   --git-repo-id nexus-go-clients/aigentchat
 cd aigentchat
-go install github.com/stretchr/testify/assert@latest
+go get github.com/stretchr/testify/assert
 go mod tidy
  
