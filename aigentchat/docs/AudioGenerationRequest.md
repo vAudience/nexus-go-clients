@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **Speed** | Pointer to **float64** |  | [optional] 
 **StreamAudio** | Pointer to **bool** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
 **Username** | Pointer to **string** |  | [optional] 
 **VoiceId** | Pointer to **string** |  | [optional] 
@@ -418,6 +419,31 @@ SetStreamAudio sets StreamAudio field to given value.
 `func (o *AudioGenerationRequest) HasStreamAudio() bool`
 
 HasStreamAudio returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *AudioGenerationRequest) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *AudioGenerationRequest) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *AudioGenerationRequest) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *AudioGenerationRequest) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
 
 ### GetUserId
 

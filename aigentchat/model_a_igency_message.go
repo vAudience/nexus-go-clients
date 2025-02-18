@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,7 +23,6 @@ var _ MappedNullable = &AIgencyMessage{}
 type AIgencyMessage struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
-	AigentThreadId *string `json:"aigent_thread_id,omitempty"`
 	Attachments *AIgencyMessageFileList `json:"attachments,omitempty"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
@@ -127,38 +126,6 @@ func (o *AIgencyMessage) GetAiServiceIdOk() (*string, bool) {
 // SetAiServiceId sets field value
 func (o *AIgencyMessage) SetAiServiceId(v string) {
 	o.AiServiceId = v
-}
-
-// GetAigentThreadId returns the AigentThreadId field value if set, zero value otherwise.
-func (o *AIgencyMessage) GetAigentThreadId() string {
-	if o == nil || IsNil(o.AigentThreadId) {
-		var ret string
-		return ret
-	}
-	return *o.AigentThreadId
-}
-
-// GetAigentThreadIdOk returns a tuple with the AigentThreadId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessage) GetAigentThreadIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AigentThreadId) {
-		return nil, false
-	}
-	return o.AigentThreadId, true
-}
-
-// HasAigentThreadId returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasAigentThreadId() bool {
-	if o != nil && !IsNil(o.AigentThreadId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAigentThreadId gets a reference to the given string and assigns it to the AigentThreadId field.
-func (o *AIgencyMessage) SetAigentThreadId(v string) {
-	o.AigentThreadId = &v
 }
 
 // GetAttachments returns the Attachments field value if set, zero value otherwise.
@@ -789,9 +756,6 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_model_id"] = o.AiModelId
 	toSerialize["ai_service_id"] = o.AiServiceId
-	if !IsNil(o.AigentThreadId) {
-		toSerialize["aigent_thread_id"] = o.AigentThreadId
-	}
 	if !IsNil(o.Attachments) {
 		toSerialize["attachments"] = o.Attachments
 	}
@@ -893,7 +857,6 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ai_model_id")
 		delete(additionalProperties, "ai_service_id")
-		delete(additionalProperties, "aigent_thread_id")
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")

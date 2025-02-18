@@ -9,8 +9,6 @@
 
 * `AIModelCapabilityFunctionCallingStreaming` (value: `"function-calling_streaming"`)
 
-* `AIModelCapabilityAcceptsDocumentFiles` (value: `"accepts-document-files"`)
-
 * `AIModelCapabilityTextToEmbedding` (value: `"text-to-embedding"`)
 
 * `AIModelCapabilityTextToText` (value: `"text-to-text"`)

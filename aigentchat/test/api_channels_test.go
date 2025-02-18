@@ -41,9 +41,8 @@ func Test_aigentchat_ChannelsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
-		var id string
 
-		resp, httpRes, err := apiClient.ChannelsAPI.CreateChannelFile(context.Background(), orgId, id).Execute()
+		resp, httpRes, err := apiClient.ChannelsAPI.CreateChannelFile(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

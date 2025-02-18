@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Direction** | Pointer to [**AIModelConstraintDirection**](AIModelConstraintDirection.md) |  | [optional] 
-**Max** | Pointer to **float32** |  | [optional] 
-**Min** | Pointer to **float32** |  | [optional] 
+**Max** | Pointer to **int32** |  | [optional] 
+**Min** | Pointer to **int32** |  | [optional] 
 **Unit** | Pointer to [**AIModelMinMaxUnit**](AIModelMinMaxUnit.md) |  | [optional] 
 
 ## Methods
@@ -55,20 +55,20 @@ HasDirection returns a boolean if a field has been set.
 
 ### GetMax
 
-`func (o *AIModelConstraint) GetMax() float32`
+`func (o *AIModelConstraint) GetMax() int32`
 
 GetMax returns the Max field if non-nil, zero value otherwise.
 
 ### GetMaxOk
 
-`func (o *AIModelConstraint) GetMaxOk() (*float32, bool)`
+`func (o *AIModelConstraint) GetMaxOk() (*int32, bool)`
 
 GetMaxOk returns a tuple with the Max field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMax
 
-`func (o *AIModelConstraint) SetMax(v float32)`
+`func (o *AIModelConstraint) SetMax(v int32)`
 
 SetMax sets Max field to given value.
 
@@ -80,20 +80,20 @@ HasMax returns a boolean if a field has been set.
 
 ### GetMin
 
-`func (o *AIModelConstraint) GetMin() float32`
+`func (o *AIModelConstraint) GetMin() int32`
 
 GetMin returns the Min field if non-nil, zero value otherwise.
 
 ### GetMinOk
 
-`func (o *AIModelConstraint) GetMinOk() (*float32, bool)`
+`func (o *AIModelConstraint) GetMinOk() (*int32, bool)`
 
 GetMinOk returns a tuple with the Min field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMin
 
-`func (o *AIModelConstraint) SetMin(v float32)`
+`func (o *AIModelConstraint) SetMin(v int32)`
 
 SetMin sets Min field to given value.
 

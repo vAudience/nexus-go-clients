@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.15.0
+  version: 0.15.9
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -1640,18 +1640,17 @@ paths:
         in: query
         name: add_default_agents
         schema:
-          enum:
-          - "true"
-          - "false"
-          type: string
-      - description: Filter by agent capability
+          type: boolean
+      - description: Filter agents by ability type
         in: query
-        name: capability
+        name: ability
         schema:
           enum:
+          - text
           - chat
           - embedding
           - image
+          - tool-function
           type: string
       responses:
         "200":
@@ -2970,7 +2969,66 @@ paths:
       summary: Get active channels
       tags:
       - Channels
-  /v1/organizations/{org_id}/channels/file-settings:
+  /v1/organizations/{org_id}/channels/files:
+    post:
+      description: Create a file for a channel
+      operationId: CreateChannelFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateChannelFile_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a file for a channel
+      tags:
+      - Channels
+  /v1/organizations/{org_id}/channels/files/settings:
     get:
       description: Get channel file settings
       operationId: GetChannelFileSettings
@@ -3337,71 +3395,6 @@ paths:
       tags:
       - Channels
       x-codegen-request-body-name: channel
-  /v1/organizations/{org_id}/channels/{id}/files:
-    post:
-      description: Create a file for a channel
-      operationId: CreateChannelFile
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Channel ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateChannelFile_request'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileUploadResponse'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a file for a channel
-      tags:
-      - Channels
   /v1/organizations/{org_id}/completions:
     post:
       description: Create a new chat-completion for a specific channel
@@ -4215,12 +4208,19 @@ paths:
         required: true
         schema:
           type: string
+      - description: Delete related message
+        in: query
+        name: cascade
+        schema:
+          type: boolean
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                items:
+                  $ref: '#/components/schemas/AIgencyMessage'
+                type: array
           description: OK
         "400":
           content:
@@ -4755,15 +4755,27 @@ components:
         accepted_file_mimetypes:
         - accepted_file_mimetypes
         - accepted_file_mimetypes
-        constraints:
-        - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
-          direction: input
-        - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
-          direction: input
+        abilities:
+        - type: text
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+        - type: text
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
         features:
         - capability: ""
           cost_items:
@@ -4786,12 +4798,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
         - capability: ""
           cost_items:
@@ -4814,12 +4826,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
         service_host_locations:
         - ""
@@ -4834,13 +4846,13 @@ components:
         id: id
         parameters: "{}"
       properties:
+        abilities:
+          items:
+            $ref: '#/components/schemas/Ability'
+          type: array
         accepted_file_mimetypes:
           items:
             type: string
-          type: array
-        constraints:
-          items:
-            $ref: '#/components/schemas/AIModelConstraint'
           type: array
         created_at:
           format: int64
@@ -4910,7 +4922,6 @@ components:
       - ""
       - function-calling
       - function-calling_streaming
-      - accepts-document-files
       - text-to-embedding
       - text-to-text
       - text-to-text_streaming
@@ -4934,7 +4945,6 @@ components:
       - AIModelCapabilityNil
       - AIModelCapabilityFunctionCalling
       - AIModelCapabilityFunctionCallingStreaming
-      - AIModelCapabilityAcceptsDocumentFiles
       - AIModelCapabilityTextToEmbedding
       - AIModelCapabilityTextToText
       - AIModelCapabilityTextToTextStreaming
@@ -4956,16 +4966,16 @@ components:
     AIModelConstraint:
       example:
         unit: tokens
-        min: 6.027456183070403
-        max: 0.8008281904610115
+        min: 6
+        max: 0
         direction: input
       properties:
         direction:
           $ref: '#/components/schemas/AIModelConstraintDirection'
         max:
-          type: number
+          type: integer
         min:
-          type: number
+          type: integer
         unit:
           $ref: '#/components/schemas/AIModelMinMaxUnit'
       type: object
@@ -5026,12 +5036,12 @@ components:
           cost_unit: input-tokens-per-million
         constraints:
         - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
+          min: 6
+          max: 0
           direction: input
         - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
+          min: 6
+          max: 0
           direction: input
       properties:
         capability:
@@ -5144,15 +5154,27 @@ components:
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
-          constraints:
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
+          abilities:
+          - type: text
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          - type: text
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
           features:
           - capability: ""
             cost_items:
@@ -5175,12 +5197,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
           - capability: ""
             cost_items:
@@ -5203,12 +5225,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
           service_host_locations:
           - ""
@@ -5231,15 +5253,27 @@ components:
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
-          constraints:
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
+          abilities:
+          - type: text
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          - type: text
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
           features:
           - capability: ""
             cost_items:
@@ -5262,12 +5296,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
           - capability: ""
             cost_items:
@@ -5290,12 +5324,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
             - unit: tokens
-              min: 6.027456183070403
-              max: 0.8008281904610115
+              min: 6
+              max: 0
               direction: input
           service_host_locations:
           - ""
@@ -5371,22 +5405,6 @@ components:
       type: object
     AIModelWriteDto:
       example:
-        internal_id: internal_id
-        description: description
-        model_id: model_id
-        documentation_url: documentation_url
-        accepted_file_mimetypes:
-        - accepted_file_mimetypes
-        - accepted_file_mimetypes
-        constraints:
-        - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
-          direction: input
-        - unit: tokens
-          min: 6.027456183070403
-          max: 0.8008281904610115
-          direction: input
         features:
         - capability: ""
           cost_items:
@@ -5409,12 +5427,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
         - capability: ""
           cost_items:
@@ -5437,30 +5455,33 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
           - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
+            min: 6
+            max: 0
             direction: input
         service_host_locations:
         - ""
         - ""
+        internal_id: internal_id
         service_id: service_id
         is_public: true
         name: name
+        description: description
         parameter_definitions: "{}"
+        model_id: model_id
+        documentation_url: documentation_url
+        accepted_file_mimetypes:
+        - accepted_file_mimetypes
+        - accepted_file_mimetypes
         parameters:
           key: "{}"
       properties:
         accepted_file_mimetypes:
           items:
             type: string
-          type: array
-        constraints:
-          items:
-            $ref: '#/components/schemas/AIModelConstraint'
           type: array
         description:
           maxLength: 1024
@@ -5540,6 +5561,8 @@ components:
       type: object
     AIgencyMessage:
       example:
+        channel_name: channel_name
+        response_to_id: response_to_id
         attachments:
           files:
           - embedded_content: embedded_content
@@ -5559,6 +5582,35 @@ components:
             file_size: 0
             url: url
         reference_id: reference_id
+        created_for_feature:
+          capability: ""
+          cost_items:
+          - resulting_cost_in_euro: 2.3021358869347655
+            used_units: 7.061401241503109
+            description: description
+            cost_per_unit_in_euro: 5.637376656633329
+            cost_unit: null
+          - resulting_cost_in_euro: 2.3021358869347655
+            used_units: 7.061401241503109
+            description: description
+            cost_per_unit_in_euro: 5.637376656633329
+            cost_unit: null
+          cost_item_templates:
+          - description: description
+            cost_per_unit_in_euro: 5.962133916683182
+            cost_unit: input-tokens-per-million
+          - description: description
+            cost_per_unit_in_euro: 5.962133916683182
+            cost_unit: input-tokens-per-million
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
         mission_id: mission_id
         created_at: 6
         sender_name: sender_name
@@ -5568,6 +5620,7 @@ components:
           error_code: ""
           message: message
         type: "{}"
+        ai_model_id: ai_model_id
         ai_service_id: ai_service_id
         content:
           data:
@@ -5595,47 +5648,14 @@ components:
             type: text
           full_text: full_text
         sender_id: sender_id
+        token_direction: "{}"
         token_count: 5
         finish_reason: ""
+        owner_organization_id: owner_organization_id
         updated_at: 2
         sender_conversation_role: "{}"
         meta_data: "{}"
         id: id
-        channel_name: channel_name
-        response_to_id: response_to_id
-        created_for_feature:
-          capability: ""
-          cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
-            description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            cost_unit: null
-          cost_item_templates:
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          - description: description
-            cost_per_unit_in_euro: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          constraints:
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-          - unit: tokens
-            min: 6.027456183070403
-            max: 0.8008281904610115
-            direction: input
-        ai_model_id: ai_model_id
-        token_direction: "{}"
-        owner_organization_id: owner_organization_id
-        aigent_thread_id: aigent_thread_id
         channel_id: channel_id
         parameters: "{}"
       properties:
@@ -5646,9 +5666,6 @@ components:
         ai_service_id:
           maxLength: 64
           minLength: 1
-          type: string
-        aigent_thread_id:
-          maxLength: 64
           type: string
         attachments:
           $ref: '#/components/schemas/AIgencyMessageFileList'
@@ -5918,7 +5935,6 @@ components:
             type: text
           full_text: full_text
         sender_conversation_role: "{}"
-        aigent_thread_id: aigent_thread_id
         meta_data: "{}"
         channel_id: channel_id
         parameters: "{}"
@@ -5928,10 +5944,6 @@ components:
           minLength: 1
           type: string
         ai_service_id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        aigent_thread_id:
           maxLength: 64
           minLength: 1
           type: string
@@ -5980,7 +5992,6 @@ components:
       required:
       - ai_model_id
       - ai_service_id
-      - aigent_thread_id
       - channel_id
       - channel_name
       - mission_id
@@ -5988,28 +5999,84 @@ components:
       - sender_name
       - type
       type: object
+    Ability:
+      example:
+        type: text
+        constraints:
+        - unit: tokens
+          min: 6
+          max: 0
+          direction: input
+        - unit: tokens
+          min: 6
+          max: 0
+          direction: input
+      properties:
+        constraints:
+          items:
+            $ref: '#/components/schemas/AIModelConstraint'
+          type: array
+        type:
+          $ref: '#/components/schemas/AbilityType'
+      type: object
+    AbilityType:
+      enum:
+      - text
+      - chat
+      - embedding
+      - image
+      - tool-function
+      type: string
+      x-enum-varnames:
+      - AbilityTypeText
+      - AbilityTypeChat
+      - AbilityTypeEmbedding
+      - AbilityTypeImage
+      - AbilityTypeToolFunction
     Agent:
       example:
-        capabilities:
-        - chat
-        - chat
         internal_id: internal_id
         system_messages:
         - system_messages
         - system_messages
         owner_id: owner_id
+        team_ids:
+        - team_ids
+        - team_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
         created_at: 0
         description: description
         model_id: model_id
+        type: ""
         initial_user_messages:
         - initial_user_messages
         - initial_user_messages
         attached_file_ids:
         - attached_file_ids
         - attached_file_ids
+        abilities:
+        - type: text
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+        - type: text
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
         owner_organization_id: owner_organization_id
         avatar_url: avatar_url
         updated_at: 6
@@ -6022,6 +6089,10 @@ components:
         id: id
         parameters: "{}"
       properties:
+        abilities:
+          items:
+            $ref: '#/components/schemas/Ability'
+          type: array
         assigned_tools:
           items:
             type: string
@@ -6034,10 +6105,6 @@ components:
           uniqueItems: true
         avatar_url:
           type: string
-        capabilities:
-          items:
-            $ref: '#/components/schemas/AgentCapability'
-          type: array
         created_at:
           format: int64
           type: integer
@@ -6086,6 +6153,13 @@ components:
             type: string
           type: array
           uniqueItems: true
+        team_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        type:
+          $ref: '#/components/schemas/AgentType'
         updated_at:
           format: int64
           type: integer
@@ -6102,16 +6176,6 @@ components:
       - owner_id
       - owner_organization_id
       type: object
-    AgentCapability:
-      enum:
-      - chat
-      - embedding
-      - image
-      type: string
-      x-enum-varnames:
-      - AgentCapabilityChat
-      - AgentCapabilityEmbedding
-      - AgentCapabilityImage
     AgentPrompt:
       example:
         visibility: private
@@ -6370,17 +6434,31 @@ components:
           type: array
           uniqueItems: true
       type: object
+    AgentType:
+      enum:
+      - ""
+      - basic
+      - service
+      type: string
+      x-enum-varnames:
+      - AgentTypeNil
+      - AgentTypeBasic
+      - AgentTypeService
     AgentWriteDto:
       example:
         internal_id: internal_id
         system_messages:
         - system_messages
         - system_messages
+        team_ids:
+        - team_ids
+        - team_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
         description: description
         model_id: model_id
+        type: ""
         initial_user_messages:
         - initial_user_messages
         - initial_user_messages
@@ -6440,6 +6518,13 @@ components:
             type: string
           type: array
           uniqueItems: true
+        team_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        type:
+          $ref: '#/components/schemas/AgentType'
         use_tools:
           type: boolean
       type: object
@@ -6501,6 +6586,7 @@ components:
       - failed_to_update_messages
       - ai_model_not_found
       - invalid_ai_model_id
+      - invalid_ai_model_definition
       - failed_to_create_ai_model
       - failed_to_update_ai_model
       - failed_to_delete_ai_model
@@ -6536,7 +6622,6 @@ components:
       - failed_to_fetch_presence
       - failed_to_fetch_subscribed_channels
       - failed_to_upload_channel_file
-      - failed_to_retrieve_dependencies
       - failed_to_store_chat_completion_user
       - failed_to_create_chat_context
       - failed_to_acquire_chat_completion_lock
@@ -6545,7 +6630,7 @@ components:
       - failed_to_release_chat_completion_lock
       - capability_not_available
       - no_messages_found
-      - failed_to_validate_request_parameters
+      - invalid_request_parameters
       - chat_completion_too_many_temporary_files
       - chat_completion_exceeds_total_temporary_file_size
       - chat_completion_exceeds_max_input_tokens
@@ -6587,6 +6672,7 @@ components:
       - organization_cost_budget_exists
       - invalid_tool_id
       - unknown_tool_id
+      - failed_to_create_temp_api_key
       - invalid_prompt_id
       - prompt_not_found
       - invalid_prompt_data
@@ -6621,6 +6707,7 @@ components:
       - ErrCodeFailedToUpdateMessages
       - ErrCodeAIModelNotFound
       - ErrCodeInvalidAIModelID
+      - ErrCodeInvalidAIModelDefinition
       - ErrCodeFailedToCreateAIModel
       - ErrCodeFailedToUpdateAIModel
       - ErrCodeFailedToDeleteAIModel
@@ -6656,7 +6743,6 @@ components:
       - ErrCodeFailedToFetchPresence
       - ErrCodeFailedToFetchSubscribed
       - ErrCodeFailedToUploadChannelFile
-      - ErrCodeFailedToRetrieveDependencies
       - ErrCodeFailedToStoreChatCompletionUser
       - ErrCodeFailedToCreateChatContext
       - ErrCodeFailedToAcquireChatCompletionLock
@@ -6665,7 +6751,7 @@ components:
       - ErrCodeFailedToReleaseChatCompletionLock
       - ErrCodeCapabilityNotAvailable
       - ErrCodeNoMessagesFound
-      - ErrCodeFailedToValidateRequestParameters
+      - ErrCodeInvalidRequestParameters
       - ErrCodeChatCompletionTooManyTempFiles
       - ErrCodeChatCompletionExceedsTotalTempFileSize
       - ErrCodeChatCompletionExceedsMaxInputTokens
@@ -6707,6 +6793,7 @@ components:
       - ErrCodeOrgCostBudgetExists
       - ErrCodeInvalidToolID
       - ErrCodeUnknownToolID
+      - ErrCodeFailedToCreateTempApiKey
       - ErrCodeInvalidPromptID
       - ErrCodePromptNotFound
       - ErrCodeInvalidPromptData
@@ -6718,6 +6805,9 @@ components:
       example:
         agent_id: agent_id
         voice_id: voice_id
+        team_ids:
+        - team_ids
+        - team_ids
         message_response_to_id: message_response_to_id
         mission_id: mission_id
         language: language
@@ -6776,6 +6866,10 @@ components:
           type: number
         stream_audio:
           type: boolean
+        team_ids:
+          items:
+            type: string
+          type: array
         user_id:
           type: string
         username:
@@ -6791,6 +6885,9 @@ components:
       example:
         agent_id: agent_id
         skip_ai_agency_message_generation: true
+        team_ids:
+        - team_ids
+        - team_ids
         message_response_to_id: message_response_to_id
         mission_id: mission_id
         language: language
@@ -6836,6 +6933,10 @@ components:
           type: object
         skip_ai_agency_message_generation:
           type: boolean
+        team_ids:
+          items:
+            type: string
+          type: array
         transcription_format:
           type: string
         trigger_chat_completion:
@@ -7375,6 +7476,9 @@ components:
     ImageGenerationRequest:
       example:
         agent_id: agent_id
+        team_ids:
+        - team_ids
+        - team_ids
         message_response_to_id: message_response_to_id
         mission_id: mission_id
         output_image_file_format: output_image_file_format
@@ -7415,6 +7519,10 @@ components:
         parameters:
           properties: {}
           type: object
+        team_ids:
+          items:
+            type: string
+          type: array
         user_id:
           type: string
         username:
@@ -7813,6 +7921,9 @@ components:
         file:
           description: File to upload
           format: binary
+          type: string
+        channel_id:
+          description: Channel id
           type: string
       required:
       - file

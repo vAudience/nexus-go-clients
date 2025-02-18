@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -1282,19 +1282,19 @@ type ApiListAgentsRequest struct {
 	ctx context.Context
 	ApiService *AgentsAPIService
 	orgId string
-	addDefaultAgents *string
-	capability *string
+	addDefaultAgents *bool
+	ability *string
 }
 
 // Include default agents to the list of org owned agents
-func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents string) ApiListAgentsRequest {
+func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents bool) ApiListAgentsRequest {
 	r.addDefaultAgents = &addDefaultAgents
 	return r
 }
 
-// Filter by agent capability
-func (r ApiListAgentsRequest) Capability(capability string) ApiListAgentsRequest {
-	r.capability = &capability
+// Filter agents by ability type
+func (r ApiListAgentsRequest) Ability(ability string) ApiListAgentsRequest {
+	r.ability = &ability
 	return r
 }
 
@@ -1344,8 +1344,8 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 	if r.addDefaultAgents != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "add_default_agents", r.addDefaultAgents, "", "")
 	}
-	if r.capability != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "capability", r.capability, "", "")
+	if r.ability != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ability", r.ability, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

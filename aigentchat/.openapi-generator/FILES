@@ -46,8 +46,9 @@ docs/AIgencyMessageFile.md
 docs/AIgencyMessageFileList.md
 docs/AIgencyMessageType.md
 docs/AIgencyMessageWriteDto.md
+docs/Ability.md
+docs/AbilityType.md
 docs/Agent.md
-docs/AgentCapability.md
 docs/AgentPrompt.md
 docs/AgentPromptRenderDto.md
 docs/AgentPromptRenderedDto.md
@@ -56,6 +57,7 @@ docs/AgentPromptsAPI.md
 docs/AgentTeam.md
 docs/AgentTeamWriteDto.md
 docs/AgentTeamsAPI.md
+docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
 docs/AiServiceError.md
@@ -128,14 +130,16 @@ model_a_igency_message_file.go
 model_a_igency_message_file_list.go
 model_a_igency_message_type.go
 model_a_igency_message_write_dto.go
+model_ability.go
+model_ability_type.go
 model_agent.go
-model_agent_capability.go
 model_agent_prompt.go
 model_agent_prompt_render_dto.go
 model_agent_prompt_rendered_dto.go
 model_agent_prompt_visibility_states.go
 model_agent_team.go
 model_agent_team_write_dto.go
+model_agent_type.go
 model_agent_write_dto.go
 model_ai_model.go
 model_ai_model_capability.go

@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**AigentThreadId** | Pointer to **string** |  | [optional] 
 **Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | [optional] 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
@@ -88,31 +87,6 @@ and a boolean to check if the value has been set.
 
 SetAiServiceId sets AiServiceId field to given value.
 
-
-### GetAigentThreadId
-
-`func (o *AIgencyMessage) GetAigentThreadId() string`
-
-GetAigentThreadId returns the AigentThreadId field if non-nil, zero value otherwise.
-
-### GetAigentThreadIdOk
-
-`func (o *AIgencyMessage) GetAigentThreadIdOk() (*string, bool)`
-
-GetAigentThreadIdOk returns a tuple with the AigentThreadId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAigentThreadId
-
-`func (o *AIgencyMessage) SetAigentThreadId(v string)`
-
-SetAigentThreadId sets AigentThreadId field to given value.
-
-### HasAigentThreadId
-
-`func (o *AIgencyMessage) HasAigentThreadId() bool`
-
-HasAigentThreadId returns a boolean if a field has been set.
 
 ### GetAttachments
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **OrgId** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SkipAiAgencyMessageGeneration** | Pointer to **bool** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
 **TranscriptionFormat** | **string** |  | 
 **TriggerChatCompletion** | Pointer to **bool** |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
@@ -308,6 +309,31 @@ SetSkipAiAgencyMessageGeneration sets SkipAiAgencyMessageGeneration field to giv
 `func (o *AudioTranscriptionRequest) HasSkipAiAgencyMessageGeneration() bool`
 
 HasSkipAiAgencyMessageGeneration returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *AudioTranscriptionRequest) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *AudioTranscriptionRequest) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *AudioTranscriptionRequest) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *AudioTranscriptionRequest) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
 
 ### GetTranscriptionFormat
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -201,9 +201,16 @@ type ApiDeleteMessageRequest struct {
 	ApiService *MessagesAPIService
 	orgId string
 	id string
+	cascade *bool
 }
 
-func (r ApiDeleteMessageRequest) Execute() (*AIgencyMessage, *http.Response, error) {
+// Delete related message
+func (r ApiDeleteMessageRequest) Cascade(cascade bool) ApiDeleteMessageRequest {
+	r.cascade = &cascade
+	return r
+}
+
+func (r ApiDeleteMessageRequest) Execute() ([]AIgencyMessage, *http.Response, error) {
 	return r.ApiService.DeleteMessageExecute(r)
 }
 
@@ -227,13 +234,13 @@ func (a *MessagesAPIService) DeleteMessage(ctx context.Context, orgId string, id
 }
 
 // Execute executes the request
-//  @return AIgencyMessage
-func (a *MessagesAPIService) DeleteMessageExecute(r ApiDeleteMessageRequest) (*AIgencyMessage, *http.Response, error) {
+//  @return []AIgencyMessage
+func (a *MessagesAPIService) DeleteMessageExecute(r ApiDeleteMessageRequest) ([]AIgencyMessage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AIgencyMessage
+		localVarReturnValue  []AIgencyMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessagesAPIService.DeleteMessage")
@@ -249,6 +256,9 @@ func (a *MessagesAPIService) DeleteMessageExecute(r ApiDeleteMessageRequest) (*A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cascade != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cascade", r.cascade, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

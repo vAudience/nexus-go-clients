@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -33,6 +33,8 @@ type AgentWriteDto struct {
 	Name *string `json:"name,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
+	TeamIds []string `json:"team_ids,omitempty"`
+	Type *AgentType `json:"type,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -472,6 +474,70 @@ func (o *AgentWriteDto) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
+// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetTeamIds() []string {
+	if o == nil || IsNil(o.TeamIds) {
+		var ret []string
+		return ret
+	}
+	return o.TeamIds
+}
+
+// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetTeamIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TeamIds) {
+		return nil, false
+	}
+	return o.TeamIds, true
+}
+
+// HasTeamIds returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasTeamIds() bool {
+	if o != nil && !IsNil(o.TeamIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
+func (o *AgentWriteDto) SetTeamIds(v []string) {
+	o.TeamIds = v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetType() AgentType {
+	if o == nil || IsNil(o.Type) {
+		var ret AgentType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetTypeOk() (*AgentType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given AgentType and assigns it to the Type field.
+func (o *AgentWriteDto) SetType(v AgentType) {
+	o.Type = &v
+}
+
 // GetUseTools returns the UseTools field value if set, zero value otherwise.
 func (o *AgentWriteDto) GetUseTools() bool {
 	if o == nil || IsNil(o.UseTools) {
@@ -553,6 +619,12 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
+	if !IsNil(o.TeamIds) {
+		toSerialize["team_ids"] = o.TeamIds
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.UseTools) {
 		toSerialize["use_tools"] = o.UseTools
 	}
@@ -591,6 +663,8 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "system_messages")
+		delete(additionalProperties, "team_ids")
+		delete(additionalProperties, "type")
 		delete(additionalProperties, "use_tools")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).AddDefaultAgents(addDefaultAgents).Capability(capability).Execute()
+> []Agent ListAgents(ctx, orgId).AddDefaultAgents(addDefaultAgents).Ability(ability).Execute()
 
 List agents
 
@@ -563,12 +563,12 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	addDefaultAgents := "addDefaultAgents_example" // string | Include default agents to the list of org owned agents (optional)
-	capability := "capability_example" // string | Filter by agent capability (optional)
+	addDefaultAgents := true // bool | Include default agents to the list of org owned agents (optional)
+	ability := "ability_example" // string | Filter agents by ability type (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).AddDefaultAgents(addDefaultAgents).Capability(capability).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).AddDefaultAgents(addDefaultAgents).Ability(ability).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -594,8 +594,8 @@ Other parameters are passed through a pointer to a apiListAgentsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **addDefaultAgents** | **string** | Include default agents to the list of org owned agents | 
- **capability** | **string** | Filter by agent capability | 
+ **addDefaultAgents** | **bool** | Include default agents to the list of org owned agents | 
+ **ability** | **string** | Filter agents by ability type | 
 
 ### Return type
 

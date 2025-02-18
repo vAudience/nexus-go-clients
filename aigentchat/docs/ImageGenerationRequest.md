@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **OrgId** | Pointer to **string** |  | [optional] 
 **OutputImageFileFormat** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
 **UserId** | Pointer to **string** |  | [optional] 
 **Username** | Pointer to **string** |  | [optional] 
 
@@ -311,6 +312,31 @@ SetParameters sets Parameters field to given value.
 `func (o *ImageGenerationRequest) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *ImageGenerationRequest) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *ImageGenerationRequest) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *ImageGenerationRequest) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *ImageGenerationRequest) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
 
 ### GetUserId
 

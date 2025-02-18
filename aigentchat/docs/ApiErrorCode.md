@@ -53,6 +53,8 @@
 
 * `ErrCodeInvalidAIModelID` (value: `"invalid_ai_model_id"`)
 
+* `ErrCodeInvalidAIModelDefinition` (value: `"invalid_ai_model_definition"`)
+
 * `ErrCodeFailedToCreateAIModel` (value: `"failed_to_create_ai_model"`)
 
 * `ErrCodeFailedToUpdateAIModel` (value: `"failed_to_update_ai_model"`)
@@ -123,8 +125,6 @@
 
 * `ErrCodeFailedToUploadChannelFile` (value: `"failed_to_upload_channel_file"`)
 
-* `ErrCodeFailedToRetrieveDependencies` (value: `"failed_to_retrieve_dependencies"`)
-
 * `ErrCodeFailedToStoreChatCompletionUser` (value: `"failed_to_store_chat_completion_user"`)
 
 * `ErrCodeFailedToCreateChatContext` (value: `"failed_to_create_chat_context"`)
@@ -141,7 +141,7 @@
 
 * `ErrCodeNoMessagesFound` (value: `"no_messages_found"`)
 
-* `ErrCodeFailedToValidateRequestParameters` (value: `"failed_to_validate_request_parameters"`)
+* `ErrCodeInvalidRequestParameters` (value: `"invalid_request_parameters"`)
 
 * `ErrCodeChatCompletionTooManyTempFiles` (value: `"chat_completion_too_many_temporary_files"`)
 
@@ -224,6 +224,8 @@
 * `ErrCodeInvalidToolID` (value: `"invalid_tool_id"`)
 
 * `ErrCodeUnknownToolID` (value: `"unknown_tool_id"`)
+
+* `ErrCodeFailedToCreateTempApiKey` (value: `"failed_to_create_temp_api_key"`)
 
 * `ErrCodeInvalidPromptID` (value: `"invalid_prompt_id"`)
 

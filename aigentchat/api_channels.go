@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -201,13 +201,19 @@ type ApiCreateChannelFileRequest struct {
 	ctx context.Context
 	ApiService *ChannelsAPIService
 	orgId string
-	id string
 	file *os.File
+	channelId *string
 }
 
 // File to upload
 func (r ApiCreateChannelFileRequest) File(file *os.File) ApiCreateChannelFileRequest {
 	r.file = file
+	return r
+}
+
+// Channel id
+func (r ApiCreateChannelFileRequest) ChannelId(channelId string) ApiCreateChannelFileRequest {
+	r.channelId = &channelId
 	return r
 }
 
@@ -222,15 +228,13 @@ Create a file for a channel
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Channel ID
  @return ApiCreateChannelFileRequest
 */
-func (a *ChannelsAPIService) CreateChannelFile(ctx context.Context, orgId string, id string) ApiCreateChannelFileRequest {
+func (a *ChannelsAPIService) CreateChannelFile(ctx context.Context, orgId string) ApiCreateChannelFileRequest {
 	return ApiCreateChannelFileRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		id: id,
 	}
 }
 
@@ -249,9 +253,8 @@ func (a *ChannelsAPIService) CreateChannelFileExecute(r ApiCreateChannelFileRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/channels/{id}/files"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/channels/files"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -291,6 +294,9 @@ func (a *ChannelsAPIService) CreateChannelFileExecute(r ApiCreateChannelFileRequ
 		fileLocalVarFileName = fileLocalVarFile.Name()
 		fileLocalVarFile.Close()
 		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
+	}
+	if r.channelId != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "channel_id", r.channelId, "", "")
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -916,7 +922,7 @@ func (a *ChannelsAPIService) GetChannelFileSettingsExecute(r ApiGetChannelFileSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/channels/file-settings"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/channels/files/settings"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

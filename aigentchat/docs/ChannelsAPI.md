@@ -5,11 +5,11 @@ All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateChannel**](ChannelsAPI.md#CreateChannel) | **Post** /v1/organizations/{org_id}/channels | Create a new channel
-[**CreateChannelFile**](ChannelsAPI.md#CreateChannelFile) | **Post** /v1/organizations/{org_id}/channels/{id}/files | Create a file for a channel
+[**CreateChannelFile**](ChannelsAPI.md#CreateChannelFile) | **Post** /v1/organizations/{org_id}/channels/files | Create a file for a channel
 [**DeleteChannel**](ChannelsAPI.md#DeleteChannel) | **Delete** /v1/organizations/{org_id}/channels/{id} | Delete a channel
 [**GetActiveChannels**](ChannelsAPI.md#GetActiveChannels) | **Get** /v1/organizations/{org_id}/channels/active | Get active channels
 [**GetChannel**](ChannelsAPI.md#GetChannel) | **Get** /v1/organizations/{org_id}/channels/{id} | Get a channel by ID
-[**GetChannelFileSettings**](ChannelsAPI.md#GetChannelFileSettings) | **Get** /v1/organizations/{org_id}/channels/file-settings | Get channel file settings
+[**GetChannelFileSettings**](ChannelsAPI.md#GetChannelFileSettings) | **Get** /v1/organizations/{org_id}/channels/files/settings | Get channel file settings
 [**GetChannelPresence**](ChannelsAPI.md#GetChannelPresence) | **Get** /v1/organizations/{org_id}/channels/{channel_id}/presence | Get channel presence
 [**GetUserSubscribedChannels**](ChannelsAPI.md#GetUserSubscribedChannels) | **Get** /v1/organizations/{org_id}/channels/subscribed/{user_id} | Get user&#39;s subscribed channels
 [**ListChannelsByOrgId**](ChannelsAPI.md#ListChannelsByOrgId) | **Get** /v1/organizations/{org_id}/channels | List channels by organization ID
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## CreateChannelFile
 
-> FileUploadResponse CreateChannelFile(ctx, orgId, id).File(file).Execute()
+> FileUploadResponse CreateChannelFile(ctx, orgId).File(file).ChannelId(channelId).Execute()
 
 Create a file for a channel
 
@@ -112,12 +112,12 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Channel ID
 	file := os.NewFile(1234, "some_file") // *os.File | File to upload
+	channelId := "channelId_example" // string | Channel id (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.CreateChannelFile(context.Background(), orgId, id).File(file).Execute()
+	resp, r, err := apiClient.ChannelsAPI.CreateChannelFile(context.Background(), orgId).File(file).ChannelId(channelId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.CreateChannelFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,7 +134,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Channel ID | 
 
 ### Other Parameters
 
@@ -144,8 +143,8 @@ Other parameters are passed through a pointer to a apiCreateChannelFileRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
  **file** | ***os.File** | File to upload | 
+ **channelId** | **string** | Channel id | 
 
 ### Return type
 

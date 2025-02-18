@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
+**Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UseTools** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -362,6 +364,56 @@ SetSystemMessages sets SystemMessages field to given value.
 `func (o *AgentWriteDto) HasSystemMessages() bool`
 
 HasSystemMessages returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *AgentWriteDto) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *AgentWriteDto) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *AgentWriteDto) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *AgentWriteDto) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *AgentWriteDto) GetType() AgentType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *AgentWriteDto) GetTypeOk() (*AgentType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *AgentWriteDto) SetType(v AgentType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *AgentWriteDto) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUseTools
 

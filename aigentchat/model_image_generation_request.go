@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -31,6 +31,7 @@ type ImageGenerationRequest struct {
 	OrgId *string `json:"org_id,omitempty"`
 	OutputImageFileFormat *string `json:"output_image_file_format,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	TeamIds []string `json:"team_ids,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
 	Username *string `json:"username,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -407,6 +408,38 @@ func (o *ImageGenerationRequest) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
+// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
+func (o *ImageGenerationRequest) GetTeamIds() []string {
+	if o == nil || IsNil(o.TeamIds) {
+		var ret []string
+		return ret
+	}
+	return o.TeamIds
+}
+
+// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageGenerationRequest) GetTeamIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TeamIds) {
+		return nil, false
+	}
+	return o.TeamIds, true
+}
+
+// HasTeamIds returns a boolean if a field has been set.
+func (o *ImageGenerationRequest) HasTeamIds() bool {
+	if o != nil && !IsNil(o.TeamIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
+func (o *ImageGenerationRequest) SetTeamIds(v []string) {
+	o.TeamIds = v
+}
+
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *ImageGenerationRequest) GetUserId() string {
 	if o == nil || IsNil(o.UserId) {
@@ -514,6 +547,9 @@ func (o ImageGenerationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
+	if !IsNil(o.TeamIds) {
+		toSerialize["team_ids"] = o.TeamIds
+	}
 	if !IsNil(o.UserId) {
 		toSerialize["user_id"] = o.UserId
 	}
@@ -553,6 +589,7 @@ func (o *ImageGenerationRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "org_id")
 		delete(additionalProperties, "output_image_file_format")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "team_ids")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties

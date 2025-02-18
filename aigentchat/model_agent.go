@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,10 +21,10 @@ var _ MappedNullable = &Agent{}
 
 // Agent struct for Agent
 type Agent struct {
+	Abilities []Ability `json:"abilities,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
-	Capabilities []AgentCapability `json:"capabilities,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
@@ -39,6 +39,8 @@ type Agent struct {
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
+	TeamIds []string `json:"team_ids,omitempty"`
+	Type *AgentType `json:"type,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
@@ -67,6 +69,38 @@ func NewAgent(id string, modelId string, name string, ownerId string, ownerOrgan
 func NewAgentWithDefaults() *Agent {
 	this := Agent{}
 	return &this
+}
+
+// GetAbilities returns the Abilities field value if set, zero value otherwise.
+func (o *Agent) GetAbilities() []Ability {
+	if o == nil || IsNil(o.Abilities) {
+		var ret []Ability
+		return ret
+	}
+	return o.Abilities
+}
+
+// GetAbilitiesOk returns a tuple with the Abilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAbilitiesOk() ([]Ability, bool) {
+	if o == nil || IsNil(o.Abilities) {
+		return nil, false
+	}
+	return o.Abilities, true
+}
+
+// HasAbilities returns a boolean if a field has been set.
+func (o *Agent) HasAbilities() bool {
+	if o != nil && !IsNil(o.Abilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
+func (o *Agent) SetAbilities(v []Ability) {
+	o.Abilities = v
 }
 
 // GetAssignedTools returns the AssignedTools field value if set, zero value otherwise.
@@ -163,38 +197,6 @@ func (o *Agent) HasAvatarUrl() bool {
 // SetAvatarUrl gets a reference to the given string and assigns it to the AvatarUrl field.
 func (o *Agent) SetAvatarUrl(v string) {
 	o.AvatarUrl = &v
-}
-
-// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
-func (o *Agent) GetCapabilities() []AgentCapability {
-	if o == nil || IsNil(o.Capabilities) {
-		var ret []AgentCapability
-		return ret
-	}
-	return o.Capabilities
-}
-
-// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetCapabilitiesOk() ([]AgentCapability, bool) {
-	if o == nil || IsNil(o.Capabilities) {
-		return nil, false
-	}
-	return o.Capabilities, true
-}
-
-// HasCapabilities returns a boolean if a field has been set.
-func (o *Agent) HasCapabilities() bool {
-	if o != nil && !IsNil(o.Capabilities) {
-		return true
-	}
-
-	return false
-}
-
-// SetCapabilities gets a reference to the given []AgentCapability and assigns it to the Capabilities field.
-func (o *Agent) SetCapabilities(v []AgentCapability) {
-	o.Capabilities = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -605,6 +607,70 @@ func (o *Agent) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
+// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
+func (o *Agent) GetTeamIds() []string {
+	if o == nil || IsNil(o.TeamIds) {
+		var ret []string
+		return ret
+	}
+	return o.TeamIds
+}
+
+// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetTeamIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TeamIds) {
+		return nil, false
+	}
+	return o.TeamIds, true
+}
+
+// HasTeamIds returns a boolean if a field has been set.
+func (o *Agent) HasTeamIds() bool {
+	if o != nil && !IsNil(o.TeamIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
+func (o *Agent) SetTeamIds(v []string) {
+	o.TeamIds = v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Agent) GetType() AgentType {
+	if o == nil || IsNil(o.Type) {
+		var ret AgentType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetTypeOk() (*AgentType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Agent) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given AgentType and assigns it to the Type field.
+func (o *Agent) SetType(v AgentType) {
+	o.Type = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Agent) GetUpdatedAt() int64 {
 	if o == nil || IsNil(o.UpdatedAt) {
@@ -711,6 +777,9 @@ func (o Agent) MarshalJSON() ([]byte, error) {
 
 func (o Agent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Abilities) {
+		toSerialize["abilities"] = o.Abilities
+	}
 	if !IsNil(o.AssignedTools) {
 		toSerialize["assigned_tools"] = o.AssignedTools
 	}
@@ -719,9 +788,6 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AvatarUrl) {
 		toSerialize["avatar_url"] = o.AvatarUrl
-	}
-	if !IsNil(o.Capabilities) {
-		toSerialize["capabilities"] = o.Capabilities
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
@@ -754,6 +820,12 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
+	}
+	if !IsNil(o.TeamIds) {
+		toSerialize["team_ids"] = o.TeamIds
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
@@ -811,10 +883,10 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "abilities")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
-		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
@@ -829,6 +901,8 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "system_messages")
+		delete(additionalProperties, "team_ids")
+		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "updated_by")
 		delete(additionalProperties, "use_tools")

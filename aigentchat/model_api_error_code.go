@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -46,6 +46,7 @@ const (
 	ErrCodeFailedToUpdateMessages ApiErrorCode = "failed_to_update_messages"
 	ErrCodeAIModelNotFound ApiErrorCode = "ai_model_not_found"
 	ErrCodeInvalidAIModelID ApiErrorCode = "invalid_ai_model_id"
+	ErrCodeInvalidAIModelDefinition ApiErrorCode = "invalid_ai_model_definition"
 	ErrCodeFailedToCreateAIModel ApiErrorCode = "failed_to_create_ai_model"
 	ErrCodeFailedToUpdateAIModel ApiErrorCode = "failed_to_update_ai_model"
 	ErrCodeFailedToDeleteAIModel ApiErrorCode = "failed_to_delete_ai_model"
@@ -81,7 +82,6 @@ const (
 	ErrCodeFailedToFetchPresence ApiErrorCode = "failed_to_fetch_presence"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
 	ErrCodeFailedToUploadChannelFile ApiErrorCode = "failed_to_upload_channel_file"
-	ErrCodeFailedToRetrieveDependencies ApiErrorCode = "failed_to_retrieve_dependencies"
 	ErrCodeFailedToStoreChatCompletionUser ApiErrorCode = "failed_to_store_chat_completion_user"
 	ErrCodeFailedToCreateChatContext ApiErrorCode = "failed_to_create_chat_context"
 	ErrCodeFailedToAcquireChatCompletionLock ApiErrorCode = "failed_to_acquire_chat_completion_lock"
@@ -90,7 +90,7 @@ const (
 	ErrCodeFailedToReleaseChatCompletionLock ApiErrorCode = "failed_to_release_chat_completion_lock"
 	ErrCodeCapabilityNotAvailable ApiErrorCode = "capability_not_available"
 	ErrCodeNoMessagesFound ApiErrorCode = "no_messages_found"
-	ErrCodeFailedToValidateRequestParameters ApiErrorCode = "failed_to_validate_request_parameters"
+	ErrCodeInvalidRequestParameters ApiErrorCode = "invalid_request_parameters"
 	ErrCodeChatCompletionTooManyTempFiles ApiErrorCode = "chat_completion_too_many_temporary_files"
 	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
 	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
@@ -132,6 +132,7 @@ const (
 	ErrCodeOrgCostBudgetExists ApiErrorCode = "organization_cost_budget_exists"
 	ErrCodeInvalidToolID ApiErrorCode = "invalid_tool_id"
 	ErrCodeUnknownToolID ApiErrorCode = "unknown_tool_id"
+	ErrCodeFailedToCreateTempApiKey ApiErrorCode = "failed_to_create_temp_api_key"
 	ErrCodeInvalidPromptID ApiErrorCode = "invalid_prompt_id"
 	ErrCodePromptNotFound ApiErrorCode = "prompt_not_found"
 	ErrCodeInvalidPromptData ApiErrorCode = "invalid_prompt_data"
@@ -168,6 +169,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_update_messages",
 	"ai_model_not_found",
 	"invalid_ai_model_id",
+	"invalid_ai_model_definition",
 	"failed_to_create_ai_model",
 	"failed_to_update_ai_model",
 	"failed_to_delete_ai_model",
@@ -203,7 +205,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_presence",
 	"failed_to_fetch_subscribed_channels",
 	"failed_to_upload_channel_file",
-	"failed_to_retrieve_dependencies",
 	"failed_to_store_chat_completion_user",
 	"failed_to_create_chat_context",
 	"failed_to_acquire_chat_completion_lock",
@@ -212,7 +213,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_release_chat_completion_lock",
 	"capability_not_available",
 	"no_messages_found",
-	"failed_to_validate_request_parameters",
+	"invalid_request_parameters",
 	"chat_completion_too_many_temporary_files",
 	"chat_completion_exceeds_total_temporary_file_size",
 	"chat_completion_exceeds_max_input_tokens",
@@ -254,6 +255,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"organization_cost_budget_exists",
 	"invalid_tool_id",
 	"unknown_tool_id",
+	"failed_to_create_temp_api_key",
 	"invalid_prompt_id",
 	"prompt_not_found",
 	"invalid_prompt_data",

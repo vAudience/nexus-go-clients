@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,7 +23,6 @@ var _ MappedNullable = &AIgencyMessageWriteDto{}
 type AIgencyMessageWriteDto struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
-	AigentThreadId string `json:"aigent_thread_id"`
 	Attachments *AIgencyMessageFileList `json:"attachments,omitempty"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
@@ -45,11 +44,10 @@ type _AIgencyMessageWriteDto AIgencyMessageWriteDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, aigentThreadId string, channelId string, channelName string, missionId string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType) *AIgencyMessageWriteDto {
+func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, channelId string, channelName string, missionId string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType) *AIgencyMessageWriteDto {
 	this := AIgencyMessageWriteDto{}
 	this.AiModelId = aiModelId
 	this.AiServiceId = aiServiceId
-	this.AigentThreadId = aigentThreadId
 	this.ChannelId = channelId
 	this.ChannelName = channelName
 	this.MissionId = missionId
@@ -113,30 +111,6 @@ func (o *AIgencyMessageWriteDto) GetAiServiceIdOk() (*string, bool) {
 // SetAiServiceId sets field value
 func (o *AIgencyMessageWriteDto) SetAiServiceId(v string) {
 	o.AiServiceId = v
-}
-
-// GetAigentThreadId returns the AigentThreadId field value
-func (o *AIgencyMessageWriteDto) GetAigentThreadId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AigentThreadId
-}
-
-// GetAigentThreadIdOk returns a tuple with the AigentThreadId field value
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessageWriteDto) GetAigentThreadIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AigentThreadId, true
-}
-
-// SetAigentThreadId sets field value
-func (o *AIgencyMessageWriteDto) SetAigentThreadId(v string) {
-	o.AigentThreadId = v
 }
 
 // GetAttachments returns the Attachments field value if set, zero value otherwise.
@@ -487,7 +461,6 @@ func (o AIgencyMessageWriteDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_model_id"] = o.AiModelId
 	toSerialize["ai_service_id"] = o.AiServiceId
-	toSerialize["aigent_thread_id"] = o.AigentThreadId
 	if !IsNil(o.Attachments) {
 		toSerialize["attachments"] = o.Attachments
 	}
@@ -527,7 +500,6 @@ func (o *AIgencyMessageWriteDto) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"ai_model_id",
 		"ai_service_id",
-		"aigent_thread_id",
 		"channel_id",
 		"channel_name",
 		"mission_id",
@@ -565,7 +537,6 @@ func (o *AIgencyMessageWriteDto) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ai_model_id")
 		delete(additionalProperties, "ai_service_id")
-		delete(additionalProperties, "aigent_thread_id")
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")

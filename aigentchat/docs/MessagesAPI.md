@@ -35,7 +35,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "AigentThreadId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
+	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## DeleteMessage
 
-> AIgencyMessage DeleteMessage(ctx, orgId, id).Execute()
+> []AIgencyMessage DeleteMessage(ctx, orgId, id).Cascade(cascade).Execute()
 
 Delete a message
 
@@ -108,15 +108,16 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | Message ID
+	cascade := true // bool | Delete related message (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.DeleteMessage(context.Background(), orgId, id).Execute()
+	resp, r, err := apiClient.MessagesAPI.DeleteMessage(context.Background(), orgId, id).Cascade(cascade).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.DeleteMessage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteMessage`: AIgencyMessage
+	// response from `DeleteMessage`: []AIgencyMessage
 	fmt.Fprintf(os.Stdout, "Response from `MessagesAPI.DeleteMessage`: %v\n", resp)
 }
 ```
@@ -139,10 +140,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **cascade** | **bool** | Delete related message | 
 
 ### Return type
 
-[**AIgencyMessage**](AIgencyMessage.md)
+[**[]AIgencyMessage**](AIgencyMessage.md)
 
 ### Authorization
 
@@ -407,7 +409,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | Message ID
-	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "AigentThreadId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
+	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**AigentThreadId** | **string** |  | 
 **Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | [optional] 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessageWriteDto
 
-`func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, aigentThreadId string, channelId string, channelName string, missionId string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType, ) *AIgencyMessageWriteDto`
+`func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, channelId string, channelName string, missionId string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType, ) *AIgencyMessageWriteDto`
 
 NewAIgencyMessageWriteDto instantiates a new AIgencyMessageWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -77,26 +76,6 @@ and a boolean to check if the value has been set.
 `func (o *AIgencyMessageWriteDto) SetAiServiceId(v string)`
 
 SetAiServiceId sets AiServiceId field to given value.
-
-
-### GetAigentThreadId
-
-`func (o *AIgencyMessageWriteDto) GetAigentThreadId() string`
-
-GetAigentThreadId returns the AigentThreadId field if non-nil, zero value otherwise.
-
-### GetAigentThreadIdOk
-
-`func (o *AIgencyMessageWriteDto) GetAigentThreadIdOk() (*string, bool)`
-
-GetAigentThreadIdOk returns a tuple with the AigentThreadId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAigentThreadId
-
-`func (o *AIgencyMessageWriteDto) SetAigentThreadId(v string)`
-
-SetAigentThreadId sets AigentThreadId field to given value.
 
 
 ### GetAttachments

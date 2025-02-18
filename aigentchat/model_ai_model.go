@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &AIModel{}
 
 // AIModel struct for AIModel
 type AIModel struct {
+	Abilities []Ability `json:"abilities,omitempty"`
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
-	Constraints []AIModelConstraint `json:"constraints,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
@@ -68,6 +68,38 @@ func NewAIModelWithDefaults() *AIModel {
 	return &this
 }
 
+// GetAbilities returns the Abilities field value if set, zero value otherwise.
+func (o *AIModel) GetAbilities() []Ability {
+	if o == nil || IsNil(o.Abilities) {
+		var ret []Ability
+		return ret
+	}
+	return o.Abilities
+}
+
+// GetAbilitiesOk returns a tuple with the Abilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetAbilitiesOk() ([]Ability, bool) {
+	if o == nil || IsNil(o.Abilities) {
+		return nil, false
+	}
+	return o.Abilities, true
+}
+
+// HasAbilities returns a boolean if a field has been set.
+func (o *AIModel) HasAbilities() bool {
+	if o != nil && !IsNil(o.Abilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
+func (o *AIModel) SetAbilities(v []Ability) {
+	o.Abilities = v
+}
+
 // GetAcceptedFileMimetypes returns the AcceptedFileMimetypes field value if set, zero value otherwise.
 func (o *AIModel) GetAcceptedFileMimetypes() []string {
 	if o == nil || IsNil(o.AcceptedFileMimetypes) {
@@ -98,38 +130,6 @@ func (o *AIModel) HasAcceptedFileMimetypes() bool {
 // SetAcceptedFileMimetypes gets a reference to the given []string and assigns it to the AcceptedFileMimetypes field.
 func (o *AIModel) SetAcceptedFileMimetypes(v []string) {
 	o.AcceptedFileMimetypes = v
-}
-
-// GetConstraints returns the Constraints field value if set, zero value otherwise.
-func (o *AIModel) GetConstraints() []AIModelConstraint {
-	if o == nil || IsNil(o.Constraints) {
-		var ret []AIModelConstraint
-		return ret
-	}
-	return o.Constraints
-}
-
-// GetConstraintsOk returns a tuple with the Constraints field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetConstraintsOk() ([]AIModelConstraint, bool) {
-	if o == nil || IsNil(o.Constraints) {
-		return nil, false
-	}
-	return o.Constraints, true
-}
-
-// HasConstraints returns a boolean if a field has been set.
-func (o *AIModel) HasConstraints() bool {
-	if o != nil && !IsNil(o.Constraints) {
-		return true
-	}
-
-	return false
-}
-
-// SetConstraints gets a reference to the given []AIModelConstraint and assigns it to the Constraints field.
-func (o *AIModel) SetConstraints(v []AIModelConstraint) {
-	o.Constraints = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -638,11 +638,11 @@ func (o AIModel) MarshalJSON() ([]byte, error) {
 
 func (o AIModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Abilities) {
+		toSerialize["abilities"] = o.Abilities
+	}
 	if !IsNil(o.AcceptedFileMimetypes) {
 		toSerialize["accepted_file_mimetypes"] = o.AcceptedFileMimetypes
-	}
-	if !IsNil(o.Constraints) {
-		toSerialize["constraints"] = o.Constraints
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
@@ -731,8 +731,8 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "abilities")
 		delete(additionalProperties, "accepted_file_mimetypes")
-		delete(additionalProperties, "constraints")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")

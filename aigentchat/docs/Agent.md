@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Abilities** | Pointer to [**[]Ability**](Ability.md) |  | [optional] 
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
-**Capabilities** | Pointer to [**[]AgentCapability**](AgentCapability.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
+**Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 **UseTools** | Pointer to **bool** |  | [optional] 
@@ -44,6 +46,31 @@ will change when the set of required properties is changed
 NewAgentWithDefaults instantiates a new Agent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAbilities
+
+`func (o *Agent) GetAbilities() []Ability`
+
+GetAbilities returns the Abilities field if non-nil, zero value otherwise.
+
+### GetAbilitiesOk
+
+`func (o *Agent) GetAbilitiesOk() (*[]Ability, bool)`
+
+GetAbilitiesOk returns a tuple with the Abilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAbilities
+
+`func (o *Agent) SetAbilities(v []Ability)`
+
+SetAbilities sets Abilities field to given value.
+
+### HasAbilities
+
+`func (o *Agent) HasAbilities() bool`
+
+HasAbilities returns a boolean if a field has been set.
 
 ### GetAssignedTools
 
@@ -119,31 +146,6 @@ SetAvatarUrl sets AvatarUrl field to given value.
 `func (o *Agent) HasAvatarUrl() bool`
 
 HasAvatarUrl returns a boolean if a field has been set.
-
-### GetCapabilities
-
-`func (o *Agent) GetCapabilities() []AgentCapability`
-
-GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
-
-### GetCapabilitiesOk
-
-`func (o *Agent) GetCapabilitiesOk() (*[]AgentCapability, bool)`
-
-GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCapabilities
-
-`func (o *Agent) SetCapabilities(v []AgentCapability)`
-
-SetCapabilities sets Capabilities field to given value.
-
-### HasCapabilities
-
-`func (o *Agent) HasCapabilities() bool`
-
-HasCapabilities returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -469,6 +471,56 @@ SetSystemMessages sets SystemMessages field to given value.
 `func (o *Agent) HasSystemMessages() bool`
 
 HasSystemMessages returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *Agent) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *Agent) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *Agent) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *Agent) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *Agent) GetType() AgentType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Agent) GetTypeOk() (*AgentType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Agent) SetType(v AgentType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *Agent) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

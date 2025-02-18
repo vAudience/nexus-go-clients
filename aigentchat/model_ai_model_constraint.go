@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &AIModelConstraint{}
 // AIModelConstraint struct for AIModelConstraint
 type AIModelConstraint struct {
 	Direction *AIModelConstraintDirection `json:"direction,omitempty"`
-	Max *float32 `json:"max,omitempty"`
-	Min *float32 `json:"min,omitempty"`
+	Max *int32 `json:"max,omitempty"`
+	Min *int32 `json:"min,omitempty"`
 	Unit *AIModelMinMaxUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -79,9 +79,9 @@ func (o *AIModelConstraint) SetDirection(v AIModelConstraintDirection) {
 }
 
 // GetMax returns the Max field value if set, zero value otherwise.
-func (o *AIModelConstraint) GetMax() float32 {
+func (o *AIModelConstraint) GetMax() int32 {
 	if o == nil || IsNil(o.Max) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Max
@@ -89,7 +89,7 @@ func (o *AIModelConstraint) GetMax() float32 {
 
 // GetMaxOk returns a tuple with the Max field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIModelConstraint) GetMaxOk() (*float32, bool) {
+func (o *AIModelConstraint) GetMaxOk() (*int32, bool) {
 	if o == nil || IsNil(o.Max) {
 		return nil, false
 	}
@@ -105,15 +105,15 @@ func (o *AIModelConstraint) HasMax() bool {
 	return false
 }
 
-// SetMax gets a reference to the given float32 and assigns it to the Max field.
-func (o *AIModelConstraint) SetMax(v float32) {
+// SetMax gets a reference to the given int32 and assigns it to the Max field.
+func (o *AIModelConstraint) SetMax(v int32) {
 	o.Max = &v
 }
 
 // GetMin returns the Min field value if set, zero value otherwise.
-func (o *AIModelConstraint) GetMin() float32 {
+func (o *AIModelConstraint) GetMin() int32 {
 	if o == nil || IsNil(o.Min) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Min
@@ -121,7 +121,7 @@ func (o *AIModelConstraint) GetMin() float32 {
 
 // GetMinOk returns a tuple with the Min field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIModelConstraint) GetMinOk() (*float32, bool) {
+func (o *AIModelConstraint) GetMinOk() (*int32, bool) {
 	if o == nil || IsNil(o.Min) {
 		return nil, false
 	}
@@ -137,8 +137,8 @@ func (o *AIModelConstraint) HasMin() bool {
 	return false
 }
 
-// SetMin gets a reference to the given float32 and assigns it to the Min field.
-func (o *AIModelConstraint) SetMin(v float32) {
+// SetMin gets a reference to the given int32 and assigns it to the Min field.
+func (o *AIModelConstraint) SetMin(v int32) {
 	o.Min = &v
 }
 

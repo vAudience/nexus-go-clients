@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &AIModelWriteDto{}
 // AIModelWriteDto struct for AIModelWriteDto
 type AIModelWriteDto struct {
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
-	Constraints []AIModelConstraint `json:"constraints,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
 	Features []AIModelFeature `json:"features,omitempty"`
@@ -85,38 +84,6 @@ func (o *AIModelWriteDto) HasAcceptedFileMimetypes() bool {
 // SetAcceptedFileMimetypes gets a reference to the given []string and assigns it to the AcceptedFileMimetypes field.
 func (o *AIModelWriteDto) SetAcceptedFileMimetypes(v []string) {
 	o.AcceptedFileMimetypes = v
-}
-
-// GetConstraints returns the Constraints field value if set, zero value otherwise.
-func (o *AIModelWriteDto) GetConstraints() []AIModelConstraint {
-	if o == nil || IsNil(o.Constraints) {
-		var ret []AIModelConstraint
-		return ret
-	}
-	return o.Constraints
-}
-
-// GetConstraintsOk returns a tuple with the Constraints field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModelWriteDto) GetConstraintsOk() ([]AIModelConstraint, bool) {
-	if o == nil || IsNil(o.Constraints) {
-		return nil, false
-	}
-	return o.Constraints, true
-}
-
-// HasConstraints returns a boolean if a field has been set.
-func (o *AIModelWriteDto) HasConstraints() bool {
-	if o != nil && !IsNil(o.Constraints) {
-		return true
-	}
-
-	return false
-}
-
-// SetConstraints gets a reference to the given []AIModelConstraint and assigns it to the Constraints field.
-func (o *AIModelWriteDto) SetConstraints(v []AIModelConstraint) {
-	o.Constraints = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -484,9 +451,6 @@ func (o AIModelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AcceptedFileMimetypes) {
 		toSerialize["accepted_file_mimetypes"] = o.AcceptedFileMimetypes
 	}
-	if !IsNil(o.Constraints) {
-		toSerialize["constraints"] = o.Constraints
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -543,7 +507,6 @@ func (o *AIModelWriteDto) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "accepted_file_mimetypes")
-		delete(additionalProperties, "constraints")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")
 		delete(additionalProperties, "features")

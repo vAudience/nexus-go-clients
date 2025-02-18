@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -35,6 +35,7 @@ type AudioGenerationRequest struct {
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	Speed *float64 `json:"speed,omitempty"`
 	StreamAudio *bool `json:"stream_audio,omitempty"`
+	TeamIds []string `json:"team_ids,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
 	Username *string `json:"username,omitempty"`
 	VoiceId *string `json:"voice_id,omitempty"`
@@ -542,6 +543,38 @@ func (o *AudioGenerationRequest) SetStreamAudio(v bool) {
 	o.StreamAudio = &v
 }
 
+// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
+func (o *AudioGenerationRequest) GetTeamIds() []string {
+	if o == nil || IsNil(o.TeamIds) {
+		var ret []string
+		return ret
+	}
+	return o.TeamIds
+}
+
+// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudioGenerationRequest) GetTeamIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TeamIds) {
+		return nil, false
+	}
+	return o.TeamIds, true
+}
+
+// HasTeamIds returns a boolean if a field has been set.
+func (o *AudioGenerationRequest) HasTeamIds() bool {
+	if o != nil && !IsNil(o.TeamIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
+func (o *AudioGenerationRequest) SetTeamIds(v []string) {
+	o.TeamIds = v
+}
+
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *AudioGenerationRequest) GetUserId() string {
 	if o == nil || IsNil(o.UserId) {
@@ -757,6 +790,9 @@ func (o AudioGenerationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StreamAudio) {
 		toSerialize["stream_audio"] = o.StreamAudio
 	}
+	if !IsNil(o.TeamIds) {
+		toSerialize["team_ids"] = o.TeamIds
+	}
 	if !IsNil(o.UserId) {
 		toSerialize["user_id"] = o.UserId
 	}
@@ -809,6 +845,7 @@ func (o *AudioGenerationRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "speed")
 		delete(additionalProperties, "stream_audio")
+		delete(additionalProperties, "team_ids")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "username")
 		delete(additionalProperties, "voice_id")

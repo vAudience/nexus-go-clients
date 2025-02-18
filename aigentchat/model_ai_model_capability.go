@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -24,7 +24,6 @@ const (
 	AIModelCapabilityNil AIModelCapability = ""
 	AIModelCapabilityFunctionCalling AIModelCapability = "function-calling"
 	AIModelCapabilityFunctionCallingStreaming AIModelCapability = "function-calling_streaming"
-	AIModelCapabilityAcceptsDocumentFiles AIModelCapability = "accepts-document-files"
 	AIModelCapabilityTextToEmbedding AIModelCapability = "text-to-embedding"
 	AIModelCapabilityTextToText AIModelCapability = "text-to-text"
 	AIModelCapabilityTextToTextStreaming AIModelCapability = "text-to-text_streaming"
@@ -50,7 +49,6 @@ var AllowedAIModelCapabilityEnumValues = []AIModelCapability{
 	"",
 	"function-calling",
 	"function-calling_streaming",
-	"accepts-document-files",
 	"text-to-embedding",
 	"text-to-text",
 	"text-to-text_streaming",

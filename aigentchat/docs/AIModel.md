@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Abilities** | Pointer to [**[]Ability**](Ability.md) |  | [optional] 
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
-**Constraints** | Pointer to [**[]AIModelConstraint**](AIModelConstraint.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
@@ -43,6 +43,31 @@ NewAIModelWithDefaults instantiates a new AIModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetAbilities
+
+`func (o *AIModel) GetAbilities() []Ability`
+
+GetAbilities returns the Abilities field if non-nil, zero value otherwise.
+
+### GetAbilitiesOk
+
+`func (o *AIModel) GetAbilitiesOk() (*[]Ability, bool)`
+
+GetAbilitiesOk returns a tuple with the Abilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAbilities
+
+`func (o *AIModel) SetAbilities(v []Ability)`
+
+SetAbilities sets Abilities field to given value.
+
+### HasAbilities
+
+`func (o *AIModel) HasAbilities() bool`
+
+HasAbilities returns a boolean if a field has been set.
+
 ### GetAcceptedFileMimetypes
 
 `func (o *AIModel) GetAcceptedFileMimetypes() []string`
@@ -67,31 +92,6 @@ SetAcceptedFileMimetypes sets AcceptedFileMimetypes field to given value.
 `func (o *AIModel) HasAcceptedFileMimetypes() bool`
 
 HasAcceptedFileMimetypes returns a boolean if a field has been set.
-
-### GetConstraints
-
-`func (o *AIModel) GetConstraints() []AIModelConstraint`
-
-GetConstraints returns the Constraints field if non-nil, zero value otherwise.
-
-### GetConstraintsOk
-
-`func (o *AIModel) GetConstraintsOk() (*[]AIModelConstraint, bool)`
-
-GetConstraintsOk returns a tuple with the Constraints field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConstraints
-
-`func (o *AIModel) SetConstraints(v []AIModelConstraint)`
-
-SetConstraints sets Constraints field to given value.
-
-### HasConstraints
-
-`func (o *AIModel) HasConstraints() bool`
-
-HasConstraints returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

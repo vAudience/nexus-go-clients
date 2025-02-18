@@ -1,13 +1,13 @@
-# AgentCapability
+# AgentType
 
 ## Enum
 
 
-* `AgentCapabilityChat` (value: `"chat"`)
+* `AgentTypeNil` (value: `""`)
 
-* `AgentCapabilityEmbedding` (value: `"embedding"`)
+* `AgentTypeBasic` (value: `"basic"`)
 
-* `AgentCapabilityImage` (value: `"image"`)
+* `AgentTypeService` (value: `"service"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.0
+API version: 0.15.9
 Contact: contact@vaudience.ai
 */
 
@@ -32,6 +32,7 @@ type AudioTranscriptionRequest struct {
 	OrgId *string `json:"org_id,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SkipAiAgencyMessageGeneration *bool `json:"skip_ai_agency_message_generation,omitempty"`
+	TeamIds []string `json:"team_ids,omitempty"`
 	TranscriptionFormat string `json:"transcription_format"`
 	TriggerChatCompletion *bool `json:"trigger_chat_completion,omitempty"`
 	UserId *string `json:"user_id,omitempty"`
@@ -404,6 +405,38 @@ func (o *AudioTranscriptionRequest) SetSkipAiAgencyMessageGeneration(v bool) {
 	o.SkipAiAgencyMessageGeneration = &v
 }
 
+// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
+func (o *AudioTranscriptionRequest) GetTeamIds() []string {
+	if o == nil || IsNil(o.TeamIds) {
+		var ret []string
+		return ret
+	}
+	return o.TeamIds
+}
+
+// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudioTranscriptionRequest) GetTeamIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TeamIds) {
+		return nil, false
+	}
+	return o.TeamIds, true
+}
+
+// HasTeamIds returns a boolean if a field has been set.
+func (o *AudioTranscriptionRequest) HasTeamIds() bool {
+	if o != nil && !IsNil(o.TeamIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
+func (o *AudioTranscriptionRequest) SetTeamIds(v []string) {
+	o.TeamIds = v
+}
+
 // GetTranscriptionFormat returns the TranscriptionFormat field value
 func (o *AudioTranscriptionRequest) GetTranscriptionFormat() string {
 	if o == nil {
@@ -565,6 +598,9 @@ func (o AudioTranscriptionRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkipAiAgencyMessageGeneration) {
 		toSerialize["skip_ai_agency_message_generation"] = o.SkipAiAgencyMessageGeneration
 	}
+	if !IsNil(o.TeamIds) {
+		toSerialize["team_ids"] = o.TeamIds
+	}
 	toSerialize["transcription_format"] = o.TranscriptionFormat
 	if !IsNil(o.TriggerChatCompletion) {
 		toSerialize["trigger_chat_completion"] = o.TriggerChatCompletion
@@ -630,6 +666,7 @@ func (o *AudioTranscriptionRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "org_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "skip_ai_agency_message_generation")
+		delete(additionalProperties, "team_ids")
 		delete(additionalProperties, "transcription_format")
 		delete(additionalProperties, "trigger_chat_completion")
 		delete(additionalProperties, "user_id")
