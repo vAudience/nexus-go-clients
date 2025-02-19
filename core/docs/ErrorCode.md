@@ -133,6 +133,8 @@
 
 * `ErrCodeStripeEventConstructionFailed` (value: `"stripe_event_construction_failed"`)
 
+* `ErrCodeStripeDisabled` (value: `"stripe_disabled"`)
+
 * `ErrCodeOrganizationApiKeyExists` (value: `"organization_api_key_exists"`)
 
 * `ErrCodeOrganizationMemberExists` (value: `"organization_member_exists"`)

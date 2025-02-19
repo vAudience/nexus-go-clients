@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**DeleteTeam**](OrganizationsAPI.md#DeleteTeam) | **Delete** /v1/organizations/{id}/teams/{teamId} | Delete a team for an Organization
 [**DeleteTeamMember**](OrganizationsAPI.md#DeleteTeamMember) | **Delete** /v1/organizations/{id}/teams/{teamId}/members/{memberId} | Remove a member from a team
 [**GetAllMyOrganizations**](OrganizationsAPI.md#GetAllMyOrganizations) | **Get** /v1/organizations/me | Get all my organizations
+[**GetAllMyTeams**](OrganizationsAPI.md#GetAllMyTeams) | **Get** /v1/organizations/{id}/teams/me | Get all teams for an Organization of the current user
 [**GetCheckoutSession**](OrganizationsAPI.md#GetCheckoutSession) | **Get** /v1/organizations/{id}/checkout-sessions/{productId} | Get a checkout session for an Organization
 [**GetCreditsPayments**](OrganizationsAPI.md#GetCreditsPayments) | **Get** /v1/organizations/{id}/credits-payments | Get all credits payments for an Organization
 [**GetCustomerPortalSession**](OrganizationsAPI.md#GetCustomerPortalSession) | **Get** /v1/organizations/{id}/customer-portal-sessions/{typeId} | Get a stripe customer portal session for an Organization
@@ -1382,6 +1383,76 @@ Other parameters are passed through a pointer to a apiGetAllMyOrganizationsReque
 ### Return type
 
 [**[]OrganizationResponse**](OrganizationResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllMyTeams
+
+> []TeamResponse GetAllMyTeams(ctx, id).Execute()
+
+Get all teams for an Organization of the current user
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetAllMyTeams(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetAllMyTeams``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllMyTeams`: []TeamResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetAllMyTeams`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllMyTeamsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]TeamResponse**](TeamResponse.md)
 
 ### Authorization
 

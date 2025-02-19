@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.1
+  version: 0.2.3
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -2391,6 +2391,55 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: team
+  /v1/organizations/{id}/teams/me:
+    get:
+      description: Get all teams for an Organization of the current user
+      operationId: GetAllMyTeams
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TeamResponse'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Get all teams for an Organization of the current user
+      tags:
+      - Organizations
   /v1/organizations/{id}/teams/{teamId}:
     delete:
       description: Delete a team for an Organization
@@ -3532,6 +3581,7 @@ components:
       - product_type_invalid
       - stripe_signature_header_missing
       - stripe_event_construction_failed
+      - stripe_disabled
       - organization_api_key_exists
       - organization_member_exists
       - organization_invite_email_exists
@@ -3606,6 +3656,7 @@ components:
       - ErrCodeProductTypeInvalid
       - ErrCodeStripeSignatureHeaderMissing
       - ErrCodeStripeEventConstructionFailed
+      - ErrCodeStripeDisabled
       - ErrCodeOrganizationApiKeyExists
       - ErrCodeOrganizationMemberExists
       - ErrCodeOrganizationInviteEmailExists
