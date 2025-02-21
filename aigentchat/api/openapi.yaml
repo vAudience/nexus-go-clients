@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.15.9
+  version: 0.15.10
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3017,6 +3017,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
           description: Not Found
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Request Entity Too Large
         "500":
           content:
             application/json:
