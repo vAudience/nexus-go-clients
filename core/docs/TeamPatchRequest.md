@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**MetaId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewTeamPatchRequestWithDefaults instantiates a new TeamPatchRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetMetaId
+
+`func (o *TeamPatchRequest) GetMetaId() string`
+
+GetMetaId returns the MetaId field if non-nil, zero value otherwise.
+
+### GetMetaIdOk
+
+`func (o *TeamPatchRequest) GetMetaIdOk() (*string, bool)`
+
+GetMetaIdOk returns a tuple with the MetaId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetaId
+
+`func (o *TeamPatchRequest) SetMetaId(v string)`
+
+SetMetaId sets MetaId field to given value.
+
+### HasMetaId
+
+`func (o *TeamPatchRequest) HasMetaId() bool`
+
+HasMetaId returns a boolean if a field has been set.
 
 ### GetName
 

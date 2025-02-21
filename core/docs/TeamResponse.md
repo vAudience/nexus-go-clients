@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **string** |  | 
 **Id** | **string** |  | 
 **Members** | [**[]TeamMemberResponse**](TeamMemberResponse.md) |  | 
+**MetaId** | **string** |  | 
 **Name** | **string** |  | 
 **OrganizationId** | **string** |  | 
 **Owner** | **string** |  | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewTeamResponse
 
-`func NewTeamResponse(createdAt string, id string, members []TeamMemberResponse, name string, organizationId string, owner string, updatedAt string, ) *TeamResponse`
+`func NewTeamResponse(createdAt string, id string, members []TeamMemberResponse, metaId string, name string, organizationId string, owner string, updatedAt string, ) *TeamResponse`
 
 NewTeamResponse instantiates a new TeamResponse object
 This constructor will assign default values to properties that have it defined,
@@ -89,6 +90,26 @@ and a boolean to check if the value has been set.
 `func (o *TeamResponse) SetMembers(v []TeamMemberResponse)`
 
 SetMembers sets Members field to given value.
+
+
+### GetMetaId
+
+`func (o *TeamResponse) GetMetaId() string`
+
+GetMetaId returns the MetaId field if non-nil, zero value otherwise.
+
+### GetMetaIdOk
+
+`func (o *TeamResponse) GetMetaIdOk() (*string, bool)`
+
+GetMetaIdOk returns a tuple with the MetaId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetaId
+
+`func (o *TeamResponse) SetMetaId(v string)`
+
+SetMetaId sets MetaId field to given value.
 
 
 ### GetName

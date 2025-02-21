@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.3
+  version: 0.2.4
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -4472,16 +4472,22 @@ components:
       type: object
     TeamPatchRequest:
       example:
+        metaId: metaId
         name: name
       properties:
+        metaId:
+          type: string
         name:
           minLength: 1
           type: string
       type: object
     TeamPostRequest:
       example:
+        metaId: metaId
         name: name
       properties:
+        metaId:
+          type: string
         name:
           minLength: 1
           type: string
@@ -4493,6 +4499,7 @@ components:
         organizationId: organizationId
         owner: owner
         createdAt: createdAt
+        metaId: metaId
         members:
         - teamOwner: true
           createdAt: createdAt
@@ -4544,6 +4551,8 @@ components:
           items:
             $ref: '#/components/schemas/TeamMemberResponse'
           type: array
+        metaId:
+          type: string
         name:
           type: string
         organizationId:
@@ -4556,6 +4565,7 @@ components:
       - createdAt
       - id
       - members
+      - metaId
       - name
       - organizationId
       - owner
