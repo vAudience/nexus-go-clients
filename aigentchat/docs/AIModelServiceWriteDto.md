@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Name** | **string** |  | 
-**ServiceImpl** | **string** |  | 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) |  | 
 
 ## Methods
 
 ### NewAIModelServiceWriteDto
 
-`func NewAIModelServiceWriteDto(name string, serviceImpl string, ) *AIModelServiceWriteDto`
+`func NewAIModelServiceWriteDto(name string, serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
 
 NewAIModelServiceWriteDto instantiates a new AIModelServiceWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -178,20 +178,20 @@ SetName sets Name field to given value.
 
 ### GetServiceImpl
 
-`func (o *AIModelServiceWriteDto) GetServiceImpl() string`
+`func (o *AIModelServiceWriteDto) GetServiceImpl() AiServiceId`
 
 GetServiceImpl returns the ServiceImpl field if non-nil, zero value otherwise.
 
 ### GetServiceImplOk
 
-`func (o *AIModelServiceWriteDto) GetServiceImplOk() (*string, bool)`
+`func (o *AIModelServiceWriteDto) GetServiceImplOk() (*AiServiceId, bool)`
 
 GetServiceImplOk returns a tuple with the ServiceImpl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServiceImpl
 
-`func (o *AIModelServiceWriteDto) SetServiceImpl(v string)`
+`func (o *AIModelServiceWriteDto) SetServiceImpl(v AiServiceId)`
 
 SetServiceImpl sets ServiceImpl field to given value.
 

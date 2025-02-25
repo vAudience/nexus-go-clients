@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.10
+API version: 0.15.12
 Contact: contact@vaudience.ai
 */
 
@@ -27,7 +27,7 @@ type AIModelServiceWriteDto struct {
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	Name string `json:"name"`
-	ServiceImpl string `json:"service_impl"`
+	ServiceImpl AiServiceId `json:"service_impl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +37,7 @@ type _AIModelServiceWriteDto AIModelServiceWriteDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceWriteDto(name string, serviceImpl string) *AIModelServiceWriteDto {
+func NewAIModelServiceWriteDto(name string, serviceImpl AiServiceId) *AIModelServiceWriteDto {
 	this := AIModelServiceWriteDto{}
 	this.Name = name
 	this.ServiceImpl = serviceImpl
@@ -237,9 +237,9 @@ func (o *AIModelServiceWriteDto) SetName(v string) {
 }
 
 // GetServiceImpl returns the ServiceImpl field value
-func (o *AIModelServiceWriteDto) GetServiceImpl() string {
+func (o *AIModelServiceWriteDto) GetServiceImpl() AiServiceId {
 	if o == nil {
-		var ret string
+		var ret AiServiceId
 		return ret
 	}
 
@@ -248,7 +248,7 @@ func (o *AIModelServiceWriteDto) GetServiceImpl() string {
 
 // GetServiceImplOk returns a tuple with the ServiceImpl field value
 // and a boolean to check if the value has been set.
-func (o *AIModelServiceWriteDto) GetServiceImplOk() (*string, bool) {
+func (o *AIModelServiceWriteDto) GetServiceImplOk() (*AiServiceId, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -256,7 +256,7 @@ func (o *AIModelServiceWriteDto) GetServiceImplOk() (*string, bool) {
 }
 
 // SetServiceImpl sets field value
-func (o *AIModelServiceWriteDto) SetServiceImpl(v string) {
+func (o *AIModelServiceWriteDto) SetServiceImpl(v AiServiceId) {
 	o.ServiceImpl = v
 }
 

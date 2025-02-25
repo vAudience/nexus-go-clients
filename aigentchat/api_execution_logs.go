@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.10
+API version: 0.15.12
 Contact: contact@vaudience.ai
 */
 
@@ -29,24 +29,24 @@ type ApiGetExecutionLogsCostsRequest struct {
 	ApiService *ExecutionLogsAPIService
 	orgId string
 	userId *string
-	startDate *string
-	endDate *string
+	startDate *int32
+	endDate *int32
 }
 
-// User ID
+// User ID or me
 func (r ApiGetExecutionLogsCostsRequest) UserId(userId string) ApiGetExecutionLogsCostsRequest {
 	r.userId = &userId
 	return r
 }
 
 // Start date in Unix milliseconds
-func (r ApiGetExecutionLogsCostsRequest) StartDate(startDate string) ApiGetExecutionLogsCostsRequest {
+func (r ApiGetExecutionLogsCostsRequest) StartDate(startDate int32) ApiGetExecutionLogsCostsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiGetExecutionLogsCostsRequest) EndDate(endDate string) ApiGetExecutionLogsCostsRequest {
+func (r ApiGetExecutionLogsCostsRequest) EndDate(endDate int32) ApiGetExecutionLogsCostsRequest {
 	r.endDate = &endDate
 	return r
 }
@@ -208,26 +208,26 @@ type ApiSearchExecutionLogsRequest struct {
 	ApiService *ExecutionLogsAPIService
 	orgId string
 	userId *string
-	startDate *string
-	endDate *string
+	startDate *int32
+	endDate *int32
 	offset *int32
 	limit *int32
 }
 
-// User ID
+// User ID or me
 func (r ApiSearchExecutionLogsRequest) UserId(userId string) ApiSearchExecutionLogsRequest {
 	r.userId = &userId
 	return r
 }
 
 // Start date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) StartDate(startDate string) ApiSearchExecutionLogsRequest {
+func (r ApiSearchExecutionLogsRequest) StartDate(startDate int32) ApiSearchExecutionLogsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) EndDate(endDate string) ApiSearchExecutionLogsRequest {
+func (r ApiSearchExecutionLogsRequest) EndDate(endDate int32) ApiSearchExecutionLogsRequest {
 	r.endDate = &endDate
 	return r
 }

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.10
+API version: 0.15.12
 Contact: contact@vaudience.ai
 */
 
@@ -31,7 +31,7 @@ type AIModelServiceObject struct {
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	ServiceImpl string `json:"service_impl"`
+	ServiceImpl AiServiceId `json:"service_impl"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -43,7 +43,7 @@ type _AIModelServiceObject AIModelServiceObject
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl string) *AIModelServiceObject {
+func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
 	this := AIModelServiceObject{}
 	this.Id = id
 	this.Name = name
@@ -350,9 +350,9 @@ func (o *AIModelServiceObject) SetOwnerOrganizationId(v string) {
 }
 
 // GetServiceImpl returns the ServiceImpl field value
-func (o *AIModelServiceObject) GetServiceImpl() string {
+func (o *AIModelServiceObject) GetServiceImpl() AiServiceId {
 	if o == nil {
-		var ret string
+		var ret AiServiceId
 		return ret
 	}
 
@@ -361,7 +361,7 @@ func (o *AIModelServiceObject) GetServiceImpl() string {
 
 // GetServiceImplOk returns a tuple with the ServiceImpl field value
 // and a boolean to check if the value has been set.
-func (o *AIModelServiceObject) GetServiceImplOk() (*string, bool) {
+func (o *AIModelServiceObject) GetServiceImplOk() (*AiServiceId, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -369,7 +369,7 @@ func (o *AIModelServiceObject) GetServiceImplOk() (*string, bool) {
 }
 
 // SetServiceImpl sets field value
-func (o *AIModelServiceObject) SetServiceImpl(v string) {
+func (o *AIModelServiceObject) SetServiceImpl(v AiServiceId) {
 	o.ServiceImpl = v
 }
 

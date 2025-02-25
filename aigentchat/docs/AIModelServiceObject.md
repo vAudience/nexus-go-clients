@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
-**ServiceImpl** | **string** |  | 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) |  | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewAIModelServiceObject
 
-`func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl string, ) *AIModelServiceObject`
+`func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
 
 NewAIModelServiceObject instantiates a new AIModelServiceObject object
 This constructor will assign default values to properties that have it defined,
@@ -269,20 +269,20 @@ SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
 ### GetServiceImpl
 
-`func (o *AIModelServiceObject) GetServiceImpl() string`
+`func (o *AIModelServiceObject) GetServiceImpl() AiServiceId`
 
 GetServiceImpl returns the ServiceImpl field if non-nil, zero value otherwise.
 
 ### GetServiceImplOk
 
-`func (o *AIModelServiceObject) GetServiceImplOk() (*string, bool)`
+`func (o *AIModelServiceObject) GetServiceImplOk() (*AiServiceId, bool)`
 
 GetServiceImplOk returns a tuple with the ServiceImpl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServiceImpl
 
-`func (o *AIModelServiceObject) SetServiceImpl(v string)`
+`func (o *AIModelServiceObject) SetServiceImpl(v AiServiceId)`
 
 SetServiceImpl sets ServiceImpl field to given value.
 

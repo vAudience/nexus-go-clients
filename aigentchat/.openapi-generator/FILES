@@ -61,6 +61,7 @@ docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
 docs/AiServiceError.md
+docs/AiServiceId.md
 docs/ApiError.md
 docs/ApiErrorCode.md
 docs/AudioAPI.md
@@ -153,6 +154,7 @@ model_ai_model_service_with_models.go
 model_ai_model_service_write_dto.go
 model_ai_model_write_dto.go
 model_ai_service_error.go
+model_ai_service_id.go
 model_api_error.go
 model_api_error_code.go
 model_audio_generation_request.go

@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.15.10
+  version: 0.15.12
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3708,7 +3708,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: User ID
+      - description: User ID or me
         in: query
         name: user_id
         schema:
@@ -3717,12 +3717,12 @@ paths:
         in: query
         name: start_date
         schema:
-          type: string
+          type: integer
       - description: End date in Unix milliseconds
         in: query
         name: end_date
         schema:
-          type: string
+          type: integer
       responses:
         "200":
           content:
@@ -3765,7 +3765,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: User ID
+      - description: User ID or me
         in: query
         name: user_id
         schema:
@@ -3774,12 +3774,12 @@ paths:
         in: query
         name: start_date
         schema:
-          type: string
+          type: integer
       - description: End date in Unix milliseconds
         in: query
         name: end_date
         schema:
-          type: string
+          type: integer
       - description: Offset
         in: query
         name: offset
@@ -5098,7 +5098,7 @@ components:
         name: name
         updated_by: updated_by
         id: id
-        service_impl: service_impl
+        service_impl: "{}"
       properties:
         cost_multiplier:
           type: number
@@ -5133,9 +5133,9 @@ components:
           minLength: 1
           type: string
         service_impl:
-          maxLength: 64
-          minLength: 1
-          type: string
+          allOf:
+          - $ref: '#/components/schemas/AiServiceId'
+          type: object
         updated_at:
           format: int64
           type: integer
@@ -5363,7 +5363,7 @@ components:
           name: name
           updated_by: updated_by
           id: id
-          service_impl: service_impl
+          service_impl: "{}"
       properties:
         models:
           items:
@@ -5381,7 +5381,7 @@ components:
         is_public: true
         name: name
         description: description
-        service_impl: service_impl
+        service_impl: "{}"
       properties:
         cost_multiplier:
           format: double
@@ -5402,9 +5402,9 @@ components:
           minLength: 1
           type: string
         service_impl:
-          maxLength: 64
-          minLength: 1
-          type: string
+          allOf:
+          - $ref: '#/components/schemas/AiServiceId'
+          type: object
       required:
       - name
       - service_impl
@@ -6555,6 +6555,28 @@ components:
       - original_status_code
       - status_code
       type: object
+    AiServiceId:
+      enum:
+      - anthropic
+      - anthropicgooglecloud
+      - assemblyai
+      - azureai
+      - elevenlabs
+      - googlevertexai
+      - openai
+      - replicate
+      - vaiembed
+      type: string
+      x-enum-varnames:
+      - AiServiceIdAnthropic
+      - AiServiceIdAnthropicGcp
+      - AiServiceIdAssemblyAI
+      - AiServiceIdAzureAi
+      - AiServiceIdElevenLabs
+      - AiServiceIdGoogleVertexAi
+      - AiServiceIdOpenAI
+      - AiServiceIdReplicate
+      - AiServiceIdVaiEmbed
     ApiError:
       example:
         code: ""
