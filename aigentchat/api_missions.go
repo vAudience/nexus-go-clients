@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.12
+API version: 0.15.17
 Contact: contact@vaudience.ai
 */
 
@@ -213,7 +213,7 @@ Create a new mission
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
- @param missionExecutorId Agent Team ID OR Agent ID to run the mission with
+ @param missionExecutorId Agent ID to run the mission with
  @return ApiCreateMissionRequest
 */
 func (a *MissionsAPIService) CreateMission(ctx context.Context, orgId string, missionExecutorId string) ApiCreateMissionRequest {
@@ -735,18 +735,18 @@ func (r ApiListMissionsByExecutorIDRequest) Limit(limit int32) ApiListMissionsBy
 	return r
 }
 
-func (r ApiListMissionsByExecutorIDRequest) Execute() ([]Mission, *http.Response, error) {
+func (r ApiListMissionsByExecutorIDRequest) Execute() (*MissionResults, *http.Response, error) {
 	return r.ApiService.ListMissionsByExecutorIDExecute(r)
 }
 
 /*
-ListMissionsByExecutorID List all missions by a executorID (Agent Team or Agent)
+ListMissionsByExecutorID List all missions by a executorID (Executing Agent)
 
-List all missions by a a executorID (Agent Team or Agent)
+List all missions by a a executorID (Executing Agent)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
- @param missionExecutorId Agent or Agent-Team ID
+ @param missionExecutorId Executor Agent ID
  @return ApiListMissionsByExecutorIDRequest
 */
 func (a *MissionsAPIService) ListMissionsByExecutorID(ctx context.Context, orgId string, missionExecutorId string) ApiListMissionsByExecutorIDRequest {
@@ -759,13 +759,13 @@ func (a *MissionsAPIService) ListMissionsByExecutorID(ctx context.Context, orgId
 }
 
 // Execute executes the request
-//  @return []Mission
-func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsByExecutorIDRequest) ([]Mission, *http.Response, error) {
+//  @return MissionResults
+func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsByExecutorIDRequest) (*MissionResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Mission
+		localVarReturnValue  *MissionResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.ListMissionsByExecutorID")
@@ -918,7 +918,7 @@ func (r ApiListMissionsByOrgRequest) Limit(limit int32) ApiListMissionsByOrgRequ
 	return r
 }
 
-func (r ApiListMissionsByOrgRequest) Execute() ([]Mission, *http.Response, error) {
+func (r ApiListMissionsByOrgRequest) Execute() (*MissionResults, *http.Response, error) {
 	return r.ApiService.ListMissionsByOrgExecute(r)
 }
 
@@ -940,13 +940,13 @@ func (a *MissionsAPIService) ListMissionsByOrg(ctx context.Context, orgId string
 }
 
 // Execute executes the request
-//  @return []Mission
-func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequest) ([]Mission, *http.Response, error) {
+//  @return MissionResults
+func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequest) (*MissionResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Mission
+		localVarReturnValue  *MissionResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.ListMissionsByOrg")

@@ -4,7 +4,6 @@
 README.md
 api/openapi.yaml
 api_agent_prompts.go
-api_agent_teams.go
 api_agents.go
 api_ai_model_services.go
 api_ai_models.go
@@ -44,6 +43,7 @@ docs/AIgencyMessageContentList.md
 docs/AIgencyMessageContentType.md
 docs/AIgencyMessageFile.md
 docs/AIgencyMessageFileList.md
+docs/AIgencyMessageResults.md
 docs/AIgencyMessageType.md
 docs/AIgencyMessageWriteDto.md
 docs/Ability.md
@@ -54,9 +54,6 @@ docs/AgentPromptRenderDto.md
 docs/AgentPromptRenderedDto.md
 docs/AgentPromptVisibilityStates.md
 docs/AgentPromptsAPI.md
-docs/AgentTeam.md
-docs/AgentTeamWriteDto.md
-docs/AgentTeamsAPI.md
 docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
@@ -101,6 +98,7 @@ docs/MetricsAPI.md
 docs/Mission.md
 docs/MissionCompletionReason.md
 docs/MissionInstructions.md
+docs/MissionResults.md
 docs/MissionStatus.md
 docs/MissionStatusUpdate.md
 docs/MissionStatusUpdateList.md
@@ -110,7 +108,6 @@ docs/OrgCostBudget.md
 docs/OrgCostBudgetCheck.md
 docs/OrgCostBudgetWriteDto.md
 docs/OrgCostBudgetsAPI.md
-docs/PromptInjectionMode.md
 docs/PromptVersion.md
 docs/ResultFile.md
 docs/TextEmbedding.md
@@ -129,6 +126,7 @@ model_a_igency_message_content_list.go
 model_a_igency_message_content_type.go
 model_a_igency_message_file.go
 model_a_igency_message_file_list.go
+model_a_igency_message_results.go
 model_a_igency_message_type.go
 model_a_igency_message_write_dto.go
 model_ability.go
@@ -138,8 +136,6 @@ model_agent_prompt.go
 model_agent_prompt_render_dto.go
 model_agent_prompt_rendered_dto.go
 model_agent_prompt_visibility_states.go
-model_agent_team.go
-model_agent_team_write_dto.go
 model_agent_type.go
 model_agent_write_dto.go
 model_ai_model.go
@@ -183,6 +179,7 @@ model_image_generation_request.go
 model_mission.go
 model_mission_completion_reason.go
 model_mission_instructions.go
+model_mission_results.go
 model_mission_status.go
 model_mission_status_update.go
 model_mission_status_update_list.go
@@ -190,7 +187,6 @@ model_mission_write_dto.go
 model_org_cost_budget.go
 model_org_cost_budget_check.go
 model_org_cost_budget_write_dto.go
-model_prompt_injection_mode.go
 model_prompt_version.go
 model_result_file.go
 model_text_embedding.go
@@ -200,7 +196,6 @@ model_token_direction.go
 model_version_response.go
 response.go
 test/api_agent_prompts_test.go
-test/api_agent_teams_test.go
 test/api_agents_test.go
 test/api_ai_model_services_test.go
 test/api_ai_models_test.go

@@ -13,7 +13,13 @@
 
 * `ErrCodeInvalidPayload` (value: `"invalid_payload"`)
 
+* `ErrCodeInvalidEntity` (value: `"invalid_entity"`)
+
 * `ErrCodeInvalidParams` (value: `"invalid_params"`)
+
+* `ErrCodeInvalidDate` (value: `"invalid_date"`)
+
+* `ErrCodeStartDateMustBeBeforeEndDate` (value: `"start_date_must_be_before_end_date"`)
 
 * `ErrCodeAgentNotFound` (value: `"agent_not_found"`)
 
@@ -28,26 +34,6 @@
 * `ErrCodeFailedToGetAgent` (value: `"failed_to_get_agent"`)
 
 * `ErrCodeFailedToUpdateAgent` (value: `"failed_to_update_agent"`)
-
-* `ErrCodeInvalidExecutorID` (value: `"invalid_executor_id"`)
-
-* `ErrCodeInvalidAgentTeamID` (value: `"invalid_agent_team_id"`)
-
-* `ErrCodeAgentTeamNotFound` (value: `"agent_team_not_found"`)
-
-* `ErrCodeFailedToCreateAgentTeam` (value: `"failed_to_create_agent_team"`)
-
-* `ErrCodeFailedToUpdateAgentTeam` (value: `"failed_to_update_agent_team"`)
-
-* `ErrCodeFailedToDeleteAgentTeam` (value: `"failed_to_delete_agent_team"`)
-
-* `ErrCodeFailedToFetchAgentTeam` (value: `"failed_to_fetch_agent_team"`)
-
-* `ErrCodeFailedToAddAgent` (value: `"failed_to_add_agent"`)
-
-* `ErrCodeFailedToRemoveAgent` (value: `"failed_to_remove_agent"`)
-
-* `ErrCodeFailedToUpdateMessages` (value: `"failed_to_update_messages"`)
 
 * `ErrCodeAIModelNotFound` (value: `"ai_model_not_found"`)
 
@@ -115,12 +101,6 @@
 
 * `ErrCodeFailedToFetchChannels` (value: `"failed_to_fetch_channels"`)
 
-* `ErrCodeFailedToAddPresence` (value: `"failed_to_add_presence"`)
-
-* `ErrCodeFailedToRemovePresence` (value: `"failed_to_remove_presence"`)
-
-* `ErrCodeFailedToFetchPresence` (value: `"failed_to_fetch_presence"`)
-
 * `ErrCodeFailedToFetchSubscribed` (value: `"failed_to_fetch_subscribed_channels"`)
 
 * `ErrCodeFailedToUploadChannelFile` (value: `"failed_to_upload_channel_file"`)
@@ -154,8 +134,6 @@
 * `ErrCodeFailedToEmbedText` (value: `"failed_to_embed_text"`)
 
 * `ErrCodeFailedToSearchExecutionLogs` (value: `"failed_to_search_execution_logs"`)
-
-* `ErrCodeExecutionLogStartMustBeBeforeEnd` (value: `"start_date_must_be_before_end_date"`)
 
 * `ErrCodeInvalidFileID` (value: `"invalid_file_id"`)
 
@@ -206,6 +184,8 @@
 * `ErrCodeInvalidMissionExecutorID` (value: `"invalid mission executor ID"`)
 
 * `ErrCodeMissionNotDone` (value: `"mission_not_done"`)
+
+* `ErrCodeInvalidExecutorID` (value: `"invalid_executor_id"`)
 
 * `ErrCodeInvalidOrgID` (value: `"invalid_organization_id"`)
 

@@ -32,8 +32,8 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	userId := "userId_example" // string | User ID or me (optional)
-	startDate := int32(56) // int32 | Start date in Unix milliseconds (optional)
-	endDate := int32(56) // int32 | End date in Unix milliseconds (optional)
+	startDate := "startDate_example" // string | Start date in Unix milliseconds (optional)
+	endDate := "endDate_example" // string | End date in Unix milliseconds (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -64,8 +64,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **userId** | **string** | User ID or me | 
- **startDate** | **int32** | Start date in Unix milliseconds | 
- **endDate** | **int32** | End date in Unix milliseconds | 
+ **startDate** | **string** | Start date in Unix milliseconds | 
+ **endDate** | **string** | End date in Unix milliseconds | 
 
 ### Return type
 
@@ -108,8 +108,8 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	userId := "userId_example" // string | User ID or me (optional)
-	startDate := int32(56) // int32 | Start date in Unix milliseconds (optional)
-	endDate := int32(56) // int32 | End date in Unix milliseconds (optional)
+	startDate := "startDate_example" // string | Start date in Unix milliseconds (optional)
+	endDate := "endDate_example" // string | End date in Unix milliseconds (optional)
 	offset := int32(56) // int32 | Offset (optional)
 	limit := int32(56) // int32 | Limit (optional)
 
@@ -142,8 +142,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **userId** | **string** | User ID or me | 
- **startDate** | **int32** | Start date in Unix milliseconds | 
- **endDate** | **int32** | End date in Unix milliseconds | 
+ **startDate** | **string** | Start date in Unix milliseconds | 
+ **endDate** | **string** | End date in Unix milliseconds | 
  **offset** | **int32** | Offset | 
  **limit** | **int32** | Limit | 
 

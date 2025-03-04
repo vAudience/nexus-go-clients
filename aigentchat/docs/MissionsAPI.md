@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**CreateMission**](MissionsAPI.md#CreateMission) | **Post** /v1/organizations/{org_id}/missions/{mission_executor_id} | Create a new mission
 [**DeleteMission**](MissionsAPI.md#DeleteMission) | **Delete** /v1/organizations/{org_id}/missions/{mission_id} | Delete a mission
 [**GetMission**](MissionsAPI.md#GetMission) | **Get** /v1/organizations/{org_id}/missions/{mission_id} | Get a mission
-[**ListMissionsByExecutorID**](MissionsAPI.md#ListMissionsByExecutorID) | **Get** /v1/organizations/{org_id}/missions/executor/{mission_executor_id} | List all missions by a executorID (Agent Team or Agent)
+[**ListMissionsByExecutorID**](MissionsAPI.md#ListMissionsByExecutorID) | **Get** /v1/organizations/{org_id}/missions/executor/{mission_executor_id} | List all missions by a executorID (Executing Agent)
 [**ListMissionsByOrg**](MissionsAPI.md#ListMissionsByOrg) | **Get** /v1/organizations/{org_id}/missions | List all missions of an organization and owned by the current user
 
 
@@ -106,7 +106,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | Organization ID
-	missionExecutorId := "missionExecutorId_example" // string | Agent Team ID OR Agent ID to run the mission with
+	missionExecutorId := "missionExecutorId_example" // string | Agent ID to run the mission with
 	mission := *openapiclient.NewMissionWriteDto(*openapiclient.NewMissionInstructions("Text_example")) // MissionWriteDto | Mission object that needs to be created
 
 	configuration := openapiclient.NewConfiguration()
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | Organization ID | 
-**missionExecutorId** | **string** | Agent Team ID OR Agent ID to run the mission with | 
+**missionExecutorId** | **string** | Agent ID to run the mission with | 
 
 ### Other Parameters
 
@@ -305,9 +305,9 @@ Name | Type | Description  | Notes
 
 ## ListMissionsByExecutorID
 
-> []Mission ListMissionsByExecutorID(ctx, orgId, missionExecutorId).Offset(offset).Limit(limit).Execute()
+> MissionResults ListMissionsByExecutorID(ctx, orgId, missionExecutorId).Offset(offset).Limit(limit).Execute()
 
-List all missions by a executorID (Agent Team or Agent)
+List all missions by a executorID (Executing Agent)
 
 
 
@@ -325,7 +325,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | Organization ID
-	missionExecutorId := "missionExecutorId_example" // string | Agent or Agent-Team ID
+	missionExecutorId := "missionExecutorId_example" // string | Executor Agent ID
 	offset := int32(56) // int32 | Offset the number of missions returned (optional)
 	limit := int32(56) // int32 | Limit the number of missions returned (optional)
 
@@ -336,7 +336,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `MissionsAPI.ListMissionsByExecutorID``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListMissionsByExecutorID`: []Mission
+	// response from `ListMissionsByExecutorID`: MissionResults
 	fmt.Fprintf(os.Stdout, "Response from `MissionsAPI.ListMissionsByExecutorID`: %v\n", resp)
 }
 ```
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | Organization ID | 
-**missionExecutorId** | **string** | Agent or Agent-Team ID | 
+**missionExecutorId** | **string** | Executor Agent ID | 
 
 ### Other Parameters
 
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Mission**](Mission.md)
+[**MissionResults**](MissionResults.md)
 
 ### Authorization
 
@@ -382,7 +382,7 @@ Name | Type | Description  | Notes
 
 ## ListMissionsByOrg
 
-> []Mission ListMissionsByOrg(ctx, orgId).Offset(offset).Limit(limit).Execute()
+> MissionResults ListMissionsByOrg(ctx, orgId).Offset(offset).Limit(limit).Execute()
 
 List all missions of an organization and owned by the current user
 
@@ -412,7 +412,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `MissionsAPI.ListMissionsByOrg``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListMissionsByOrg`: []Mission
+	// response from `ListMissionsByOrg`: MissionResults
 	fmt.Fprintf(os.Stdout, "Response from `MissionsAPI.ListMissionsByOrg`: %v\n", resp)
 }
 ```
@@ -438,7 +438,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Mission**](Mission.md)
+[**MissionResults**](MissionResults.md)
 
 ### Authorization
 

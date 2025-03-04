@@ -15,39 +15,39 @@ import (
 	"encoding/json"
 )
 
-// checks if the ExecutionLogResults type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ExecutionLogResults{}
+// checks if the MissionResults type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MissionResults{}
 
-// ExecutionLogResults struct for ExecutionLogResults
-type ExecutionLogResults struct {
-	Results []ExecutionLog `json:"results,omitempty"`
+// MissionResults struct for MissionResults
+type MissionResults struct {
+	Results []Mission `json:"results,omitempty"`
 	TotalResults *int64 `json:"total_results,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ExecutionLogResults ExecutionLogResults
+type _MissionResults MissionResults
 
-// NewExecutionLogResults instantiates a new ExecutionLogResults object
+// NewMissionResults instantiates a new MissionResults object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExecutionLogResults() *ExecutionLogResults {
-	this := ExecutionLogResults{}
+func NewMissionResults() *MissionResults {
+	this := MissionResults{}
 	return &this
 }
 
-// NewExecutionLogResultsWithDefaults instantiates a new ExecutionLogResults object
+// NewMissionResultsWithDefaults instantiates a new MissionResults object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewExecutionLogResultsWithDefaults() *ExecutionLogResults {
-	this := ExecutionLogResults{}
+func NewMissionResultsWithDefaults() *MissionResults {
+	this := MissionResults{}
 	return &this
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
-func (o *ExecutionLogResults) GetResults() []ExecutionLog {
+func (o *MissionResults) GetResults() []Mission {
 	if o == nil || IsNil(o.Results) {
-		var ret []ExecutionLog
+		var ret []Mission
 		return ret
 	}
 	return o.Results
@@ -55,7 +55,7 @@ func (o *ExecutionLogResults) GetResults() []ExecutionLog {
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExecutionLogResults) GetResultsOk() ([]ExecutionLog, bool) {
+func (o *MissionResults) GetResultsOk() ([]Mission, bool) {
 	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *ExecutionLogResults) GetResultsOk() ([]ExecutionLog, bool) {
 }
 
 // HasResults returns a boolean if a field has been set.
-func (o *ExecutionLogResults) HasResults() bool {
+func (o *MissionResults) HasResults() bool {
 	if o != nil && !IsNil(o.Results) {
 		return true
 	}
@@ -71,13 +71,13 @@ func (o *ExecutionLogResults) HasResults() bool {
 	return false
 }
 
-// SetResults gets a reference to the given []ExecutionLog and assigns it to the Results field.
-func (o *ExecutionLogResults) SetResults(v []ExecutionLog) {
+// SetResults gets a reference to the given []Mission and assigns it to the Results field.
+func (o *MissionResults) SetResults(v []Mission) {
 	o.Results = v
 }
 
 // GetTotalResults returns the TotalResults field value if set, zero value otherwise.
-func (o *ExecutionLogResults) GetTotalResults() int64 {
+func (o *MissionResults) GetTotalResults() int64 {
 	if o == nil || IsNil(o.TotalResults) {
 		var ret int64
 		return ret
@@ -87,7 +87,7 @@ func (o *ExecutionLogResults) GetTotalResults() int64 {
 
 // GetTotalResultsOk returns a tuple with the TotalResults field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExecutionLogResults) GetTotalResultsOk() (*int64, bool) {
+func (o *MissionResults) GetTotalResultsOk() (*int64, bool) {
 	if o == nil || IsNil(o.TotalResults) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *ExecutionLogResults) GetTotalResultsOk() (*int64, bool) {
 }
 
 // HasTotalResults returns a boolean if a field has been set.
-func (o *ExecutionLogResults) HasTotalResults() bool {
+func (o *MissionResults) HasTotalResults() bool {
 	if o != nil && !IsNil(o.TotalResults) {
 		return true
 	}
@@ -104,11 +104,11 @@ func (o *ExecutionLogResults) HasTotalResults() bool {
 }
 
 // SetTotalResults gets a reference to the given int64 and assigns it to the TotalResults field.
-func (o *ExecutionLogResults) SetTotalResults(v int64) {
+func (o *MissionResults) SetTotalResults(v int64) {
 	o.TotalResults = &v
 }
 
-func (o ExecutionLogResults) MarshalJSON() ([]byte, error) {
+func (o MissionResults) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -116,7 +116,7 @@ func (o ExecutionLogResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ExecutionLogResults) ToMap() (map[string]interface{}, error) {
+func (o MissionResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
@@ -132,16 +132,16 @@ func (o ExecutionLogResults) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ExecutionLogResults) UnmarshalJSON(data []byte) (err error) {
-	varExecutionLogResults := _ExecutionLogResults{}
+func (o *MissionResults) UnmarshalJSON(data []byte) (err error) {
+	varMissionResults := _MissionResults{}
 
-	err = json.Unmarshal(data, &varExecutionLogResults)
+	err = json.Unmarshal(data, &varMissionResults)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ExecutionLogResults(varExecutionLogResults)
+	*o = MissionResults(varMissionResults)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -154,38 +154,38 @@ func (o *ExecutionLogResults) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableExecutionLogResults struct {
-	value *ExecutionLogResults
+type NullableMissionResults struct {
+	value *MissionResults
 	isSet bool
 }
 
-func (v NullableExecutionLogResults) Get() *ExecutionLogResults {
+func (v NullableMissionResults) Get() *MissionResults {
 	return v.value
 }
 
-func (v *NullableExecutionLogResults) Set(val *ExecutionLogResults) {
+func (v *NullableMissionResults) Set(val *MissionResults) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableExecutionLogResults) IsSet() bool {
+func (v NullableMissionResults) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableExecutionLogResults) Unset() {
+func (v *NullableMissionResults) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableExecutionLogResults(val *ExecutionLogResults) *NullableExecutionLogResults {
-	return &NullableExecutionLogResults{value: val, isSet: true}
+func NewNullableMissionResults(val *MissionResults) *NullableMissionResults {
+	return &NullableMissionResults{value: val, isSet: true}
 }
 
-func (v NullableExecutionLogResults) MarshalJSON() ([]byte, error) {
+func (v NullableMissionResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableExecutionLogResults) UnmarshalJSON(src []byte) error {
+func (v *NullableMissionResults) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

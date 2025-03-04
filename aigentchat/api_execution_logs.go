@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.12
+API version: 0.15.17
 Contact: contact@vaudience.ai
 */
 
@@ -29,8 +29,8 @@ type ApiGetExecutionLogsCostsRequest struct {
 	ApiService *ExecutionLogsAPIService
 	orgId string
 	userId *string
-	startDate *int32
-	endDate *int32
+	startDate *string
+	endDate *string
 }
 
 // User ID or me
@@ -40,13 +40,13 @@ func (r ApiGetExecutionLogsCostsRequest) UserId(userId string) ApiGetExecutionLo
 }
 
 // Start date in Unix milliseconds
-func (r ApiGetExecutionLogsCostsRequest) StartDate(startDate int32) ApiGetExecutionLogsCostsRequest {
+func (r ApiGetExecutionLogsCostsRequest) StartDate(startDate string) ApiGetExecutionLogsCostsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiGetExecutionLogsCostsRequest) EndDate(endDate int32) ApiGetExecutionLogsCostsRequest {
+func (r ApiGetExecutionLogsCostsRequest) EndDate(endDate string) ApiGetExecutionLogsCostsRequest {
 	r.endDate = &endDate
 	return r
 }
@@ -156,6 +156,17 @@ func (a *ExecutionLogsAPIService) GetExecutionLogsCostsExecute(r ApiGetExecution
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -208,8 +219,8 @@ type ApiSearchExecutionLogsRequest struct {
 	ApiService *ExecutionLogsAPIService
 	orgId string
 	userId *string
-	startDate *int32
-	endDate *int32
+	startDate *string
+	endDate *string
 	offset *int32
 	limit *int32
 }
@@ -221,13 +232,13 @@ func (r ApiSearchExecutionLogsRequest) UserId(userId string) ApiSearchExecutionL
 }
 
 // Start date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) StartDate(startDate int32) ApiSearchExecutionLogsRequest {
+func (r ApiSearchExecutionLogsRequest) StartDate(startDate string) ApiSearchExecutionLogsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) EndDate(endDate int32) ApiSearchExecutionLogsRequest {
+func (r ApiSearchExecutionLogsRequest) EndDate(endDate string) ApiSearchExecutionLogsRequest {
 	r.endDate = &endDate
 	return r
 }
@@ -354,6 +365,17 @@ func (a *ExecutionLogsAPIService) SearchExecutionLogsExecute(r ApiSearchExecutio
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiError

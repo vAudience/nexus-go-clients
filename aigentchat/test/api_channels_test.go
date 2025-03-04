@@ -65,13 +65,13 @@ func Test_aigentchat_ChannelsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ChannelsAPIService GetActiveChannels", func(t *testing.T) {
+	t.Run("Test ChannelsAPIService DeleteChannelsByOwnerId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.ChannelsAPI.GetActiveChannels(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.ChannelsAPI.DeleteChannelsByOwnerId(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -101,36 +101,6 @@ func Test_aigentchat_ChannelsAPIService(t *testing.T) {
 		var orgId string
 
 		resp, httpRes, err := apiClient.ChannelsAPI.GetChannelFileSettings(context.Background(), orgId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetChannelPresence", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var channelId string
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetChannelPresence(context.Background(), orgId, channelId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ChannelsAPIService GetUserSubscribedChannels", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var userId string
-
-		resp, httpRes, err := apiClient.ChannelsAPI.GetUserSubscribedChannels(context.Background(), orgId, userId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

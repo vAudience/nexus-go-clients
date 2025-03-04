@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.15.12
+  version: 0.15.17
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -18,8 +18,6 @@ tags:
   name: Agents
 - description: anything related to agent prompts
   name: AgentPrompts
-- description: anything related to agent teams
-  name: AgentTeams
 - description: anything related to the AI models
   name: AIModels
 - description: anything related to the AI model services
@@ -1024,607 +1022,6 @@ paths:
       tags:
       - AgentPrompts
       x-codegen-request-body-name: prompt
-  /v1/organizations/{org_id}/agent-teams:
-    get:
-      description: Retrieve a list of agent teams by ownership and organization
-      operationId: ListAgentTeams
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AgentTeam'
-                type: array
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: List agent teams
-      tags:
-      - AgentTeams
-    post:
-      description: Create a new agent team with the provided details
-      operationId: CreateAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentTeamWriteDto'
-        description: Agent Team
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a new agent team
-      tags:
-      - AgentTeams
-      x-codegen-request-body-name: agentTeam
-  /v1/organizations/{org_id}/agent-teams/{team_id}:
-    delete:
-      description: Delete an agent team by its ID
-      operationId: DeleteAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Delete an agent team
-      tags:
-      - AgentTeams
-    get:
-      description: Retrieve an agent team by its ID
-      operationId: GetAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get an agent team
-      tags:
-      - AgentTeams
-    put:
-      description: Update an agent team by its ID
-      operationId: UpdateAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentTeamWriteDto'
-        description: Agent Team
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update an agent team
-      tags:
-      - AgentTeams
-      x-codegen-request-body-name: agentTeam
-  /v1/organizations/{org_id}/agent-teams/{team_id}/add-agent/{agent_id}:
-    patch:
-      description: Add an agent to an agent team
-      operationId: AddAgentToTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: agent_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Add an agent to a team
-      tags:
-      - AgentTeams
-  /v1/organizations/{org_id}/agent-teams/{team_id}/full:
-    get:
-      description: Retrieve an agent team with full details of associated agents
-      operationId: GetFullAgentTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get a full agent team
-      tags:
-      - AgentTeams
-  /v1/organizations/{org_id}/agent-teams/{team_id}/messages/system:
-    patch:
-      description: Update the system messages of an agent team
-      operationId: UpdateSystemMessages
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: string
-              type: array
-        description: System Messages
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update system messages
-      tags:
-      - AgentTeams
-      x-codegen-request-body-name: messages
-  /v1/organizations/{org_id}/agent-teams/{team_id}/messages/user:
-    patch:
-      description: Update the user messages of an agent team
-      operationId: UpdateUserMessages
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: string
-              type: array
-        description: User Messages
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update user messages
-      tags:
-      - AgentTeams
-      x-codegen-request-body-name: messages
-  /v1/organizations/{org_id}/agent-teams/{team_id}/remove-agent/{agent_id}:
-    patch:
-      description: Remove an agent from an agent team
-      operationId: RemoveAgentFromTeam
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent Team ID
-        in: path
-        name: team_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: agent_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentTeam'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Remove an agent from a team
-      tags:
-      - AgentTeams
   /v1/organizations/{org_id}/agents:
     get:
       description: Retrieve a list of agents by ownership and organization
@@ -2841,6 +2238,48 @@ paths:
       tags:
       - OrgCostBudgets
   /v1/organizations/{org_id}/channels:
+    delete:
+      description: Delete all channels with a given owner ID
+      operationId: DeleteChannelsByOwnerId
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Channel'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete channels by their owner ID
+      tags:
+      - Channels
     get:
       description: Retrieve a list of channels belonging to a specific organization
       operationId: ListChannelsByOrgId
@@ -2937,38 +2376,6 @@ paths:
       tags:
       - Channels
       x-codegen-request-body-name: channel
-  /v1/organizations/{org_id}/channels/active:
-    get:
-      description: Retrieve a list of active channels based on subscribed clients
-        across all instances
-      operationId: GetActiveChannels
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Channel'
-                type: array
-          description: OK
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get active channels
-      tags:
-      - Channels
   /v1/organizations/{org_id}/channels/files:
     post:
       description: Create a file for a channel
@@ -3116,106 +2523,6 @@ paths:
       security:
       - ApiKey: []
       summary: List channels owned by the current user
-      tags:
-      - Channels
-  /v1/organizations/{org_id}/channels/subscribed/{user_id}:
-    get:
-      description: "Retrieve a list of channels a user was subscribed to, sorted by\
-        \ last activity"
-      operationId: GetUserSubscribedChannels
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: User ID
-        in: path
-        name: user_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Channel'
-                type: array
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get user's subscribed channels
-      tags:
-      - Channels
-  /v1/organizations/{org_id}/channels/{channel_id}/presence:
-    get:
-      description: Retrieve a list of connected subscribers for a channel across all
-        instances
-      operationId: GetChannelPresence
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Channel ID
-        in: path
-        name: channel_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  type: string
-                type: array
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get channel presence
       tags:
       - Channels
   /v1/organizations/{org_id}/channels/{id}:
@@ -3717,12 +3024,12 @@ paths:
         in: query
         name: start_date
         schema:
-          type: integer
+          type: string
       - description: End date in Unix milliseconds
         in: query
         name: end_date
         schema:
-          type: integer
+          type: string
       responses:
         "200":
           content:
@@ -3730,6 +3037,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExecutionLogCosts'
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -3774,12 +3087,12 @@ paths:
         in: query
         name: start_date
         schema:
-          type: integer
+          type: string
       - description: End date in Unix milliseconds
         in: query
         name: end_date
         schema:
-          type: integer
+          type: string
       - description: Offset
         in: query
         name: offset
@@ -3797,6 +3110,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExecutionLogResults'
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -4118,6 +3437,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
         "500":
           content:
             application/json:
@@ -4145,11 +3476,6 @@ paths:
         name: content
         schema:
           type: string
-      - description: Search by sender ID
-        in: query
-        name: sender_id
-        schema:
-          type: string
       - description: Start date in Unix milliseconds
         in: query
         name: start_date
@@ -4160,6 +3486,11 @@ paths:
         name: end_date
         schema:
           type: string
+      - description: Offset
+        in: query
+        name: offset
+        schema:
+          type: integer
       - description: Limit results
         in: query
         name: limit
@@ -4170,9 +3501,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/AIgencyMessage'
-                type: array
+                $ref: '#/components/schemas/AIgencyMessageResults'
           description: OK
         "400":
           content:
@@ -4186,6 +3515,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
         "500":
           content:
             application/json:
@@ -4413,9 +3748,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Mission'
-                type: array
+                $ref: '#/components/schemas/MissionResults'
           description: OK
         "400":
           content:
@@ -4448,7 +3781,7 @@ paths:
       - Missions
   /v1/organizations/{org_id}/missions/executor/{mission_executor_id}:
     get:
-      description: List all missions by a a executorID (Agent Team or Agent)
+      description: List all missions by a a executorID (Executing Agent)
       operationId: ListMissionsByExecutorID
       parameters:
       - description: Organization ID
@@ -4457,7 +3790,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent or Agent-Team ID
+      - description: Executor Agent ID
         in: path
         name: mission_executor_id
         required: true
@@ -4478,9 +3811,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Mission'
-                type: array
+                $ref: '#/components/schemas/MissionResults'
           description: OK
         "400":
           content:
@@ -4508,7 +3839,7 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: List all missions by a executorID (Agent Team or Agent)
+      summary: List all missions by a executorID (Executing Agent)
       tags:
       - Missions
   /v1/organizations/{org_id}/missions/{mission_executor_id}:
@@ -4522,7 +3853,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent Team ID OR Agent ID to run the mission with
+      - description: Agent ID to run the mission with
         in: path
         name: mission_executor_id
         required: true
@@ -5875,6 +5206,213 @@ components:
       type: object
     AIgencyMessageList:
       type: object
+    AIgencyMessageResults:
+      example:
+        results:
+        - channel_name: channel_name
+          response_to_id: response_to_id
+          attachments:
+            files:
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
+                key: "{}"
+              id: id
+              file_size: 0
+              url: url
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
+                key: "{}"
+              id: id
+              file_size: 0
+              url: url
+          reference_id: reference_id
+          created_for_feature:
+            capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 2.3021358869347655
+              used_units: 7.061401241503109
+              description: description
+              cost_per_unit_in_euro: 5.637376656633329
+              cost_unit: null
+            - resulting_cost_in_euro: 2.3021358869347655
+              used_units: 7.061401241503109
+              description: description
+              cost_per_unit_in_euro: 5.637376656633329
+              cost_unit: null
+            cost_item_templates:
+            - description: description
+              cost_per_unit_in_euro: 5.962133916683182
+              cost_unit: input-tokens-per-million
+            - description: description
+              cost_per_unit_in_euro: 5.962133916683182
+              cost_unit: input-tokens-per-million
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          mission_id: mission_id
+          created_at: 6
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data:
+                  key: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data:
+                  key: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            full_text: full_text
+          sender_id: sender_id
+          token_direction: "{}"
+          token_count: 5
+          finish_reason: ""
+          owner_organization_id: owner_organization_id
+          updated_at: 2
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          channel_id: channel_id
+          parameters: "{}"
+        - channel_name: channel_name
+          response_to_id: response_to_id
+          attachments:
+            files:
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
+                key: "{}"
+              id: id
+              file_size: 0
+              url: url
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data:
+                key: "{}"
+              id: id
+              file_size: 0
+              url: url
+          reference_id: reference_id
+          created_for_feature:
+            capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 2.3021358869347655
+              used_units: 7.061401241503109
+              description: description
+              cost_per_unit_in_euro: 5.637376656633329
+              cost_unit: null
+            - resulting_cost_in_euro: 2.3021358869347655
+              used_units: 7.061401241503109
+              description: description
+              cost_per_unit_in_euro: 5.637376656633329
+              cost_unit: null
+            cost_item_templates:
+            - description: description
+              cost_per_unit_in_euro: 5.962133916683182
+              cost_unit: input-tokens-per-million
+            - description: description
+              cost_per_unit_in_euro: 5.962133916683182
+              cost_unit: input-tokens-per-million
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          mission_id: mission_id
+          created_at: 6
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data:
+                  key: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data:
+                  key: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            full_text: full_text
+          sender_id: sender_id
+          token_direction: "{}"
+          token_count: 5
+          finish_reason: ""
+          owner_organization_id: owner_organization_id
+          updated_at: 2
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          channel_id: channel_id
+          parameters: "{}"
+        total_results: 0
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/AIgencyMessage'
+          type: array
+        total_results:
+          format: int64
+          type: integer
+      type: object
     AIgencyMessageType:
       enum:
       - message
@@ -6279,167 +5817,6 @@ components:
       - AgentPromptVisibilityOrganization
       - AgentPromptVisibilityPublic
       - AgentPromptVisibilityCurated
-    AgentTeam:
-      example:
-        initial_user_messages_mode: "{}"
-        system_messages_mode: "{}"
-        system_messages:
-        - system_messages
-        - system_messages
-        owner_id: owner_id
-        created_at: 0
-        description: description
-        initial_user_messages:
-        - initial_user_messages
-        - initial_user_messages
-        tags:
-        - tags
-        - tags
-        coordinating_agent_id: coordinating_agent_id
-        owner_organization_id: owner_organization_id
-        updated_at: 6
-        meta_data: "{}"
-        name: name
-        updated_by: updated_by
-        id: id
-        agent_ids:
-        - agent_ids
-        - agent_ids
-      properties:
-        agent_ids:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        coordinating_agent_id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        created_at:
-          format: int64
-          type: integer
-        description:
-          maxLength: 1024
-          type: string
-        id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        initial_user_messages:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        initial_user_messages_mode:
-          allOf:
-          - $ref: '#/components/schemas/PromptInjectionMode'
-          type: object
-        meta_data:
-          properties: {}
-          type: object
-        name:
-          maxLength: 255
-          minLength: 1
-          type: string
-        owner_id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        owner_organization_id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        system_messages:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        system_messages_mode:
-          allOf:
-          - $ref: '#/components/schemas/PromptInjectionMode'
-          type: object
-        tags:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        updated_at:
-          format: int64
-          type: integer
-        updated_by:
-          maxLength: 64
-          minLength: 1
-          type: string
-      required:
-      - id
-      - name
-      - owner_id
-      - owner_organization_id
-      type: object
-    AgentTeamWriteDto:
-      example:
-        initial_user_messages_mode: "{}"
-        coordinating_agent_id: coordinating_agent_id
-        system_messages_mode: "{}"
-        system_messages:
-        - system_messages
-        - system_messages
-        meta_data: "{}"
-        name: name
-        description: description
-        agent_ids:
-        - agent_ids
-        - agent_ids
-        initial_user_messages:
-        - initial_user_messages
-        - initial_user_messages
-        tags:
-        - tags
-        - tags
-      properties:
-        agent_ids:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        coordinating_agent_id:
-          maxLength: 64
-          minLength: 1
-          type: string
-        description:
-          maxLength: 1024
-          type: string
-        initial_user_messages:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        initial_user_messages_mode:
-          allOf:
-          - $ref: '#/components/schemas/PromptInjectionMode'
-          type: object
-        meta_data:
-          properties: {}
-          type: object
-        name:
-          maxLength: 255
-          minLength: 1
-          type: string
-        system_messages:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        system_messages_mode:
-          allOf:
-          - $ref: '#/components/schemas/PromptInjectionMode'
-          type: object
-        tags:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
     AgentType:
       enum:
       - ""
@@ -6594,7 +5971,10 @@ components:
       - unknown
       - unauthorized
       - invalid_payload
+      - invalid_entity
       - invalid_params
+      - invalid_date
+      - start_date_must_be_before_end_date
       - agent_not_found
       - invalid_agent_id
       - failed_to_create_agent
@@ -6602,16 +5982,6 @@ components:
       - failed_to_delete_agent
       - failed_to_get_agent
       - failed_to_update_agent
-      - invalid_executor_id
-      - invalid_agent_team_id
-      - agent_team_not_found
-      - failed_to_create_agent_team
-      - failed_to_update_agent_team
-      - failed_to_delete_agent_team
-      - failed_to_fetch_agent_team
-      - failed_to_add_agent
-      - failed_to_remove_agent
-      - failed_to_update_messages
       - ai_model_not_found
       - invalid_ai_model_id
       - invalid_ai_model_definition
@@ -6645,9 +6015,6 @@ components:
       - failed_to_delete_channel
       - failed_to_fetch_channel
       - failed_to_fetch_channels
-      - failed_to_add_presence
-      - failed_to_remove_presence
-      - failed_to_fetch_presence
       - failed_to_fetch_subscribed_channels
       - failed_to_upload_channel_file
       - failed_to_store_chat_completion_user
@@ -6665,7 +6032,6 @@ components:
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
-      - start_date_must_be_before_end_date
       - invalid_file_id
       - invalid_storage_url
       - file_upload_info_not_found
@@ -6691,6 +6057,7 @@ components:
       - invalid_mission_id
       - invalid mission executor ID
       - mission_not_done
+      - invalid_executor_id
       - invalid_organization_id
       - organization_cost_budget_not_found
       - failed_to_create_organization_cost_budget
@@ -6715,7 +6082,10 @@ components:
       - ErrCodeUnknown
       - ErrCodeUnauthorized
       - ErrCodeInvalidPayload
+      - ErrCodeInvalidEntity
       - ErrCodeInvalidParams
+      - ErrCodeInvalidDate
+      - ErrCodeStartDateMustBeBeforeEndDate
       - ErrCodeAgentNotFound
       - ErrCodeInvalidAgentID
       - ErrCodeFailedToCreateAgent
@@ -6723,16 +6093,6 @@ components:
       - ErrCodeFailedToDeleteAgent
       - ErrCodeFailedToGetAgent
       - ErrCodeFailedToUpdateAgent
-      - ErrCodeInvalidExecutorID
-      - ErrCodeInvalidAgentTeamID
-      - ErrCodeAgentTeamNotFound
-      - ErrCodeFailedToCreateAgentTeam
-      - ErrCodeFailedToUpdateAgentTeam
-      - ErrCodeFailedToDeleteAgentTeam
-      - ErrCodeFailedToFetchAgentTeam
-      - ErrCodeFailedToAddAgent
-      - ErrCodeFailedToRemoveAgent
-      - ErrCodeFailedToUpdateMessages
       - ErrCodeAIModelNotFound
       - ErrCodeInvalidAIModelID
       - ErrCodeInvalidAIModelDefinition
@@ -6766,9 +6126,6 @@ components:
       - ErrCodeFailedToDeleteChannel
       - ErrCodeFailedToFetchChannel
       - ErrCodeFailedToFetchChannels
-      - ErrCodeFailedToAddPresence
-      - ErrCodeFailedToRemovePresence
-      - ErrCodeFailedToFetchPresence
       - ErrCodeFailedToFetchSubscribed
       - ErrCodeFailedToUploadChannelFile
       - ErrCodeFailedToStoreChatCompletionUser
@@ -6786,7 +6143,6 @@ components:
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
-      - ErrCodeExecutionLogStartMustBeBeforeEnd
       - ErrCodeInvalidFileID
       - ErrCodeInvalidStorageUrl
       - ErrCodeFileUploadInfoNotFound
@@ -6812,6 +6168,7 @@ components:
       - ErrCodeInvalidMissionID
       - ErrCodeInvalidMissionExecutorID
       - ErrCodeMissionNotDone
+      - ErrCodeInvalidExecutorID
       - ErrCodeInvalidOrgID
       - ErrCodeOrgCostBudgetNotFound
       - ErrCodeFailedToCreateBudget
@@ -7559,12 +6916,10 @@ components:
     Mission:
       example:
         instructions:
-          user_prompt_injection_mode: null
           var_replacements:
             key: var_replacements
           max_tokens: 1
           temperature: 5.962133916683182
-          system_prompt_injection_mode: append
           text: text
         completion_reason: ""
         mission_executor_id: agent_1234567890123456
@@ -7641,31 +6996,98 @@ components:
       - MissionCompletionReasonError
     MissionInstructions:
       example:
-        user_prompt_injection_mode: null
         var_replacements:
           key: var_replacements
         max_tokens: 1
         temperature: 5.962133916683182
-        system_prompt_injection_mode: append
         text: text
       properties:
         max_tokens:
           type: integer
-        system_prompt_injection_mode:
-          $ref: '#/components/schemas/PromptInjectionMode'
         temperature:
           type: number
         text:
           minLength: 1
           type: string
-        user_prompt_injection_mode:
-          $ref: '#/components/schemas/PromptInjectionMode'
         var_replacements:
           additionalProperties:
             type: string
           type: object
       required:
       - text
+      type: object
+    MissionResults:
+      example:
+        results:
+        - instructions:
+            var_replacements:
+              key: var_replacements
+            max_tokens: 1
+            temperature: 5.962133916683182
+            text: text
+          completion_reason: ""
+          mission_executor_id: agent_1234567890123456
+          owner_id: owner_id
+          created_at: 6
+          description: Mission to find a fun fact about basketball
+          status_updates:
+            status_updates:
+            - mission_id: mission_id
+              description: description
+              id: id
+              status: created
+              timestamp: 5
+            - mission_id: mission_id
+              description: description
+              id: id
+              status: created
+              timestamp: 5
+          created_by: created_by
+          content: "{}"
+          completed_at: 0
+          owner_organization_id: owner_organization_id
+          updated_at: 2
+          creator_name: John Doe
+          id: mis_1234567890123456
+        - instructions:
+            var_replacements:
+              key: var_replacements
+            max_tokens: 1
+            temperature: 5.962133916683182
+            text: text
+          completion_reason: ""
+          mission_executor_id: agent_1234567890123456
+          owner_id: owner_id
+          created_at: 6
+          description: Mission to find a fun fact about basketball
+          status_updates:
+            status_updates:
+            - mission_id: mission_id
+              description: description
+              id: id
+              status: created
+              timestamp: 5
+            - mission_id: mission_id
+              description: description
+              id: id
+              status: created
+              timestamp: 5
+          created_by: created_by
+          content: "{}"
+          completed_at: 0
+          owner_organization_id: owner_organization_id
+          updated_at: 2
+          creator_name: John Doe
+          id: mis_1234567890123456
+        total_results: 7
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/Mission'
+          type: array
+        total_results:
+          format: int64
+          type: integer
       type: object
     MissionStatus:
       enum:
@@ -7726,12 +7148,10 @@ components:
     MissionWriteDto:
       example:
         instructions:
-          user_prompt_injection_mode: null
           var_replacements:
             key: var_replacements
           max_tokens: 1
           temperature: 5.962133916683182
-          system_prompt_injection_mode: append
           text: text
         description: description
       properties:
@@ -7802,16 +7222,6 @@ components:
           minimum: 0
           type: number
       type: object
-    PromptInjectionMode:
-      enum:
-      - append
-      - prepend
-      - replace
-      type: string
-      x-enum-varnames:
-      - PromptInjectionModeAppend
-      - PromptInjectionModePrepend
-      - PromptInjectionModeReplace
     PromptVersion:
       example:
         created_at: 5

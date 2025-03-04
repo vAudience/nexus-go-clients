@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.12
+API version: 0.15.17
 Contact: contact@vaudience.ai
 */
 
@@ -26,7 +26,10 @@ const (
 	ErrCodeUnknown ApiErrorCode = "unknown"
 	ErrCodeUnauthorized ApiErrorCode = "unauthorized"
 	ErrCodeInvalidPayload ApiErrorCode = "invalid_payload"
+	ErrCodeInvalidEntity ApiErrorCode = "invalid_entity"
 	ErrCodeInvalidParams ApiErrorCode = "invalid_params"
+	ErrCodeInvalidDate ApiErrorCode = "invalid_date"
+	ErrCodeStartDateMustBeBeforeEndDate ApiErrorCode = "start_date_must_be_before_end_date"
 	ErrCodeAgentNotFound ApiErrorCode = "agent_not_found"
 	ErrCodeInvalidAgentID ApiErrorCode = "invalid_agent_id"
 	ErrCodeFailedToCreateAgent ApiErrorCode = "failed_to_create_agent"
@@ -34,16 +37,6 @@ const (
 	ErrCodeFailedToDeleteAgent ApiErrorCode = "failed_to_delete_agent"
 	ErrCodeFailedToGetAgent ApiErrorCode = "failed_to_get_agent"
 	ErrCodeFailedToUpdateAgent ApiErrorCode = "failed_to_update_agent"
-	ErrCodeInvalidExecutorID ApiErrorCode = "invalid_executor_id"
-	ErrCodeInvalidAgentTeamID ApiErrorCode = "invalid_agent_team_id"
-	ErrCodeAgentTeamNotFound ApiErrorCode = "agent_team_not_found"
-	ErrCodeFailedToCreateAgentTeam ApiErrorCode = "failed_to_create_agent_team"
-	ErrCodeFailedToUpdateAgentTeam ApiErrorCode = "failed_to_update_agent_team"
-	ErrCodeFailedToDeleteAgentTeam ApiErrorCode = "failed_to_delete_agent_team"
-	ErrCodeFailedToFetchAgentTeam ApiErrorCode = "failed_to_fetch_agent_team"
-	ErrCodeFailedToAddAgent ApiErrorCode = "failed_to_add_agent"
-	ErrCodeFailedToRemoveAgent ApiErrorCode = "failed_to_remove_agent"
-	ErrCodeFailedToUpdateMessages ApiErrorCode = "failed_to_update_messages"
 	ErrCodeAIModelNotFound ApiErrorCode = "ai_model_not_found"
 	ErrCodeInvalidAIModelID ApiErrorCode = "invalid_ai_model_id"
 	ErrCodeInvalidAIModelDefinition ApiErrorCode = "invalid_ai_model_definition"
@@ -77,9 +70,6 @@ const (
 	ErrCodeFailedToDeleteChannel ApiErrorCode = "failed_to_delete_channel"
 	ErrCodeFailedToFetchChannel ApiErrorCode = "failed_to_fetch_channel"
 	ErrCodeFailedToFetchChannels ApiErrorCode = "failed_to_fetch_channels"
-	ErrCodeFailedToAddPresence ApiErrorCode = "failed_to_add_presence"
-	ErrCodeFailedToRemovePresence ApiErrorCode = "failed_to_remove_presence"
-	ErrCodeFailedToFetchPresence ApiErrorCode = "failed_to_fetch_presence"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
 	ErrCodeFailedToUploadChannelFile ApiErrorCode = "failed_to_upload_channel_file"
 	ErrCodeFailedToStoreChatCompletionUser ApiErrorCode = "failed_to_store_chat_completion_user"
@@ -97,7 +87,6 @@ const (
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
-	ErrCodeExecutionLogStartMustBeBeforeEnd ApiErrorCode = "start_date_must_be_before_end_date"
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
 	ErrCodeInvalidStorageUrl ApiErrorCode = "invalid_storage_url"
 	ErrCodeFileUploadInfoNotFound ApiErrorCode = "file_upload_info_not_found"
@@ -123,6 +112,7 @@ const (
 	ErrCodeInvalidMissionID ApiErrorCode = "invalid_mission_id"
 	ErrCodeInvalidMissionExecutorID ApiErrorCode = "invalid mission executor ID"
 	ErrCodeMissionNotDone ApiErrorCode = "mission_not_done"
+	ErrCodeInvalidExecutorID ApiErrorCode = "invalid_executor_id"
 	ErrCodeInvalidOrgID ApiErrorCode = "invalid_organization_id"
 	ErrCodeOrgCostBudgetNotFound ApiErrorCode = "organization_cost_budget_not_found"
 	ErrCodeFailedToCreateBudget ApiErrorCode = "failed_to_create_organization_cost_budget"
@@ -149,7 +139,10 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"unknown",
 	"unauthorized",
 	"invalid_payload",
+	"invalid_entity",
 	"invalid_params",
+	"invalid_date",
+	"start_date_must_be_before_end_date",
 	"agent_not_found",
 	"invalid_agent_id",
 	"failed_to_create_agent",
@@ -157,16 +150,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_delete_agent",
 	"failed_to_get_agent",
 	"failed_to_update_agent",
-	"invalid_executor_id",
-	"invalid_agent_team_id",
-	"agent_team_not_found",
-	"failed_to_create_agent_team",
-	"failed_to_update_agent_team",
-	"failed_to_delete_agent_team",
-	"failed_to_fetch_agent_team",
-	"failed_to_add_agent",
-	"failed_to_remove_agent",
-	"failed_to_update_messages",
 	"ai_model_not_found",
 	"invalid_ai_model_id",
 	"invalid_ai_model_definition",
@@ -200,9 +183,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_delete_channel",
 	"failed_to_fetch_channel",
 	"failed_to_fetch_channels",
-	"failed_to_add_presence",
-	"failed_to_remove_presence",
-	"failed_to_fetch_presence",
 	"failed_to_fetch_subscribed_channels",
 	"failed_to_upload_channel_file",
 	"failed_to_store_chat_completion_user",
@@ -220,7 +200,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",
-	"start_date_must_be_before_end_date",
 	"invalid_file_id",
 	"invalid_storage_url",
 	"file_upload_info_not_found",
@@ -246,6 +225,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_mission_id",
 	"invalid mission executor ID",
 	"mission_not_done",
+	"invalid_executor_id",
 	"invalid_organization_id",
 	"organization_cost_budget_not_found",
 	"failed_to_create_organization_cost_budget",

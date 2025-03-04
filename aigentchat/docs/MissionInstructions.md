@@ -5,10 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MaxTokens** | Pointer to **int32** |  | [optional] 
-**SystemPromptInjectionMode** | Pointer to [**PromptInjectionMode**](PromptInjectionMode.md) |  | [optional] 
 **Temperature** | Pointer to **float32** |  | [optional] 
 **Text** | **string** |  | 
-**UserPromptInjectionMode** | Pointer to [**PromptInjectionMode**](PromptInjectionMode.md) |  | [optional] 
 **VarReplacements** | Pointer to **map[string]string** |  | [optional] 
 
 ## Methods
@@ -55,31 +53,6 @@ SetMaxTokens sets MaxTokens field to given value.
 
 HasMaxTokens returns a boolean if a field has been set.
 
-### GetSystemPromptInjectionMode
-
-`func (o *MissionInstructions) GetSystemPromptInjectionMode() PromptInjectionMode`
-
-GetSystemPromptInjectionMode returns the SystemPromptInjectionMode field if non-nil, zero value otherwise.
-
-### GetSystemPromptInjectionModeOk
-
-`func (o *MissionInstructions) GetSystemPromptInjectionModeOk() (*PromptInjectionMode, bool)`
-
-GetSystemPromptInjectionModeOk returns a tuple with the SystemPromptInjectionMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSystemPromptInjectionMode
-
-`func (o *MissionInstructions) SetSystemPromptInjectionMode(v PromptInjectionMode)`
-
-SetSystemPromptInjectionMode sets SystemPromptInjectionMode field to given value.
-
-### HasSystemPromptInjectionMode
-
-`func (o *MissionInstructions) HasSystemPromptInjectionMode() bool`
-
-HasSystemPromptInjectionMode returns a boolean if a field has been set.
-
 ### GetTemperature
 
 `func (o *MissionInstructions) GetTemperature() float32`
@@ -124,31 +97,6 @@ and a boolean to check if the value has been set.
 
 SetText sets Text field to given value.
 
-
-### GetUserPromptInjectionMode
-
-`func (o *MissionInstructions) GetUserPromptInjectionMode() PromptInjectionMode`
-
-GetUserPromptInjectionMode returns the UserPromptInjectionMode field if non-nil, zero value otherwise.
-
-### GetUserPromptInjectionModeOk
-
-`func (o *MissionInstructions) GetUserPromptInjectionModeOk() (*PromptInjectionMode, bool)`
-
-GetUserPromptInjectionModeOk returns a tuple with the UserPromptInjectionMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserPromptInjectionMode
-
-`func (o *MissionInstructions) SetUserPromptInjectionMode(v PromptInjectionMode)`
-
-SetUserPromptInjectionMode sets UserPromptInjectionMode field to given value.
-
-### HasUserPromptInjectionMode
-
-`func (o *MissionInstructions) HasUserPromptInjectionMode() bool`
-
-HasUserPromptInjectionMode returns a boolean if a field has been set.
 
 ### GetVarReplacements
 

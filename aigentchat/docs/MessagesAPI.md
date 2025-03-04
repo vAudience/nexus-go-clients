@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 
 ## SearchMessages
 
-> []AIgencyMessage SearchMessages(ctx, orgId).Content(content).SenderId(senderId).StartDate(startDate).EndDate(endDate).Limit(limit).Execute()
+> AIgencyMessageResults SearchMessages(ctx, orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 
 Search messages
 
@@ -329,19 +329,19 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	content := "content_example" // string | Search by content (optional)
-	senderId := "senderId_example" // string | Search by sender ID (optional)
 	startDate := "startDate_example" // string | Start date in Unix milliseconds (optional)
 	endDate := "endDate_example" // string | End date in Unix milliseconds (optional)
+	offset := int32(56) // int32 | Offset (optional)
 	limit := int32(56) // int32 | Limit results (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.SearchMessages(context.Background(), orgId).Content(content).SenderId(senderId).StartDate(startDate).EndDate(endDate).Limit(limit).Execute()
+	resp, r, err := apiClient.MessagesAPI.SearchMessages(context.Background(), orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.SearchMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchMessages`: []AIgencyMessage
+	// response from `SearchMessages`: AIgencyMessageResults
 	fmt.Fprintf(os.Stdout, "Response from `MessagesAPI.SearchMessages`: %v\n", resp)
 }
 ```
@@ -363,14 +363,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **content** | **string** | Search by content | 
- **senderId** | **string** | Search by sender ID | 
  **startDate** | **string** | Start date in Unix milliseconds | 
  **endDate** | **string** | End date in Unix milliseconds | 
+ **offset** | **int32** | Offset | 
  **limit** | **int32** | Limit results | 
 
 ### Return type
 
-[**[]AIgencyMessage**](AIgencyMessage.md)
+[**AIgencyMessageResults**](AIgencyMessageResults.md)
 
 ### Authorization
 

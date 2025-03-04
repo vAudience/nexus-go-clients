@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.12
+API version: 0.15.17
 Contact: contact@vaudience.ai
 */
 
@@ -22,10 +22,8 @@ var _ MappedNullable = &MissionInstructions{}
 // MissionInstructions struct for MissionInstructions
 type MissionInstructions struct {
 	MaxTokens *int32 `json:"max_tokens,omitempty"`
-	SystemPromptInjectionMode *PromptInjectionMode `json:"system_prompt_injection_mode,omitempty"`
 	Temperature *float32 `json:"temperature,omitempty"`
 	Text string `json:"text"`
-	UserPromptInjectionMode *PromptInjectionMode `json:"user_prompt_injection_mode,omitempty"`
 	VarReplacements *map[string]string `json:"var_replacements,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -80,38 +78,6 @@ func (o *MissionInstructions) HasMaxTokens() bool {
 // SetMaxTokens gets a reference to the given int32 and assigns it to the MaxTokens field.
 func (o *MissionInstructions) SetMaxTokens(v int32) {
 	o.MaxTokens = &v
-}
-
-// GetSystemPromptInjectionMode returns the SystemPromptInjectionMode field value if set, zero value otherwise.
-func (o *MissionInstructions) GetSystemPromptInjectionMode() PromptInjectionMode {
-	if o == nil || IsNil(o.SystemPromptInjectionMode) {
-		var ret PromptInjectionMode
-		return ret
-	}
-	return *o.SystemPromptInjectionMode
-}
-
-// GetSystemPromptInjectionModeOk returns a tuple with the SystemPromptInjectionMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MissionInstructions) GetSystemPromptInjectionModeOk() (*PromptInjectionMode, bool) {
-	if o == nil || IsNil(o.SystemPromptInjectionMode) {
-		return nil, false
-	}
-	return o.SystemPromptInjectionMode, true
-}
-
-// HasSystemPromptInjectionMode returns a boolean if a field has been set.
-func (o *MissionInstructions) HasSystemPromptInjectionMode() bool {
-	if o != nil && !IsNil(o.SystemPromptInjectionMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetSystemPromptInjectionMode gets a reference to the given PromptInjectionMode and assigns it to the SystemPromptInjectionMode field.
-func (o *MissionInstructions) SetSystemPromptInjectionMode(v PromptInjectionMode) {
-	o.SystemPromptInjectionMode = &v
 }
 
 // GetTemperature returns the Temperature field value if set, zero value otherwise.
@@ -170,38 +136,6 @@ func (o *MissionInstructions) SetText(v string) {
 	o.Text = v
 }
 
-// GetUserPromptInjectionMode returns the UserPromptInjectionMode field value if set, zero value otherwise.
-func (o *MissionInstructions) GetUserPromptInjectionMode() PromptInjectionMode {
-	if o == nil || IsNil(o.UserPromptInjectionMode) {
-		var ret PromptInjectionMode
-		return ret
-	}
-	return *o.UserPromptInjectionMode
-}
-
-// GetUserPromptInjectionModeOk returns a tuple with the UserPromptInjectionMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MissionInstructions) GetUserPromptInjectionModeOk() (*PromptInjectionMode, bool) {
-	if o == nil || IsNil(o.UserPromptInjectionMode) {
-		return nil, false
-	}
-	return o.UserPromptInjectionMode, true
-}
-
-// HasUserPromptInjectionMode returns a boolean if a field has been set.
-func (o *MissionInstructions) HasUserPromptInjectionMode() bool {
-	if o != nil && !IsNil(o.UserPromptInjectionMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserPromptInjectionMode gets a reference to the given PromptInjectionMode and assigns it to the UserPromptInjectionMode field.
-func (o *MissionInstructions) SetUserPromptInjectionMode(v PromptInjectionMode) {
-	o.UserPromptInjectionMode = &v
-}
-
 // GetVarReplacements returns the VarReplacements field value if set, zero value otherwise.
 func (o *MissionInstructions) GetVarReplacements() map[string]string {
 	if o == nil || IsNil(o.VarReplacements) {
@@ -247,16 +181,10 @@ func (o MissionInstructions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxTokens) {
 		toSerialize["max_tokens"] = o.MaxTokens
 	}
-	if !IsNil(o.SystemPromptInjectionMode) {
-		toSerialize["system_prompt_injection_mode"] = o.SystemPromptInjectionMode
-	}
 	if !IsNil(o.Temperature) {
 		toSerialize["temperature"] = o.Temperature
 	}
 	toSerialize["text"] = o.Text
-	if !IsNil(o.UserPromptInjectionMode) {
-		toSerialize["user_prompt_injection_mode"] = o.UserPromptInjectionMode
-	}
 	if !IsNil(o.VarReplacements) {
 		toSerialize["var_replacements"] = o.VarReplacements
 	}
@@ -304,10 +232,8 @@ func (o *MissionInstructions) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "max_tokens")
-		delete(additionalProperties, "system_prompt_injection_mode")
 		delete(additionalProperties, "temperature")
 		delete(additionalProperties, "text")
-		delete(additionalProperties, "user_prompt_injection_mode")
 		delete(additionalProperties, "var_replacements")
 		o.AdditionalProperties = additionalProperties
 	}

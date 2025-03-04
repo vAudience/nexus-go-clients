@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.12
+API version: 0.15.17
 Contact: contact@vaudience.ai
 */
 
@@ -509,6 +509,28 @@ func (a *MessagesAPIService) GetChannelMessagesExecute(r ApiGetChannelMessagesRe
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -714,21 +736,15 @@ type ApiSearchMessagesRequest struct {
 	ApiService *MessagesAPIService
 	orgId string
 	content *string
-	senderId *string
 	startDate *string
 	endDate *string
+	offset *int32
 	limit *int32
 }
 
 // Search by content
 func (r ApiSearchMessagesRequest) Content(content string) ApiSearchMessagesRequest {
 	r.content = &content
-	return r
-}
-
-// Search by sender ID
-func (r ApiSearchMessagesRequest) SenderId(senderId string) ApiSearchMessagesRequest {
-	r.senderId = &senderId
 	return r
 }
 
@@ -744,13 +760,19 @@ func (r ApiSearchMessagesRequest) EndDate(endDate string) ApiSearchMessagesReque
 	return r
 }
 
+// Offset
+func (r ApiSearchMessagesRequest) Offset(offset int32) ApiSearchMessagesRequest {
+	r.offset = &offset
+	return r
+}
+
 // Limit results
 func (r ApiSearchMessagesRequest) Limit(limit int32) ApiSearchMessagesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchMessagesRequest) Execute() ([]AIgencyMessage, *http.Response, error) {
+func (r ApiSearchMessagesRequest) Execute() (*AIgencyMessageResults, *http.Response, error) {
 	return r.ApiService.SearchMessagesExecute(r)
 }
 
@@ -772,13 +794,13 @@ func (a *MessagesAPIService) SearchMessages(ctx context.Context, orgId string) A
 }
 
 // Execute executes the request
-//  @return []AIgencyMessage
-func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) ([]AIgencyMessage, *http.Response, error) {
+//  @return AIgencyMessageResults
+func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (*AIgencyMessageResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []AIgencyMessage
+		localVarReturnValue  *AIgencyMessageResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessagesAPIService.SearchMessages")
@@ -796,14 +818,14 @@ func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (
 	if r.content != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "content", r.content, "", "")
 	}
-	if r.senderId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sender_id", r.senderId, "", "")
-	}
 	if r.startDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date", r.startDate, "", "")
 	}
 	if r.endDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date", r.endDate, "", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
@@ -873,6 +895,17 @@ func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

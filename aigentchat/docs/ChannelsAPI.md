@@ -7,11 +7,9 @@ Method | HTTP request | Description
 [**CreateChannel**](ChannelsAPI.md#CreateChannel) | **Post** /v1/organizations/{org_id}/channels | Create a new channel
 [**CreateChannelFile**](ChannelsAPI.md#CreateChannelFile) | **Post** /v1/organizations/{org_id}/channels/files | Create a file for a channel
 [**DeleteChannel**](ChannelsAPI.md#DeleteChannel) | **Delete** /v1/organizations/{org_id}/channels/{id} | Delete a channel
-[**GetActiveChannels**](ChannelsAPI.md#GetActiveChannels) | **Get** /v1/organizations/{org_id}/channels/active | Get active channels
+[**DeleteChannelsByOwnerId**](ChannelsAPI.md#DeleteChannelsByOwnerId) | **Delete** /v1/organizations/{org_id}/channels | Delete channels by their owner ID
 [**GetChannel**](ChannelsAPI.md#GetChannel) | **Get** /v1/organizations/{org_id}/channels/{id} | Get a channel by ID
 [**GetChannelFileSettings**](ChannelsAPI.md#GetChannelFileSettings) | **Get** /v1/organizations/{org_id}/channels/files/settings | Get channel file settings
-[**GetChannelPresence**](ChannelsAPI.md#GetChannelPresence) | **Get** /v1/organizations/{org_id}/channels/{channel_id}/presence | Get channel presence
-[**GetUserSubscribedChannels**](ChannelsAPI.md#GetUserSubscribedChannels) | **Get** /v1/organizations/{org_id}/channels/subscribed/{user_id} | Get user&#39;s subscribed channels
 [**ListChannelsByOrgId**](ChannelsAPI.md#ListChannelsByOrgId) | **Get** /v1/organizations/{org_id}/channels | List channels by organization ID
 [**ListChannelsByOwnerId**](ChannelsAPI.md#ListChannelsByOwnerId) | **Get** /v1/organizations/{org_id}/channels/me | List channels owned by the current user
 [**UpdateChannel**](ChannelsAPI.md#UpdateChannel) | **Put** /v1/organizations/{org_id}/channels/{id} | Update a channel
@@ -237,11 +235,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetActiveChannels
+## DeleteChannelsByOwnerId
 
-> []Channel GetActiveChannels(ctx, orgId).Execute()
+> []Channel DeleteChannelsByOwnerId(ctx, orgId).Execute()
 
-Get active channels
+Delete channels by their owner ID
 
 
 
@@ -262,13 +260,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetActiveChannels(context.Background(), orgId).Execute()
+	resp, r, err := apiClient.ChannelsAPI.DeleteChannelsByOwnerId(context.Background(), orgId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetActiveChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.DeleteChannelsByOwnerId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetActiveChannels`: []Channel
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetActiveChannels`: %v\n", resp)
+	// response from `DeleteChannelsByOwnerId`: []Channel
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.DeleteChannelsByOwnerId`: %v\n", resp)
 }
 ```
 
@@ -282,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetActiveChannelsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteChannelsByOwnerIdRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -435,152 +433,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FileSettings**](FileSettings.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetChannelPresence
-
-> []string GetChannelPresence(ctx, orgId, channelId).Execute()
-
-Get channel presence
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	orgId := "orgId_example" // string | organization ID
-	channelId := "channelId_example" // string | Channel ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetChannelPresence(context.Background(), orgId, channelId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetChannelPresence``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetChannelPresence`: []string
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetChannelPresence`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgId** | **string** | organization ID | 
-**channelId** | **string** | Channel ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetChannelPresenceRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-**[]string**
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetUserSubscribedChannels
-
-> []Channel GetUserSubscribedChannels(ctx, orgId, userId).Execute()
-
-Get user's subscribed channels
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	orgId := "orgId_example" // string | organization ID
-	userId := "userId_example" // string | User ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.GetUserSubscribedChannels(context.Background(), orgId, userId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.GetUserSubscribedChannels``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetUserSubscribedChannels`: []Channel
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.GetUserSubscribedChannels`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgId** | **string** | organization ID | 
-**userId** | **string** | User ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetUserSubscribedChannelsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**[]Channel**](Channel.md)
 
 ### Authorization
 
