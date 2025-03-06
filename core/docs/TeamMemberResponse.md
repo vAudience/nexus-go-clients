@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **TeamId** | **string** |  | 
 **TeamOwner** | **bool** |  | 
-**TeamRole** | [**TeamRoleReducedResponse**](TeamRoleReducedResponse.md) |  | 
+**TeamRole** | Pointer to [**TeamRoleReducedResponse**](TeamRoleReducedResponse.md) |  | [optional] 
 **UpdatedAt** | **string** |  | 
 **User** | [**UserResponse**](UserResponse.md) |  | 
 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewTeamMemberResponse
 
-`func NewTeamMemberResponse(createdAt string, id string, teamId string, teamOwner bool, teamRole TeamRoleReducedResponse, updatedAt string, user UserResponse, ) *TeamMemberResponse`
+`func NewTeamMemberResponse(createdAt string, id string, teamId string, teamOwner bool, updatedAt string, user UserResponse, ) *TeamMemberResponse`
 
 NewTeamMemberResponse instantiates a new TeamMemberResponse object
 This constructor will assign default values to properties that have it defined,
@@ -130,6 +130,11 @@ and a boolean to check if the value has been set.
 
 SetTeamRole sets TeamRole field to given value.
 
+### HasTeamRole
+
+`func (o *TeamMemberResponse) HasTeamRole() bool`
+
+HasTeamRole returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.4
+  version: 0.2.5
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -4466,7 +4466,6 @@ components:
       - id
       - teamId
       - teamOwner
-      - teamRole
       - updatedAt
       - user
       type: object
