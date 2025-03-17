@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
 **OrganizationRoleId** | Pointer to **string** |  | [optional] 
+**RequiresRotation** | Pointer to **bool** |  | [optional] 
 **RoleIds** | Pointer to **[]string** |  | [optional] 
 **UserEmail** | Pointer to **string** |  | [optional] 
 **UserFullName** | Pointer to **string** |  | [optional] 
@@ -79,6 +80,31 @@ SetOrganizationRoleId sets OrganizationRoleId field to given value.
 `func (o *OrganizationApiKeyPatchRequest) HasOrganizationRoleId() bool`
 
 HasOrganizationRoleId returns a boolean if a field has been set.
+
+### GetRequiresRotation
+
+`func (o *OrganizationApiKeyPatchRequest) GetRequiresRotation() bool`
+
+GetRequiresRotation returns the RequiresRotation field if non-nil, zero value otherwise.
+
+### GetRequiresRotationOk
+
+`func (o *OrganizationApiKeyPatchRequest) GetRequiresRotationOk() (*bool, bool)`
+
+GetRequiresRotationOk returns a tuple with the RequiresRotation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresRotation
+
+`func (o *OrganizationApiKeyPatchRequest) SetRequiresRotation(v bool)`
+
+SetRequiresRotation sets RequiresRotation field to given value.
+
+### HasRequiresRotation
+
+`func (o *OrganizationApiKeyPatchRequest) HasRequiresRotation() bool`
+
+HasRequiresRotation returns a boolean if a field has been set.
 
 ### GetRoleIds
 

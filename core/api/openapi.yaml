@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.5
+  version: 0.2.6
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -3751,6 +3751,7 @@ components:
       type: object
     OrganizationApiKeyPatchRequest:
       example:
+        requiresRotation: true
         roleIds:
         - roleIds
         - roleIds
@@ -3765,6 +3766,8 @@ components:
           type: string
         organizationRoleId:
           type: string
+        requiresRotation:
+          type: boolean
         roleIds:
           items:
             type: string
