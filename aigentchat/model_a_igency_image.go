@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -13,6 +13,7 @@ package aigentchat
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the AIgencyImage type satisfies the MappedNullable interface at compile time
@@ -20,17 +21,18 @@ var _ MappedNullable = &AIgencyImage{}
 
 // AIgencyImage struct for AIgencyImage
 type AIgencyImage struct {
-	AgentId *string `json:"agent_id,omitempty"`
-	ChannelId *string `json:"channel_id,omitempty"`
-	MessageReferenceId *string `json:"message_reference_id,omitempty"`
-	MessageResponseToId *string `json:"message_response_to_id,omitempty"`
-	MimeType *string `json:"mime_type,omitempty"`
-	MissionId *string `json:"mission_id,omitempty"`
-	OrgOwnerId *string `json:"org_owner_id,omitempty"`
+	AiModelId string `json:"ai_model_id"`
+	AiServiceId string `json:"ai_service_id"`
+	CreatedAt int64 `json:"created_at"`
+	ExecutionId string `json:"execution_id"`
+	Id string `json:"id"`
+	Message string `json:"message"`
+	MimeType string `json:"mime_type"`
+	OwnerId string `json:"owner_id"`
+	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
-	Url *string `json:"url,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
-	Username *string `json:"username,omitempty"`
+	Thumbnails []AIgencyThumbnail `json:"thumbnails,omitempty"`
+	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,8 +42,18 @@ type _AIgencyImage AIgencyImage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyImage() *AIgencyImage {
+func NewAIgencyImage(aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string) *AIgencyImage {
 	this := AIgencyImage{}
+	this.AiModelId = aiModelId
+	this.AiServiceId = aiServiceId
+	this.CreatedAt = createdAt
+	this.ExecutionId = executionId
+	this.Id = id
+	this.Message = message
+	this.MimeType = mimeType
+	this.OwnerId = ownerId
+	this.OwnerOrganizationId = ownerOrganizationId
+	this.Url = url
 	return &this
 }
 
@@ -53,228 +65,220 @@ func NewAIgencyImageWithDefaults() *AIgencyImage {
 	return &this
 }
 
-// GetAgentId returns the AgentId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetAgentId() string {
-	if o == nil || IsNil(o.AgentId) {
+// GetAiModelId returns the AiModelId field value
+func (o *AIgencyImage) GetAiModelId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AgentId
+
+	return o.AiModelId
 }
 
-// GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
+// GetAiModelIdOk returns a tuple with the AiModelId field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetAgentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AgentId) {
+func (o *AIgencyImage) GetAiModelIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AgentId, true
+	return &o.AiModelId, true
 }
 
-// HasAgentId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasAgentId() bool {
-	if o != nil && !IsNil(o.AgentId) {
-		return true
-	}
-
-	return false
+// SetAiModelId sets field value
+func (o *AIgencyImage) SetAiModelId(v string) {
+	o.AiModelId = v
 }
 
-// SetAgentId gets a reference to the given string and assigns it to the AgentId field.
-func (o *AIgencyImage) SetAgentId(v string) {
-	o.AgentId = &v
-}
-
-// GetChannelId returns the ChannelId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetChannelId() string {
-	if o == nil || IsNil(o.ChannelId) {
+// GetAiServiceId returns the AiServiceId field value
+func (o *AIgencyImage) GetAiServiceId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ChannelId
+
+	return o.AiServiceId
 }
 
-// GetChannelIdOk returns a tuple with the ChannelId field value if set, nil otherwise
+// GetAiServiceIdOk returns a tuple with the AiServiceId field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetChannelIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ChannelId) {
+func (o *AIgencyImage) GetAiServiceIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChannelId, true
+	return &o.AiServiceId, true
 }
 
-// HasChannelId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasChannelId() bool {
-	if o != nil && !IsNil(o.ChannelId) {
-		return true
+// SetAiServiceId sets field value
+func (o *AIgencyImage) SetAiServiceId(v string) {
+	o.AiServiceId = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *AIgencyImage) GetCreatedAt() int64 {
+	if o == nil {
+		var ret int64
+		return ret
 	}
 
-	return false
+	return o.CreatedAt
 }
 
-// SetChannelId gets a reference to the given string and assigns it to the ChannelId field.
-func (o *AIgencyImage) SetChannelId(v string) {
-	o.ChannelId = &v
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *AIgencyImage) GetCreatedAtOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
 }
 
-// GetMessageReferenceId returns the MessageReferenceId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetMessageReferenceId() string {
-	if o == nil || IsNil(o.MessageReferenceId) {
+// SetCreatedAt sets field value
+func (o *AIgencyImage) SetCreatedAt(v int64) {
+	o.CreatedAt = v
+}
+
+// GetExecutionId returns the ExecutionId field value
+func (o *AIgencyImage) GetExecutionId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MessageReferenceId
+
+	return o.ExecutionId
 }
 
-// GetMessageReferenceIdOk returns a tuple with the MessageReferenceId field value if set, nil otherwise
+// GetExecutionIdOk returns a tuple with the ExecutionId field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetMessageReferenceIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MessageReferenceId) {
+func (o *AIgencyImage) GetExecutionIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MessageReferenceId, true
+	return &o.ExecutionId, true
 }
 
-// HasMessageReferenceId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMessageReferenceId() bool {
-	if o != nil && !IsNil(o.MessageReferenceId) {
-		return true
-	}
-
-	return false
+// SetExecutionId sets field value
+func (o *AIgencyImage) SetExecutionId(v string) {
+	o.ExecutionId = v
 }
 
-// SetMessageReferenceId gets a reference to the given string and assigns it to the MessageReferenceId field.
-func (o *AIgencyImage) SetMessageReferenceId(v string) {
-	o.MessageReferenceId = &v
-}
-
-// GetMessageResponseToId returns the MessageResponseToId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetMessageResponseToId() string {
-	if o == nil || IsNil(o.MessageResponseToId) {
+// GetId returns the Id field value
+func (o *AIgencyImage) GetId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MessageResponseToId
+
+	return o.Id
 }
 
-// GetMessageResponseToIdOk returns a tuple with the MessageResponseToId field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetMessageResponseToIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MessageResponseToId) {
+func (o *AIgencyImage) GetIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MessageResponseToId, true
+	return &o.Id, true
 }
 
-// HasMessageResponseToId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMessageResponseToId() bool {
-	if o != nil && !IsNil(o.MessageResponseToId) {
-		return true
+// SetId sets field value
+func (o *AIgencyImage) SetId(v string) {
+	o.Id = v
+}
+
+// GetMessage returns the Message field value
+func (o *AIgencyImage) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Message
 }
 
-// SetMessageResponseToId gets a reference to the given string and assigns it to the MessageResponseToId field.
-func (o *AIgencyImage) SetMessageResponseToId(v string) {
-	o.MessageResponseToId = &v
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *AIgencyImage) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
 }
 
-// GetMimeType returns the MimeType field value if set, zero value otherwise.
+// SetMessage sets field value
+func (o *AIgencyImage) SetMessage(v string) {
+	o.Message = v
+}
+
+// GetMimeType returns the MimeType field value
 func (o *AIgencyImage) GetMimeType() string {
-	if o == nil || IsNil(o.MimeType) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MimeType
+
+	return o.MimeType
 }
 
-// GetMimeTypeOk returns a tuple with the MimeType field value if set, nil otherwise
+// GetMimeTypeOk returns a tuple with the MimeType field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyImage) GetMimeTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.MimeType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MimeType, true
+	return &o.MimeType, true
 }
 
-// HasMimeType returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMimeType() bool {
-	if o != nil && !IsNil(o.MimeType) {
-		return true
-	}
-
-	return false
-}
-
-// SetMimeType gets a reference to the given string and assigns it to the MimeType field.
+// SetMimeType sets field value
 func (o *AIgencyImage) SetMimeType(v string) {
-	o.MimeType = &v
+	o.MimeType = v
 }
 
-// GetMissionId returns the MissionId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetMissionId() string {
-	if o == nil || IsNil(o.MissionId) {
+// GetOwnerId returns the OwnerId field value
+func (o *AIgencyImage) GetOwnerId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MissionId
+
+	return o.OwnerId
 }
 
-// GetMissionIdOk returns a tuple with the MissionId field value if set, nil otherwise
+// GetOwnerIdOk returns a tuple with the OwnerId field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetMissionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MissionId) {
+func (o *AIgencyImage) GetOwnerIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MissionId, true
+	return &o.OwnerId, true
 }
 
-// HasMissionId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasMissionId() bool {
-	if o != nil && !IsNil(o.MissionId) {
-		return true
-	}
-
-	return false
+// SetOwnerId sets field value
+func (o *AIgencyImage) SetOwnerId(v string) {
+	o.OwnerId = v
 }
 
-// SetMissionId gets a reference to the given string and assigns it to the MissionId field.
-func (o *AIgencyImage) SetMissionId(v string) {
-	o.MissionId = &v
-}
-
-// GetOrgOwnerId returns the OrgOwnerId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetOrgOwnerId() string {
-	if o == nil || IsNil(o.OrgOwnerId) {
+// GetOwnerOrganizationId returns the OwnerOrganizationId field value
+func (o *AIgencyImage) GetOwnerOrganizationId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrgOwnerId
+
+	return o.OwnerOrganizationId
 }
 
-// GetOrgOwnerIdOk returns a tuple with the OrgOwnerId field value if set, nil otherwise
+// GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetOrgOwnerIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrgOwnerId) {
+func (o *AIgencyImage) GetOwnerOrganizationIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrgOwnerId, true
+	return &o.OwnerOrganizationId, true
 }
 
-// HasOrgOwnerId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasOrgOwnerId() bool {
-	if o != nil && !IsNil(o.OrgOwnerId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrgOwnerId gets a reference to the given string and assigns it to the OrgOwnerId field.
-func (o *AIgencyImage) SetOrgOwnerId(v string) {
-	o.OrgOwnerId = &v
+// SetOwnerOrganizationId sets field value
+func (o *AIgencyImage) SetOwnerOrganizationId(v string) {
+	o.OwnerOrganizationId = v
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
@@ -309,100 +313,60 @@ func (o *AIgencyImage) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetThumbnails returns the Thumbnails field value if set, zero value otherwise.
+func (o *AIgencyImage) GetThumbnails() []AIgencyThumbnail {
+	if o == nil || IsNil(o.Thumbnails) {
+		var ret []AIgencyThumbnail
+		return ret
+	}
+	return o.Thumbnails
+}
+
+// GetThumbnailsOk returns a tuple with the Thumbnails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyImage) GetThumbnailsOk() ([]AIgencyThumbnail, bool) {
+	if o == nil || IsNil(o.Thumbnails) {
+		return nil, false
+	}
+	return o.Thumbnails, true
+}
+
+// HasThumbnails returns a boolean if a field has been set.
+func (o *AIgencyImage) HasThumbnails() bool {
+	if o != nil && !IsNil(o.Thumbnails) {
+		return true
+	}
+
+	return false
+}
+
+// SetThumbnails gets a reference to the given []AIgencyThumbnail and assigns it to the Thumbnails field.
+func (o *AIgencyImage) SetThumbnails(v []AIgencyThumbnail) {
+	o.Thumbnails = v
+}
+
+// GetUrl returns the Url field value
 func (o *AIgencyImage) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyImage) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *AIgencyImage) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *AIgencyImage) SetUrl(v string) {
-	o.Url = &v
-}
-
-// GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *AIgencyImage) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
-		var ret string
-		return ret
-	}
-	return *o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
-		return nil, false
-	}
-	return o.UserId, true
-}
-
-// HasUserId returns a boolean if a field has been set.
-func (o *AIgencyImage) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *AIgencyImage) SetUserId(v string) {
-	o.UserId = &v
-}
-
-// GetUsername returns the Username field value if set, zero value otherwise.
-func (o *AIgencyImage) GetUsername() string {
-	if o == nil || IsNil(o.Username) {
-		var ret string
-		return ret
-	}
-	return *o.Username
-}
-
-// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyImage) GetUsernameOk() (*string, bool) {
-	if o == nil || IsNil(o.Username) {
-		return nil, false
-	}
-	return o.Username, true
-}
-
-// HasUsername returns a boolean if a field has been set.
-func (o *AIgencyImage) HasUsername() bool {
-	if o != nil && !IsNil(o.Username) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsername gets a reference to the given string and assigns it to the Username field.
-func (o *AIgencyImage) SetUsername(v string) {
-	o.Username = &v
+	o.Url = v
 }
 
 func (o AIgencyImage) MarshalJSON() ([]byte, error) {
@@ -415,39 +379,22 @@ func (o AIgencyImage) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AgentId) {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	if !IsNil(o.ChannelId) {
-		toSerialize["channel_id"] = o.ChannelId
-	}
-	if !IsNil(o.MessageReferenceId) {
-		toSerialize["message_reference_id"] = o.MessageReferenceId
-	}
-	if !IsNil(o.MessageResponseToId) {
-		toSerialize["message_response_to_id"] = o.MessageResponseToId
-	}
-	if !IsNil(o.MimeType) {
-		toSerialize["mime_type"] = o.MimeType
-	}
-	if !IsNil(o.MissionId) {
-		toSerialize["mission_id"] = o.MissionId
-	}
-	if !IsNil(o.OrgOwnerId) {
-		toSerialize["org_owner_id"] = o.OrgOwnerId
-	}
+	toSerialize["ai_model_id"] = o.AiModelId
+	toSerialize["ai_service_id"] = o.AiServiceId
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["execution_id"] = o.ExecutionId
+	toSerialize["id"] = o.Id
+	toSerialize["message"] = o.Message
+	toSerialize["mime_type"] = o.MimeType
+	toSerialize["owner_id"] = o.OwnerId
+	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
+	if !IsNil(o.Thumbnails) {
+		toSerialize["thumbnails"] = o.Thumbnails
 	}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.Username) {
-		toSerialize["username"] = o.Username
-	}
+	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -457,6 +404,36 @@ func (o AIgencyImage) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AIgencyImage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ai_model_id",
+		"ai_service_id",
+		"created_at",
+		"execution_id",
+		"id",
+		"message",
+		"mime_type",
+		"owner_id",
+		"owner_organization_id",
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAIgencyImage := _AIgencyImage{}
 
 	err = json.Unmarshal(data, &varAIgencyImage)
@@ -470,17 +447,18 @@ func (o *AIgencyImage) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "agent_id")
-		delete(additionalProperties, "channel_id")
-		delete(additionalProperties, "message_reference_id")
-		delete(additionalProperties, "message_response_to_id")
+		delete(additionalProperties, "ai_model_id")
+		delete(additionalProperties, "ai_service_id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "message")
 		delete(additionalProperties, "mime_type")
-		delete(additionalProperties, "mission_id")
-		delete(additionalProperties, "org_owner_id")
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "thumbnails")
 		delete(additionalProperties, "url")
-		delete(additionalProperties, "user_id")
-		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | [optional] 
+**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
-**Content** | Pointer to [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | [optional] 
+**Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
 **CreatedAt** | **int64** |  | 
 **CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) |  | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
+**ExecutionId** | Pointer to **string** |  | [optional] 
 **FinishReason** | Pointer to [**FinishReason**](FinishReason.md) |  | [optional] 
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -33,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessage
 
-`func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
+`func NewAIgencyMessage(aiModelId string, aiServiceId string, attachments AIgencyMessageFileList, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AIgencyMessage`
 
 NewAIgencyMessage instantiates a new AIgencyMessage object
 This constructor will assign default values to properties that have it defined,
@@ -107,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetAttachments sets Attachments field to given value.
 
-### HasAttachments
-
-`func (o *AIgencyMessage) HasAttachments() bool`
-
-HasAttachments returns a boolean if a field has been set.
 
 ### GetChannelId
 
@@ -172,11 +168,6 @@ and a boolean to check if the value has been set.
 
 SetContent sets Content field to given value.
 
-### HasContent
-
-`func (o *AIgencyMessage) HasContent() bool`
-
-HasContent returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -247,6 +238,31 @@ SetError sets Error field to given value.
 `func (o *AIgencyMessage) HasError() bool`
 
 HasError returns a boolean if a field has been set.
+
+### GetExecutionId
+
+`func (o *AIgencyMessage) GetExecutionId() string`
+
+GetExecutionId returns the ExecutionId field if non-nil, zero value otherwise.
+
+### GetExecutionIdOk
+
+`func (o *AIgencyMessage) GetExecutionIdOk() (*string, bool)`
+
+GetExecutionIdOk returns a tuple with the ExecutionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionId
+
+`func (o *AIgencyMessage) SetExecutionId(v string)`
+
+SetExecutionId sets ExecutionId field to given value.
+
+### HasExecutionId
+
+`func (o *AIgencyMessage) HasExecutionId() bool`
+
+HasExecutionId returns a boolean if a field has been set.
 
 ### GetFinishReason
 

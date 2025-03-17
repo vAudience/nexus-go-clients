@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Files** | Pointer to [**[]AIgencyMessageFile**](AIgencyMessageFile.md) |  | [optional] 
+**Files** | [**[]AIgencyMessageFile**](AIgencyMessageFile.md) |  | 
 
 ## Methods
 
 ### NewAIgencyMessageFileList
 
-`func NewAIgencyMessageFileList() *AIgencyMessageFileList`
+`func NewAIgencyMessageFileList(files []AIgencyMessageFile, ) *AIgencyMessageFileList`
 
 NewAIgencyMessageFileList instantiates a new AIgencyMessageFileList object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetFiles sets Files field to given value.
 
-### HasFiles
-
-`func (o *AIgencyMessageFileList) HasFiles() bool`
-
-HasFiles returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

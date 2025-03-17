@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the vAudience AIgentChat API API v0.15.17
+// APIClient manages communication with the vAudience AIgentChat API API v0.17.2
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -53,8 +53,6 @@ type APIClient struct {
 	AIModelServicesAPI *AIModelServicesAPIService
 
 	AIModelsAPI *AIModelsAPIService
-
-	AgentPromptsAPI *AgentPromptsAPIService
 
 	AgentsAPI *AgentsAPIService
 
@@ -84,6 +82,8 @@ type APIClient struct {
 
 	OrgCostBudgetsAPI *OrgCostBudgetsAPIService
 
+	PromptsAPI *PromptsAPIService
+
 	VersionAPI *VersionAPIService
 }
 
@@ -105,7 +105,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AIModelServicesAPI = (*AIModelServicesAPIService)(&c.common)
 	c.AIModelsAPI = (*AIModelsAPIService)(&c.common)
-	c.AgentPromptsAPI = (*AgentPromptsAPIService)(&c.common)
 	c.AgentsAPI = (*AgentsAPIService)(&c.common)
 	c.AudioAPI = (*AudioAPIService)(&c.common)
 	c.ChannelsAPI = (*ChannelsAPIService)(&c.common)
@@ -120,6 +119,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MetricsAPI = (*MetricsAPIService)(&c.common)
 	c.MissionsAPI = (*MissionsAPIService)(&c.common)
 	c.OrgCostBudgetsAPI = (*OrgCostBudgetsAPIService)(&c.common)
+	c.PromptsAPI = (*PromptsAPIService)(&c.common)
 	c.VersionAPI = (*VersionAPIService)(&c.common)
 
 	return c

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -13,6 +13,7 @@ package aigentchat
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the AIgencyMessageResults type satisfies the MappedNullable interface at compile time
@@ -20,8 +21,8 @@ var _ MappedNullable = &AIgencyMessageResults{}
 
 // AIgencyMessageResults struct for AIgencyMessageResults
 type AIgencyMessageResults struct {
-	Results []AIgencyMessage `json:"results,omitempty"`
-	TotalResults *int64 `json:"total_results,omitempty"`
+	Results []AIgencyMessage `json:"results"`
+	TotalResults int64 `json:"total_results"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,8 +32,10 @@ type _AIgencyMessageResults AIgencyMessageResults
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageResults() *AIgencyMessageResults {
+func NewAIgencyMessageResults(results []AIgencyMessage, totalResults int64) *AIgencyMessageResults {
 	this := AIgencyMessageResults{}
+	this.Results = results
+	this.TotalResults = totalResults
 	return &this
 }
 
@@ -44,68 +47,52 @@ func NewAIgencyMessageResultsWithDefaults() *AIgencyMessageResults {
 	return &this
 }
 
-// GetResults returns the Results field value if set, zero value otherwise.
+// GetResults returns the Results field value
 func (o *AIgencyMessageResults) GetResults() []AIgencyMessage {
-	if o == nil || IsNil(o.Results) {
+	if o == nil {
 		var ret []AIgencyMessage
 		return ret
 	}
+
 	return o.Results
 }
 
-// GetResultsOk returns a tuple with the Results field value if set, nil otherwise
+// GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageResults) GetResultsOk() ([]AIgencyMessage, bool) {
-	if o == nil || IsNil(o.Results) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Results, true
 }
 
-// HasResults returns a boolean if a field has been set.
-func (o *AIgencyMessageResults) HasResults() bool {
-	if o != nil && !IsNil(o.Results) {
-		return true
-	}
-
-	return false
-}
-
-// SetResults gets a reference to the given []AIgencyMessage and assigns it to the Results field.
+// SetResults sets field value
 func (o *AIgencyMessageResults) SetResults(v []AIgencyMessage) {
 	o.Results = v
 }
 
-// GetTotalResults returns the TotalResults field value if set, zero value otherwise.
+// GetTotalResults returns the TotalResults field value
 func (o *AIgencyMessageResults) GetTotalResults() int64 {
-	if o == nil || IsNil(o.TotalResults) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.TotalResults
+
+	return o.TotalResults
 }
 
-// GetTotalResultsOk returns a tuple with the TotalResults field value if set, nil otherwise
+// GetTotalResultsOk returns a tuple with the TotalResults field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageResults) GetTotalResultsOk() (*int64, bool) {
-	if o == nil || IsNil(o.TotalResults) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalResults, true
+	return &o.TotalResults, true
 }
 
-// HasTotalResults returns a boolean if a field has been set.
-func (o *AIgencyMessageResults) HasTotalResults() bool {
-	if o != nil && !IsNil(o.TotalResults) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalResults gets a reference to the given int64 and assigns it to the TotalResults field.
+// SetTotalResults sets field value
 func (o *AIgencyMessageResults) SetTotalResults(v int64) {
-	o.TotalResults = &v
+	o.TotalResults = v
 }
 
 func (o AIgencyMessageResults) MarshalJSON() ([]byte, error) {
@@ -118,12 +105,8 @@ func (o AIgencyMessageResults) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyMessageResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Results) {
-		toSerialize["results"] = o.Results
-	}
-	if !IsNil(o.TotalResults) {
-		toSerialize["total_results"] = o.TotalResults
-	}
+	toSerialize["results"] = o.Results
+	toSerialize["total_results"] = o.TotalResults
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -133,6 +116,28 @@ func (o AIgencyMessageResults) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AIgencyMessageResults) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"results",
+		"total_results",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAIgencyMessageResults := _AIgencyMessageResults{}
 
 	err = json.Unmarshal(data, &varAIgencyMessageResults)

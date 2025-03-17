@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **File** | Pointer to [**AIgencyMessageFile**](AIgencyMessageFile.md) |  | [optional] 
-**Text** | Pointer to **string** |  | [optional] 
-**Type** | Pointer to [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | [optional] 
+**Text** | **string** |  | 
+**Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
 
 ## Methods
 
 ### NewAIgencyMessageContent
 
-`func NewAIgencyMessageContent() *AIgencyMessageContent`
+`func NewAIgencyMessageContent(text string, type_ AIgencyMessageContentType, ) *AIgencyMessageContent`
 
 NewAIgencyMessageContent instantiates a new AIgencyMessageContent object
 This constructor will assign default values to properties that have it defined,
@@ -71,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetText sets Text field to given value.
 
-### HasText
-
-`func (o *AIgencyMessageContent) HasText() bool`
-
-HasText returns a boolean if a field has been set.
 
 ### GetType
 
@@ -96,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *AIgencyMessageContent) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

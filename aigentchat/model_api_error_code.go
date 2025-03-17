@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -94,6 +94,13 @@ const (
 	ErrCodeInvalidFileUploadMimeType ApiErrorCode = "invalid_file_upload_mime_type"
 	ErrCodeProcessingChecksFailed ApiErrorCode = "processing_checks_failed"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
+	ErrCodeFailedToGenerateImage ApiErrorCode = "failed_to_generate_image"
+	ErrCodeInvalidImageID ApiErrorCode = "invalid_image_id"
+	ErrCodeImageNotFound ApiErrorCode = "image_not_found"
+	ErrCodeFailedToDeleteImage ApiErrorCode = "failed_to_delete_image"
+	ErrCodeFailedToGetImage ApiErrorCode = "failed_to_get_image"
+	ErrCodeFailedToSearchImages ApiErrorCode = "failed_to_search_images"
+	ErrCodeFailedToStoreImages ApiErrorCode = "failed_to_store_images"
 	ErrCodeInvalidMessageID ApiErrorCode = "invalid_message_id"
 	ErrCodeMessageNotFound ApiErrorCode = "message_not_found"
 	ErrCodeFailedToUpdateMessage ApiErrorCode = "failed_to_update_message"
@@ -125,6 +132,9 @@ const (
 	ErrCodeFailedToCreateTempApiKey ApiErrorCode = "failed_to_create_temp_api_key"
 	ErrCodeInvalidPromptID ApiErrorCode = "invalid_prompt_id"
 	ErrCodePromptNotFound ApiErrorCode = "prompt_not_found"
+	ErrCodeFailedToGetPrompt ApiErrorCode = "failed_to_get_prompt"
+	ErrCodeFailedToUpdatePrompt ApiErrorCode = "failed_to_update_prompt"
+	ErrCodeFailedToDeletePrompt ApiErrorCode = "failed_to_delete_prompt"
 	ErrCodeInvalidPromptData ApiErrorCode = "invalid_prompt_data"
 	ErrCodePromptAlreadyExists ApiErrorCode = "prompt_already_exists"
 	ErrCodeInvalidVersion ApiErrorCode = "invalid_prompt_version"
@@ -207,6 +217,13 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_file_upload_mime_type",
 	"processing_checks_failed",
 	"functioncall_not_found",
+	"failed_to_generate_image",
+	"invalid_image_id",
+	"image_not_found",
+	"failed_to_delete_image",
+	"failed_to_get_image",
+	"failed_to_search_images",
+	"failed_to_store_images",
 	"invalid_message_id",
 	"message_not_found",
 	"failed_to_update_message",
@@ -238,6 +255,9 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_create_temp_api_key",
 	"invalid_prompt_id",
 	"prompt_not_found",
+	"failed_to_get_prompt",
+	"failed_to_update_prompt",
+	"failed_to_delete_prompt",
 	"invalid_prompt_data",
 	"prompt_already_exists",
 	"invalid_prompt_version",

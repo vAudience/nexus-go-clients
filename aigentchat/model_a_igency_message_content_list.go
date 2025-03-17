@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -13,6 +13,7 @@ package aigentchat
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the AIgencyMessageContentList type satisfies the MappedNullable interface at compile time
@@ -20,8 +21,8 @@ var _ MappedNullable = &AIgencyMessageContentList{}
 
 // AIgencyMessageContentList struct for AIgencyMessageContentList
 type AIgencyMessageContentList struct {
-	Data []AIgencyMessageContent `json:"data,omitempty"`
-	FullText *string `json:"full_text,omitempty"`
+	Data []AIgencyMessageContent `json:"data"`
+	FullText string `json:"full_text"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,8 +32,10 @@ type _AIgencyMessageContentList AIgencyMessageContentList
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageContentList() *AIgencyMessageContentList {
+func NewAIgencyMessageContentList(data []AIgencyMessageContent, fullText string) *AIgencyMessageContentList {
 	this := AIgencyMessageContentList{}
+	this.Data = data
+	this.FullText = fullText
 	return &this
 }
 
@@ -44,68 +47,52 @@ func NewAIgencyMessageContentListWithDefaults() *AIgencyMessageContentList {
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
+// GetData returns the Data field value
 func (o *AIgencyMessageContentList) GetData() []AIgencyMessageContent {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		var ret []AIgencyMessageContent
 		return ret
 	}
+
 	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageContentList) GetDataOk() ([]AIgencyMessageContent, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Data, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *AIgencyMessageContentList) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given []AIgencyMessageContent and assigns it to the Data field.
+// SetData sets field value
 func (o *AIgencyMessageContentList) SetData(v []AIgencyMessageContent) {
 	o.Data = v
 }
 
-// GetFullText returns the FullText field value if set, zero value otherwise.
+// GetFullText returns the FullText field value
 func (o *AIgencyMessageContentList) GetFullText() string {
-	if o == nil || IsNil(o.FullText) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FullText
+
+	return o.FullText
 }
 
-// GetFullTextOk returns a tuple with the FullText field value if set, nil otherwise
+// GetFullTextOk returns a tuple with the FullText field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageContentList) GetFullTextOk() (*string, bool) {
-	if o == nil || IsNil(o.FullText) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FullText, true
+	return &o.FullText, true
 }
 
-// HasFullText returns a boolean if a field has been set.
-func (o *AIgencyMessageContentList) HasFullText() bool {
-	if o != nil && !IsNil(o.FullText) {
-		return true
-	}
-
-	return false
-}
-
-// SetFullText gets a reference to the given string and assigns it to the FullText field.
+// SetFullText sets field value
 func (o *AIgencyMessageContentList) SetFullText(v string) {
-	o.FullText = &v
+	o.FullText = v
 }
 
 func (o AIgencyMessageContentList) MarshalJSON() ([]byte, error) {
@@ -118,12 +105,8 @@ func (o AIgencyMessageContentList) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyMessageContentList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
-	if !IsNil(o.FullText) {
-		toSerialize["full_text"] = o.FullText
-	}
+	toSerialize["data"] = o.Data
+	toSerialize["full_text"] = o.FullText
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -133,6 +116,28 @@ func (o AIgencyMessageContentList) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AIgencyMessageContentList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"data",
+		"full_text",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAIgencyMessageContentList := _AIgencyMessageContentList{}
 
 	err = json.Unmarshal(data, &varAIgencyMessageContentList)

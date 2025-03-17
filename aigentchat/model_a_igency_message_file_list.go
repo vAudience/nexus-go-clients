@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -13,6 +13,7 @@ package aigentchat
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the AIgencyMessageFileList type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ MappedNullable = &AIgencyMessageFileList{}
 
 // AIgencyMessageFileList struct for AIgencyMessageFileList
 type AIgencyMessageFileList struct {
-	Files []AIgencyMessageFile `json:"files,omitempty"`
+	Files []AIgencyMessageFile `json:"files"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,8 +31,9 @@ type _AIgencyMessageFileList AIgencyMessageFileList
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageFileList() *AIgencyMessageFileList {
+func NewAIgencyMessageFileList(files []AIgencyMessageFile) *AIgencyMessageFileList {
 	this := AIgencyMessageFileList{}
+	this.Files = files
 	return &this
 }
 
@@ -43,34 +45,26 @@ func NewAIgencyMessageFileListWithDefaults() *AIgencyMessageFileList {
 	return &this
 }
 
-// GetFiles returns the Files field value if set, zero value otherwise.
+// GetFiles returns the Files field value
 func (o *AIgencyMessageFileList) GetFiles() []AIgencyMessageFile {
-	if o == nil || IsNil(o.Files) {
+	if o == nil {
 		var ret []AIgencyMessageFile
 		return ret
 	}
+
 	return o.Files
 }
 
-// GetFilesOk returns a tuple with the Files field value if set, nil otherwise
+// GetFilesOk returns a tuple with the Files field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageFileList) GetFilesOk() ([]AIgencyMessageFile, bool) {
-	if o == nil || IsNil(o.Files) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Files, true
 }
 
-// HasFiles returns a boolean if a field has been set.
-func (o *AIgencyMessageFileList) HasFiles() bool {
-	if o != nil && !IsNil(o.Files) {
-		return true
-	}
-
-	return false
-}
-
-// SetFiles gets a reference to the given []AIgencyMessageFile and assigns it to the Files field.
+// SetFiles sets field value
 func (o *AIgencyMessageFileList) SetFiles(v []AIgencyMessageFile) {
 	o.Files = v
 }
@@ -85,9 +79,7 @@ func (o AIgencyMessageFileList) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyMessageFileList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Files) {
-		toSerialize["files"] = o.Files
-	}
+	toSerialize["files"] = o.Files
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -97,6 +89,27 @@ func (o AIgencyMessageFileList) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AIgencyMessageFileList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"files",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAIgencyMessageFileList := _AIgencyMessageFileList{}
 
 	err = json.Unmarshal(data, &varAIgencyMessageFileList)

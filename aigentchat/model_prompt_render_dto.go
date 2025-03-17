@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -15,38 +15,38 @@ import (
 	"encoding/json"
 )
 
-// checks if the AgentPromptRenderDto type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AgentPromptRenderDto{}
+// checks if the PromptRenderDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PromptRenderDto{}
 
-// AgentPromptRenderDto struct for AgentPromptRenderDto
-type AgentPromptRenderDto struct {
+// PromptRenderDto struct for PromptRenderDto
+type PromptRenderDto struct {
 	Content *string `json:"content,omitempty"`
 	PromptId *string `json:"prompt_id,omitempty"`
 	VarReplacements *map[string]string `json:"var_replacements,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _AgentPromptRenderDto AgentPromptRenderDto
+type _PromptRenderDto PromptRenderDto
 
-// NewAgentPromptRenderDto instantiates a new AgentPromptRenderDto object
+// NewPromptRenderDto instantiates a new PromptRenderDto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAgentPromptRenderDto() *AgentPromptRenderDto {
-	this := AgentPromptRenderDto{}
+func NewPromptRenderDto() *PromptRenderDto {
+	this := PromptRenderDto{}
 	return &this
 }
 
-// NewAgentPromptRenderDtoWithDefaults instantiates a new AgentPromptRenderDto object
+// NewPromptRenderDtoWithDefaults instantiates a new PromptRenderDto object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAgentPromptRenderDtoWithDefaults() *AgentPromptRenderDto {
-	this := AgentPromptRenderDto{}
+func NewPromptRenderDtoWithDefaults() *PromptRenderDto {
+	this := PromptRenderDto{}
 	return &this
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
-func (o *AgentPromptRenderDto) GetContent() string {
+func (o *PromptRenderDto) GetContent() string {
 	if o == nil || IsNil(o.Content) {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *AgentPromptRenderDto) GetContent() string {
 
 // GetContentOk returns a tuple with the Content field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPromptRenderDto) GetContentOk() (*string, bool) {
+func (o *PromptRenderDto) GetContentOk() (*string, bool) {
 	if o == nil || IsNil(o.Content) {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *AgentPromptRenderDto) GetContentOk() (*string, bool) {
 }
 
 // HasContent returns a boolean if a field has been set.
-func (o *AgentPromptRenderDto) HasContent() bool {
+func (o *PromptRenderDto) HasContent() bool {
 	if o != nil && !IsNil(o.Content) {
 		return true
 	}
@@ -73,12 +73,12 @@ func (o *AgentPromptRenderDto) HasContent() bool {
 }
 
 // SetContent gets a reference to the given string and assigns it to the Content field.
-func (o *AgentPromptRenderDto) SetContent(v string) {
+func (o *PromptRenderDto) SetContent(v string) {
 	o.Content = &v
 }
 
 // GetPromptId returns the PromptId field value if set, zero value otherwise.
-func (o *AgentPromptRenderDto) GetPromptId() string {
+func (o *PromptRenderDto) GetPromptId() string {
 	if o == nil || IsNil(o.PromptId) {
 		var ret string
 		return ret
@@ -88,7 +88,7 @@ func (o *AgentPromptRenderDto) GetPromptId() string {
 
 // GetPromptIdOk returns a tuple with the PromptId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPromptRenderDto) GetPromptIdOk() (*string, bool) {
+func (o *PromptRenderDto) GetPromptIdOk() (*string, bool) {
 	if o == nil || IsNil(o.PromptId) {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *AgentPromptRenderDto) GetPromptIdOk() (*string, bool) {
 }
 
 // HasPromptId returns a boolean if a field has been set.
-func (o *AgentPromptRenderDto) HasPromptId() bool {
+func (o *PromptRenderDto) HasPromptId() bool {
 	if o != nil && !IsNil(o.PromptId) {
 		return true
 	}
@@ -105,12 +105,12 @@ func (o *AgentPromptRenderDto) HasPromptId() bool {
 }
 
 // SetPromptId gets a reference to the given string and assigns it to the PromptId field.
-func (o *AgentPromptRenderDto) SetPromptId(v string) {
+func (o *PromptRenderDto) SetPromptId(v string) {
 	o.PromptId = &v
 }
 
 // GetVarReplacements returns the VarReplacements field value if set, zero value otherwise.
-func (o *AgentPromptRenderDto) GetVarReplacements() map[string]string {
+func (o *PromptRenderDto) GetVarReplacements() map[string]string {
 	if o == nil || IsNil(o.VarReplacements) {
 		var ret map[string]string
 		return ret
@@ -120,7 +120,7 @@ func (o *AgentPromptRenderDto) GetVarReplacements() map[string]string {
 
 // GetVarReplacementsOk returns a tuple with the VarReplacements field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPromptRenderDto) GetVarReplacementsOk() (*map[string]string, bool) {
+func (o *PromptRenderDto) GetVarReplacementsOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.VarReplacements) {
 		return nil, false
 	}
@@ -128,7 +128,7 @@ func (o *AgentPromptRenderDto) GetVarReplacementsOk() (*map[string]string, bool)
 }
 
 // HasVarReplacements returns a boolean if a field has been set.
-func (o *AgentPromptRenderDto) HasVarReplacements() bool {
+func (o *PromptRenderDto) HasVarReplacements() bool {
 	if o != nil && !IsNil(o.VarReplacements) {
 		return true
 	}
@@ -137,11 +137,11 @@ func (o *AgentPromptRenderDto) HasVarReplacements() bool {
 }
 
 // SetVarReplacements gets a reference to the given map[string]string and assigns it to the VarReplacements field.
-func (o *AgentPromptRenderDto) SetVarReplacements(v map[string]string) {
+func (o *PromptRenderDto) SetVarReplacements(v map[string]string) {
 	o.VarReplacements = &v
 }
 
-func (o AgentPromptRenderDto) MarshalJSON() ([]byte, error) {
+func (o PromptRenderDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -149,7 +149,7 @@ func (o AgentPromptRenderDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AgentPromptRenderDto) ToMap() (map[string]interface{}, error) {
+func (o PromptRenderDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
@@ -168,16 +168,16 @@ func (o AgentPromptRenderDto) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AgentPromptRenderDto) UnmarshalJSON(data []byte) (err error) {
-	varAgentPromptRenderDto := _AgentPromptRenderDto{}
+func (o *PromptRenderDto) UnmarshalJSON(data []byte) (err error) {
+	varPromptRenderDto := _PromptRenderDto{}
 
-	err = json.Unmarshal(data, &varAgentPromptRenderDto)
+	err = json.Unmarshal(data, &varPromptRenderDto)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AgentPromptRenderDto(varAgentPromptRenderDto)
+	*o = PromptRenderDto(varPromptRenderDto)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -191,38 +191,38 @@ func (o *AgentPromptRenderDto) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAgentPromptRenderDto struct {
-	value *AgentPromptRenderDto
+type NullablePromptRenderDto struct {
+	value *PromptRenderDto
 	isSet bool
 }
 
-func (v NullableAgentPromptRenderDto) Get() *AgentPromptRenderDto {
+func (v NullablePromptRenderDto) Get() *PromptRenderDto {
 	return v.value
 }
 
-func (v *NullableAgentPromptRenderDto) Set(val *AgentPromptRenderDto) {
+func (v *NullablePromptRenderDto) Set(val *PromptRenderDto) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAgentPromptRenderDto) IsSet() bool {
+func (v NullablePromptRenderDto) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAgentPromptRenderDto) Unset() {
+func (v *NullablePromptRenderDto) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAgentPromptRenderDto(val *AgentPromptRenderDto) *NullableAgentPromptRenderDto {
-	return &NullableAgentPromptRenderDto{value: val, isSet: true}
+func NewNullablePromptRenderDto(val *PromptRenderDto) *NullablePromptRenderDto {
+	return &NullablePromptRenderDto{value: val, isSet: true}
 }
 
-func (v NullableAgentPromptRenderDto) MarshalJSON() ([]byte, error) {
+func (v NullablePromptRenderDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAgentPromptRenderDto) UnmarshalJSON(src []byte) error {
+func (v *NullablePromptRenderDto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &PromptVersion{}
 // PromptVersion struct for PromptVersion
 type PromptVersion struct {
 	Content *string `json:"content,omitempty"`
-	CreatedAt *int32 `json:"created_at,omitempty"`
+	CreatedAt *int64 `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -79,9 +79,9 @@ func (o *PromptVersion) SetContent(v string) {
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PromptVersion) GetCreatedAt() int32 {
+func (o *PromptVersion) GetCreatedAt() int64 {
 	if o == nil || IsNil(o.CreatedAt) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.CreatedAt
@@ -89,7 +89,7 @@ func (o *PromptVersion) GetCreatedAt() int32 {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptVersion) GetCreatedAtOk() (*int32, bool) {
+func (o *PromptVersion) GetCreatedAtOk() (*int64, bool) {
 	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *PromptVersion) HasCreatedAt() bool {
 	return false
 }
 
-// SetCreatedAt gets a reference to the given int32 and assigns it to the CreatedAt field.
-func (o *PromptVersion) SetCreatedAt(v int32) {
+// SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
+func (o *PromptVersion) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
 }
 

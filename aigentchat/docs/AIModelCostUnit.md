@@ -19,6 +19,8 @@
 
 * `AIModelCostUnitImageGenerationPerPixel` (value: `"image-generation-per-pixel"`)
 
+* `AIModelCostUnitImageGenerationPerCredit` (value: `"image-generation-per-credit"`)
+
 * `AIModelCostUnitAudioGenerationPerSecond` (value: `"audio-generation-per-second"`)
 
 * `AIModelCostUnitVideoGenerationPerSecond` (value: `"video-generation-per-second"`)

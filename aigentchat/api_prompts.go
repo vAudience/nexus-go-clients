@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -21,37 +21,37 @@ import (
 )
 
 
-// AgentPromptsAPIService AgentPromptsAPI service
-type AgentPromptsAPIService service
+// PromptsAPIService PromptsAPI service
+type PromptsAPIService service
 
-type ApiCreateAgentPromptRequest struct {
+type ApiCreatePromptRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
-	prompt *AgentPrompt
+	prompt *PromptWriteDto
 }
 
-// Agent Prompt object
-func (r ApiCreateAgentPromptRequest) Prompt(prompt AgentPrompt) ApiCreateAgentPromptRequest {
+// Prompt object
+func (r ApiCreatePromptRequest) Prompt(prompt PromptWriteDto) ApiCreatePromptRequest {
 	r.prompt = &prompt
 	return r
 }
 
-func (r ApiCreateAgentPromptRequest) Execute() (*AgentPrompt, *http.Response, error) {
-	return r.ApiService.CreateAgentPromptExecute(r)
+func (r ApiCreatePromptRequest) Execute() (*Prompt, *http.Response, error) {
+	return r.ApiService.CreatePromptExecute(r)
 }
 
 /*
-CreateAgentPrompt Create a new agent prompt
+CreatePrompt Create a new prompt
 
-Create a new agent prompt
+Create a new prompt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
- @return ApiCreateAgentPromptRequest
+ @return ApiCreatePromptRequest
 */
-func (a *AgentPromptsAPIService) CreateAgentPrompt(ctx context.Context, orgId string) ApiCreateAgentPromptRequest {
-	return ApiCreateAgentPromptRequest{
+func (a *PromptsAPIService) CreatePrompt(ctx context.Context, orgId string) ApiCreatePromptRequest {
+	return ApiCreatePromptRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -59,21 +59,21 @@ func (a *AgentPromptsAPIService) CreateAgentPrompt(ctx context.Context, orgId st
 }
 
 // Execute executes the request
-//  @return AgentPrompt
-func (a *AgentPromptsAPIService) CreateAgentPromptExecute(r ApiCreateAgentPromptRequest) (*AgentPrompt, *http.Response, error) {
+//  @return Prompt
+func (a *PromptsAPIService) CreatePromptExecute(r ApiCreatePromptRequest) (*Prompt, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AgentPrompt
+		localVarReturnValue  *Prompt
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.CreateAgentPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.CreatePrompt")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -196,29 +196,29 @@ func (a *AgentPromptsAPIService) CreateAgentPromptExecute(r ApiCreateAgentPrompt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteAgentPromptRequest struct {
+type ApiDeletePromptRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
 	promptId string
 }
 
-func (r ApiDeleteAgentPromptRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteAgentPromptExecute(r)
+func (r ApiDeletePromptRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeletePromptExecute(r)
 }
 
 /*
-DeleteAgentPrompt Delete an agent prompt
+DeletePrompt Delete a prompt
 
-Delete an existing agent prompt
+Delete an existing prompt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
  @param promptId Prompt ID
- @return ApiDeleteAgentPromptRequest
+ @return ApiDeletePromptRequest
 */
-func (a *AgentPromptsAPIService) DeleteAgentPrompt(ctx context.Context, orgId string, promptId string) ApiDeleteAgentPromptRequest {
-	return ApiDeleteAgentPromptRequest{
+func (a *PromptsAPIService) DeletePrompt(ctx context.Context, orgId string, promptId string) ApiDeletePromptRequest {
+	return ApiDeletePromptRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -227,19 +227,19 @@ func (a *AgentPromptsAPIService) DeleteAgentPrompt(ctx context.Context, orgId st
 }
 
 // Execute executes the request
-func (a *AgentPromptsAPIService) DeleteAgentPromptExecute(r ApiDeleteAgentPromptRequest) (*http.Response, error) {
+func (a *PromptsAPIService) DeletePromptExecute(r ApiDeletePromptRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.DeleteAgentPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.DeletePrompt")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 
@@ -360,29 +360,29 @@ func (a *AgentPromptsAPIService) DeleteAgentPromptExecute(r ApiDeleteAgentPrompt
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetAgentPromptRequest struct {
+type ApiGetPromptRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
 	promptId string
 }
 
-func (r ApiGetAgentPromptRequest) Execute() (*AgentPrompt, *http.Response, error) {
-	return r.ApiService.GetAgentPromptExecute(r)
+func (r ApiGetPromptRequest) Execute() (*Prompt, *http.Response, error) {
+	return r.ApiService.GetPromptExecute(r)
 }
 
 /*
-GetAgentPrompt Get a specific agent prompt
+GetPrompt Get a specific prompt
 
-Get details of a specific agent prompt
+Get details of a specific prompt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
  @param promptId Prompt ID
- @return ApiGetAgentPromptRequest
+ @return ApiGetPromptRequest
 */
-func (a *AgentPromptsAPIService) GetAgentPrompt(ctx context.Context, orgId string, promptId string) ApiGetAgentPromptRequest {
-	return ApiGetAgentPromptRequest{
+func (a *PromptsAPIService) GetPrompt(ctx context.Context, orgId string, promptId string) ApiGetPromptRequest {
+	return ApiGetPromptRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -391,21 +391,21 @@ func (a *AgentPromptsAPIService) GetAgentPrompt(ctx context.Context, orgId strin
 }
 
 // Execute executes the request
-//  @return AgentPrompt
-func (a *AgentPromptsAPIService) GetAgentPromptExecute(r ApiGetAgentPromptRequest) (*AgentPrompt, *http.Response, error) {
+//  @return Prompt
+func (a *PromptsAPIService) GetPromptExecute(r ApiGetPromptRequest) (*Prompt, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AgentPrompt
+		localVarReturnValue  *Prompt
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.GetAgentPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.GetPrompt")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 
@@ -535,41 +535,41 @@ func (a *AgentPromptsAPIService) GetAgentPromptExecute(r ApiGetAgentPromptReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListAgentPromptsRequest struct {
+type ApiListPromptsRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
 	offset *int32
 	limit *int32
 }
 
 // Offset
-func (r ApiListAgentPromptsRequest) Offset(offset int32) ApiListAgentPromptsRequest {
+func (r ApiListPromptsRequest) Offset(offset int32) ApiListPromptsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Limit
-func (r ApiListAgentPromptsRequest) Limit(limit int32) ApiListAgentPromptsRequest {
+func (r ApiListPromptsRequest) Limit(limit int32) ApiListPromptsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListAgentPromptsRequest) Execute() ([]AgentPrompt, *http.Response, error) {
-	return r.ApiService.ListAgentPromptsExecute(r)
+func (r ApiListPromptsRequest) Execute() ([]Prompt, *http.Response, error) {
+	return r.ApiService.ListPromptsExecute(r)
 }
 
 /*
-ListAgentPrompts List agent prompts
+ListPrompts List prompts
 
-List agent prompts for an organization
+List prompts for an organization
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
- @return ApiListAgentPromptsRequest
+ @return ApiListPromptsRequest
 */
-func (a *AgentPromptsAPIService) ListAgentPrompts(ctx context.Context, orgId string) ApiListAgentPromptsRequest {
-	return ApiListAgentPromptsRequest{
+func (a *PromptsAPIService) ListPrompts(ctx context.Context, orgId string) ApiListPromptsRequest {
+	return ApiListPromptsRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -577,21 +577,21 @@ func (a *AgentPromptsAPIService) ListAgentPrompts(ctx context.Context, orgId str
 }
 
 // Execute executes the request
-//  @return []AgentPrompt
-func (a *AgentPromptsAPIService) ListAgentPromptsExecute(r ApiListAgentPromptsRequest) ([]AgentPrompt, *http.Response, error) {
+//  @return []Prompt
+func (a *PromptsAPIService) ListPromptsExecute(r ApiListPromptsRequest) ([]Prompt, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []AgentPrompt
+		localVarReturnValue  []Prompt
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.ListAgentPrompts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.ListPrompts")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -715,34 +715,34 @@ func (a *AgentPromptsAPIService) ListAgentPromptsExecute(r ApiListAgentPromptsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRenderAgentPromptRequest struct {
+type ApiRenderPromptRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
-	renderDto *AgentPromptRenderDto
+	renderDto *PromptRenderDto
 }
 
-// Agent Prompt Render DTO
-func (r ApiRenderAgentPromptRequest) RenderDto(renderDto AgentPromptRenderDto) ApiRenderAgentPromptRequest {
+// Prompt Render DTO
+func (r ApiRenderPromptRequest) RenderDto(renderDto PromptRenderDto) ApiRenderPromptRequest {
 	r.renderDto = &renderDto
 	return r
 }
 
-func (r ApiRenderAgentPromptRequest) Execute() (*AgentPromptRenderedDto, *http.Response, error) {
-	return r.ApiService.RenderAgentPromptExecute(r)
+func (r ApiRenderPromptRequest) Execute() (*RenderedPrompt, *http.Response, error) {
+	return r.ApiService.RenderPromptExecute(r)
 }
 
 /*
-RenderAgentPrompt Render Agent Prompt
+RenderPrompt Render Prompt
 
-Renders an agent prompt by resolving references and replacing variables in the prompt content.
+Renders a prompt by resolving references and replacing variables in the prompt content.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
- @return ApiRenderAgentPromptRequest
+ @return ApiRenderPromptRequest
 */
-func (a *AgentPromptsAPIService) RenderAgentPrompt(ctx context.Context, orgId string) ApiRenderAgentPromptRequest {
-	return ApiRenderAgentPromptRequest{
+func (a *PromptsAPIService) RenderPrompt(ctx context.Context, orgId string) ApiRenderPromptRequest {
+	return ApiRenderPromptRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -750,21 +750,21 @@ func (a *AgentPromptsAPIService) RenderAgentPrompt(ctx context.Context, orgId st
 }
 
 // Execute executes the request
-//  @return AgentPromptRenderedDto
-func (a *AgentPromptsAPIService) RenderAgentPromptExecute(r ApiRenderAgentPromptRequest) (*AgentPromptRenderedDto, *http.Response, error) {
+//  @return RenderedPrompt
+func (a *PromptsAPIService) RenderPromptExecute(r ApiRenderPromptRequest) (*RenderedPrompt, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AgentPromptRenderedDto
+		localVarReturnValue  *RenderedPrompt
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.RenderAgentPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.RenderPrompt")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/render"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts/render"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -884,36 +884,36 @@ func (a *AgentPromptsAPIService) RenderAgentPromptExecute(r ApiRenderAgentPrompt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateAgentPromptRequest struct {
+type ApiUpdatePromptRequest struct {
 	ctx context.Context
-	ApiService *AgentPromptsAPIService
+	ApiService *PromptsAPIService
 	orgId string
 	promptId string
-	prompt *AgentPrompt
+	prompt *PromptWriteDto
 }
 
-// Updated Agent Prompt object
-func (r ApiUpdateAgentPromptRequest) Prompt(prompt AgentPrompt) ApiUpdateAgentPromptRequest {
+// Updated Prompt object
+func (r ApiUpdatePromptRequest) Prompt(prompt PromptWriteDto) ApiUpdatePromptRequest {
 	r.prompt = &prompt
 	return r
 }
 
-func (r ApiUpdateAgentPromptRequest) Execute() (*AgentPrompt, *http.Response, error) {
-	return r.ApiService.UpdateAgentPromptExecute(r)
+func (r ApiUpdatePromptRequest) Execute() (*Prompt, *http.Response, error) {
+	return r.ApiService.UpdatePromptExecute(r)
 }
 
 /*
-UpdateAgentPrompt Update an agent prompt
+UpdatePrompt Update a prompt
 
-Update details of an existing agent prompt
+Update details of an existing prompt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId Organization ID
  @param promptId Prompt ID
- @return ApiUpdateAgentPromptRequest
+ @return ApiUpdatePromptRequest
 */
-func (a *AgentPromptsAPIService) UpdateAgentPrompt(ctx context.Context, orgId string, promptId string) ApiUpdateAgentPromptRequest {
-	return ApiUpdateAgentPromptRequest{
+func (a *PromptsAPIService) UpdatePrompt(ctx context.Context, orgId string, promptId string) ApiUpdatePromptRequest {
+	return ApiUpdatePromptRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -922,21 +922,21 @@ func (a *AgentPromptsAPIService) UpdateAgentPrompt(ctx context.Context, orgId st
 }
 
 // Execute executes the request
-//  @return AgentPrompt
-func (a *AgentPromptsAPIService) UpdateAgentPromptExecute(r ApiUpdateAgentPromptRequest) (*AgentPrompt, *http.Response, error) {
+//  @return Prompt
+func (a *PromptsAPIService) UpdatePromptExecute(r ApiUpdatePromptRequest) (*Prompt, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AgentPrompt
+		localVarReturnValue  *Prompt
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentPromptsAPIService.UpdateAgentPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.UpdatePrompt")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agent-prompts/{prompt_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts/{prompt_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
 

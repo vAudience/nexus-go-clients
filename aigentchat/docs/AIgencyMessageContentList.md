@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]AIgencyMessageContent**](AIgencyMessageContent.md) |  | [optional] 
-**FullText** | Pointer to **string** |  | [optional] 
+**Data** | [**[]AIgencyMessageContent**](AIgencyMessageContent.md) |  | 
+**FullText** | **string** |  | 
 
 ## Methods
 
 ### NewAIgencyMessageContentList
 
-`func NewAIgencyMessageContentList() *AIgencyMessageContentList`
+`func NewAIgencyMessageContentList(data []AIgencyMessageContent, fullText string, ) *AIgencyMessageContentList`
 
 NewAIgencyMessageContentList instantiates a new AIgencyMessageContentList object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
-### HasData
-
-`func (o *AIgencyMessageContentList) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 ### GetFullText
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetFullText sets FullText field to given value.
 
-### HasFullText
-
-`func (o *AIgencyMessageContentList) HasFullText() bool`
-
-HasFullText returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

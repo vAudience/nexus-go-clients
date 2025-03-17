@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AiModelServiceId** | Pointer to **string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**ExecutionId** | Pointer to **string** |  | [optional] 
 **FinalCostInEuro** | Pointer to **float64** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **MessageId** | Pointer to **string** |  | [optional] 
@@ -159,6 +160,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *ExecutionLog) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetExecutionId
+
+`func (o *ExecutionLog) GetExecutionId() string`
+
+GetExecutionId returns the ExecutionId field if non-nil, zero value otherwise.
+
+### GetExecutionIdOk
+
+`func (o *ExecutionLog) GetExecutionIdOk() (*string, bool)`
+
+GetExecutionIdOk returns a tuple with the ExecutionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionId
+
+`func (o *ExecutionLog) SetExecutionId(v string)`
+
+SetExecutionId sets ExecutionId field to given value.
+
+### HasExecutionId
+
+`func (o *ExecutionLog) HasExecutionId() bool`
+
+HasExecutionId returns a boolean if a field has been set.
 
 ### GetFinalCostInEuro
 

@@ -4,23 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentId** | Pointer to **string** |  | [optional] 
-**ChannelId** | Pointer to **string** |  | [optional] 
-**MessageReferenceId** | Pointer to **string** |  | [optional] 
-**MessageResponseToId** | Pointer to **string** |  | [optional] 
-**MimeType** | Pointer to **string** |  | [optional] 
-**MissionId** | Pointer to **string** |  | [optional] 
-**OrgOwnerId** | Pointer to **string** |  | [optional] 
+**AiModelId** | **string** |  | 
+**AiServiceId** | **string** |  | 
+**CreatedAt** | **int64** |  | 
+**ExecutionId** | **string** |  | 
+**Id** | **string** |  | 
+**Message** | **string** |  | 
+**MimeType** | **string** |  | 
+**OwnerId** | **string** |  | 
+**OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
-**Username** | Pointer to **string** |  | [optional] 
+**Thumbnails** | Pointer to [**[]AIgencyThumbnail**](AIgencyThumbnail.md) |  | [optional] 
+**Url** | **string** |  | 
 
 ## Methods
 
 ### NewAIgencyImage
 
-`func NewAIgencyImage() *AIgencyImage`
+`func NewAIgencyImage(aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string, ) *AIgencyImage`
 
 NewAIgencyImage instantiates a new AIgencyImage object
 This constructor will assign default values to properties that have it defined,
@@ -35,105 +36,125 @@ NewAIgencyImageWithDefaults instantiates a new AIgencyImage object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAgentId
+### GetAiModelId
 
-`func (o *AIgencyImage) GetAgentId() string`
+`func (o *AIgencyImage) GetAiModelId() string`
 
-GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+GetAiModelId returns the AiModelId field if non-nil, zero value otherwise.
 
-### GetAgentIdOk
+### GetAiModelIdOk
 
-`func (o *AIgencyImage) GetAgentIdOk() (*string, bool)`
+`func (o *AIgencyImage) GetAiModelIdOk() (*string, bool)`
 
-GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+GetAiModelIdOk returns a tuple with the AiModelId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAgentId
+### SetAiModelId
 
-`func (o *AIgencyImage) SetAgentId(v string)`
+`func (o *AIgencyImage) SetAiModelId(v string)`
 
-SetAgentId sets AgentId field to given value.
+SetAiModelId sets AiModelId field to given value.
 
-### HasAgentId
 
-`func (o *AIgencyImage) HasAgentId() bool`
+### GetAiServiceId
 
-HasAgentId returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetAiServiceId() string`
 
-### GetChannelId
+GetAiServiceId returns the AiServiceId field if non-nil, zero value otherwise.
 
-`func (o *AIgencyImage) GetChannelId() string`
+### GetAiServiceIdOk
 
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
+`func (o *AIgencyImage) GetAiServiceIdOk() (*string, bool)`
 
-### GetChannelIdOk
-
-`func (o *AIgencyImage) GetChannelIdOk() (*string, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
+GetAiServiceIdOk returns a tuple with the AiServiceId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChannelId
+### SetAiServiceId
 
-`func (o *AIgencyImage) SetChannelId(v string)`
+`func (o *AIgencyImage) SetAiServiceId(v string)`
 
-SetChannelId sets ChannelId field to given value.
+SetAiServiceId sets AiServiceId field to given value.
 
-### HasChannelId
 
-`func (o *AIgencyImage) HasChannelId() bool`
+### GetCreatedAt
 
-HasChannelId returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetCreatedAt() int64`
 
-### GetMessageReferenceId
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-`func (o *AIgencyImage) GetMessageReferenceId() string`
+### GetCreatedAtOk
 
-GetMessageReferenceId returns the MessageReferenceId field if non-nil, zero value otherwise.
+`func (o *AIgencyImage) GetCreatedAtOk() (*int64, bool)`
 
-### GetMessageReferenceIdOk
-
-`func (o *AIgencyImage) GetMessageReferenceIdOk() (*string, bool)`
-
-GetMessageReferenceIdOk returns a tuple with the MessageReferenceId field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMessageReferenceId
+### SetCreatedAt
 
-`func (o *AIgencyImage) SetMessageReferenceId(v string)`
+`func (o *AIgencyImage) SetCreatedAt(v int64)`
 
-SetMessageReferenceId sets MessageReferenceId field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
-### HasMessageReferenceId
 
-`func (o *AIgencyImage) HasMessageReferenceId() bool`
+### GetExecutionId
 
-HasMessageReferenceId returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetExecutionId() string`
 
-### GetMessageResponseToId
+GetExecutionId returns the ExecutionId field if non-nil, zero value otherwise.
 
-`func (o *AIgencyImage) GetMessageResponseToId() string`
+### GetExecutionIdOk
 
-GetMessageResponseToId returns the MessageResponseToId field if non-nil, zero value otherwise.
+`func (o *AIgencyImage) GetExecutionIdOk() (*string, bool)`
 
-### GetMessageResponseToIdOk
-
-`func (o *AIgencyImage) GetMessageResponseToIdOk() (*string, bool)`
-
-GetMessageResponseToIdOk returns a tuple with the MessageResponseToId field if it's non-nil, zero value otherwise
+GetExecutionIdOk returns a tuple with the ExecutionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMessageResponseToId
+### SetExecutionId
 
-`func (o *AIgencyImage) SetMessageResponseToId(v string)`
+`func (o *AIgencyImage) SetExecutionId(v string)`
 
-SetMessageResponseToId sets MessageResponseToId field to given value.
+SetExecutionId sets ExecutionId field to given value.
 
-### HasMessageResponseToId
 
-`func (o *AIgencyImage) HasMessageResponseToId() bool`
+### GetId
 
-HasMessageResponseToId returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *AIgencyImage) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *AIgencyImage) SetId(v string)`
+
+SetId sets Id field to given value.
+
+
+### GetMessage
+
+`func (o *AIgencyImage) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *AIgencyImage) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *AIgencyImage) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
 
 ### GetMimeType
 
@@ -154,61 +175,46 @@ and a boolean to check if the value has been set.
 
 SetMimeType sets MimeType field to given value.
 
-### HasMimeType
 
-`func (o *AIgencyImage) HasMimeType() bool`
+### GetOwnerId
 
-HasMimeType returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetOwnerId() string`
 
-### GetMissionId
+GetOwnerId returns the OwnerId field if non-nil, zero value otherwise.
 
-`func (o *AIgencyImage) GetMissionId() string`
+### GetOwnerIdOk
 
-GetMissionId returns the MissionId field if non-nil, zero value otherwise.
+`func (o *AIgencyImage) GetOwnerIdOk() (*string, bool)`
 
-### GetMissionIdOk
-
-`func (o *AIgencyImage) GetMissionIdOk() (*string, bool)`
-
-GetMissionIdOk returns a tuple with the MissionId field if it's non-nil, zero value otherwise
+GetOwnerIdOk returns a tuple with the OwnerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMissionId
+### SetOwnerId
 
-`func (o *AIgencyImage) SetMissionId(v string)`
+`func (o *AIgencyImage) SetOwnerId(v string)`
 
-SetMissionId sets MissionId field to given value.
+SetOwnerId sets OwnerId field to given value.
 
-### HasMissionId
 
-`func (o *AIgencyImage) HasMissionId() bool`
+### GetOwnerOrganizationId
 
-HasMissionId returns a boolean if a field has been set.
+`func (o *AIgencyImage) GetOwnerOrganizationId() string`
 
-### GetOrgOwnerId
+GetOwnerOrganizationId returns the OwnerOrganizationId field if non-nil, zero value otherwise.
 
-`func (o *AIgencyImage) GetOrgOwnerId() string`
+### GetOwnerOrganizationIdOk
 
-GetOrgOwnerId returns the OrgOwnerId field if non-nil, zero value otherwise.
+`func (o *AIgencyImage) GetOwnerOrganizationIdOk() (*string, bool)`
 
-### GetOrgOwnerIdOk
-
-`func (o *AIgencyImage) GetOrgOwnerIdOk() (*string, bool)`
-
-GetOrgOwnerIdOk returns a tuple with the OrgOwnerId field if it's non-nil, zero value otherwise
+GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrgOwnerId
+### SetOwnerOrganizationId
 
-`func (o *AIgencyImage) SetOrgOwnerId(v string)`
+`func (o *AIgencyImage) SetOwnerOrganizationId(v string)`
 
-SetOrgOwnerId sets OrgOwnerId field to given value.
+SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
-### HasOrgOwnerId
-
-`func (o *AIgencyImage) HasOrgOwnerId() bool`
-
-HasOrgOwnerId returns a boolean if a field has been set.
 
 ### GetParameters
 
@@ -235,6 +241,31 @@ SetParameters sets Parameters field to given value.
 
 HasParameters returns a boolean if a field has been set.
 
+### GetThumbnails
+
+`func (o *AIgencyImage) GetThumbnails() []AIgencyThumbnail`
+
+GetThumbnails returns the Thumbnails field if non-nil, zero value otherwise.
+
+### GetThumbnailsOk
+
+`func (o *AIgencyImage) GetThumbnailsOk() (*[]AIgencyThumbnail, bool)`
+
+GetThumbnailsOk returns a tuple with the Thumbnails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThumbnails
+
+`func (o *AIgencyImage) SetThumbnails(v []AIgencyThumbnail)`
+
+SetThumbnails sets Thumbnails field to given value.
+
+### HasThumbnails
+
+`func (o *AIgencyImage) HasThumbnails() bool`
+
+HasThumbnails returns a boolean if a field has been set.
+
 ### GetUrl
 
 `func (o *AIgencyImage) GetUrl() string`
@@ -254,61 +285,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *AIgencyImage) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
-
-### GetUserId
-
-`func (o *AIgencyImage) GetUserId() string`
-
-GetUserId returns the UserId field if non-nil, zero value otherwise.
-
-### GetUserIdOk
-
-`func (o *AIgencyImage) GetUserIdOk() (*string, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *AIgencyImage) SetUserId(v string)`
-
-SetUserId sets UserId field to given value.
-
-### HasUserId
-
-`func (o *AIgencyImage) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
-
-### GetUsername
-
-`func (o *AIgencyImage) GetUsername() string`
-
-GetUsername returns the Username field if non-nil, zero value otherwise.
-
-### GetUsernameOk
-
-`func (o *AIgencyImage) GetUsernameOk() (*string, bool)`
-
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsername
-
-`func (o *AIgencyImage) SetUsername(v string)`
-
-SetUsername sets Username field to given value.
-
-### HasUsername
-
-`func (o *AIgencyImage) HasUsername() bool`
-
-HasUsername returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

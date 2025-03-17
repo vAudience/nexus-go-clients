@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type ResultFile struct {
 	FileName string `json:"file_name"`
 	FileSize int32 `json:"file_size"`
 	MimeType string `json:"mime_type"`
+	OriginalFileName string `json:"original_file_name"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
@@ -34,11 +35,12 @@ type _ResultFile ResultFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResultFile(fileName string, fileSize int32, mimeType string, url string) *ResultFile {
+func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileName string, url string) *ResultFile {
 	this := ResultFile{}
 	this.FileName = fileName
 	this.FileSize = fileSize
 	this.MimeType = mimeType
+	this.OriginalFileName = originalFileName
 	this.Url = url
 	return &this
 }
@@ -123,6 +125,30 @@ func (o *ResultFile) SetMimeType(v string) {
 	o.MimeType = v
 }
 
+// GetOriginalFileName returns the OriginalFileName field value
+func (o *ResultFile) GetOriginalFileName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OriginalFileName
+}
+
+// GetOriginalFileNameOk returns a tuple with the OriginalFileName field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetOriginalFileNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OriginalFileName, true
+}
+
+// SetOriginalFileName sets field value
+func (o *ResultFile) SetOriginalFileName(v string) {
+	o.OriginalFileName = v
+}
+
 // GetUrl returns the Url field value
 func (o *ResultFile) GetUrl() string {
 	if o == nil {
@@ -160,6 +186,7 @@ func (o ResultFile) ToMap() (map[string]interface{}, error) {
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
 	toSerialize["mime_type"] = o.MimeType
+	toSerialize["original_file_name"] = o.OriginalFileName
 	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
@@ -177,6 +204,7 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		"file_name",
 		"file_size",
 		"mime_type",
+		"original_file_name",
 		"url",
 	}
 
@@ -210,6 +238,7 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
 		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "original_file_name")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

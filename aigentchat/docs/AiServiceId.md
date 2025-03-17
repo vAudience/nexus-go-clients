@@ -11,9 +11,13 @@
 
 * `AiServiceIdAzureAi` (value: `"azureai"`)
 
+* `AiServiceIdBlackForest` (value: `"blackforest"`)
+
 * `AiServiceIdElevenLabs` (value: `"elevenlabs"`)
 
 * `AiServiceIdGoogleVertexAi` (value: `"googlevertexai"`)
+
+* `AiServiceIdLeonardoAI` (value: `"leonardoai"`)
 
 * `AiServiceIdOpenAI` (value: `"openai"`)
 

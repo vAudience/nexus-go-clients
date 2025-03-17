@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Results** | Pointer to [**[]AIgencyMessage**](AIgencyMessage.md) |  | [optional] 
-**TotalResults** | Pointer to **int64** |  | [optional] 
+**Results** | [**[]AIgencyMessage**](AIgencyMessage.md) |  | 
+**TotalResults** | **int64** |  | 
 
 ## Methods
 
 ### NewAIgencyMessageResults
 
-`func NewAIgencyMessageResults() *AIgencyMessageResults`
+`func NewAIgencyMessageResults(results []AIgencyMessage, totalResults int64, ) *AIgencyMessageResults`
 
 NewAIgencyMessageResults instantiates a new AIgencyMessageResults object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetResults sets Results field to given value.
 
-### HasResults
-
-`func (o *AIgencyMessageResults) HasResults() bool`
-
-HasResults returns a boolean if a field has been set.
 
 ### GetTotalResults
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetTotalResults sets TotalResults field to given value.
 
-### HasTotalResults
-
-`func (o *AIgencyMessageResults) HasTotalResults() bool`
-
-HasTotalResults returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

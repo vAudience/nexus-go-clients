@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -23,13 +23,14 @@ var _ MappedNullable = &AIgencyMessage{}
 type AIgencyMessage struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
-	Attachments *AIgencyMessageFileList `json:"attachments,omitempty"`
+	Attachments AIgencyMessageFileList `json:"attachments"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
-	Content *AIgencyMessageContentList `json:"content,omitempty"`
+	Content AIgencyMessageContentList `json:"content"`
 	CreatedAt int64 `json:"created_at"`
 	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
 	Error *AiServiceError `json:"error,omitempty"`
+	ExecutionId *string `json:"execution_id,omitempty"`
 	FinishReason *FinishReason `json:"finish_reason,omitempty"`
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
@@ -54,12 +55,14 @@ type _AIgencyMessage AIgencyMessage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessage(aiModelId string, aiServiceId string, channelId string, channelName string, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AIgencyMessage {
+func NewAIgencyMessage(aiModelId string, aiServiceId string, attachments AIgencyMessageFileList, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AIgencyMessage {
 	this := AIgencyMessage{}
 	this.AiModelId = aiModelId
 	this.AiServiceId = aiServiceId
+	this.Attachments = attachments
 	this.ChannelId = channelId
 	this.ChannelName = channelName
+	this.Content = content
 	this.CreatedAt = createdAt
 	this.Id = id
 	this.OwnerOrganizationId = ownerOrganizationId
@@ -128,36 +131,28 @@ func (o *AIgencyMessage) SetAiServiceId(v string) {
 	o.AiServiceId = v
 }
 
-// GetAttachments returns the Attachments field value if set, zero value otherwise.
+// GetAttachments returns the Attachments field value
 func (o *AIgencyMessage) GetAttachments() AIgencyMessageFileList {
-	if o == nil || IsNil(o.Attachments) {
+	if o == nil {
 		var ret AIgencyMessageFileList
 		return ret
 	}
-	return *o.Attachments
+
+	return o.Attachments
 }
 
-// GetAttachmentsOk returns a tuple with the Attachments field value if set, nil otherwise
+// GetAttachmentsOk returns a tuple with the Attachments field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessage) GetAttachmentsOk() (*AIgencyMessageFileList, bool) {
-	if o == nil || IsNil(o.Attachments) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Attachments, true
+	return &o.Attachments, true
 }
 
-// HasAttachments returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasAttachments() bool {
-	if o != nil && !IsNil(o.Attachments) {
-		return true
-	}
-
-	return false
-}
-
-// SetAttachments gets a reference to the given AIgencyMessageFileList and assigns it to the Attachments field.
+// SetAttachments sets field value
 func (o *AIgencyMessage) SetAttachments(v AIgencyMessageFileList) {
-	o.Attachments = &v
+	o.Attachments = v
 }
 
 // GetChannelId returns the ChannelId field value
@@ -208,36 +203,28 @@ func (o *AIgencyMessage) SetChannelName(v string) {
 	o.ChannelName = v
 }
 
-// GetContent returns the Content field value if set, zero value otherwise.
+// GetContent returns the Content field value
 func (o *AIgencyMessage) GetContent() AIgencyMessageContentList {
-	if o == nil || IsNil(o.Content) {
+	if o == nil {
 		var ret AIgencyMessageContentList
 		return ret
 	}
-	return *o.Content
+
+	return o.Content
 }
 
-// GetContentOk returns a tuple with the Content field value if set, nil otherwise
+// GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessage) GetContentOk() (*AIgencyMessageContentList, bool) {
-	if o == nil || IsNil(o.Content) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Content, true
+	return &o.Content, true
 }
 
-// HasContent returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasContent() bool {
-	if o != nil && !IsNil(o.Content) {
-		return true
-	}
-
-	return false
-}
-
-// SetContent gets a reference to the given AIgencyMessageContentList and assigns it to the Content field.
+// SetContent sets field value
 func (o *AIgencyMessage) SetContent(v AIgencyMessageContentList) {
-	o.Content = &v
+	o.Content = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -326,6 +313,38 @@ func (o *AIgencyMessage) HasError() bool {
 // SetError gets a reference to the given AiServiceError and assigns it to the Error field.
 func (o *AIgencyMessage) SetError(v AiServiceError) {
 	o.Error = &v
+}
+
+// GetExecutionId returns the ExecutionId field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetExecutionId() string {
+	if o == nil || IsNil(o.ExecutionId) {
+		var ret string
+		return ret
+	}
+	return *o.ExecutionId
+}
+
+// GetExecutionIdOk returns a tuple with the ExecutionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetExecutionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExecutionId) {
+		return nil, false
+	}
+	return o.ExecutionId, true
+}
+
+// HasExecutionId returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasExecutionId() bool {
+	if o != nil && !IsNil(o.ExecutionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionId gets a reference to the given string and assigns it to the ExecutionId field.
+func (o *AIgencyMessage) SetExecutionId(v string) {
+	o.ExecutionId = &v
 }
 
 // GetFinishReason returns the FinishReason field value if set, zero value otherwise.
@@ -756,20 +775,19 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_model_id"] = o.AiModelId
 	toSerialize["ai_service_id"] = o.AiServiceId
-	if !IsNil(o.Attachments) {
-		toSerialize["attachments"] = o.Attachments
-	}
+	toSerialize["attachments"] = o.Attachments
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["channel_name"] = o.ChannelName
-	if !IsNil(o.Content) {
-		toSerialize["content"] = o.Content
-	}
+	toSerialize["content"] = o.Content
 	toSerialize["created_at"] = o.CreatedAt
 	if !IsNil(o.CreatedForFeature) {
 		toSerialize["created_for_feature"] = o.CreatedForFeature
 	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
+	}
+	if !IsNil(o.ExecutionId) {
+		toSerialize["execution_id"] = o.ExecutionId
 	}
 	if !IsNil(o.FinishReason) {
 		toSerialize["finish_reason"] = o.FinishReason
@@ -815,8 +833,10 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"ai_model_id",
 		"ai_service_id",
+		"attachments",
 		"channel_id",
 		"channel_name",
+		"content",
 		"created_at",
 		"id",
 		"owner_organization_id",
@@ -864,6 +884,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "created_for_feature")
 		delete(additionalProperties, "error")
+		delete(additionalProperties, "execution_id")
 		delete(additionalProperties, "finish_reason")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "meta_data")

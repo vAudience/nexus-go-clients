@@ -7,13 +7,14 @@ Name | Type | Description | Notes
 **FileName** | **string** |  | 
 **FileSize** | **int32** |  | 
 **MimeType** | **string** |  | 
+**OriginalFileName** | **string** |  | 
 **Url** | **string** |  | 
 
 ## Methods
 
 ### NewResultFile
 
-`func NewResultFile(fileName string, fileSize int32, mimeType string, url string, ) *ResultFile`
+`func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileName string, url string, ) *ResultFile`
 
 NewResultFile instantiates a new ResultFile object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +87,26 @@ and a boolean to check if the value has been set.
 `func (o *ResultFile) SetMimeType(v string)`
 
 SetMimeType sets MimeType field to given value.
+
+
+### GetOriginalFileName
+
+`func (o *ResultFile) GetOriginalFileName() string`
+
+GetOriginalFileName returns the OriginalFileName field if non-nil, zero value otherwise.
+
+### GetOriginalFileNameOk
+
+`func (o *ResultFile) GetOriginalFileNameOk() (*string, bool)`
+
+GetOriginalFileNameOk returns a tuple with the OriginalFileName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalFileName
+
+`func (o *ResultFile) SetOriginalFileName(v string)`
+
+SetOriginalFileName sets OriginalFileName field to given value.
 
 
 ### GetUrl

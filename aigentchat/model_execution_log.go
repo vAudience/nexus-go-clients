@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type ExecutionLog struct {
 	AiModelServiceId *string `json:"ai_model_service_id,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	ExecutionId *string `json:"execution_id,omitempty"`
 	FinalCostInEuro *float64 `json:"final_cost_in_euro,omitempty"`
 	Id *string `json:"id,omitempty"`
 	MessageId *string `json:"message_id,omitempty"`
@@ -211,6 +212,38 @@ func (o *ExecutionLog) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *ExecutionLog) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
+}
+
+// GetExecutionId returns the ExecutionId field value if set, zero value otherwise.
+func (o *ExecutionLog) GetExecutionId() string {
+	if o == nil || IsNil(o.ExecutionId) {
+		var ret string
+		return ret
+	}
+	return *o.ExecutionId
+}
+
+// GetExecutionIdOk returns a tuple with the ExecutionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetExecutionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExecutionId) {
+		return nil, false
+	}
+	return o.ExecutionId, true
+}
+
+// HasExecutionId returns a boolean if a field has been set.
+func (o *ExecutionLog) HasExecutionId() bool {
+	if o != nil && !IsNil(o.ExecutionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionId gets a reference to the given string and assigns it to the ExecutionId field.
+func (o *ExecutionLog) SetExecutionId(v string) {
+	o.ExecutionId = &v
 }
 
 // GetFinalCostInEuro returns the FinalCostInEuro field value if set, zero value otherwise.
@@ -430,6 +463,9 @@ func (o ExecutionLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.ExecutionId) {
+		toSerialize["execution_id"] = o.ExecutionId
+	}
 	if !IsNil(o.FinalCostInEuro) {
 		toSerialize["final_cost_in_euro"] = o.FinalCostInEuro
 	}
@@ -475,6 +511,7 @@ func (o *ExecutionLog) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ai_model_service_id")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "execution_id")
 		delete(additionalProperties, "final_cost_in_euro")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "message_id")

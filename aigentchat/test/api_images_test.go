@@ -22,13 +22,42 @@ func Test_aigentchat_ImagesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ImagesAPIService CreateImage", func(t *testing.T) {
+	t.Run("Test ImagesAPIService CreateImages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.ImagesAPI.CreateImage(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.ImagesAPI.CreateImages(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ImagesAPIService DeleteImage", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+		var id string
+
+		resp, httpRes, err := apiClient.ImagesAPI.DeleteImage(context.Background(), orgId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ImagesAPIService ListImages", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		resp, httpRes, err := apiClient.ImagesAPI.ListImages(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

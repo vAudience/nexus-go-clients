@@ -10,14 +10,12 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.15.17
+  version: 0.17.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
 - description: anything related to ai agents
   name: Agents
-- description: anything related to agent prompts
-  name: AgentPrompts
 - description: anything related to the AI models
   name: AIModels
 - description: anything related to the AI model services
@@ -45,6 +43,8 @@ tags:
   name: Missions
 - description: anything related to the organization cost budgets
   name: OrgCostBudgets
+- description: anything related to prompts
+  name: Prompts
 paths:
   /info/health:
     get:
@@ -669,359 +669,6 @@ paths:
       tags:
       - AIModels
       x-codegen-request-body-name: aiModel
-  /v1/organizations/{org_id}/agent-prompts:
-    get:
-      description: List agent prompts for an organization
-      operationId: ListAgentPrompts
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Offset
-        in: query
-        name: offset
-        schema:
-          type: integer
-      - description: Limit
-        in: query
-        name: limit
-        schema:
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AgentPrompt'
-                type: array
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: List agent prompts
-      tags:
-      - AgentPrompts
-    post:
-      description: Create a new agent prompt
-      operationId: CreateAgentPrompt
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentPrompt'
-        description: Agent Prompt object
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentPrompt'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a new agent prompt
-      tags:
-      - AgentPrompts
-      x-codegen-request-body-name: prompt
-  /v1/organizations/{org_id}/agent-prompts/render:
-    post:
-      description: Renders an agent prompt by resolving references and replacing variables
-        in the prompt content.
-      operationId: RenderAgentPrompt
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentPromptRenderDto'
-        description: Agent Prompt Render DTO
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentPromptRenderedDto'
-          description: Rendered prompt content
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Invalid payload or prompt ID
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Prompt not found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal server error
-      summary: Render Agent Prompt
-      tags:
-      - AgentPrompts
-      x-codegen-request-body-name: renderDto
-  /v1/organizations/{org_id}/agent-prompts/{prompt_id}:
-    delete:
-      description: Delete an existing agent prompt
-      operationId: DeleteAgentPrompt
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Prompt ID
-        in: path
-        name: prompt_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          content: {}
-          description: No Content
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Delete an agent prompt
-      tags:
-      - AgentPrompts
-    get:
-      description: Get details of a specific agent prompt
-      operationId: GetAgentPrompt
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Prompt ID
-        in: path
-        name: prompt_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentPrompt'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Get a specific agent prompt
-      tags:
-      - AgentPrompts
-    put:
-      description: Update details of an existing agent prompt
-      operationId: UpdateAgentPrompt
-      parameters:
-      - description: Organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Prompt ID
-        in: path
-        name: prompt_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentPrompt'
-        description: Updated Agent Prompt object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentPrompt'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update an agent prompt
-      tags:
-      - AgentPrompts
-      x-codegen-request-body-name: prompt
   /v1/organizations/{org_id}/agents:
     get:
       description: Retrieve a list of agents by ownership and organization
@@ -3289,10 +2936,60 @@ paths:
       tags:
       - FunctionCalls
       x-codegen-request-body-name: arguments
-  /v1/organizations/{org_id}/images/generate:
+  /v1/organizations/{org_id}/images:
+    get:
+      description: Retrieve a result set of images by ownership and organization
+      operationId: ListImages
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: Limit
+        in: query
+        name: limit
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIgencyImageResults'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List images
+      tags:
+      - Images
     post:
-      description: Generates an image using a model and service
-      operationId: CreateImage
+      description: Generates a number of images using a model and service
+      operationId: CreateImages
       parameters:
       - description: organization ID
         in: path
@@ -3304,15 +3001,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ImageGenerationRequest'
-        description: Image Generation Request
+              $ref: '#/components/schemas/ImageGenerationRequestDto'
+        description: Image Generation Request DTO
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyImage'
+                items:
+                  $ref: '#/components/schemas/AIgencyImage'
+                type: array
           description: OK
         "400":
           content:
@@ -3340,10 +3039,69 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: Generates an image
+      summary: Generates a number of images
       tags:
       - Images
       x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/images/{id}:
+    delete:
+      description: Delete an image by its ID
+      operationId: DeleteImage
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Image ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIgencyImage'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete an image
+      tags:
+      - Images
   /v1/organizations/{org_id}/messages:
     post:
       description: Create a new message with the provided details
@@ -4079,6 +3837,359 @@ paths:
       summary: Cancel a mission
       tags:
       - Missions
+  /v1/organizations/{org_id}/prompts:
+    get:
+      description: List prompts for an organization
+      operationId: ListPrompts
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: Limit
+        in: query
+        name: limit
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prompt'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List prompts
+      tags:
+      - Prompts
+    post:
+      description: Create a new prompt
+      operationId: CreatePrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptWriteDto'
+        description: Prompt object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a new prompt
+      tags:
+      - Prompts
+      x-codegen-request-body-name: prompt
+  /v1/organizations/{org_id}/prompts/render:
+    post:
+      description: Renders a prompt by resolving references and replacing variables
+        in the prompt content.
+      operationId: RenderPrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptRenderDto'
+        description: Prompt Render DTO
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenderedPrompt'
+          description: Rendered prompt content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Invalid payload or prompt ID
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Prompt not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal server error
+      summary: Render Prompt
+      tags:
+      - Prompts
+      x-codegen-request-body-name: renderDto
+  /v1/organizations/{org_id}/prompts/{prompt_id}:
+    delete:
+      description: Delete an existing prompt
+      operationId: DeletePrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Prompt ID
+        in: path
+        name: prompt_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete a prompt
+      tags:
+      - Prompts
+    get:
+      description: Get details of a specific prompt
+      operationId: GetPrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Prompt ID
+        in: path
+        name: prompt_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get a specific prompt
+      tags:
+      - Prompts
+    put:
+      description: Update details of an existing prompt
+      operationId: UpdatePrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Prompt ID
+        in: path
+        name: prompt_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptWriteDto'
+        description: Updated Prompt object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update a prompt
+      tags:
+      - Prompts
+      x-codegen-request-body-name: prompt
 components:
   schemas:
     AIModel:
@@ -4334,6 +4445,7 @@ components:
       - video-input-per-second
       - image-generation-per-image
       - image-generation-per-pixel
+      - image-generation-per-credit
       - audio-generation-per-second
       - video-generation-per-second
       - per-function-call
@@ -4347,6 +4459,7 @@ components:
       - AIModelCostUnitVideoInputPerSecond
       - AIModelCostUnitImageGenerationPerImage
       - AIModelCostUnitImageGenerationPerPixel
+      - AIModelCostUnitImageGenerationPerCredit
       - AIModelCostUnitAudioGenerationPerSecond
       - AIModelCostUnitVideoGenerationPerSecond
       - AIModelCostUnitPerFunctionCall
@@ -4859,66 +4972,188 @@ components:
       type: object
     AIgencyImage:
       example:
-        org_owner_id: org_owner_id
-        agent_id: agent_id
+        execution_id: execution_id
+        owner_organization_id: owner_organization_id
         mime_type: mime_type
-        user_id: user_id
-        message_reference_id: message_reference_id
-        message_response_to_id: message_response_to_id
-        mission_id: mission_id
-        channel_id: channel_id
-        parameters:
-          key: ""
+        owner_id: owner_id
+        created_at: 0
+        id: id
+        message: message
+        thumbnails:
+        - width: 1
+          url: url
+          height: 1
+        - width: 1
+          url: url
+          height: 1
+        parameters: "{}"
+        ai_model_id: ai_model_id
+        ai_service_id: ai_service_id
         url: url
-        username: username
       properties:
-        agent_id:
+        ai_model_id:
+          maxLength: 64
+          minLength: 1
           type: string
-        channel_id:
+        ai_service_id:
+          maxLength: 64
+          minLength: 1
           type: string
-        message_reference_id:
+        created_at:
+          format: int64
+          type: integer
+        execution_id:
+          maxLength: 64
+          minLength: 1
           type: string
-        message_response_to_id:
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        message:
           type: string
         mime_type:
           type: string
-        mission_id:
+        owner_id:
+          maxLength: 64
+          minLength: 1
           type: string
-        org_owner_id:
+        owner_organization_id:
+          maxLength: 64
+          minLength: 1
           type: string
         parameters:
-          additionalProperties: true
+          properties: {}
           type: object
+        thumbnails:
+          items:
+            $ref: '#/components/schemas/AIgencyThumbnail'
+          type: array
         url:
           type: string
-        user_id:
-          type: string
-        username:
-          type: string
+      required:
+      - ai_model_id
+      - ai_service_id
+      - created_at
+      - execution_id
+      - id
+      - message
+      - mime_type
+      - owner_id
+      - owner_organization_id
+      - url
+      type: object
+    AIgencyImageResults:
+      example:
+        results:
+        - execution_id: execution_id
+          owner_organization_id: owner_organization_id
+          mime_type: mime_type
+          owner_id: owner_id
+          created_at: 0
+          id: id
+          message: message
+          thumbnails:
+          - width: 1
+            url: url
+            height: 1
+          - width: 1
+            url: url
+            height: 1
+          parameters: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          url: url
+        - execution_id: execution_id
+          owner_organization_id: owner_organization_id
+          mime_type: mime_type
+          owner_id: owner_id
+          created_at: 0
+          id: id
+          message: message
+          thumbnails:
+          - width: 1
+            url: url
+            height: 1
+          - width: 1
+            url: url
+            height: 1
+          parameters: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          url: url
+        total_results: 5
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/AIgencyImage'
+          type: array
+        total_results:
+          format: int64
+          type: integer
       type: object
     AIgencyMessage:
       example:
-        channel_name: channel_name
-        response_to_id: response_to_id
         attachments:
           files:
           - embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
           - embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
         reference_id: reference_id
+        mission_id: mission_id
+        created_at: 6
+        sender_name: sender_name
+        error:
+          status_code: 5
+          original_status_code: 1
+          error_code: ""
+          message: message
+        type: "{}"
+        ai_service_id: ai_service_id
+        content:
+          data:
+          - file:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+            text: text
+            type: text
+          - file:
+              embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+            text: text
+            type: text
+          full_text: full_text
+        sender_id: sender_id
+        execution_id: execution_id
+        token_count: 5
+        finish_reason: ""
+        updated_at: 2
+        sender_conversation_role: "{}"
+        meta_data: "{}"
+        id: id
+        channel_name: channel_name
+        response_to_id: response_to_id
         created_for_feature:
           capability: ""
           cost_items:
@@ -4948,51 +5183,9 @@ components:
             min: 6
             max: 0
             direction: input
-        mission_id: mission_id
-        created_at: 6
-        sender_name: sender_name
-        error:
-          status_code: 5
-          original_status_code: 1
-          error_code: ""
-          message: message
-        type: "{}"
         ai_model_id: ai_model_id
-        ai_service_id: ai_service_id
-        content:
-          data:
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data:
-                key: "{}"
-              id: id
-              file_size: 0
-              url: url
-            text: text
-            type: text
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data:
-                key: "{}"
-              id: id
-              file_size: 0
-              url: url
-            text: text
-            type: text
-          full_text: full_text
-        sender_id: sender_id
         token_direction: "{}"
-        token_count: 5
-        finish_reason: ""
         owner_organization_id: owner_organization_id
-        updated_at: 2
-        sender_conversation_role: "{}"
-        meta_data: "{}"
-        id: id
         channel_id: channel_id
         parameters: "{}"
       properties:
@@ -5023,6 +5216,10 @@ components:
           $ref: '#/components/schemas/AIModelFeature'
         error:
           $ref: '#/components/schemas/AiServiceError'
+        execution_id:
+          maxLength: 64
+          minLength: 1
+          type: string
         finish_reason:
           $ref: '#/components/schemas/FinishReason'
         id:
@@ -5076,8 +5273,10 @@ components:
       required:
       - ai_model_id
       - ai_service_id
+      - attachments
       - channel_id
       - channel_name
+      - content
       - created_at
       - id
       - owner_organization_id
@@ -5094,8 +5293,7 @@ components:
           embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
-          meta_data:
-            key: "{}"
+          meta_data: "{}"
           id: id
           file_size: 0
           url: url
@@ -5108,6 +5306,9 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/AIgencyMessageContentType'
+      required:
+      - text
+      - type
       type: object
     AIgencyMessageContentList:
       example:
@@ -5116,8 +5317,7 @@ components:
             embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
@@ -5127,8 +5327,7 @@ components:
             embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
@@ -5142,6 +5341,9 @@ components:
           type: array
         full_text:
           type: string
+      required:
+      - data
+      - full_text
       type: object
     AIgencyMessageContentType:
       enum:
@@ -5156,8 +5358,7 @@ components:
         embedded_content: embedded_content
         mime_type: mime_type
         file_name: file_name
-        meta_data:
-          key: "{}"
+        meta_data: "{}"
         id: id
         file_size: 0
         url: url
@@ -5171,13 +5372,20 @@ components:
         id:
           type: string
         meta_data:
-          additionalProperties:
-            type: object
+          properties: {}
           type: object
         mime_type:
           type: string
         url:
           type: string
+      required:
+      - embedded_content
+      - file_name
+      - file_size
+      - id
+      - meta_data
+      - mime_type
+      - url
       type: object
     AIgencyMessageFileList:
       example:
@@ -5185,16 +5393,14 @@ components:
         - embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
-          meta_data:
-            key: "{}"
+          meta_data: "{}"
           id: id
           file_size: 0
           url: url
         - embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
-          meta_data:
-            key: "{}"
+          meta_data: "{}"
           id: id
           file_size: 0
           url: url
@@ -5203,33 +5409,74 @@ components:
           items:
             $ref: '#/components/schemas/AIgencyMessageFile'
           type: array
+      required:
+      - files
       type: object
     AIgencyMessageList:
       type: object
     AIgencyMessageResults:
       example:
         results:
-        - channel_name: channel_name
-          response_to_id: response_to_id
-          attachments:
+        - attachments:
             files:
             - embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
             - embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
           reference_id: reference_id
+          mission_id: mission_id
+          created_at: 6
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            full_text: full_text
+          sender_id: sender_id
+          execution_id: execution_id
+          token_count: 5
+          finish_reason: ""
+          updated_at: 2
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          channel_name: channel_name
+          response_to_id: response_to_id
           created_for_feature:
             capability: ""
             cost_items:
@@ -5259,74 +5506,71 @@ components:
               min: 6
               max: 0
               direction: input
-          mission_id: mission_id
-          created_at: 6
-          sender_name: sender_name
-          error:
-            status_code: 5
-            original_status_code: 1
-            error_code: ""
-            message: message
-          type: "{}"
           ai_model_id: ai_model_id
-          ai_service_id: ai_service_id
-          content:
-            data:
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data:
-                  key: "{}"
-                id: id
-                file_size: 0
-                url: url
-              text: text
-              type: text
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data:
-                  key: "{}"
-                id: id
-                file_size: 0
-                url: url
-              text: text
-              type: text
-            full_text: full_text
-          sender_id: sender_id
           token_direction: "{}"
-          token_count: 5
-          finish_reason: ""
           owner_organization_id: owner_organization_id
-          updated_at: 2
-          sender_conversation_role: "{}"
-          meta_data: "{}"
-          id: id
           channel_id: channel_id
           parameters: "{}"
-        - channel_name: channel_name
-          response_to_id: response_to_id
-          attachments:
+        - attachments:
             files:
             - embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
             - embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
           reference_id: reference_id
+          mission_id: mission_id
+          created_at: 6
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            - file:
+                embedded_content: embedded_content
+                mime_type: mime_type
+                file_name: file_name
+                meta_data: "{}"
+                id: id
+                file_size: 0
+                url: url
+              text: text
+              type: text
+            full_text: full_text
+          sender_id: sender_id
+          execution_id: execution_id
+          token_count: 5
+          finish_reason: ""
+          updated_at: 2
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          channel_name: channel_name
+          response_to_id: response_to_id
           created_for_feature:
             capability: ""
             cost_items:
@@ -5356,51 +5600,9 @@ components:
               min: 6
               max: 0
               direction: input
-          mission_id: mission_id
-          created_at: 6
-          sender_name: sender_name
-          error:
-            status_code: 5
-            original_status_code: 1
-            error_code: ""
-            message: message
-          type: "{}"
           ai_model_id: ai_model_id
-          ai_service_id: ai_service_id
-          content:
-            data:
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data:
-                  key: "{}"
-                id: id
-                file_size: 0
-                url: url
-              text: text
-              type: text
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data:
-                  key: "{}"
-                id: id
-                file_size: 0
-                url: url
-              text: text
-              type: text
-            full_text: full_text
-          sender_id: sender_id
           token_direction: "{}"
-          token_count: 5
-          finish_reason: ""
           owner_organization_id: owner_organization_id
-          updated_at: 2
-          sender_conversation_role: "{}"
-          meta_data: "{}"
-          id: id
           channel_id: channel_id
           parameters: "{}"
         total_results: 0
@@ -5412,6 +5614,9 @@ components:
         total_results:
           format: int64
           type: integer
+      required:
+      - results
+      - total_results
       type: object
     AIgencyMessageType:
       enum:
@@ -5434,16 +5639,14 @@ components:
           - embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
           - embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
-            meta_data:
-              key: "{}"
+            meta_data: "{}"
             id: id
             file_size: 0
             url: url
@@ -5459,8 +5662,7 @@ components:
               embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
@@ -5470,8 +5672,7 @@ components:
               embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
-              meta_data:
-                key: "{}"
+              meta_data: "{}"
               id: id
               file_size: 0
               url: url
@@ -5542,6 +5743,23 @@ components:
       - sender_conversation_role
       - sender_name
       - type
+      type: object
+    AIgencyThumbnail:
+      example:
+        width: 1
+        url: url
+        height: 1
+      properties:
+        height:
+          minimum: 1
+          type: integer
+        url:
+          type: string
+        width:
+          minimum: 1
+          type: integer
+      required:
+      - url
       type: object
     Ability:
       example:
@@ -5720,103 +5938,6 @@ components:
       - owner_id
       - owner_organization_id
       type: object
-    AgentPrompt:
-      example:
-        visibility: private
-        owner_id: owner_id
-        created_at: 0
-        current_version: 6
-        description: description
-        thumbnail_url: thumbnail_url
-        title: title
-        space: space
-        tags:
-        - tags
-        - tags
-        owner_organization_id: owner_organization_id
-        updated_at: 1
-        versions:
-        - created_at: 5
-          created_by: created_by
-          version: 5
-          content: content
-        - created_at: 5
-          created_by: created_by
-          version: 5
-          content: content
-        id: id
-      properties:
-        created_at:
-          type: integer
-        current_version:
-          type: integer
-        description:
-          type: string
-        id:
-          type: string
-        owner_id:
-          type: string
-        owner_organization_id:
-          type: string
-        space:
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-        thumbnail_url:
-          type: string
-        title:
-          type: string
-        updated_at:
-          type: integer
-        versions:
-          items:
-            $ref: '#/components/schemas/PromptVersion'
-          type: array
-        visibility:
-          $ref: '#/components/schemas/AgentPromptVisibilityStates'
-      required:
-      - id
-      - owner_id
-      - owner_organization_id
-      - title
-      type: object
-    AgentPromptRenderDto:
-      example:
-        var_replacements:
-          key: var_replacements
-        prompt_id: prompt_id
-        content: content
-      properties:
-        content:
-          type: string
-        prompt_id:
-          type: string
-        var_replacements:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    AgentPromptRenderedDto:
-      example:
-        rendered_prompt: rendered_prompt
-      properties:
-        rendered_prompt:
-          type: string
-      type: object
-    AgentPromptVisibilityStates:
-      enum:
-      - private
-      - org
-      - public
-      - curated
-      type: string
-      x-enum-varnames:
-      - AgentPromptVisibilityPrivate
-      - AgentPromptVisibilityOrganization
-      - AgentPromptVisibilityPublic
-      - AgentPromptVisibilityCurated
     AgentType:
       enum:
       - ""
@@ -5938,8 +6059,10 @@ components:
       - anthropicgooglecloud
       - assemblyai
       - azureai
+      - blackforest
       - elevenlabs
       - googlevertexai
+      - leonardoai
       - openai
       - replicate
       - vaiembed
@@ -5949,8 +6072,10 @@ components:
       - AiServiceIdAnthropicGcp
       - AiServiceIdAssemblyAI
       - AiServiceIdAzureAi
+      - AiServiceIdBlackForest
       - AiServiceIdElevenLabs
       - AiServiceIdGoogleVertexAi
+      - AiServiceIdLeonardoAI
       - AiServiceIdOpenAI
       - AiServiceIdReplicate
       - AiServiceIdVaiEmbed
@@ -6039,6 +6164,13 @@ components:
       - invalid_file_upload_mime_type
       - processing_checks_failed
       - functioncall_not_found
+      - failed_to_generate_image
+      - invalid_image_id
+      - image_not_found
+      - failed_to_delete_image
+      - failed_to_get_image
+      - failed_to_search_images
+      - failed_to_store_images
       - invalid_message_id
       - message_not_found
       - failed_to_update_message
@@ -6070,6 +6202,9 @@ components:
       - failed_to_create_temp_api_key
       - invalid_prompt_id
       - prompt_not_found
+      - failed_to_get_prompt
+      - failed_to_update_prompt
+      - failed_to_delete_prompt
       - invalid_prompt_data
       - prompt_already_exists
       - invalid_prompt_version
@@ -6150,6 +6285,13 @@ components:
       - ErrCodeInvalidFileUploadMimeType
       - ErrCodeProcessingChecksFailed
       - ErrCodeFunctionCallNotFound
+      - ErrCodeFailedToGenerateImage
+      - ErrCodeInvalidImageID
+      - ErrCodeImageNotFound
+      - ErrCodeFailedToDeleteImage
+      - ErrCodeFailedToGetImage
+      - ErrCodeFailedToSearchImages
+      - ErrCodeFailedToStoreImages
       - ErrCodeInvalidMessageID
       - ErrCodeMessageNotFound
       - ErrCodeFailedToUpdateMessage
@@ -6181,6 +6323,9 @@ components:
       - ErrCodeFailedToCreateTempApiKey
       - ErrCodeInvalidPromptID
       - ErrCodePromptNotFound
+      - ErrCodeFailedToGetPrompt
+      - ErrCodeFailedToUpdatePrompt
+      - ErrCodeFailedToDeletePrompt
       - ErrCodeInvalidPromptData
       - ErrCodePromptAlreadyExists
       - ErrCodeInvalidVersion
@@ -6283,8 +6428,7 @@ components:
           embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
-          meta_data:
-            key: "{}"
+          meta_data: "{}"
           id: id
           file_size: 0
           url: url
@@ -6372,7 +6516,6 @@ components:
           type: object
         mission_id:
           maxLength: 64
-          minLength: 1
           type: string
         name:
           maxLength: 255
@@ -6420,7 +6563,6 @@ components:
           type: object
         mission_id:
           maxLength: 64
-          minLength: 1
           type: string
         name:
           maxLength: 255
@@ -6559,6 +6701,7 @@ components:
     ExecutionLog:
       example:
         ai_model_service_id: ai_model_service_id
+        execution_id: execution_id
         owner_organization_id: owner_organization_id
         agent_id: agent_id
         owner_id: owner_id
@@ -6591,6 +6734,8 @@ components:
         created_at:
           format: int64
           type: integer
+        execution_id:
+          type: string
         final_cost_in_euro:
           format: double
           type: number
@@ -6619,6 +6764,7 @@ components:
       example:
         results:
         - ai_model_service_id: ai_model_service_id
+          execution_id: execution_id
           owner_organization_id: owner_organization_id
           agent_id: agent_id
           owner_id: owner_id
@@ -6640,6 +6786,7 @@ components:
           channel_id: channel_id
           ai_model_id: ai_model_id
         - ai_model_service_id: ai_model_service_id
+          execution_id: execution_id
           owner_organization_id: owner_organization_id
           agent_id: agent_id
           owner_id: owner_id
@@ -6726,10 +6873,12 @@ components:
         resulting_files:
         - mime_type: mime_type
           file_name: file_name
+          original_file_name: original_file_name
           file_size: 0
           url: url
         - mime_type: mime_type
           file_name: file_name
+          original_file_name: original_file_name
           file_size: 0
           url: url
         id: id
@@ -6802,10 +6951,12 @@ components:
         result_files:
         - mime_type: mime_type
           file_name: file_name
+          original_file_name: original_file_name
           file_size: 0
           url: url
         - mime_type: mime_type
           file_name: file_name
+          original_file_name: original_file_name
           file_size: 0
           url: url
         final_state: final_state
@@ -6858,26 +7009,14 @@ components:
       - HostingLocationUK
       - HostingLocationSWISS
       - HostingLocationANY
-    ImageGenerationRequest:
+    ImageGenerationRequestDto:
       example:
         agent_id: agent_id
-        team_ids:
-        - team_ids
-        - team_ids
-        message_response_to_id: message_response_to_id
-        mission_id: mission_id
-        output_image_file_format: output_image_file_format
         message: message
-        user_id: user_id
-        org_id: org_id
-        message_reference_id: message_reference_id
-        id: id
         attached_temporary_files:
         - attached_temporary_files
         - attached_temporary_files
-        channel_id: channel_id
         parameters: "{}"
-        username: username
       properties:
         agent_id:
           type: string
@@ -6885,33 +7024,14 @@ components:
           items:
             type: string
           type: array
-        channel_id:
-          type: string
-        id:
-          type: string
         message:
-          type: string
-        message_reference_id:
-          type: string
-        message_response_to_id:
-          type: string
-        mission_id:
-          type: string
-        org_id:
-          type: string
-        output_image_file_format:
           type: string
         parameters:
           properties: {}
           type: object
-        team_ids:
-          items:
-            type: string
-          type: array
-        user_id:
-          type: string
-        username:
-          type: string
+      required:
+      - agent_id
+      - message
       type: object
     Mission:
       example:
@@ -7222,6 +7342,84 @@ components:
           minimum: 0
           type: number
       type: object
+    Prompt:
+      example:
+        visibility: private
+        owner_id: owner_id
+        created_at: 0
+        current_version: 6
+        description: description
+        default_agent_id: default_agent_id
+        thumbnail_url: thumbnail_url
+        title: title
+        tags:
+        - tags
+        - tags
+        owner_organization_id: owner_organization_id
+        updated_at: 1
+        versions:
+        - created_at: 5
+          created_by: created_by
+          version: 5
+          content: content
+        - created_at: 5
+          created_by: created_by
+          version: 5
+          content: content
+        id: id
+      properties:
+        created_at:
+          format: int64
+          type: integer
+        current_version:
+          type: integer
+        default_agent_id:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        owner_id:
+          type: string
+        owner_organization_id:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        thumbnail_url:
+          type: string
+        title:
+          type: string
+        updated_at:
+          format: int64
+          type: integer
+        versions:
+          items:
+            $ref: '#/components/schemas/PromptVersion'
+          type: array
+        visibility:
+          $ref: '#/components/schemas/PromptVisibilityStates'
+      required:
+      - id
+      - title
+      type: object
+    PromptRenderDto:
+      example:
+        var_replacements:
+          key: var_replacements
+        prompt_id: prompt_id
+        content: content
+      properties:
+        content:
+          type: string
+        prompt_id:
+          type: string
+        var_replacements:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     PromptVersion:
       example:
         created_at: 5
@@ -7232,16 +7430,68 @@ components:
         content:
           type: string
         created_at:
+          format: int64
           type: integer
         created_by:
           type: string
         version:
           type: integer
       type: object
+    PromptVisibilityStates:
+      enum:
+      - private
+      - org
+      - public
+      - curated
+      type: string
+      x-enum-varnames:
+      - PromptVisibilityPrivate
+      - PromptVisibilityOrganization
+      - PromptVisibilityPublic
+      - PromptVisibilityCurated
+    PromptWriteDto:
+      example:
+        visibility: private
+        description: description
+        default_agent_id: default_agent_id
+        thumbnail_url: thumbnail_url
+        title: title
+        content: content
+        tags:
+        - tags
+        - tags
+      properties:
+        content:
+          type: string
+        default_agent_id:
+          type: string
+        description:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        thumbnail_url:
+          type: string
+        title:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/PromptVisibilityStates'
+      type: object
+    RenderedPrompt:
+      example:
+        content: content
+      properties:
+        content:
+          type: string
+      required:
+      - content
+      type: object
     ResultFile:
       example:
         mime_type: mime_type
         file_name: file_name
+        original_file_name: original_file_name
         file_size: 0
         url: url
       properties:
@@ -7251,12 +7501,15 @@ components:
           type: integer
         mime_type:
           type: string
+        original_file_name:
+          type: string
         url:
           type: string
       required:
       - file_name
       - file_size
       - mime_type
+      - original_file_name
       - url
       type: object
     TextEmbedding:

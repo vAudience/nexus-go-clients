@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -16,54 +16,52 @@ import (
 	"fmt"
 )
 
-// checks if the AgentPrompt type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AgentPrompt{}
+// checks if the Prompt type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Prompt{}
 
-// AgentPrompt struct for AgentPrompt
-type AgentPrompt struct {
-	CreatedAt *int32 `json:"created_at,omitempty"`
+// Prompt struct for Prompt
+type Prompt struct {
+	CreatedAt *int64 `json:"created_at,omitempty"`
 	CurrentVersion *int32 `json:"current_version,omitempty"`
+	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
-	OwnerId string `json:"owner_id"`
-	OwnerOrganizationId string `json:"owner_organization_id"`
-	Space *string `json:"space,omitempty"`
+	OwnerId *string `json:"owner_id,omitempty"`
+	OwnerOrganizationId *string `json:"owner_organization_id,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title string `json:"title"`
-	UpdatedAt *int32 `json:"updated_at,omitempty"`
+	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	Versions []PromptVersion `json:"versions,omitempty"`
-	Visibility *AgentPromptVisibilityStates `json:"visibility,omitempty"`
+	Visibility *PromptVisibilityStates `json:"visibility,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _AgentPrompt AgentPrompt
+type _Prompt Prompt
 
-// NewAgentPrompt instantiates a new AgentPrompt object
+// NewPrompt instantiates a new Prompt object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAgentPrompt(id string, ownerId string, ownerOrganizationId string, title string) *AgentPrompt {
-	this := AgentPrompt{}
+func NewPrompt(id string, title string) *Prompt {
+	this := Prompt{}
 	this.Id = id
-	this.OwnerId = ownerId
-	this.OwnerOrganizationId = ownerOrganizationId
 	this.Title = title
 	return &this
 }
 
-// NewAgentPromptWithDefaults instantiates a new AgentPrompt object
+// NewPromptWithDefaults instantiates a new Prompt object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAgentPromptWithDefaults() *AgentPrompt {
-	this := AgentPrompt{}
+func NewPromptWithDefaults() *Prompt {
+	this := Prompt{}
 	return &this
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *AgentPrompt) GetCreatedAt() int32 {
+func (o *Prompt) GetCreatedAt() int64 {
 	if o == nil || IsNil(o.CreatedAt) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.CreatedAt
@@ -71,7 +69,7 @@ func (o *AgentPrompt) GetCreatedAt() int32 {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetCreatedAtOk() (*int32, bool) {
+func (o *Prompt) GetCreatedAtOk() (*int64, bool) {
 	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
@@ -79,7 +77,7 @@ func (o *AgentPrompt) GetCreatedAtOk() (*int32, bool) {
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *AgentPrompt) HasCreatedAt() bool {
+func (o *Prompt) HasCreatedAt() bool {
 	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
@@ -87,13 +85,13 @@ func (o *AgentPrompt) HasCreatedAt() bool {
 	return false
 }
 
-// SetCreatedAt gets a reference to the given int32 and assigns it to the CreatedAt field.
-func (o *AgentPrompt) SetCreatedAt(v int32) {
+// SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
+func (o *Prompt) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
 }
 
 // GetCurrentVersion returns the CurrentVersion field value if set, zero value otherwise.
-func (o *AgentPrompt) GetCurrentVersion() int32 {
+func (o *Prompt) GetCurrentVersion() int32 {
 	if o == nil || IsNil(o.CurrentVersion) {
 		var ret int32
 		return ret
@@ -103,7 +101,7 @@ func (o *AgentPrompt) GetCurrentVersion() int32 {
 
 // GetCurrentVersionOk returns a tuple with the CurrentVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetCurrentVersionOk() (*int32, bool) {
+func (o *Prompt) GetCurrentVersionOk() (*int32, bool) {
 	if o == nil || IsNil(o.CurrentVersion) {
 		return nil, false
 	}
@@ -111,7 +109,7 @@ func (o *AgentPrompt) GetCurrentVersionOk() (*int32, bool) {
 }
 
 // HasCurrentVersion returns a boolean if a field has been set.
-func (o *AgentPrompt) HasCurrentVersion() bool {
+func (o *Prompt) HasCurrentVersion() bool {
 	if o != nil && !IsNil(o.CurrentVersion) {
 		return true
 	}
@@ -120,12 +118,44 @@ func (o *AgentPrompt) HasCurrentVersion() bool {
 }
 
 // SetCurrentVersion gets a reference to the given int32 and assigns it to the CurrentVersion field.
-func (o *AgentPrompt) SetCurrentVersion(v int32) {
+func (o *Prompt) SetCurrentVersion(v int32) {
 	o.CurrentVersion = &v
 }
 
+// GetDefaultAgentId returns the DefaultAgentId field value if set, zero value otherwise.
+func (o *Prompt) GetDefaultAgentId() string {
+	if o == nil || IsNil(o.DefaultAgentId) {
+		var ret string
+		return ret
+	}
+	return *o.DefaultAgentId
+}
+
+// GetDefaultAgentIdOk returns a tuple with the DefaultAgentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetDefaultAgentIdOk() (*string, bool) {
+	if o == nil || IsNil(o.DefaultAgentId) {
+		return nil, false
+	}
+	return o.DefaultAgentId, true
+}
+
+// HasDefaultAgentId returns a boolean if a field has been set.
+func (o *Prompt) HasDefaultAgentId() bool {
+	if o != nil && !IsNil(o.DefaultAgentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultAgentId gets a reference to the given string and assigns it to the DefaultAgentId field.
+func (o *Prompt) SetDefaultAgentId(v string) {
+	o.DefaultAgentId = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *AgentPrompt) GetDescription() string {
+func (o *Prompt) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -135,7 +165,7 @@ func (o *AgentPrompt) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetDescriptionOk() (*string, bool) {
+func (o *Prompt) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -143,7 +173,7 @@ func (o *AgentPrompt) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *AgentPrompt) HasDescription() bool {
+func (o *Prompt) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -152,12 +182,12 @@ func (o *AgentPrompt) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *AgentPrompt) SetDescription(v string) {
+func (o *Prompt) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetId returns the Id field value
-func (o *AgentPrompt) GetId() string {
+func (o *Prompt) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -168,7 +198,7 @@ func (o *AgentPrompt) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetIdOk() (*string, bool) {
+func (o *Prompt) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,92 +206,76 @@ func (o *AgentPrompt) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *AgentPrompt) SetId(v string) {
+func (o *Prompt) SetId(v string) {
 	o.Id = v
 }
 
-// GetOwnerId returns the OwnerId field value
-func (o *AgentPrompt) GetOwnerId() string {
-	if o == nil {
+// GetOwnerId returns the OwnerId field value if set, zero value otherwise.
+func (o *Prompt) GetOwnerId() string {
+	if o == nil || IsNil(o.OwnerId) {
 		var ret string
 		return ret
 	}
-
-	return o.OwnerId
+	return *o.OwnerId
 }
 
-// GetOwnerIdOk returns a tuple with the OwnerId field value
+// GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetOwnerIdOk() (*string, bool) {
-	if o == nil {
+func (o *Prompt) GetOwnerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OwnerId) {
 		return nil, false
 	}
-	return &o.OwnerId, true
+	return o.OwnerId, true
 }
 
-// SetOwnerId sets field value
-func (o *AgentPrompt) SetOwnerId(v string) {
-	o.OwnerId = v
-}
-
-// GetOwnerOrganizationId returns the OwnerOrganizationId field value
-func (o *AgentPrompt) GetOwnerOrganizationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.OwnerOrganizationId
-}
-
-// GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field value
-// and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetOwnerOrganizationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OwnerOrganizationId, true
-}
-
-// SetOwnerOrganizationId sets field value
-func (o *AgentPrompt) SetOwnerOrganizationId(v string) {
-	o.OwnerOrganizationId = v
-}
-
-// GetSpace returns the Space field value if set, zero value otherwise.
-func (o *AgentPrompt) GetSpace() string {
-	if o == nil || IsNil(o.Space) {
-		var ret string
-		return ret
-	}
-	return *o.Space
-}
-
-// GetSpaceOk returns a tuple with the Space field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetSpaceOk() (*string, bool) {
-	if o == nil || IsNil(o.Space) {
-		return nil, false
-	}
-	return o.Space, true
-}
-
-// HasSpace returns a boolean if a field has been set.
-func (o *AgentPrompt) HasSpace() bool {
-	if o != nil && !IsNil(o.Space) {
+// HasOwnerId returns a boolean if a field has been set.
+func (o *Prompt) HasOwnerId() bool {
+	if o != nil && !IsNil(o.OwnerId) {
 		return true
 	}
 
 	return false
 }
 
-// SetSpace gets a reference to the given string and assigns it to the Space field.
-func (o *AgentPrompt) SetSpace(v string) {
-	o.Space = &v
+// SetOwnerId gets a reference to the given string and assigns it to the OwnerId field.
+func (o *Prompt) SetOwnerId(v string) {
+	o.OwnerId = &v
+}
+
+// GetOwnerOrganizationId returns the OwnerOrganizationId field value if set, zero value otherwise.
+func (o *Prompt) GetOwnerOrganizationId() string {
+	if o == nil || IsNil(o.OwnerOrganizationId) {
+		var ret string
+		return ret
+	}
+	return *o.OwnerOrganizationId
+}
+
+// GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetOwnerOrganizationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OwnerOrganizationId) {
+		return nil, false
+	}
+	return o.OwnerOrganizationId, true
+}
+
+// HasOwnerOrganizationId returns a boolean if a field has been set.
+func (o *Prompt) HasOwnerOrganizationId() bool {
+	if o != nil && !IsNil(o.OwnerOrganizationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnerOrganizationId gets a reference to the given string and assigns it to the OwnerOrganizationId field.
+func (o *Prompt) SetOwnerOrganizationId(v string) {
+	o.OwnerOrganizationId = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
-func (o *AgentPrompt) GetTags() []string {
+func (o *Prompt) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
 		var ret []string
 		return ret
@@ -271,7 +285,7 @@ func (o *AgentPrompt) GetTags() []string {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetTagsOk() ([]string, bool) {
+func (o *Prompt) GetTagsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -279,7 +293,7 @@ func (o *AgentPrompt) GetTagsOk() ([]string, bool) {
 }
 
 // HasTags returns a boolean if a field has been set.
-func (o *AgentPrompt) HasTags() bool {
+func (o *Prompt) HasTags() bool {
 	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
@@ -288,12 +302,12 @@ func (o *AgentPrompt) HasTags() bool {
 }
 
 // SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *AgentPrompt) SetTags(v []string) {
+func (o *Prompt) SetTags(v []string) {
 	o.Tags = v
 }
 
 // GetThumbnailUrl returns the ThumbnailUrl field value if set, zero value otherwise.
-func (o *AgentPrompt) GetThumbnailUrl() string {
+func (o *Prompt) GetThumbnailUrl() string {
 	if o == nil || IsNil(o.ThumbnailUrl) {
 		var ret string
 		return ret
@@ -303,7 +317,7 @@ func (o *AgentPrompt) GetThumbnailUrl() string {
 
 // GetThumbnailUrlOk returns a tuple with the ThumbnailUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetThumbnailUrlOk() (*string, bool) {
+func (o *Prompt) GetThumbnailUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.ThumbnailUrl) {
 		return nil, false
 	}
@@ -311,7 +325,7 @@ func (o *AgentPrompt) GetThumbnailUrlOk() (*string, bool) {
 }
 
 // HasThumbnailUrl returns a boolean if a field has been set.
-func (o *AgentPrompt) HasThumbnailUrl() bool {
+func (o *Prompt) HasThumbnailUrl() bool {
 	if o != nil && !IsNil(o.ThumbnailUrl) {
 		return true
 	}
@@ -320,12 +334,12 @@ func (o *AgentPrompt) HasThumbnailUrl() bool {
 }
 
 // SetThumbnailUrl gets a reference to the given string and assigns it to the ThumbnailUrl field.
-func (o *AgentPrompt) SetThumbnailUrl(v string) {
+func (o *Prompt) SetThumbnailUrl(v string) {
 	o.ThumbnailUrl = &v
 }
 
 // GetTitle returns the Title field value
-func (o *AgentPrompt) GetTitle() string {
+func (o *Prompt) GetTitle() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -336,7 +350,7 @@ func (o *AgentPrompt) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetTitleOk() (*string, bool) {
+func (o *Prompt) GetTitleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -344,14 +358,14 @@ func (o *AgentPrompt) GetTitleOk() (*string, bool) {
 }
 
 // SetTitle sets field value
-func (o *AgentPrompt) SetTitle(v string) {
+func (o *Prompt) SetTitle(v string) {
 	o.Title = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *AgentPrompt) GetUpdatedAt() int32 {
+func (o *Prompt) GetUpdatedAt() int64 {
 	if o == nil || IsNil(o.UpdatedAt) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.UpdatedAt
@@ -359,7 +373,7 @@ func (o *AgentPrompt) GetUpdatedAt() int32 {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetUpdatedAtOk() (*int32, bool) {
+func (o *Prompt) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
@@ -367,7 +381,7 @@ func (o *AgentPrompt) GetUpdatedAtOk() (*int32, bool) {
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
-func (o *AgentPrompt) HasUpdatedAt() bool {
+func (o *Prompt) HasUpdatedAt() bool {
 	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
@@ -375,13 +389,13 @@ func (o *AgentPrompt) HasUpdatedAt() bool {
 	return false
 }
 
-// SetUpdatedAt gets a reference to the given int32 and assigns it to the UpdatedAt field.
-func (o *AgentPrompt) SetUpdatedAt(v int32) {
+// SetUpdatedAt gets a reference to the given int64 and assigns it to the UpdatedAt field.
+func (o *Prompt) SetUpdatedAt(v int64) {
 	o.UpdatedAt = &v
 }
 
 // GetVersions returns the Versions field value if set, zero value otherwise.
-func (o *AgentPrompt) GetVersions() []PromptVersion {
+func (o *Prompt) GetVersions() []PromptVersion {
 	if o == nil || IsNil(o.Versions) {
 		var ret []PromptVersion
 		return ret
@@ -391,7 +405,7 @@ func (o *AgentPrompt) GetVersions() []PromptVersion {
 
 // GetVersionsOk returns a tuple with the Versions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetVersionsOk() ([]PromptVersion, bool) {
+func (o *Prompt) GetVersionsOk() ([]PromptVersion, bool) {
 	if o == nil || IsNil(o.Versions) {
 		return nil, false
 	}
@@ -399,7 +413,7 @@ func (o *AgentPrompt) GetVersionsOk() ([]PromptVersion, bool) {
 }
 
 // HasVersions returns a boolean if a field has been set.
-func (o *AgentPrompt) HasVersions() bool {
+func (o *Prompt) HasVersions() bool {
 	if o != nil && !IsNil(o.Versions) {
 		return true
 	}
@@ -408,14 +422,14 @@ func (o *AgentPrompt) HasVersions() bool {
 }
 
 // SetVersions gets a reference to the given []PromptVersion and assigns it to the Versions field.
-func (o *AgentPrompt) SetVersions(v []PromptVersion) {
+func (o *Prompt) SetVersions(v []PromptVersion) {
 	o.Versions = v
 }
 
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *AgentPrompt) GetVisibility() AgentPromptVisibilityStates {
+func (o *Prompt) GetVisibility() PromptVisibilityStates {
 	if o == nil || IsNil(o.Visibility) {
-		var ret AgentPromptVisibilityStates
+		var ret PromptVisibilityStates
 		return ret
 	}
 	return *o.Visibility
@@ -423,7 +437,7 @@ func (o *AgentPrompt) GetVisibility() AgentPromptVisibilityStates {
 
 // GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentPrompt) GetVisibilityOk() (*AgentPromptVisibilityStates, bool) {
+func (o *Prompt) GetVisibilityOk() (*PromptVisibilityStates, bool) {
 	if o == nil || IsNil(o.Visibility) {
 		return nil, false
 	}
@@ -431,7 +445,7 @@ func (o *AgentPrompt) GetVisibilityOk() (*AgentPromptVisibilityStates, bool) {
 }
 
 // HasVisibility returns a boolean if a field has been set.
-func (o *AgentPrompt) HasVisibility() bool {
+func (o *Prompt) HasVisibility() bool {
 	if o != nil && !IsNil(o.Visibility) {
 		return true
 	}
@@ -439,12 +453,12 @@ func (o *AgentPrompt) HasVisibility() bool {
 	return false
 }
 
-// SetVisibility gets a reference to the given AgentPromptVisibilityStates and assigns it to the Visibility field.
-func (o *AgentPrompt) SetVisibility(v AgentPromptVisibilityStates) {
+// SetVisibility gets a reference to the given PromptVisibilityStates and assigns it to the Visibility field.
+func (o *Prompt) SetVisibility(v PromptVisibilityStates) {
 	o.Visibility = &v
 }
 
-func (o AgentPrompt) MarshalJSON() ([]byte, error) {
+func (o Prompt) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -452,7 +466,7 @@ func (o AgentPrompt) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AgentPrompt) ToMap() (map[string]interface{}, error) {
+func (o Prompt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
@@ -460,14 +474,18 @@ func (o AgentPrompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CurrentVersion) {
 		toSerialize["current_version"] = o.CurrentVersion
 	}
+	if !IsNil(o.DefaultAgentId) {
+		toSerialize["default_agent_id"] = o.DefaultAgentId
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["id"] = o.Id
-	toSerialize["owner_id"] = o.OwnerId
-	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
-	if !IsNil(o.Space) {
-		toSerialize["space"] = o.Space
+	if !IsNil(o.OwnerId) {
+		toSerialize["owner_id"] = o.OwnerId
+	}
+	if !IsNil(o.OwnerOrganizationId) {
+		toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
@@ -493,14 +511,12 @@ func (o AgentPrompt) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AgentPrompt) UnmarshalJSON(data []byte) (err error) {
+func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"owner_id",
-		"owner_organization_id",
 		"title",
 	}
 
@@ -518,26 +534,26 @@ func (o *AgentPrompt) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAgentPrompt := _AgentPrompt{}
+	varPrompt := _Prompt{}
 
-	err = json.Unmarshal(data, &varAgentPrompt)
+	err = json.Unmarshal(data, &varPrompt)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AgentPrompt(varAgentPrompt)
+	*o = Prompt(varPrompt)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "current_version")
+		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
-		delete(additionalProperties, "space")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")
@@ -550,38 +566,38 @@ func (o *AgentPrompt) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAgentPrompt struct {
-	value *AgentPrompt
+type NullablePrompt struct {
+	value *Prompt
 	isSet bool
 }
 
-func (v NullableAgentPrompt) Get() *AgentPrompt {
+func (v NullablePrompt) Get() *Prompt {
 	return v.value
 }
 
-func (v *NullableAgentPrompt) Set(val *AgentPrompt) {
+func (v *NullablePrompt) Set(val *Prompt) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAgentPrompt) IsSet() bool {
+func (v NullablePrompt) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAgentPrompt) Unset() {
+func (v *NullablePrompt) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAgentPrompt(val *AgentPrompt) *NullableAgentPrompt {
-	return &NullableAgentPrompt{value: val, isSet: true}
+func NewNullablePrompt(val *Prompt) *NullablePrompt {
+	return &NullablePrompt{value: val, isSet: true}
 }
 
-func (v NullableAgentPrompt) MarshalJSON() ([]byte, error) {
+func (v NullablePrompt) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAgentPrompt) UnmarshalJSON(src []byte) error {
+func (v *NullablePrompt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

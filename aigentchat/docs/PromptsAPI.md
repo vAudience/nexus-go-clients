@@ -1,23 +1,23 @@
-# \AgentPromptsAPI
+# \PromptsAPI
 
 All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAgentPrompt**](AgentPromptsAPI.md#CreateAgentPrompt) | **Post** /v1/organizations/{org_id}/agent-prompts | Create a new agent prompt
-[**DeleteAgentPrompt**](AgentPromptsAPI.md#DeleteAgentPrompt) | **Delete** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Delete an agent prompt
-[**GetAgentPrompt**](AgentPromptsAPI.md#GetAgentPrompt) | **Get** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Get a specific agent prompt
-[**ListAgentPrompts**](AgentPromptsAPI.md#ListAgentPrompts) | **Get** /v1/organizations/{org_id}/agent-prompts | List agent prompts
-[**RenderAgentPrompt**](AgentPromptsAPI.md#RenderAgentPrompt) | **Post** /v1/organizations/{org_id}/agent-prompts/render | Render Agent Prompt
-[**UpdateAgentPrompt**](AgentPromptsAPI.md#UpdateAgentPrompt) | **Put** /v1/organizations/{org_id}/agent-prompts/{prompt_id} | Update an agent prompt
+[**CreatePrompt**](PromptsAPI.md#CreatePrompt) | **Post** /v1/organizations/{org_id}/prompts | Create a new prompt
+[**DeletePrompt**](PromptsAPI.md#DeletePrompt) | **Delete** /v1/organizations/{org_id}/prompts/{prompt_id} | Delete a prompt
+[**GetPrompt**](PromptsAPI.md#GetPrompt) | **Get** /v1/organizations/{org_id}/prompts/{prompt_id} | Get a specific prompt
+[**ListPrompts**](PromptsAPI.md#ListPrompts) | **Get** /v1/organizations/{org_id}/prompts | List prompts
+[**RenderPrompt**](PromptsAPI.md#RenderPrompt) | **Post** /v1/organizations/{org_id}/prompts/render | Render Prompt
+[**UpdatePrompt**](PromptsAPI.md#UpdatePrompt) | **Put** /v1/organizations/{org_id}/prompts/{prompt_id} | Update a prompt
 
 
 
-## CreateAgentPrompt
+## CreatePrompt
 
-> AgentPrompt CreateAgentPrompt(ctx, orgId).Prompt(prompt).Execute()
+> Prompt CreatePrompt(ctx, orgId).Prompt(prompt).Execute()
 
-Create a new agent prompt
+Create a new prompt
 
 
 
@@ -35,17 +35,17 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | Organization ID
-	prompt := *openapiclient.NewAgentPrompt("Id_example", "OwnerId_example", "OwnerOrganizationId_example", "Title_example") // AgentPrompt | Agent Prompt object
+	prompt := *openapiclient.NewPromptWriteDto() // PromptWriteDto | Prompt object
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentPromptsAPI.CreateAgentPrompt(context.Background(), orgId).Prompt(prompt).Execute()
+	resp, r, err := apiClient.PromptsAPI.CreatePrompt(context.Background(), orgId).Prompt(prompt).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.CreateAgentPrompt``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.CreatePrompt``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateAgentPrompt`: AgentPrompt
-	fmt.Fprintf(os.Stdout, "Response from `AgentPromptsAPI.CreateAgentPrompt`: %v\n", resp)
+	// response from `CreatePrompt`: Prompt
+	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.CreatePrompt`: %v\n", resp)
 }
 ```
 
@@ -59,17 +59,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateAgentPromptRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreatePromptRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **prompt** | [**AgentPrompt**](AgentPrompt.md) | Agent Prompt object | 
+ **prompt** | [**PromptWriteDto**](PromptWriteDto.md) | Prompt object | 
 
 ### Return type
 
-[**AgentPrompt**](AgentPrompt.md)
+[**Prompt**](Prompt.md)
 
 ### Authorization
 
@@ -85,11 +85,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteAgentPrompt
+## DeletePrompt
 
-> DeleteAgentPrompt(ctx, orgId, promptId).Execute()
+> DeletePrompt(ctx, orgId, promptId).Execute()
 
-Delete an agent prompt
+Delete a prompt
 
 
 
@@ -111,9 +111,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AgentPromptsAPI.DeleteAgentPrompt(context.Background(), orgId, promptId).Execute()
+	r, err := apiClient.PromptsAPI.DeletePrompt(context.Background(), orgId, promptId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.DeleteAgentPrompt``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.DeletePrompt``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteAgentPromptRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeletePromptRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -156,11 +156,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetAgentPrompt
+## GetPrompt
 
-> AgentPrompt GetAgentPrompt(ctx, orgId, promptId).Execute()
+> Prompt GetPrompt(ctx, orgId, promptId).Execute()
 
-Get a specific agent prompt
+Get a specific prompt
 
 
 
@@ -182,13 +182,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentPromptsAPI.GetAgentPrompt(context.Background(), orgId, promptId).Execute()
+	resp, r, err := apiClient.PromptsAPI.GetPrompt(context.Background(), orgId, promptId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.GetAgentPrompt``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.GetPrompt``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAgentPrompt`: AgentPrompt
-	fmt.Fprintf(os.Stdout, "Response from `AgentPromptsAPI.GetAgentPrompt`: %v\n", resp)
+	// response from `GetPrompt`: Prompt
+	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.GetPrompt`: %v\n", resp)
 }
 ```
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetAgentPromptRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPromptRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AgentPrompt**](AgentPrompt.md)
+[**Prompt**](Prompt.md)
 
 ### Authorization
 
@@ -229,11 +229,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListAgentPrompts
+## ListPrompts
 
-> []AgentPrompt ListAgentPrompts(ctx, orgId).Offset(offset).Limit(limit).Execute()
+> []Prompt ListPrompts(ctx, orgId).Offset(offset).Limit(limit).Execute()
 
-List agent prompts
+List prompts
 
 
 
@@ -256,13 +256,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentPromptsAPI.ListAgentPrompts(context.Background(), orgId).Offset(offset).Limit(limit).Execute()
+	resp, r, err := apiClient.PromptsAPI.ListPrompts(context.Background(), orgId).Offset(offset).Limit(limit).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.ListAgentPrompts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.ListPrompts``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListAgentPrompts`: []AgentPrompt
-	fmt.Fprintf(os.Stdout, "Response from `AgentPromptsAPI.ListAgentPrompts`: %v\n", resp)
+	// response from `ListPrompts`: []Prompt
+	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.ListPrompts`: %v\n", resp)
 }
 ```
 
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListAgentPromptsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListPromptsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AgentPrompt**](AgentPrompt.md)
+[**[]Prompt**](Prompt.md)
 
 ### Authorization
 
@@ -303,11 +303,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## RenderAgentPrompt
+## RenderPrompt
 
-> AgentPromptRenderedDto RenderAgentPrompt(ctx, orgId).RenderDto(renderDto).Execute()
+> RenderedPrompt RenderPrompt(ctx, orgId).RenderDto(renderDto).Execute()
 
-Render Agent Prompt
+Render Prompt
 
 
 
@@ -325,17 +325,17 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | Organization ID
-	renderDto := *openapiclient.NewAgentPromptRenderDto() // AgentPromptRenderDto | Agent Prompt Render DTO
+	renderDto := *openapiclient.NewPromptRenderDto() // PromptRenderDto | Prompt Render DTO
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentPromptsAPI.RenderAgentPrompt(context.Background(), orgId).RenderDto(renderDto).Execute()
+	resp, r, err := apiClient.PromptsAPI.RenderPrompt(context.Background(), orgId).RenderDto(renderDto).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.RenderAgentPrompt``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.RenderPrompt``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RenderAgentPrompt`: AgentPromptRenderedDto
-	fmt.Fprintf(os.Stdout, "Response from `AgentPromptsAPI.RenderAgentPrompt`: %v\n", resp)
+	// response from `RenderPrompt`: RenderedPrompt
+	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.RenderPrompt`: %v\n", resp)
 }
 ```
 
@@ -349,17 +349,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRenderAgentPromptRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRenderPromptRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **renderDto** | [**AgentPromptRenderDto**](AgentPromptRenderDto.md) | Agent Prompt Render DTO | 
+ **renderDto** | [**PromptRenderDto**](PromptRenderDto.md) | Prompt Render DTO | 
 
 ### Return type
 
-[**AgentPromptRenderedDto**](AgentPromptRenderedDto.md)
+[**RenderedPrompt**](RenderedPrompt.md)
 
 ### Authorization
 
@@ -375,11 +375,11 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## UpdateAgentPrompt
+## UpdatePrompt
 
-> AgentPrompt UpdateAgentPrompt(ctx, orgId, promptId).Prompt(prompt).Execute()
+> Prompt UpdatePrompt(ctx, orgId, promptId).Prompt(prompt).Execute()
 
-Update an agent prompt
+Update a prompt
 
 
 
@@ -398,17 +398,17 @@ import (
 func main() {
 	orgId := "orgId_example" // string | Organization ID
 	promptId := "promptId_example" // string | Prompt ID
-	prompt := *openapiclient.NewAgentPrompt("Id_example", "OwnerId_example", "OwnerOrganizationId_example", "Title_example") // AgentPrompt | Updated Agent Prompt object
+	prompt := *openapiclient.NewPromptWriteDto() // PromptWriteDto | Updated Prompt object
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentPromptsAPI.UpdateAgentPrompt(context.Background(), orgId, promptId).Prompt(prompt).Execute()
+	resp, r, err := apiClient.PromptsAPI.UpdatePrompt(context.Background(), orgId, promptId).Prompt(prompt).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentPromptsAPI.UpdateAgentPrompt``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.UpdatePrompt``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateAgentPrompt`: AgentPrompt
-	fmt.Fprintf(os.Stdout, "Response from `AgentPromptsAPI.UpdateAgentPrompt`: %v\n", resp)
+	// response from `UpdatePrompt`: Prompt
+	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.UpdatePrompt`: %v\n", resp)
 }
 ```
 
@@ -423,18 +423,18 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateAgentPromptRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdatePromptRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **prompt** | [**AgentPrompt**](AgentPrompt.md) | Updated Agent Prompt object | 
+ **prompt** | [**PromptWriteDto**](PromptWriteDto.md) | Updated Prompt object | 
 
 ### Return type
 
-[**AgentPrompt**](AgentPrompt.md)
+[**Prompt**](Prompt.md)
 
 ### Authorization
 

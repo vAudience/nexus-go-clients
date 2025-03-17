@@ -1,344 +1,354 @@
-# AgentPrompt
+# Prompt
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **int32** |  | [optional] 
+**CreatedAt** | Pointer to **int64** |  | [optional] 
 **CurrentVersion** | Pointer to **int32** |  | [optional] 
+**DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
-**OwnerId** | **string** |  | 
-**OwnerOrganizationId** | **string** |  | 
-**Space** | Pointer to **string** |  | [optional] 
+**OwnerId** | Pointer to **string** |  | [optional] 
+**OwnerOrganizationId** | Pointer to **string** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | **string** |  | 
-**UpdatedAt** | Pointer to **int32** |  | [optional] 
+**UpdatedAt** | Pointer to **int64** |  | [optional] 
 **Versions** | Pointer to [**[]PromptVersion**](PromptVersion.md) |  | [optional] 
-**Visibility** | Pointer to [**AgentPromptVisibilityStates**](AgentPromptVisibilityStates.md) |  | [optional] 
+**Visibility** | Pointer to [**PromptVisibilityStates**](PromptVisibilityStates.md) |  | [optional] 
 
 ## Methods
 
-### NewAgentPrompt
+### NewPrompt
 
-`func NewAgentPrompt(id string, ownerId string, ownerOrganizationId string, title string, ) *AgentPrompt`
+`func NewPrompt(id string, title string, ) *Prompt`
 
-NewAgentPrompt instantiates a new AgentPrompt object
+NewPrompt instantiates a new Prompt object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAgentPromptWithDefaults
+### NewPromptWithDefaults
 
-`func NewAgentPromptWithDefaults() *AgentPrompt`
+`func NewPromptWithDefaults() *Prompt`
 
-NewAgentPromptWithDefaults instantiates a new AgentPrompt object
+NewPromptWithDefaults instantiates a new Prompt object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCreatedAt
 
-`func (o *AgentPrompt) GetCreatedAt() int32`
+`func (o *Prompt) GetCreatedAt() int64`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *AgentPrompt) GetCreatedAtOk() (*int32, bool)`
+`func (o *Prompt) GetCreatedAtOk() (*int64, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *AgentPrompt) SetCreatedAt(v int32)`
+`func (o *Prompt) SetCreatedAt(v int64)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 ### HasCreatedAt
 
-`func (o *AgentPrompt) HasCreatedAt() bool`
+`func (o *Prompt) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
 
 ### GetCurrentVersion
 
-`func (o *AgentPrompt) GetCurrentVersion() int32`
+`func (o *Prompt) GetCurrentVersion() int32`
 
 GetCurrentVersion returns the CurrentVersion field if non-nil, zero value otherwise.
 
 ### GetCurrentVersionOk
 
-`func (o *AgentPrompt) GetCurrentVersionOk() (*int32, bool)`
+`func (o *Prompt) GetCurrentVersionOk() (*int32, bool)`
 
 GetCurrentVersionOk returns a tuple with the CurrentVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrentVersion
 
-`func (o *AgentPrompt) SetCurrentVersion(v int32)`
+`func (o *Prompt) SetCurrentVersion(v int32)`
 
 SetCurrentVersion sets CurrentVersion field to given value.
 
 ### HasCurrentVersion
 
-`func (o *AgentPrompt) HasCurrentVersion() bool`
+`func (o *Prompt) HasCurrentVersion() bool`
 
 HasCurrentVersion returns a boolean if a field has been set.
 
+### GetDefaultAgentId
+
+`func (o *Prompt) GetDefaultAgentId() string`
+
+GetDefaultAgentId returns the DefaultAgentId field if non-nil, zero value otherwise.
+
+### GetDefaultAgentIdOk
+
+`func (o *Prompt) GetDefaultAgentIdOk() (*string, bool)`
+
+GetDefaultAgentIdOk returns a tuple with the DefaultAgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultAgentId
+
+`func (o *Prompt) SetDefaultAgentId(v string)`
+
+SetDefaultAgentId sets DefaultAgentId field to given value.
+
+### HasDefaultAgentId
+
+`func (o *Prompt) HasDefaultAgentId() bool`
+
+HasDefaultAgentId returns a boolean if a field has been set.
+
 ### GetDescription
 
-`func (o *AgentPrompt) GetDescription() string`
+`func (o *Prompt) GetDescription() string`
 
 GetDescription returns the Description field if non-nil, zero value otherwise.
 
 ### GetDescriptionOk
 
-`func (o *AgentPrompt) GetDescriptionOk() (*string, bool)`
+`func (o *Prompt) GetDescriptionOk() (*string, bool)`
 
 GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescription
 
-`func (o *AgentPrompt) SetDescription(v string)`
+`func (o *Prompt) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
 
 ### HasDescription
 
-`func (o *AgentPrompt) HasDescription() bool`
+`func (o *Prompt) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *AgentPrompt) GetId() string`
+`func (o *Prompt) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *AgentPrompt) GetIdOk() (*string, bool)`
+`func (o *Prompt) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *AgentPrompt) SetId(v string)`
+`func (o *Prompt) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetOwnerId
 
-`func (o *AgentPrompt) GetOwnerId() string`
+`func (o *Prompt) GetOwnerId() string`
 
 GetOwnerId returns the OwnerId field if non-nil, zero value otherwise.
 
 ### GetOwnerIdOk
 
-`func (o *AgentPrompt) GetOwnerIdOk() (*string, bool)`
+`func (o *Prompt) GetOwnerIdOk() (*string, bool)`
 
 GetOwnerIdOk returns a tuple with the OwnerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOwnerId
 
-`func (o *AgentPrompt) SetOwnerId(v string)`
+`func (o *Prompt) SetOwnerId(v string)`
 
 SetOwnerId sets OwnerId field to given value.
 
+### HasOwnerId
+
+`func (o *Prompt) HasOwnerId() bool`
+
+HasOwnerId returns a boolean if a field has been set.
 
 ### GetOwnerOrganizationId
 
-`func (o *AgentPrompt) GetOwnerOrganizationId() string`
+`func (o *Prompt) GetOwnerOrganizationId() string`
 
 GetOwnerOrganizationId returns the OwnerOrganizationId field if non-nil, zero value otherwise.
 
 ### GetOwnerOrganizationIdOk
 
-`func (o *AgentPrompt) GetOwnerOrganizationIdOk() (*string, bool)`
+`func (o *Prompt) GetOwnerOrganizationIdOk() (*string, bool)`
 
 GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOwnerOrganizationId
 
-`func (o *AgentPrompt) SetOwnerOrganizationId(v string)`
+`func (o *Prompt) SetOwnerOrganizationId(v string)`
 
 SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
+### HasOwnerOrganizationId
 
-### GetSpace
+`func (o *Prompt) HasOwnerOrganizationId() bool`
 
-`func (o *AgentPrompt) GetSpace() string`
-
-GetSpace returns the Space field if non-nil, zero value otherwise.
-
-### GetSpaceOk
-
-`func (o *AgentPrompt) GetSpaceOk() (*string, bool)`
-
-GetSpaceOk returns a tuple with the Space field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSpace
-
-`func (o *AgentPrompt) SetSpace(v string)`
-
-SetSpace sets Space field to given value.
-
-### HasSpace
-
-`func (o *AgentPrompt) HasSpace() bool`
-
-HasSpace returns a boolean if a field has been set.
+HasOwnerOrganizationId returns a boolean if a field has been set.
 
 ### GetTags
 
-`func (o *AgentPrompt) GetTags() []string`
+`func (o *Prompt) GetTags() []string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *AgentPrompt) GetTagsOk() (*[]string, bool)`
+`func (o *Prompt) GetTagsOk() (*[]string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *AgentPrompt) SetTags(v []string)`
+`func (o *Prompt) SetTags(v []string)`
 
 SetTags sets Tags field to given value.
 
 ### HasTags
 
-`func (o *AgentPrompt) HasTags() bool`
+`func (o *Prompt) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
 
 ### GetThumbnailUrl
 
-`func (o *AgentPrompt) GetThumbnailUrl() string`
+`func (o *Prompt) GetThumbnailUrl() string`
 
 GetThumbnailUrl returns the ThumbnailUrl field if non-nil, zero value otherwise.
 
 ### GetThumbnailUrlOk
 
-`func (o *AgentPrompt) GetThumbnailUrlOk() (*string, bool)`
+`func (o *Prompt) GetThumbnailUrlOk() (*string, bool)`
 
 GetThumbnailUrlOk returns a tuple with the ThumbnailUrl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetThumbnailUrl
 
-`func (o *AgentPrompt) SetThumbnailUrl(v string)`
+`func (o *Prompt) SetThumbnailUrl(v string)`
 
 SetThumbnailUrl sets ThumbnailUrl field to given value.
 
 ### HasThumbnailUrl
 
-`func (o *AgentPrompt) HasThumbnailUrl() bool`
+`func (o *Prompt) HasThumbnailUrl() bool`
 
 HasThumbnailUrl returns a boolean if a field has been set.
 
 ### GetTitle
 
-`func (o *AgentPrompt) GetTitle() string`
+`func (o *Prompt) GetTitle() string`
 
 GetTitle returns the Title field if non-nil, zero value otherwise.
 
 ### GetTitleOk
 
-`func (o *AgentPrompt) GetTitleOk() (*string, bool)`
+`func (o *Prompt) GetTitleOk() (*string, bool)`
 
 GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTitle
 
-`func (o *AgentPrompt) SetTitle(v string)`
+`func (o *Prompt) SetTitle(v string)`
 
 SetTitle sets Title field to given value.
 
 
 ### GetUpdatedAt
 
-`func (o *AgentPrompt) GetUpdatedAt() int32`
+`func (o *Prompt) GetUpdatedAt() int64`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *AgentPrompt) GetUpdatedAtOk() (*int32, bool)`
+`func (o *Prompt) GetUpdatedAtOk() (*int64, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *AgentPrompt) SetUpdatedAt(v int32)`
+`func (o *Prompt) SetUpdatedAt(v int64)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
 ### HasUpdatedAt
 
-`func (o *AgentPrompt) HasUpdatedAt() bool`
+`func (o *Prompt) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetVersions
 
-`func (o *AgentPrompt) GetVersions() []PromptVersion`
+`func (o *Prompt) GetVersions() []PromptVersion`
 
 GetVersions returns the Versions field if non-nil, zero value otherwise.
 
 ### GetVersionsOk
 
-`func (o *AgentPrompt) GetVersionsOk() (*[]PromptVersion, bool)`
+`func (o *Prompt) GetVersionsOk() (*[]PromptVersion, bool)`
 
 GetVersionsOk returns a tuple with the Versions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVersions
 
-`func (o *AgentPrompt) SetVersions(v []PromptVersion)`
+`func (o *Prompt) SetVersions(v []PromptVersion)`
 
 SetVersions sets Versions field to given value.
 
 ### HasVersions
 
-`func (o *AgentPrompt) HasVersions() bool`
+`func (o *Prompt) HasVersions() bool`
 
 HasVersions returns a boolean if a field has been set.
 
 ### GetVisibility
 
-`func (o *AgentPrompt) GetVisibility() AgentPromptVisibilityStates`
+`func (o *Prompt) GetVisibility() PromptVisibilityStates`
 
 GetVisibility returns the Visibility field if non-nil, zero value otherwise.
 
 ### GetVisibilityOk
 
-`func (o *AgentPrompt) GetVisibilityOk() (*AgentPromptVisibilityStates, bool)`
+`func (o *Prompt) GetVisibilityOk() (*PromptVisibilityStates, bool)`
 
 GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVisibility
 
-`func (o *AgentPrompt) SetVisibility(v AgentPromptVisibilityStates)`
+`func (o *Prompt) SetVisibility(v PromptVisibilityStates)`
 
 SetVisibility sets Visibility field to given value.
 
 ### HasVisibility
 
-`func (o *AgentPrompt) HasVisibility() bool`
+`func (o *Prompt) HasVisibility() bool`
 
 HasVisibility returns a boolean if a field has been set.
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.15.17
+API version: 0.17.2
 Contact: contact@vaudience.ai
 */
 
@@ -29,6 +29,7 @@ const (
 	AIModelCostUnitVideoInputPerSecond AIModelCostUnit = "video-input-per-second"
 	AIModelCostUnitImageGenerationPerImage AIModelCostUnit = "image-generation-per-image"
 	AIModelCostUnitImageGenerationPerPixel AIModelCostUnit = "image-generation-per-pixel"
+	AIModelCostUnitImageGenerationPerCredit AIModelCostUnit = "image-generation-per-credit"
 	AIModelCostUnitAudioGenerationPerSecond AIModelCostUnit = "audio-generation-per-second"
 	AIModelCostUnitVideoGenerationPerSecond AIModelCostUnit = "video-generation-per-second"
 	AIModelCostUnitPerFunctionCall AIModelCostUnit = "per-function-call"
@@ -44,6 +45,7 @@ var AllowedAIModelCostUnitEnumValues = []AIModelCostUnit{
 	"video-input-per-second",
 	"image-generation-per-image",
 	"image-generation-per-pixel",
+	"image-generation-per-credit",
 	"audio-generation-per-second",
 	"video-generation-per-second",
 	"per-function-call",

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Content** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **int32** |  | [optional] 
+**CreatedAt** | Pointer to **int64** |  | [optional] 
 **CreatedBy** | Pointer to **string** |  | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 
@@ -55,20 +55,20 @@ HasContent returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *PromptVersion) GetCreatedAt() int32`
+`func (o *PromptVersion) GetCreatedAt() int64`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *PromptVersion) GetCreatedAtOk() (*int32, bool)`
+`func (o *PromptVersion) GetCreatedAtOk() (*int64, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *PromptVersion) SetCreatedAt(v int32)`
+`func (o *PromptVersion) SetCreatedAt(v int64)`
 
 SetCreatedAt sets CreatedAt field to given value.
 

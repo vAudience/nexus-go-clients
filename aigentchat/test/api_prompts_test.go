@@ -1,7 +1,7 @@
 /*
 vAudience AIgentChat API
 
-Testing AgentPromptsAPIService
+Testing PromptsAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
 )
 
-func Test_aigentchat_AgentPromptsAPIService(t *testing.T) {
+func Test_aigentchat_PromptsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test AgentPromptsAPIService CreateAgentPrompt", func(t *testing.T) {
+	t.Run("Test PromptsAPIService CreatePrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.AgentPromptsAPI.CreateAgentPrompt(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.PromptsAPI.CreatePrompt(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,28 +36,28 @@ func Test_aigentchat_AgentPromptsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentPromptsAPIService DeleteAgentPrompt", func(t *testing.T) {
+	t.Run("Test PromptsAPIService DeletePrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 		var promptId string
 
-		httpRes, err := apiClient.AgentPromptsAPI.DeleteAgentPrompt(context.Background(), orgId, promptId).Execute()
+		httpRes, err := apiClient.PromptsAPI.DeletePrompt(context.Background(), orgId, promptId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test AgentPromptsAPIService GetAgentPrompt", func(t *testing.T) {
+	t.Run("Test PromptsAPIService GetPrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 		var promptId string
 
-		resp, httpRes, err := apiClient.AgentPromptsAPI.GetAgentPrompt(context.Background(), orgId, promptId).Execute()
+		resp, httpRes, err := apiClient.PromptsAPI.GetPrompt(context.Background(), orgId, promptId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -65,13 +65,13 @@ func Test_aigentchat_AgentPromptsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentPromptsAPIService ListAgentPrompts", func(t *testing.T) {
+	t.Run("Test PromptsAPIService ListPrompts", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.AgentPromptsAPI.ListAgentPrompts(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.PromptsAPI.ListPrompts(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -79,13 +79,13 @@ func Test_aigentchat_AgentPromptsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentPromptsAPIService RenderAgentPrompt", func(t *testing.T) {
+	t.Run("Test PromptsAPIService RenderPrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.AgentPromptsAPI.RenderAgentPrompt(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.PromptsAPI.RenderPrompt(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -93,14 +93,14 @@ func Test_aigentchat_AgentPromptsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentPromptsAPIService UpdateAgentPrompt", func(t *testing.T) {
+	t.Run("Test PromptsAPIService UpdatePrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 		var promptId string
 
-		resp, httpRes, err := apiClient.AgentPromptsAPI.UpdateAgentPrompt(context.Background(), orgId, promptId).Execute()
+		resp, httpRes, err := apiClient.PromptsAPI.UpdatePrompt(context.Background(), orgId, promptId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

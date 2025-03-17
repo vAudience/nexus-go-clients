@@ -149,6 +149,20 @@
 
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 
+* `ErrCodeFailedToGenerateImage` (value: `"failed_to_generate_image"`)
+
+* `ErrCodeInvalidImageID` (value: `"invalid_image_id"`)
+
+* `ErrCodeImageNotFound` (value: `"image_not_found"`)
+
+* `ErrCodeFailedToDeleteImage` (value: `"failed_to_delete_image"`)
+
+* `ErrCodeFailedToGetImage` (value: `"failed_to_get_image"`)
+
+* `ErrCodeFailedToSearchImages` (value: `"failed_to_search_images"`)
+
+* `ErrCodeFailedToStoreImages` (value: `"failed_to_store_images"`)
+
 * `ErrCodeInvalidMessageID` (value: `"invalid_message_id"`)
 
 * `ErrCodeMessageNotFound` (value: `"message_not_found"`)
@@ -210,6 +224,12 @@
 * `ErrCodeInvalidPromptID` (value: `"invalid_prompt_id"`)
 
 * `ErrCodePromptNotFound` (value: `"prompt_not_found"`)
+
+* `ErrCodeFailedToGetPrompt` (value: `"failed_to_get_prompt"`)
+
+* `ErrCodeFailedToUpdatePrompt` (value: `"failed_to_update_prompt"`)
+
+* `ErrCodeFailedToDeletePrompt` (value: `"failed_to_delete_prompt"`)
 
 * `ErrCodeInvalidPromptData` (value: `"invalid_prompt_data"`)
 

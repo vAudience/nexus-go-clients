@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EmbeddedContent** | Pointer to **string** |  | [optional] 
-**FileName** | Pointer to **string** |  | [optional] 
-**FileSize** | Pointer to **int32** |  | [optional] 
-**Id** | Pointer to **string** |  | [optional] 
-**MetaData** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**MimeType** | Pointer to **string** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
+**EmbeddedContent** | **string** |  | 
+**FileName** | **string** |  | 
+**FileSize** | **int32** |  | 
+**Id** | **string** |  | 
+**MetaData** | **map[string]interface{}** |  | 
+**MimeType** | **string** |  | 
+**Url** | **string** |  | 
 
 ## Methods
 
 ### NewAIgencyMessageFile
 
-`func NewAIgencyMessageFile() *AIgencyMessageFile`
+`func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, metaData map[string]interface{}, mimeType string, url string, ) *AIgencyMessageFile`
 
 NewAIgencyMessageFile instantiates a new AIgencyMessageFile object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetEmbeddedContent sets EmbeddedContent field to given value.
 
-### HasEmbeddedContent
-
-`func (o *AIgencyMessageFile) HasEmbeddedContent() bool`
-
-HasEmbeddedContent returns a boolean if a field has been set.
 
 ### GetFileName
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetFileName sets FileName field to given value.
 
-### HasFileName
-
-`func (o *AIgencyMessageFile) HasFileName() bool`
-
-HasFileName returns a boolean if a field has been set.
 
 ### GetFileSize
 
@@ -100,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetFileSize sets FileSize field to given value.
 
-### HasFileSize
-
-`func (o *AIgencyMessageFile) HasFileSize() bool`
-
-HasFileSize returns a boolean if a field has been set.
 
 ### GetId
 
@@ -125,36 +110,26 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *AIgencyMessageFile) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetMetaData
 
-`func (o *AIgencyMessageFile) GetMetaData() map[string]map[string]interface{}`
+`func (o *AIgencyMessageFile) GetMetaData() map[string]interface{}`
 
 GetMetaData returns the MetaData field if non-nil, zero value otherwise.
 
 ### GetMetaDataOk
 
-`func (o *AIgencyMessageFile) GetMetaDataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *AIgencyMessageFile) GetMetaDataOk() (*map[string]interface{}, bool)`
 
 GetMetaDataOk returns a tuple with the MetaData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetaData
 
-`func (o *AIgencyMessageFile) SetMetaData(v map[string]map[string]interface{})`
+`func (o *AIgencyMessageFile) SetMetaData(v map[string]interface{})`
 
 SetMetaData sets MetaData field to given value.
 
-### HasMetaData
-
-`func (o *AIgencyMessageFile) HasMetaData() bool`
-
-HasMetaData returns a boolean if a field has been set.
 
 ### GetMimeType
 
@@ -175,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetMimeType sets MimeType field to given value.
 
-### HasMimeType
-
-`func (o *AIgencyMessageFile) HasMimeType() bool`
-
-HasMimeType returns a boolean if a field has been set.
 
 ### GetUrl
 
@@ -200,11 +170,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *AIgencyMessageFile) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

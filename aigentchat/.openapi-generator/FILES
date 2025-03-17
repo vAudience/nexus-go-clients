@@ -3,7 +3,6 @@
 .travis.yml
 README.md
 api/openapi.yaml
-api_agent_prompts.go
 api_agents.go
 api_ai_model_services.go
 api_ai_models.go
@@ -20,6 +19,7 @@ api_messages.go
 api_metrics.go
 api_missions.go
 api_org_cost_budgets.go
+api_prompts.go
 api_version.go
 client.go
 configuration.go
@@ -37,6 +37,7 @@ docs/AIModelServicesAPI.md
 docs/AIModelWriteDto.md
 docs/AIModelsAPI.md
 docs/AIgencyImage.md
+docs/AIgencyImageResults.md
 docs/AIgencyMessage.md
 docs/AIgencyMessageContent.md
 docs/AIgencyMessageContentList.md
@@ -46,14 +47,10 @@ docs/AIgencyMessageFileList.md
 docs/AIgencyMessageResults.md
 docs/AIgencyMessageType.md
 docs/AIgencyMessageWriteDto.md
+docs/AIgencyThumbnail.md
 docs/Ability.md
 docs/AbilityType.md
 docs/Agent.md
-docs/AgentPrompt.md
-docs/AgentPromptRenderDto.md
-docs/AgentPromptRenderedDto.md
-docs/AgentPromptVisibilityStates.md
-docs/AgentPromptsAPI.md
 docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
@@ -91,7 +88,7 @@ docs/FunctionCallsAPI.md
 docs/HealthAPI.md
 docs/HealthResponse.md
 docs/HostingLocation.md
-docs/ImageGenerationRequest.md
+docs/ImageGenerationRequestDto.md
 docs/ImagesAPI.md
 docs/MessagesAPI.md
 docs/MetricsAPI.md
@@ -108,7 +105,13 @@ docs/OrgCostBudget.md
 docs/OrgCostBudgetCheck.md
 docs/OrgCostBudgetWriteDto.md
 docs/OrgCostBudgetsAPI.md
+docs/Prompt.md
+docs/PromptRenderDto.md
 docs/PromptVersion.md
+docs/PromptVisibilityStates.md
+docs/PromptWriteDto.md
+docs/PromptsAPI.md
+docs/RenderedPrompt.md
 docs/ResultFile.md
 docs/TextEmbedding.md
 docs/TextEmbeddingItemDto.md
@@ -120,6 +123,7 @@ git_push.sh
 go.mod
 go.sum
 model_a_igency_image.go
+model_a_igency_image_results.go
 model_a_igency_message.go
 model_a_igency_message_content.go
 model_a_igency_message_content_list.go
@@ -129,13 +133,10 @@ model_a_igency_message_file_list.go
 model_a_igency_message_results.go
 model_a_igency_message_type.go
 model_a_igency_message_write_dto.go
+model_a_igency_thumbnail.go
 model_ability.go
 model_ability_type.go
 model_agent.go
-model_agent_prompt.go
-model_agent_prompt_render_dto.go
-model_agent_prompt_rendered_dto.go
-model_agent_prompt_visibility_states.go
 model_agent_type.go
 model_agent_write_dto.go
 model_ai_model.go
@@ -175,7 +176,7 @@ model_function_call.go
 model_function_call_results.go
 model_health_response.go
 model_hosting_location.go
-model_image_generation_request.go
+model_image_generation_request_dto.go
 model_mission.go
 model_mission_completion_reason.go
 model_mission_instructions.go
@@ -187,7 +188,12 @@ model_mission_write_dto.go
 model_org_cost_budget.go
 model_org_cost_budget_check.go
 model_org_cost_budget_write_dto.go
+model_prompt.go
+model_prompt_render_dto.go
 model_prompt_version.go
+model_prompt_visibility_states.go
+model_prompt_write_dto.go
+model_rendered_prompt.go
 model_result_file.go
 model_text_embedding.go
 model_text_embedding_item_dto.go
@@ -195,7 +201,6 @@ model_text_embedding_request_dto.go
 model_token_direction.go
 model_version_response.go
 response.go
-test/api_agent_prompts_test.go
 test/api_agents_test.go
 test/api_ai_model_services_test.go
 test/api_ai_models_test.go
@@ -212,5 +217,6 @@ test/api_messages_test.go
 test/api_metrics_test.go
 test/api_missions_test.go
 test/api_org_cost_budgets_test.go
+test/api_prompts_test.go
 test/api_version_test.go
 utils.go
