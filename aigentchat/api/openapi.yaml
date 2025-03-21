@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.17.2
+  version: 0.17.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -4449,6 +4449,8 @@ components:
       - audio-generation-per-second
       - video-generation-per-second
       - per-function-call
+      - per-file-upload
+      - conversion-per-page
       type: string
       x-enum-varnames:
       - AIModelCostUnitInputPerMillionTokens
@@ -4463,6 +4465,8 @@ components:
       - AIModelCostUnitAudioGenerationPerSecond
       - AIModelCostUnitVideoGenerationPerSecond
       - AIModelCostUnitPerFunctionCall
+      - AIModelCostUnitPerFileUpload
+      - AIModelCostUnitConversionPerPage
     AIModelFeature:
       example:
         capability: ""
@@ -6128,6 +6132,7 @@ components:
       - ai_service_rate_limit
       - ai_service_internal_server_error
       - ai_service_overload
+      - ai_service_unprocessable_entity
       - no_audio_file_saved
       - failed_to_create_audio_transcription_context
       - failed_to_create_audio_generation_context
@@ -6249,6 +6254,7 @@ components:
       - ErrCodeAiServiceRateLimit
       - ErrCodeAiServiceInternalServerError
       - ErrCodeAiServiceOverload
+      - ErrCodeAiServiceUnprocessableEntity
       - ErrCodeNoAudioFileSaved
       - ErrCodeCreatingAudioTranscriptionContext
       - ErrCodeCreatingAudioGenerationContext

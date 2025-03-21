@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.2
+API version: 0.17.3
 Contact: contact@vaudience.ai
 */
 
@@ -58,6 +58,7 @@ const (
 	ErrCodeAiServiceRateLimit ApiErrorCode = "ai_service_rate_limit"
 	ErrCodeAiServiceInternalServerError ApiErrorCode = "ai_service_internal_server_error"
 	ErrCodeAiServiceOverload ApiErrorCode = "ai_service_overload"
+	ErrCodeAiServiceUnprocessableEntity ApiErrorCode = "ai_service_unprocessable_entity"
 	ErrCodeNoAudioFileSaved ApiErrorCode = "no_audio_file_saved"
 	ErrCodeCreatingAudioTranscriptionContext ApiErrorCode = "failed_to_create_audio_transcription_context"
 	ErrCodeCreatingAudioGenerationContext ApiErrorCode = "failed_to_create_audio_generation_context"
@@ -181,6 +182,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"ai_service_rate_limit",
 	"ai_service_internal_server_error",
 	"ai_service_overload",
+	"ai_service_unprocessable_entity",
 	"no_audio_file_saved",
 	"failed_to_create_audio_transcription_context",
 	"failed_to_create_audio_generation_context",

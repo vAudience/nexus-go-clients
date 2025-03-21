@@ -77,6 +77,8 @@
 
 * `ErrCodeAiServiceOverload` (value: `"ai_service_overload"`)
 
+* `ErrCodeAiServiceUnprocessableEntity` (value: `"ai_service_unprocessable_entity"`)
+
 * `ErrCodeNoAudioFileSaved` (value: `"no_audio_file_saved"`)
 
 * `ErrCodeCreatingAudioTranscriptionContext` (value: `"failed_to_create_audio_transcription_context"`)
