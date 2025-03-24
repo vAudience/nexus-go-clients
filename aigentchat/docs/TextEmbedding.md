@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AgentId** | **string** |  | 
 **Embeddings** | [**[]EmbeddingItem**](EmbeddingItem.md) |  | 
 **ExecutionId** | **string** |  | 
 **ModelId** | **string** |  | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewTextEmbedding
 
-`func NewTextEmbedding(embeddings []EmbeddingItem, executionId string, modelId string, parameters map[string]interface{}, serviceId string, tokens int32, ) *TextEmbedding`
+`func NewTextEmbedding(agentId string, embeddings []EmbeddingItem, executionId string, modelId string, parameters map[string]interface{}, serviceId string, tokens int32, ) *TextEmbedding`
 
 NewTextEmbedding instantiates a new TextEmbedding object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +30,26 @@ will change when the set of required properties is changed
 NewTextEmbeddingWithDefaults instantiates a new TextEmbedding object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAgentId
+
+`func (o *TextEmbedding) GetAgentId() string`
+
+GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+
+### GetAgentIdOk
+
+`func (o *TextEmbedding) GetAgentIdOk() (*string, bool)`
+
+GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentId
+
+`func (o *TextEmbedding) SetAgentId(v string)`
+
+SetAgentId sets AgentId field to given value.
+
 
 ### GetEmbeddings
 

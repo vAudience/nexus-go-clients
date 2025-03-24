@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.3
+API version: 0.17.4
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &TextEmbedding{}
 
 // TextEmbedding struct for TextEmbedding
 type TextEmbedding struct {
+	AgentId string `json:"agent_id"`
 	Embeddings []EmbeddingItem `json:"embeddings"`
 	ExecutionId string `json:"execution_id"`
 	ModelId string `json:"model_id"`
@@ -36,8 +37,9 @@ type _TextEmbedding TextEmbedding
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextEmbedding(embeddings []EmbeddingItem, executionId string, modelId string, parameters map[string]interface{}, serviceId string, tokens int32) *TextEmbedding {
+func NewTextEmbedding(agentId string, embeddings []EmbeddingItem, executionId string, modelId string, parameters map[string]interface{}, serviceId string, tokens int32) *TextEmbedding {
 	this := TextEmbedding{}
+	this.AgentId = agentId
 	this.Embeddings = embeddings
 	this.ExecutionId = executionId
 	this.ModelId = modelId
@@ -53,6 +55,30 @@ func NewTextEmbedding(embeddings []EmbeddingItem, executionId string, modelId st
 func NewTextEmbeddingWithDefaults() *TextEmbedding {
 	this := TextEmbedding{}
 	return &this
+}
+
+// GetAgentId returns the AgentId field value
+func (o *TextEmbedding) GetAgentId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AgentId
+}
+
+// GetAgentIdOk returns a tuple with the AgentId field value
+// and a boolean to check if the value has been set.
+func (o *TextEmbedding) GetAgentIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AgentId, true
+}
+
+// SetAgentId sets field value
+func (o *TextEmbedding) SetAgentId(v string) {
+	o.AgentId = v
 }
 
 // GetEmbeddings returns the Embeddings field value
@@ -209,6 +235,7 @@ func (o TextEmbedding) MarshalJSON() ([]byte, error) {
 
 func (o TextEmbedding) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["agent_id"] = o.AgentId
 	toSerialize["embeddings"] = o.Embeddings
 	toSerialize["execution_id"] = o.ExecutionId
 	toSerialize["model_id"] = o.ModelId
@@ -228,6 +255,7 @@ func (o *TextEmbedding) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"agent_id",
 		"embeddings",
 		"execution_id",
 		"model_id",
@@ -263,6 +291,7 @@ func (o *TextEmbedding) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "embeddings")
 		delete(additionalProperties, "execution_id")
 		delete(additionalProperties, "model_id")

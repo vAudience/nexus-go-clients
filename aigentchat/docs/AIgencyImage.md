@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AgentId** | **string** |  | 
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
 **CreatedAt** | **int64** |  | 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyImage
 
-`func NewAIgencyImage(aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string, ) *AIgencyImage`
+`func NewAIgencyImage(agentId string, aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string, ) *AIgencyImage`
 
 NewAIgencyImage instantiates a new AIgencyImage object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +36,26 @@ will change when the set of required properties is changed
 NewAIgencyImageWithDefaults instantiates a new AIgencyImage object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAgentId
+
+`func (o *AIgencyImage) GetAgentId() string`
+
+GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+
+### GetAgentIdOk
+
+`func (o *AIgencyImage) GetAgentIdOk() (*string, bool)`
+
+GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentId
+
+`func (o *AIgencyImage) SetAgentId(v string)`
+
+SetAgentId sets AgentId field to given value.
+
 
 ### GetAiModelId
 

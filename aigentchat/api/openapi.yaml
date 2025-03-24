@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.17.3
+  version: 0.17.4
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -4976,13 +4976,17 @@ components:
       type: object
     AIgencyImage:
       example:
+        agent_id: agent_id
+        owner_id: owner_id
+        created_at: 0
+        message: message
+        ai_model_id: ai_model_id
+        ai_service_id: ai_service_id
+        url: url
         execution_id: execution_id
         owner_organization_id: owner_organization_id
         mime_type: mime_type
-        owner_id: owner_id
-        created_at: 0
         id: id
-        message: message
         thumbnails:
         - width: 1
           url: url
@@ -4991,10 +4995,11 @@ components:
           url: url
           height: 1
         parameters: "{}"
-        ai_model_id: ai_model_id
-        ai_service_id: ai_service_id
-        url: url
       properties:
+        agent_id:
+          maxLength: 64
+          minLength: 1
+          type: string
         ai_model_id:
           maxLength: 64
           minLength: 1
@@ -5036,6 +5041,7 @@ components:
         url:
           type: string
       required:
+      - agent_id
       - ai_model_id
       - ai_service_id
       - created_at
@@ -5050,13 +5056,17 @@ components:
     AIgencyImageResults:
       example:
         results:
-        - execution_id: execution_id
-          owner_organization_id: owner_organization_id
-          mime_type: mime_type
+        - agent_id: agent_id
           owner_id: owner_id
           created_at: 0
-          id: id
           message: message
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          url: url
+          execution_id: execution_id
+          owner_organization_id: owner_organization_id
+          mime_type: mime_type
+          id: id
           thumbnails:
           - width: 1
             url: url
@@ -5065,16 +5075,17 @@ components:
             url: url
             height: 1
           parameters: "{}"
+        - agent_id: agent_id
+          owner_id: owner_id
+          created_at: 0
+          message: message
           ai_model_id: ai_model_id
           ai_service_id: ai_service_id
           url: url
-        - execution_id: execution_id
+          execution_id: execution_id
           owner_organization_id: owner_organization_id
           mime_type: mime_type
-          owner_id: owner_id
-          created_at: 0
           id: id
-          message: message
           thumbnails:
           - width: 1
             url: url
@@ -5083,9 +5094,6 @@ components:
             url: url
             height: 1
           parameters: "{}"
-          ai_model_id: ai_model_id
-          ai_service_id: ai_service_id
-          url: url
         total_results: 5
       properties:
         results:
@@ -7532,11 +7540,14 @@ components:
           - 0.8008282
           - 0.8008282
         execution_id: execution_id
+        agent_id: agent_id
         service_id: service_id
         tokens: 1
         model_id: model_id
         parameters: "{}"
       properties:
+        agent_id:
+          type: string
         embeddings:
           items:
             $ref: '#/components/schemas/EmbeddingItem'
@@ -7553,6 +7564,7 @@ components:
         tokens:
           type: integer
       required:
+      - agent_id
       - embeddings
       - execution_id
       - model_id

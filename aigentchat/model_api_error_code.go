@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.3
+API version: 0.17.4
 Contact: contact@vaudience.ai
 */
 

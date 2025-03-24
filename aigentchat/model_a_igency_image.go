@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.3
+API version: 0.17.4
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &AIgencyImage{}
 
 // AIgencyImage struct for AIgencyImage
 type AIgencyImage struct {
+	AgentId string `json:"agent_id"`
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
 	CreatedAt int64 `json:"created_at"`
@@ -42,8 +43,9 @@ type _AIgencyImage AIgencyImage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyImage(aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string) *AIgencyImage {
+func NewAIgencyImage(agentId string, aiModelId string, aiServiceId string, createdAt int64, executionId string, id string, message string, mimeType string, ownerId string, ownerOrganizationId string, url string) *AIgencyImage {
 	this := AIgencyImage{}
+	this.AgentId = agentId
 	this.AiModelId = aiModelId
 	this.AiServiceId = aiServiceId
 	this.CreatedAt = createdAt
@@ -63,6 +65,30 @@ func NewAIgencyImage(aiModelId string, aiServiceId string, createdAt int64, exec
 func NewAIgencyImageWithDefaults() *AIgencyImage {
 	this := AIgencyImage{}
 	return &this
+}
+
+// GetAgentId returns the AgentId field value
+func (o *AIgencyImage) GetAgentId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AgentId
+}
+
+// GetAgentIdOk returns a tuple with the AgentId field value
+// and a boolean to check if the value has been set.
+func (o *AIgencyImage) GetAgentIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AgentId, true
+}
+
+// SetAgentId sets field value
+func (o *AIgencyImage) SetAgentId(v string) {
+	o.AgentId = v
 }
 
 // GetAiModelId returns the AiModelId field value
@@ -379,6 +405,7 @@ func (o AIgencyImage) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["agent_id"] = o.AgentId
 	toSerialize["ai_model_id"] = o.AiModelId
 	toSerialize["ai_service_id"] = o.AiServiceId
 	toSerialize["created_at"] = o.CreatedAt
@@ -408,6 +435,7 @@ func (o *AIgencyImage) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"agent_id",
 		"ai_model_id",
 		"ai_service_id",
 		"created_at",
@@ -447,6 +475,7 @@ func (o *AIgencyImage) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "ai_model_id")
 		delete(additionalProperties, "ai_service_id")
 		delete(additionalProperties, "created_at")
