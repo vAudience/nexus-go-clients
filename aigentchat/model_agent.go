@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.4
+API version: 0.17.8
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,7 @@ type Agent struct {
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
+	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
@@ -261,6 +262,38 @@ func (o *Agent) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Agent) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetI18n returns the I18n field value if set, zero value otherwise.
+func (o *Agent) GetI18n() map[string]AgentI18n {
+	if o == nil || IsNil(o.I18n) {
+		var ret map[string]AgentI18n
+		return ret
+	}
+	return *o.I18n
+}
+
+// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetI18nOk() (*map[string]AgentI18n, bool) {
+	if o == nil || IsNil(o.I18n) {
+		return nil, false
+	}
+	return o.I18n, true
+}
+
+// HasI18n returns a boolean if a field has been set.
+func (o *Agent) HasI18n() bool {
+	if o != nil && !IsNil(o.I18n) {
+		return true
+	}
+
+	return false
+}
+
+// SetI18n gets a reference to the given map[string]AgentI18n and assigns it to the I18n field.
+func (o *Agent) SetI18n(v map[string]AgentI18n) {
+	o.I18n = &v
 }
 
 // GetId returns the Id field value
@@ -795,6 +828,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.I18n) {
+		toSerialize["i18n"] = o.I18n
+	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.InitialUserMessages) {
 		toSerialize["initial_user_messages"] = o.InitialUserMessages
@@ -889,6 +925,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "avatar_url")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "initial_user_messages")
 		delete(additionalProperties, "internal_id")

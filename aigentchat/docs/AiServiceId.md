@@ -9,7 +9,7 @@
 
 * `AiServiceIdAssemblyAI` (value: `"assemblyai"`)
 
-* `AiServiceIdAzureAi` (value: `"azureai"`)
+* `AiServiceIdAzureAI` (value: `"azureai"`)
 
 * `AiServiceIdBlackForest` (value: `"blackforest"`)
 
@@ -19,9 +19,13 @@
 
 * `AiServiceIdLeonardoAI` (value: `"leonardoai"`)
 
+* `AiServiceIdMistralAI` (value: `"mistralai"`)
+
 * `AiServiceIdOpenAI` (value: `"openai"`)
 
 * `AiServiceIdReplicate` (value: `"replicate"`)
+
+* `AiServiceIdScaleway` (value: `"scaleway"`)
 
 * `AiServiceIdVaiEmbed` (value: `"vaiembed"`)
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AvatarUrl** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **Id** | **string** |  | 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
@@ -196,6 +197,31 @@ SetDescription sets Description field to given value.
 `func (o *Agent) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetI18n
+
+`func (o *Agent) GetI18n() map[string]AgentI18n`
+
+GetI18n returns the I18n field if non-nil, zero value otherwise.
+
+### GetI18nOk
+
+`func (o *Agent) GetI18nOk() (*map[string]AgentI18n, bool)`
+
+GetI18nOk returns a tuple with the I18n field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetI18n
+
+`func (o *Agent) SetI18n(v map[string]AgentI18n)`
+
+SetI18n sets I18n field to given value.
+
+### HasI18n
+
+`func (o *Agent) HasI18n() bool`
+
+HasI18n returns a boolean if a field has been set.
 
 ### GetId
 

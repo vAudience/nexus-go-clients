@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.17.4
+  version: 0.17.8
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3043,6 +3043,62 @@ paths:
       tags:
       - Images
       x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/images/cost:
+    post:
+      description: Estimate the total costs for an image generation request before
+        generating the images.
+      operationId: CreateImagesCosts
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateImageGenerationCostRequestDto'
+        description: Estimate Image Generation Cost Request DTO
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostEstimation'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get the total costs of an image generation request.
+      tags:
+      - Images
+      x-codegen-request-body-name: request
   /v1/organizations/{org_id}/images/{id}:
     delete:
       description: Delete an image by its ID
@@ -4203,6 +4259,10 @@ components:
         accepted_file_mimetypes:
         - accepted_file_mimetypes
         - accepted_file_mimetypes
+        i18n:
+          key:
+            name: name
+            description: description
         abilities:
         - type: text
           constraints:
@@ -4314,6 +4374,10 @@ components:
           items:
             $ref: '#/components/schemas/AIModelFeature'
           type: array
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AIModelI18n'
+          type: object
         id:
           maxLength: 64
           minLength: 1
@@ -4513,6 +4577,21 @@ components:
             $ref: '#/components/schemas/ExecutionUsageCost'
           type: array
       type: object
+    AIModelI18n:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 1024
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
     AIModelMinMaxUnit:
       enum:
       - tokens
@@ -4531,12 +4610,31 @@ components:
       - AIModelMinMaxUnitImages
       - AIModelMinMaxUnitPixels
       - AIModelMinMaxUnitFilesizeMegabytes
+    AIModelServiceI18n:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 1024
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
     AIModelServiceObject:
       example:
         internal_id: internal_id
         owner_id: owner_id
         created_at: 6
         description: description
+        i18n:
+          key:
+            name: name
+            description: description
         owner_organization_id: owner_organization_id
         hosting_locations:
           key: ""
@@ -4559,6 +4657,10 @@ components:
         hosting_locations:
           additionalProperties:
             $ref: '#/components/schemas/HostingLocation'
+          type: object
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AIModelServiceI18n'
           type: object
         id:
           maxLength: 64
@@ -4608,6 +4710,10 @@ components:
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
+          i18n:
+            key:
+              name: name
+              description: description
           abilities:
           - type: text
             constraints:
@@ -4707,6 +4813,10 @@ components:
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
+          i18n:
+            key:
+              name: name
+              description: description
           abilities:
           - type: text
             constraints:
@@ -4802,6 +4912,10 @@ components:
           owner_id: owner_id
           created_at: 6
           description: description
+          i18n:
+            key:
+              name: name
+              description: description
           owner_organization_id: owner_organization_id
           hosting_locations:
             key: ""
@@ -4830,6 +4944,10 @@ components:
         name: name
         description: description
         service_impl: "{}"
+        i18n:
+          key:
+            name: name
+            description: description
       properties:
         cost_multiplier:
           format: double
@@ -4840,6 +4958,10 @@ components:
         hosting_locations:
           additionalProperties:
             $ref: '#/components/schemas/HostingLocation'
+          type: object
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AIModelServiceI18n'
           type: object
         internal_id:
           type: string
@@ -4859,6 +4981,17 @@ components:
       type: object
     AIModelWriteDto:
       example:
+        internal_id: internal_id
+        description: description
+        model_id: model_id
+        documentation_url: documentation_url
+        accepted_file_mimetypes:
+        - accepted_file_mimetypes
+        - accepted_file_mimetypes
+        i18n:
+          key:
+            name: name
+            description: description
         features:
         - capability: ""
           cost_items:
@@ -4919,17 +5052,10 @@ components:
         service_host_locations:
         - ""
         - ""
-        internal_id: internal_id
         service_id: service_id
         is_public: true
         name: name
-        description: description
         parameter_definitions: "{}"
-        model_id: model_id
-        documentation_url: documentation_url
-        accepted_file_mimetypes:
-        - accepted_file_mimetypes
-        - accepted_file_mimetypes
         parameters:
           key: "{}"
       properties:
@@ -4946,6 +5072,10 @@ components:
           items:
             $ref: '#/components/schemas/AIModelFeature'
           type: array
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AIModelI18n'
+          type: object
         internal_id:
           type: string
         is_public:
@@ -5824,6 +5954,10 @@ components:
         description: description
         model_id: model_id
         type: ""
+        i18n:
+          key:
+            name: name
+            description: description
         initial_user_messages:
         - initial_user_messages
         - initial_user_messages
@@ -5885,6 +6019,10 @@ components:
         description:
           maxLength: 1024
           type: string
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AgentI18n'
+          type: object
         id:
           maxLength: 64
           minLength: 1
@@ -5950,6 +6088,21 @@ components:
       - owner_id
       - owner_organization_id
       type: object
+    AgentI18n:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 1024
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
     AgentType:
       enum:
       - ""
@@ -5975,6 +6128,10 @@ components:
         description: description
         model_id: model_id
         type: ""
+        i18n:
+          key:
+            name: name
+            description: description
         initial_user_messages:
         - initial_user_messages
         - initial_user_messages
@@ -6004,6 +6161,10 @@ components:
         description:
           maxLength: 1024
           type: string
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/AgentI18n'
+          type: object
         initial_user_messages:
           items:
             type: string
@@ -6075,21 +6236,25 @@ components:
       - elevenlabs
       - googlevertexai
       - leonardoai
+      - mistralai
       - openai
       - replicate
+      - scaleway
       - vaiembed
       type: string
       x-enum-varnames:
       - AiServiceIdAnthropic
       - AiServiceIdAnthropicGcp
       - AiServiceIdAssemblyAI
-      - AiServiceIdAzureAi
+      - AiServiceIdAzureAI
       - AiServiceIdBlackForest
       - AiServiceIdElevenLabs
       - AiServiceIdGoogleVertexAi
       - AiServiceIdLeonardoAI
+      - AiServiceIdMistralAI
       - AiServiceIdOpenAI
       - AiServiceIdReplicate
+      - AiServiceIdScaleway
       - AiServiceIdVaiEmbed
     ApiError:
       example:
@@ -6676,6 +6841,21 @@ components:
       - ConversationRoleSystem
       - ConversationRoleAssistant
       - ConversationRoleAIgent
+    CostEstimation:
+      example:
+        parameters: "{}"
+        cost_in_euro: 0.08008281904610115
+      properties:
+        cost_in_euro:
+          format: double
+          minimum: 0
+          type: number
+        parameters:
+          properties: {}
+          type: object
+      required:
+      - cost_in_euro
+      type: object
     EmbeddingItem:
       example:
         meta_data: "{}"
@@ -6697,6 +6877,26 @@ components:
       required:
       - embedding
       - index
+      type: object
+    EstimateImageGenerationCostRequestDto:
+      example:
+        agent_id: agent_id
+        attached_temporary_files:
+        - attached_temporary_files
+        - attached_temporary_files
+        parameters: "{}"
+      properties:
+        agent_id:
+          type: string
+        attached_temporary_files:
+          items:
+            type: string
+          type: array
+        parameters:
+          properties: {}
+          type: object
+      required:
+      - agent_id
       type: object
     ExecutionCostTemplate:
       example:
@@ -7011,8 +7211,8 @@ components:
       - usa
       - europe
       - germany
-      - uk
       - swiss
+      - uk
       - any
       type: string
       x-enum-varnames:
@@ -7020,8 +7220,8 @@ components:
       - HostingLocationUSA
       - HostingLocationEU
       - HostingLocationGERMANY
-      - HostingLocationUK
       - HostingLocationSWISS
+      - HostingLocationUK
       - HostingLocationANY
     ImageGenerationRequestDto:
       example:

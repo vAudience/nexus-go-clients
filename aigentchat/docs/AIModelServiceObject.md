@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
+**I18n** | Pointer to [**map[string]AIModelServiceI18n**](AIModelServiceI18n.md) |  | [optional] 
 **Id** | **string** |  | 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
@@ -136,6 +137,31 @@ SetHostingLocations sets HostingLocations field to given value.
 `func (o *AIModelServiceObject) HasHostingLocations() bool`
 
 HasHostingLocations returns a boolean if a field has been set.
+
+### GetI18n
+
+`func (o *AIModelServiceObject) GetI18n() map[string]AIModelServiceI18n`
+
+GetI18n returns the I18n field if non-nil, zero value otherwise.
+
+### GetI18nOk
+
+`func (o *AIModelServiceObject) GetI18nOk() (*map[string]AIModelServiceI18n, bool)`
+
+GetI18nOk returns a tuple with the I18n field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetI18n
+
+`func (o *AIModelServiceObject) SetI18n(v map[string]AIModelServiceI18n)`
+
+SetI18n sets I18n field to given value.
+
+### HasI18n
+
+`func (o *AIModelServiceObject) HasI18n() bool`
+
+HasI18n returns a boolean if a field has been set.
 
 ### GetId
 

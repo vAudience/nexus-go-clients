@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.4
+API version: 0.17.8
 Contact: contact@vaudience.ai
 */
 
@@ -24,13 +24,15 @@ const (
 	AiServiceIdAnthropic AiServiceId = "anthropic"
 	AiServiceIdAnthropicGcp AiServiceId = "anthropicgooglecloud"
 	AiServiceIdAssemblyAI AiServiceId = "assemblyai"
-	AiServiceIdAzureAi AiServiceId = "azureai"
+	AiServiceIdAzureAI AiServiceId = "azureai"
 	AiServiceIdBlackForest AiServiceId = "blackforest"
 	AiServiceIdElevenLabs AiServiceId = "elevenlabs"
 	AiServiceIdGoogleVertexAi AiServiceId = "googlevertexai"
 	AiServiceIdLeonardoAI AiServiceId = "leonardoai"
+	AiServiceIdMistralAI AiServiceId = "mistralai"
 	AiServiceIdOpenAI AiServiceId = "openai"
 	AiServiceIdReplicate AiServiceId = "replicate"
+	AiServiceIdScaleway AiServiceId = "scaleway"
 	AiServiceIdVaiEmbed AiServiceId = "vaiembed"
 )
 
@@ -44,8 +46,10 @@ var AllowedAiServiceIdEnumValues = []AiServiceId{
 	"elevenlabs",
 	"googlevertexai",
 	"leonardoai",
+	"mistralai",
 	"openai",
 	"replicate",
+	"scaleway",
 	"vaiembed",
 }
 

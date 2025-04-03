@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.4
+API version: 0.17.8
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,7 @@ type AIModel struct {
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
 	Features []AIModelFeature `json:"features,omitempty"`
+	I18n *map[string]AIModelI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -258,6 +259,38 @@ func (o *AIModel) HasFeatures() bool {
 // SetFeatures gets a reference to the given []AIModelFeature and assigns it to the Features field.
 func (o *AIModel) SetFeatures(v []AIModelFeature) {
 	o.Features = v
+}
+
+// GetI18n returns the I18n field value if set, zero value otherwise.
+func (o *AIModel) GetI18n() map[string]AIModelI18n {
+	if o == nil || IsNil(o.I18n) {
+		var ret map[string]AIModelI18n
+		return ret
+	}
+	return *o.I18n
+}
+
+// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetI18nOk() (*map[string]AIModelI18n, bool) {
+	if o == nil || IsNil(o.I18n) {
+		return nil, false
+	}
+	return o.I18n, true
+}
+
+// HasI18n returns a boolean if a field has been set.
+func (o *AIModel) HasI18n() bool {
+	if o != nil && !IsNil(o.I18n) {
+		return true
+	}
+
+	return false
+}
+
+// SetI18n gets a reference to the given map[string]AIModelI18n and assigns it to the I18n field.
+func (o *AIModel) SetI18n(v map[string]AIModelI18n) {
+	o.I18n = &v
 }
 
 // GetId returns the Id field value
@@ -656,6 +689,9 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Features) {
 		toSerialize["features"] = o.Features
 	}
+	if !IsNil(o.I18n) {
+		toSerialize["i18n"] = o.I18n
+	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
@@ -737,6 +773,7 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")
 		delete(additionalProperties, "features")
+		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")

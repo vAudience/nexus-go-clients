@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
@@ -139,6 +140,31 @@ SetDescription sets Description field to given value.
 `func (o *AgentWriteDto) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetI18n
+
+`func (o *AgentWriteDto) GetI18n() map[string]AgentI18n`
+
+GetI18n returns the I18n field if non-nil, zero value otherwise.
+
+### GetI18nOk
+
+`func (o *AgentWriteDto) GetI18nOk() (*map[string]AgentI18n, bool)`
+
+GetI18nOk returns a tuple with the I18n field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetI18n
+
+`func (o *AgentWriteDto) SetI18n(v map[string]AgentI18n)`
+
+SetI18n sets I18n field to given value.
+
+### HasI18n
+
+`func (o *AgentWriteDto) HasI18n() bool`
+
+HasI18n returns a boolean if a field has been set.
 
 ### GetInitialUserMessages
 

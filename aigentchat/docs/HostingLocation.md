@@ -11,9 +11,9 @@
 
 * `HostingLocationGERMANY` (value: `"germany"`)
 
-* `HostingLocationUK` (value: `"uk"`)
-
 * `HostingLocationSWISS` (value: `"swiss"`)
+
+* `HostingLocationUK` (value: `"uk"`)
 
 * `HostingLocationANY` (value: `"any"`)
 

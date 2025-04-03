@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.4
+API version: 0.17.8
 Contact: contact@vaudience.ai
 */
 
@@ -25,8 +25,8 @@ const (
 	HostingLocationUSA HostingLocation = "usa"
 	HostingLocationEU HostingLocation = "europe"
 	HostingLocationGERMANY HostingLocation = "germany"
-	HostingLocationUK HostingLocation = "uk"
 	HostingLocationSWISS HostingLocation = "swiss"
+	HostingLocationUK HostingLocation = "uk"
 	HostingLocationANY HostingLocation = "any"
 )
 
@@ -36,8 +36,8 @@ var AllowedHostingLocationEnumValues = []HostingLocation{
 	"usa",
 	"europe",
 	"germany",
-	"uk",
 	"swiss",
+	"uk",
 	"any",
 }
 

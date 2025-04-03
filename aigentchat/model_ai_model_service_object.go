@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.4
+API version: 0.17.8
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type AIModelServiceObject struct {
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	HostingLocations *map[string]HostingLocation `json:"hosting_locations,omitempty"`
+	I18n *map[string]AIModelServiceI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -187,6 +188,38 @@ func (o *AIModelServiceObject) HasHostingLocations() bool {
 // SetHostingLocations gets a reference to the given map[string]HostingLocation and assigns it to the HostingLocations field.
 func (o *AIModelServiceObject) SetHostingLocations(v map[string]HostingLocation) {
 	o.HostingLocations = &v
+}
+
+// GetI18n returns the I18n field value if set, zero value otherwise.
+func (o *AIModelServiceObject) GetI18n() map[string]AIModelServiceI18n {
+	if o == nil || IsNil(o.I18n) {
+		var ret map[string]AIModelServiceI18n
+		return ret
+	}
+	return *o.I18n
+}
+
+// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelServiceObject) GetI18nOk() (*map[string]AIModelServiceI18n, bool) {
+	if o == nil || IsNil(o.I18n) {
+		return nil, false
+	}
+	return o.I18n, true
+}
+
+// HasI18n returns a boolean if a field has been set.
+func (o *AIModelServiceObject) HasI18n() bool {
+	if o != nil && !IsNil(o.I18n) {
+		return true
+	}
+
+	return false
+}
+
+// SetI18n gets a reference to the given map[string]AIModelServiceI18n and assigns it to the I18n field.
+func (o *AIModelServiceObject) SetI18n(v map[string]AIModelServiceI18n) {
+	o.I18n = &v
 }
 
 // GetId returns the Id field value
@@ -459,6 +492,9 @@ func (o AIModelServiceObject) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HostingLocations) {
 		toSerialize["hosting_locations"] = o.HostingLocations
 	}
+	if !IsNil(o.I18n) {
+		toSerialize["i18n"] = o.I18n
+	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
@@ -527,6 +563,7 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "hosting_locations")
+		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")

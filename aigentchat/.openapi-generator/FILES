@@ -29,7 +29,9 @@ docs/AIModelConstraint.md
 docs/AIModelConstraintDirection.md
 docs/AIModelCostUnit.md
 docs/AIModelFeature.md
+docs/AIModelI18n.md
 docs/AIModelMinMaxUnit.md
+docs/AIModelServiceI18n.md
 docs/AIModelServiceObject.md
 docs/AIModelServiceWithModels.md
 docs/AIModelServiceWriteDto.md
@@ -51,6 +53,7 @@ docs/AIgencyThumbnail.md
 docs/Ability.md
 docs/AbilityType.md
 docs/Agent.md
+docs/AgentI18n.md
 docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
@@ -69,8 +72,10 @@ docs/ChatCompletionsAPI.md
 docs/ConnectionTokenResponse.md
 docs/ConnectionTokensAPI.md
 docs/ConversationRole.md
+docs/CostEstimation.md
 docs/EmbeddingItem.md
 docs/EmbeddingsAPI.md
+docs/EstimateImageGenerationCostRequestDto.md
 docs/ExecutionCostTemplate.md
 docs/ExecutionLog.md
 docs/ExecutionLogCosts.md
@@ -137,6 +142,7 @@ model_a_igency_thumbnail.go
 model_ability.go
 model_ability_type.go
 model_agent.go
+model_agent_i18n.go
 model_agent_type.go
 model_agent_write_dto.go
 model_ai_model.go
@@ -145,7 +151,9 @@ model_ai_model_constraint.go
 model_ai_model_constraint_direction.go
 model_ai_model_cost_unit.go
 model_ai_model_feature.go
+model_ai_model_i18n.go
 model_ai_model_min_max_unit.go
+model_ai_model_service_i18n.go
 model_ai_model_service_object.go
 model_ai_model_service_with_models.go
 model_ai_model_service_write_dto.go
@@ -161,7 +169,9 @@ model_channel_write_dto.go
 model_chat_completion_request_dto.go
 model_connection_token_response.go
 model_conversation_role.go
+model_cost_estimation.go
 model_embedding_item.go
+model_estimate_image_generation_cost_request_dto.go
 model_execution_cost_template.go
 model_execution_log.go
 model_execution_log_costs.go
