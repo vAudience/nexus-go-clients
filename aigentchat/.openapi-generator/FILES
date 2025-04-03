@@ -38,6 +38,8 @@ docs/AIModelServiceWriteDto.md
 docs/AIModelServicesAPI.md
 docs/AIModelWriteDto.md
 docs/AIModelsAPI.md
+docs/AIgencyFunctionCall.md
+docs/AIgencyFunctionResponse.md
 docs/AIgencyImage.md
 docs/AIgencyImageResults.md
 docs/AIgencyMessage.md
@@ -49,6 +51,7 @@ docs/AIgencyMessageFileList.md
 docs/AIgencyMessageResults.md
 docs/AIgencyMessageType.md
 docs/AIgencyMessageWriteDto.md
+docs/AIgencyThinking.md
 docs/AIgencyThumbnail.md
 docs/Ability.md
 docs/AbilityType.md
@@ -127,6 +130,8 @@ docs/VersionResponse.md
 git_push.sh
 go.mod
 go.sum
+model_a_igency_function_call.go
+model_a_igency_function_response.go
 model_a_igency_image.go
 model_a_igency_image_results.go
 model_a_igency_message.go
@@ -138,6 +143,7 @@ model_a_igency_message_file_list.go
 model_a_igency_message_results.go
 model_a_igency_message_type.go
 model_a_igency_message_write_dto.go
+model_a_igency_thinking.go
 model_a_igency_thumbnail.go
 model_ability.go
 model_ability_type.go

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.8
+API version: 0.18.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,12 +23,18 @@ type AIgencyMessageContentType string
 const (
 	AIgencyMessageContentTypeText AIgencyMessageContentType = "text"
 	AIgencyMessageContentTypeFile AIgencyMessageContentType = "file"
+	AIgencyMessageContentTypeFunctionCall AIgencyMessageContentType = "function_call"
+	AIgencyMessageContentTypeFunctionResponse AIgencyMessageContentType = "function_response"
+	AIgencyMessageContentTypeThinking AIgencyMessageContentType = "thinking"
 )
 
 // All allowed values of AIgencyMessageContentType enum
 var AllowedAIgencyMessageContentTypeEnumValues = []AIgencyMessageContentType{
 	"text",
 	"file",
+	"function_call",
+	"function_response",
+	"thinking",
 }
 
 func (v *AIgencyMessageContentType) UnmarshalJSON(src []byte) error {

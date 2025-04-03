@@ -5,7 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **File** | Pointer to [**AIgencyMessageFile**](AIgencyMessageFile.md) |  | [optional] 
+**FunctionCall** | Pointer to [**AIgencyFunctionCall**](AIgencyFunctionCall.md) |  | [optional] 
+**FunctionResponses** | Pointer to [**AIgencyFunctionResponse**](AIgencyFunctionResponse.md) |  | [optional] 
 **Text** | **string** |  | 
+**Thinking** | Pointer to [**AIgencyThinking**](AIgencyThinking.md) |  | [optional] 
 **Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
 
 ## Methods
@@ -52,6 +55,56 @@ SetFile sets File field to given value.
 
 HasFile returns a boolean if a field has been set.
 
+### GetFunctionCall
+
+`func (o *AIgencyMessageContent) GetFunctionCall() AIgencyFunctionCall`
+
+GetFunctionCall returns the FunctionCall field if non-nil, zero value otherwise.
+
+### GetFunctionCallOk
+
+`func (o *AIgencyMessageContent) GetFunctionCallOk() (*AIgencyFunctionCall, bool)`
+
+GetFunctionCallOk returns a tuple with the FunctionCall field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionCall
+
+`func (o *AIgencyMessageContent) SetFunctionCall(v AIgencyFunctionCall)`
+
+SetFunctionCall sets FunctionCall field to given value.
+
+### HasFunctionCall
+
+`func (o *AIgencyMessageContent) HasFunctionCall() bool`
+
+HasFunctionCall returns a boolean if a field has been set.
+
+### GetFunctionResponses
+
+`func (o *AIgencyMessageContent) GetFunctionResponses() AIgencyFunctionResponse`
+
+GetFunctionResponses returns the FunctionResponses field if non-nil, zero value otherwise.
+
+### GetFunctionResponsesOk
+
+`func (o *AIgencyMessageContent) GetFunctionResponsesOk() (*AIgencyFunctionResponse, bool)`
+
+GetFunctionResponsesOk returns a tuple with the FunctionResponses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionResponses
+
+`func (o *AIgencyMessageContent) SetFunctionResponses(v AIgencyFunctionResponse)`
+
+SetFunctionResponses sets FunctionResponses field to given value.
+
+### HasFunctionResponses
+
+`func (o *AIgencyMessageContent) HasFunctionResponses() bool`
+
+HasFunctionResponses returns a boolean if a field has been set.
+
 ### GetText
 
 `func (o *AIgencyMessageContent) GetText() string`
@@ -71,6 +124,31 @@ and a boolean to check if the value has been set.
 
 SetText sets Text field to given value.
 
+
+### GetThinking
+
+`func (o *AIgencyMessageContent) GetThinking() AIgencyThinking`
+
+GetThinking returns the Thinking field if non-nil, zero value otherwise.
+
+### GetThinkingOk
+
+`func (o *AIgencyMessageContent) GetThinkingOk() (*AIgencyThinking, bool)`
+
+GetThinkingOk returns a tuple with the Thinking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThinking
+
+`func (o *AIgencyMessageContent) SetThinking(v AIgencyThinking)`
+
+SetThinking sets Thinking field to given value.
+
+### HasThinking
+
+`func (o *AIgencyMessageContent) HasThinking() bool`
+
+HasThinking returns a boolean if a field has been set.
 
 ### GetType
 

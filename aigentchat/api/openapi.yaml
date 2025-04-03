@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.17.8
+  version: 0.18.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -5104,6 +5104,48 @@ components:
           minLength: 1
           type: string
       type: object
+    AIgencyFunctionCall:
+      example:
+        function_name: function_name
+        arguments: "{}"
+        id: id
+      properties:
+        arguments:
+          properties: {}
+          type: object
+        function_name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+      required:
+      - function_name
+      - id
+      type: object
+    AIgencyFunctionResponse:
+      example:
+        result: result
+        function_name: function_name
+        id: id
+      properties:
+        function_name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        result:
+          type: string
+      required:
+      - function_name
+      - id
+      - result
+      type: object
     AIgencyImage:
       example:
         agent_id: agent_id
@@ -5273,8 +5315,20 @@ components:
               id: id
               file_size: 0
               url: url
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+            function_responses:
+              result: result
+              function_name: function_name
+              id: id
             text: text
             type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
           - file:
               embedded_content: embedded_content
               mime_type: mime_type
@@ -5283,8 +5337,20 @@ components:
               id: id
               file_size: 0
               url: url
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+            function_responses:
+              result: result
+              function_name: function_name
+              id: id
             text: text
             type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
           full_text: full_text
         sender_id: sender_id
         execution_id: execution_id
@@ -5439,13 +5505,31 @@ components:
           id: id
           file_size: 0
           url: url
+        function_call:
+          function_name: function_name
+          arguments: "{}"
+          id: id
+        function_responses:
+          result: result
+          function_name: function_name
+          id: id
         text: text
         type: text
+        thinking:
+          is_redacted: true
+          signature: signature
+          content: content
       properties:
         file:
           $ref: '#/components/schemas/AIgencyMessageFile'
+        function_call:
+          $ref: '#/components/schemas/AIgencyFunctionCall'
+        function_responses:
+          $ref: '#/components/schemas/AIgencyFunctionResponse'
         text:
           type: string
+        thinking:
+          $ref: '#/components/schemas/AIgencyThinking'
         type:
           $ref: '#/components/schemas/AIgencyMessageContentType'
       required:
@@ -5463,8 +5547,20 @@ components:
             id: id
             file_size: 0
             url: url
+          function_call:
+            function_name: function_name
+            arguments: "{}"
+            id: id
+          function_responses:
+            result: result
+            function_name: function_name
+            id: id
           text: text
           type: text
+          thinking:
+            is_redacted: true
+            signature: signature
+            content: content
         - file:
             embedded_content: embedded_content
             mime_type: mime_type
@@ -5473,8 +5569,20 @@ components:
             id: id
             file_size: 0
             url: url
+          function_call:
+            function_name: function_name
+            arguments: "{}"
+            id: id
+          function_responses:
+            result: result
+            function_name: function_name
+            id: id
           text: text
           type: text
+          thinking:
+            is_redacted: true
+            signature: signature
+            content: content
         full_text: full_text
       properties:
         data:
@@ -5491,10 +5599,16 @@ components:
       enum:
       - text
       - file
+      - function_call
+      - function_response
+      - thinking
       type: string
       x-enum-varnames:
       - AIgencyMessageContentTypeText
       - AIgencyMessageContentTypeFile
+      - AIgencyMessageContentTypeFunctionCall
+      - AIgencyMessageContentTypeFunctionResponse
+      - AIgencyMessageContentTypeThinking
     AIgencyMessageFile:
       example:
         embedded_content: embedded_content
@@ -5596,8 +5710,20 @@ components:
                 id: id
                 file_size: 0
                 url: url
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+              function_responses:
+                result: result
+                function_name: function_name
+                id: id
               text: text
               type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
             - file:
                 embedded_content: embedded_content
                 mime_type: mime_type
@@ -5606,8 +5732,20 @@ components:
                 id: id
                 file_size: 0
                 url: url
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+              function_responses:
+                result: result
+                function_name: function_name
+                id: id
               text: text
               type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -5690,8 +5828,20 @@ components:
                 id: id
                 file_size: 0
                 url: url
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+              function_responses:
+                result: result
+                function_name: function_name
+                id: id
               text: text
               type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
             - file:
                 embedded_content: embedded_content
                 mime_type: mime_type
@@ -5700,8 +5850,20 @@ components:
                 id: id
                 file_size: 0
                 url: url
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+              function_responses:
+                result: result
+                function_name: function_name
+                id: id
               text: text
               type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -5808,8 +5970,20 @@ components:
               id: id
               file_size: 0
               url: url
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+            function_responses:
+              result: result
+              function_name: function_name
+              id: id
             text: text
             type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
           - file:
               embedded_content: embedded_content
               mime_type: mime_type
@@ -5818,8 +5992,20 @@ components:
               id: id
               file_size: 0
               url: url
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+            function_responses:
+              result: result
+              function_name: function_name
+              id: id
             text: text
             type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
           full_text: full_text
         sender_conversation_role: "{}"
         meta_data: "{}"
@@ -5885,6 +6071,19 @@ components:
       - sender_conversation_role
       - sender_name
       - type
+      type: object
+    AIgencyThinking:
+      example:
+        is_redacted: true
+        signature: signature
+        content: content
+      properties:
+        content:
+          type: string
+        is_redacted:
+          type: boolean
+        signature:
+          type: string
       type: object
     AIgencyThumbnail:
       example:
@@ -7134,6 +7333,7 @@ components:
       - max_tokens
       - stop
       - tool_calls
+      - delta
       - unknown
       type: string
       x-enum-varnames:
@@ -7143,6 +7343,7 @@ components:
       - FinishReasonMaxTokens
       - FinishReasonStop
       - FinishReasonToolCalls
+      - FinishReasonDelta
       - FinishReasonUnknown
     FunctionCall:
       example:

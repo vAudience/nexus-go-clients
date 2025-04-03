@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.8
+API version: 0.18.0
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,7 @@ const (
 	FinishReasonMaxTokens FinishReason = "max_tokens"
 	FinishReasonStop FinishReason = "stop"
 	FinishReasonToolCalls FinishReason = "tool_calls"
+	FinishReasonDelta FinishReason = "delta"
 	FinishReasonUnknown FinishReason = "unknown"
 )
 
@@ -38,6 +39,7 @@ var AllowedFinishReasonEnumValues = []FinishReason{
 	"max_tokens",
 	"stop",
 	"tool_calls",
+	"delta",
 	"unknown",
 }
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.17.8
+API version: 0.18.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,10 @@ var _ MappedNullable = &AIgencyMessageContent{}
 // AIgencyMessageContent struct for AIgencyMessageContent
 type AIgencyMessageContent struct {
 	File *AIgencyMessageFile `json:"file,omitempty"`
+	FunctionCall *AIgencyFunctionCall `json:"function_call,omitempty"`
+	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`
 	Text string `json:"text"`
+	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
@@ -80,6 +83,70 @@ func (o *AIgencyMessageContent) SetFile(v AIgencyMessageFile) {
 	o.File = &v
 }
 
+// GetFunctionCall returns the FunctionCall field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetFunctionCall() AIgencyFunctionCall {
+	if o == nil || IsNil(o.FunctionCall) {
+		var ret AIgencyFunctionCall
+		return ret
+	}
+	return *o.FunctionCall
+}
+
+// GetFunctionCallOk returns a tuple with the FunctionCall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetFunctionCallOk() (*AIgencyFunctionCall, bool) {
+	if o == nil || IsNil(o.FunctionCall) {
+		return nil, false
+	}
+	return o.FunctionCall, true
+}
+
+// HasFunctionCall returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasFunctionCall() bool {
+	if o != nil && !IsNil(o.FunctionCall) {
+		return true
+	}
+
+	return false
+}
+
+// SetFunctionCall gets a reference to the given AIgencyFunctionCall and assigns it to the FunctionCall field.
+func (o *AIgencyMessageContent) SetFunctionCall(v AIgencyFunctionCall) {
+	o.FunctionCall = &v
+}
+
+// GetFunctionResponses returns the FunctionResponses field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetFunctionResponses() AIgencyFunctionResponse {
+	if o == nil || IsNil(o.FunctionResponses) {
+		var ret AIgencyFunctionResponse
+		return ret
+	}
+	return *o.FunctionResponses
+}
+
+// GetFunctionResponsesOk returns a tuple with the FunctionResponses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetFunctionResponsesOk() (*AIgencyFunctionResponse, bool) {
+	if o == nil || IsNil(o.FunctionResponses) {
+		return nil, false
+	}
+	return o.FunctionResponses, true
+}
+
+// HasFunctionResponses returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasFunctionResponses() bool {
+	if o != nil && !IsNil(o.FunctionResponses) {
+		return true
+	}
+
+	return false
+}
+
+// SetFunctionResponses gets a reference to the given AIgencyFunctionResponse and assigns it to the FunctionResponses field.
+func (o *AIgencyMessageContent) SetFunctionResponses(v AIgencyFunctionResponse) {
+	o.FunctionResponses = &v
+}
+
 // GetText returns the Text field value
 func (o *AIgencyMessageContent) GetText() string {
 	if o == nil {
@@ -102,6 +169,38 @@ func (o *AIgencyMessageContent) GetTextOk() (*string, bool) {
 // SetText sets field value
 func (o *AIgencyMessageContent) SetText(v string) {
 	o.Text = v
+}
+
+// GetThinking returns the Thinking field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetThinking() AIgencyThinking {
+	if o == nil || IsNil(o.Thinking) {
+		var ret AIgencyThinking
+		return ret
+	}
+	return *o.Thinking
+}
+
+// GetThinkingOk returns a tuple with the Thinking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetThinkingOk() (*AIgencyThinking, bool) {
+	if o == nil || IsNil(o.Thinking) {
+		return nil, false
+	}
+	return o.Thinking, true
+}
+
+// HasThinking returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasThinking() bool {
+	if o != nil && !IsNil(o.Thinking) {
+		return true
+	}
+
+	return false
+}
+
+// SetThinking gets a reference to the given AIgencyThinking and assigns it to the Thinking field.
+func (o *AIgencyMessageContent) SetThinking(v AIgencyThinking) {
+	o.Thinking = &v
 }
 
 // GetType returns the Type field value
@@ -141,7 +240,16 @@ func (o AIgencyMessageContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.File) {
 		toSerialize["file"] = o.File
 	}
+	if !IsNil(o.FunctionCall) {
+		toSerialize["function_call"] = o.FunctionCall
+	}
+	if !IsNil(o.FunctionResponses) {
+		toSerialize["function_responses"] = o.FunctionResponses
+	}
 	toSerialize["text"] = o.Text
+	if !IsNil(o.Thinking) {
+		toSerialize["thinking"] = o.Thinking
+	}
 	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
@@ -188,7 +296,10 @@ func (o *AIgencyMessageContent) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "file")
+		delete(additionalProperties, "function_call")
+		delete(additionalProperties, "function_responses")
 		delete(additionalProperties, "text")
+		delete(additionalProperties, "thinking")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
 	}

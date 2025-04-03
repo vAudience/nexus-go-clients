@@ -15,6 +15,8 @@
 
 * `FinishReasonToolCalls` (value: `"tool_calls"`)
 
+* `FinishReasonDelta` (value: `"delta"`)
+
 * `FinishReasonUnknown` (value: `"unknown"`)
 
 
