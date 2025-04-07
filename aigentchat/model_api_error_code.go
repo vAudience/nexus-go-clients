@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.0
+API version: 0.18.2
 Contact: contact@vaudience.ai
 */
 
@@ -85,6 +85,7 @@ const (
 	ErrCodeChatCompletionTooManyTempFiles ApiErrorCode = "chat_completion_too_many_temporary_files"
 	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
 	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
+	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
@@ -209,6 +210,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"chat_completion_too_many_temporary_files",
 	"chat_completion_exceeds_total_temporary_file_size",
 	"chat_completion_exceeds_max_input_tokens",
+	"chat_completion_exceeds_max_tool_calls",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",

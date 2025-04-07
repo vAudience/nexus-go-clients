@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.0
+API version: 0.18.2
 Contact: contact@vaudience.ai
 */
 
@@ -24,7 +24,7 @@ type AIgencyMessageContent struct {
 	File *AIgencyMessageFile `json:"file,omitempty"`
 	FunctionCall *AIgencyFunctionCall `json:"function_call,omitempty"`
 	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`
-	Text string `json:"text"`
+	Text *string `json:"text,omitempty"`
 	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
 	AdditionalProperties map[string]interface{}
@@ -36,9 +36,8 @@ type _AIgencyMessageContent AIgencyMessageContent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageContent(text string, type_ AIgencyMessageContentType) *AIgencyMessageContent {
+func NewAIgencyMessageContent(type_ AIgencyMessageContentType) *AIgencyMessageContent {
 	this := AIgencyMessageContent{}
-	this.Text = text
 	this.Type = type_
 	return &this
 }
@@ -147,28 +146,36 @@ func (o *AIgencyMessageContent) SetFunctionResponses(v AIgencyFunctionResponse) 
 	o.FunctionResponses = &v
 }
 
-// GetText returns the Text field value
+// GetText returns the Text field value if set, zero value otherwise.
 func (o *AIgencyMessageContent) GetText() string {
-	if o == nil {
+	if o == nil || IsNil(o.Text) {
 		var ret string
 		return ret
 	}
-
-	return o.Text
+	return *o.Text
 }
 
-// GetTextOk returns a tuple with the Text field value
+// GetTextOk returns a tuple with the Text field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AIgencyMessageContent) GetTextOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Text) {
 		return nil, false
 	}
-	return &o.Text, true
+	return o.Text, true
 }
 
-// SetText sets field value
+// HasText returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasText() bool {
+	if o != nil && !IsNil(o.Text) {
+		return true
+	}
+
+	return false
+}
+
+// SetText gets a reference to the given string and assigns it to the Text field.
 func (o *AIgencyMessageContent) SetText(v string) {
-	o.Text = v
+	o.Text = &v
 }
 
 // GetThinking returns the Thinking field value if set, zero value otherwise.
@@ -246,7 +253,9 @@ func (o AIgencyMessageContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FunctionResponses) {
 		toSerialize["function_responses"] = o.FunctionResponses
 	}
-	toSerialize["text"] = o.Text
+	if !IsNil(o.Text) {
+		toSerialize["text"] = o.Text
+	}
 	if !IsNil(o.Thinking) {
 		toSerialize["thinking"] = o.Thinking
 	}
@@ -264,7 +273,6 @@ func (o *AIgencyMessageContent) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"text",
 		"type",
 	}
 

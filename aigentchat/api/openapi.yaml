@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.18.0
+  version: 0.18.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -5533,7 +5533,6 @@ components:
         type:
           $ref: '#/components/schemas/AIgencyMessageContentType'
       required:
-      - text
       - type
       type: object
     AIgencyMessageContentList:
@@ -6531,6 +6530,7 @@ components:
       - chat_completion_too_many_temporary_files
       - chat_completion_exceeds_total_temporary_file_size
       - chat_completion_exceeds_max_input_tokens
+      - chat_completion_exceeds_max_tool_calls
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
@@ -6653,6 +6653,7 @@ components:
       - ErrCodeChatCompletionTooManyTempFiles
       - ErrCodeChatCompletionExceedsTotalTempFileSize
       - ErrCodeChatCompletionExceedsMaxInputTokens
+      - ErrCodeChatCompletionExceedsMaxToolCalls
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs

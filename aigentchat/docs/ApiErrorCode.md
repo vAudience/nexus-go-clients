@@ -131,6 +131,8 @@
 
 * `ErrCodeChatCompletionExceedsMaxInputTokens` (value: `"chat_completion_exceeds_max_input_tokens"`)
 
+* `ErrCodeChatCompletionExceedsMaxToolCalls` (value: `"chat_completion_exceeds_max_tool_calls"`)
+
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 
 * `ErrCodeFailedToEmbedText` (value: `"failed_to_embed_text"`)

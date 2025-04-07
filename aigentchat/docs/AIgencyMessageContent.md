@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **File** | Pointer to [**AIgencyMessageFile**](AIgencyMessageFile.md) |  | [optional] 
 **FunctionCall** | Pointer to [**AIgencyFunctionCall**](AIgencyFunctionCall.md) |  | [optional] 
 **FunctionResponses** | Pointer to [**AIgencyFunctionResponse**](AIgencyFunctionResponse.md) |  | [optional] 
-**Text** | **string** |  | 
+**Text** | Pointer to **string** |  | [optional] 
 **Thinking** | Pointer to [**AIgencyThinking**](AIgencyThinking.md) |  | [optional] 
 **Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessageContent
 
-`func NewAIgencyMessageContent(text string, type_ AIgencyMessageContentType, ) *AIgencyMessageContent`
+`func NewAIgencyMessageContent(type_ AIgencyMessageContentType, ) *AIgencyMessageContent`
 
 NewAIgencyMessageContent instantiates a new AIgencyMessageContent object
 This constructor will assign default values to properties that have it defined,
@@ -124,6 +124,11 @@ and a boolean to check if the value has been set.
 
 SetText sets Text field to given value.
 
+### HasText
+
+`func (o *AIgencyMessageContent) HasText() bool`
+
+HasText returns a boolean if a field has been set.
 
 ### GetThinking
 
