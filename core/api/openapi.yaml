@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.6
+  version: 0.2.7
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -4182,15 +4182,29 @@ components:
       type: object
     OrganizationSettingsPatchRequest:
       example:
+        allowedPredefinedAgentIds:
+        - allowedPredefinedAgentIds
+        - allowedPredefinedAgentIds
         defaultAgentId: defaultAgentId
       properties:
+        allowedPredefinedAgentIds:
+          items:
+            type: string
+          type: array
         defaultAgentId:
           type: string
       type: object
     OrganizationSettingsPostRequest:
       example:
+        allowedPredefinedAgentIds:
+        - allowedPredefinedAgentIds
+        - allowedPredefinedAgentIds
         defaultAgentId: defaultAgentId
       properties:
+        allowedPredefinedAgentIds:
+          items:
+            type: string
+          type: array
         defaultAgentId:
           type: string
       type: object
@@ -4198,10 +4212,17 @@ components:
       example:
         organizationId: organizationId
         createdAt: createdAt
+        allowedPredefinedAgentIds:
+        - allowedPredefinedAgentIds
+        - allowedPredefinedAgentIds
         defaultAgentId: defaultAgentId
         id: id
         updatedAt: updatedAt
       properties:
+        allowedPredefinedAgentIds:
+          items:
+            type: string
+          type: array
         createdAt:
           type: string
         defaultAgentId:
@@ -4213,6 +4234,7 @@ components:
         updatedAt:
           type: string
       required:
+      - allowedPredefinedAgentIds
       - createdAt
       - defaultAgentId
       - id

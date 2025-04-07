@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllowedPredefinedAgentIds** | Pointer to **[]string** |  | [optional] 
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewOrganizationSettingsPostRequestWithDefaults instantiates a new OrganizationSettingsPostRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllowedPredefinedAgentIds
+
+`func (o *OrganizationSettingsPostRequest) GetAllowedPredefinedAgentIds() []string`
+
+GetAllowedPredefinedAgentIds returns the AllowedPredefinedAgentIds field if non-nil, zero value otherwise.
+
+### GetAllowedPredefinedAgentIdsOk
+
+`func (o *OrganizationSettingsPostRequest) GetAllowedPredefinedAgentIdsOk() (*[]string, bool)`
+
+GetAllowedPredefinedAgentIdsOk returns a tuple with the AllowedPredefinedAgentIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedPredefinedAgentIds
+
+`func (o *OrganizationSettingsPostRequest) SetAllowedPredefinedAgentIds(v []string)`
+
+SetAllowedPredefinedAgentIds sets AllowedPredefinedAgentIds field to given value.
+
+### HasAllowedPredefinedAgentIds
+
+`func (o *OrganizationSettingsPostRequest) HasAllowedPredefinedAgentIds() bool`
+
+HasAllowedPredefinedAgentIds returns a boolean if a field has been set.
 
 ### GetDefaultAgentId
 

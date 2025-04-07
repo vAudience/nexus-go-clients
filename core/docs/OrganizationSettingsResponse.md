@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllowedPredefinedAgentIds** | **[]string** |  | 
 **CreatedAt** | **string** |  | 
 **DefaultAgentId** | **string** |  | 
 **Id** | **string** |  | 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewOrganizationSettingsResponse
 
-`func NewOrganizationSettingsResponse(createdAt string, defaultAgentId string, id string, organizationId string, updatedAt string, ) *OrganizationSettingsResponse`
+`func NewOrganizationSettingsResponse(allowedPredefinedAgentIds []string, createdAt string, defaultAgentId string, id string, organizationId string, updatedAt string, ) *OrganizationSettingsResponse`
 
 NewOrganizationSettingsResponse instantiates a new OrganizationSettingsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +29,26 @@ will change when the set of required properties is changed
 NewOrganizationSettingsResponseWithDefaults instantiates a new OrganizationSettingsResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllowedPredefinedAgentIds
+
+`func (o *OrganizationSettingsResponse) GetAllowedPredefinedAgentIds() []string`
+
+GetAllowedPredefinedAgentIds returns the AllowedPredefinedAgentIds field if non-nil, zero value otherwise.
+
+### GetAllowedPredefinedAgentIdsOk
+
+`func (o *OrganizationSettingsResponse) GetAllowedPredefinedAgentIdsOk() (*[]string, bool)`
+
+GetAllowedPredefinedAgentIdsOk returns a tuple with the AllowedPredefinedAgentIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedPredefinedAgentIds
+
+`func (o *OrganizationSettingsResponse) SetAllowedPredefinedAgentIds(v []string)`
+
+SetAllowedPredefinedAgentIds sets AllowedPredefinedAgentIds field to given value.
+
 
 ### GetCreatedAt
 
