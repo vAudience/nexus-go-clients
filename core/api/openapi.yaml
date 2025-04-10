@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.7
+  version: 0.2.8
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -3811,6 +3811,9 @@ components:
           type: string
       required:
       - name
+      - userEmail
+      - userFullName
+      - userName
       type: object
     OrganizationApiKeyResponse:
       example:

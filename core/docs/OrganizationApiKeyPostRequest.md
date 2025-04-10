@@ -7,15 +7,15 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OrganizationRoleId** | Pointer to **string** |  | [optional] 
 **RoleIds** | Pointer to **[]string** |  | [optional] 
-**UserEmail** | Pointer to **string** |  | [optional] 
-**UserFullName** | Pointer to **string** |  | [optional] 
-**UserName** | Pointer to **string** |  | [optional] 
+**UserEmail** | **string** |  | 
+**UserFullName** | **string** |  | 
+**UserName** | **string** |  | 
 
 ## Methods
 
 ### NewOrganizationApiKeyPostRequest
 
-`func NewOrganizationApiKeyPostRequest(name string, ) *OrganizationApiKeyPostRequest`
+`func NewOrganizationApiKeyPostRequest(name string, userEmail string, userFullName string, userName string, ) *OrganizationApiKeyPostRequest`
 
 NewOrganizationApiKeyPostRequest instantiates a new OrganizationApiKeyPostRequest object
 This constructor will assign default values to properties that have it defined,
@@ -119,11 +119,6 @@ and a boolean to check if the value has been set.
 
 SetUserEmail sets UserEmail field to given value.
 
-### HasUserEmail
-
-`func (o *OrganizationApiKeyPostRequest) HasUserEmail() bool`
-
-HasUserEmail returns a boolean if a field has been set.
 
 ### GetUserFullName
 
@@ -144,11 +139,6 @@ and a boolean to check if the value has been set.
 
 SetUserFullName sets UserFullName field to given value.
 
-### HasUserFullName
-
-`func (o *OrganizationApiKeyPostRequest) HasUserFullName() bool`
-
-HasUserFullName returns a boolean if a field has been set.
 
 ### GetUserName
 
@@ -169,11 +159,6 @@ and a boolean to check if the value has been set.
 
 SetUserName sets UserName field to given value.
 
-### HasUserName
-
-`func (o *OrganizationApiKeyPostRequest) HasUserName() bool`
-
-HasUserName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

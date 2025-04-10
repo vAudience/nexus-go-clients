@@ -287,7 +287,7 @@ import (
 
 func main() {
 	id := "id_example" // string | id of the organization
-	key := *openapiclient.NewOrganizationApiKeyPostRequest("Name_example") // OrganizationApiKeyPostRequest | api key object
+	key := *openapiclient.NewOrganizationApiKeyPostRequest("Name_example", "UserEmail_example", "UserFullName_example", "UserName_example") // OrganizationApiKeyPostRequest | api key object
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
