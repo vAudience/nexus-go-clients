@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **I18n** | Pointer to [**map[string]AIModelI18n**](AIModelI18n.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
+**ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
+**ModelReleaseDate** | Pointer to **int32** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
 **Parameters** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
@@ -212,6 +214,31 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
+### GetModelCategory
+
+`func (o *AIModelWriteDto) GetModelCategory() string`
+
+GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
+
+### GetModelCategoryOk
+
+`func (o *AIModelWriteDto) GetModelCategoryOk() (*string, bool)`
+
+GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelCategory
+
+`func (o *AIModelWriteDto) SetModelCategory(v string)`
+
+SetModelCategory sets ModelCategory field to given value.
+
+### HasModelCategory
+
+`func (o *AIModelWriteDto) HasModelCategory() bool`
+
+HasModelCategory returns a boolean if a field has been set.
+
 ### GetModelId
 
 `func (o *AIModelWriteDto) GetModelId() string`
@@ -236,6 +263,31 @@ SetModelId sets ModelId field to given value.
 `func (o *AIModelWriteDto) HasModelId() bool`
 
 HasModelId returns a boolean if a field has been set.
+
+### GetModelReleaseDate
+
+`func (o *AIModelWriteDto) GetModelReleaseDate() int32`
+
+GetModelReleaseDate returns the ModelReleaseDate field if non-nil, zero value otherwise.
+
+### GetModelReleaseDateOk
+
+`func (o *AIModelWriteDto) GetModelReleaseDateOk() (*int32, bool)`
+
+GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelReleaseDate
+
+`func (o *AIModelWriteDto) SetModelReleaseDate(v int32)`
+
+SetModelReleaseDate sets ModelReleaseDate field to given value.
+
+### HasModelReleaseDate
+
+`func (o *AIModelWriteDto) HasModelReleaseDate() bool`
+
+HasModelReleaseDate returns a boolean if a field has been set.
 
 ### GetName
 

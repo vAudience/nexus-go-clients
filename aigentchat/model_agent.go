@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.2
+API version: 0.18.8
 Contact: contact@vaudience.ai
 */
 
@@ -33,8 +33,10 @@ type Agent struct {
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
+	ModelCategory *string `json:"model_category,omitempty"`
 	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
 	ModelId string `json:"model_id"`
+	ModelReleaseDate *int64 `json:"model_release_date,omitempty"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
@@ -448,6 +450,38 @@ func (o *Agent) SetMetaData(v map[string]interface{}) {
 	o.MetaData = v
 }
 
+// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
+func (o *Agent) GetModelCategory() string {
+	if o == nil || IsNil(o.ModelCategory) {
+		var ret string
+		return ret
+	}
+	return *o.ModelCategory
+}
+
+// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetModelCategoryOk() (*string, bool) {
+	if o == nil || IsNil(o.ModelCategory) {
+		return nil, false
+	}
+	return o.ModelCategory, true
+}
+
+// HasModelCategory returns a boolean if a field has been set.
+func (o *Agent) HasModelCategory() bool {
+	if o != nil && !IsNil(o.ModelCategory) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
+func (o *Agent) SetModelCategory(v string) {
+	o.ModelCategory = &v
+}
+
 // GetModelHostLocation returns the ModelHostLocation field value if set, zero value otherwise.
 func (o *Agent) GetModelHostLocation() HostingLocation {
 	if o == nil || IsNil(o.ModelHostLocation) {
@@ -502,6 +536,38 @@ func (o *Agent) GetModelIdOk() (*string, bool) {
 // SetModelId sets field value
 func (o *Agent) SetModelId(v string) {
 	o.ModelId = v
+}
+
+// GetModelReleaseDate returns the ModelReleaseDate field value if set, zero value otherwise.
+func (o *Agent) GetModelReleaseDate() int64 {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		var ret int64
+		return ret
+	}
+	return *o.ModelReleaseDate
+}
+
+// GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetModelReleaseDateOk() (*int64, bool) {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		return nil, false
+	}
+	return o.ModelReleaseDate, true
+}
+
+// HasModelReleaseDate returns a boolean if a field has been set.
+func (o *Agent) HasModelReleaseDate() bool {
+	if o != nil && !IsNil(o.ModelReleaseDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelReleaseDate gets a reference to the given int64 and assigns it to the ModelReleaseDate field.
+func (o *Agent) SetModelReleaseDate(v int64) {
+	o.ModelReleaseDate = &v
 }
 
 // GetName returns the Name field value
@@ -844,10 +910,16 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
 	}
+	if !IsNil(o.ModelCategory) {
+		toSerialize["model_category"] = o.ModelCategory
+	}
 	if !IsNil(o.ModelHostLocation) {
 		toSerialize["model_host_location"] = o.ModelHostLocation
 	}
 	toSerialize["model_id"] = o.ModelId
+	if !IsNil(o.ModelReleaseDate) {
+		toSerialize["model_release_date"] = o.ModelReleaseDate
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
@@ -931,8 +1003,10 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "meta_data")
+		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_host_location")
 		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_release_date")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

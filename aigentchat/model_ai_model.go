@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.2
+API version: 0.18.8
 Contact: contact@vaudience.ai
 */
 
@@ -31,7 +31,9 @@ type AIModel struct {
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
+	ModelCategory *string `json:"model_category,omitempty"`
 	ModelId string `json:"model_id"`
+	ModelReleaseDate *int64 `json:"model_release_date,omitempty"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
@@ -381,6 +383,38 @@ func (o *AIModel) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
+// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
+func (o *AIModel) GetModelCategory() string {
+	if o == nil || IsNil(o.ModelCategory) {
+		var ret string
+		return ret
+	}
+	return *o.ModelCategory
+}
+
+// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetModelCategoryOk() (*string, bool) {
+	if o == nil || IsNil(o.ModelCategory) {
+		return nil, false
+	}
+	return o.ModelCategory, true
+}
+
+// HasModelCategory returns a boolean if a field has been set.
+func (o *AIModel) HasModelCategory() bool {
+	if o != nil && !IsNil(o.ModelCategory) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
+func (o *AIModel) SetModelCategory(v string) {
+	o.ModelCategory = &v
+}
+
 // GetModelId returns the ModelId field value
 func (o *AIModel) GetModelId() string {
 	if o == nil {
@@ -403,6 +437,38 @@ func (o *AIModel) GetModelIdOk() (*string, bool) {
 // SetModelId sets field value
 func (o *AIModel) SetModelId(v string) {
 	o.ModelId = v
+}
+
+// GetModelReleaseDate returns the ModelReleaseDate field value if set, zero value otherwise.
+func (o *AIModel) GetModelReleaseDate() int64 {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		var ret int64
+		return ret
+	}
+	return *o.ModelReleaseDate
+}
+
+// GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetModelReleaseDateOk() (*int64, bool) {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		return nil, false
+	}
+	return o.ModelReleaseDate, true
+}
+
+// HasModelReleaseDate returns a boolean if a field has been set.
+func (o *AIModel) HasModelReleaseDate() bool {
+	if o != nil && !IsNil(o.ModelReleaseDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelReleaseDate gets a reference to the given int64 and assigns it to the ModelReleaseDate field.
+func (o *AIModel) SetModelReleaseDate(v int64) {
+	o.ModelReleaseDate = &v
 }
 
 // GetName returns the Name field value
@@ -699,7 +765,13 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
+	if !IsNil(o.ModelCategory) {
+		toSerialize["model_category"] = o.ModelCategory
+	}
 	toSerialize["model_id"] = o.ModelId
+	if !IsNil(o.ModelReleaseDate) {
+		toSerialize["model_release_date"] = o.ModelReleaseDate
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
@@ -777,7 +849,9 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_release_date")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.2
+API version: 0.18.8
 Contact: contact@vaudience.ai
 */
 
@@ -24,7 +24,9 @@ type ResultFile struct {
 	FileName string `json:"file_name"`
 	FileSize int32 `json:"file_size"`
 	MimeType string `json:"mime_type"`
+	OriginalFileMimeType string `json:"original_file_mime_type"`
 	OriginalFileName string `json:"original_file_name"`
+	OriginalFileUrl string `json:"original_file_url"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
@@ -35,12 +37,14 @@ type _ResultFile ResultFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileName string, url string) *ResultFile {
+func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, url string) *ResultFile {
 	this := ResultFile{}
 	this.FileName = fileName
 	this.FileSize = fileSize
 	this.MimeType = mimeType
+	this.OriginalFileMimeType = originalFileMimeType
 	this.OriginalFileName = originalFileName
+	this.OriginalFileUrl = originalFileUrl
 	this.Url = url
 	return &this
 }
@@ -125,6 +129,30 @@ func (o *ResultFile) SetMimeType(v string) {
 	o.MimeType = v
 }
 
+// GetOriginalFileMimeType returns the OriginalFileMimeType field value
+func (o *ResultFile) GetOriginalFileMimeType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OriginalFileMimeType
+}
+
+// GetOriginalFileMimeTypeOk returns a tuple with the OriginalFileMimeType field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetOriginalFileMimeTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OriginalFileMimeType, true
+}
+
+// SetOriginalFileMimeType sets field value
+func (o *ResultFile) SetOriginalFileMimeType(v string) {
+	o.OriginalFileMimeType = v
+}
+
 // GetOriginalFileName returns the OriginalFileName field value
 func (o *ResultFile) GetOriginalFileName() string {
 	if o == nil {
@@ -147,6 +175,30 @@ func (o *ResultFile) GetOriginalFileNameOk() (*string, bool) {
 // SetOriginalFileName sets field value
 func (o *ResultFile) SetOriginalFileName(v string) {
 	o.OriginalFileName = v
+}
+
+// GetOriginalFileUrl returns the OriginalFileUrl field value
+func (o *ResultFile) GetOriginalFileUrl() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OriginalFileUrl
+}
+
+// GetOriginalFileUrlOk returns a tuple with the OriginalFileUrl field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetOriginalFileUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OriginalFileUrl, true
+}
+
+// SetOriginalFileUrl sets field value
+func (o *ResultFile) SetOriginalFileUrl(v string) {
+	o.OriginalFileUrl = v
 }
 
 // GetUrl returns the Url field value
@@ -186,7 +238,9 @@ func (o ResultFile) ToMap() (map[string]interface{}, error) {
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
 	toSerialize["mime_type"] = o.MimeType
+	toSerialize["original_file_mime_type"] = o.OriginalFileMimeType
 	toSerialize["original_file_name"] = o.OriginalFileName
+	toSerialize["original_file_url"] = o.OriginalFileUrl
 	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
@@ -204,7 +258,9 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		"file_name",
 		"file_size",
 		"mime_type",
+		"original_file_mime_type",
 		"original_file_name",
+		"original_file_url",
 		"url",
 	}
 
@@ -238,7 +294,9 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
 		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "original_file_mime_type")
 		delete(additionalProperties, "original_file_name")
+		delete(additionalProperties, "original_file_url")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

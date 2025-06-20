@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.2
+API version: 0.18.8
 Contact: contact@vaudience.ai
 */
 
@@ -27,7 +27,9 @@ type AIModelWriteDto struct {
 	I18n *map[string]AIModelI18n `json:"i18n,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
+	ModelCategory *string `json:"model_category,omitempty"`
 	ModelId *string `json:"model_id,omitempty"`
+	ModelReleaseDate *int32 `json:"model_release_date,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ParameterDefinitions map[string]interface{} `json:"parameter_definitions,omitempty"`
 	Parameters map[string]map[string]interface{} `json:"parameters,omitempty"`
@@ -279,6 +281,38 @@ func (o *AIModelWriteDto) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
+// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
+func (o *AIModelWriteDto) GetModelCategory() string {
+	if o == nil || IsNil(o.ModelCategory) {
+		var ret string
+		return ret
+	}
+	return *o.ModelCategory
+}
+
+// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelWriteDto) GetModelCategoryOk() (*string, bool) {
+	if o == nil || IsNil(o.ModelCategory) {
+		return nil, false
+	}
+	return o.ModelCategory, true
+}
+
+// HasModelCategory returns a boolean if a field has been set.
+func (o *AIModelWriteDto) HasModelCategory() bool {
+	if o != nil && !IsNil(o.ModelCategory) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
+func (o *AIModelWriteDto) SetModelCategory(v string) {
+	o.ModelCategory = &v
+}
+
 // GetModelId returns the ModelId field value if set, zero value otherwise.
 func (o *AIModelWriteDto) GetModelId() string {
 	if o == nil || IsNil(o.ModelId) {
@@ -309,6 +343,38 @@ func (o *AIModelWriteDto) HasModelId() bool {
 // SetModelId gets a reference to the given string and assigns it to the ModelId field.
 func (o *AIModelWriteDto) SetModelId(v string) {
 	o.ModelId = &v
+}
+
+// GetModelReleaseDate returns the ModelReleaseDate field value if set, zero value otherwise.
+func (o *AIModelWriteDto) GetModelReleaseDate() int32 {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		var ret int32
+		return ret
+	}
+	return *o.ModelReleaseDate
+}
+
+// GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelWriteDto) GetModelReleaseDateOk() (*int32, bool) {
+	if o == nil || IsNil(o.ModelReleaseDate) {
+		return nil, false
+	}
+	return o.ModelReleaseDate, true
+}
+
+// HasModelReleaseDate returns a boolean if a field has been set.
+func (o *AIModelWriteDto) HasModelReleaseDate() bool {
+	if o != nil && !IsNil(o.ModelReleaseDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelReleaseDate gets a reference to the given int32 and assigns it to the ModelReleaseDate field.
+func (o *AIModelWriteDto) SetModelReleaseDate(v int32) {
+	o.ModelReleaseDate = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -502,8 +568,14 @@ func (o AIModelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
+	if !IsNil(o.ModelCategory) {
+		toSerialize["model_category"] = o.ModelCategory
+	}
 	if !IsNil(o.ModelId) {
 		toSerialize["model_id"] = o.ModelId
+	}
+	if !IsNil(o.ModelReleaseDate) {
+		toSerialize["model_release_date"] = o.ModelReleaseDate
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -549,7 +621,9 @@ func (o *AIModelWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_release_date")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameter_definitions")
 		delete(additionalProperties, "parameters")

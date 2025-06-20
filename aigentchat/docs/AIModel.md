@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
+**ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelId** | **string** |  | 
+**ModelReleaseDate** | Pointer to **int64** |  | [optional] 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
@@ -289,6 +291,31 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
+### GetModelCategory
+
+`func (o *AIModel) GetModelCategory() string`
+
+GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
+
+### GetModelCategoryOk
+
+`func (o *AIModel) GetModelCategoryOk() (*string, bool)`
+
+GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelCategory
+
+`func (o *AIModel) SetModelCategory(v string)`
+
+SetModelCategory sets ModelCategory field to given value.
+
+### HasModelCategory
+
+`func (o *AIModel) HasModelCategory() bool`
+
+HasModelCategory returns a boolean if a field has been set.
+
 ### GetModelId
 
 `func (o *AIModel) GetModelId() string`
@@ -308,6 +335,31 @@ and a boolean to check if the value has been set.
 
 SetModelId sets ModelId field to given value.
 
+
+### GetModelReleaseDate
+
+`func (o *AIModel) GetModelReleaseDate() int64`
+
+GetModelReleaseDate returns the ModelReleaseDate field if non-nil, zero value otherwise.
+
+### GetModelReleaseDateOk
+
+`func (o *AIModel) GetModelReleaseDateOk() (*int64, bool)`
+
+GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelReleaseDate
+
+`func (o *AIModel) SetModelReleaseDate(v int64)`
+
+SetModelReleaseDate sets ModelReleaseDate field to given value.
+
+### HasModelReleaseDate
+
+`func (o *AIModel) HasModelReleaseDate() bool`
+
+HasModelReleaseDate returns a boolean if a field has been set.
 
 ### GetName
 

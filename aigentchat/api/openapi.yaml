@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.18.2
+  version: 0.18.8
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3158,6 +3158,47 @@ paths:
       summary: Delete an image
       tags:
       - Images
+  /v1/organizations/{org_id}/images/{image_id}:
+    get:
+      description: Get an image by its ID
+      operationId: GetImage
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Image ID
+        in: path
+        name: image_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIgencyImage'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get an image
+      tags:
+      - Images
   /v1/organizations/{org_id}/messages:
     post:
       description: Create a new message with the provided details
@@ -4252,6 +4293,7 @@ components:
       example:
         internal_id: internal_id
         owner_id: owner_id
+        model_release_date: 9
         created_at: 1
         description: description
         model_id: model_id
@@ -4261,6 +4303,7 @@ components:
         - accepted_file_mimetypes
         i18n:
           key:
+            model_category: model_category
             name: name
             description: description
         abilities:
@@ -4345,7 +4388,8 @@ components:
         - ""
         - ""
         owner_organization_id: owner_organization_id
-        updated_at: 9
+        updated_at: 3
+        model_category: model_category
         service_id: service_id
         is_public: true
         name: name
@@ -4386,10 +4430,16 @@ components:
           type: string
         is_public:
           type: boolean
+        model_category:
+          maxLength: 255
+          type: string
         model_id:
           maxLength: 64
           minLength: 1
           type: string
+        model_release_date:
+          format: int64
+          type: integer
         name:
           maxLength: 255
           minLength: 1
@@ -4579,11 +4629,15 @@ components:
       type: object
     AIModelI18n:
       example:
+        model_category: model_category
         name: name
         description: description
       properties:
         description:
           maxLength: 1024
+          type: string
+        model_category:
+          maxLength: 255
           type: string
         name:
           maxLength: 255
@@ -4703,6 +4757,7 @@ components:
         models:
         - internal_id: internal_id
           owner_id: owner_id
+          model_release_date: 9
           created_at: 1
           description: description
           model_id: model_id
@@ -4712,6 +4767,7 @@ components:
           - accepted_file_mimetypes
           i18n:
             key:
+              model_category: model_category
               name: name
               description: description
           abilities:
@@ -4796,7 +4852,8 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 9
+          updated_at: 3
+          model_category: model_category
           service_id: service_id
           is_public: true
           name: name
@@ -4806,6 +4863,7 @@ components:
           parameters: "{}"
         - internal_id: internal_id
           owner_id: owner_id
+          model_release_date: 9
           created_at: 1
           description: description
           model_id: model_id
@@ -4815,6 +4873,7 @@ components:
           - accepted_file_mimetypes
           i18n:
             key:
+              model_category: model_category
               name: name
               description: description
           abilities:
@@ -4899,7 +4958,8 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 9
+          updated_at: 3
+          model_category: model_category
           service_id: service_id
           is_public: true
           name: name
@@ -4982,6 +5042,7 @@ components:
     AIModelWriteDto:
       example:
         internal_id: internal_id
+        model_release_date: 0
         description: description
         model_id: model_id
         documentation_url: documentation_url
@@ -4990,6 +5051,7 @@ components:
         - accepted_file_mimetypes
         i18n:
           key:
+            model_category: model_category
             name: name
             description: description
         features:
@@ -5052,6 +5114,7 @@ components:
         service_host_locations:
         - ""
         - ""
+        model_category: model_category
         service_id: service_id
         is_public: true
         name: name
@@ -5080,10 +5143,15 @@ components:
           type: string
         is_public:
           type: boolean
+        model_category:
+          maxLength: 255
+          type: string
         model_id:
           maxLength: 64
           minLength: 1
           type: string
+        model_release_date:
+          type: integer
         name:
           maxLength: 255
           minLength: 1
@@ -5307,14 +5375,7 @@ components:
         ai_service_id: ai_service_id
         content:
           data:
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data: "{}"
-              id: id
-              file_size: 0
-              url: url
+          - file: "{}"
             function_call:
               function_name: function_name
               arguments: "{}"
@@ -5329,14 +5390,7 @@ components:
               is_redacted: true
               signature: signature
               content: content
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data: "{}"
-              id: id
-              file_size: 0
-              url: url
+          - file: "{}"
             function_call:
               function_name: function_name
               arguments: "{}"
@@ -5497,14 +5551,7 @@ components:
       type: object
     AIgencyMessageContent:
       example:
-        file:
-          embedded_content: embedded_content
-          mime_type: mime_type
-          file_name: file_name
-          meta_data: "{}"
-          id: id
-          file_size: 0
-          url: url
+        file: "{}"
         function_call:
           function_name: function_name
           arguments: "{}"
@@ -5521,7 +5568,10 @@ components:
           content: content
       properties:
         file:
-          $ref: '#/components/schemas/AIgencyMessageFile'
+          allOf:
+          - $ref: '#/components/schemas/AIgencyMessageFile'
+          description: Currently unused in favor of attachment list
+          type: object
         function_call:
           $ref: '#/components/schemas/AIgencyFunctionCall'
         function_responses:
@@ -5538,14 +5588,7 @@ components:
     AIgencyMessageContentList:
       example:
         data:
-        - file:
-            embedded_content: embedded_content
-            mime_type: mime_type
-            file_name: file_name
-            meta_data: "{}"
-            id: id
-            file_size: 0
-            url: url
+        - file: "{}"
           function_call:
             function_name: function_name
             arguments: "{}"
@@ -5560,14 +5603,7 @@ components:
             is_redacted: true
             signature: signature
             content: content
-        - file:
-            embedded_content: embedded_content
-            mime_type: mime_type
-            file_name: file_name
-            meta_data: "{}"
-            id: id
-            file_size: 0
-            url: url
+        - file: "{}"
           function_call:
             function_name: function_name
             arguments: "{}"
@@ -5602,6 +5638,8 @@ components:
       - function_response
       - thinking
       type: string
+      x-enum-comments:
+        AIgencyMessageContentTypeFile: Currently unused in favor of attachment list
       x-enum-varnames:
       - AIgencyMessageContentTypeText
       - AIgencyMessageContentTypeFile
@@ -5701,14 +5739,7 @@ components:
           ai_service_id: ai_service_id
           content:
             data:
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data: "{}"
-                id: id
-                file_size: 0
-                url: url
+            - file: "{}"
               function_call:
                 function_name: function_name
                 arguments: "{}"
@@ -5723,14 +5754,7 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data: "{}"
-                id: id
-                file_size: 0
-                url: url
+            - file: "{}"
               function_call:
                 function_name: function_name
                 arguments: "{}"
@@ -5819,14 +5843,7 @@ components:
           ai_service_id: ai_service_id
           content:
             data:
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data: "{}"
-                id: id
-                file_size: 0
-                url: url
+            - file: "{}"
               function_call:
                 function_name: function_name
                 arguments: "{}"
@@ -5841,14 +5858,7 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
-            - file:
-                embedded_content: embedded_content
-                mime_type: mime_type
-                file_name: file_name
-                meta_data: "{}"
-                id: id
-                file_size: 0
-                url: url
+            - file: "{}"
               function_call:
                 function_name: function_name
                 arguments: "{}"
@@ -5961,14 +5971,7 @@ components:
         ai_service_id: ai_service_id
         content:
           data:
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data: "{}"
-              id: id
-              file_size: 0
-              url: url
+          - file: "{}"
             function_call:
               function_name: function_name
               arguments: "{}"
@@ -5983,14 +5986,7 @@ components:
               is_redacted: true
               signature: signature
               content: content
-          - file:
-              embedded_content: embedded_content
-              mime_type: mime_type
-              file_name: file_name
-              meta_data: "{}"
-              id: id
-              file_size: 0
-              url: url
+          - file: "{}"
             function_call:
               function_name: function_name
               arguments: "{}"
@@ -6137,7 +6133,6 @@ components:
       - AbilityTypeToolFunction
     Agent:
       example:
-        internal_id: internal_id
         system_messages:
         - system_messages
         - system_messages
@@ -6150,12 +6145,7 @@ components:
         - assigned_tools
         created_at: 0
         description: description
-        model_id: model_id
         type: ""
-        i18n:
-          key:
-            name: name
-            description: description
         initial_user_messages:
         - initial_user_messages
         - initial_user_messages
@@ -6183,16 +6173,25 @@ components:
             min: 6
             max: 0
             direction: input
-        owner_organization_id: owner_organization_id
-        avatar_url: avatar_url
-        updated_at: 6
+        updated_at: 1
+        model_category: model_category
         use_tools: true
-        is_public: true
         meta_data: "{}"
-        name: name
-        updated_by: updated_by
         model_host_location: ""
         id: id
+        internal_id: internal_id
+        model_release_date: 6
+        model_id: model_id
+        i18n:
+          key:
+            model_category: model_category
+            name: name
+            description: description
+        owner_organization_id: owner_organization_id
+        avatar_url: avatar_url
+        is_public: true
+        name: name
+        updated_by: updated_by
         parameters: "{}"
       properties:
         abilities:
@@ -6237,12 +6236,18 @@ components:
         meta_data:
           properties: {}
           type: object
+        model_category:
+          maxLength: 255
+          type: string
         model_host_location:
           $ref: '#/components/schemas/HostingLocation'
         model_id:
           maxLength: 64
           minLength: 1
           type: string
+        model_release_date:
+          format: int64
+          type: integer
         name:
           maxLength: 255
           minLength: 1
@@ -6288,11 +6293,15 @@ components:
       type: object
     AgentI18n:
       example:
+        model_category: model_category
         name: name
         description: description
       properties:
         description:
           maxLength: 1024
+          type: string
+        model_category:
+          maxLength: 255
           type: string
         name:
           maxLength: 255
@@ -6328,6 +6337,7 @@ components:
         type: ""
         i18n:
           key:
+            model_category: model_category
             name: name
             description: description
         initial_user_messages:
@@ -6965,6 +6975,7 @@ components:
         - set_message_history_ids
         expire_messages: true
         continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+        use_summary_service: true
         use_tools: true
         message_reference_id: message_reference_id
         use_channel_messages_as_history: true
@@ -7009,6 +7020,8 @@ components:
         use_channel_messages_as_history:
           description: "If true, the channel messages will be used as history and\
             \ SetMessageHistoryIds will be ignored"
+          type: boolean
+        use_summary_service:
           type: boolean
         use_tools:
           type: boolean
@@ -7286,12 +7299,16 @@ components:
       example:
         resulting_files:
         - mime_type: mime_type
+          original_file_url: original_file_url
           file_name: file_name
+          original_file_mime_type: original_file_mime_type
           original_file_name: original_file_name
           file_size: 0
           url: url
         - mime_type: mime_type
+          original_file_url: original_file_url
           file_name: file_name
+          original_file_mime_type: original_file_mime_type
           original_file_name: original_file_name
           file_size: 0
           url: url
@@ -7366,12 +7383,16 @@ components:
       example:
         result_files:
         - mime_type: mime_type
+          original_file_url: original_file_url
           file_name: file_name
+          original_file_mime_type: original_file_mime_type
           original_file_name: original_file_name
           file_size: 0
           url: url
         - mime_type: mime_type
+          original_file_url: original_file_url
           file_name: file_name
+          original_file_mime_type: original_file_mime_type
           original_file_name: original_file_name
           file_size: 0
           url: url
@@ -7906,7 +7927,9 @@ components:
     ResultFile:
       example:
         mime_type: mime_type
+        original_file_url: original_file_url
         file_name: file_name
+        original_file_mime_type: original_file_mime_type
         original_file_name: original_file_name
         file_size: 0
         url: url
@@ -7917,7 +7940,11 @@ components:
           type: integer
         mime_type:
           type: string
+        original_file_mime_type:
+          type: string
         original_file_name:
+          type: string
+        original_file_url:
           type: string
         url:
           type: string
@@ -7925,7 +7952,9 @@ components:
       - file_name
       - file_size
       - mime_type
+      - original_file_mime_type
       - original_file_name
+      - original_file_url
       - url
       type: object
     TextEmbedding:

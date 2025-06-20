@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SetMessageHistoryIds** | Pointer to **[]string** | If UseChannelMessagesAsHistory is false, this list of message IDs will be used as history, if empty, the history will be empty, ignored if UseChannelMessagesAsHistory is true | [optional] 
 **UseChannelMessagesAsHistory** | Pointer to **bool** | If true, the channel messages will be used as history and SetMessageHistoryIds will be ignored | [optional] 
+**UseSummaryService** | Pointer to **bool** |  | [optional] 
 **UseTools** | Pointer to **bool** |  | [optional] 
 **VarReplacements** | Pointer to **map[string]string** |  | [optional] 
 
@@ -353,6 +354,31 @@ SetUseChannelMessagesAsHistory sets UseChannelMessagesAsHistory field to given v
 `func (o *ChatCompletionRequestDto) HasUseChannelMessagesAsHistory() bool`
 
 HasUseChannelMessagesAsHistory returns a boolean if a field has been set.
+
+### GetUseSummaryService
+
+`func (o *ChatCompletionRequestDto) GetUseSummaryService() bool`
+
+GetUseSummaryService returns the UseSummaryService field if non-nil, zero value otherwise.
+
+### GetUseSummaryServiceOk
+
+`func (o *ChatCompletionRequestDto) GetUseSummaryServiceOk() (*bool, bool)`
+
+GetUseSummaryServiceOk returns a tuple with the UseSummaryService field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseSummaryService
+
+`func (o *ChatCompletionRequestDto) SetUseSummaryService(v bool)`
+
+SetUseSummaryService sets UseSummaryService field to given value.
+
+### HasUseSummaryService
+
+`func (o *ChatCompletionRequestDto) HasUseSummaryService() bool`
+
+HasUseSummaryService returns a boolean if a field has been set.
 
 ### GetUseTools
 

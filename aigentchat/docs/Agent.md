@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
+**ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **ModelId** | **string** |  | 
+**ModelReleaseDate** | Pointer to **int64** |  | [optional] 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
@@ -343,6 +345,31 @@ SetMetaData sets MetaData field to given value.
 
 HasMetaData returns a boolean if a field has been set.
 
+### GetModelCategory
+
+`func (o *Agent) GetModelCategory() string`
+
+GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
+
+### GetModelCategoryOk
+
+`func (o *Agent) GetModelCategoryOk() (*string, bool)`
+
+GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelCategory
+
+`func (o *Agent) SetModelCategory(v string)`
+
+SetModelCategory sets ModelCategory field to given value.
+
+### HasModelCategory
+
+`func (o *Agent) HasModelCategory() bool`
+
+HasModelCategory returns a boolean if a field has been set.
+
 ### GetModelHostLocation
 
 `func (o *Agent) GetModelHostLocation() HostingLocation`
@@ -387,6 +414,31 @@ and a boolean to check if the value has been set.
 
 SetModelId sets ModelId field to given value.
 
+
+### GetModelReleaseDate
+
+`func (o *Agent) GetModelReleaseDate() int64`
+
+GetModelReleaseDate returns the ModelReleaseDate field if non-nil, zero value otherwise.
+
+### GetModelReleaseDateOk
+
+`func (o *Agent) GetModelReleaseDateOk() (*int64, bool)`
+
+GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelReleaseDate
+
+`func (o *Agent) SetModelReleaseDate(v int64)`
+
+SetModelReleaseDate sets ModelReleaseDate field to given value.
+
+### HasModelReleaseDate
+
+`func (o *Agent) HasModelReleaseDate() bool`
+
+HasModelReleaseDate returns a boolean if a field has been set.
 
 ### GetName
 

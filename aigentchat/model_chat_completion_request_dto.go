@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.2
+API version: 0.18.8
 Contact: contact@vaudience.ai
 */
 
@@ -36,6 +36,7 @@ type ChatCompletionRequestDto struct {
 	SetMessageHistoryIds []string `json:"set_message_history_ids,omitempty"`
 	// If true, the channel messages will be used as history and SetMessageHistoryIds will be ignored
 	UseChannelMessagesAsHistory *bool `json:"use_channel_messages_as_history,omitempty"`
+	UseSummaryService *bool `json:"use_summary_service,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
 	VarReplacements *map[string]string `json:"var_replacements,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -462,6 +463,38 @@ func (o *ChatCompletionRequestDto) SetUseChannelMessagesAsHistory(v bool) {
 	o.UseChannelMessagesAsHistory = &v
 }
 
+// GetUseSummaryService returns the UseSummaryService field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetUseSummaryService() bool {
+	if o == nil || IsNil(o.UseSummaryService) {
+		var ret bool
+		return ret
+	}
+	return *o.UseSummaryService
+}
+
+// GetUseSummaryServiceOk returns a tuple with the UseSummaryService field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetUseSummaryServiceOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseSummaryService) {
+		return nil, false
+	}
+	return o.UseSummaryService, true
+}
+
+// HasUseSummaryService returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasUseSummaryService() bool {
+	if o != nil && !IsNil(o.UseSummaryService) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseSummaryService gets a reference to the given bool and assigns it to the UseSummaryService field.
+func (o *ChatCompletionRequestDto) SetUseSummaryService(v bool) {
+	o.UseSummaryService = &v
+}
+
 // GetUseTools returns the UseTools field value if set, zero value otherwise.
 func (o *ChatCompletionRequestDto) GetUseTools() bool {
 	if o == nil || IsNil(o.UseTools) {
@@ -571,6 +604,9 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UseChannelMessagesAsHistory) {
 		toSerialize["use_channel_messages_as_history"] = o.UseChannelMessagesAsHistory
 	}
+	if !IsNil(o.UseSummaryService) {
+		toSerialize["use_summary_service"] = o.UseSummaryService
+	}
 	if !IsNil(o.UseTools) {
 		toSerialize["use_tools"] = o.UseTools
 	}
@@ -634,6 +670,7 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "set_message_history_ids")
 		delete(additionalProperties, "use_channel_messages_as_history")
+		delete(additionalProperties, "use_summary_service")
 		delete(additionalProperties, "use_tools")
 		delete(additionalProperties, "var_replacements")
 		o.AdditionalProperties = additionalProperties
