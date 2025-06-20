@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **OrganizationRoleId** | Pointer to **string** |  | [optional] 
 **RequiresRotation** | Pointer to **bool** |  | [optional] 
 **RoleIds** | Pointer to **[]string** |  | [optional] 
+**TeamIds** | Pointer to **[]string** |  | [optional] 
 **UserEmail** | Pointer to **string** |  | [optional] 
 **UserFullName** | Pointer to **string** |  | [optional] 
 **UserName** | Pointer to **string** |  | [optional] 
@@ -130,6 +131,31 @@ SetRoleIds sets RoleIds field to given value.
 `func (o *OrganizationApiKeyPatchRequest) HasRoleIds() bool`
 
 HasRoleIds returns a boolean if a field has been set.
+
+### GetTeamIds
+
+`func (o *OrganizationApiKeyPatchRequest) GetTeamIds() []string`
+
+GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+
+### GetTeamIdsOk
+
+`func (o *OrganizationApiKeyPatchRequest) GetTeamIdsOk() (*[]string, bool)`
+
+GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamIds
+
+`func (o *OrganizationApiKeyPatchRequest) SetTeamIds(v []string)`
+
+SetTeamIds sets TeamIds field to given value.
+
+### HasTeamIds
+
+`func (o *OrganizationApiKeyPatchRequest) HasTeamIds() bool`
+
+HasTeamIds returns a boolean if a field has been set.
 
 ### GetUserEmail
 

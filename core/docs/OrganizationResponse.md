@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **Name** | **string** |  | 
 **Owner** | **string** |  | 
+**Personal** | **bool** |  | 
 **UpdatedAt** | **string** |  | 
 
 ## Methods
 
 ### NewOrganizationResponse
 
-`func NewOrganizationResponse(createdAt string, id string, name string, owner string, updatedAt string, ) *OrganizationResponse`
+`func NewOrganizationResponse(createdAt string, id string, name string, owner string, personal bool, updatedAt string, ) *OrganizationResponse`
 
 NewOrganizationResponse instantiates a new OrganizationResponse object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +108,26 @@ and a boolean to check if the value has been set.
 `func (o *OrganizationResponse) SetOwner(v string)`
 
 SetOwner sets Owner field to given value.
+
+
+### GetPersonal
+
+`func (o *OrganizationResponse) GetPersonal() bool`
+
+GetPersonal returns the Personal field if non-nil, zero value otherwise.
+
+### GetPersonalOk
+
+`func (o *OrganizationResponse) GetPersonalOk() (*bool, bool)`
+
+GetPersonalOk returns a tuple with the Personal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonal
+
+`func (o *OrganizationResponse) SetPersonal(v bool)`
+
+SetPersonal sets Personal field to given value.
 
 
 ### GetUpdatedAt

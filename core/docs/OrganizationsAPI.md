@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**CreateSubscription**](OrganizationsAPI.md#CreateSubscription) | **Post** /v1/organizations/{id}/subscription | Create a subscription for an Organization
 [**CreateTeam**](OrganizationsAPI.md#CreateTeam) | **Post** /v1/organizations/{id}/teams | Create a team for an Organization
 [**CreateTeamMember**](OrganizationsAPI.md#CreateTeamMember) | **Post** /v1/organizations/{id}/teams/{teamId}/members | Add a member to a team
+[**CreateVaudEnterpriseCreditsPayment**](OrganizationsAPI.md#CreateVaudEnterpriseCreditsPayment) | **Post** /v1/organizations/{id}/vaud-credits-payments | Create a credits payment for an vaud enterprise Organization
 [**DeleteInvite**](OrganizationsAPI.md#DeleteInvite) | **Delete** /v1/organizations/{id}/invites/{inviteId} | Delete Organization Invite by ID
 [**DeleteMember**](OrganizationsAPI.md#DeleteMember) | **Delete** /v1/organizations/{id}/members/{memberId} | Delete a member for an Organization
 [**DeleteOrganization**](OrganizationsAPI.md#DeleteOrganization) | **Delete** /v1/organizations/{id} | Delete Organization by ID
@@ -22,8 +23,10 @@ Method | HTTP request | Description
 [**DeleteSubscription**](OrganizationsAPI.md#DeleteSubscription) | **Delete** /v1/organizations/{id}/subscription | Delete a subscription for an Organization
 [**DeleteTeam**](OrganizationsAPI.md#DeleteTeam) | **Delete** /v1/organizations/{id}/teams/{teamId} | Delete a team for an Organization
 [**DeleteTeamMember**](OrganizationsAPI.md#DeleteTeamMember) | **Delete** /v1/organizations/{id}/teams/{teamId}/members/{memberId} | Remove a member from a team
+[**EndTrial**](OrganizationsAPI.md#EndTrial) | **Patch** /v1/organizations/{id}/subscription/end-trial | End the trial period early for an Organization
 [**GetAllMyOrganizations**](OrganizationsAPI.md#GetAllMyOrganizations) | **Get** /v1/organizations/me | Get all my organizations
 [**GetAllMyTeams**](OrganizationsAPI.md#GetAllMyTeams) | **Get** /v1/organizations/{id}/teams/me | Get all teams for an Organization of the current user
+[**GetAllOrganizations**](OrganizationsAPI.md#GetAllOrganizations) | **Get** /v1/organizations | Get all Organizations
 [**GetCheckoutSession**](OrganizationsAPI.md#GetCheckoutSession) | **Get** /v1/organizations/{id}/checkout-sessions/{productId} | Get a checkout session for an Organization
 [**GetCreditsPayments**](OrganizationsAPI.md#GetCreditsPayments) | **Get** /v1/organizations/{id}/credits-payments | Get all credits payments for an Organization
 [**GetCustomerPortalSession**](OrganizationsAPI.md#GetCustomerPortalSession) | **Get** /v1/organizations/{id}/customer-portal-sessions/{typeId} | Get a stripe customer portal session for an Organization
@@ -45,6 +48,7 @@ Method | HTTP request | Description
 [**PatchMember**](OrganizationsAPI.md#PatchMember) | **Patch** /v1/organizations/{id}/members/{memberId} | Patch a member for an Organization
 [**PatchOrganization**](OrganizationsAPI.md#PatchOrganization) | **Patch** /v1/organizations/{id} | Patch an Organization by ID
 [**PatchOrganizationApiKey**](OrganizationsAPI.md#PatchOrganizationApiKey) | **Patch** /v1/organizations/{id}/keys/{keyId} | Patch an api key for an Organization
+[**PatchOrganizationOwnership**](OrganizationsAPI.md#PatchOrganizationOwnership) | **Patch** /v1/organizations/{id}/owner | Transfer the ownership of an organization
 [**PatchOrganizationRole**](OrganizationsAPI.md#PatchOrganizationRole) | **Patch** /v1/organizations/{id}/roles/{roleId} | Patch a role for an Organization
 [**PatchOrganizationSettings**](OrganizationsAPI.md#PatchOrganizationSettings) | **Patch** /v1/organizations/{id}/settings | Patch settings for an Organization
 [**PatchTeam**](OrganizationsAPI.md#PatchTeam) | **Patch** /v1/organizations/{id}/teams/{teamId} | Patch a team for an Organization
@@ -201,7 +205,7 @@ Name | Type | Description  | Notes
 
 ## CreateOrganization
 
-> OrganizationResponse CreateOrganization(ctx).Organization(organization).Execute()
+> OrganizationResponse CreateOrganization(ctx).Organization(organization).UserId(userId).Execute()
 
 Create an Organization
 
@@ -221,10 +225,11 @@ import (
 
 func main() {
 	organization := *openapiclient.NewOrganizationPostRequest("Name_example") // OrganizationPostRequest | organization object
+	userId := "userId_example" // string | User ID (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.CreateOrganization(context.Background()).Organization(organization).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.CreateOrganization(context.Background()).Organization(organization).UserId(userId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.CreateOrganization``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -246,6 +251,7 @@ Other parameters are passed through a pointer to a apiCreateOrganizationRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **organization** | [**OrganizationPostRequest**](OrganizationPostRequest.md) | organization object | 
+ **userId** | **string** | User ID | 
 
 ### Return type
 
@@ -694,6 +700,76 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateVaudEnterpriseCreditsPayment
+
+> CreateVaudEnterpriseCreditsPayment(ctx, id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
+
+Create a credits payment for an vaud enterprise Organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+	organizationCreditsPayment := *openapiclient.NewOrganizationCreditsPaymentPostRequest(float32(123)) // OrganizationCreditsPaymentPostRequest | organization credits payment object
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrganizationsAPI.CreateVaudEnterpriseCreditsPayment(context.Background(), id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.CreateVaudEnterpriseCreditsPayment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateVaudEnterpriseCreditsPaymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **organizationCreditsPayment** | [**OrganizationCreditsPaymentPostRequest**](OrganizationCreditsPaymentPostRequest.md) | organization credits payment object | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1337,6 +1413,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## EndTrial
+
+> OrganizationSubscriptionResponse EndTrial(ctx, id).Execute()
+
+End the trial period early for an Organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.EndTrial(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.EndTrial``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EndTrial`: OrganizationSubscriptionResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.EndTrial`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEndTrialRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrganizationSubscriptionResponse**](OrganizationSubscriptionResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAllMyOrganizations
 
 > []OrganizationResponse GetAllMyOrganizations(ctx).Execute()
@@ -1468,9 +1614,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetAllOrganizations
+
+> OrganizationResultsResponse GetAllOrganizations(ctx).Limit(limit).Offset(offset).Name(name).Execute()
+
+Get all Organizations
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	limit := int32(56) // int32 | limit of the organizations (optional)
+	offset := int32(56) // int32 | offset of the organizations (optional)
+	name := "name_example" // string | name of the organization (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetAllOrganizations(context.Background()).Limit(limit).Offset(offset).Name(name).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetAllOrganizations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllOrganizations`: OrganizationResultsResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetAllOrganizations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllOrganizationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | limit of the organizations | 
+ **offset** | **int32** | offset of the organizations | 
+ **name** | **string** | name of the organization | 
+
+### Return type
+
+[**OrganizationResultsResponse**](OrganizationResultsResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCheckoutSession
 
-> OrganizationCheckoutSessionResponse GetCheckoutSession(ctx, id, productId).SuccessUrl(successUrl).CancelUrl(cancelUrl).Execute()
+> OrganizationCheckoutSessionResponse GetCheckoutSession(ctx, id, productId).SuccessUrl(successUrl).CancelUrl(cancelUrl).Seats(seats).Trial(trial).Execute()
 
 Get a checkout session for an Organization
 
@@ -1493,10 +1709,12 @@ func main() {
 	productId := "productId_example" // string | id of the product
 	successUrl := "successUrl_example" // string | The URL to which Stripe should send customers when payment is complete
 	cancelUrl := "cancelUrl_example" // string | If set, Checkout displays a back button and customers will be directed to this URL if they decide to cancel payment (optional)
+	seats := int32(56) // int32 | The number of seats to purchase (optional)
+	trial := true // bool | Whether the checkout session is for a trial period (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.GetCheckoutSession(context.Background(), id, productId).SuccessUrl(successUrl).CancelUrl(cancelUrl).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.GetCheckoutSession(context.Background(), id, productId).SuccessUrl(successUrl).CancelUrl(cancelUrl).Seats(seats).Trial(trial).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetCheckoutSession``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1526,6 +1744,8 @@ Name | Type | Description  | Notes
 
  **successUrl** | **string** | The URL to which Stripe should send customers when payment is complete | 
  **cancelUrl** | **string** | If set, Checkout displays a back button and customers will be directed to this URL if they decide to cancel payment | 
+ **seats** | **int32** | The number of seats to purchase | 
+ **trial** | **bool** | Whether the checkout session is for a trial period | 
 
 ### Return type
 
@@ -2976,6 +3196,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationApiKeyResponse**](OrganizationApiKeyResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchOrganizationOwnership
+
+> OrganizationResponse PatchOrganizationOwnership(ctx, id).OrganizationTransfer(organizationTransfer).Execute()
+
+Transfer the ownership of an organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+	organizationTransfer := *openapiclient.NewOrganizationPatchOwnershipRequest("TargetOwnerId_example") // OrganizationPatchOwnershipRequest | organization transfer object
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.PatchOrganizationOwnership(context.Background(), id).OrganizationTransfer(organizationTransfer).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.PatchOrganizationOwnership``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchOrganizationOwnership`: OrganizationResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.PatchOrganizationOwnership`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchOrganizationOwnershipRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **organizationTransfer** | [**OrganizationPatchOwnershipRequest**](OrganizationPatchOwnershipRequest.md) | organization transfer object | 
+
+### Return type
+
+[**OrganizationResponse**](OrganizationResponse.md)
 
 ### Authorization
 

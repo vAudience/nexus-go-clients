@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AssignRole**](RolesAPI.md#AssignRole) | **Post** /v1/roles/{id}/users/{userId} | Assign a Role to a User
 [**GetAllRoles**](RolesAPI.md#GetAllRoles) | **Get** /v1/roles | Get all Roles
+[**GetByUser**](RolesAPI.md#GetByUser) | **Get** /v1/roles/users/{userId} | Get all Roles for a User
 [**GetRole**](RolesAPI.md#GetRole) | **Get** /v1/roles/{id} | Get a Role
 [**RevokeRole**](RolesAPI.md#RevokeRole) | **Delete** /v1/roles/{id}/users/{userId} | Revoke a Role from a User
 
@@ -125,6 +126,76 @@ This endpoint does not need any parameter.
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllRolesRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]RoleResponse**](RoleResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetByUser
+
+> []RoleResponse GetByUser(ctx, userId).Execute()
+
+Get all Roles for a User
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	userId := "userId_example" // string | user id
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RolesAPI.GetByUser(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RolesAPI.GetByUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetByUser`: []RoleResponse
+	fmt.Fprintf(os.Stdout, "Response from `RolesAPI.GetByUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | user id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetByUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type

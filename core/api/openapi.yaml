@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.2.8
+  version: 0.3.1
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -194,9 +194,70 @@ paths:
       tags:
       - Entitlements
   /v1/organizations:
+    get:
+      description: Get all Organizations
+      operationId: GetAllOrganizations
+      parameters:
+      - description: limit of the organizations
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: offset of the organizations
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: name of the organization
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResultsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Get all Organizations
+      tags:
+      - Organizations
     post:
       description: Create an Organization
       operationId: CreateOrganization
+      parameters:
+      - description: User ID
+        in: query
+        name: userId
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -475,6 +536,16 @@ paths:
         name: cancelUrl
         schema:
           type: string
+      - description: The number of seats to purchase
+        in: query
+        name: seats
+        schema:
+          type: integer
+      - description: Whether the checkout session is for a trial period
+        in: query
+        name: trial
+        schema:
+          type: boolean
       responses:
         "200":
           content:
@@ -1086,6 +1157,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Organization Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict
         "500":
           content:
             application/json:
@@ -1208,6 +1285,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Organization Api Key Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict
         "500":
           content:
             application/json:
@@ -1514,6 +1597,67 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: member
+  /v1/organizations/{id}/owner:
+    patch:
+      description: Transfer the ownership of an organization
+      operationId: PatchOrganizationOwnership
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPatchOwnershipRequest'
+        description: organization transfer object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Transfer the ownership of an organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organizationTransfer
   /v1/organizations/{id}/roles:
     get:
       description: Get all roles for an Organization
@@ -2229,6 +2373,57 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: organization
+  /v1/organizations/{id}/subscription/end-trial:
+    patch:
+      description: End the trial period early for an Organization
+      operationId: EndTrial
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSubscriptionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      summary: End the trial period early for an Organization
+      tags:
+      - Organizations
   /v1/organizations/{id}/subscription/reactivate:
     patch:
       description: Reactivate a subscription for an Organization
@@ -2855,6 +3050,64 @@ paths:
       summary: Get a member for a team
       tags:
       - Organizations
+  /v1/organizations/{id}/vaud-credits-payments:
+    post:
+      description: Create a credits payment for an vaud enterprise Organization
+      operationId: CreateVaudEnterpriseCreditsPayment
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationCreditsPaymentPostRequest'
+        description: organization credits payment object
+        required: true
+      responses:
+        "201":
+          content: {}
+          description: Created
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Organization Not Found
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Create a credits payment for an vaud enterprise Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organizationCreditsPayment
   /v1/roles:
     get:
       description: Get all Roles
@@ -2889,6 +3142,55 @@ paths:
       security:
       - ApiKey: []
       summary: Get all Roles
+      tags:
+      - Roles
+  /v1/roles/users/{userId}:
+    get:
+      description: Get all Roles for a User
+      operationId: GetByUser
+      parameters:
+      - description: user id
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoleResponse'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Get all Roles for a User
       tags:
       - Roles
   /v1/roles/{id}:
@@ -3319,6 +3621,62 @@ paths:
       tags:
       - UserSettings
       x-codegen-request-body-name: userSettings
+  /v1/users:
+    get:
+      description: Get all users
+      operationId: GetAllUsers
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: search
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResultsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get all users
+      tags:
+      - Users
   /v1/users/email/{email}:
     get:
       description: Get a user by email
@@ -3370,6 +3728,55 @@ paths:
       security:
       - ApiKey: []
       summary: Get a user by email
+      tags:
+      - Users
+  /v1/users/roles/{roleId}:
+    get:
+      description: Get users by role
+      operationId: GetUsersByRole
+      parameters:
+      - description: Role id
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get users by role
       tags:
       - Users
   /v1/users/username/{username}:
@@ -3518,6 +3925,7 @@ components:
       enum:
       - permission_denied
       - request_body_invalid
+      - request_queries_invalid
       - unknown
       - unauthorized
       - user_email_not_in_token
@@ -3559,6 +3967,7 @@ components:
       - association_member_has_not_role
       - organization_has_subscription
       - organization_has_subscription_plan
+      - organization_has_subscription_price
       - organization_has_subscription_seats
       - organization_has_active_subscription
       - organization_has_no_active_subscription
@@ -3574,11 +3983,20 @@ components:
       - organization_subscription_requires_payment_method
       - organization_subscription_requires_action
       - organization_subscription_not_canceled_at
+      - organization_subscription_in_trial
+      - organization_subscription_not_in_trial
+      - organization_not_qualified_for_trial
+      - organization_wrong_product_id
+      - organization_stripe_product_id_mismatch
       - organization_invite_expired
       - organization_invite_email_mismatch
       - organization_invite_org_id_mismatch
       - organization_invite_self_invite
+      - organization_transfer_is_personal
+      - organization_transfer_identical_owner
       - product_type_invalid
+      - product_disabled
+      - product_not_allowed_for_trial
       - stripe_signature_header_missing
       - stripe_event_construction_failed
       - stripe_disabled
@@ -3588,11 +4006,13 @@ components:
       - organization_invite_member_exists
       - organization_invite_accept_member_exists
       - organization_settings_exists
+      - user_exists
       - user_role_exists
       type: string
       x-enum-varnames:
       - ErrCodePermissionDenied
       - ErrCodeRequestBodyInvalid
+      - ErrCodeRequestQueriesInvalid
       - ErrCodeUnknown
       - ErrCodeUnauthorized
       - ErrCodeUserEmailNotInToken
@@ -3634,6 +4054,7 @@ components:
       - ErrCodeAssociationMemberHasNotRole
       - ErrCodeOrganizationHasSubscription
       - ErrCodeOrganizationHasSubscriptionPlan
+      - ErrCodeOrganizationHasSubscriptionPrice
       - ErrCodeOrganizationHasSubscriptionSeats
       - ErrCodeOrganizationHasActiveSubscription
       - ErrCodeOrganizationHasNoActiveSubscription
@@ -3649,11 +4070,20 @@ components:
       - ErrCodeOrganizationSubscriptionRequiresPaymentMethod
       - ErrCodeOrganizationSubscriptionRequiresAction
       - ErrCodeOrganizationSubscriptionNotCanceledAt
+      - ErrCodeOrganizationSubscriptionInTrial
+      - ErrCodeOrganizationSubscriptionNotInTrial
+      - ErrCodeOrganizationNotQualifiedForTrial
+      - ErrCodeOrganizationWrongProductId
+      - ErrCodeOrganizationStripeProductIdMismatch
       - ErrCodeOrganizationInviteExpired
       - ErrCodeOrganizationInviteEmailMismatch
       - ErrCodeOrganizationInviteOrgIdMismatch
       - ErrCodeOrganizationInviteSelfInvite
+      - ErrCodeOrganizationTransferIsPersonal
+      - ErrCodeOrganizationTransferIdenticalOwner
       - ErrCodeProductTypeInvalid
+      - ErrCodeProductDisabled
+      - ErrCodeProductNotAllowedForTrial
       - ErrCodeStripeSignatureHeaderMissing
       - ErrCodeStripeEventConstructionFailed
       - ErrCodeStripeDisabled
@@ -3663,6 +4093,7 @@ components:
       - ErrCodeOrganizationInviteMemberExists
       - ErrCodeOrganizationInviteAcceptMemberExists
       - ErrCodeOrganizationSettingsExists
+      - ErrCodeUserExists
       - ErrCodeUserRoleExists
     ErrorDetail:
       example:
@@ -3760,6 +4191,9 @@ components:
         userEmail: userEmail
         userName: userName
         organizationRoleId: organizationRoleId
+        teamIds:
+        - teamIds
+        - teamIds
       properties:
         name:
           minLength: 1
@@ -3769,6 +4203,10 @@ components:
         requiresRotation:
           type: boolean
         roleIds:
+          items:
+            type: string
+          type: array
+        teamIds:
           items:
             type: string
           type: array
@@ -3791,6 +4229,9 @@ components:
         userEmail: userEmail
         userName: userName
         organizationRoleId: organizationRoleId
+        teamIds:
+        - teamIds
+        - teamIds
       properties:
         name:
           minLength: 1
@@ -3798,6 +4239,10 @@ components:
         organizationRoleId:
           type: string
         roleIds:
+          items:
+            type: string
+          type: array
+        teamIds:
           items:
             type: string
           type: array
@@ -3818,6 +4263,17 @@ components:
     OrganizationApiKeyResponse:
       example:
         apiKey: apiKey
+        teams:
+        - organizationId: organizationId
+          createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        - organizationId: organizationId
+          createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
         roles:
         - createdAt: createdAt
           name: name
@@ -3866,6 +4322,10 @@ components:
           items:
             $ref: '#/components/schemas/RoleReducedResponse'
           type: array
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamReducedResponse'
+          type: array
         updatedAt:
           type: string
         userEmail:
@@ -3886,6 +4346,7 @@ components:
       - organizationId
       - organizationRole
       - roles
+      - teams
       - updatedAt
       - userEmail
       - userFullName
@@ -3900,6 +4361,16 @@ components:
           type: string
       required:
       - url
+      type: object
+    OrganizationCreditsPaymentPostRequest:
+      example:
+        credits: 1.0800828190461012
+      properties:
+        credits:
+          minimum: 1
+          type: number
+      required:
+      - credits
       type: object
     OrganizationCreditsPaymentResponse:
       example:
@@ -4072,6 +4543,15 @@ components:
       - updatedAt
       - user
       type: object
+    OrganizationPatchOwnershipRequest:
+      example:
+        targetOwnerId: targetOwnerId
+      properties:
+        targetOwnerId:
+          type: string
+      required:
+      - targetOwnerId
+      type: object
     OrganizationPatchRequest:
       example:
         name: name
@@ -4097,6 +4577,7 @@ components:
         owner: owner
         createdAt: createdAt
         name: name
+        personal: true
         id: id
         updatedAt: updatedAt
       properties:
@@ -4108,6 +4589,8 @@ components:
           type: string
         owner:
           type: string
+        personal:
+          type: boolean
         updatedAt:
           type: string
       required:
@@ -4115,7 +4598,35 @@ components:
       - id
       - name
       - owner
+      - personal
       - updatedAt
+      type: object
+    OrganizationResultsResponse:
+      example:
+        totalResults: 0
+        results:
+        - owner: owner
+          createdAt: createdAt
+          name: name
+          personal: true
+          id: id
+          updatedAt: updatedAt
+        - owner: owner
+          createdAt: createdAt
+          name: name
+          personal: true
+          id: id
+          updatedAt: updatedAt
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/OrganizationResponse'
+          type: array
+        totalResults:
+          type: integer
+      required:
+      - results
+      - totalResults
       type: object
     OrganizationRoleReducedResponse:
       example:
@@ -4280,10 +4791,12 @@ components:
       type: object
     OrganizationSubscriptionResponse:
       example:
+        trialEnd: trialEnd
         productId: productId
         currentPeriodEnd: currentPeriodEnd
         active: true
         seats: 0
+        trial: true
         organizationId: organizationId
         createdAt: createdAt
         totalAmount: 1
@@ -4323,7 +4836,12 @@ components:
         status:
           type: string
         totalAmount:
+          description: total amount in cents
           type: integer
+        trial:
+          type: boolean
+        trialEnd:
+          type: string
         updatedAt:
           type: string
       required:
@@ -4341,6 +4859,8 @@ components:
       - seatsTaken
       - status
       - totalAmount
+      - trial
+      - trialEnd
       - updatedAt
       type: object
     ProductType:
@@ -4521,6 +5041,31 @@ components:
       required:
       - name
       type: object
+    TeamReducedResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        name: name
+        id: id
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - name
+      - organizationId
+      - updatedAt
+      type: object
     TeamResponse:
       example:
         organizationId: organizationId
@@ -4655,6 +5200,33 @@ components:
       - id
       - updatedAt
       - username
+      type: object
+    UserResultsResponse:
+      example:
+        totalResults: 0
+        results:
+        - createdAt: createdAt
+          fullname: fullname
+          id: id
+          email: email
+          updatedAt: updatedAt
+          username: username
+        - createdAt: createdAt
+          fullname: fullname
+          id: id
+          email: email
+          updatedAt: updatedAt
+          username: username
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/UserResponse'
+          type: array
+        totalResults:
+          type: integer
+      required:
+      - results
+      - totalResults
       type: object
     UserRoleResponse:
       example:

@@ -148,6 +148,19 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OrganizationsAPIService CreateVaudEnterpriseCreditsPayment", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		httpRes, err := apiClient.OrganizationsAPI.CreateVaudEnterpriseCreditsPayment(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test OrganizationsAPIService DeleteInvite", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -273,6 +286,20 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OrganizationsAPIService EndTrial", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.EndTrial(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test OrganizationsAPIService GetAllMyOrganizations", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -292,6 +319,18 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.OrganizationsAPI.GetAllMyTeams(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test OrganizationsAPIService GetAllOrganizations", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.GetAllOrganizations(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -597,6 +636,20 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 		var keyId string
 
 		resp, httpRes, err := apiClient.OrganizationsAPI.PatchOrganizationApiKey(context.Background(), id, keyId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test OrganizationsAPIService PatchOrganizationOwnership", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.PatchOrganizationOwnership(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

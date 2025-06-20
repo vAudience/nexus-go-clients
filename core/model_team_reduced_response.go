@@ -15,45 +15,45 @@ import (
 	"fmt"
 )
 
-// checks if the UserRoleResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UserRoleResponse{}
+// checks if the TeamReducedResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TeamReducedResponse{}
 
-// UserRoleResponse struct for UserRoleResponse
-type UserRoleResponse struct {
+// TeamReducedResponse struct for TeamReducedResponse
+type TeamReducedResponse struct {
 	CreatedAt string `json:"createdAt"`
 	Id string `json:"id"`
-	RoleId string `json:"roleId"`
+	Name string `json:"name"`
+	OrganizationId string `json:"organizationId"`
 	UpdatedAt string `json:"updatedAt"`
-	UserId string `json:"userId"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UserRoleResponse UserRoleResponse
+type _TeamReducedResponse TeamReducedResponse
 
-// NewUserRoleResponse instantiates a new UserRoleResponse object
+// NewTeamReducedResponse instantiates a new TeamReducedResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserRoleResponse(createdAt string, id string, roleId string, updatedAt string, userId string) *UserRoleResponse {
-	this := UserRoleResponse{}
+func NewTeamReducedResponse(createdAt string, id string, name string, organizationId string, updatedAt string) *TeamReducedResponse {
+	this := TeamReducedResponse{}
 	this.CreatedAt = createdAt
 	this.Id = id
-	this.RoleId = roleId
+	this.Name = name
+	this.OrganizationId = organizationId
 	this.UpdatedAt = updatedAt
-	this.UserId = userId
 	return &this
 }
 
-// NewUserRoleResponseWithDefaults instantiates a new UserRoleResponse object
+// NewTeamReducedResponseWithDefaults instantiates a new TeamReducedResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUserRoleResponseWithDefaults() *UserRoleResponse {
-	this := UserRoleResponse{}
+func NewTeamReducedResponseWithDefaults() *TeamReducedResponse {
+	this := TeamReducedResponse{}
 	return &this
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *UserRoleResponse) GetCreatedAt() string {
+func (o *TeamReducedResponse) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -64,7 +64,7 @@ func (o *UserRoleResponse) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *UserRoleResponse) GetCreatedAtOk() (*string, bool) {
+func (o *TeamReducedResponse) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,12 +72,12 @@ func (o *UserRoleResponse) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *UserRoleResponse) SetCreatedAt(v string) {
+func (o *TeamReducedResponse) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetId returns the Id field value
-func (o *UserRoleResponse) GetId() string {
+func (o *TeamReducedResponse) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +88,7 @@ func (o *UserRoleResponse) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *UserRoleResponse) GetIdOk() (*string, bool) {
+func (o *TeamReducedResponse) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,36 +96,60 @@ func (o *UserRoleResponse) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *UserRoleResponse) SetId(v string) {
+func (o *TeamReducedResponse) SetId(v string) {
 	o.Id = v
 }
 
-// GetRoleId returns the RoleId field value
-func (o *UserRoleResponse) GetRoleId() string {
+// GetName returns the Name field value
+func (o *TeamReducedResponse) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.RoleId
+	return o.Name
 }
 
-// GetRoleIdOk returns a tuple with the RoleId field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *UserRoleResponse) GetRoleIdOk() (*string, bool) {
+func (o *TeamReducedResponse) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RoleId, true
+	return &o.Name, true
 }
 
-// SetRoleId sets field value
-func (o *UserRoleResponse) SetRoleId(v string) {
-	o.RoleId = v
+// SetName sets field value
+func (o *TeamReducedResponse) SetName(v string) {
+	o.Name = v
+}
+
+// GetOrganizationId returns the OrganizationId field value
+func (o *TeamReducedResponse) GetOrganizationId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OrganizationId
+}
+
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value
+// and a boolean to check if the value has been set.
+func (o *TeamReducedResponse) GetOrganizationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OrganizationId, true
+}
+
+// SetOrganizationId sets field value
+func (o *TeamReducedResponse) SetOrganizationId(v string) {
+	o.OrganizationId = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *UserRoleResponse) GetUpdatedAt() string {
+func (o *TeamReducedResponse) GetUpdatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -136,7 +160,7 @@ func (o *UserRoleResponse) GetUpdatedAt() string {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *UserRoleResponse) GetUpdatedAtOk() (*string, bool) {
+func (o *TeamReducedResponse) GetUpdatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,35 +168,11 @@ func (o *UserRoleResponse) GetUpdatedAtOk() (*string, bool) {
 }
 
 // SetUpdatedAt sets field value
-func (o *UserRoleResponse) SetUpdatedAt(v string) {
+func (o *TeamReducedResponse) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
-// GetUserId returns the UserId field value
-func (o *UserRoleResponse) GetUserId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value
-// and a boolean to check if the value has been set.
-func (o *UserRoleResponse) GetUserIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserId, true
-}
-
-// SetUserId sets field value
-func (o *UserRoleResponse) SetUserId(v string) {
-	o.UserId = v
-}
-
-func (o UserRoleResponse) MarshalJSON() ([]byte, error) {
+func (o TeamReducedResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -180,13 +180,13 @@ func (o UserRoleResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UserRoleResponse) ToMap() (map[string]interface{}, error) {
+func (o TeamReducedResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["id"] = o.Id
-	toSerialize["roleId"] = o.RoleId
+	toSerialize["name"] = o.Name
+	toSerialize["organizationId"] = o.OrganizationId
 	toSerialize["updatedAt"] = o.UpdatedAt
-	toSerialize["userId"] = o.UserId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -195,16 +195,16 @@ func (o UserRoleResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UserRoleResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *TeamReducedResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"createdAt",
 		"id",
-		"roleId",
+		"name",
+		"organizationId",
 		"updatedAt",
-		"userId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -221,62 +221,62 @@ func (o *UserRoleResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUserRoleResponse := _UserRoleResponse{}
+	varTeamReducedResponse := _TeamReducedResponse{}
 
-	err = json.Unmarshal(data, &varUserRoleResponse)
+	err = json.Unmarshal(data, &varTeamReducedResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UserRoleResponse(varUserRoleResponse)
+	*o = TeamReducedResponse(varTeamReducedResponse)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "roleId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "updatedAt")
-		delete(additionalProperties, "userId")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableUserRoleResponse struct {
-	value *UserRoleResponse
+type NullableTeamReducedResponse struct {
+	value *TeamReducedResponse
 	isSet bool
 }
 
-func (v NullableUserRoleResponse) Get() *UserRoleResponse {
+func (v NullableTeamReducedResponse) Get() *TeamReducedResponse {
 	return v.value
 }
 
-func (v *NullableUserRoleResponse) Set(val *UserRoleResponse) {
+func (v *NullableTeamReducedResponse) Set(val *TeamReducedResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUserRoleResponse) IsSet() bool {
+func (v NullableTeamReducedResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUserRoleResponse) Unset() {
+func (v *NullableTeamReducedResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUserRoleResponse(val *UserRoleResponse) *NullableUserRoleResponse {
-	return &NullableUserRoleResponse{value: val, isSet: true}
+func NewNullableTeamReducedResponse(val *TeamReducedResponse) *NullableTeamReducedResponse {
+	return &NullableTeamReducedResponse{value: val, isSet: true}
 }
 
-func (v NullableUserRoleResponse) MarshalJSON() ([]byte, error) {
+func (v NullableTeamReducedResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUserRoleResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableTeamReducedResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

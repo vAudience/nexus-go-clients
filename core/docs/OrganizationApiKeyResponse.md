@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **OrganizationId** | **string** |  | 
 **OrganizationRole** | [**OrganizationRoleReducedResponse**](OrganizationRoleReducedResponse.md) |  | 
 **Roles** | [**[]RoleReducedResponse**](RoleReducedResponse.md) |  | 
+**Teams** | [**[]TeamReducedResponse**](TeamReducedResponse.md) |  | 
 **UpdatedAt** | **string** |  | 
 **UserEmail** | **string** |  | 
 **UserFullName** | **string** |  | 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewOrganizationApiKeyResponse
 
-`func NewOrganizationApiKeyResponse(apiKey string, apiKeyHint string, createdAt string, createdBy string, id string, name string, organizationId string, organizationRole OrganizationRoleReducedResponse, roles []RoleReducedResponse, updatedAt string, userEmail string, userFullName string, userId string, userName string, ) *OrganizationApiKeyResponse`
+`func NewOrganizationApiKeyResponse(apiKey string, apiKeyHint string, createdAt string, createdBy string, id string, name string, organizationId string, organizationRole OrganizationRoleReducedResponse, roles []RoleReducedResponse, teams []TeamReducedResponse, updatedAt string, userEmail string, userFullName string, userId string, userName string, ) *OrganizationApiKeyResponse`
 
 NewOrganizationApiKeyResponse instantiates a new OrganizationApiKeyResponse object
 This constructor will assign default values to properties that have it defined,
@@ -216,6 +217,26 @@ and a boolean to check if the value has been set.
 `func (o *OrganizationApiKeyResponse) SetRoles(v []RoleReducedResponse)`
 
 SetRoles sets Roles field to given value.
+
+
+### GetTeams
+
+`func (o *OrganizationApiKeyResponse) GetTeams() []TeamReducedResponse`
+
+GetTeams returns the Teams field if non-nil, zero value otherwise.
+
+### GetTeamsOk
+
+`func (o *OrganizationApiKeyResponse) GetTeamsOk() (*[]TeamReducedResponse, bool)`
+
+GetTeamsOk returns a tuple with the Teams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeams
+
+`func (o *OrganizationApiKeyResponse) SetTeams(v []TeamReducedResponse)`
+
+SetTeams sets Teams field to given value.
 
 
 ### GetUpdatedAt

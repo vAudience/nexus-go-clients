@@ -17,14 +17,16 @@ Name | Type | Description | Notes
 **Seats** | **int32** |  | 
 **SeatsTaken** | **int32** |  | 
 **Status** | **string** |  | 
-**TotalAmount** | **int32** |  | 
+**TotalAmount** | **int32** | total amount in cents | 
+**Trial** | **bool** |  | 
+**TrialEnd** | **string** |  | 
 **UpdatedAt** | **string** |  | 
 
 ## Methods
 
 ### NewOrganizationSubscriptionResponse
 
-`func NewOrganizationSubscriptionResponse(active bool, cancelAtPeriodEnd bool, createdAt string, currency string, currentPeriodEnd string, id string, name string, organizationId string, productId string, productType ProductType, seats int32, seatsTaken int32, status string, totalAmount int32, updatedAt string, ) *OrganizationSubscriptionResponse`
+`func NewOrganizationSubscriptionResponse(active bool, cancelAtPeriodEnd bool, createdAt string, currency string, currentPeriodEnd string, id string, name string, organizationId string, productId string, productType ProductType, seats int32, seatsTaken int32, status string, totalAmount int32, trial bool, trialEnd string, updatedAt string, ) *OrganizationSubscriptionResponse`
 
 NewOrganizationSubscriptionResponse instantiates a new OrganizationSubscriptionResponse object
 This constructor will assign default values to properties that have it defined,
@@ -317,6 +319,46 @@ and a boolean to check if the value has been set.
 `func (o *OrganizationSubscriptionResponse) SetTotalAmount(v int32)`
 
 SetTotalAmount sets TotalAmount field to given value.
+
+
+### GetTrial
+
+`func (o *OrganizationSubscriptionResponse) GetTrial() bool`
+
+GetTrial returns the Trial field if non-nil, zero value otherwise.
+
+### GetTrialOk
+
+`func (o *OrganizationSubscriptionResponse) GetTrialOk() (*bool, bool)`
+
+GetTrialOk returns a tuple with the Trial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrial
+
+`func (o *OrganizationSubscriptionResponse) SetTrial(v bool)`
+
+SetTrial sets Trial field to given value.
+
+
+### GetTrialEnd
+
+`func (o *OrganizationSubscriptionResponse) GetTrialEnd() string`
+
+GetTrialEnd returns the TrialEnd field if non-nil, zero value otherwise.
+
+### GetTrialEndOk
+
+`func (o *OrganizationSubscriptionResponse) GetTrialEndOk() (*string, bool)`
+
+GetTrialEndOk returns a tuple with the TrialEnd field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrialEnd
+
+`func (o *OrganizationSubscriptionResponse) SetTrialEnd(v string)`
+
+SetTrialEnd sets TrialEnd field to given value.
 
 
 ### GetUpdatedAt

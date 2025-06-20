@@ -49,6 +49,20 @@ func Test_core_RolesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test RolesAPIService GetByUser", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var userId string
+
+		resp, httpRes, err := apiClient.RolesAPI.GetByUser(context.Background(), userId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RolesAPIService GetRole", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

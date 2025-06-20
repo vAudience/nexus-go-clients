@@ -22,6 +22,18 @@ func Test_core_UsersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test UsersAPIService GetAllUsers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.UsersAPI.GetAllUsers(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test UsersAPIService GetUser", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -57,6 +69,20 @@ func Test_core_UsersAPIService(t *testing.T) {
 		var username string
 
 		resp, httpRes, err := apiClient.UsersAPI.GetUserByUsername(context.Background(), username).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test UsersAPIService GetUsersByRole", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var roleId string
+
+		resp, httpRes, err := apiClient.UsersAPI.GetUsersByRole(context.Background(), roleId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

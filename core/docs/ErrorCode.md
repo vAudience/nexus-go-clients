@@ -7,6 +7,8 @@
 
 * `ErrCodeRequestBodyInvalid` (value: `"request_body_invalid"`)
 
+* `ErrCodeRequestQueriesInvalid` (value: `"request_queries_invalid"`)
+
 * `ErrCodeUnknown` (value: `"unknown"`)
 
 * `ErrCodeUnauthorized` (value: `"unauthorized"`)
@@ -89,6 +91,8 @@
 
 * `ErrCodeOrganizationHasSubscriptionPlan` (value: `"organization_has_subscription_plan"`)
 
+* `ErrCodeOrganizationHasSubscriptionPrice` (value: `"organization_has_subscription_price"`)
+
 * `ErrCodeOrganizationHasSubscriptionSeats` (value: `"organization_has_subscription_seats"`)
 
 * `ErrCodeOrganizationHasActiveSubscription` (value: `"organization_has_active_subscription"`)
@@ -119,6 +123,16 @@
 
 * `ErrCodeOrganizationSubscriptionNotCanceledAt` (value: `"organization_subscription_not_canceled_at"`)
 
+* `ErrCodeOrganizationSubscriptionInTrial` (value: `"organization_subscription_in_trial"`)
+
+* `ErrCodeOrganizationSubscriptionNotInTrial` (value: `"organization_subscription_not_in_trial"`)
+
+* `ErrCodeOrganizationNotQualifiedForTrial` (value: `"organization_not_qualified_for_trial"`)
+
+* `ErrCodeOrganizationWrongProductId` (value: `"organization_wrong_product_id"`)
+
+* `ErrCodeOrganizationStripeProductIdMismatch` (value: `"organization_stripe_product_id_mismatch"`)
+
 * `ErrCodeOrganizationInviteExpired` (value: `"organization_invite_expired"`)
 
 * `ErrCodeOrganizationInviteEmailMismatch` (value: `"organization_invite_email_mismatch"`)
@@ -127,7 +141,15 @@
 
 * `ErrCodeOrganizationInviteSelfInvite` (value: `"organization_invite_self_invite"`)
 
+* `ErrCodeOrganizationTransferIsPersonal` (value: `"organization_transfer_is_personal"`)
+
+* `ErrCodeOrganizationTransferIdenticalOwner` (value: `"organization_transfer_identical_owner"`)
+
 * `ErrCodeProductTypeInvalid` (value: `"product_type_invalid"`)
+
+* `ErrCodeProductDisabled` (value: `"product_disabled"`)
+
+* `ErrCodeProductNotAllowedForTrial` (value: `"product_not_allowed_for_trial"`)
 
 * `ErrCodeStripeSignatureHeaderMissing` (value: `"stripe_signature_header_missing"`)
 
@@ -146,6 +168,8 @@
 * `ErrCodeOrganizationInviteAcceptMemberExists` (value: `"organization_invite_accept_member_exists"`)
 
 * `ErrCodeOrganizationSettingsExists` (value: `"organization_settings_exists"`)
+
+* `ErrCodeUserExists` (value: `"user_exists"`)
 
 * `ErrCodeUserRoleExists` (value: `"user_role_exists"`)
 
