@@ -79,6 +79,8 @@
 
 * `ErrCodeAuthVerifierIsRequired` (value: `"auth_verifier_is_required"`)
 
+* `ErrCodeAuthInvalidTokenInfo` (value: `"auth_invalid_token_info"`)
+
 * `ErrCodeAssociationRoleIsDefault` (value: `"association_role_is_default"`)
 
 * `ErrCodeAssociationRoleInUse` (value: `"association_role_in_use"`)

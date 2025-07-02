@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.3.1
+  version: 0.3.3
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -3961,6 +3961,7 @@ components:
       - auth_return_to_is_required
       - auth_refresh_token_is_required
       - auth_verifier_is_required
+      - auth_invalid_token_info
       - association_role_is_default
       - association_role_in_use
       - association_member_has_role
@@ -4048,6 +4049,7 @@ components:
       - ErrCodeAuthReturnToIsRequired
       - ErrCodeAuthRefreshTokenIsRequired
       - ErrCodeAuthVerifierIsRequired
+      - ErrCodeAuthInvalidTokenInfo
       - ErrCodeAssociationRoleIsDefault
       - ErrCodeAssociationRoleInUse
       - ErrCodeAssociationMemberHasRole
@@ -4699,8 +4701,15 @@ components:
         allowedPredefinedAgentIds:
         - allowedPredefinedAgentIds
         - allowedPredefinedAgentIds
+        allowedHostingLocations:
+        - allowedHostingLocations
+        - allowedHostingLocations
         defaultAgentId: defaultAgentId
       properties:
+        allowedHostingLocations:
+          items:
+            type: string
+          type: array
         allowedPredefinedAgentIds:
           items:
             type: string
@@ -4713,8 +4722,15 @@ components:
         allowedPredefinedAgentIds:
         - allowedPredefinedAgentIds
         - allowedPredefinedAgentIds
+        allowedHostingLocations:
+        - allowedHostingLocations
+        - allowedHostingLocations
         defaultAgentId: defaultAgentId
       properties:
+        allowedHostingLocations:
+          items:
+            type: string
+          type: array
         allowedPredefinedAgentIds:
           items:
             type: string
@@ -4729,10 +4745,17 @@ components:
         allowedPredefinedAgentIds:
         - allowedPredefinedAgentIds
         - allowedPredefinedAgentIds
+        allowedHostingLocations:
+        - allowedHostingLocations
+        - allowedHostingLocations
         defaultAgentId: defaultAgentId
         id: id
         updatedAt: updatedAt
       properties:
+        allowedHostingLocations:
+          items:
+            type: string
+          type: array
         allowedPredefinedAgentIds:
           items:
             type: string
@@ -4748,6 +4771,7 @@ components:
         updatedAt:
           type: string
       required:
+      - allowedHostingLocations
       - allowedPredefinedAgentIds
       - createdAt
       - defaultAgentId

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllowedHostingLocations** | **[]string** |  | 
 **AllowedPredefinedAgentIds** | **[]string** |  | 
 **CreatedAt** | **string** |  | 
 **DefaultAgentId** | **string** |  | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewOrganizationSettingsResponse
 
-`func NewOrganizationSettingsResponse(allowedPredefinedAgentIds []string, createdAt string, defaultAgentId string, id string, organizationId string, updatedAt string, ) *OrganizationSettingsResponse`
+`func NewOrganizationSettingsResponse(allowedHostingLocations []string, allowedPredefinedAgentIds []string, createdAt string, defaultAgentId string, id string, organizationId string, updatedAt string, ) *OrganizationSettingsResponse`
 
 NewOrganizationSettingsResponse instantiates a new OrganizationSettingsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +30,26 @@ will change when the set of required properties is changed
 NewOrganizationSettingsResponseWithDefaults instantiates a new OrganizationSettingsResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllowedHostingLocations
+
+`func (o *OrganizationSettingsResponse) GetAllowedHostingLocations() []string`
+
+GetAllowedHostingLocations returns the AllowedHostingLocations field if non-nil, zero value otherwise.
+
+### GetAllowedHostingLocationsOk
+
+`func (o *OrganizationSettingsResponse) GetAllowedHostingLocationsOk() (*[]string, bool)`
+
+GetAllowedHostingLocationsOk returns a tuple with the AllowedHostingLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedHostingLocations
+
+`func (o *OrganizationSettingsResponse) SetAllowedHostingLocations(v []string)`
+
+SetAllowedHostingLocations sets AllowedHostingLocations field to given value.
+
 
 ### GetAllowedPredefinedAgentIds
 
