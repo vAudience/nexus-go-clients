@@ -55,6 +55,7 @@ docs/AIgencyThinking.md
 docs/AIgencyThumbnail.md
 docs/Ability.md
 docs/AbilityType.md
+docs/AbilityV2.md
 docs/Agent.md
 docs/AgentI18n.md
 docs/AgentType.md
@@ -147,6 +148,7 @@ model_a_igency_thinking.go
 model_a_igency_thumbnail.go
 model_ability.go
 model_ability_type.go
+model_ability_v2.go
 model_agent.go
 model_agent_i18n.go
 model_agent_type.go

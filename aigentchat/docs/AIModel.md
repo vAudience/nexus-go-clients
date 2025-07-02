@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Abilities** | Pointer to [**[]Ability**](Ability.md) |  | [optional] 
+**AbilitiesV2** | Pointer to [**[]AbilityV2**](AbilityV2.md) |  | [optional] 
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
@@ -70,6 +71,31 @@ SetAbilities sets Abilities field to given value.
 `func (o *AIModel) HasAbilities() bool`
 
 HasAbilities returns a boolean if a field has been set.
+
+### GetAbilitiesV2
+
+`func (o *AIModel) GetAbilitiesV2() []AbilityV2`
+
+GetAbilitiesV2 returns the AbilitiesV2 field if non-nil, zero value otherwise.
+
+### GetAbilitiesV2Ok
+
+`func (o *AIModel) GetAbilitiesV2Ok() (*[]AbilityV2, bool)`
+
+GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAbilitiesV2
+
+`func (o *AIModel) SetAbilitiesV2(v []AbilityV2)`
+
+SetAbilitiesV2 sets AbilitiesV2 field to given value.
+
+### HasAbilitiesV2
+
+`func (o *AIModel) HasAbilitiesV2() bool`
+
+HasAbilitiesV2 returns a boolean if a field has been set.
 
 ### GetAcceptedFileMimetypes
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.8
+API version: 0.19.1
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &AIModel{}
 // AIModel struct for AIModel
 type AIModel struct {
 	Abilities []Ability `json:"abilities,omitempty"`
+	AbilitiesV2 []AbilityV2 `json:"abilities_v2,omitempty"`
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -101,6 +102,38 @@ func (o *AIModel) HasAbilities() bool {
 // SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
 func (o *AIModel) SetAbilities(v []Ability) {
 	o.Abilities = v
+}
+
+// GetAbilitiesV2 returns the AbilitiesV2 field value if set, zero value otherwise.
+func (o *AIModel) GetAbilitiesV2() []AbilityV2 {
+	if o == nil || IsNil(o.AbilitiesV2) {
+		var ret []AbilityV2
+		return ret
+	}
+	return o.AbilitiesV2
+}
+
+// GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetAbilitiesV2Ok() ([]AbilityV2, bool) {
+	if o == nil || IsNil(o.AbilitiesV2) {
+		return nil, false
+	}
+	return o.AbilitiesV2, true
+}
+
+// HasAbilitiesV2 returns a boolean if a field has been set.
+func (o *AIModel) HasAbilitiesV2() bool {
+	if o != nil && !IsNil(o.AbilitiesV2) {
+		return true
+	}
+
+	return false
+}
+
+// SetAbilitiesV2 gets a reference to the given []AbilityV2 and assigns it to the AbilitiesV2 field.
+func (o *AIModel) SetAbilitiesV2(v []AbilityV2) {
+	o.AbilitiesV2 = v
 }
 
 // GetAcceptedFileMimetypes returns the AcceptedFileMimetypes field value if set, zero value otherwise.
@@ -740,6 +773,9 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Abilities) {
 		toSerialize["abilities"] = o.Abilities
 	}
+	if !IsNil(o.AbilitiesV2) {
+		toSerialize["abilities_v2"] = o.AbilitiesV2
+	}
 	if !IsNil(o.AcceptedFileMimetypes) {
 		toSerialize["accepted_file_mimetypes"] = o.AcceptedFileMimetypes
 	}
@@ -840,6 +876,7 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "abilities")
+		delete(additionalProperties, "abilities_v2")
 		delete(additionalProperties, "accepted_file_mimetypes")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")

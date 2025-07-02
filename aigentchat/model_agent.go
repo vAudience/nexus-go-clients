@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.8
+API version: 0.19.1
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &Agent{}
 // Agent struct for Agent
 type Agent struct {
 	Abilities []Ability `json:"abilities,omitempty"`
+	AbilitiesV2 []AbilityV2 `json:"abilities_v2,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
@@ -104,6 +105,38 @@ func (o *Agent) HasAbilities() bool {
 // SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
 func (o *Agent) SetAbilities(v []Ability) {
 	o.Abilities = v
+}
+
+// GetAbilitiesV2 returns the AbilitiesV2 field value if set, zero value otherwise.
+func (o *Agent) GetAbilitiesV2() []AbilityV2 {
+	if o == nil || IsNil(o.AbilitiesV2) {
+		var ret []AbilityV2
+		return ret
+	}
+	return o.AbilitiesV2
+}
+
+// GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAbilitiesV2Ok() ([]AbilityV2, bool) {
+	if o == nil || IsNil(o.AbilitiesV2) {
+		return nil, false
+	}
+	return o.AbilitiesV2, true
+}
+
+// HasAbilitiesV2 returns a boolean if a field has been set.
+func (o *Agent) HasAbilitiesV2() bool {
+	if o != nil && !IsNil(o.AbilitiesV2) {
+		return true
+	}
+
+	return false
+}
+
+// SetAbilitiesV2 gets a reference to the given []AbilityV2 and assigns it to the AbilitiesV2 field.
+func (o *Agent) SetAbilitiesV2(v []AbilityV2) {
+	o.AbilitiesV2 = v
 }
 
 // GetAssignedTools returns the AssignedTools field value if set, zero value otherwise.
@@ -879,6 +912,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Abilities) {
 		toSerialize["abilities"] = o.Abilities
 	}
+	if !IsNil(o.AbilitiesV2) {
+		toSerialize["abilities_v2"] = o.AbilitiesV2
+	}
 	if !IsNil(o.AssignedTools) {
 		toSerialize["assigned_tools"] = o.AssignedTools
 	}
@@ -992,6 +1028,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "abilities")
+		delete(additionalProperties, "abilities_v2")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")

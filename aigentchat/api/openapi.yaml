@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.18.8
+  version: 0.19.1
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -90,8 +90,9 @@ paths:
       - Version
   /v1/ai-model-services:
     get:
+      deprecated: true
       description: Retrieve a list of AI model services
-      operationId: ListAIModelServices
+      operationId: ListAIModelServicesLegacy
       responses:
         "200":
           content:
@@ -124,57 +125,11 @@ paths:
       summary: List AI model services
       tags:
       - AIModelServices
-    post:
-      description: Create a new AI model service with the provided details
-      operationId: CreateAIModelService
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIModelServiceWriteDto'
-        description: AI Model Service
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a new AI model service
-      tags:
-      - AIModelServices
-      x-codegen-request-body-name: service
   /v1/ai-model-services-with-models:
     get:
+      deprecated: true
       description: Retrieve a list of AI services with their associated models
-      operationId: ListAIModelServicesWithModels
+      operationId: ListAIModelServicesWithModelsLegacy
       responses:
         "200":
           content:
@@ -208,61 +163,10 @@ paths:
       tags:
       - AIModelServices
   /v1/ai-model-services/{id}:
-    delete:
-      description: Delete an AI model service by its ID
-      operationId: DeleteAIModelService
-      parameters:
-      - description: AI Model Service ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Delete an AI model service
-      tags:
-      - AIModelServices
     get:
+      deprecated: true
       description: Retrieve an AI model service by its ID
-      operationId: GetAIModelService
+      operationId: GetAIModelServiceLegacy
       parameters:
       - description: AI Model Service ID
         in: path
@@ -312,70 +216,11 @@ paths:
       summary: Get an AI model service by ID
       tags:
       - AIModelServices
-    put:
-      description: Update an AI model service by its ID
-      operationId: UpdateAIModelService
-      parameters:
-      - description: AI Model Service ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIModelServiceWriteDto'
-        description: AI Model Service
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update an AI model service
-      tags:
-      - AIModelServices
-      x-codegen-request-body-name: service
   /v1/ai-model-services/{id}/models:
     get:
+      deprecated: true
       description: Retrieve a list of AI models for a specific AI model service
-      operationId: ListAIModelsForService
+      operationId: ListAIModelsForServiceLegacy
       parameters:
       - description: AI Model Service ID
         in: path
@@ -429,8 +274,9 @@ paths:
       - AIModelServices
   /v1/ai-models:
     get:
+      deprecated: true
       description: Retrieve a list of AI models
-      operationId: ListAIModels
+      operationId: ListAIModelsLegacy
       responses:
         "200":
           content:
@@ -457,109 +303,11 @@ paths:
       summary: List AI models
       tags:
       - AIModels
-    post:
-      description: Create a new AI model with the provided details
-      operationId: CreateAIModel
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIModelWriteDto'
-        description: AI Model
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModel'
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a new AI model
-      tags:
-      - AIModels
-      x-codegen-request-body-name: aiModel
   /v1/ai-models/{id}:
-    delete:
-      description: Delete an AI model by its ID
-      operationId: DeleteAIModel
-      parameters:
-      - description: AI Model ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModel'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Delete an AI model
-      tags:
-      - AIModels
     get:
+      deprecated: true
       description: Retrieve an AI model by its ID
-      operationId: GetAIModel
+      operationId: GetAIModelLegacy
       parameters:
       - description: AI Model ID
         in: path
@@ -609,66 +357,6 @@ paths:
       summary: Get an AI model by ID
       tags:
       - AIModels
-    put:
-      description: Update an AI model by its ID
-      operationId: UpdateAIModel
-      parameters:
-      - description: AI Model ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIModel'
-        description: AI Model
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIModel'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Update an AI model
-      tags:
-      - AIModels
-      x-codegen-request-body-name: aiModel
   /v1/organizations/{org_id}/agents:
     get:
       description: Retrieve a list of agents by ownership and organization
@@ -1552,6 +1240,669 @@ paths:
       summary: Remove an assigned tool from an agent
       tags:
       - Agents
+  /v1/organizations/{org_id}/ai-model-services:
+    get:
+      description: Retrieve a list of AI model services
+      operationId: ListAIModelServices
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIModelServiceObject'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List AI model services
+      tags:
+      - AIModelServices
+    post:
+      description: Create a new AI model service with the provided details
+      operationId: CreateAIModelService
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIModelServiceWriteDto'
+        description: AI Model Service
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModelServiceObject'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a new AI model service
+      tags:
+      - AIModelServices
+      x-codegen-request-body-name: service
+  /v1/organizations/{org_id}/ai-model-services-with-models:
+    get:
+      description: Retrieve a list of AI services with their associated models
+      operationId: ListAIModelServicesWithModels
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: return only available AI model services for this organization
+        in: query
+        name: orgId
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIModelServiceWithModels'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List AI services with models
+      tags:
+      - AIModelServices
+  /v1/organizations/{org_id}/ai-model-services/{id}:
+    delete:
+      description: Delete an AI model service by its ID
+      operationId: DeleteAIModelService
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model Service ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModelServiceObject'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete an AI model service
+      tags:
+      - AIModelServices
+    get:
+      description: Retrieve an AI model service by its ID
+      operationId: GetAIModelService
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model Service ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModelServiceObject'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get an AI model service by ID
+      tags:
+      - AIModelServices
+    put:
+      description: Update an AI model service by its ID
+      operationId: UpdateAIModelService
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model Service ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIModelServiceWriteDto'
+        description: AI Model Service
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModelServiceObject'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update an AI model service
+      tags:
+      - AIModelServices
+      x-codegen-request-body-name: service
+  /v1/organizations/{org_id}/ai-model-services/{id}/models:
+    get:
+      description: Retrieve a list of AI models for a specific AI model service
+      operationId: ListAIModelsForService
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model Service ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIModel'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List AI models for a service
+      tags:
+      - AIModelServices
+  /v1/organizations/{org_id}/ai-models:
+    get:
+      description: Retrieve a list of AI models
+      operationId: ListAIModels
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AIModel'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List AI models
+      tags:
+      - AIModels
+    post:
+      description: Create a new AI model with the provided details
+      operationId: CreateAIModel
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIModelWriteDto'
+        description: AI Model
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModel'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a new AI model
+      tags:
+      - AIModels
+      x-codegen-request-body-name: aiModel
+  /v1/organizations/{org_id}/ai-models/{id}:
+    delete:
+      description: Delete an AI model by its ID
+      operationId: DeleteAIModel
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModel'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Delete an AI model
+      tags:
+      - AIModels
+    get:
+      description: Retrieve an AI model by its ID
+      operationId: GetAIModel
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModel'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get an AI model by ID
+      tags:
+      - AIModels
+    put:
+      description: Update an AI model by its ID
+      operationId: UpdateAIModel
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: AI Model ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIModel'
+        description: AI Model
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIModel'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update an AI model
+      tags:
+      - AIModels
+      x-codegen-request-body-name: aiModel
   /v1/organizations/{org_id}/audio/transcribe:
     post:
       description: Reads an audio file and transcribes text from it
@@ -4294,6 +4645,27 @@ components:
         internal_id: internal_id
         owner_id: owner_id
         model_release_date: 9
+        abilities_v2:
+        - type: type
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+        - type: type
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
         created_at: 1
         description: description
         model_id: model_id
@@ -4401,6 +4773,10 @@ components:
         abilities:
           items:
             $ref: '#/components/schemas/Ability'
+          type: array
+        abilities_v2:
+          items:
+            $ref: '#/components/schemas/AbilityV2'
           type: array
         accepted_file_mimetypes:
           items:
@@ -4758,6 +5134,27 @@ components:
         - internal_id: internal_id
           owner_id: owner_id
           model_release_date: 9
+          abilities_v2:
+          - type: type
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          - type: type
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
           created_at: 1
           description: description
           model_id: model_id
@@ -4864,6 +5261,27 @@ components:
         - internal_id: internal_id
           owner_id: owner_id
           model_release_date: 9
+          abilities_v2:
+          - type: type
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+          - type: type
+            constraints:
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
+            - unit: tokens
+              min: 6
+              max: 0
+              direction: input
           created_at: 1
           description: description
           model_id: model_id
@@ -6131,6 +6549,26 @@ components:
       - AbilityTypeEmbedding
       - AbilityTypeImage
       - AbilityTypeToolFunction
+    AbilityV2:
+      example:
+        type: type
+        constraints:
+        - unit: tokens
+          min: 6
+          max: 0
+          direction: input
+        - unit: tokens
+          min: 6
+          max: 0
+          direction: input
+      properties:
+        constraints:
+          items:
+            $ref: '#/components/schemas/AIModelConstraint'
+          type: array
+        type:
+          type: string
+      type: object
     Agent:
       example:
         system_messages:
@@ -6181,6 +6619,27 @@ components:
         id: id
         internal_id: internal_id
         model_release_date: 6
+        abilities_v2:
+        - type: type
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+        - type: type
+          constraints:
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
+          - unit: tokens
+            min: 6
+            max: 0
+            direction: input
         model_id: model_id
         i18n:
           key:
@@ -6197,6 +6656,10 @@ components:
         abilities:
           items:
             $ref: '#/components/schemas/Ability'
+          type: array
+        abilities_v2:
+          items:
+            $ref: '#/components/schemas/AbilityV2'
           type: array
         assigned_tools:
           items:

@@ -15,37 +15,37 @@ import (
 	"encoding/json"
 )
 
-// checks if the Ability type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Ability{}
+// checks if the AbilityV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AbilityV2{}
 
-// Ability struct for Ability
-type Ability struct {
+// AbilityV2 struct for AbilityV2
+type AbilityV2 struct {
 	Constraints []AIModelConstraint `json:"constraints,omitempty"`
-	Type *AbilityType `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Ability Ability
+type _AbilityV2 AbilityV2
 
-// NewAbility instantiates a new Ability object
+// NewAbilityV2 instantiates a new AbilityV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAbility() *Ability {
-	this := Ability{}
+func NewAbilityV2() *AbilityV2 {
+	this := AbilityV2{}
 	return &this
 }
 
-// NewAbilityWithDefaults instantiates a new Ability object
+// NewAbilityV2WithDefaults instantiates a new AbilityV2 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAbilityWithDefaults() *Ability {
-	this := Ability{}
+func NewAbilityV2WithDefaults() *AbilityV2 {
+	this := AbilityV2{}
 	return &this
 }
 
 // GetConstraints returns the Constraints field value if set, zero value otherwise.
-func (o *Ability) GetConstraints() []AIModelConstraint {
+func (o *AbilityV2) GetConstraints() []AIModelConstraint {
 	if o == nil || IsNil(o.Constraints) {
 		var ret []AIModelConstraint
 		return ret
@@ -55,7 +55,7 @@ func (o *Ability) GetConstraints() []AIModelConstraint {
 
 // GetConstraintsOk returns a tuple with the Constraints field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Ability) GetConstraintsOk() ([]AIModelConstraint, bool) {
+func (o *AbilityV2) GetConstraintsOk() ([]AIModelConstraint, bool) {
 	if o == nil || IsNil(o.Constraints) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *Ability) GetConstraintsOk() ([]AIModelConstraint, bool) {
 }
 
 // HasConstraints returns a boolean if a field has been set.
-func (o *Ability) HasConstraints() bool {
+func (o *AbilityV2) HasConstraints() bool {
 	if o != nil && !IsNil(o.Constraints) {
 		return true
 	}
@@ -72,14 +72,14 @@ func (o *Ability) HasConstraints() bool {
 }
 
 // SetConstraints gets a reference to the given []AIModelConstraint and assigns it to the Constraints field.
-func (o *Ability) SetConstraints(v []AIModelConstraint) {
+func (o *AbilityV2) SetConstraints(v []AIModelConstraint) {
 	o.Constraints = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *Ability) GetType() AbilityType {
+func (o *AbilityV2) GetType() string {
 	if o == nil || IsNil(o.Type) {
-		var ret AbilityType
+		var ret string
 		return ret
 	}
 	return *o.Type
@@ -87,7 +87,7 @@ func (o *Ability) GetType() AbilityType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Ability) GetTypeOk() (*AbilityType, bool) {
+func (o *AbilityV2) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *Ability) GetTypeOk() (*AbilityType, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *Ability) HasType() bool {
+func (o *AbilityV2) HasType() bool {
 	if o != nil && !IsNil(o.Type) {
 		return true
 	}
@@ -103,12 +103,12 @@ func (o *Ability) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given AbilityType and assigns it to the Type field.
-func (o *Ability) SetType(v AbilityType) {
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *AbilityV2) SetType(v string) {
 	o.Type = &v
 }
 
-func (o Ability) MarshalJSON() ([]byte, error) {
+func (o AbilityV2) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -116,7 +116,7 @@ func (o Ability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Ability) ToMap() (map[string]interface{}, error) {
+func (o AbilityV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Constraints) {
 		toSerialize["constraints"] = o.Constraints
@@ -132,16 +132,16 @@ func (o Ability) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Ability) UnmarshalJSON(data []byte) (err error) {
-	varAbility := _Ability{}
+func (o *AbilityV2) UnmarshalJSON(data []byte) (err error) {
+	varAbilityV2 := _AbilityV2{}
 
-	err = json.Unmarshal(data, &varAbility)
+	err = json.Unmarshal(data, &varAbilityV2)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Ability(varAbility)
+	*o = AbilityV2(varAbilityV2)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -154,38 +154,38 @@ func (o *Ability) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAbility struct {
-	value *Ability
+type NullableAbilityV2 struct {
+	value *AbilityV2
 	isSet bool
 }
 
-func (v NullableAbility) Get() *Ability {
+func (v NullableAbilityV2) Get() *AbilityV2 {
 	return v.value
 }
 
-func (v *NullableAbility) Set(val *Ability) {
+func (v *NullableAbilityV2) Set(val *AbilityV2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAbility) IsSet() bool {
+func (v NullableAbilityV2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAbility) Unset() {
+func (v *NullableAbilityV2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAbility(val *Ability) *NullableAbility {
-	return &NullableAbility{value: val, isSet: true}
+func NewNullableAbilityV2(val *AbilityV2) *NullableAbilityV2 {
+	return &NullableAbilityV2{value: val, isSet: true}
 }
 
-func (v NullableAbility) MarshalJSON() ([]byte, error) {
+func (v NullableAbilityV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAbility) UnmarshalJSON(src []byte) error {
+func (v *NullableAbilityV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

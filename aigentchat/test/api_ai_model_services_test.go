@@ -26,7 +26,9 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.CreateAIModelService(context.Background()).Execute()
+		var orgId string
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.CreateAIModelService(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,9 +40,10 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
+		var orgId string
 		var id string
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.DeleteAIModelService(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.AIModelServicesAPI.DeleteAIModelService(context.Background(), orgId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -52,9 +55,24 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
+		var orgId string
 		var id string
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.GetAIModelService(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.AIModelServicesAPI.GetAIModelService(context.Background(), orgId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIModelServicesAPIService GetAIModelServiceLegacy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.GetAIModelServiceLegacy(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -66,7 +84,21 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServices(context.Background()).Execute()
+		var orgId string
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServices(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIModelServicesAPIService ListAIModelServicesLegacy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServicesLegacy(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -78,7 +110,21 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background()).Execute()
+		var orgId string
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIModelServicesAPIService ListAIModelServicesWithModelsLegacy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModelsLegacy(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -90,9 +136,24 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
+		var orgId string
 		var id string
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelsForService(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelsForService(context.Background(), orgId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIModelServicesAPIService ListAIModelsForServiceLegacy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.AIModelServicesAPI.ListAIModelsForServiceLegacy(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -104,9 +165,10 @@ func Test_aigentchat_AIModelServicesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
+		var orgId string
 		var id string
 
-		resp, httpRes, err := apiClient.AIModelServicesAPI.UpdateAIModelService(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.AIModelServicesAPI.UpdateAIModelService(context.Background(), orgId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

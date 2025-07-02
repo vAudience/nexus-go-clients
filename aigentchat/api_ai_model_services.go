@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.18.8
+API version: 0.19.1
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,7 @@ type AIModelServicesAPIService service
 type ApiCreateAIModelServiceRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 	service *AIModelServiceWriteDto
 }
 
@@ -46,12 +47,14 @@ CreateAIModelService Create a new AI model service
 Create a new AI model service with the provided details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @return ApiCreateAIModelServiceRequest
 */
-func (a *AIModelServicesAPIService) CreateAIModelService(ctx context.Context) ApiCreateAIModelServiceRequest {
+func (a *AIModelServicesAPIService) CreateAIModelService(ctx context.Context, orgId string) ApiCreateAIModelServiceRequest {
 	return ApiCreateAIModelServiceRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 	}
 }
 
@@ -70,7 +73,8 @@ func (a *AIModelServicesAPIService) CreateAIModelServiceExecute(r ApiCreateAIMod
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/ai-model-services"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -195,6 +199,7 @@ func (a *AIModelServicesAPIService) CreateAIModelServiceExecute(r ApiCreateAIMod
 type ApiDeleteAIModelServiceRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 	id string
 }
 
@@ -208,13 +213,15 @@ DeleteAIModelService Delete an AI model service
 Delete an AI model service by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @param id AI Model Service ID
  @return ApiDeleteAIModelServiceRequest
 */
-func (a *AIModelServicesAPIService) DeleteAIModelService(ctx context.Context, id string) ApiDeleteAIModelServiceRequest {
+func (a *AIModelServicesAPIService) DeleteAIModelService(ctx context.Context, orgId string, id string) ApiDeleteAIModelServiceRequest {
 	return ApiDeleteAIModelServiceRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 		id: id,
 	}
 }
@@ -234,7 +241,8 @@ func (a *AIModelServicesAPIService) DeleteAIModelServiceExecute(r ApiDeleteAIMod
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/ai-model-services/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -366,6 +374,7 @@ func (a *AIModelServicesAPIService) DeleteAIModelServiceExecute(r ApiDeleteAIMod
 type ApiGetAIModelServiceRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 	id string
 }
 
@@ -379,13 +388,15 @@ GetAIModelService Get an AI model service by ID
 Retrieve an AI model service by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @param id AI Model Service ID
  @return ApiGetAIModelServiceRequest
 */
-func (a *AIModelServicesAPIService) GetAIModelService(ctx context.Context, id string) ApiGetAIModelServiceRequest {
+func (a *AIModelServicesAPIService) GetAIModelService(ctx context.Context, orgId string, id string) ApiGetAIModelServiceRequest {
 	return ApiGetAIModelServiceRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 		id: id,
 	}
 }
@@ -401,6 +412,181 @@ func (a *AIModelServicesAPIService) GetAIModelServiceExecute(r ApiGetAIModelServ
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.GetAIModelService")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAIModelServiceLegacyRequest struct {
+	ctx context.Context
+	ApiService *AIModelServicesAPIService
+	id string
+}
+
+func (r ApiGetAIModelServiceLegacyRequest) Execute() (*AIModelServiceObject, *http.Response, error) {
+	return r.ApiService.GetAIModelServiceLegacyExecute(r)
+}
+
+/*
+GetAIModelServiceLegacy Get an AI model service by ID
+
+Retrieve an AI model service by its ID
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id AI Model Service ID
+ @return ApiGetAIModelServiceLegacyRequest
+
+Deprecated
+*/
+func (a *AIModelServicesAPIService) GetAIModelServiceLegacy(ctx context.Context, id string) ApiGetAIModelServiceLegacyRequest {
+	return ApiGetAIModelServiceLegacyRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return AIModelServiceObject
+// Deprecated
+func (a *AIModelServicesAPIService) GetAIModelServiceLegacyExecute(r ApiGetAIModelServiceLegacyRequest) (*AIModelServiceObject, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AIModelServiceObject
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.GetAIModelServiceLegacy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -537,6 +723,7 @@ func (a *AIModelServicesAPIService) GetAIModelServiceExecute(r ApiGetAIModelServ
 type ApiListAIModelServicesRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 }
 
 func (r ApiListAIModelServicesRequest) Execute() ([]AIModelServiceObject, *http.Response, error) {
@@ -549,12 +736,14 @@ ListAIModelServices List AI model services
 Retrieve a list of AI model services
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @return ApiListAIModelServicesRequest
 */
-func (a *AIModelServicesAPIService) ListAIModelServices(ctx context.Context) ApiListAIModelServicesRequest {
+func (a *AIModelServicesAPIService) ListAIModelServices(ctx context.Context, orgId string) ApiListAIModelServicesRequest {
 	return ApiListAIModelServicesRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 	}
 }
 
@@ -569,6 +758,155 @@ func (a *AIModelServicesAPIService) ListAIModelServicesExecute(r ApiListAIModelS
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelServices")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAIModelServicesLegacyRequest struct {
+	ctx context.Context
+	ApiService *AIModelServicesAPIService
+}
+
+func (r ApiListAIModelServicesLegacyRequest) Execute() ([]AIModelServiceObject, *http.Response, error) {
+	return r.ApiService.ListAIModelServicesLegacyExecute(r)
+}
+
+/*
+ListAIModelServicesLegacy List AI model services
+
+Retrieve a list of AI model services
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListAIModelServicesLegacyRequest
+
+Deprecated
+*/
+func (a *AIModelServicesAPIService) ListAIModelServicesLegacy(ctx context.Context) ApiListAIModelServicesLegacyRequest {
+	return ApiListAIModelServicesLegacyRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []AIModelServiceObject
+// Deprecated
+func (a *AIModelServicesAPIService) ListAIModelServicesLegacyExecute(r ApiListAIModelServicesLegacyRequest) ([]AIModelServiceObject, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []AIModelServiceObject
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelServicesLegacy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -682,6 +1020,14 @@ func (a *AIModelServicesAPIService) ListAIModelServicesExecute(r ApiListAIModelS
 type ApiListAIModelServicesWithModelsRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
+	orgId2 *string
+}
+
+// return only available AI model services for this organization
+func (r ApiListAIModelServicesWithModelsRequest) OrgId2(orgId2 string) ApiListAIModelServicesWithModelsRequest {
+	r.orgId2 = &orgId2
+	return r
 }
 
 func (r ApiListAIModelServicesWithModelsRequest) Execute() ([]AIModelServiceWithModels, *http.Response, error) {
@@ -694,12 +1040,14 @@ ListAIModelServicesWithModels List AI services with models
 Retrieve a list of AI services with their associated models
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @return ApiListAIModelServicesWithModelsRequest
 */
-func (a *AIModelServicesAPIService) ListAIModelServicesWithModels(ctx context.Context) ApiListAIModelServicesWithModelsRequest {
+func (a *AIModelServicesAPIService) ListAIModelServicesWithModels(ctx context.Context, orgId string) ApiListAIModelServicesWithModelsRequest {
 	return ApiListAIModelServicesWithModelsRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 	}
 }
 
@@ -714,6 +1062,158 @@ func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsExecute(r ApiLi
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelServicesWithModels")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services-with-models"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.orgId2 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orgId", r.orgId2, "", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAIModelServicesWithModelsLegacyRequest struct {
+	ctx context.Context
+	ApiService *AIModelServicesAPIService
+}
+
+func (r ApiListAIModelServicesWithModelsLegacyRequest) Execute() ([]AIModelServiceWithModels, *http.Response, error) {
+	return r.ApiService.ListAIModelServicesWithModelsLegacyExecute(r)
+}
+
+/*
+ListAIModelServicesWithModelsLegacy List AI services with models
+
+Retrieve a list of AI services with their associated models
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListAIModelServicesWithModelsLegacyRequest
+
+Deprecated
+*/
+func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsLegacy(ctx context.Context) ApiListAIModelServicesWithModelsLegacyRequest {
+	return ApiListAIModelServicesWithModelsLegacyRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []AIModelServiceWithModels
+// Deprecated
+func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsLegacyExecute(r ApiListAIModelServicesWithModelsLegacyRequest) ([]AIModelServiceWithModels, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []AIModelServiceWithModels
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelServicesWithModelsLegacy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -827,6 +1327,7 @@ func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsExecute(r ApiLi
 type ApiListAIModelsForServiceRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 	id string
 }
 
@@ -840,13 +1341,15 @@ ListAIModelsForService List AI models for a service
 Retrieve a list of AI models for a specific AI model service
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @param id AI Model Service ID
  @return ApiListAIModelsForServiceRequest
 */
-func (a *AIModelServicesAPIService) ListAIModelsForService(ctx context.Context, id string) ApiListAIModelsForServiceRequest {
+func (a *AIModelServicesAPIService) ListAIModelsForService(ctx context.Context, orgId string, id string) ApiListAIModelsForServiceRequest {
 	return ApiListAIModelsForServiceRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 		id: id,
 	}
 }
@@ -862,6 +1365,181 @@ func (a *AIModelServicesAPIService) ListAIModelsForServiceExecute(r ApiListAIMod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelsForService")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services/{id}/models"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAIModelsForServiceLegacyRequest struct {
+	ctx context.Context
+	ApiService *AIModelServicesAPIService
+	id string
+}
+
+func (r ApiListAIModelsForServiceLegacyRequest) Execute() ([]AIModel, *http.Response, error) {
+	return r.ApiService.ListAIModelsForServiceLegacyExecute(r)
+}
+
+/*
+ListAIModelsForServiceLegacy List AI models for a service
+
+Retrieve a list of AI models for a specific AI model service
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id AI Model Service ID
+ @return ApiListAIModelsForServiceLegacyRequest
+
+Deprecated
+*/
+func (a *AIModelServicesAPIService) ListAIModelsForServiceLegacy(ctx context.Context, id string) ApiListAIModelsForServiceLegacyRequest {
+	return ApiListAIModelsForServiceLegacyRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return []AIModel
+// Deprecated
+func (a *AIModelServicesAPIService) ListAIModelsForServiceLegacyExecute(r ApiListAIModelsForServiceLegacyRequest) ([]AIModel, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []AIModel
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIModelServicesAPIService.ListAIModelsForServiceLegacy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -998,6 +1676,7 @@ func (a *AIModelServicesAPIService) ListAIModelsForServiceExecute(r ApiListAIMod
 type ApiUpdateAIModelServiceRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
+	orgId string
 	id string
 	service *AIModelServiceWriteDto
 }
@@ -1018,13 +1697,15 @@ UpdateAIModelService Update an AI model service
 Update an AI model service by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
  @param id AI Model Service ID
  @return ApiUpdateAIModelServiceRequest
 */
-func (a *AIModelServicesAPIService) UpdateAIModelService(ctx context.Context, id string) ApiUpdateAIModelServiceRequest {
+func (a *AIModelServicesAPIService) UpdateAIModelService(ctx context.Context, orgId string, id string) ApiUpdateAIModelServiceRequest {
 	return ApiUpdateAIModelServiceRequest{
 		ApiService: a,
 		ctx: ctx,
+		orgId: orgId,
 		id: id,
 	}
 }
@@ -1044,7 +1725,8 @@ func (a *AIModelServicesAPIService) UpdateAIModelServiceExecute(r ApiUpdateAIMod
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/ai-model-services/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/ai-model-services/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
