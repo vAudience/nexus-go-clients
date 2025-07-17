@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.1
+API version: 0.19.3
 Contact: contact@vaudience.ai
 */
 
@@ -1021,13 +1021,6 @@ type ApiListAIModelServicesWithModelsRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
 	orgId string
-	orgId2 *string
-}
-
-// return only available AI model services for this organization
-func (r ApiListAIModelServicesWithModelsRequest) OrgId2(orgId2 string) ApiListAIModelServicesWithModelsRequest {
-	r.orgId2 = &orgId2
-	return r
 }
 
 func (r ApiListAIModelServicesWithModelsRequest) Execute() ([]AIModelServiceWithModels, *http.Response, error) {
@@ -1073,9 +1066,6 @@ func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsExecute(r ApiLi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.orgId2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orgId", r.orgId2, "", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

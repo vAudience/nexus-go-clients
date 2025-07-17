@@ -439,7 +439,7 @@ Other parameters are passed through a pointer to a apiListAIModelServicesLegacyR
 
 ## ListAIModelServicesWithModels
 
-> []AIModelServiceWithModels ListAIModelServicesWithModels(ctx, orgId).OrgId2(orgId2).Execute()
+> []AIModelServiceWithModels ListAIModelServicesWithModels(ctx, orgId).Execute()
 
 List AI services with models
 
@@ -459,11 +459,10 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	orgId2 := "orgId_example" // string | return only available AI model services for this organization (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background(), orgId).OrgId2(orgId2).Execute()
+	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background(), orgId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelServicesWithModels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -489,7 +488,6 @@ Other parameters are passed through a pointer to a apiListAIModelServicesWithMod
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **orgId2** | **string** | return only available AI model services for this organization | 
 
 ### Return type
 

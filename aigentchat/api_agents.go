@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.1
+API version: 0.19.3
 Contact: contact@vaudience.ai
 */
 
@@ -1283,12 +1283,19 @@ type ApiListAgentsRequest struct {
 	ApiService *AgentsAPIService
 	orgId string
 	addDefaultAgents *bool
+	skipDefaultAgentsFilter *bool
 	ability *string
 }
 
 // Include default agents to the list of org owned agents
 func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents bool) ApiListAgentsRequest {
 	r.addDefaultAgents = &addDefaultAgents
+	return r
+}
+
+// Skip the default agent filtering of the organization settings
+func (r ApiListAgentsRequest) SkipDefaultAgentsFilter(skipDefaultAgentsFilter bool) ApiListAgentsRequest {
+	r.skipDefaultAgentsFilter = &skipDefaultAgentsFilter
 	return r
 }
 
@@ -1343,6 +1350,9 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 
 	if r.addDefaultAgents != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "add_default_agents", r.addDefaultAgents, "", "")
+	}
+	if r.skipDefaultAgentsFilter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "skip_default_agents_filter", r.skipDefaultAgentsFilter, "", "")
 	}
 	if r.ability != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ability", r.ability, "", "")

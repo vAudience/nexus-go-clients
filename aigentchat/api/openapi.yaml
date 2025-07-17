@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.19.1
+  version: 0.19.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -371,6 +371,11 @@ paths:
       - description: Include default agents to the list of org owned agents
         in: query
         name: add_default_agents
+        schema:
+          type: boolean
+      - description: Skip the default agent filtering of the organization settings
+        in: query
+        name: skip_default_agents_filter
         schema:
           type: boolean
       - description: Filter agents by ability type
@@ -1346,11 +1351,6 @@ paths:
         in: path
         name: org_id
         required: true
-        schema:
-          type: string
-      - description: return only available AI model services for this organization
-        in: query
-        name: orgId
         schema:
           type: string
       responses:
