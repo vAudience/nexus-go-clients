@@ -221,8 +221,6 @@
 
 * `ErrCodeInvalidToolID` (value: `"invalid_tool_id"`)
 
-* `ErrCodeUnknownToolID` (value: `"unknown_tool_id"`)
-
 * `ErrCodeFailedToCreateTempApiKey` (value: `"failed_to_create_temp_api_key"`)
 
 * `ErrCodeInvalidPromptID` (value: `"invalid_prompt_id"`)

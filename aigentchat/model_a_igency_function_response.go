@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,7 +23,9 @@ var _ MappedNullable = &AIgencyFunctionResponse{}
 type AIgencyFunctionResponse struct {
 	FunctionName string `json:"function_name"`
 	Id string `json:"id"`
+	IsError *bool `json:"is_error,omitempty"`
 	Result string `json:"result"`
+	ToolFunctionId *string `json:"tool_function_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -97,6 +99,38 @@ func (o *AIgencyFunctionResponse) SetId(v string) {
 	o.Id = v
 }
 
+// GetIsError returns the IsError field value if set, zero value otherwise.
+func (o *AIgencyFunctionResponse) GetIsError() bool {
+	if o == nil || IsNil(o.IsError) {
+		var ret bool
+		return ret
+	}
+	return *o.IsError
+}
+
+// GetIsErrorOk returns a tuple with the IsError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionResponse) GetIsErrorOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsError) {
+		return nil, false
+	}
+	return o.IsError, true
+}
+
+// HasIsError returns a boolean if a field has been set.
+func (o *AIgencyFunctionResponse) HasIsError() bool {
+	if o != nil && !IsNil(o.IsError) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsError gets a reference to the given bool and assigns it to the IsError field.
+func (o *AIgencyFunctionResponse) SetIsError(v bool) {
+	o.IsError = &v
+}
+
 // GetResult returns the Result field value
 func (o *AIgencyFunctionResponse) GetResult() string {
 	if o == nil {
@@ -121,6 +155,38 @@ func (o *AIgencyFunctionResponse) SetResult(v string) {
 	o.Result = v
 }
 
+// GetToolFunctionId returns the ToolFunctionId field value if set, zero value otherwise.
+func (o *AIgencyFunctionResponse) GetToolFunctionId() string {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		var ret string
+		return ret
+	}
+	return *o.ToolFunctionId
+}
+
+// GetToolFunctionIdOk returns a tuple with the ToolFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionResponse) GetToolFunctionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		return nil, false
+	}
+	return o.ToolFunctionId, true
+}
+
+// HasToolFunctionId returns a boolean if a field has been set.
+func (o *AIgencyFunctionResponse) HasToolFunctionId() bool {
+	if o != nil && !IsNil(o.ToolFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolFunctionId gets a reference to the given string and assigns it to the ToolFunctionId field.
+func (o *AIgencyFunctionResponse) SetToolFunctionId(v string) {
+	o.ToolFunctionId = &v
+}
+
 func (o AIgencyFunctionResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,7 +199,13 @@ func (o AIgencyFunctionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["id"] = o.Id
+	if !IsNil(o.IsError) {
+		toSerialize["is_error"] = o.IsError
+	}
 	toSerialize["result"] = o.Result
+	if !IsNil(o.ToolFunctionId) {
+		toSerialize["tool_function_id"] = o.ToolFunctionId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -181,7 +253,9 @@ func (o *AIgencyFunctionResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_error")
 		delete(additionalProperties, "result")
+		delete(additionalProperties, "tool_function_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

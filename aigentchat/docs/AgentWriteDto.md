@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AddToolGuidelines** | Pointer to **bool** |  | [optional] 
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
+**IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
@@ -40,6 +42,31 @@ will change when the set of required properties is changed
 NewAgentWriteDtoWithDefaults instantiates a new AgentWriteDto object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAddToolGuidelines
+
+`func (o *AgentWriteDto) GetAddToolGuidelines() bool`
+
+GetAddToolGuidelines returns the AddToolGuidelines field if non-nil, zero value otherwise.
+
+### GetAddToolGuidelinesOk
+
+`func (o *AgentWriteDto) GetAddToolGuidelinesOk() (*bool, bool)`
+
+GetAddToolGuidelinesOk returns a tuple with the AddToolGuidelines field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddToolGuidelines
+
+`func (o *AgentWriteDto) SetAddToolGuidelines(v bool)`
+
+SetAddToolGuidelines sets AddToolGuidelines field to given value.
+
+### HasAddToolGuidelines
+
+`func (o *AgentWriteDto) HasAddToolGuidelines() bool`
+
+HasAddToolGuidelines returns a boolean if a field has been set.
 
 ### GetAssignedTools
 
@@ -165,6 +192,31 @@ SetI18n sets I18n field to given value.
 `func (o *AgentWriteDto) HasI18n() bool`
 
 HasI18n returns a boolean if a field has been set.
+
+### GetIgnoreIncomingOverwrite
+
+`func (o *AgentWriteDto) GetIgnoreIncomingOverwrite() bool`
+
+GetIgnoreIncomingOverwrite returns the IgnoreIncomingOverwrite field if non-nil, zero value otherwise.
+
+### GetIgnoreIncomingOverwriteOk
+
+`func (o *AgentWriteDto) GetIgnoreIncomingOverwriteOk() (*bool, bool)`
+
+GetIgnoreIncomingOverwriteOk returns a tuple with the IgnoreIncomingOverwrite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIgnoreIncomingOverwrite
+
+`func (o *AgentWriteDto) SetIgnoreIncomingOverwrite(v bool)`
+
+SetIgnoreIncomingOverwrite sets IgnoreIncomingOverwrite field to given value.
+
+### HasIgnoreIncomingOverwrite
+
+`func (o *AgentWriteDto) HasIgnoreIncomingOverwrite() bool`
+
+HasIgnoreIncomingOverwrite returns a boolean if a field has been set.
 
 ### GetInitialUserMessages
 

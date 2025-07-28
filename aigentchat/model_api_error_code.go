@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -130,7 +130,6 @@ const (
 	ErrCodeInsufficientBudget ApiErrorCode = "insufficient_budget"
 	ErrCodeOrgCostBudgetExists ApiErrorCode = "organization_cost_budget_exists"
 	ErrCodeInvalidToolID ApiErrorCode = "invalid_tool_id"
-	ErrCodeUnknownToolID ApiErrorCode = "unknown_tool_id"
 	ErrCodeFailedToCreateTempApiKey ApiErrorCode = "failed_to_create_temp_api_key"
 	ErrCodeInvalidPromptID ApiErrorCode = "invalid_prompt_id"
 	ErrCodePromptNotFound ApiErrorCode = "prompt_not_found"
@@ -255,7 +254,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"insufficient_budget",
 	"organization_cost_budget_exists",
 	"invalid_tool_id",
-	"unknown_tool_id",
 	"failed_to_create_temp_api_key",
 	"invalid_prompt_id",
 	"prompt_not_found",

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the vAudience AIgentChat API API v0.19.3
+// APIClient manages communication with the vAudience AIgentChat API API v0.20.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -84,6 +84,8 @@ type APIClient struct {
 
 	PromptsAPI *PromptsAPIService
 
+	ToolsAPI *ToolsAPIService
+
 	VersionAPI *VersionAPIService
 }
 
@@ -120,6 +122,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MissionsAPI = (*MissionsAPIService)(&c.common)
 	c.OrgCostBudgetsAPI = (*OrgCostBudgetsAPIService)(&c.common)
 	c.PromptsAPI = (*PromptsAPIService)(&c.common)
+	c.ToolsAPI = (*ToolsAPIService)(&c.common)
 	c.VersionAPI = (*VersionAPIService)(&c.common)
 
 	return c

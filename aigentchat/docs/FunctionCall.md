@@ -5,8 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | Pointer to **string** |  | [optional] 
+**HostingLocation** | Pointer to **string** |  | [optional] 
+**I18n** | Pointer to [**map[string]FunctionCallI18n**](FunctionCallI18n.md) |  | [optional] 
+**Icon** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **string** |  | [optional] 
+**ResponseVisible** | Pointer to **bool** |  | [optional] 
+**ToolId** | Pointer to **string** |  | [optional] 
 **Version** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -52,6 +58,106 @@ SetDescription sets Description field to given value.
 `func (o *FunctionCall) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetHostingLocation
+
+`func (o *FunctionCall) GetHostingLocation() string`
+
+GetHostingLocation returns the HostingLocation field if non-nil, zero value otherwise.
+
+### GetHostingLocationOk
+
+`func (o *FunctionCall) GetHostingLocationOk() (*string, bool)`
+
+GetHostingLocationOk returns a tuple with the HostingLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostingLocation
+
+`func (o *FunctionCall) SetHostingLocation(v string)`
+
+SetHostingLocation sets HostingLocation field to given value.
+
+### HasHostingLocation
+
+`func (o *FunctionCall) HasHostingLocation() bool`
+
+HasHostingLocation returns a boolean if a field has been set.
+
+### GetI18n
+
+`func (o *FunctionCall) GetI18n() map[string]FunctionCallI18n`
+
+GetI18n returns the I18n field if non-nil, zero value otherwise.
+
+### GetI18nOk
+
+`func (o *FunctionCall) GetI18nOk() (*map[string]FunctionCallI18n, bool)`
+
+GetI18nOk returns a tuple with the I18n field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetI18n
+
+`func (o *FunctionCall) SetI18n(v map[string]FunctionCallI18n)`
+
+SetI18n sets I18n field to given value.
+
+### HasI18n
+
+`func (o *FunctionCall) HasI18n() bool`
+
+HasI18n returns a boolean if a field has been set.
+
+### GetIcon
+
+`func (o *FunctionCall) GetIcon() string`
+
+GetIcon returns the Icon field if non-nil, zero value otherwise.
+
+### GetIconOk
+
+`func (o *FunctionCall) GetIconOk() (*string, bool)`
+
+GetIconOk returns a tuple with the Icon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIcon
+
+`func (o *FunctionCall) SetIcon(v string)`
+
+SetIcon sets Icon field to given value.
+
+### HasIcon
+
+`func (o *FunctionCall) HasIcon() bool`
+
+HasIcon returns a boolean if a field has been set.
+
+### GetId
+
+`func (o *FunctionCall) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *FunctionCall) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *FunctionCall) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *FunctionCall) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -102,6 +208,56 @@ SetParameters sets Parameters field to given value.
 `func (o *FunctionCall) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
+
+### GetResponseVisible
+
+`func (o *FunctionCall) GetResponseVisible() bool`
+
+GetResponseVisible returns the ResponseVisible field if non-nil, zero value otherwise.
+
+### GetResponseVisibleOk
+
+`func (o *FunctionCall) GetResponseVisibleOk() (*bool, bool)`
+
+GetResponseVisibleOk returns a tuple with the ResponseVisible field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseVisible
+
+`func (o *FunctionCall) SetResponseVisible(v bool)`
+
+SetResponseVisible sets ResponseVisible field to given value.
+
+### HasResponseVisible
+
+`func (o *FunctionCall) HasResponseVisible() bool`
+
+HasResponseVisible returns a boolean if a field has been set.
+
+### GetToolId
+
+`func (o *FunctionCall) GetToolId() string`
+
+GetToolId returns the ToolId field if non-nil, zero value otherwise.
+
+### GetToolIdOk
+
+`func (o *FunctionCall) GetToolIdOk() (*string, bool)`
+
+GetToolIdOk returns a tuple with the ToolId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolId
+
+`func (o *FunctionCall) SetToolId(v string)`
+
+SetToolId sets ToolId field to given value.
+
+### HasToolId
+
+`func (o *FunctionCall) HasToolId() bool`
+
+HasToolId returns a boolean if a field has been set.
 
 ### GetVersion
 

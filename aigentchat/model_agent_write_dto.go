@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -20,11 +20,13 @@ var _ MappedNullable = &AgentWriteDto{}
 
 // AgentWriteDto struct for AgentWriteDto
 type AgentWriteDto struct {
+	AddToolGuidelines *bool `json:"add_tool_guidelines,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 	Description *string `json:"description,omitempty"`
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
+	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -57,6 +59,38 @@ func NewAgentWriteDto() *AgentWriteDto {
 func NewAgentWriteDtoWithDefaults() *AgentWriteDto {
 	this := AgentWriteDto{}
 	return &this
+}
+
+// GetAddToolGuidelines returns the AddToolGuidelines field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetAddToolGuidelines() bool {
+	if o == nil || IsNil(o.AddToolGuidelines) {
+		var ret bool
+		return ret
+	}
+	return *o.AddToolGuidelines
+}
+
+// GetAddToolGuidelinesOk returns a tuple with the AddToolGuidelines field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetAddToolGuidelinesOk() (*bool, bool) {
+	if o == nil || IsNil(o.AddToolGuidelines) {
+		return nil, false
+	}
+	return o.AddToolGuidelines, true
+}
+
+// HasAddToolGuidelines returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasAddToolGuidelines() bool {
+	if o != nil && !IsNil(o.AddToolGuidelines) {
+		return true
+	}
+
+	return false
+}
+
+// SetAddToolGuidelines gets a reference to the given bool and assigns it to the AddToolGuidelines field.
+func (o *AgentWriteDto) SetAddToolGuidelines(v bool) {
+	o.AddToolGuidelines = &v
 }
 
 // GetAssignedTools returns the AssignedTools field value if set, zero value otherwise.
@@ -217,6 +251,38 @@ func (o *AgentWriteDto) HasI18n() bool {
 // SetI18n gets a reference to the given map[string]AgentI18n and assigns it to the I18n field.
 func (o *AgentWriteDto) SetI18n(v map[string]AgentI18n) {
 	o.I18n = &v
+}
+
+// GetIgnoreIncomingOverwrite returns the IgnoreIncomingOverwrite field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetIgnoreIncomingOverwrite() bool {
+	if o == nil || IsNil(o.IgnoreIncomingOverwrite) {
+		var ret bool
+		return ret
+	}
+	return *o.IgnoreIncomingOverwrite
+}
+
+// GetIgnoreIncomingOverwriteOk returns a tuple with the IgnoreIncomingOverwrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetIgnoreIncomingOverwriteOk() (*bool, bool) {
+	if o == nil || IsNil(o.IgnoreIncomingOverwrite) {
+		return nil, false
+	}
+	return o.IgnoreIncomingOverwrite, true
+}
+
+// HasIgnoreIncomingOverwrite returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasIgnoreIncomingOverwrite() bool {
+	if o != nil && !IsNil(o.IgnoreIncomingOverwrite) {
+		return true
+	}
+
+	return false
+}
+
+// SetIgnoreIncomingOverwrite gets a reference to the given bool and assigns it to the IgnoreIncomingOverwrite field.
+func (o *AgentWriteDto) SetIgnoreIncomingOverwrite(v bool) {
+	o.IgnoreIncomingOverwrite = &v
 }
 
 // GetInitialUserMessages returns the InitialUserMessages field value if set, zero value otherwise.
@@ -613,6 +679,9 @@ func (o AgentWriteDto) MarshalJSON() ([]byte, error) {
 
 func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AddToolGuidelines) {
+		toSerialize["add_tool_guidelines"] = o.AddToolGuidelines
+	}
 	if !IsNil(o.AssignedTools) {
 		toSerialize["assigned_tools"] = o.AssignedTools
 	}
@@ -627,6 +696,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.I18n) {
 		toSerialize["i18n"] = o.I18n
+	}
+	if !IsNil(o.IgnoreIncomingOverwrite) {
+		toSerialize["ignore_incoming_overwrite"] = o.IgnoreIncomingOverwrite
 	}
 	if !IsNil(o.InitialUserMessages) {
 		toSerialize["initial_user_messages"] = o.InitialUserMessages
@@ -686,11 +758,13 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "add_tool_guidelines")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "i18n")
+		delete(additionalProperties, "ignore_incoming_overwrite")
 		delete(additionalProperties, "initial_user_messages")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")

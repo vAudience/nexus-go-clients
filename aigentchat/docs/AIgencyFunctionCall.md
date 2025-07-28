@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Arguments** | Pointer to **map[string]interface{}** |  | [optional] 
 **FunctionName** | **string** |  | 
 **Id** | **string** |  | 
+**ToolFunctionId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetToolFunctionId
+
+`func (o *AIgencyFunctionCall) GetToolFunctionId() string`
+
+GetToolFunctionId returns the ToolFunctionId field if non-nil, zero value otherwise.
+
+### GetToolFunctionIdOk
+
+`func (o *AIgencyFunctionCall) GetToolFunctionIdOk() (*string, bool)`
+
+GetToolFunctionIdOk returns a tuple with the ToolFunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolFunctionId
+
+`func (o *AIgencyFunctionCall) SetToolFunctionId(v string)`
+
+SetToolFunctionId sets ToolFunctionId field to given value.
+
+### HasToolFunctionId
+
+`func (o *AIgencyFunctionCall) HasToolFunctionId() bool`
+
+HasToolFunctionId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

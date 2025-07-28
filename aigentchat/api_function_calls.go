@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -28,7 +28,7 @@ type ApiExecuteFunctionCallRequest struct {
 	ctx context.Context
 	ApiService *FunctionCallsAPIService
 	orgId string
-	name string
+	ref string
 	arguments *map[string]interface{}
 }
 
@@ -49,15 +49,15 @@ Executes a specified function call with provided arguments
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param name Function call name
+ @param ref Function call name or ID
  @return ApiExecuteFunctionCallRequest
 */
-func (a *FunctionCallsAPIService) ExecuteFunctionCall(ctx context.Context, orgId string, name string) ApiExecuteFunctionCallRequest {
+func (a *FunctionCallsAPIService) ExecuteFunctionCall(ctx context.Context, orgId string, ref string) ApiExecuteFunctionCallRequest {
 	return ApiExecuteFunctionCallRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		name: name,
+		ref: ref,
 	}
 }
 
@@ -76,9 +76,9 @@ func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{name}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{ref}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ref"+"}", url.PathEscape(parameterValueToString(r.ref, "ref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -215,7 +215,7 @@ type ApiGetFunctionCallRequest struct {
 	ctx context.Context
 	ApiService *FunctionCallsAPIService
 	orgId string
-	name string
+	ref string
 }
 
 func (r ApiGetFunctionCallRequest) Execute() (*FunctionCall, *http.Response, error) {
@@ -229,15 +229,15 @@ Returns the definition of a function call
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param name Function call name
+ @param ref Function call name or ID
  @return ApiGetFunctionCallRequest
 */
-func (a *FunctionCallsAPIService) GetFunctionCall(ctx context.Context, orgId string, name string) ApiGetFunctionCallRequest {
+func (a *FunctionCallsAPIService) GetFunctionCall(ctx context.Context, orgId string, ref string) ApiGetFunctionCallRequest {
 	return ApiGetFunctionCallRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		name: name,
+		ref: ref,
 	}
 }
 
@@ -256,9 +256,9 @@ func (a *FunctionCallsAPIService) GetFunctionCallExecute(r ApiGetFunctionCallReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{name}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/function-calls/{ref}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ref"+"}", url.PathEscape(parameterValueToString(r.ref, "ref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

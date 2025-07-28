@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,8 +21,14 @@ var _ MappedNullable = &FunctionCall{}
 // FunctionCall struct for FunctionCall
 type FunctionCall struct {
 	Description *string `json:"description,omitempty"`
+	HostingLocation *string `json:"hosting_location,omitempty"`
+	I18n *map[string]FunctionCallI18n `json:"i18n,omitempty"`
+	Icon *string `json:"icon,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Parameters *string `json:"parameters,omitempty"`
+	ResponseVisible *bool `json:"response_visible,omitempty"`
+	ToolId *string `json:"tool_id,omitempty"`
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -76,6 +82,134 @@ func (o *FunctionCall) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *FunctionCall) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetHostingLocation returns the HostingLocation field value if set, zero value otherwise.
+func (o *FunctionCall) GetHostingLocation() string {
+	if o == nil || IsNil(o.HostingLocation) {
+		var ret string
+		return ret
+	}
+	return *o.HostingLocation
+}
+
+// GetHostingLocationOk returns a tuple with the HostingLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetHostingLocationOk() (*string, bool) {
+	if o == nil || IsNil(o.HostingLocation) {
+		return nil, false
+	}
+	return o.HostingLocation, true
+}
+
+// HasHostingLocation returns a boolean if a field has been set.
+func (o *FunctionCall) HasHostingLocation() bool {
+	if o != nil && !IsNil(o.HostingLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostingLocation gets a reference to the given string and assigns it to the HostingLocation field.
+func (o *FunctionCall) SetHostingLocation(v string) {
+	o.HostingLocation = &v
+}
+
+// GetI18n returns the I18n field value if set, zero value otherwise.
+func (o *FunctionCall) GetI18n() map[string]FunctionCallI18n {
+	if o == nil || IsNil(o.I18n) {
+		var ret map[string]FunctionCallI18n
+		return ret
+	}
+	return *o.I18n
+}
+
+// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetI18nOk() (*map[string]FunctionCallI18n, bool) {
+	if o == nil || IsNil(o.I18n) {
+		return nil, false
+	}
+	return o.I18n, true
+}
+
+// HasI18n returns a boolean if a field has been set.
+func (o *FunctionCall) HasI18n() bool {
+	if o != nil && !IsNil(o.I18n) {
+		return true
+	}
+
+	return false
+}
+
+// SetI18n gets a reference to the given map[string]FunctionCallI18n and assigns it to the I18n field.
+func (o *FunctionCall) SetI18n(v map[string]FunctionCallI18n) {
+	o.I18n = &v
+}
+
+// GetIcon returns the Icon field value if set, zero value otherwise.
+func (o *FunctionCall) GetIcon() string {
+	if o == nil || IsNil(o.Icon) {
+		var ret string
+		return ret
+	}
+	return *o.Icon
+}
+
+// GetIconOk returns a tuple with the Icon field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetIconOk() (*string, bool) {
+	if o == nil || IsNil(o.Icon) {
+		return nil, false
+	}
+	return o.Icon, true
+}
+
+// HasIcon returns a boolean if a field has been set.
+func (o *FunctionCall) HasIcon() bool {
+	if o != nil && !IsNil(o.Icon) {
+		return true
+	}
+
+	return false
+}
+
+// SetIcon gets a reference to the given string and assigns it to the Icon field.
+func (o *FunctionCall) SetIcon(v string) {
+	o.Icon = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *FunctionCall) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *FunctionCall) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *FunctionCall) SetId(v string) {
+	o.Id = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -142,6 +276,70 @@ func (o *FunctionCall) SetParameters(v string) {
 	o.Parameters = &v
 }
 
+// GetResponseVisible returns the ResponseVisible field value if set, zero value otherwise.
+func (o *FunctionCall) GetResponseVisible() bool {
+	if o == nil || IsNil(o.ResponseVisible) {
+		var ret bool
+		return ret
+	}
+	return *o.ResponseVisible
+}
+
+// GetResponseVisibleOk returns a tuple with the ResponseVisible field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetResponseVisibleOk() (*bool, bool) {
+	if o == nil || IsNil(o.ResponseVisible) {
+		return nil, false
+	}
+	return o.ResponseVisible, true
+}
+
+// HasResponseVisible returns a boolean if a field has been set.
+func (o *FunctionCall) HasResponseVisible() bool {
+	if o != nil && !IsNil(o.ResponseVisible) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseVisible gets a reference to the given bool and assigns it to the ResponseVisible field.
+func (o *FunctionCall) SetResponseVisible(v bool) {
+	o.ResponseVisible = &v
+}
+
+// GetToolId returns the ToolId field value if set, zero value otherwise.
+func (o *FunctionCall) GetToolId() string {
+	if o == nil || IsNil(o.ToolId) {
+		var ret string
+		return ret
+	}
+	return *o.ToolId
+}
+
+// GetToolIdOk returns a tuple with the ToolId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCall) GetToolIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolId) {
+		return nil, false
+	}
+	return o.ToolId, true
+}
+
+// HasToolId returns a boolean if a field has been set.
+func (o *FunctionCall) HasToolId() bool {
+	if o != nil && !IsNil(o.ToolId) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolId gets a reference to the given string and assigns it to the ToolId field.
+func (o *FunctionCall) SetToolId(v string) {
+	o.ToolId = &v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *FunctionCall) GetVersion() string {
 	if o == nil || IsNil(o.Version) {
@@ -187,11 +385,29 @@ func (o FunctionCall) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.HostingLocation) {
+		toSerialize["hosting_location"] = o.HostingLocation
+	}
+	if !IsNil(o.I18n) {
+		toSerialize["i18n"] = o.I18n
+	}
+	if !IsNil(o.Icon) {
+		toSerialize["icon"] = o.Icon
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.ResponseVisible) {
+		toSerialize["response_visible"] = o.ResponseVisible
+	}
+	if !IsNil(o.ToolId) {
+		toSerialize["tool_id"] = o.ToolId
 	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
@@ -219,8 +435,14 @@ func (o *FunctionCall) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "hosting_location")
+		delete(additionalProperties, "i18n")
+		delete(additionalProperties, "icon")
+		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "response_visible")
+		delete(additionalProperties, "tool_id")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}

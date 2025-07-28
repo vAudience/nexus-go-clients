@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **MessageResponseToId** | Pointer to **string** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**SelectedTools** | Pointer to **[]string** |  | [optional] 
 **SetMessageHistoryIds** | Pointer to **[]string** | If UseChannelMessagesAsHistory is false, this list of message IDs will be used as history, if empty, the history will be empty, ignored if UseChannelMessagesAsHistory is true | [optional] 
 **UseChannelMessagesAsHistory** | Pointer to **bool** | If true, the channel messages will be used as history and SetMessageHistoryIds will be ignored | [optional] 
 **UseSummaryService** | Pointer to **bool** |  | [optional] 
@@ -304,6 +305,31 @@ SetParameters sets Parameters field to given value.
 `func (o *ChatCompletionRequestDto) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
+
+### GetSelectedTools
+
+`func (o *ChatCompletionRequestDto) GetSelectedTools() []string`
+
+GetSelectedTools returns the SelectedTools field if non-nil, zero value otherwise.
+
+### GetSelectedToolsOk
+
+`func (o *ChatCompletionRequestDto) GetSelectedToolsOk() (*[]string, bool)`
+
+GetSelectedToolsOk returns a tuple with the SelectedTools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelectedTools
+
+`func (o *ChatCompletionRequestDto) SetSelectedTools(v []string)`
+
+SetSelectedTools sets SelectedTools field to given value.
+
+### HasSelectedTools
+
+`func (o *ChatCompletionRequestDto) HasSelectedTools() bool`
+
+HasSelectedTools returns a boolean if a field has been set.
 
 ### GetSetMessageHistoryIds
 

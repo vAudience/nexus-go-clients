@@ -27,9 +27,9 @@ func Test_aigentchat_FunctionCallsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
-		var name string
+		var ref string
 
-		resp, httpRes, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, name).Execute()
+		resp, httpRes, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, ref).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -42,9 +42,9 @@ func Test_aigentchat_FunctionCallsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
-		var name string
+		var ref string
 
-		resp, httpRes, err := apiClient.FunctionCallsAPI.GetFunctionCall(context.Background(), orgId, name).Execute()
+		resp, httpRes, err := apiClient.FunctionCallsAPI.GetFunctionCall(context.Background(), orgId, ref).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type AIgencyFunctionCall struct {
 	Arguments map[string]interface{} `json:"arguments,omitempty"`
 	FunctionName string `json:"function_name"`
 	Id string `json:"id"`
+	ToolFunctionId *string `json:"tool_function_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,6 +129,38 @@ func (o *AIgencyFunctionCall) SetId(v string) {
 	o.Id = v
 }
 
+// GetToolFunctionId returns the ToolFunctionId field value if set, zero value otherwise.
+func (o *AIgencyFunctionCall) GetToolFunctionId() string {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		var ret string
+		return ret
+	}
+	return *o.ToolFunctionId
+}
+
+// GetToolFunctionIdOk returns a tuple with the ToolFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionCall) GetToolFunctionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		return nil, false
+	}
+	return o.ToolFunctionId, true
+}
+
+// HasToolFunctionId returns a boolean if a field has been set.
+func (o *AIgencyFunctionCall) HasToolFunctionId() bool {
+	if o != nil && !IsNil(o.ToolFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolFunctionId gets a reference to the given string and assigns it to the ToolFunctionId field.
+func (o *AIgencyFunctionCall) SetToolFunctionId(v string) {
+	o.ToolFunctionId = &v
+}
+
 func (o AIgencyFunctionCall) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -143,6 +176,9 @@ func (o AIgencyFunctionCall) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["id"] = o.Id
+	if !IsNil(o.ToolFunctionId) {
+		toSerialize["tool_function_id"] = o.ToolFunctionId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -190,6 +226,7 @@ func (o *AIgencyFunctionCall) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "arguments")
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "tool_function_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

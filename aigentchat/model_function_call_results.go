@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.19.3
+API version: 0.20.0
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,8 @@ type FunctionCallResults struct {
 	Name *string `json:"name,omitempty"`
 	ResultFiles []ResultFile `json:"result_files,omitempty"`
 	ResultTexts []string `json:"result_texts,omitempty"`
+	ToolFunctionId *string `json:"tool_function_id,omitempty"`
+	ToolId *string `json:"tool_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -240,6 +242,70 @@ func (o *FunctionCallResults) SetResultTexts(v []string) {
 	o.ResultTexts = v
 }
 
+// GetToolFunctionId returns the ToolFunctionId field value if set, zero value otherwise.
+func (o *FunctionCallResults) GetToolFunctionId() string {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		var ret string
+		return ret
+	}
+	return *o.ToolFunctionId
+}
+
+// GetToolFunctionIdOk returns a tuple with the ToolFunctionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCallResults) GetToolFunctionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolFunctionId) {
+		return nil, false
+	}
+	return o.ToolFunctionId, true
+}
+
+// HasToolFunctionId returns a boolean if a field has been set.
+func (o *FunctionCallResults) HasToolFunctionId() bool {
+	if o != nil && !IsNil(o.ToolFunctionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolFunctionId gets a reference to the given string and assigns it to the ToolFunctionId field.
+func (o *FunctionCallResults) SetToolFunctionId(v string) {
+	o.ToolFunctionId = &v
+}
+
+// GetToolId returns the ToolId field value if set, zero value otherwise.
+func (o *FunctionCallResults) GetToolId() string {
+	if o == nil || IsNil(o.ToolId) {
+		var ret string
+		return ret
+	}
+	return *o.ToolId
+}
+
+// GetToolIdOk returns a tuple with the ToolId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCallResults) GetToolIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolId) {
+		return nil, false
+	}
+	return o.ToolId, true
+}
+
+// HasToolId returns a boolean if a field has been set.
+func (o *FunctionCallResults) HasToolId() bool {
+	if o != nil && !IsNil(o.ToolId) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolId gets a reference to the given string and assigns it to the ToolId field.
+func (o *FunctionCallResults) SetToolId(v string) {
+	o.ToolId = &v
+}
+
 func (o FunctionCallResults) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -267,6 +333,12 @@ func (o FunctionCallResults) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ResultTexts) {
 		toSerialize["result_texts"] = o.ResultTexts
+	}
+	if !IsNil(o.ToolFunctionId) {
+		toSerialize["tool_function_id"] = o.ToolFunctionId
+	}
+	if !IsNil(o.ToolId) {
+		toSerialize["tool_id"] = o.ToolId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -296,6 +368,8 @@ func (o *FunctionCallResults) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "result_files")
 		delete(additionalProperties, "result_texts")
+		delete(additionalProperties, "tool_function_id")
+		delete(additionalProperties, "tool_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

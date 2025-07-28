@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **ResultFiles** | Pointer to [**[]ResultFile**](ResultFile.md) |  | [optional] 
 **ResultTexts** | Pointer to **[]string** |  | [optional] 
+**ToolFunctionId** | Pointer to **string** |  | [optional] 
+**ToolId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -179,6 +181,56 @@ SetResultTexts sets ResultTexts field to given value.
 `func (o *FunctionCallResults) HasResultTexts() bool`
 
 HasResultTexts returns a boolean if a field has been set.
+
+### GetToolFunctionId
+
+`func (o *FunctionCallResults) GetToolFunctionId() string`
+
+GetToolFunctionId returns the ToolFunctionId field if non-nil, zero value otherwise.
+
+### GetToolFunctionIdOk
+
+`func (o *FunctionCallResults) GetToolFunctionIdOk() (*string, bool)`
+
+GetToolFunctionIdOk returns a tuple with the ToolFunctionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolFunctionId
+
+`func (o *FunctionCallResults) SetToolFunctionId(v string)`
+
+SetToolFunctionId sets ToolFunctionId field to given value.
+
+### HasToolFunctionId
+
+`func (o *FunctionCallResults) HasToolFunctionId() bool`
+
+HasToolFunctionId returns a boolean if a field has been set.
+
+### GetToolId
+
+`func (o *FunctionCallResults) GetToolId() string`
+
+GetToolId returns the ToolId field if non-nil, zero value otherwise.
+
+### GetToolIdOk
+
+`func (o *FunctionCallResults) GetToolIdOk() (*string, bool)`
+
+GetToolIdOk returns a tuple with the ToolId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolId
+
+`func (o *FunctionCallResults) SetToolId(v string)`
+
+SetToolId sets ToolId field to given value.
+
+### HasToolId
+
+`func (o *FunctionCallResults) HasToolId() bool`
+
+HasToolId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.19.3
+  version: 0.20.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3174,7 +3174,7 @@ paths:
       summary: List accessible function calls
       tags:
       - FunctionCalls
-  /v1/organizations/{org_id}/function-calls/{name}:
+  /v1/organizations/{org_id}/function-calls/{ref}:
     get:
       description: Returns the definition of a function call
       operationId: GetFunctionCall
@@ -3185,9 +3185,9 @@ paths:
         required: true
         schema:
           type: string
-      - description: Function call name
+      - description: Function call name or ID
         in: path
-        name: name
+        name: ref
         required: true
         schema:
           type: string
@@ -3231,9 +3231,9 @@ paths:
         required: true
         schema:
           type: string
-      - description: Function call name
+      - description: Function call name or ID
         in: path
-        name: name
+        name: ref
         required: true
         schema:
           type: string
@@ -4638,6 +4638,43 @@ paths:
       tags:
       - Prompts
       x-codegen-request-body-name: prompt
+  /v1/organizations/{org_id}/tools:
+    get:
+      description: Returns a list of tools
+      operationId: GetTools
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Tool'
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: List accessible tools
+      tags:
+      - Tools
 components:
   schemas:
     AIModel:
@@ -5595,6 +5632,7 @@ components:
         function_name: function_name
         arguments: "{}"
         id: id
+        tool_function_id: tool_function_id
       properties:
         arguments:
           properties: {}
@@ -5607,6 +5645,8 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        tool_function_id:
+          type: string
       required:
       - function_name
       - id
@@ -5615,7 +5655,9 @@ components:
       example:
         result: result
         function_name: function_name
+        is_error: true
         id: id
+        tool_function_id: tool_function_id
       properties:
         function_name:
           maxLength: 64
@@ -5625,7 +5667,11 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        is_error:
+          type: boolean
         result:
+          type: string
+        tool_function_id:
           type: string
       required:
       - function_name
@@ -5798,10 +5844,13 @@ components:
               function_name: function_name
               arguments: "{}"
               id: id
+              tool_function_id: tool_function_id
             function_responses:
               result: result
               function_name: function_name
+              is_error: true
               id: id
+              tool_function_id: tool_function_id
             text: text
             type: text
             thinking:
@@ -5813,10 +5862,13 @@ components:
               function_name: function_name
               arguments: "{}"
               id: id
+              tool_function_id: tool_function_id
             function_responses:
               result: result
               function_name: function_name
+              is_error: true
               id: id
+              tool_function_id: tool_function_id
             text: text
             type: text
             thinking:
@@ -5974,10 +6026,13 @@ components:
           function_name: function_name
           arguments: "{}"
           id: id
+          tool_function_id: tool_function_id
         function_responses:
           result: result
           function_name: function_name
+          is_error: true
           id: id
+          tool_function_id: tool_function_id
         text: text
         type: text
         thinking:
@@ -6011,10 +6066,13 @@ components:
             function_name: function_name
             arguments: "{}"
             id: id
+            tool_function_id: tool_function_id
           function_responses:
             result: result
             function_name: function_name
+            is_error: true
             id: id
+            tool_function_id: tool_function_id
           text: text
           type: text
           thinking:
@@ -6026,10 +6084,13 @@ components:
             function_name: function_name
             arguments: "{}"
             id: id
+            tool_function_id: tool_function_id
           function_responses:
             result: result
             function_name: function_name
+            is_error: true
             id: id
+            tool_function_id: tool_function_id
           text: text
           type: text
           thinking:
@@ -6162,10 +6223,13 @@ components:
                 function_name: function_name
                 arguments: "{}"
                 id: id
+                tool_function_id: tool_function_id
               function_responses:
                 result: result
                 function_name: function_name
+                is_error: true
                 id: id
+                tool_function_id: tool_function_id
               text: text
               type: text
               thinking:
@@ -6177,10 +6241,13 @@ components:
                 function_name: function_name
                 arguments: "{}"
                 id: id
+                tool_function_id: tool_function_id
               function_responses:
                 result: result
                 function_name: function_name
+                is_error: true
                 id: id
+                tool_function_id: tool_function_id
               text: text
               type: text
               thinking:
@@ -6266,10 +6333,13 @@ components:
                 function_name: function_name
                 arguments: "{}"
                 id: id
+                tool_function_id: tool_function_id
               function_responses:
                 result: result
                 function_name: function_name
+                is_error: true
                 id: id
+                tool_function_id: tool_function_id
               text: text
               type: text
               thinking:
@@ -6281,10 +6351,13 @@ components:
                 function_name: function_name
                 arguments: "{}"
                 id: id
+                tool_function_id: tool_function_id
               function_responses:
                 result: result
                 function_name: function_name
+                is_error: true
                 id: id
+                tool_function_id: tool_function_id
               text: text
               type: text
               thinking:
@@ -6394,10 +6467,13 @@ components:
               function_name: function_name
               arguments: "{}"
               id: id
+              tool_function_id: tool_function_id
             function_responses:
               result: result
               function_name: function_name
+              is_error: true
               id: id
+              tool_function_id: tool_function_id
             text: text
             type: text
             thinking:
@@ -6409,10 +6485,13 @@ components:
               function_name: function_name
               arguments: "{}"
               id: id
+              tool_function_id: tool_function_id
             function_responses:
               result: result
               function_name: function_name
+              is_error: true
               id: id
+              tool_function_id: tool_function_id
             text: text
             type: text
             thinking:
@@ -6614,6 +6693,7 @@ components:
         updated_at: 1
         model_category: model_category
         use_tools: true
+        ignore_incoming_overwrite: true
         meta_data: "{}"
         model_host_location: ""
         id: id
@@ -6647,6 +6727,7 @@ components:
             name: name
             description: description
         owner_organization_id: owner_organization_id
+        add_tool_guidelines: true
         avatar_url: avatar_url
         is_public: true
         name: name
@@ -6661,6 +6742,8 @@ components:
           items:
             $ref: '#/components/schemas/AbilityV2'
           type: array
+        add_tool_guidelines:
+          type: boolean
         assigned_tools:
           items:
             type: string
@@ -6687,6 +6770,8 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        ignore_incoming_overwrite:
+          type: boolean
         initial_user_messages:
           items:
             type: string
@@ -6809,14 +6894,18 @@ components:
         attached_file_ids:
         - attached_file_ids
         - attached_file_ids
+        add_tool_guidelines: true
         avatar_url: avatar_url
         use_tools: true
+        ignore_incoming_overwrite: true
         is_public: true
         meta_data: "{}"
         name: name
         model_host_location: ""
         parameters: "{}"
       properties:
+        add_tool_guidelines:
+          type: boolean
         assigned_tools:
           items:
             type: string
@@ -6836,6 +6925,8 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/AgentI18n'
           type: object
+        ignore_incoming_overwrite:
+          type: boolean
         initial_user_messages:
           items:
             type: string
@@ -7048,7 +7139,6 @@ components:
       - insufficient_budget
       - organization_cost_budget_exists
       - invalid_tool_id
-      - unknown_tool_id
       - failed_to_create_temp_api_key
       - invalid_prompt_id
       - prompt_not_found
@@ -7171,7 +7261,6 @@ components:
       - ErrCodeInsufficientBudget
       - ErrCodeOrgCostBudgetExists
       - ErrCodeInvalidToolID
-      - ErrCodeUnknownToolID
       - ErrCodeFailedToCreateTempApiKey
       - ErrCodeInvalidPromptID
       - ErrCodePromptNotFound
@@ -7440,6 +7529,9 @@ components:
         continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
         use_summary_service: true
         use_tools: true
+        selected_tools:
+        - selected_tools
+        - selected_tools
         message_reference_id: message_reference_id
         use_channel_messages_as_history: true
         attached_temporary_files:
@@ -7473,6 +7565,10 @@ components:
         parameters:
           properties: {}
           type: object
+        selected_tools:
+          items:
+            type: string
+          type: array
         set_message_history_ids:
           description: "If UseChannelMessagesAsHistory is false, this list of message\
             \ IDs will be used as history, if empty, the history will be empty, ignored\
@@ -7828,18 +7924,51 @@ components:
       - FinishReasonUnknown
     FunctionCall:
       example:
+        response_visible: true
+        hosting_location: hosting_location
+        icon: icon
         name: name
         description: description
+        tool_id: tool_id
+        id: id
         parameters: parameters
         version: version
+        i18n:
+          key:
+            name: name
+            description: description
       properties:
         description:
+          type: string
+        hosting_location:
+          type: string
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/FunctionCallI18n'
+          type: object
+        icon:
+          type: string
+        id:
           type: string
         name:
           type: string
         parameters:
           type: string
+        response_visible:
+          type: boolean
+        tool_id:
+          type: string
         version:
+          type: string
+      type: object
+    FunctionCallI18n:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
           type: string
       type: object
     FunctionCallResults:
@@ -7861,11 +7990,13 @@ components:
           url: url
         final_state: final_state
         name: name
+        tool_id: tool_id
         id: id
         error: error
         result_texts:
         - result_texts
         - result_texts
+        tool_function_id: tool_function_id
       properties:
         error:
           type: string
@@ -7883,6 +8014,10 @@ components:
           items:
             type: string
           type: array
+        tool_function_id:
+          type: string
+        tool_id:
+          type: string
       type: object
     HealthResponse:
       example:
@@ -8512,6 +8647,135 @@ components:
       x-enum-varnames:
       - InputToken
       - OutputToken
+    Tool:
+      example:
+        functions:
+        - response_visible: true
+          hosting_location: hosting_location
+          icon: icon
+          name: name
+          description: description
+          tool_id: tool_id
+          id: id
+          parameters: parameters
+          version: version
+          i18n:
+            key:
+              name: name
+              description: description
+        - response_visible: true
+          hosting_location: hosting_location
+          icon: icon
+          name: name
+          description: description
+          tool_id: tool_id
+          id: id
+          parameters: parameters
+          version: version
+          i18n:
+            key:
+              name: name
+              description: description
+        hosting_locations:
+        - hosting_locations
+        - hosting_locations
+        icon: icon
+        is_public: true
+        name: name
+        description: description
+        id: id
+        version: version
+        i18n:
+          key:
+            name: name
+            description: description
+      properties:
+        description:
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/ToolFunction'
+          type: array
+        hosting_locations:
+          items:
+            type: string
+          type: array
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/ToolI18n'
+          type: object
+        icon:
+          type: string
+        id:
+          type: string
+        is_public:
+          type: boolean
+        name:
+          type: string
+        version:
+          type: string
+      required:
+      - functions
+      - id
+      - is_public
+      - name
+      - version
+      type: object
+    ToolFunction:
+      example:
+        response_visible: true
+        hosting_location: hosting_location
+        icon: icon
+        name: name
+        description: description
+        tool_id: tool_id
+        id: id
+        parameters: parameters
+        version: version
+        i18n:
+          key:
+            name: name
+            description: description
+      properties:
+        description:
+          type: string
+        hosting_location:
+          type: string
+        i18n:
+          additionalProperties:
+            $ref: '#/components/schemas/ToolI18n'
+          type: object
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        parameters:
+          type: string
+        response_visible:
+          type: boolean
+        tool_id:
+          type: string
+        version:
+          type: string
+      required:
+      - id
+      - name
+      - response_visible
+      - tool_id
+      - version
+      type: object
+    ToolI18n:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      type: object
     VersionResponse:
       example:
         version: version

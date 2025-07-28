@@ -4,15 +4,15 @@ All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ExecuteFunctionCall**](FunctionCallsAPI.md#ExecuteFunctionCall) | **Post** /v1/organizations/{org_id}/function-calls/{name} | Execute a function call
-[**GetFunctionCall**](FunctionCallsAPI.md#GetFunctionCall) | **Get** /v1/organizations/{org_id}/function-calls/{name} | Get function call definition
+[**ExecuteFunctionCall**](FunctionCallsAPI.md#ExecuteFunctionCall) | **Post** /v1/organizations/{org_id}/function-calls/{ref} | Execute a function call
+[**GetFunctionCall**](FunctionCallsAPI.md#GetFunctionCall) | **Get** /v1/organizations/{org_id}/function-calls/{ref} | Get function call definition
 [**GetFunctionCalls**](FunctionCallsAPI.md#GetFunctionCalls) | **Get** /v1/organizations/{org_id}/function-calls | List accessible function calls
 
 
 
 ## ExecuteFunctionCall
 
-> FunctionCallResults ExecuteFunctionCall(ctx, orgId, name).Arguments(arguments).Execute()
+> FunctionCallResults ExecuteFunctionCall(ctx, orgId, ref).Arguments(arguments).Execute()
 
 Execute a function call
 
@@ -32,12 +32,12 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	name := "name_example" // string | Function call name
+	ref := "ref_example" // string | Function call name or ID
 	arguments := map[string]interface{}{ ... } // map[string]interface{} | Function call arguments
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, name).Arguments(arguments).Execute()
+	resp, r, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, ref).Arguments(arguments).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionCallsAPI.ExecuteFunctionCall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**name** | **string** | Function call name | 
+**ref** | **string** | Function call name or ID | 
 
 ### Other Parameters
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## GetFunctionCall
 
-> FunctionCall GetFunctionCall(ctx, orgId, name).Execute()
+> FunctionCall GetFunctionCall(ctx, orgId, ref).Execute()
 
 Get function call definition
 
@@ -107,11 +107,11 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	name := "name_example" // string | Function call name
+	ref := "ref_example" // string | Function call name or ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionCallsAPI.GetFunctionCall(context.Background(), orgId, name).Execute()
+	resp, r, err := apiClient.FunctionCallsAPI.GetFunctionCall(context.Background(), orgId, ref).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionCallsAPI.GetFunctionCall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**name** | **string** | Function call name | 
+**ref** | **string** | Function call name or ID | 
 
 ### Other Parameters
 

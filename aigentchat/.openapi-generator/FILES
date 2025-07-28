@@ -20,6 +20,7 @@ api_metrics.go
 api_missions.go
 api_org_cost_budgets.go
 api_prompts.go
+api_tools.go
 api_version.go
 client.go
 configuration.go
@@ -92,6 +93,7 @@ docs/FileUploadResponse.md
 docs/FileUploadSettings.md
 docs/FinishReason.md
 docs/FunctionCall.md
+docs/FunctionCallI18n.md
 docs/FunctionCallResults.md
 docs/FunctionCallsAPI.md
 docs/HealthAPI.md
@@ -126,6 +128,10 @@ docs/TextEmbedding.md
 docs/TextEmbeddingItemDto.md
 docs/TextEmbeddingRequestDto.md
 docs/TokenDirection.md
+docs/Tool.md
+docs/ToolFunction.md
+docs/ToolI18n.md
+docs/ToolsAPI.md
 docs/VersionAPI.md
 docs/VersionResponse.md
 git_push.sh
@@ -191,6 +197,7 @@ model_file_upload_response.go
 model_file_upload_settings.go
 model_finish_reason.go
 model_function_call.go
+model_function_call_i18n.go
 model_function_call_results.go
 model_health_response.go
 model_hosting_location.go
@@ -217,6 +224,9 @@ model_text_embedding.go
 model_text_embedding_item_dto.go
 model_text_embedding_request_dto.go
 model_token_direction.go
+model_tool.go
+model_tool_function.go
+model_tool_i18n.go
 model_version_response.go
 response.go
 test/api_agents_test.go
@@ -236,5 +246,6 @@ test/api_metrics_test.go
 test/api_missions_test.go
 test/api_org_cost_budgets_test.go
 test/api_prompts_test.go
+test/api_tools_test.go
 test/api_version_test.go
 utils.go
