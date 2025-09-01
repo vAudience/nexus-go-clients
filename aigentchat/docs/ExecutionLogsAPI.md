@@ -4,9 +4,155 @@ All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateDocumentConversionCosts**](ExecutionLogsAPI.md#CreateDocumentConversionCosts) | **Post** /v1/organizations/{org_id}/execution-logs/document-conversion-costs | Track document conversion costs
+[**CreateFileUploadCosts**](ExecutionLogsAPI.md#CreateFileUploadCosts) | **Post** /v1/organizations/{org_id}/execution-logs/file-upload-costs | Track file upload costs
 [**GetExecutionLogsCosts**](ExecutionLogsAPI.md#GetExecutionLogsCosts) | **Get** /v1/organizations/{org_id}/execution-logs/costs | Get execution logs costs
 [**SearchExecutionLogs**](ExecutionLogsAPI.md#SearchExecutionLogs) | **Get** /v1/organizations/{org_id}/execution-logs/search | Search execution logs
 
+
+
+## CreateDocumentConversionCosts
+
+> CostTrackingResponse CreateDocumentConversionCosts(ctx, orgId).Request(request).Execute()
+
+Track document conversion costs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	request := *openapiclient.NewDocumentConversionCostTrackingRequest() // DocumentConversionCostTrackingRequest | Document conversion cost tracking request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ExecutionLogsAPI.CreateDocumentConversionCosts(context.Background(), orgId).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ExecutionLogsAPI.CreateDocumentConversionCosts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateDocumentConversionCosts`: CostTrackingResponse
+	fmt.Fprintf(os.Stdout, "Response from `ExecutionLogsAPI.CreateDocumentConversionCosts`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDocumentConversionCostsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **request** | [**DocumentConversionCostTrackingRequest**](DocumentConversionCostTrackingRequest.md) | Document conversion cost tracking request | 
+
+### Return type
+
+[**CostTrackingResponse**](CostTrackingResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateFileUploadCosts
+
+> CostTrackingResponse CreateFileUploadCosts(ctx, orgId).Request(request).Execute()
+
+Track file upload costs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	request := *openapiclient.NewFileUploadCostTrackingRequest(int32(123)) // FileUploadCostTrackingRequest | File upload cost tracking request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ExecutionLogsAPI.CreateFileUploadCosts(context.Background(), orgId).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ExecutionLogsAPI.CreateFileUploadCosts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateFileUploadCosts`: CostTrackingResponse
+	fmt.Fprintf(os.Stdout, "Response from `ExecutionLogsAPI.CreateFileUploadCosts`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFileUploadCostsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **request** | [**FileUploadCostTrackingRequest**](FileUploadCostTrackingRequest.md) | File upload cost tracking request | 
+
+### Return type
+
+[**CostTrackingResponse**](CostTrackingResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetExecutionLogsCosts

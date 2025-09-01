@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ const (
 	AIgencyMessageContentTypeFile AIgencyMessageContentType = "file"
 	AIgencyMessageContentTypeFunctionCall AIgencyMessageContentType = "function_call"
 	AIgencyMessageContentTypeFunctionResponse AIgencyMessageContentType = "function_response"
+	AIgencyMessageContentTypeFunctionStatusUpdate AIgencyMessageContentType = "function_status_update"
 	AIgencyMessageContentTypeThinking AIgencyMessageContentType = "thinking"
 )
 
@@ -34,6 +35,7 @@ var AllowedAIgencyMessageContentTypeEnumValues = []AIgencyMessageContentType{
 	"file",
 	"function_call",
 	"function_response",
+	"function_status_update",
 	"thinking",
 }
 

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **ModelId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**RecommendedTask** | Pointer to **string** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
@@ -417,6 +418,31 @@ SetParameters sets Parameters field to given value.
 `func (o *AgentWriteDto) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
+
+### GetRecommendedTask
+
+`func (o *AgentWriteDto) GetRecommendedTask() string`
+
+GetRecommendedTask returns the RecommendedTask field if non-nil, zero value otherwise.
+
+### GetRecommendedTaskOk
+
+`func (o *AgentWriteDto) GetRecommendedTaskOk() (*string, bool)`
+
+GetRecommendedTaskOk returns a tuple with the RecommendedTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedTask
+
+`func (o *AgentWriteDto) SetRecommendedTask(v string)`
+
+SetRecommendedTask sets RecommendedTask field to given value.
+
+### HasRecommendedTask
+
+`func (o *AgentWriteDto) HasRecommendedTask() bool`
+
+HasRecommendedTask returns a boolean if a field has been set.
 
 ### GetSystemMessages
 

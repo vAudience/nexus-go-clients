@@ -11,6 +11,8 @@
 
 * `AIgencyMessageContentTypeFunctionResponse` (value: `"function_response"`)
 
+* `AIgencyMessageContentTypeFunctionStatusUpdate` (value: `"function_status_update"`)
+
 * `AIgencyMessageContentTypeThinking` (value: `"thinking"`)
 
 

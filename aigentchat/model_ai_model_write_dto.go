@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,7 @@ type AIModelWriteDto struct {
 	I18n *map[string]AIModelI18n `json:"i18n,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
+	Lifecycle *string `json:"lifecycle,omitempty"`
 	ModelCategory *string `json:"model_category,omitempty"`
 	ModelId *string `json:"model_id,omitempty"`
 	ModelReleaseDate *int32 `json:"model_release_date,omitempty"`
@@ -279,6 +280,38 @@ func (o *AIModelWriteDto) HasIsPublic() bool {
 // SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
 func (o *AIModelWriteDto) SetIsPublic(v bool) {
 	o.IsPublic = &v
+}
+
+// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
+func (o *AIModelWriteDto) GetLifecycle() string {
+	if o == nil || IsNil(o.Lifecycle) {
+		var ret string
+		return ret
+	}
+	return *o.Lifecycle
+}
+
+// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelWriteDto) GetLifecycleOk() (*string, bool) {
+	if o == nil || IsNil(o.Lifecycle) {
+		return nil, false
+	}
+	return o.Lifecycle, true
+}
+
+// HasLifecycle returns a boolean if a field has been set.
+func (o *AIModelWriteDto) HasLifecycle() bool {
+	if o != nil && !IsNil(o.Lifecycle) {
+		return true
+	}
+
+	return false
+}
+
+// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
+func (o *AIModelWriteDto) SetLifecycle(v string) {
+	o.Lifecycle = &v
 }
 
 // GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
@@ -568,6 +601,9 @@ func (o AIModelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
+	if !IsNil(o.Lifecycle) {
+		toSerialize["lifecycle"] = o.Lifecycle
+	}
 	if !IsNil(o.ModelCategory) {
 		toSerialize["model_category"] = o.ModelCategory
 	}
@@ -621,6 +657,7 @@ func (o *AIModelWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "lifecycle")
 		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "model_release_date")

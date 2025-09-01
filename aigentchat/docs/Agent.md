@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
+**Lifecycle** | Pointer to **string** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
@@ -27,6 +28,7 @@ Name | Type | Description | Notes
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**RecommendedTask** | Pointer to **string** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
@@ -398,6 +400,31 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
+### GetLifecycle
+
+`func (o *Agent) GetLifecycle() string`
+
+GetLifecycle returns the Lifecycle field if non-nil, zero value otherwise.
+
+### GetLifecycleOk
+
+`func (o *Agent) GetLifecycleOk() (*string, bool)`
+
+GetLifecycleOk returns a tuple with the Lifecycle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLifecycle
+
+`func (o *Agent) SetLifecycle(v string)`
+
+SetLifecycle sets Lifecycle field to given value.
+
+### HasLifecycle
+
+`func (o *Agent) HasLifecycle() bool`
+
+HasLifecycle returns a boolean if a field has been set.
+
 ### GetMetaData
 
 `func (o *Agent) GetMetaData() map[string]interface{}`
@@ -602,6 +629,31 @@ SetParameters sets Parameters field to given value.
 `func (o *Agent) HasParameters() bool`
 
 HasParameters returns a boolean if a field has been set.
+
+### GetRecommendedTask
+
+`func (o *Agent) GetRecommendedTask() string`
+
+GetRecommendedTask returns the RecommendedTask field if non-nil, zero value otherwise.
+
+### GetRecommendedTaskOk
+
+`func (o *Agent) GetRecommendedTaskOk() (*string, bool)`
+
+GetRecommendedTaskOk returns a tuple with the RecommendedTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedTask
+
+`func (o *Agent) SetRecommendedTask(v string)`
+
+SetRecommendedTask sets RecommendedTask field to given value.
+
+### HasRecommendedTask
+
+`func (o *Agent) HasRecommendedTask() bool`
+
+HasRecommendedTask returns a boolean if a field has been set.
 
 ### GetSystemMessages
 

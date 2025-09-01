@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **File** | Pointer to [**AIgencyMessageFile**](AIgencyMessageFile.md) | Currently unused in favor of attachment list | [optional] 
 **FunctionCall** | Pointer to [**AIgencyFunctionCall**](AIgencyFunctionCall.md) |  | [optional] 
 **FunctionResponses** | Pointer to [**AIgencyFunctionResponse**](AIgencyFunctionResponse.md) |  | [optional] 
+**FunctionStatusUpdate** | Pointer to [**AIgencyFunctionStatusUpdate**](AIgencyFunctionStatusUpdate.md) |  | [optional] 
 **Text** | Pointer to **string** |  | [optional] 
 **Thinking** | Pointer to [**AIgencyThinking**](AIgencyThinking.md) |  | [optional] 
 **Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
@@ -104,6 +105,31 @@ SetFunctionResponses sets FunctionResponses field to given value.
 `func (o *AIgencyMessageContent) HasFunctionResponses() bool`
 
 HasFunctionResponses returns a boolean if a field has been set.
+
+### GetFunctionStatusUpdate
+
+`func (o *AIgencyMessageContent) GetFunctionStatusUpdate() AIgencyFunctionStatusUpdate`
+
+GetFunctionStatusUpdate returns the FunctionStatusUpdate field if non-nil, zero value otherwise.
+
+### GetFunctionStatusUpdateOk
+
+`func (o *AIgencyMessageContent) GetFunctionStatusUpdateOk() (*AIgencyFunctionStatusUpdate, bool)`
+
+GetFunctionStatusUpdateOk returns a tuple with the FunctionStatusUpdate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFunctionStatusUpdate
+
+`func (o *AIgencyMessageContent) SetFunctionStatusUpdate(v AIgencyFunctionStatusUpdate)`
+
+SetFunctionStatusUpdate sets FunctionStatusUpdate field to given value.
+
+### HasFunctionStatusUpdate
+
+`func (o *AIgencyMessageContent) HasFunctionStatusUpdate() bool`
+
+HasFunctionStatusUpdate returns a boolean if a field has been set.
 
 ### GetText
 

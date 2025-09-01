@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.20.0
+  version: 0.20.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -388,6 +388,16 @@ paths:
           - embedding
           - image
           - tool-function
+          type: string
+      - description: Ignore hasManageBasicAgentsAccess when listing agents
+        in: query
+        name: ignore_manage_basic_agents_access
+        schema:
+          type: boolean
+      - description: Filter agents by lifecycle status
+        in: query
+        name: lifecycle
+        schema:
           type: string
       responses:
         "200":
@@ -3064,6 +3074,116 @@ paths:
       summary: Get execution logs costs
       tags:
       - ExecutionLogs
+  /v1/organizations/{org_id}/execution-logs/document-conversion-costs:
+    post:
+      description: Track document conversion costs to execution log
+      operationId: CreateDocumentConversionCosts
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentConversionCostTrackingRequest'
+        description: Document conversion cost tracking request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostTrackingResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Track document conversion costs
+      tags:
+      - ExecutionLogs
+      x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/execution-logs/file-upload-costs:
+    post:
+      description: Track file upload costs to execution log
+      operationId: CreateFileUploadCosts
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUploadCostTrackingRequest'
+        description: File upload cost tracking request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostTrackingResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Track file upload costs
+      tags:
+      - ExecutionLogs
+      x-codegen-request-body-name: request
   /v1/organizations/{org_id}/execution-logs/search:
     get:
       description: "Search for execution logs by user, org, API key, and date range.\
@@ -4736,6 +4856,7 @@ components:
             min: 6
             max: 0
             direction: input
+        lifecycle: lifecycle
         features:
         - capability: ""
           cost_items:
@@ -4843,6 +4964,8 @@ components:
           type: string
         is_public:
           type: boolean
+        lifecycle:
+          type: string
         model_category:
           maxLength: 255
           type: string
@@ -5225,6 +5348,7 @@ components:
               min: 6
               max: 0
               direction: input
+          lifecycle: lifecycle
           features:
           - capability: ""
             cost_items:
@@ -5352,6 +5476,7 @@ components:
               min: 6
               max: 0
               direction: input
+          lifecycle: lifecycle
           features:
           - capability: ""
             cost_items:
@@ -5509,6 +5634,7 @@ components:
             model_category: model_category
             name: name
             description: description
+        lifecycle: lifecycle
         features:
         - capability: ""
           cost_items:
@@ -5598,6 +5724,8 @@ components:
           type: string
         is_public:
           type: boolean
+        lifecycle:
+          type: string
         model_category:
           maxLength: 255
           type: string
@@ -5677,6 +5805,25 @@ components:
       - function_name
       - id
       - result
+      type: object
+    AIgencyFunctionStatusUpdate:
+      example:
+        id: id
+        updates:
+        - updates
+        - updates
+      properties:
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        updates:
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      - updates
       type: object
     AIgencyImage:
       example:
@@ -5857,6 +6004,11 @@ components:
               is_redacted: true
               signature: signature
               content: content
+            function_status_update:
+              id: id
+              updates:
+              - updates
+              - updates
           - file: "{}"
             function_call:
               function_name: function_name
@@ -5875,6 +6027,11 @@ components:
               is_redacted: true
               signature: signature
               content: content
+            function_status_update:
+              id: id
+              updates:
+              - updates
+              - updates
           full_text: full_text
         sender_id: sender_id
         execution_id: execution_id
@@ -6039,6 +6196,11 @@ components:
           is_redacted: true
           signature: signature
           content: content
+        function_status_update:
+          id: id
+          updates:
+          - updates
+          - updates
       properties:
         file:
           allOf:
@@ -6049,6 +6211,8 @@ components:
           $ref: '#/components/schemas/AIgencyFunctionCall'
         function_responses:
           $ref: '#/components/schemas/AIgencyFunctionResponse'
+        function_status_update:
+          $ref: '#/components/schemas/AIgencyFunctionStatusUpdate'
         text:
           type: string
         thinking:
@@ -6079,6 +6243,11 @@ components:
             is_redacted: true
             signature: signature
             content: content
+          function_status_update:
+            id: id
+            updates:
+            - updates
+            - updates
         - file: "{}"
           function_call:
             function_name: function_name
@@ -6097,6 +6266,11 @@ components:
             is_redacted: true
             signature: signature
             content: content
+          function_status_update:
+            id: id
+            updates:
+            - updates
+            - updates
         full_text: full_text
       properties:
         data:
@@ -6115,6 +6289,7 @@ components:
       - file
       - function_call
       - function_response
+      - function_status_update
       - thinking
       type: string
       x-enum-comments:
@@ -6124,6 +6299,7 @@ components:
       - AIgencyMessageContentTypeFile
       - AIgencyMessageContentTypeFunctionCall
       - AIgencyMessageContentTypeFunctionResponse
+      - AIgencyMessageContentTypeFunctionStatusUpdate
       - AIgencyMessageContentTypeThinking
     AIgencyMessageFile:
       example:
@@ -6236,6 +6412,11 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
+              function_status_update:
+                id: id
+                updates:
+                - updates
+                - updates
             - file: "{}"
               function_call:
                 function_name: function_name
@@ -6254,6 +6435,11 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
+              function_status_update:
+                id: id
+                updates:
+                - updates
+                - updates
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -6346,6 +6532,11 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
+              function_status_update:
+                id: id
+                updates:
+                - updates
+                - updates
             - file: "{}"
               function_call:
                 function_name: function_name
@@ -6364,6 +6555,11 @@ components:
                 is_redacted: true
                 signature: signature
                 content: content
+              function_status_update:
+                id: id
+                updates:
+                - updates
+                - updates
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -6480,6 +6676,11 @@ components:
               is_redacted: true
               signature: signature
               content: content
+            function_status_update:
+              id: id
+              updates:
+              - updates
+              - updates
           - file: "{}"
             function_call:
               function_name: function_name
@@ -6498,6 +6699,11 @@ components:
               is_redacted: true
               signature: signature
               content: content
+            function_status_update:
+              id: id
+              updates:
+              - updates
+              - updates
           full_text: full_text
         sender_conversation_role: "{}"
         meta_data: "{}"
@@ -6690,6 +6896,7 @@ components:
             min: 6
             max: 0
             direction: input
+        lifecycle: lifecycle
         updated_at: 1
         model_category: model_category
         use_tools: true
@@ -6724,11 +6931,13 @@ components:
         i18n:
           key:
             model_category: model_category
+            recommended_task: recommended_task
             name: name
             description: description
         owner_organization_id: owner_organization_id
         add_tool_guidelines: true
         avatar_url: avatar_url
+        recommended_task: recommended_task
         is_public: true
         name: name
         updated_by: updated_by
@@ -6781,6 +6990,8 @@ components:
           type: string
         is_public:
           type: boolean
+        lifecycle:
+          type: string
         meta_data:
           properties: {}
           type: object
@@ -6811,6 +7022,8 @@ components:
         parameters:
           properties: {}
           type: object
+        recommended_task:
+          type: string
         system_messages:
           items:
             type: string
@@ -6842,6 +7055,7 @@ components:
     AgentI18n:
       example:
         model_category: model_category
+        recommended_task: recommended_task
         name: name
         description: description
       properties:
@@ -6854,6 +7068,9 @@ components:
         name:
           maxLength: 255
           minLength: 1
+          type: string
+        recommended_task:
+          maxLength: 255
           type: string
       required:
       - name
@@ -6886,6 +7103,7 @@ components:
         i18n:
           key:
             model_category: model_category
+            recommended_task: recommended_task
             name: name
             description: description
         initial_user_messages:
@@ -6898,6 +7116,7 @@ components:
         avatar_url: avatar_url
         use_tools: true
         ignore_incoming_overwrite: true
+        recommended_task: recommended_task
         is_public: true
         meta_data: "{}"
         name: name
@@ -6952,6 +7171,8 @@ components:
         parameters:
           properties: {}
           type: object
+        recommended_task:
+          type: string
         system_messages:
           items:
             type: string
@@ -7628,6 +7849,39 @@ components:
       required:
       - cost_in_euro
       type: object
+    CostTrackingResponse:
+      example:
+        execution_log_id: execution_log_id
+      properties:
+        execution_log_id:
+          type: string
+      type: object
+    DocumentConversionCostTrackingRequest:
+      example:
+        execution_id: execution_id
+        user_id: user_id
+        num_pages_with_images: 0
+        num_pages: 0
+        output_tokens: 0
+        input_tokens: 0
+      properties:
+        execution_id:
+          type: string
+        input_tokens:
+          minimum: 0
+          type: integer
+        num_pages:
+          minimum: 0
+          type: integer
+        num_pages_with_images:
+          minimum: 0
+          type: integer
+        output_tokens:
+          minimum: 0
+          type: integer
+        user_id:
+          type: string
+      type: object
     EmbeddingItem:
       example:
         meta_data: "{}"
@@ -7686,9 +7940,6 @@ components:
       type: object
     ExecutionLog:
       example:
-        ai_model_service_id: ai_model_service_id
-        execution_id: execution_id
-        owner_organization_id: owner_organization_id
         agent_id: agent_id
         owner_id: owner_id
         usage:
@@ -7703,11 +7954,15 @@ components:
           cost_per_unit_in_euro: 5.637376656633329
           cost_unit: null
         created_at: 0
-        final_cost_in_euro: 6.027456183070403
         message_id: message_id
+        type: type
+        ai_model_id: ai_model_id
+        ai_model_service_id: ai_model_service_id
+        execution_id: execution_id
+        owner_organization_id: owner_organization_id
+        final_cost_in_euro: 6.027456183070403
         id: id
         channel_id: channel_id
-        ai_model_id: ai_model_id
       properties:
         agent_id:
           type: string
@@ -7733,6 +7988,8 @@ components:
           type: string
         owner_organization_id:
           type: string
+        type:
+          type: string
         usage:
           items:
             $ref: '#/components/schemas/ExecutionUsageCost'
@@ -7749,10 +8006,7 @@ components:
     ExecutionLogResults:
       example:
         results:
-        - ai_model_service_id: ai_model_service_id
-          execution_id: execution_id
-          owner_organization_id: owner_organization_id
-          agent_id: agent_id
+        - agent_id: agent_id
           owner_id: owner_id
           usage:
           - resulting_cost_in_euro: 2.3021358869347655
@@ -7766,15 +8020,16 @@ components:
             cost_per_unit_in_euro: 5.637376656633329
             cost_unit: null
           created_at: 0
-          final_cost_in_euro: 6.027456183070403
           message_id: message_id
-          id: id
-          channel_id: channel_id
+          type: type
           ai_model_id: ai_model_id
-        - ai_model_service_id: ai_model_service_id
+          ai_model_service_id: ai_model_service_id
           execution_id: execution_id
           owner_organization_id: owner_organization_id
-          agent_id: agent_id
+          final_cost_in_euro: 6.027456183070403
+          id: id
+          channel_id: channel_id
+        - agent_id: agent_id
           owner_id: owner_id
           usage:
           - resulting_cost_in_euro: 2.3021358869347655
@@ -7788,11 +8043,15 @@ components:
             cost_per_unit_in_euro: 5.637376656633329
             cost_unit: null
           created_at: 0
-          final_cost_in_euro: 6.027456183070403
           message_id: message_id
+          type: type
+          ai_model_id: ai_model_id
+          ai_model_service_id: ai_model_service_id
+          execution_id: execution_id
+          owner_organization_id: owner_organization_id
+          final_cost_in_euro: 6.027456183070403
           id: id
           channel_id: channel_id
-          ai_model_id: ai_model_id
         total_results: 1
       properties:
         results:
@@ -7853,6 +8112,22 @@ components:
           $ref: '#/components/schemas/FileChatSettings'
         upload:
           $ref: '#/components/schemas/FileUploadSettings'
+      type: object
+    FileUploadCostTrackingRequest:
+      example:
+        execution_id: execution_id
+        user_id: user_id
+        num_files: 1
+      properties:
+        execution_id:
+          type: string
+        num_files:
+          minimum: 1
+          type: integer
+        user_id:
+          type: string
+      required:
+      - num_files
       type: object
     FileUploadResponse:
       example:

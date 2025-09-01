@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -1285,6 +1285,8 @@ type ApiListAgentsRequest struct {
 	addDefaultAgents *bool
 	skipDefaultAgentsFilter *bool
 	ability *string
+	ignoreManageBasicAgentsAccess *bool
+	lifecycle *string
 }
 
 // Include default agents to the list of org owned agents
@@ -1302,6 +1304,18 @@ func (r ApiListAgentsRequest) SkipDefaultAgentsFilter(skipDefaultAgentsFilter bo
 // Filter agents by ability type
 func (r ApiListAgentsRequest) Ability(ability string) ApiListAgentsRequest {
 	r.ability = &ability
+	return r
+}
+
+// Ignore hasManageBasicAgentsAccess when listing agents
+func (r ApiListAgentsRequest) IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess bool) ApiListAgentsRequest {
+	r.ignoreManageBasicAgentsAccess = &ignoreManageBasicAgentsAccess
+	return r
+}
+
+// Filter agents by lifecycle status
+func (r ApiListAgentsRequest) Lifecycle(lifecycle string) ApiListAgentsRequest {
+	r.lifecycle = &lifecycle
 	return r
 }
 
@@ -1356,6 +1370,12 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 	}
 	if r.ability != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ability", r.ability, "", "")
+	}
+	if r.ignoreManageBasicAgentsAccess != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ignore_manage_basic_agents_access", r.ignoreManageBasicAgentsAccess, "", "")
+	}
+	if r.lifecycle != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "lifecycle", r.lifecycle, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

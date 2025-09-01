@@ -22,6 +22,34 @@ func Test_aigentchat_ExecutionLogsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ExecutionLogsAPIService CreateDocumentConversionCosts", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		resp, httpRes, err := apiClient.ExecutionLogsAPI.CreateDocumentConversionCosts(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExecutionLogsAPIService CreateFileUploadCosts", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		resp, httpRes, err := apiClient.ExecutionLogsAPI.CreateFileUploadCosts(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ExecutionLogsAPIService GetExecutionLogsCosts", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

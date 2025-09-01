@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -35,6 +35,7 @@ type Agent struct {
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
+	Lifecycle *string `json:"lifecycle,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	ModelCategory *string `json:"model_category,omitempty"`
 	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
@@ -44,6 +45,7 @@ type Agent struct {
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	RecommendedTask *string `json:"recommended_task,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
 	TeamIds []string `json:"team_ids,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
@@ -517,6 +519,38 @@ func (o *Agent) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
+// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
+func (o *Agent) GetLifecycle() string {
+	if o == nil || IsNil(o.Lifecycle) {
+		var ret string
+		return ret
+	}
+	return *o.Lifecycle
+}
+
+// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetLifecycleOk() (*string, bool) {
+	if o == nil || IsNil(o.Lifecycle) {
+		return nil, false
+	}
+	return o.Lifecycle, true
+}
+
+// HasLifecycle returns a boolean if a field has been set.
+func (o *Agent) HasLifecycle() bool {
+	if o != nil && !IsNil(o.Lifecycle) {
+		return true
+	}
+
+	return false
+}
+
+// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
+func (o *Agent) SetLifecycle(v string) {
+	o.Lifecycle = &v
+}
+
 // GetMetaData returns the MetaData field value if set, zero value otherwise.
 func (o *Agent) GetMetaData() map[string]interface{} {
 	if o == nil || IsNil(o.MetaData) {
@@ -773,6 +807,38 @@ func (o *Agent) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
+// GetRecommendedTask returns the RecommendedTask field value if set, zero value otherwise.
+func (o *Agent) GetRecommendedTask() string {
+	if o == nil || IsNil(o.RecommendedTask) {
+		var ret string
+		return ret
+	}
+	return *o.RecommendedTask
+}
+
+// GetRecommendedTaskOk returns a tuple with the RecommendedTask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetRecommendedTaskOk() (*string, bool) {
+	if o == nil || IsNil(o.RecommendedTask) {
+		return nil, false
+	}
+	return o.RecommendedTask, true
+}
+
+// HasRecommendedTask returns a boolean if a field has been set.
+func (o *Agent) HasRecommendedTask() bool {
+	if o != nil && !IsNil(o.RecommendedTask) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedTask gets a reference to the given string and assigns it to the RecommendedTask field.
+func (o *Agent) SetRecommendedTask(v string) {
+	o.RecommendedTask = &v
+}
+
 // GetSystemMessages returns the SystemMessages field value if set, zero value otherwise.
 func (o *Agent) GetSystemMessages() []string {
 	if o == nil || IsNil(o.SystemMessages) {
@@ -1015,6 +1081,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
+	if !IsNil(o.Lifecycle) {
+		toSerialize["lifecycle"] = o.Lifecycle
+	}
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
 	}
@@ -1033,6 +1102,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.RecommendedTask) {
+		toSerialize["recommended_task"] = o.RecommendedTask
 	}
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
@@ -1113,6 +1185,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "initial_user_messages")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "lifecycle")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_host_location")
@@ -1122,6 +1195,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "recommended_task")
 		delete(additionalProperties, "system_messages")
 		delete(additionalProperties, "team_ids")
 		delete(additionalProperties, "type")

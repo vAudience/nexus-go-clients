@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type AIgencyMessageContent struct {
 	File *AIgencyMessageFile `json:"file,omitempty"`
 	FunctionCall *AIgencyFunctionCall `json:"function_call,omitempty"`
 	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`
+	FunctionStatusUpdate *AIgencyFunctionStatusUpdate `json:"function_status_update,omitempty"`
 	Text *string `json:"text,omitempty"`
 	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
@@ -147,6 +148,38 @@ func (o *AIgencyMessageContent) SetFunctionResponses(v AIgencyFunctionResponse) 
 	o.FunctionResponses = &v
 }
 
+// GetFunctionStatusUpdate returns the FunctionStatusUpdate field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetFunctionStatusUpdate() AIgencyFunctionStatusUpdate {
+	if o == nil || IsNil(o.FunctionStatusUpdate) {
+		var ret AIgencyFunctionStatusUpdate
+		return ret
+	}
+	return *o.FunctionStatusUpdate
+}
+
+// GetFunctionStatusUpdateOk returns a tuple with the FunctionStatusUpdate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetFunctionStatusUpdateOk() (*AIgencyFunctionStatusUpdate, bool) {
+	if o == nil || IsNil(o.FunctionStatusUpdate) {
+		return nil, false
+	}
+	return o.FunctionStatusUpdate, true
+}
+
+// HasFunctionStatusUpdate returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasFunctionStatusUpdate() bool {
+	if o != nil && !IsNil(o.FunctionStatusUpdate) {
+		return true
+	}
+
+	return false
+}
+
+// SetFunctionStatusUpdate gets a reference to the given AIgencyFunctionStatusUpdate and assigns it to the FunctionStatusUpdate field.
+func (o *AIgencyMessageContent) SetFunctionStatusUpdate(v AIgencyFunctionStatusUpdate) {
+	o.FunctionStatusUpdate = &v
+}
+
 // GetText returns the Text field value if set, zero value otherwise.
 func (o *AIgencyMessageContent) GetText() string {
 	if o == nil || IsNil(o.Text) {
@@ -254,6 +287,9 @@ func (o AIgencyMessageContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FunctionResponses) {
 		toSerialize["function_responses"] = o.FunctionResponses
 	}
+	if !IsNil(o.FunctionStatusUpdate) {
+		toSerialize["function_status_update"] = o.FunctionStatusUpdate
+	}
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
@@ -307,6 +343,7 @@ func (o *AIgencyMessageContent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "file")
 		delete(additionalProperties, "function_call")
 		delete(additionalProperties, "function_responses")
+		delete(additionalProperties, "function_status_update")
 		delete(additionalProperties, "text")
 		delete(additionalProperties, "thinking")
 		delete(additionalProperties, "type")

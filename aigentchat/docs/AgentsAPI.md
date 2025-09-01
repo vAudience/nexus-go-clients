@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).Execute()
+> []Agent ListAgents(ctx, orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Lifecycle(lifecycle).Execute()
 
 List agents
 
@@ -566,10 +566,12 @@ func main() {
 	addDefaultAgents := true // bool | Include default agents to the list of org owned agents (optional)
 	skipDefaultAgentsFilter := true // bool | Skip the default agent filtering of the organization settings (optional)
 	ability := "ability_example" // string | Filter agents by ability type (optional)
+	ignoreManageBasicAgentsAccess := true // bool | Ignore hasManageBasicAgentsAccess when listing agents (optional)
+	lifecycle := "lifecycle_example" // string | Filter agents by lifecycle status (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Lifecycle(lifecycle).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -598,6 +600,8 @@ Name | Type | Description  | Notes
  **addDefaultAgents** | **bool** | Include default agents to the list of org owned agents | 
  **skipDefaultAgentsFilter** | **bool** | Skip the default agent filtering of the organization settings | 
  **ability** | **string** | Filter agents by ability type | 
+ **ignoreManageBasicAgentsAccess** | **bool** | Ignore hasManageBasicAgentsAccess when listing agents | 
+ **lifecycle** | **string** | Filter agents by lifecycle status | 
 
 ### Return type
 

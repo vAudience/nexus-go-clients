@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.0
+API version: 0.20.3
 Contact: contact@vaudience.ai
 */
 
@@ -35,6 +35,7 @@ type AgentWriteDto struct {
 	ModelId *string `json:"model_id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	RecommendedTask *string `json:"recommended_task,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
 	TeamIds []string `json:"team_ids,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
@@ -541,6 +542,38 @@ func (o *AgentWriteDto) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
+// GetRecommendedTask returns the RecommendedTask field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetRecommendedTask() string {
+	if o == nil || IsNil(o.RecommendedTask) {
+		var ret string
+		return ret
+	}
+	return *o.RecommendedTask
+}
+
+// GetRecommendedTaskOk returns a tuple with the RecommendedTask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetRecommendedTaskOk() (*string, bool) {
+	if o == nil || IsNil(o.RecommendedTask) {
+		return nil, false
+	}
+	return o.RecommendedTask, true
+}
+
+// HasRecommendedTask returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasRecommendedTask() bool {
+	if o != nil && !IsNil(o.RecommendedTask) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedTask gets a reference to the given string and assigns it to the RecommendedTask field.
+func (o *AgentWriteDto) SetRecommendedTask(v string) {
+	o.RecommendedTask = &v
+}
+
 // GetSystemMessages returns the SystemMessages field value if set, zero value otherwise.
 func (o *AgentWriteDto) GetSystemMessages() []string {
 	if o == nil || IsNil(o.SystemMessages) {
@@ -724,6 +757,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
+	if !IsNil(o.RecommendedTask) {
+		toSerialize["recommended_task"] = o.RecommendedTask
+	}
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
@@ -773,6 +809,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "recommended_task")
 		delete(additionalProperties, "system_messages")
 		delete(additionalProperties, "team_ids")
 		delete(additionalProperties, "type")

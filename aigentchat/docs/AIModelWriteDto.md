@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **I18n** | Pointer to [**map[string]AIModelI18n**](AIModelI18n.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
+**Lifecycle** | Pointer to **string** |  | [optional] 
 **ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
 **ModelReleaseDate** | Pointer to **int32** |  | [optional] 
@@ -213,6 +214,31 @@ SetIsPublic sets IsPublic field to given value.
 `func (o *AIModelWriteDto) HasIsPublic() bool`
 
 HasIsPublic returns a boolean if a field has been set.
+
+### GetLifecycle
+
+`func (o *AIModelWriteDto) GetLifecycle() string`
+
+GetLifecycle returns the Lifecycle field if non-nil, zero value otherwise.
+
+### GetLifecycleOk
+
+`func (o *AIModelWriteDto) GetLifecycleOk() (*string, bool)`
+
+GetLifecycleOk returns a tuple with the Lifecycle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLifecycle
+
+`func (o *AIModelWriteDto) SetLifecycle(v string)`
+
+SetLifecycle sets Lifecycle field to given value.
+
+### HasLifecycle
+
+`func (o *AIModelWriteDto) HasLifecycle() bool`
+
+HasLifecycle returns a boolean if a field has been set.
 
 ### GetModelCategory
 

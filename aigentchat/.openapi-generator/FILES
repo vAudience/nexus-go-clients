@@ -41,6 +41,7 @@ docs/AIModelWriteDto.md
 docs/AIModelsAPI.md
 docs/AIgencyFunctionCall.md
 docs/AIgencyFunctionResponse.md
+docs/AIgencyFunctionStatusUpdate.md
 docs/AIgencyImage.md
 docs/AIgencyImageResults.md
 docs/AIgencyMessage.md
@@ -78,6 +79,8 @@ docs/ConnectionTokenResponse.md
 docs/ConnectionTokensAPI.md
 docs/ConversationRole.md
 docs/CostEstimation.md
+docs/CostTrackingResponse.md
+docs/DocumentConversionCostTrackingRequest.md
 docs/EmbeddingItem.md
 docs/EmbeddingsAPI.md
 docs/EstimateImageGenerationCostRequestDto.md
@@ -89,6 +92,7 @@ docs/ExecutionLogsAPI.md
 docs/ExecutionUsageCost.md
 docs/FileChatSettings.md
 docs/FileSettings.md
+docs/FileUploadCostTrackingRequest.md
 docs/FileUploadResponse.md
 docs/FileUploadSettings.md
 docs/FinishReason.md
@@ -139,6 +143,7 @@ go.mod
 go.sum
 model_a_igency_function_call.go
 model_a_igency_function_response.go
+model_a_igency_function_status_update.go
 model_a_igency_image.go
 model_a_igency_image_results.go
 model_a_igency_message.go
@@ -184,6 +189,8 @@ model_chat_completion_request_dto.go
 model_connection_token_response.go
 model_conversation_role.go
 model_cost_estimation.go
+model_cost_tracking_response.go
+model_document_conversion_cost_tracking_request.go
 model_embedding_item.go
 model_estimate_image_generation_cost_request_dto.go
 model_execution_cost_template.go
@@ -193,6 +200,7 @@ model_execution_log_results.go
 model_execution_usage_cost.go
 model_file_chat_settings.go
 model_file_settings.go
+model_file_upload_cost_tracking_request.go
 model_file_upload_response.go
 model_file_upload_settings.go
 model_finish_reason.go
