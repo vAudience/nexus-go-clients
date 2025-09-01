@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.3.3
+  version: 0.3.4
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -4579,7 +4579,6 @@ components:
         owner: owner
         createdAt: createdAt
         name: name
-        personal: true
         id: id
         updatedAt: updatedAt
       properties:
@@ -4591,8 +4590,6 @@ components:
           type: string
         owner:
           type: string
-        personal:
-          type: boolean
         updatedAt:
           type: string
       required:
@@ -4600,7 +4597,6 @@ components:
       - id
       - name
       - owner
-      - personal
       - updatedAt
       type: object
     OrganizationResultsResponse:
@@ -4610,13 +4606,11 @@ components:
         - owner: owner
           createdAt: createdAt
           name: name
-          personal: true
           id: id
           updatedAt: updatedAt
         - owner: owner
           createdAt: createdAt
           name: name
-          personal: true
           id: id
           updatedAt: updatedAt
       properties:
