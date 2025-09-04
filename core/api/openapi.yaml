@@ -6,7 +6,7 @@ info:
     name: Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.3.4
+  version: 0.3.5
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -213,6 +213,11 @@ paths:
         name: name
         schema:
           type: string
+      - description: filter by active subscription
+        in: query
+        name: hasActiveSubscription
+        schema:
+          type: boolean
       responses:
         "200":
           content:

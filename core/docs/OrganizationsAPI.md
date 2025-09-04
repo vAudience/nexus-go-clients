@@ -1616,7 +1616,7 @@ Name | Type | Description  | Notes
 
 ## GetAllOrganizations
 
-> OrganizationResultsResponse GetAllOrganizations(ctx).Limit(limit).Offset(offset).Name(name).Execute()
+> OrganizationResultsResponse GetAllOrganizations(ctx).Limit(limit).Offset(offset).Name(name).HasActiveSubscription(hasActiveSubscription).Execute()
 
 Get all Organizations
 
@@ -1638,10 +1638,11 @@ func main() {
 	limit := int32(56) // int32 | limit of the organizations (optional)
 	offset := int32(56) // int32 | offset of the organizations (optional)
 	name := "name_example" // string | name of the organization (optional)
+	hasActiveSubscription := true // bool | filter by active subscription (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.GetAllOrganizations(context.Background()).Limit(limit).Offset(offset).Name(name).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.GetAllOrganizations(context.Background()).Limit(limit).Offset(offset).Name(name).HasActiveSubscription(hasActiveSubscription).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetAllOrganizations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1665,6 +1666,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | limit of the organizations | 
  **offset** | **int32** | offset of the organizations | 
  **name** | **string** | name of the organization | 
+ **hasActiveSubscription** | **bool** | filter by active subscription | 
 
 ### Return type
 
