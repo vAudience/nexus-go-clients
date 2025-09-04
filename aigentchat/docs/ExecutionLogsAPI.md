@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 
 ## SearchExecutionLogs
 
-> ExecutionLogResults SearchExecutionLogs(ctx, orgId).UserId(userId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+> ExecutionLogResults SearchExecutionLogs(ctx, orgId).UserId(userId).ExecType(execType).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 
 Search execution logs
 
@@ -254,6 +254,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	userId := "userId_example" // string | User ID or me (optional)
+	execType := "execType_example" // string | Execution log type (optional)
 	startDate := "startDate_example" // string | Start date in Unix milliseconds (optional)
 	endDate := "endDate_example" // string | End date in Unix milliseconds (optional)
 	offset := int32(56) // int32 | Offset (optional)
@@ -261,7 +262,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExecutionLogsAPI.SearchExecutionLogs(context.Background(), orgId).UserId(userId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+	resp, r, err := apiClient.ExecutionLogsAPI.SearchExecutionLogs(context.Background(), orgId).UserId(userId).ExecType(execType).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExecutionLogsAPI.SearchExecutionLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,6 +289,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **userId** | **string** | User ID or me | 
+ **execType** | **string** | Execution log type | 
  **startDate** | **string** | Start date in Unix milliseconds | 
  **endDate** | **string** | End date in Unix milliseconds | 
  **offset** | **int32** | Offset | 

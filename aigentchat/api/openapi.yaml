@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.20.3
+  version: 0.20.5
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3201,6 +3201,11 @@ paths:
         name: user_id
         schema:
           type: string
+      - description: Execution log type
+        in: query
+        name: exec_type
+        schema:
+          type: string
       - description: Start date in Unix milliseconds
         in: query
         name: start_date
@@ -6041,6 +6046,7 @@ components:
         sender_conversation_role: "{}"
         meta_data: "{}"
         id: id
+        state: state
         channel_name: channel_name
         response_to_id: response_to_id
         created_for_feature:
@@ -6145,6 +6151,8 @@ components:
         sender_name:
           maxLength: 255
           minLength: 1
+          type: string
+        state:
           type: string
         token_count:
           type: integer
@@ -6449,6 +6457,7 @@ components:
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
+          state: state
           channel_name: channel_name
           response_to_id: response_to_id
           created_for_feature:
@@ -6569,6 +6578,7 @@ components:
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
+          state: state
           channel_name: channel_name
           response_to_id: response_to_id
           created_for_feature:
@@ -7303,12 +7313,7 @@ components:
       - failed_to_fetch_channels
       - failed_to_fetch_subscribed_channels
       - failed_to_upload_channel_file
-      - failed_to_store_chat_completion_user
       - failed_to_create_chat_context
-      - failed_to_acquire_chat_completion_lock
-      - chat_completion_is_locked_for_channel
-      - failed_to_check_user_authorization
-      - failed_to_release_chat_completion_lock
       - capability_not_available
       - no_messages_found
       - invalid_request_parameters
@@ -7316,6 +7321,7 @@ components:
       - chat_completion_exceeds_total_temporary_file_size
       - chat_completion_exceeds_max_input_tokens
       - chat_completion_exceeds_max_tool_calls
+      - chat_completion_channel_in_progress
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
@@ -7425,12 +7431,7 @@ components:
       - ErrCodeFailedToFetchChannels
       - ErrCodeFailedToFetchSubscribed
       - ErrCodeFailedToUploadChannelFile
-      - ErrCodeFailedToStoreChatCompletionUser
       - ErrCodeFailedToCreateChatContext
-      - ErrCodeFailedToAcquireChatCompletionLock
-      - ErrCodeChatCompletionIsLockedForChannel
-      - ErrCodeFailedToCheckUserAuthorization
-      - ErrCodeFailedToReleaseChatCompletionLock
       - ErrCodeCapabilityNotAvailable
       - ErrCodeNoMessagesFound
       - ErrCodeInvalidRequestParameters
@@ -7438,6 +7439,7 @@ components:
       - ErrCodeChatCompletionExceedsTotalTempFileSize
       - ErrCodeChatCompletionExceedsMaxInputTokens
       - ErrCodeChatCompletionExceedsMaxToolCalls
+      - ErrCodeChatCompletionChannelInProgress
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs

@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **SenderConversationRole** | [**ConversationRole**](ConversationRole.md) |  | 
 **SenderId** | **string** |  | 
 **SenderName** | **string** |  | 
+**State** | Pointer to **string** |  | [optional] 
 **TokenCount** | Pointer to **int32** |  | [optional] 
 **TokenDirection** | [**TokenDirection**](TokenDirection.md) |  | 
 **Type** | [**AIgencyMessageType**](AIgencyMessageType.md) |  | 
@@ -513,6 +514,31 @@ and a boolean to check if the value has been set.
 
 SetSenderName sets SenderName field to given value.
 
+
+### GetState
+
+`func (o *AIgencyMessage) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *AIgencyMessage) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *AIgencyMessage) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *AIgencyMessage) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetTokenCount
 

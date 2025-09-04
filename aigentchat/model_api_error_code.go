@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.3
+API version: 0.20.5
 Contact: contact@vaudience.ai
 */
 
@@ -73,12 +73,7 @@ const (
 	ErrCodeFailedToFetchChannels ApiErrorCode = "failed_to_fetch_channels"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
 	ErrCodeFailedToUploadChannelFile ApiErrorCode = "failed_to_upload_channel_file"
-	ErrCodeFailedToStoreChatCompletionUser ApiErrorCode = "failed_to_store_chat_completion_user"
 	ErrCodeFailedToCreateChatContext ApiErrorCode = "failed_to_create_chat_context"
-	ErrCodeFailedToAcquireChatCompletionLock ApiErrorCode = "failed_to_acquire_chat_completion_lock"
-	ErrCodeChatCompletionIsLockedForChannel ApiErrorCode = "chat_completion_is_locked_for_channel"
-	ErrCodeFailedToCheckUserAuthorization ApiErrorCode = "failed_to_check_user_authorization"
-	ErrCodeFailedToReleaseChatCompletionLock ApiErrorCode = "failed_to_release_chat_completion_lock"
 	ErrCodeCapabilityNotAvailable ApiErrorCode = "capability_not_available"
 	ErrCodeNoMessagesFound ApiErrorCode = "no_messages_found"
 	ErrCodeInvalidRequestParameters ApiErrorCode = "invalid_request_parameters"
@@ -86,6 +81,7 @@ const (
 	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
 	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
 	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
+	ErrCodeChatCompletionChannelInProgress ApiErrorCode = "chat_completion_channel_in_progress"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
@@ -197,12 +193,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_channels",
 	"failed_to_fetch_subscribed_channels",
 	"failed_to_upload_channel_file",
-	"failed_to_store_chat_completion_user",
 	"failed_to_create_chat_context",
-	"failed_to_acquire_chat_completion_lock",
-	"chat_completion_is_locked_for_channel",
-	"failed_to_check_user_authorization",
-	"failed_to_release_chat_completion_lock",
 	"capability_not_available",
 	"no_messages_found",
 	"invalid_request_parameters",
@@ -210,6 +201,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"chat_completion_exceeds_total_temporary_file_size",
 	"chat_completion_exceeds_max_input_tokens",
 	"chat_completion_exceeds_max_tool_calls",
+	"chat_completion_channel_in_progress",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.3
+API version: 0.20.5
 Contact: contact@vaudience.ai
 */
 
@@ -42,6 +42,7 @@ type AIgencyMessage struct {
 	SenderConversationRole ConversationRole `json:"sender_conversation_role"`
 	SenderId string `json:"sender_id"`
 	SenderName string `json:"sender_name"`
+	State *string `json:"state,omitempty"`
 	TokenCount *int32 `json:"token_count,omitempty"`
 	TokenDirection TokenDirection `json:"token_direction"`
 	Type AIgencyMessageType `json:"type"`
@@ -659,6 +660,38 @@ func (o *AIgencyMessage) SetSenderName(v string) {
 	o.SenderName = v
 }
 
+// GetState returns the State field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetState() string {
+	if o == nil || IsNil(o.State) {
+		var ret string
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetStateOk() (*string, bool) {
+	if o == nil || IsNil(o.State) {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasState() bool {
+	if o != nil && !IsNil(o.State) {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *AIgencyMessage) SetState(v string) {
+	o.State = &v
+}
+
 // GetTokenCount returns the TokenCount field value if set, zero value otherwise.
 func (o *AIgencyMessage) GetTokenCount() int32 {
 	if o == nil || IsNil(o.TokenCount) {
@@ -812,6 +845,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["sender_conversation_role"] = o.SenderConversationRole
 	toSerialize["sender_id"] = o.SenderId
 	toSerialize["sender_name"] = o.SenderName
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
 	if !IsNil(o.TokenCount) {
 		toSerialize["token_count"] = o.TokenCount
 	}
@@ -896,6 +932,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sender_conversation_role")
 		delete(additionalProperties, "sender_id")
 		delete(additionalProperties, "sender_name")
+		delete(additionalProperties, "state")
 		delete(additionalProperties, "token_count")
 		delete(additionalProperties, "token_direction")
 		delete(additionalProperties, "type")

@@ -107,17 +107,7 @@
 
 * `ErrCodeFailedToUploadChannelFile` (value: `"failed_to_upload_channel_file"`)
 
-* `ErrCodeFailedToStoreChatCompletionUser` (value: `"failed_to_store_chat_completion_user"`)
-
 * `ErrCodeFailedToCreateChatContext` (value: `"failed_to_create_chat_context"`)
-
-* `ErrCodeFailedToAcquireChatCompletionLock` (value: `"failed_to_acquire_chat_completion_lock"`)
-
-* `ErrCodeChatCompletionIsLockedForChannel` (value: `"chat_completion_is_locked_for_channel"`)
-
-* `ErrCodeFailedToCheckUserAuthorization` (value: `"failed_to_check_user_authorization"`)
-
-* `ErrCodeFailedToReleaseChatCompletionLock` (value: `"failed_to_release_chat_completion_lock"`)
 
 * `ErrCodeCapabilityNotAvailable` (value: `"capability_not_available"`)
 
@@ -132,6 +122,8 @@
 * `ErrCodeChatCompletionExceedsMaxInputTokens` (value: `"chat_completion_exceeds_max_input_tokens"`)
 
 * `ErrCodeChatCompletionExceedsMaxToolCalls` (value: `"chat_completion_exceeds_max_tool_calls"`)
+
+* `ErrCodeChatCompletionChannelInProgress` (value: `"chat_completion_channel_in_progress"`)
 
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 
