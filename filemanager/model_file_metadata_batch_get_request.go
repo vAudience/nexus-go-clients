@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the MetadataGetFileMetadataBatchRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &MetadataGetFileMetadataBatchRequest{}
+// checks if the FileMetadataBatchGetRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FileMetadataBatchGetRequest{}
 
-// MetadataGetFileMetadataBatchRequest struct for MetadataGetFileMetadataBatchRequest
-type MetadataGetFileMetadataBatchRequest struct {
+// FileMetadataBatchGetRequest struct for FileMetadataBatchGetRequest
+type FileMetadataBatchGetRequest struct {
 	StoragePaths []string `json:"storage_paths"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _MetadataGetFileMetadataBatchRequest MetadataGetFileMetadataBatchRequest
+type _FileMetadataBatchGetRequest FileMetadataBatchGetRequest
 
-// NewMetadataGetFileMetadataBatchRequest instantiates a new MetadataGetFileMetadataBatchRequest object
+// NewFileMetadataBatchGetRequest instantiates a new FileMetadataBatchGetRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadataGetFileMetadataBatchRequest(storagePaths []string) *MetadataGetFileMetadataBatchRequest {
-	this := MetadataGetFileMetadataBatchRequest{}
+func NewFileMetadataBatchGetRequest(storagePaths []string) *FileMetadataBatchGetRequest {
+	this := FileMetadataBatchGetRequest{}
 	this.StoragePaths = storagePaths
 	return &this
 }
 
-// NewMetadataGetFileMetadataBatchRequestWithDefaults instantiates a new MetadataGetFileMetadataBatchRequest object
+// NewFileMetadataBatchGetRequestWithDefaults instantiates a new FileMetadataBatchGetRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMetadataGetFileMetadataBatchRequestWithDefaults() *MetadataGetFileMetadataBatchRequest {
-	this := MetadataGetFileMetadataBatchRequest{}
+func NewFileMetadataBatchGetRequestWithDefaults() *FileMetadataBatchGetRequest {
+	this := FileMetadataBatchGetRequest{}
 	return &this
 }
 
 // GetStoragePaths returns the StoragePaths field value
-func (o *MetadataGetFileMetadataBatchRequest) GetStoragePaths() []string {
+func (o *FileMetadataBatchGetRequest) GetStoragePaths() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -56,7 +56,7 @@ func (o *MetadataGetFileMetadataBatchRequest) GetStoragePaths() []string {
 
 // GetStoragePathsOk returns a tuple with the StoragePaths field value
 // and a boolean to check if the value has been set.
-func (o *MetadataGetFileMetadataBatchRequest) GetStoragePathsOk() ([]string, bool) {
+func (o *FileMetadataBatchGetRequest) GetStoragePathsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *MetadataGetFileMetadataBatchRequest) GetStoragePathsOk() ([]string, boo
 }
 
 // SetStoragePaths sets field value
-func (o *MetadataGetFileMetadataBatchRequest) SetStoragePaths(v []string) {
+func (o *FileMetadataBatchGetRequest) SetStoragePaths(v []string) {
 	o.StoragePaths = v
 }
 
-func (o MetadataGetFileMetadataBatchRequest) MarshalJSON() ([]byte, error) {
+func (o FileMetadataBatchGetRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o MetadataGetFileMetadataBatchRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MetadataGetFileMetadataBatchRequest) ToMap() (map[string]interface{}, error) {
+func (o FileMetadataBatchGetRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["storage_paths"] = o.StoragePaths
 
@@ -87,7 +87,7 @@ func (o MetadataGetFileMetadataBatchRequest) ToMap() (map[string]interface{}, er
 	return toSerialize, nil
 }
 
-func (o *MetadataGetFileMetadataBatchRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *FileMetadataBatchGetRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *MetadataGetFileMetadataBatchRequest) UnmarshalJSON(data []byte) (err er
 		}
 	}
 
-	varMetadataGetFileMetadataBatchRequest := _MetadataGetFileMetadataBatchRequest{}
+	varFileMetadataBatchGetRequest := _FileMetadataBatchGetRequest{}
 
-	err = json.Unmarshal(data, &varMetadataGetFileMetadataBatchRequest)
+	err = json.Unmarshal(data, &varFileMetadataBatchGetRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = MetadataGetFileMetadataBatchRequest(varMetadataGetFileMetadataBatchRequest)
+	*o = FileMetadataBatchGetRequest(varFileMetadataBatchGetRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *MetadataGetFileMetadataBatchRequest) UnmarshalJSON(data []byte) (err er
 	return err
 }
 
-type NullableMetadataGetFileMetadataBatchRequest struct {
-	value *MetadataGetFileMetadataBatchRequest
+type NullableFileMetadataBatchGetRequest struct {
+	value *FileMetadataBatchGetRequest
 	isSet bool
 }
 
-func (v NullableMetadataGetFileMetadataBatchRequest) Get() *MetadataGetFileMetadataBatchRequest {
+func (v NullableFileMetadataBatchGetRequest) Get() *FileMetadataBatchGetRequest {
 	return v.value
 }
 
-func (v *NullableMetadataGetFileMetadataBatchRequest) Set(val *MetadataGetFileMetadataBatchRequest) {
+func (v *NullableFileMetadataBatchGetRequest) Set(val *FileMetadataBatchGetRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMetadataGetFileMetadataBatchRequest) IsSet() bool {
+func (v NullableFileMetadataBatchGetRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMetadataGetFileMetadataBatchRequest) Unset() {
+func (v *NullableFileMetadataBatchGetRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMetadataGetFileMetadataBatchRequest(val *MetadataGetFileMetadataBatchRequest) *NullableMetadataGetFileMetadataBatchRequest {
-	return &NullableMetadataGetFileMetadataBatchRequest{value: val, isSet: true}
+func NewNullableFileMetadataBatchGetRequest(val *FileMetadataBatchGetRequest) *NullableFileMetadataBatchGetRequest {
+	return &NullableFileMetadataBatchGetRequest{value: val, isSet: true}
 }
 
-func (v NullableMetadataGetFileMetadataBatchRequest) MarshalJSON() ([]byte, error) {
+func (v NullableFileMetadataBatchGetRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMetadataGetFileMetadataBatchRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableFileMetadataBatchGetRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

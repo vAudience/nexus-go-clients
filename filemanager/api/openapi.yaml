@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HealthResponse"
+                $ref: '#/components/schemas/HealthResponse'
           description: OK
       summary: checks for service health
       tags:
@@ -57,7 +57,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VersionResponse"
+                $ref: '#/components/schemas/VersionResponse'
           description: OK
       summary: returns the service version
       tags:
@@ -107,76 +107,76 @@ paths:
           content:
             application/octet-stream:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             image/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             text/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             application/pdf:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad Request
         "401":
           content:
             application/octet-stream:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             image/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             text/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             application/pdf:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
             application/octet-stream:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             image/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             text/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             application/pdf:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
         "404":
           content:
             application/octet-stream:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             image/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             text/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             application/pdf:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Not Found
         "501":
           content:
             application/octet-stream:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             image/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             text/*:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
             application/pdf:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Not Implemented
       security:
       - ApiKey: []
@@ -191,7 +191,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: "#/components/schemas/metadata.GetFileMetadataBatchRequest"
+              $ref: '#/components/schemas/FileMetadataBatchGetRequest'
         description: Batch request with file paths
         required: true
       responses:
@@ -199,25 +199,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/metadata.FileMetadataBatchResponse"
+                $ref: '#/components/schemas/FileMetadataBatchResponse'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
       security:
       - ApiKey: []
@@ -241,31 +241,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/metadata.FileMetadataResponse"
+                $ref: '#/components/schemas/FileMetadataResponse'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Not Found
       security:
       - ApiKey: []
@@ -303,50 +303,50 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/UploadFile_request"
+              $ref: '#/components/schemas/UploadFile_request'
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileUploadResponse"
+                $ref: '#/components/schemas/FileUploadResponse'
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Not Found
         "413":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Request Entity Too Large
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -385,25 +385,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileUploadSettings"
+                $ref: '#/components/schemas/FileUploadSettings'
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
           description: Not Found
       security:
       - ApiKey: []
@@ -442,122 +442,28 @@ components:
           type: string
         details:
           items:
-            $ref: "#/components/schemas/ErrorDetail"
+            $ref: '#/components/schemas/ErrorDetail'
           type: array
         message:
           type: string
         status:
           type: integer
       type: object
-    FileUploadResponse:
+    FileMetadataBatchGetRequest:
       example:
-        execution_log_id: execution_log_id
-        resulting_files:
-        - mime_type: mime_type
-          original_file_url: original_file_url
-          storage_path: storage_path
-          file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          original_file_name: original_file_name
-          file_size: 0
-          url: url
-        - mime_type: mime_type
-          original_file_url: original_file_url
-          storage_path: storage_path
-          file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          original_file_name: original_file_name
-          file_size: 0
-          url: url
-        id: id
+        storage_paths:
+        - storage_paths
+        - storage_paths
       properties:
-        execution_log_id:
-          type: string
-        id:
-          type: string
-        resulting_files:
-          items:
-            $ref: "#/components/schemas/ResultFile"
-          type: array
-      required:
-      - id
-      - resulting_files
-      type: object
-    FileUploadSettings:
-      example:
-        min_file_size: 6
-        max_file_size: 0
-        accepted_mime_types:
-        - accepted_mime_types
-        - accepted_mime_types
-      properties:
-        accepted_mime_types:
+        storage_paths:
           items:
             type: string
+          minItems: 1
           type: array
-        max_file_size:
-          format: int64
-          type: integer
-        min_file_size:
-          format: int64
-          type: integer
-      type: object
-    HealthResponse:
-      example:
-        health: health
-      properties:
-        health:
-          type: string
       required:
-      - health
+      - storage_paths
       type: object
-    ResultFile:
-      example:
-        mime_type: mime_type
-        original_file_url: original_file_url
-        storage_path: storage_path
-        file_name: file_name
-        original_file_mime_type: original_file_mime_type
-        original_file_name: original_file_name
-        file_size: 0
-        url: url
-      properties:
-        file_name:
-          type: string
-        file_size:
-          type: integer
-        mime_type:
-          type: string
-        original_file_mime_type:
-          type: string
-        original_file_name:
-          type: string
-        original_file_url:
-          type: string
-        storage_path:
-          type: string
-        url:
-          type: string
-      required:
-      - file_name
-      - file_size
-      - mime_type
-      - original_file_mime_type
-      - original_file_name
-      - original_file_url
-      - storage_path
-      - url
-      type: object
-    VersionResponse:
-      example:
-        version: version
-      properties:
-        version:
-          type: string
-      required:
-      - version
-      type: object
-    metadata.FileMetadataBatchResponse:
+    FileMetadataBatchResponse:
       example:
         files:
         - upload_category: upload_category
@@ -570,7 +476,6 @@ components:
           storage_category: storage_category
           original_file_size: 6
           team_id: team_id
-          deleted_at: deleted_at
           file_size: 0
           url: url
           expires_at: expires_at
@@ -593,7 +498,6 @@ components:
           storage_category: storage_category
           original_file_size: 6
           team_id: team_id
-          deleted_at: deleted_at
           file_size: 0
           url: url
           expires_at: expires_at
@@ -609,10 +513,10 @@ components:
       properties:
         files:
           items:
-            $ref: "#/components/schemas/metadata.FileMetadataResponse"
+            $ref: '#/components/schemas/FileMetadataResponse'
           type: array
       type: object
-    metadata.FileMetadataResponse:
+    FileMetadataResponse:
       example:
         upload_category: upload_category
         metadata:
@@ -624,7 +528,6 @@ components:
         storage_category: storage_category
         original_file_size: 6
         team_id: team_id
-        deleted_at: deleted_at
         file_size: 0
         url: url
         expires_at: expires_at
@@ -639,8 +542,6 @@ components:
         id: id
       properties:
         created_at:
-          type: string
-        deleted_at:
           type: string
         expires_at:
           type: string
@@ -687,15 +588,127 @@ components:
         user_id:
           type: string
       type: object
-    metadata.GetFileMetadataBatchRequest:
+    FileUploadResponse:
+      example:
+        execution_log_id: execution_log_id
+        resulting_files:
+        - mime_type: mime_type
+          original_file_url: original_file_url
+          storage_path: storage_path
+          file_name: file_name
+          original_file_mime_type: original_file_mime_type
+          meta_data: "{}"
+          original_file_name: original_file_name
+          original_file_size: 6
+          file_size: 0
+          url: url
+        - mime_type: mime_type
+          original_file_url: original_file_url
+          storage_path: storage_path
+          file_name: file_name
+          original_file_mime_type: original_file_mime_type
+          meta_data: "{}"
+          original_file_name: original_file_name
+          original_file_size: 6
+          file_size: 0
+          url: url
+        id: id
       properties:
-        storage_paths:
+        execution_log_id:
+          type: string
+        id:
+          type: string
+        resulting_files:
           items:
-            type: string
-          minItems: 1
+            $ref: '#/components/schemas/ResultFile'
           type: array
       required:
-      - storage_paths
+      - id
+      - resulting_files
+      type: object
+    FileUploadSettings:
+      example:
+        min_file_size: 6
+        max_file_size: 0
+        accepted_mime_types:
+        - accepted_mime_types
+        - accepted_mime_types
+      properties:
+        accepted_mime_types:
+          items:
+            type: string
+          type: array
+        max_file_size:
+          format: int64
+          type: integer
+        min_file_size:
+          format: int64
+          type: integer
+      type: object
+    HealthResponse:
+      example:
+        health: health
+      properties:
+        health:
+          type: string
+      required:
+      - health
+      type: object
+    ResultFile:
+      example:
+        mime_type: mime_type
+        original_file_url: original_file_url
+        storage_path: storage_path
+        file_name: file_name
+        original_file_mime_type: original_file_mime_type
+        meta_data: "{}"
+        original_file_name: original_file_name
+        original_file_size: 6
+        file_size: 0
+        url: url
+      properties:
+        file_name:
+          type: string
+        file_size:
+          format: int64
+          type: integer
+        meta_data:
+          properties: {}
+          type: object
+        mime_type:
+          type: string
+        original_file_mime_type:
+          type: string
+        original_file_name:
+          type: string
+        original_file_size:
+          format: int64
+          type: integer
+        original_file_url:
+          type: string
+        storage_path:
+          type: string
+        url:
+          type: string
+      required:
+      - file_name
+      - file_size
+      - mime_type
+      - original_file_mime_type
+      - original_file_name
+      - original_file_size
+      - original_file_url
+      - storage_path
+      - url
+      type: object
+    VersionResponse:
+      example:
+        version: version
+      properties:
+        version:
+          type: string
+      required:
+      - version
       type: object
     UploadFile_request:
       properties:

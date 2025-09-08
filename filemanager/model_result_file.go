@@ -21,10 +21,12 @@ var _ MappedNullable = &ResultFile{}
 // ResultFile struct for ResultFile
 type ResultFile struct {
 	FileName string `json:"file_name"`
-	FileSize int32 `json:"file_size"`
+	FileSize int64 `json:"file_size"`
+	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	MimeType string `json:"mime_type"`
 	OriginalFileMimeType string `json:"original_file_mime_type"`
 	OriginalFileName string `json:"original_file_name"`
+	OriginalFileSize int64 `json:"original_file_size"`
 	OriginalFileUrl string `json:"original_file_url"`
 	StoragePath string `json:"storage_path"`
 	Url string `json:"url"`
@@ -37,13 +39,14 @@ type _ResultFile ResultFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, storagePath string, url string) *ResultFile {
+func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, originalFileUrl string, storagePath string, url string) *ResultFile {
 	this := ResultFile{}
 	this.FileName = fileName
 	this.FileSize = fileSize
 	this.MimeType = mimeType
 	this.OriginalFileMimeType = originalFileMimeType
 	this.OriginalFileName = originalFileName
+	this.OriginalFileSize = originalFileSize
 	this.OriginalFileUrl = originalFileUrl
 	this.StoragePath = storagePath
 	this.Url = url
@@ -83,9 +86,9 @@ func (o *ResultFile) SetFileName(v string) {
 }
 
 // GetFileSize returns the FileSize field value
-func (o *ResultFile) GetFileSize() int32 {
+func (o *ResultFile) GetFileSize() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -94,7 +97,7 @@ func (o *ResultFile) GetFileSize() int32 {
 
 // GetFileSizeOk returns a tuple with the FileSize field value
 // and a boolean to check if the value has been set.
-func (o *ResultFile) GetFileSizeOk() (*int32, bool) {
+func (o *ResultFile) GetFileSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,8 +105,40 @@ func (o *ResultFile) GetFileSizeOk() (*int32, bool) {
 }
 
 // SetFileSize sets field value
-func (o *ResultFile) SetFileSize(v int32) {
+func (o *ResultFile) SetFileSize(v int64) {
 	o.FileSize = v
+}
+
+// GetMetaData returns the MetaData field value if set, zero value otherwise.
+func (o *ResultFile) GetMetaData() map[string]interface{} {
+	if o == nil || IsNil(o.MetaData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.MetaData
+}
+
+// GetMetaDataOk returns a tuple with the MetaData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetMetaDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MetaData) {
+		return map[string]interface{}{}, false
+	}
+	return o.MetaData, true
+}
+
+// HasMetaData returns a boolean if a field has been set.
+func (o *ResultFile) HasMetaData() bool {
+	if o != nil && !IsNil(o.MetaData) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetaData gets a reference to the given map[string]interface{} and assigns it to the MetaData field.
+func (o *ResultFile) SetMetaData(v map[string]interface{}) {
+	o.MetaData = v
 }
 
 // GetMimeType returns the MimeType field value
@@ -176,6 +211,30 @@ func (o *ResultFile) GetOriginalFileNameOk() (*string, bool) {
 // SetOriginalFileName sets field value
 func (o *ResultFile) SetOriginalFileName(v string) {
 	o.OriginalFileName = v
+}
+
+// GetOriginalFileSize returns the OriginalFileSize field value
+func (o *ResultFile) GetOriginalFileSize() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.OriginalFileSize
+}
+
+// GetOriginalFileSizeOk returns a tuple with the OriginalFileSize field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetOriginalFileSizeOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OriginalFileSize, true
+}
+
+// SetOriginalFileSize sets field value
+func (o *ResultFile) SetOriginalFileSize(v int64) {
+	o.OriginalFileSize = v
 }
 
 // GetOriginalFileUrl returns the OriginalFileUrl field value
@@ -262,9 +321,13 @@ func (o ResultFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
+	if !IsNil(o.MetaData) {
+		toSerialize["meta_data"] = o.MetaData
+	}
 	toSerialize["mime_type"] = o.MimeType
 	toSerialize["original_file_mime_type"] = o.OriginalFileMimeType
 	toSerialize["original_file_name"] = o.OriginalFileName
+	toSerialize["original_file_size"] = o.OriginalFileSize
 	toSerialize["original_file_url"] = o.OriginalFileUrl
 	toSerialize["storage_path"] = o.StoragePath
 	toSerialize["url"] = o.Url
@@ -286,6 +349,7 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		"mime_type",
 		"original_file_mime_type",
 		"original_file_name",
+		"original_file_size",
 		"original_file_url",
 		"storage_path",
 		"url",
@@ -320,9 +384,11 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "mime_type")
 		delete(additionalProperties, "original_file_mime_type")
 		delete(additionalProperties, "original_file_name")
+		delete(additionalProperties, "original_file_size")
 		delete(additionalProperties, "original_file_url")
 		delete(additionalProperties, "storage_path")
 		delete(additionalProperties, "url")

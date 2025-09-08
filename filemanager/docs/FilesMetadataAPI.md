@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetFileMetadata
 
-> MetadataFileMetadataResponse GetFileMetadata(ctx, storagePath).Execute()
+> FileMetadataResponse GetFileMetadata(ctx, storagePath).Execute()
 
 Get file metadata by path
 
@@ -39,7 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesMetadataAPI.GetFileMetadata``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFileMetadata`: MetadataFileMetadataResponse
+	// response from `GetFileMetadata`: FileMetadataResponse
 	fmt.Fprintf(os.Stdout, "Response from `FilesMetadataAPI.GetFileMetadata`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MetadataFileMetadataResponse**](MetadataFileMetadataResponse.md)
+[**FileMetadataResponse**](FileMetadataResponse.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetFileMetadataBatch
 
-> MetadataFileMetadataBatchResponse GetFileMetadataBatch(ctx).Batchrequest(batchrequest).Execute()
+> FileMetadataBatchResponse GetFileMetadataBatch(ctx).Batchrequest(batchrequest).Execute()
 
 Get metadata for multiple files
 
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-	batchrequest := *openapiclient.NewMetadataGetFileMetadataBatchRequest([]string{"StoragePaths_example"}) // MetadataGetFileMetadataBatchRequest | Batch request with file paths
+	batchrequest := *openapiclient.NewFileMetadataBatchGetRequest([]string{"StoragePaths_example"}) // FileMetadataBatchGetRequest | Batch request with file paths
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -109,7 +109,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesMetadataAPI.GetFileMetadataBatch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFileMetadataBatch`: MetadataFileMetadataBatchResponse
+	// response from `GetFileMetadataBatch`: FileMetadataBatchResponse
 	fmt.Fprintf(os.Stdout, "Response from `FilesMetadataAPI.GetFileMetadataBatch`: %v\n", resp)
 }
 ```
@@ -125,11 +125,11 @@ Other parameters are passed through a pointer to a apiGetFileMetadataBatchReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **batchrequest** | [**MetadataGetFileMetadataBatchRequest**](MetadataGetFileMetadataBatchRequest.md) | Batch request with file paths | 
+ **batchrequest** | [**FileMetadataBatchGetRequest**](FileMetadataBatchGetRequest.md) | Batch request with file paths | 
 
 ### Return type
 
-[**MetadataFileMetadataBatchResponse**](MetadataFileMetadataBatchResponse.md)
+[**FileMetadataBatchResponse**](FileMetadataBatchResponse.md)
 
 ### Authorization
 

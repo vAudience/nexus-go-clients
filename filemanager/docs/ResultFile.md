@@ -5,10 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FileName** | **string** |  | 
-**FileSize** | **int32** |  | 
+**FileSize** | **int64** |  | 
+**MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **MimeType** | **string** |  | 
 **OriginalFileMimeType** | **string** |  | 
 **OriginalFileName** | **string** |  | 
+**OriginalFileSize** | **int64** |  | 
 **OriginalFileUrl** | **string** |  | 
 **StoragePath** | **string** |  | 
 **Url** | **string** |  | 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewResultFile
 
-`func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, storagePath string, url string, ) *ResultFile`
+`func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, originalFileUrl string, storagePath string, url string, ) *ResultFile`
 
 NewResultFile instantiates a new ResultFile object
 This constructor will assign default values to properties that have it defined,
@@ -54,23 +56,48 @@ SetFileName sets FileName field to given value.
 
 ### GetFileSize
 
-`func (o *ResultFile) GetFileSize() int32`
+`func (o *ResultFile) GetFileSize() int64`
 
 GetFileSize returns the FileSize field if non-nil, zero value otherwise.
 
 ### GetFileSizeOk
 
-`func (o *ResultFile) GetFileSizeOk() (*int32, bool)`
+`func (o *ResultFile) GetFileSizeOk() (*int64, bool)`
 
 GetFileSizeOk returns a tuple with the FileSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileSize
 
-`func (o *ResultFile) SetFileSize(v int32)`
+`func (o *ResultFile) SetFileSize(v int64)`
 
 SetFileSize sets FileSize field to given value.
 
+
+### GetMetaData
+
+`func (o *ResultFile) GetMetaData() map[string]interface{}`
+
+GetMetaData returns the MetaData field if non-nil, zero value otherwise.
+
+### GetMetaDataOk
+
+`func (o *ResultFile) GetMetaDataOk() (*map[string]interface{}, bool)`
+
+GetMetaDataOk returns a tuple with the MetaData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetaData
+
+`func (o *ResultFile) SetMetaData(v map[string]interface{})`
+
+SetMetaData sets MetaData field to given value.
+
+### HasMetaData
+
+`func (o *ResultFile) HasMetaData() bool`
+
+HasMetaData returns a boolean if a field has been set.
 
 ### GetMimeType
 
@@ -130,6 +157,26 @@ and a boolean to check if the value has been set.
 `func (o *ResultFile) SetOriginalFileName(v string)`
 
 SetOriginalFileName sets OriginalFileName field to given value.
+
+
+### GetOriginalFileSize
+
+`func (o *ResultFile) GetOriginalFileSize() int64`
+
+GetOriginalFileSize returns the OriginalFileSize field if non-nil, zero value otherwise.
+
+### GetOriginalFileSizeOk
+
+`func (o *ResultFile) GetOriginalFileSizeOk() (*int64, bool)`
+
+GetOriginalFileSizeOk returns a tuple with the OriginalFileSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalFileSize
+
+`func (o *ResultFile) SetOriginalFileSize(v int64)`
+
+SetOriginalFileSize sets OriginalFileSize field to given value.
 
 
 ### GetOriginalFileUrl

@@ -1,11 +1,10 @@
-# MetadataFileMetadataResponse
+# FileMetadataResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | Pointer to **string** |  | [optional] 
-**DeletedAt** | Pointer to **string** |  | [optional] 
 **ExpiresAt** | Pointer to **string** |  | [optional] 
 **FileName** | Pointer to **string** |  | [optional] 
 **FileSize** | Pointer to **int32** |  | [optional] 
@@ -28,545 +27,520 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMetadataFileMetadataResponse
+### NewFileMetadataResponse
 
-`func NewMetadataFileMetadataResponse() *MetadataFileMetadataResponse`
+`func NewFileMetadataResponse() *FileMetadataResponse`
 
-NewMetadataFileMetadataResponse instantiates a new MetadataFileMetadataResponse object
+NewFileMetadataResponse instantiates a new FileMetadataResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMetadataFileMetadataResponseWithDefaults
+### NewFileMetadataResponseWithDefaults
 
-`func NewMetadataFileMetadataResponseWithDefaults() *MetadataFileMetadataResponse`
+`func NewFileMetadataResponseWithDefaults() *FileMetadataResponse`
 
-NewMetadataFileMetadataResponseWithDefaults instantiates a new MetadataFileMetadataResponse object
+NewFileMetadataResponseWithDefaults instantiates a new FileMetadataResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCreatedAt
 
-`func (o *MetadataFileMetadataResponse) GetCreatedAt() string`
+`func (o *FileMetadataResponse) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *MetadataFileMetadataResponse) GetCreatedAtOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *MetadataFileMetadataResponse) SetCreatedAt(v string)`
+`func (o *FileMetadataResponse) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 ### HasCreatedAt
 
-`func (o *MetadataFileMetadataResponse) HasCreatedAt() bool`
+`func (o *FileMetadataResponse) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
 
-### GetDeletedAt
-
-`func (o *MetadataFileMetadataResponse) GetDeletedAt() string`
-
-GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
-
-### GetDeletedAtOk
-
-`func (o *MetadataFileMetadataResponse) GetDeletedAtOk() (*string, bool)`
-
-GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeletedAt
-
-`func (o *MetadataFileMetadataResponse) SetDeletedAt(v string)`
-
-SetDeletedAt sets DeletedAt field to given value.
-
-### HasDeletedAt
-
-`func (o *MetadataFileMetadataResponse) HasDeletedAt() bool`
-
-HasDeletedAt returns a boolean if a field has been set.
-
 ### GetExpiresAt
 
-`func (o *MetadataFileMetadataResponse) GetExpiresAt() string`
+`func (o *FileMetadataResponse) GetExpiresAt() string`
 
 GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
 
 ### GetExpiresAtOk
 
-`func (o *MetadataFileMetadataResponse) GetExpiresAtOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetExpiresAtOk() (*string, bool)`
 
 GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiresAt
 
-`func (o *MetadataFileMetadataResponse) SetExpiresAt(v string)`
+`func (o *FileMetadataResponse) SetExpiresAt(v string)`
 
 SetExpiresAt sets ExpiresAt field to given value.
 
 ### HasExpiresAt
 
-`func (o *MetadataFileMetadataResponse) HasExpiresAt() bool`
+`func (o *FileMetadataResponse) HasExpiresAt() bool`
 
 HasExpiresAt returns a boolean if a field has been set.
 
 ### GetFileName
 
-`func (o *MetadataFileMetadataResponse) GetFileName() string`
+`func (o *FileMetadataResponse) GetFileName() string`
 
 GetFileName returns the FileName field if non-nil, zero value otherwise.
 
 ### GetFileNameOk
 
-`func (o *MetadataFileMetadataResponse) GetFileNameOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetFileNameOk() (*string, bool)`
 
 GetFileNameOk returns a tuple with the FileName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileName
 
-`func (o *MetadataFileMetadataResponse) SetFileName(v string)`
+`func (o *FileMetadataResponse) SetFileName(v string)`
 
 SetFileName sets FileName field to given value.
 
 ### HasFileName
 
-`func (o *MetadataFileMetadataResponse) HasFileName() bool`
+`func (o *FileMetadataResponse) HasFileName() bool`
 
 HasFileName returns a boolean if a field has been set.
 
 ### GetFileSize
 
-`func (o *MetadataFileMetadataResponse) GetFileSize() int32`
+`func (o *FileMetadataResponse) GetFileSize() int32`
 
 GetFileSize returns the FileSize field if non-nil, zero value otherwise.
 
 ### GetFileSizeOk
 
-`func (o *MetadataFileMetadataResponse) GetFileSizeOk() (*int32, bool)`
+`func (o *FileMetadataResponse) GetFileSizeOk() (*int32, bool)`
 
 GetFileSizeOk returns a tuple with the FileSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileSize
 
-`func (o *MetadataFileMetadataResponse) SetFileSize(v int32)`
+`func (o *FileMetadataResponse) SetFileSize(v int32)`
 
 SetFileSize sets FileSize field to given value.
 
 ### HasFileSize
 
-`func (o *MetadataFileMetadataResponse) HasFileSize() bool`
+`func (o *FileMetadataResponse) HasFileSize() bool`
 
 HasFileSize returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *MetadataFileMetadataResponse) GetId() string`
+`func (o *FileMetadataResponse) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *MetadataFileMetadataResponse) GetIdOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *MetadataFileMetadataResponse) SetId(v string)`
+`func (o *FileMetadataResponse) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *MetadataFileMetadataResponse) HasId() bool`
+`func (o *FileMetadataResponse) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *MetadataFileMetadataResponse) GetMetadata() map[string]map[string]interface{}`
+`func (o *FileMetadataResponse) GetMetadata() map[string]map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *MetadataFileMetadataResponse) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *FileMetadataResponse) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *MetadataFileMetadataResponse) SetMetadata(v map[string]map[string]interface{})`
+`func (o *FileMetadataResponse) SetMetadata(v map[string]map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *MetadataFileMetadataResponse) HasMetadata() bool`
+`func (o *FileMetadataResponse) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetMimeType
 
-`func (o *MetadataFileMetadataResponse) GetMimeType() string`
+`func (o *FileMetadataResponse) GetMimeType() string`
 
 GetMimeType returns the MimeType field if non-nil, zero value otherwise.
 
 ### GetMimeTypeOk
 
-`func (o *MetadataFileMetadataResponse) GetMimeTypeOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetMimeTypeOk() (*string, bool)`
 
 GetMimeTypeOk returns a tuple with the MimeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMimeType
 
-`func (o *MetadataFileMetadataResponse) SetMimeType(v string)`
+`func (o *FileMetadataResponse) SetMimeType(v string)`
 
 SetMimeType sets MimeType field to given value.
 
 ### HasMimeType
 
-`func (o *MetadataFileMetadataResponse) HasMimeType() bool`
+`func (o *FileMetadataResponse) HasMimeType() bool`
 
 HasMimeType returns a boolean if a field has been set.
 
 ### GetOrganizationId
 
-`func (o *MetadataFileMetadataResponse) GetOrganizationId() string`
+`func (o *FileMetadataResponse) GetOrganizationId() string`
 
 GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
 
 ### GetOrganizationIdOk
 
-`func (o *MetadataFileMetadataResponse) GetOrganizationIdOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetOrganizationIdOk() (*string, bool)`
 
 GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrganizationId
 
-`func (o *MetadataFileMetadataResponse) SetOrganizationId(v string)`
+`func (o *FileMetadataResponse) SetOrganizationId(v string)`
 
 SetOrganizationId sets OrganizationId field to given value.
 
 ### HasOrganizationId
 
-`func (o *MetadataFileMetadataResponse) HasOrganizationId() bool`
+`func (o *FileMetadataResponse) HasOrganizationId() bool`
 
 HasOrganizationId returns a boolean if a field has been set.
 
 ### GetOriginalFileName
 
-`func (o *MetadataFileMetadataResponse) GetOriginalFileName() string`
+`func (o *FileMetadataResponse) GetOriginalFileName() string`
 
 GetOriginalFileName returns the OriginalFileName field if non-nil, zero value otherwise.
 
 ### GetOriginalFileNameOk
 
-`func (o *MetadataFileMetadataResponse) GetOriginalFileNameOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetOriginalFileNameOk() (*string, bool)`
 
 GetOriginalFileNameOk returns a tuple with the OriginalFileName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalFileName
 
-`func (o *MetadataFileMetadataResponse) SetOriginalFileName(v string)`
+`func (o *FileMetadataResponse) SetOriginalFileName(v string)`
 
 SetOriginalFileName sets OriginalFileName field to given value.
 
 ### HasOriginalFileName
 
-`func (o *MetadataFileMetadataResponse) HasOriginalFileName() bool`
+`func (o *FileMetadataResponse) HasOriginalFileName() bool`
 
 HasOriginalFileName returns a boolean if a field has been set.
 
 ### GetOriginalFileSize
 
-`func (o *MetadataFileMetadataResponse) GetOriginalFileSize() int32`
+`func (o *FileMetadataResponse) GetOriginalFileSize() int32`
 
 GetOriginalFileSize returns the OriginalFileSize field if non-nil, zero value otherwise.
 
 ### GetOriginalFileSizeOk
 
-`func (o *MetadataFileMetadataResponse) GetOriginalFileSizeOk() (*int32, bool)`
+`func (o *FileMetadataResponse) GetOriginalFileSizeOk() (*int32, bool)`
 
 GetOriginalFileSizeOk returns a tuple with the OriginalFileSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalFileSize
 
-`func (o *MetadataFileMetadataResponse) SetOriginalFileSize(v int32)`
+`func (o *FileMetadataResponse) SetOriginalFileSize(v int32)`
 
 SetOriginalFileSize sets OriginalFileSize field to given value.
 
 ### HasOriginalFileSize
 
-`func (o *MetadataFileMetadataResponse) HasOriginalFileSize() bool`
+`func (o *FileMetadataResponse) HasOriginalFileSize() bool`
 
 HasOriginalFileSize returns a boolean if a field has been set.
 
 ### GetOriginalMimeType
 
-`func (o *MetadataFileMetadataResponse) GetOriginalMimeType() string`
+`func (o *FileMetadataResponse) GetOriginalMimeType() string`
 
 GetOriginalMimeType returns the OriginalMimeType field if non-nil, zero value otherwise.
 
 ### GetOriginalMimeTypeOk
 
-`func (o *MetadataFileMetadataResponse) GetOriginalMimeTypeOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetOriginalMimeTypeOk() (*string, bool)`
 
 GetOriginalMimeTypeOk returns a tuple with the OriginalMimeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalMimeType
 
-`func (o *MetadataFileMetadataResponse) SetOriginalMimeType(v string)`
+`func (o *FileMetadataResponse) SetOriginalMimeType(v string)`
 
 SetOriginalMimeType sets OriginalMimeType field to given value.
 
 ### HasOriginalMimeType
 
-`func (o *MetadataFileMetadataResponse) HasOriginalMimeType() bool`
+`func (o *FileMetadataResponse) HasOriginalMimeType() bool`
 
 HasOriginalMimeType returns a boolean if a field has been set.
 
 ### GetOriginalUrl
 
-`func (o *MetadataFileMetadataResponse) GetOriginalUrl() string`
+`func (o *FileMetadataResponse) GetOriginalUrl() string`
 
 GetOriginalUrl returns the OriginalUrl field if non-nil, zero value otherwise.
 
 ### GetOriginalUrlOk
 
-`func (o *MetadataFileMetadataResponse) GetOriginalUrlOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetOriginalUrlOk() (*string, bool)`
 
 GetOriginalUrlOk returns a tuple with the OriginalUrl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalUrl
 
-`func (o *MetadataFileMetadataResponse) SetOriginalUrl(v string)`
+`func (o *FileMetadataResponse) SetOriginalUrl(v string)`
 
 SetOriginalUrl sets OriginalUrl field to given value.
 
 ### HasOriginalUrl
 
-`func (o *MetadataFileMetadataResponse) HasOriginalUrl() bool`
+`func (o *FileMetadataResponse) HasOriginalUrl() bool`
 
 HasOriginalUrl returns a boolean if a field has been set.
 
 ### GetStorageCategory
 
-`func (o *MetadataFileMetadataResponse) GetStorageCategory() string`
+`func (o *FileMetadataResponse) GetStorageCategory() string`
 
 GetStorageCategory returns the StorageCategory field if non-nil, zero value otherwise.
 
 ### GetStorageCategoryOk
 
-`func (o *MetadataFileMetadataResponse) GetStorageCategoryOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetStorageCategoryOk() (*string, bool)`
 
 GetStorageCategoryOk returns a tuple with the StorageCategory field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageCategory
 
-`func (o *MetadataFileMetadataResponse) SetStorageCategory(v string)`
+`func (o *FileMetadataResponse) SetStorageCategory(v string)`
 
 SetStorageCategory sets StorageCategory field to given value.
 
 ### HasStorageCategory
 
-`func (o *MetadataFileMetadataResponse) HasStorageCategory() bool`
+`func (o *FileMetadataResponse) HasStorageCategory() bool`
 
 HasStorageCategory returns a boolean if a field has been set.
 
 ### GetStoragePath
 
-`func (o *MetadataFileMetadataResponse) GetStoragePath() string`
+`func (o *FileMetadataResponse) GetStoragePath() string`
 
 GetStoragePath returns the StoragePath field if non-nil, zero value otherwise.
 
 ### GetStoragePathOk
 
-`func (o *MetadataFileMetadataResponse) GetStoragePathOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetStoragePathOk() (*string, bool)`
 
 GetStoragePathOk returns a tuple with the StoragePath field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStoragePath
 
-`func (o *MetadataFileMetadataResponse) SetStoragePath(v string)`
+`func (o *FileMetadataResponse) SetStoragePath(v string)`
 
 SetStoragePath sets StoragePath field to given value.
 
 ### HasStoragePath
 
-`func (o *MetadataFileMetadataResponse) HasStoragePath() bool`
+`func (o *FileMetadataResponse) HasStoragePath() bool`
 
 HasStoragePath returns a boolean if a field has been set.
 
 ### GetTeamId
 
-`func (o *MetadataFileMetadataResponse) GetTeamId() string`
+`func (o *FileMetadataResponse) GetTeamId() string`
 
 GetTeamId returns the TeamId field if non-nil, zero value otherwise.
 
 ### GetTeamIdOk
 
-`func (o *MetadataFileMetadataResponse) GetTeamIdOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetTeamIdOk() (*string, bool)`
 
 GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTeamId
 
-`func (o *MetadataFileMetadataResponse) SetTeamId(v string)`
+`func (o *FileMetadataResponse) SetTeamId(v string)`
 
 SetTeamId sets TeamId field to given value.
 
 ### HasTeamId
 
-`func (o *MetadataFileMetadataResponse) HasTeamId() bool`
+`func (o *FileMetadataResponse) HasTeamId() bool`
 
 HasTeamId returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
-`func (o *MetadataFileMetadataResponse) GetUpdatedAt() string`
+`func (o *FileMetadataResponse) GetUpdatedAt() string`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *MetadataFileMetadataResponse) GetUpdatedAtOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetUpdatedAtOk() (*string, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *MetadataFileMetadataResponse) SetUpdatedAt(v string)`
+`func (o *FileMetadataResponse) SetUpdatedAt(v string)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
 ### HasUpdatedAt
 
-`func (o *MetadataFileMetadataResponse) HasUpdatedAt() bool`
+`func (o *FileMetadataResponse) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUploadCategory
 
-`func (o *MetadataFileMetadataResponse) GetUploadCategory() string`
+`func (o *FileMetadataResponse) GetUploadCategory() string`
 
 GetUploadCategory returns the UploadCategory field if non-nil, zero value otherwise.
 
 ### GetUploadCategoryOk
 
-`func (o *MetadataFileMetadataResponse) GetUploadCategoryOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetUploadCategoryOk() (*string, bool)`
 
 GetUploadCategoryOk returns a tuple with the UploadCategory field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUploadCategory
 
-`func (o *MetadataFileMetadataResponse) SetUploadCategory(v string)`
+`func (o *FileMetadataResponse) SetUploadCategory(v string)`
 
 SetUploadCategory sets UploadCategory field to given value.
 
 ### HasUploadCategory
 
-`func (o *MetadataFileMetadataResponse) HasUploadCategory() bool`
+`func (o *FileMetadataResponse) HasUploadCategory() bool`
 
 HasUploadCategory returns a boolean if a field has been set.
 
 ### GetUploadParams
 
-`func (o *MetadataFileMetadataResponse) GetUploadParams() map[string]map[string]interface{}`
+`func (o *FileMetadataResponse) GetUploadParams() map[string]map[string]interface{}`
 
 GetUploadParams returns the UploadParams field if non-nil, zero value otherwise.
 
 ### GetUploadParamsOk
 
-`func (o *MetadataFileMetadataResponse) GetUploadParamsOk() (*map[string]map[string]interface{}, bool)`
+`func (o *FileMetadataResponse) GetUploadParamsOk() (*map[string]map[string]interface{}, bool)`
 
 GetUploadParamsOk returns a tuple with the UploadParams field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUploadParams
 
-`func (o *MetadataFileMetadataResponse) SetUploadParams(v map[string]map[string]interface{})`
+`func (o *FileMetadataResponse) SetUploadParams(v map[string]map[string]interface{})`
 
 SetUploadParams sets UploadParams field to given value.
 
 ### HasUploadParams
 
-`func (o *MetadataFileMetadataResponse) HasUploadParams() bool`
+`func (o *FileMetadataResponse) HasUploadParams() bool`
 
 HasUploadParams returns a boolean if a field has been set.
 
 ### GetUrl
 
-`func (o *MetadataFileMetadataResponse) GetUrl() string`
+`func (o *FileMetadataResponse) GetUrl() string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *MetadataFileMetadataResponse) GetUrlOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetUrlOk() (*string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *MetadataFileMetadataResponse) SetUrl(v string)`
+`func (o *FileMetadataResponse) SetUrl(v string)`
 
 SetUrl sets Url field to given value.
 
 ### HasUrl
 
-`func (o *MetadataFileMetadataResponse) HasUrl() bool`
+`func (o *FileMetadataResponse) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
 
 ### GetUserId
 
-`func (o *MetadataFileMetadataResponse) GetUserId() string`
+`func (o *FileMetadataResponse) GetUserId() string`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *MetadataFileMetadataResponse) GetUserIdOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetUserIdOk() (*string, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *MetadataFileMetadataResponse) SetUserId(v string)`
+`func (o *FileMetadataResponse) SetUserId(v string)`
 
 SetUserId sets UserId field to given value.
 
 ### HasUserId
 
-`func (o *MetadataFileMetadataResponse) HasUserId() bool`
+`func (o *FileMetadataResponse) HasUserId() bool`
 
 HasUserId returns a boolean if a field has been set.
 

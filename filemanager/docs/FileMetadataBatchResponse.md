@@ -1,52 +1,52 @@
-# MetadataFileMetadataBatchResponse
+# FileMetadataBatchResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Files** | Pointer to [**[]MetadataFileMetadataResponse**](MetadataFileMetadataResponse.md) |  | [optional] 
+**Files** | Pointer to [**[]FileMetadataResponse**](FileMetadataResponse.md) |  | [optional] 
 
 ## Methods
 
-### NewMetadataFileMetadataBatchResponse
+### NewFileMetadataBatchResponse
 
-`func NewMetadataFileMetadataBatchResponse() *MetadataFileMetadataBatchResponse`
+`func NewFileMetadataBatchResponse() *FileMetadataBatchResponse`
 
-NewMetadataFileMetadataBatchResponse instantiates a new MetadataFileMetadataBatchResponse object
+NewFileMetadataBatchResponse instantiates a new FileMetadataBatchResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMetadataFileMetadataBatchResponseWithDefaults
+### NewFileMetadataBatchResponseWithDefaults
 
-`func NewMetadataFileMetadataBatchResponseWithDefaults() *MetadataFileMetadataBatchResponse`
+`func NewFileMetadataBatchResponseWithDefaults() *FileMetadataBatchResponse`
 
-NewMetadataFileMetadataBatchResponseWithDefaults instantiates a new MetadataFileMetadataBatchResponse object
+NewFileMetadataBatchResponseWithDefaults instantiates a new FileMetadataBatchResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFiles
 
-`func (o *MetadataFileMetadataBatchResponse) GetFiles() []MetadataFileMetadataResponse`
+`func (o *FileMetadataBatchResponse) GetFiles() []FileMetadataResponse`
 
 GetFiles returns the Files field if non-nil, zero value otherwise.
 
 ### GetFilesOk
 
-`func (o *MetadataFileMetadataBatchResponse) GetFilesOk() (*[]MetadataFileMetadataResponse, bool)`
+`func (o *FileMetadataBatchResponse) GetFilesOk() (*[]FileMetadataResponse, bool)`
 
 GetFilesOk returns a tuple with the Files field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFiles
 
-`func (o *MetadataFileMetadataBatchResponse) SetFiles(v []MetadataFileMetadataResponse)`
+`func (o *FileMetadataBatchResponse) SetFiles(v []FileMetadataResponse)`
 
 SetFiles sets Files field to given value.
 
 ### HasFiles
 
-`func (o *MetadataFileMetadataBatchResponse) HasFiles() bool`
+`func (o *FileMetadataBatchResponse) HasFiles() bool`
 
 HasFiles returns a boolean if a field has been set.
 

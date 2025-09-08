@@ -29,7 +29,7 @@ type ApiGetFileMetadataRequest struct {
 	storagePath string
 }
 
-func (r ApiGetFileMetadataRequest) Execute() (*MetadataFileMetadataResponse, *http.Response, error) {
+func (r ApiGetFileMetadataRequest) Execute() (*FileMetadataResponse, *http.Response, error) {
 	return r.ApiService.GetFileMetadataExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *FilesMetadataAPIService) GetFileMetadata(ctx context.Context, storagePa
 }
 
 // Execute executes the request
-//  @return MetadataFileMetadataResponse
-func (a *FilesMetadataAPIService) GetFileMetadataExecute(r ApiGetFileMetadataRequest) (*MetadataFileMetadataResponse, *http.Response, error) {
+//  @return FileMetadataResponse
+func (a *FilesMetadataAPIService) GetFileMetadataExecute(r ApiGetFileMetadataRequest) (*FileMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MetadataFileMetadataResponse
+		localVarReturnValue  *FileMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesMetadataAPIService.GetFileMetadata")
@@ -186,16 +186,16 @@ func (a *FilesMetadataAPIService) GetFileMetadataExecute(r ApiGetFileMetadataReq
 type ApiGetFileMetadataBatchRequest struct {
 	ctx context.Context
 	ApiService *FilesMetadataAPIService
-	batchrequest *MetadataGetFileMetadataBatchRequest
+	batchrequest *FileMetadataBatchGetRequest
 }
 
 // Batch request with file paths
-func (r ApiGetFileMetadataBatchRequest) Batchrequest(batchrequest MetadataGetFileMetadataBatchRequest) ApiGetFileMetadataBatchRequest {
+func (r ApiGetFileMetadataBatchRequest) Batchrequest(batchrequest FileMetadataBatchGetRequest) ApiGetFileMetadataBatchRequest {
 	r.batchrequest = &batchrequest
 	return r
 }
 
-func (r ApiGetFileMetadataBatchRequest) Execute() (*MetadataFileMetadataBatchResponse, *http.Response, error) {
+func (r ApiGetFileMetadataBatchRequest) Execute() (*FileMetadataBatchResponse, *http.Response, error) {
 	return r.ApiService.GetFileMetadataBatchExecute(r)
 }
 
@@ -215,13 +215,13 @@ func (a *FilesMetadataAPIService) GetFileMetadataBatch(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return MetadataFileMetadataBatchResponse
-func (a *FilesMetadataAPIService) GetFileMetadataBatchExecute(r ApiGetFileMetadataBatchRequest) (*MetadataFileMetadataBatchResponse, *http.Response, error) {
+//  @return FileMetadataBatchResponse
+func (a *FilesMetadataAPIService) GetFileMetadataBatchExecute(r ApiGetFileMetadataBatchRequest) (*FileMetadataBatchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MetadataFileMetadataBatchResponse
+		localVarReturnValue  *FileMetadataBatchResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesMetadataAPIService.GetFileMetadataBatch")
