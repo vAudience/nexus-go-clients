@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExecutionLogId** | **string** |  | 
 **Id** | **string** |  | 
 **ResultingFiles** | [**[]ResultFile**](ResultFile.md) |  | 
 
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewFileUploadResponse
 
-`func NewFileUploadResponse(executionLogId string, id string, resultingFiles []ResultFile, ) *FileUploadResponse`
+`func NewFileUploadResponse(id string, resultingFiles []ResultFile, ) *FileUploadResponse`
 
 NewFileUploadResponse instantiates a new FileUploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +25,6 @@ will change when the set of required properties is changed
 NewFileUploadResponseWithDefaults instantiates a new FileUploadResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetExecutionLogId
-
-`func (o *FileUploadResponse) GetExecutionLogId() string`
-
-GetExecutionLogId returns the ExecutionLogId field if non-nil, zero value otherwise.
-
-### GetExecutionLogIdOk
-
-`func (o *FileUploadResponse) GetExecutionLogIdOk() (*string, bool)`
-
-GetExecutionLogIdOk returns a tuple with the ExecutionLogId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutionLogId
-
-`func (o *FileUploadResponse) SetExecutionLogId(v string)`
-
-SetExecutionLogId sets ExecutionLogId field to given value.
-
 
 ### GetId
 

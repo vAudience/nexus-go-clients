@@ -580,7 +580,6 @@ components:
       type: object
     FileUploadResponse:
       example:
-        execution_log_id: execution_log_id
         resulting_files:
         - mime_type: mime_type
           original_file_url: original_file_url
@@ -604,8 +603,6 @@ components:
           url: url
         id: id
       properties:
-        execution_log_id:
-          type: string
         id:
           type: string
         resulting_files:
@@ -613,7 +610,6 @@ components:
             $ref: '#/components/schemas/ResultFile'
           type: array
       required:
-      - execution_log_id
       - id
       - resulting_files
       type: object

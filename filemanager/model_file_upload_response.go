@@ -20,7 +20,6 @@ var _ MappedNullable = &FileUploadResponse{}
 
 // FileUploadResponse struct for FileUploadResponse
 type FileUploadResponse struct {
-	ExecutionLogId string `json:"execution_log_id"`
 	Id string `json:"id"`
 	ResultingFiles []ResultFile `json:"resulting_files"`
 	AdditionalProperties map[string]interface{}
@@ -32,9 +31,8 @@ type _FileUploadResponse FileUploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileUploadResponse(executionLogId string, id string, resultingFiles []ResultFile) *FileUploadResponse {
+func NewFileUploadResponse(id string, resultingFiles []ResultFile) *FileUploadResponse {
 	this := FileUploadResponse{}
-	this.ExecutionLogId = executionLogId
 	this.Id = id
 	this.ResultingFiles = resultingFiles
 	return &this
@@ -46,30 +44,6 @@ func NewFileUploadResponse(executionLogId string, id string, resultingFiles []Re
 func NewFileUploadResponseWithDefaults() *FileUploadResponse {
 	this := FileUploadResponse{}
 	return &this
-}
-
-// GetExecutionLogId returns the ExecutionLogId field value
-func (o *FileUploadResponse) GetExecutionLogId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ExecutionLogId
-}
-
-// GetExecutionLogIdOk returns a tuple with the ExecutionLogId field value
-// and a boolean to check if the value has been set.
-func (o *FileUploadResponse) GetExecutionLogIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ExecutionLogId, true
-}
-
-// SetExecutionLogId sets field value
-func (o *FileUploadResponse) SetExecutionLogId(v string) {
-	o.ExecutionLogId = v
 }
 
 // GetId returns the Id field value
@@ -130,7 +104,6 @@ func (o FileUploadResponse) MarshalJSON() ([]byte, error) {
 
 func (o FileUploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["execution_log_id"] = o.ExecutionLogId
 	toSerialize["id"] = o.Id
 	toSerialize["resulting_files"] = o.ResultingFiles
 
@@ -146,7 +119,6 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"execution_log_id",
 		"id",
 		"resulting_files",
 	}
@@ -178,7 +150,6 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "execution_log_id")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "resulting_files")
 		o.AdditionalProperties = additionalProperties
