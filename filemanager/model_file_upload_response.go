@@ -20,7 +20,7 @@ var _ MappedNullable = &FileUploadResponse{}
 
 // FileUploadResponse struct for FileUploadResponse
 type FileUploadResponse struct {
-	ExecutionLogId *string `json:"execution_log_id,omitempty"`
+	ExecutionLogId string `json:"execution_log_id"`
 	Id string `json:"id"`
 	ResultingFiles []ResultFile `json:"resulting_files"`
 	AdditionalProperties map[string]interface{}
@@ -32,8 +32,9 @@ type _FileUploadResponse FileUploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileUploadResponse(id string, resultingFiles []ResultFile) *FileUploadResponse {
+func NewFileUploadResponse(executionLogId string, id string, resultingFiles []ResultFile) *FileUploadResponse {
 	this := FileUploadResponse{}
+	this.ExecutionLogId = executionLogId
 	this.Id = id
 	this.ResultingFiles = resultingFiles
 	return &this
@@ -47,36 +48,28 @@ func NewFileUploadResponseWithDefaults() *FileUploadResponse {
 	return &this
 }
 
-// GetExecutionLogId returns the ExecutionLogId field value if set, zero value otherwise.
+// GetExecutionLogId returns the ExecutionLogId field value
 func (o *FileUploadResponse) GetExecutionLogId() string {
-	if o == nil || IsNil(o.ExecutionLogId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExecutionLogId
+
+	return o.ExecutionLogId
 }
 
-// GetExecutionLogIdOk returns a tuple with the ExecutionLogId field value if set, nil otherwise
+// GetExecutionLogIdOk returns a tuple with the ExecutionLogId field value
 // and a boolean to check if the value has been set.
 func (o *FileUploadResponse) GetExecutionLogIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ExecutionLogId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExecutionLogId, true
+	return &o.ExecutionLogId, true
 }
 
-// HasExecutionLogId returns a boolean if a field has been set.
-func (o *FileUploadResponse) HasExecutionLogId() bool {
-	if o != nil && !IsNil(o.ExecutionLogId) {
-		return true
-	}
-
-	return false
-}
-
-// SetExecutionLogId gets a reference to the given string and assigns it to the ExecutionLogId field.
+// SetExecutionLogId sets field value
 func (o *FileUploadResponse) SetExecutionLogId(v string) {
-	o.ExecutionLogId = &v
+	o.ExecutionLogId = v
 }
 
 // GetId returns the Id field value
@@ -137,9 +130,7 @@ func (o FileUploadResponse) MarshalJSON() ([]byte, error) {
 
 func (o FileUploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExecutionLogId) {
-		toSerialize["execution_log_id"] = o.ExecutionLogId
-	}
+	toSerialize["execution_log_id"] = o.ExecutionLogId
 	toSerialize["id"] = o.Id
 	toSerialize["resulting_files"] = o.ResultingFiles
 
@@ -155,6 +146,7 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"execution_log_id",
 		"id",
 		"resulting_files",
 	}

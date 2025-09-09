@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **OriginalFileMimeType** | **string** |  | 
 **OriginalFileName** | **string** |  | 
 **OriginalFileSize** | **int64** |  | 
-**OriginalFileUrl** | **string** |  | 
+**OriginalFileUrl** | Pointer to **string** |  | [optional] 
 **StoragePath** | **string** |  | 
 **Url** | **string** |  | 
 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewResultFile
 
-`func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, originalFileUrl string, storagePath string, url string, ) *ResultFile`
+`func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, storagePath string, url string, ) *ResultFile`
 
 NewResultFile instantiates a new ResultFile object
 This constructor will assign default values to properties that have it defined,
@@ -198,6 +198,11 @@ and a boolean to check if the value has been set.
 
 SetOriginalFileUrl sets OriginalFileUrl field to given value.
 
+### HasOriginalFileUrl
+
+`func (o *ResultFile) HasOriginalFileUrl() bool`
+
+HasOriginalFileUrl returns a boolean if a field has been set.
 
 ### GetStoragePath
 

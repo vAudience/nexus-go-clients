@@ -29,20 +29,6 @@ type ApiGetFileUploadSettingsRequest struct {
 	ApiService *FilesAPIService
 	orgId string
 	category string
-	storeOriginalFile *bool
-	convertToMd *bool
-}
-
-// Store original file
-func (r ApiGetFileUploadSettingsRequest) StoreOriginalFile(storeOriginalFile bool) ApiGetFileUploadSettingsRequest {
-	r.storeOriginalFile = &storeOriginalFile
-	return r
-}
-
-// Convert uploaded file to markdown if applicable
-func (r ApiGetFileUploadSettingsRequest) ConvertToMd(convertToMd bool) ApiGetFileUploadSettingsRequest {
-	r.convertToMd = &convertToMd
-	return r
 }
 
 func (r ApiGetFileUploadSettingsRequest) Execute() (*FileUploadSettings, *http.Response, error) {
@@ -91,12 +77,6 @@ func (a *FilesAPIService) GetFileUploadSettingsExecute(r ApiGetFileUploadSetting
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.storeOriginalFile != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "store_original_file", r.storeOriginalFile, "", "")
-	}
-	if r.convertToMd != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "convert_to_md", r.convertToMd, "", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -394,26 +374,12 @@ type ApiUploadFileRequest struct {
 	orgId string
 	category string
 	file *os.File
-	storeOriginalFile *bool
-	convertToMd *bool
 	metadata *map[string]interface{}
 }
 
 // File to upload
 func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {
 	r.file = file
-	return r
-}
-
-// Store original file
-func (r ApiUploadFileRequest) StoreOriginalFile(storeOriginalFile bool) ApiUploadFileRequest {
-	r.storeOriginalFile = &storeOriginalFile
-	return r
-}
-
-// Convert uploaded file to markdown if applicable
-func (r ApiUploadFileRequest) ConvertToMd(convertToMd bool) ApiUploadFileRequest {
-	r.convertToMd = &convertToMd
 	return r
 }
 
@@ -472,12 +438,6 @@ func (a *FilesAPIService) UploadFileExecute(r ApiUploadFileRequest) (*FileUpload
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	if r.storeOriginalFile != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "store_original_file", r.storeOriginalFile, "", "")
-	}
-	if r.convertToMd != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "convert_to_md", r.convertToMd, "", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 

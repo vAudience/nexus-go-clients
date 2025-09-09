@@ -12,6 +12,7 @@ package filemanager
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FileMetadataBatchResponse type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ MappedNullable = &FileMetadataBatchResponse{}
 
 // FileMetadataBatchResponse struct for FileMetadataBatchResponse
 type FileMetadataBatchResponse struct {
-	Files []FileMetadataResponse `json:"files,omitempty"`
+	Files []FileMetadataResponse `json:"files"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -29,8 +30,9 @@ type _FileMetadataBatchResponse FileMetadataBatchResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileMetadataBatchResponse() *FileMetadataBatchResponse {
+func NewFileMetadataBatchResponse(files []FileMetadataResponse) *FileMetadataBatchResponse {
 	this := FileMetadataBatchResponse{}
+	this.Files = files
 	return &this
 }
 
@@ -42,34 +44,26 @@ func NewFileMetadataBatchResponseWithDefaults() *FileMetadataBatchResponse {
 	return &this
 }
 
-// GetFiles returns the Files field value if set, zero value otherwise.
+// GetFiles returns the Files field value
 func (o *FileMetadataBatchResponse) GetFiles() []FileMetadataResponse {
-	if o == nil || IsNil(o.Files) {
+	if o == nil {
 		var ret []FileMetadataResponse
 		return ret
 	}
+
 	return o.Files
 }
 
-// GetFilesOk returns a tuple with the Files field value if set, nil otherwise
+// GetFilesOk returns a tuple with the Files field value
 // and a boolean to check if the value has been set.
 func (o *FileMetadataBatchResponse) GetFilesOk() ([]FileMetadataResponse, bool) {
-	if o == nil || IsNil(o.Files) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Files, true
 }
 
-// HasFiles returns a boolean if a field has been set.
-func (o *FileMetadataBatchResponse) HasFiles() bool {
-	if o != nil && !IsNil(o.Files) {
-		return true
-	}
-
-	return false
-}
-
-// SetFiles gets a reference to the given []FileMetadataResponse and assigns it to the Files field.
+// SetFiles sets field value
 func (o *FileMetadataBatchResponse) SetFiles(v []FileMetadataResponse) {
 	o.Files = v
 }
@@ -84,9 +78,7 @@ func (o FileMetadataBatchResponse) MarshalJSON() ([]byte, error) {
 
 func (o FileMetadataBatchResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Files) {
-		toSerialize["files"] = o.Files
-	}
+	toSerialize["files"] = o.Files
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -96,6 +88,27 @@ func (o FileMetadataBatchResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FileMetadataBatchResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"files",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varFileMetadataBatchResponse := _FileMetadataBatchResponse{}
 
 	err = json.Unmarshal(data, &varFileMetadataBatchResponse)

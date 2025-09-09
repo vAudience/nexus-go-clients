@@ -27,7 +27,7 @@ type ResultFile struct {
 	OriginalFileMimeType string `json:"original_file_mime_type"`
 	OriginalFileName string `json:"original_file_name"`
 	OriginalFileSize int64 `json:"original_file_size"`
-	OriginalFileUrl string `json:"original_file_url"`
+	OriginalFileUrl *string `json:"original_file_url,omitempty"`
 	StoragePath string `json:"storage_path"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
@@ -39,7 +39,7 @@ type _ResultFile ResultFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, originalFileUrl string, storagePath string, url string) *ResultFile {
+func NewResultFile(fileName string, fileSize int64, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, storagePath string, url string) *ResultFile {
 	this := ResultFile{}
 	this.FileName = fileName
 	this.FileSize = fileSize
@@ -47,7 +47,6 @@ func NewResultFile(fileName string, fileSize int64, mimeType string, originalFil
 	this.OriginalFileMimeType = originalFileMimeType
 	this.OriginalFileName = originalFileName
 	this.OriginalFileSize = originalFileSize
-	this.OriginalFileUrl = originalFileUrl
 	this.StoragePath = storagePath
 	this.Url = url
 	return &this
@@ -237,28 +236,36 @@ func (o *ResultFile) SetOriginalFileSize(v int64) {
 	o.OriginalFileSize = v
 }
 
-// GetOriginalFileUrl returns the OriginalFileUrl field value
+// GetOriginalFileUrl returns the OriginalFileUrl field value if set, zero value otherwise.
 func (o *ResultFile) GetOriginalFileUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.OriginalFileUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.OriginalFileUrl
+	return *o.OriginalFileUrl
 }
 
-// GetOriginalFileUrlOk returns a tuple with the OriginalFileUrl field value
+// GetOriginalFileUrlOk returns a tuple with the OriginalFileUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResultFile) GetOriginalFileUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OriginalFileUrl) {
 		return nil, false
 	}
-	return &o.OriginalFileUrl, true
+	return o.OriginalFileUrl, true
 }
 
-// SetOriginalFileUrl sets field value
+// HasOriginalFileUrl returns a boolean if a field has been set.
+func (o *ResultFile) HasOriginalFileUrl() bool {
+	if o != nil && !IsNil(o.OriginalFileUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalFileUrl gets a reference to the given string and assigns it to the OriginalFileUrl field.
 func (o *ResultFile) SetOriginalFileUrl(v string) {
-	o.OriginalFileUrl = v
+	o.OriginalFileUrl = &v
 }
 
 // GetStoragePath returns the StoragePath field value
@@ -328,7 +335,9 @@ func (o ResultFile) ToMap() (map[string]interface{}, error) {
 	toSerialize["original_file_mime_type"] = o.OriginalFileMimeType
 	toSerialize["original_file_name"] = o.OriginalFileName
 	toSerialize["original_file_size"] = o.OriginalFileSize
-	toSerialize["original_file_url"] = o.OriginalFileUrl
+	if !IsNil(o.OriginalFileUrl) {
+		toSerialize["original_file_url"] = o.OriginalFileUrl
+	}
 	toSerialize["storage_path"] = o.StoragePath
 	toSerialize["url"] = o.Url
 
@@ -350,7 +359,6 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 		"original_file_mime_type",
 		"original_file_name",
 		"original_file_size",
-		"original_file_url",
 		"storage_path",
 		"url",
 	}

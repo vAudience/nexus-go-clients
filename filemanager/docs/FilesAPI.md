@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## GetFileUploadSettings
 
-> FileUploadSettings GetFileUploadSettings(ctx, orgId, category).StoreOriginalFile(storeOriginalFile).ConvertToMd(convertToMd).Execute()
+> FileUploadSettings GetFileUploadSettings(ctx, orgId, category).Execute()
 
 Get file upload settings for a category
 
@@ -33,12 +33,10 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	category := "category_example" // string | category ID
-	storeOriginalFile := true // bool | Store original file (optional)
-	convertToMd := true // bool | Convert uploaded file to markdown if applicable (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.GetFileUploadSettings(context.Background(), orgId, category).StoreOriginalFile(storeOriginalFile).ConvertToMd(convertToMd).Execute()
+	resp, r, err := apiClient.FilesAPI.GetFileUploadSettings(context.Background(), orgId, category).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.GetFileUploadSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,8 +64,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **storeOriginalFile** | **bool** | Store original file | 
- **convertToMd** | **bool** | Convert uploaded file to markdown if applicable | 
 
 ### Return type
 
@@ -163,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## UploadFile
 
-> FileUploadResponse UploadFile(ctx, orgId, category).File(file).StoreOriginalFile(storeOriginalFile).ConvertToMd(convertToMd).Metadata(metadata).Execute()
+> FileUploadResponse UploadFile(ctx, orgId, category).File(file).Metadata(metadata).Execute()
 
 Create a file for a channel
 
@@ -185,13 +181,11 @@ func main() {
 	orgId := "orgId_example" // string | organization ID
 	category := "category_example" // string | category ID
 	file := os.NewFile(1234, "some_file") // *os.File | File to upload
-	storeOriginalFile := true // bool | Store original file (optional)
-	convertToMd := true // bool | Convert uploaded file to markdown if applicable (optional)
 	metadata := map[string]interface{}{ ... } // map[string]interface{} | Metadata for the uploaded file (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.UploadFile(context.Background(), orgId, category).File(file).StoreOriginalFile(storeOriginalFile).ConvertToMd(convertToMd).Metadata(metadata).Execute()
+	resp, r, err := apiClient.FilesAPI.UploadFile(context.Background(), orgId, category).File(file).Metadata(metadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.UploadFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -220,8 +214,6 @@ Name | Type | Description  | Notes
 
 
  **file** | ***os.File** | File to upload | 
- **storeOriginalFile** | **bool** | Store original file | 
- **convertToMd** | **bool** | Convert uploaded file to markdown if applicable | 
  **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Metadata for the uploaded file | 
 
 ### Return type

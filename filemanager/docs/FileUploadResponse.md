@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExecutionLogId** | Pointer to **string** |  | [optional] 
+**ExecutionLogId** | **string** |  | 
 **Id** | **string** |  | 
 **ResultingFiles** | [**[]ResultFile**](ResultFile.md) |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewFileUploadResponse
 
-`func NewFileUploadResponse(id string, resultingFiles []ResultFile, ) *FileUploadResponse`
+`func NewFileUploadResponse(executionLogId string, id string, resultingFiles []ResultFile, ) *FileUploadResponse`
 
 NewFileUploadResponse instantiates a new FileUploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetExecutionLogId sets ExecutionLogId field to given value.
 
-### HasExecutionLogId
-
-`func (o *FileUploadResponse) HasExecutionLogId() bool`
-
-HasExecutionLogId returns a boolean if a field has been set.
 
 ### GetId
 

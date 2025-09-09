@@ -4,32 +4,32 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **string** |  | [optional] 
+**CreatedAt** | **string** |  | 
 **ExpiresAt** | Pointer to **string** |  | [optional] 
-**FileName** | Pointer to **string** |  | [optional] 
-**FileSize** | Pointer to **int32** |  | [optional] 
-**Id** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**MimeType** | Pointer to **string** |  | [optional] 
+**FileName** | **string** |  | 
+**FileSize** | **int64** |  | 
+**Id** | **string** |  | 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**MimeType** | **string** |  | 
 **OrganizationId** | Pointer to **string** |  | [optional] 
-**OriginalFileName** | Pointer to **string** |  | [optional] 
-**OriginalFileSize** | Pointer to **int32** |  | [optional] 
-**OriginalMimeType** | Pointer to **string** |  | [optional] 
+**OriginalFileName** | **string** |  | 
+**OriginalFileSize** | **int64** |  | 
+**OriginalMimeType** | **string** |  | 
 **OriginalUrl** | Pointer to **string** |  | [optional] 
-**StorageCategory** | Pointer to **string** | temp, public, privateOrg, privateUser, privateTeam | [optional] 
-**StoragePath** | Pointer to **string** |  | [optional] 
+**StorageCategory** | **string** | temp, public, privateOrg, privateUser, privateTeam | 
+**StoragePath** | **string** |  | 
 **TeamId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **string** |  | [optional] 
-**UploadCategory** | Pointer to **string** | temp, image | [optional] 
-**UploadParams** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
+**UpdatedAt** | **string** |  | 
+**UploadCategory** | **string** | temp, image | 
+**UploadParams** | Pointer to **map[string]interface{}** |  | [optional] 
+**Url** | **string** |  | 
 **UserId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewFileMetadataResponse
 
-`func NewFileMetadataResponse() *FileMetadataResponse`
+`func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storageCategory string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
 
 NewFileMetadataResponse instantiates a new FileMetadataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -63,11 +63,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *FileMetadataResponse) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
@@ -113,36 +108,26 @@ and a boolean to check if the value has been set.
 
 SetFileName sets FileName field to given value.
 
-### HasFileName
-
-`func (o *FileMetadataResponse) HasFileName() bool`
-
-HasFileName returns a boolean if a field has been set.
 
 ### GetFileSize
 
-`func (o *FileMetadataResponse) GetFileSize() int32`
+`func (o *FileMetadataResponse) GetFileSize() int64`
 
 GetFileSize returns the FileSize field if non-nil, zero value otherwise.
 
 ### GetFileSizeOk
 
-`func (o *FileMetadataResponse) GetFileSizeOk() (*int32, bool)`
+`func (o *FileMetadataResponse) GetFileSizeOk() (*int64, bool)`
 
 GetFileSizeOk returns a tuple with the FileSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFileSize
 
-`func (o *FileMetadataResponse) SetFileSize(v int32)`
+`func (o *FileMetadataResponse) SetFileSize(v int64)`
 
 SetFileSize sets FileSize field to given value.
 
-### HasFileSize
-
-`func (o *FileMetadataResponse) HasFileSize() bool`
-
-HasFileSize returns a boolean if a field has been set.
 
 ### GetId
 
@@ -163,28 +148,23 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *FileMetadataResponse) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *FileMetadataResponse) GetMetadata() map[string]map[string]interface{}`
+`func (o *FileMetadataResponse) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *FileMetadataResponse) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *FileMetadataResponse) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *FileMetadataResponse) SetMetadata(v map[string]map[string]interface{})`
+`func (o *FileMetadataResponse) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 
@@ -213,11 +193,6 @@ and a boolean to check if the value has been set.
 
 SetMimeType sets MimeType field to given value.
 
-### HasMimeType
-
-`func (o *FileMetadataResponse) HasMimeType() bool`
-
-HasMimeType returns a boolean if a field has been set.
 
 ### GetOrganizationId
 
@@ -263,36 +238,26 @@ and a boolean to check if the value has been set.
 
 SetOriginalFileName sets OriginalFileName field to given value.
 
-### HasOriginalFileName
-
-`func (o *FileMetadataResponse) HasOriginalFileName() bool`
-
-HasOriginalFileName returns a boolean if a field has been set.
 
 ### GetOriginalFileSize
 
-`func (o *FileMetadataResponse) GetOriginalFileSize() int32`
+`func (o *FileMetadataResponse) GetOriginalFileSize() int64`
 
 GetOriginalFileSize returns the OriginalFileSize field if non-nil, zero value otherwise.
 
 ### GetOriginalFileSizeOk
 
-`func (o *FileMetadataResponse) GetOriginalFileSizeOk() (*int32, bool)`
+`func (o *FileMetadataResponse) GetOriginalFileSizeOk() (*int64, bool)`
 
 GetOriginalFileSizeOk returns a tuple with the OriginalFileSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginalFileSize
 
-`func (o *FileMetadataResponse) SetOriginalFileSize(v int32)`
+`func (o *FileMetadataResponse) SetOriginalFileSize(v int64)`
 
 SetOriginalFileSize sets OriginalFileSize field to given value.
 
-### HasOriginalFileSize
-
-`func (o *FileMetadataResponse) HasOriginalFileSize() bool`
-
-HasOriginalFileSize returns a boolean if a field has been set.
 
 ### GetOriginalMimeType
 
@@ -313,11 +278,6 @@ and a boolean to check if the value has been set.
 
 SetOriginalMimeType sets OriginalMimeType field to given value.
 
-### HasOriginalMimeType
-
-`func (o *FileMetadataResponse) HasOriginalMimeType() bool`
-
-HasOriginalMimeType returns a boolean if a field has been set.
 
 ### GetOriginalUrl
 
@@ -363,11 +323,6 @@ and a boolean to check if the value has been set.
 
 SetStorageCategory sets StorageCategory field to given value.
 
-### HasStorageCategory
-
-`func (o *FileMetadataResponse) HasStorageCategory() bool`
-
-HasStorageCategory returns a boolean if a field has been set.
 
 ### GetStoragePath
 
@@ -388,11 +343,6 @@ and a boolean to check if the value has been set.
 
 SetStoragePath sets StoragePath field to given value.
 
-### HasStoragePath
-
-`func (o *FileMetadataResponse) HasStoragePath() bool`
-
-HasStoragePath returns a boolean if a field has been set.
 
 ### GetTeamId
 
@@ -438,11 +388,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *FileMetadataResponse) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUploadCategory
 
@@ -463,28 +408,23 @@ and a boolean to check if the value has been set.
 
 SetUploadCategory sets UploadCategory field to given value.
 
-### HasUploadCategory
-
-`func (o *FileMetadataResponse) HasUploadCategory() bool`
-
-HasUploadCategory returns a boolean if a field has been set.
 
 ### GetUploadParams
 
-`func (o *FileMetadataResponse) GetUploadParams() map[string]map[string]interface{}`
+`func (o *FileMetadataResponse) GetUploadParams() map[string]interface{}`
 
 GetUploadParams returns the UploadParams field if non-nil, zero value otherwise.
 
 ### GetUploadParamsOk
 
-`func (o *FileMetadataResponse) GetUploadParamsOk() (*map[string]map[string]interface{}, bool)`
+`func (o *FileMetadataResponse) GetUploadParamsOk() (*map[string]interface{}, bool)`
 
 GetUploadParamsOk returns a tuple with the UploadParams field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUploadParams
 
-`func (o *FileMetadataResponse) SetUploadParams(v map[string]map[string]interface{})`
+`func (o *FileMetadataResponse) SetUploadParams(v map[string]interface{})`
 
 SetUploadParams sets UploadParams field to given value.
 
@@ -513,11 +453,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *FileMetadataResponse) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
 
 ### GetUserId
 
