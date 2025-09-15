@@ -78,6 +78,7 @@ All URIs are relative to *https://file-manager.dev.ai.vaud.one*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*FilesAPI* | [**DeleteFile**](docs/FilesAPI.md#deletefile) | **Delete** /v1/files/{storage_path} | Delete a file
 *FilesAPI* | [**GetFileUploadSettings**](docs/FilesAPI.md#getfileuploadsettings) | **Get** /v1/organizations/{org_id}/files/{category}/settings | Get file upload settings for a category
 *FilesAPI* | [**ServeFile**](docs/FilesAPI.md#servefile) | **Get** /v1/files/{storage_path} | Serve a file
 *FilesAPI* | [**UploadFile**](docs/FilesAPI.md#uploadfile) | **Post** /v1/organizations/{org_id}/files/{category} | Create a file for a channel
@@ -98,7 +99,6 @@ Class | Method | HTTP request | Description
  - [FileUploadResponse](docs/FileUploadResponse.md)
  - [FileUploadSettings](docs/FileUploadSettings.md)
  - [HealthResponse](docs/HealthResponse.md)
- - [ResultFile](docs/ResultFile.md)
  - [VersionResponse](docs/VersionResponse.md)
 
 

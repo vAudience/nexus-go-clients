@@ -2,7 +2,7 @@
 rm -rf filemanager
 openapi-generator generate \
   -o filemanager \
-  -i https://file-manager.dev.ai.vaud.one/info/docs/doc.json \
+  -i /Users/frederik/projects/vaud-ai-file-manager/docs/swagger.json \
   -g go \
   --additional-properties packageName=filemanager  \
   --additional-properties disallowAdditionalPropertiesIfNotPresent=false \

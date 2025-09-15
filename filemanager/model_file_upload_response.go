@@ -20,8 +20,8 @@ var _ MappedNullable = &FileUploadResponse{}
 
 // FileUploadResponse struct for FileUploadResponse
 type FileUploadResponse struct {
+	Files []FileMetadataResponse `json:"files"`
 	Id string `json:"id"`
-	ResultingFiles []ResultFile `json:"resulting_files"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +31,10 @@ type _FileUploadResponse FileUploadResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileUploadResponse(id string, resultingFiles []ResultFile) *FileUploadResponse {
+func NewFileUploadResponse(files []FileMetadataResponse, id string) *FileUploadResponse {
 	this := FileUploadResponse{}
+	this.Files = files
 	this.Id = id
-	this.ResultingFiles = resultingFiles
 	return &this
 }
 
@@ -44,6 +44,30 @@ func NewFileUploadResponse(id string, resultingFiles []ResultFile) *FileUploadRe
 func NewFileUploadResponseWithDefaults() *FileUploadResponse {
 	this := FileUploadResponse{}
 	return &this
+}
+
+// GetFiles returns the Files field value
+func (o *FileUploadResponse) GetFiles() []FileMetadataResponse {
+	if o == nil {
+		var ret []FileMetadataResponse
+		return ret
+	}
+
+	return o.Files
+}
+
+// GetFilesOk returns a tuple with the Files field value
+// and a boolean to check if the value has been set.
+func (o *FileUploadResponse) GetFilesOk() ([]FileMetadataResponse, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Files, true
+}
+
+// SetFiles sets field value
+func (o *FileUploadResponse) SetFiles(v []FileMetadataResponse) {
+	o.Files = v
 }
 
 // GetId returns the Id field value
@@ -70,30 +94,6 @@ func (o *FileUploadResponse) SetId(v string) {
 	o.Id = v
 }
 
-// GetResultingFiles returns the ResultingFiles field value
-func (o *FileUploadResponse) GetResultingFiles() []ResultFile {
-	if o == nil {
-		var ret []ResultFile
-		return ret
-	}
-
-	return o.ResultingFiles
-}
-
-// GetResultingFilesOk returns a tuple with the ResultingFiles field value
-// and a boolean to check if the value has been set.
-func (o *FileUploadResponse) GetResultingFilesOk() ([]ResultFile, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ResultingFiles, true
-}
-
-// SetResultingFiles sets field value
-func (o *FileUploadResponse) SetResultingFiles(v []ResultFile) {
-	o.ResultingFiles = v
-}
-
 func (o FileUploadResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -104,8 +104,8 @@ func (o FileUploadResponse) MarshalJSON() ([]byte, error) {
 
 func (o FileUploadResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["files"] = o.Files
 	toSerialize["id"] = o.Id
-	toSerialize["resulting_files"] = o.ResultingFiles
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -119,8 +119,8 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"files",
 		"id",
-		"resulting_files",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -150,8 +150,8 @@ func (o *FileUploadResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "files")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "resulting_files")
 		o.AdditionalProperties = additionalProperties
 	}
 

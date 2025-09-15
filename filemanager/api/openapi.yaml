@@ -63,6 +63,52 @@ paths:
       tags:
       - Version
   /v1/files/{storage_path}:
+    delete:
+      description: Delete a file
+      operationId: DeleteFile
+      parameters:
+      - description: Storage path
+        in: path
+        name: storage_path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Delete a file
+      tags:
+      - Files
     get:
       description: Serve a file
       operationId: ServeFile
@@ -213,12 +259,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden
       security:
       - ApiKey: []
       summary: Get metadata for multiple files
@@ -449,13 +489,12 @@ components:
         - upload_category: upload_category
           metadata: "{}"
           file_name: file_name
-          upload_params: "{}"
           created_at: created_at
-          storage_category: storage_category
           original_file_size: 6
           team_id: team_id
           file_size: 0
           url: url
+          file_storage_type: temp
           expires_at: expires_at
           updated_at: updated_at
           mime_type: mime_type
@@ -469,13 +508,12 @@ components:
         - upload_category: upload_category
           metadata: "{}"
           file_name: file_name
-          upload_params: "{}"
           created_at: created_at
-          storage_category: storage_category
           original_file_size: 6
           team_id: team_id
           file_size: 0
           url: url
+          file_storage_type: temp
           expires_at: expires_at
           updated_at: updated_at
           mime_type: mime_type
@@ -499,13 +537,12 @@ components:
         upload_category: upload_category
         metadata: "{}"
         file_name: file_name
-        upload_params: "{}"
         created_at: created_at
-        storage_category: storage_category
         original_file_size: 6
         team_id: team_id
         file_size: 0
         url: url
+        file_storage_type: temp
         expires_at: expires_at
         updated_at: updated_at
         mime_type: mime_type
@@ -526,6 +563,14 @@ components:
         file_size:
           format: int64
           type: integer
+        file_storage_type:
+          enum:
+          - temp
+          - public
+          - private-org
+          - private-org-user
+          - private-team
+          type: string
         id:
           type: string
         metadata:
@@ -544,9 +589,6 @@ components:
           type: string
         original_url:
           type: string
-        storage_category:
-          description: "temp, public, privateOrg, privateUser, privateTeam"
-          type: string
         storage_path:
           type: string
         team_id:
@@ -554,11 +596,7 @@ components:
         updated_at:
           type: string
         upload_category:
-          description: "temp, image"
           type: string
-        upload_params:
-          properties: {}
-          type: object
         url:
           type: string
         user_id:
@@ -567,12 +605,12 @@ components:
       - created_at
       - file_name
       - file_size
+      - file_storage_type
       - id
       - mime_type
       - original_file_name
       - original_file_size
       - original_mime_type
-      - storage_category
       - storage_path
       - updated_at
       - upload_category
@@ -580,38 +618,56 @@ components:
       type: object
     FileUploadResponse:
       example:
-        resulting_files:
-        - mime_type: mime_type
-          original_file_url: original_file_url
-          storage_path: storage_path
+        files:
+        - upload_category: upload_category
+          metadata: "{}"
           file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          meta_data: "{}"
-          original_file_name: original_file_name
+          created_at: created_at
           original_file_size: 6
+          team_id: team_id
           file_size: 0
           url: url
-        - mime_type: mime_type
-          original_file_url: original_file_url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
           storage_path: storage_path
-          file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          meta_data: "{}"
+          user_id: user_id
+          organization_id: organization_id
           original_file_name: original_file_name
+          id: id
+        - upload_category: upload_category
+          metadata: "{}"
+          file_name: file_name
+          created_at: created_at
           original_file_size: 6
+          team_id: team_id
           file_size: 0
           url: url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
+          storage_path: storage_path
+          user_id: user_id
+          organization_id: organization_id
+          original_file_name: original_file_name
+          id: id
         id: id
       properties:
+        files:
+          items:
+            $ref: "#/components/schemas/FileMetadataResponse"
+          type: array
         id:
           type: string
-        resulting_files:
-          items:
-            $ref: "#/components/schemas/ResultFile"
-          type: array
       required:
+      - files
       - id
-      - resulting_files
       type: object
     FileUploadSettings:
       example:
@@ -640,52 +696,6 @@ components:
           type: string
       required:
       - health
-      type: object
-    ResultFile:
-      example:
-        mime_type: mime_type
-        original_file_url: original_file_url
-        storage_path: storage_path
-        file_name: file_name
-        original_file_mime_type: original_file_mime_type
-        meta_data: "{}"
-        original_file_name: original_file_name
-        original_file_size: 6
-        file_size: 0
-        url: url
-      properties:
-        file_name:
-          type: string
-        file_size:
-          format: int64
-          type: integer
-        meta_data:
-          properties: {}
-          type: object
-        mime_type:
-          type: string
-        original_file_mime_type:
-          type: string
-        original_file_name:
-          type: string
-        original_file_size:
-          format: int64
-          type: integer
-        original_file_url:
-          type: string
-        storage_path:
-          type: string
-        url:
-          type: string
-      required:
-      - file_name
-      - file_size
-      - mime_type
-      - original_file_mime_type
-      - original_file_name
-      - original_file_size
-      - storage_path
-      - url
       type: object
     VersionResponse:
       example:

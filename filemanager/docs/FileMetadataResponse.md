@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | Pointer to **string** |  | [optional] 
 **FileName** | **string** |  | 
 **FileSize** | **int64** |  | 
+**FileStorageType** | **string** |  | 
 **Id** | **string** |  | 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **MimeType** | **string** |  | 
@@ -16,12 +17,10 @@ Name | Type | Description | Notes
 **OriginalFileSize** | **int64** |  | 
 **OriginalMimeType** | **string** |  | 
 **OriginalUrl** | Pointer to **string** |  | [optional] 
-**StorageCategory** | **string** | temp, public, privateOrg, privateUser, privateTeam | 
 **StoragePath** | **string** |  | 
 **TeamId** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | **string** |  | 
-**UploadCategory** | **string** | temp, image | 
-**UploadParams** | Pointer to **map[string]interface{}** |  | [optional] 
+**UploadCategory** | **string** |  | 
 **Url** | **string** |  | 
 **UserId** | Pointer to **string** |  | [optional] 
 
@@ -29,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewFileMetadataResponse
 
-`func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storageCategory string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
+`func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
 
 NewFileMetadataResponse instantiates a new FileMetadataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +126,26 @@ and a boolean to check if the value has been set.
 `func (o *FileMetadataResponse) SetFileSize(v int64)`
 
 SetFileSize sets FileSize field to given value.
+
+
+### GetFileStorageType
+
+`func (o *FileMetadataResponse) GetFileStorageType() string`
+
+GetFileStorageType returns the FileStorageType field if non-nil, zero value otherwise.
+
+### GetFileStorageTypeOk
+
+`func (o *FileMetadataResponse) GetFileStorageTypeOk() (*string, bool)`
+
+GetFileStorageTypeOk returns a tuple with the FileStorageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileStorageType
+
+`func (o *FileMetadataResponse) SetFileStorageType(v string)`
+
+SetFileStorageType sets FileStorageType field to given value.
 
 
 ### GetId
@@ -304,26 +323,6 @@ SetOriginalUrl sets OriginalUrl field to given value.
 
 HasOriginalUrl returns a boolean if a field has been set.
 
-### GetStorageCategory
-
-`func (o *FileMetadataResponse) GetStorageCategory() string`
-
-GetStorageCategory returns the StorageCategory field if non-nil, zero value otherwise.
-
-### GetStorageCategoryOk
-
-`func (o *FileMetadataResponse) GetStorageCategoryOk() (*string, bool)`
-
-GetStorageCategoryOk returns a tuple with the StorageCategory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStorageCategory
-
-`func (o *FileMetadataResponse) SetStorageCategory(v string)`
-
-SetStorageCategory sets StorageCategory field to given value.
-
-
 ### GetStoragePath
 
 `func (o *FileMetadataResponse) GetStoragePath() string`
@@ -408,31 +407,6 @@ and a boolean to check if the value has been set.
 
 SetUploadCategory sets UploadCategory field to given value.
 
-
-### GetUploadParams
-
-`func (o *FileMetadataResponse) GetUploadParams() map[string]interface{}`
-
-GetUploadParams returns the UploadParams field if non-nil, zero value otherwise.
-
-### GetUploadParamsOk
-
-`func (o *FileMetadataResponse) GetUploadParamsOk() (*map[string]interface{}, bool)`
-
-GetUploadParamsOk returns a tuple with the UploadParams field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUploadParams
-
-`func (o *FileMetadataResponse) SetUploadParams(v map[string]interface{})`
-
-SetUploadParams sets UploadParams field to given value.
-
-### HasUploadParams
-
-`func (o *FileMetadataResponse) HasUploadParams() bool`
-
-HasUploadParams returns a boolean if a field has been set.
 
 ### GetUrl
 

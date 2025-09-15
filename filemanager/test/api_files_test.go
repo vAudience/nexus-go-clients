@@ -22,6 +22,20 @@ func Test_filemanager_FilesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test FilesAPIService DeleteFile", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var storagePath string
+
+		resp, httpRes, err := apiClient.FilesAPI.DeleteFile(context.Background(), storagePath).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FilesAPIService GetFileUploadSettings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

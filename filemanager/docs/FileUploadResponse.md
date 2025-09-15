@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Files** | [**[]FileMetadataResponse**](FileMetadataResponse.md) |  | 
 **Id** | **string** |  | 
-**ResultingFiles** | [**[]ResultFile**](ResultFile.md) |  | 
 
 ## Methods
 
 ### NewFileUploadResponse
 
-`func NewFileUploadResponse(id string, resultingFiles []ResultFile, ) *FileUploadResponse`
+`func NewFileUploadResponse(files []FileMetadataResponse, id string, ) *FileUploadResponse`
 
 NewFileUploadResponse instantiates a new FileUploadResponse object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +25,26 @@ will change when the set of required properties is changed
 NewFileUploadResponseWithDefaults instantiates a new FileUploadResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFiles
+
+`func (o *FileUploadResponse) GetFiles() []FileMetadataResponse`
+
+GetFiles returns the Files field if non-nil, zero value otherwise.
+
+### GetFilesOk
+
+`func (o *FileUploadResponse) GetFilesOk() (*[]FileMetadataResponse, bool)`
+
+GetFilesOk returns a tuple with the Files field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFiles
+
+`func (o *FileUploadResponse) SetFiles(v []FileMetadataResponse)`
+
+SetFiles sets Files field to given value.
+
 
 ### GetId
 
@@ -44,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *FileUploadResponse) SetId(v string)`
 
 SetId sets Id field to given value.
-
-
-### GetResultingFiles
-
-`func (o *FileUploadResponse) GetResultingFiles() []ResultFile`
-
-GetResultingFiles returns the ResultingFiles field if non-nil, zero value otherwise.
-
-### GetResultingFilesOk
-
-`func (o *FileUploadResponse) GetResultingFilesOk() (*[]ResultFile, bool)`
-
-GetResultingFilesOk returns a tuple with the ResultingFiles field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResultingFiles
-
-`func (o *FileUploadResponse) SetResultingFiles(v []ResultFile)`
-
-SetResultingFiles sets ResultingFiles field to given value.
 
 
 

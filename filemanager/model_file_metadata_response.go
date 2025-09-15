@@ -24,6 +24,7 @@ type FileMetadataResponse struct {
 	ExpiresAt *string `json:"expires_at,omitempty"`
 	FileName string `json:"file_name"`
 	FileSize int64 `json:"file_size"`
+	FileStorageType string `json:"file_storage_type"`
 	Id string `json:"id"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	MimeType string `json:"mime_type"`
@@ -32,14 +33,10 @@ type FileMetadataResponse struct {
 	OriginalFileSize int64 `json:"original_file_size"`
 	OriginalMimeType string `json:"original_mime_type"`
 	OriginalUrl *string `json:"original_url,omitempty"`
-	// temp, public, privateOrg, privateUser, privateTeam
-	StorageCategory string `json:"storage_category"`
 	StoragePath string `json:"storage_path"`
 	TeamId *string `json:"team_id,omitempty"`
 	UpdatedAt string `json:"updated_at"`
-	// temp, image
 	UploadCategory string `json:"upload_category"`
-	UploadParams map[string]interface{} `json:"upload_params,omitempty"`
 	Url string `json:"url"`
 	UserId *string `json:"user_id,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -51,17 +48,17 @@ type _FileMetadataResponse FileMetadataResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storageCategory string, storagePath string, updatedAt string, uploadCategory string, url string) *FileMetadataResponse {
+func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string) *FileMetadataResponse {
 	this := FileMetadataResponse{}
 	this.CreatedAt = createdAt
 	this.FileName = fileName
 	this.FileSize = fileSize
+	this.FileStorageType = fileStorageType
 	this.Id = id
 	this.MimeType = mimeType
 	this.OriginalFileName = originalFileName
 	this.OriginalFileSize = originalFileSize
 	this.OriginalMimeType = originalMimeType
-	this.StorageCategory = storageCategory
 	this.StoragePath = storagePath
 	this.UpdatedAt = updatedAt
 	this.UploadCategory = uploadCategory
@@ -179,6 +176,30 @@ func (o *FileMetadataResponse) GetFileSizeOk() (*int64, bool) {
 // SetFileSize sets field value
 func (o *FileMetadataResponse) SetFileSize(v int64) {
 	o.FileSize = v
+}
+
+// GetFileStorageType returns the FileStorageType field value
+func (o *FileMetadataResponse) GetFileStorageType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FileStorageType
+}
+
+// GetFileStorageTypeOk returns a tuple with the FileStorageType field value
+// and a boolean to check if the value has been set.
+func (o *FileMetadataResponse) GetFileStorageTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FileStorageType, true
+}
+
+// SetFileStorageType sets field value
+func (o *FileMetadataResponse) SetFileStorageType(v string) {
+	o.FileStorageType = v
 }
 
 // GetId returns the Id field value
@@ -397,30 +418,6 @@ func (o *FileMetadataResponse) SetOriginalUrl(v string) {
 	o.OriginalUrl = &v
 }
 
-// GetStorageCategory returns the StorageCategory field value
-func (o *FileMetadataResponse) GetStorageCategory() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.StorageCategory
-}
-
-// GetStorageCategoryOk returns a tuple with the StorageCategory field value
-// and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetStorageCategoryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StorageCategory, true
-}
-
-// SetStorageCategory sets field value
-func (o *FileMetadataResponse) SetStorageCategory(v string) {
-	o.StorageCategory = v
-}
-
 // GetStoragePath returns the StoragePath field value
 func (o *FileMetadataResponse) GetStoragePath() string {
 	if o == nil {
@@ -525,38 +522,6 @@ func (o *FileMetadataResponse) SetUploadCategory(v string) {
 	o.UploadCategory = v
 }
 
-// GetUploadParams returns the UploadParams field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetUploadParams() map[string]interface{} {
-	if o == nil || IsNil(o.UploadParams) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.UploadParams
-}
-
-// GetUploadParamsOk returns a tuple with the UploadParams field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetUploadParamsOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.UploadParams) {
-		return map[string]interface{}{}, false
-	}
-	return o.UploadParams, true
-}
-
-// HasUploadParams returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasUploadParams() bool {
-	if o != nil && !IsNil(o.UploadParams) {
-		return true
-	}
-
-	return false
-}
-
-// SetUploadParams gets a reference to the given map[string]interface{} and assigns it to the UploadParams field.
-func (o *FileMetadataResponse) SetUploadParams(v map[string]interface{}) {
-	o.UploadParams = v
-}
-
 // GetUrl returns the Url field value
 func (o *FileMetadataResponse) GetUrl() string {
 	if o == nil {
@@ -629,6 +594,7 @@ func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
+	toSerialize["file_storage_type"] = o.FileStorageType
 	toSerialize["id"] = o.Id
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -643,16 +609,12 @@ func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginalUrl) {
 		toSerialize["original_url"] = o.OriginalUrl
 	}
-	toSerialize["storage_category"] = o.StorageCategory
 	toSerialize["storage_path"] = o.StoragePath
 	if !IsNil(o.TeamId) {
 		toSerialize["team_id"] = o.TeamId
 	}
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["upload_category"] = o.UploadCategory
-	if !IsNil(o.UploadParams) {
-		toSerialize["upload_params"] = o.UploadParams
-	}
 	toSerialize["url"] = o.Url
 	if !IsNil(o.UserId) {
 		toSerialize["user_id"] = o.UserId
@@ -673,12 +635,12 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 		"created_at",
 		"file_name",
 		"file_size",
+		"file_storage_type",
 		"id",
 		"mime_type",
 		"original_file_name",
 		"original_file_size",
 		"original_mime_type",
-		"storage_category",
 		"storage_path",
 		"updated_at",
 		"upload_category",
@@ -716,6 +678,7 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "file_storage_type")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "mime_type")
@@ -724,12 +687,10 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "original_file_size")
 		delete(additionalProperties, "original_mime_type")
 		delete(additionalProperties, "original_url")
-		delete(additionalProperties, "storage_category")
 		delete(additionalProperties, "storage_path")
 		delete(additionalProperties, "team_id")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "upload_category")
-		delete(additionalProperties, "upload_params")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "user_id")
 		o.AdditionalProperties = additionalProperties
