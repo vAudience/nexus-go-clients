@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**Updates** | **[]string** |  | 
+**Updates** | [**[]AIgencyFunctionStatusUpdateData**](AIgencyFunctionStatusUpdateData.md) |  | 
 
 ## Methods
 
 ### NewAIgencyFunctionStatusUpdate
 
-`func NewAIgencyFunctionStatusUpdate(id string, updates []string, ) *AIgencyFunctionStatusUpdate`
+`func NewAIgencyFunctionStatusUpdate(id string, updates []AIgencyFunctionStatusUpdateData, ) *AIgencyFunctionStatusUpdate`
 
 NewAIgencyFunctionStatusUpdate instantiates a new AIgencyFunctionStatusUpdate object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetId sets Id field to given value.
 
 ### GetUpdates
 
-`func (o *AIgencyFunctionStatusUpdate) GetUpdates() []string`
+`func (o *AIgencyFunctionStatusUpdate) GetUpdates() []AIgencyFunctionStatusUpdateData`
 
 GetUpdates returns the Updates field if non-nil, zero value otherwise.
 
 ### GetUpdatesOk
 
-`func (o *AIgencyFunctionStatusUpdate) GetUpdatesOk() (*[]string, bool)`
+`func (o *AIgencyFunctionStatusUpdate) GetUpdatesOk() (*[]AIgencyFunctionStatusUpdateData, bool)`
 
 GetUpdatesOk returns a tuple with the Updates field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdates
 
-`func (o *AIgencyFunctionStatusUpdate) SetUpdates(v []string)`
+`func (o *AIgencyFunctionStatusUpdate) SetUpdates(v []AIgencyFunctionStatusUpdateData)`
 
 SetUpdates sets Updates field to given value.
 

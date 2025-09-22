@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**GetChannelFileSettings**](ChannelsAPI.md#GetChannelFileSettings) | **Get** /v1/organizations/{org_id}/channels/files/settings | Get channel file settings
 [**ListChannelsByOrgId**](ChannelsAPI.md#ListChannelsByOrgId) | **Get** /v1/organizations/{org_id}/channels | List channels by organization ID
 [**ListChannelsByOwnerId**](ChannelsAPI.md#ListChannelsByOwnerId) | **Get** /v1/organizations/{org_id}/channels/me | List channels owned by the current user
+[**SearchChannels**](ChannelsAPI.md#SearchChannels) | **Get** /v1/organizations/{org_id}/channels/search | Search channels by query
 [**UpdateChannel**](ChannelsAPI.md#UpdateChannel) | **Put** /v1/organizations/{org_id}/channels/{id} | Update a channel
 
 
@@ -573,6 +574,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Channel**](Channel.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchChannels
+
+> ChannelResults SearchChannels(ctx, orgId).UserId(userId).Limit(limit).Offset(offset).Execute()
+
+Search channels by query
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	userId := "userId_example" // string | user ID or me for current user (optional)
+	limit := int32(56) // int32 | Limit the number of results (optional) (default to 1000)
+	offset := int32(56) // int32 | Offset for pagination (optional) (default to 0)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChannelsAPI.SearchChannels(context.Background(), orgId).UserId(userId).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.SearchChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchChannels`: ChannelResults
+	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.SearchChannels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchChannelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **userId** | **string** | user ID or me for current user | 
+ **limit** | **int32** | Limit the number of results | [default to 1000]
+ **offset** | **int32** | Offset for pagination | [default to 0]
+
+### Return type
+
+[**ChannelResults**](ChannelResults.md)
 
 ### Authorization
 

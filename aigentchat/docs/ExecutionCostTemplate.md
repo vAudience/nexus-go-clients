@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BatchCostFactor** | Pointer to **float64** |  | [optional] 
 **CostPerUnitInEuro** | Pointer to **float64** |  | [optional] 
 **CostUnit** | Pointer to [**AIModelCostUnit**](AIModelCostUnit.md) |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewExecutionCostTemplateWithDefaults instantiates a new ExecutionCostTemplate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBatchCostFactor
+
+`func (o *ExecutionCostTemplate) GetBatchCostFactor() float64`
+
+GetBatchCostFactor returns the BatchCostFactor field if non-nil, zero value otherwise.
+
+### GetBatchCostFactorOk
+
+`func (o *ExecutionCostTemplate) GetBatchCostFactorOk() (*float64, bool)`
+
+GetBatchCostFactorOk returns a tuple with the BatchCostFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBatchCostFactor
+
+`func (o *ExecutionCostTemplate) SetBatchCostFactor(v float64)`
+
+SetBatchCostFactor sets BatchCostFactor field to given value.
+
+### HasBatchCostFactor
+
+`func (o *ExecutionCostTemplate) HasBatchCostFactor() bool`
+
+HasBatchCostFactor returns a boolean if a field has been set.
 
 ### GetCostPerUnitInEuro
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **IsError** | Pointer to **bool** |  | [optional] 
 **Result** | **string** |  | 
+**ResultMetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **ToolFunctionId** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -113,6 +114,31 @@ and a boolean to check if the value has been set.
 
 SetResult sets Result field to given value.
 
+
+### GetResultMetaData
+
+`func (o *AIgencyFunctionResponse) GetResultMetaData() map[string]interface{}`
+
+GetResultMetaData returns the ResultMetaData field if non-nil, zero value otherwise.
+
+### GetResultMetaDataOk
+
+`func (o *AIgencyFunctionResponse) GetResultMetaDataOk() (*map[string]interface{}, bool)`
+
+GetResultMetaDataOk returns a tuple with the ResultMetaData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultMetaData
+
+`func (o *AIgencyFunctionResponse) SetResultMetaData(v map[string]interface{})`
+
+SetResultMetaData sets ResultMetaData field to given value.
+
+### HasResultMetaData
+
+`func (o *AIgencyFunctionResponse) HasResultMetaData() bool`
+
+HasResultMetaData returns a boolean if a field has been set.
 
 ### GetToolFunctionId
 

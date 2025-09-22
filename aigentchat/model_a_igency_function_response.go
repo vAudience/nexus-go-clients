@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.5
+API version: 0.20.10
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type AIgencyFunctionResponse struct {
 	Id string `json:"id"`
 	IsError *bool `json:"is_error,omitempty"`
 	Result string `json:"result"`
+	ResultMetaData map[string]interface{} `json:"result_meta_data,omitempty"`
 	ToolFunctionId *string `json:"tool_function_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -155,6 +156,38 @@ func (o *AIgencyFunctionResponse) SetResult(v string) {
 	o.Result = v
 }
 
+// GetResultMetaData returns the ResultMetaData field value if set, zero value otherwise.
+func (o *AIgencyFunctionResponse) GetResultMetaData() map[string]interface{} {
+	if o == nil || IsNil(o.ResultMetaData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ResultMetaData
+}
+
+// GetResultMetaDataOk returns a tuple with the ResultMetaData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionResponse) GetResultMetaDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ResultMetaData) {
+		return map[string]interface{}{}, false
+	}
+	return o.ResultMetaData, true
+}
+
+// HasResultMetaData returns a boolean if a field has been set.
+func (o *AIgencyFunctionResponse) HasResultMetaData() bool {
+	if o != nil && !IsNil(o.ResultMetaData) {
+		return true
+	}
+
+	return false
+}
+
+// SetResultMetaData gets a reference to the given map[string]interface{} and assigns it to the ResultMetaData field.
+func (o *AIgencyFunctionResponse) SetResultMetaData(v map[string]interface{}) {
+	o.ResultMetaData = v
+}
+
 // GetToolFunctionId returns the ToolFunctionId field value if set, zero value otherwise.
 func (o *AIgencyFunctionResponse) GetToolFunctionId() string {
 	if o == nil || IsNil(o.ToolFunctionId) {
@@ -203,6 +236,9 @@ func (o AIgencyFunctionResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["is_error"] = o.IsError
 	}
 	toSerialize["result"] = o.Result
+	if !IsNil(o.ResultMetaData) {
+		toSerialize["result_meta_data"] = o.ResultMetaData
+	}
 	if !IsNil(o.ToolFunctionId) {
 		toSerialize["tool_function_id"] = o.ToolFunctionId
 	}
@@ -255,6 +291,7 @@ func (o *AIgencyFunctionResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "is_error")
 		delete(additionalProperties, "result")
+		delete(additionalProperties, "result_meta_data")
 		delete(additionalProperties, "tool_function_id")
 		o.AdditionalProperties = additionalProperties
 	}

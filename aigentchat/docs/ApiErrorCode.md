@@ -123,7 +123,7 @@
 
 * `ErrCodeChatCompletionExceedsMaxToolCalls` (value: `"chat_completion_exceeds_max_tool_calls"`)
 
-* `ErrCodeChatCompletionChannelInProgress` (value: `"chat_completion_channel_in_progress"`)
+* `ErrCodeChatCompletionInProgress` (value: `"chat_completion_in_progress"`)
 
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 

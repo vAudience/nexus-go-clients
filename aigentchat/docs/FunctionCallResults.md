@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ResultFiles** | Pointer to [**[]ResultFile**](ResultFile.md) |  | [optional] 
+**ResultMetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **ResultTexts** | Pointer to **[]string** |  | [optional] 
 **ToolFunctionId** | Pointer to **string** |  | [optional] 
 **ToolId** | Pointer to **string** |  | [optional] 
@@ -156,6 +157,31 @@ SetResultFiles sets ResultFiles field to given value.
 `func (o *FunctionCallResults) HasResultFiles() bool`
 
 HasResultFiles returns a boolean if a field has been set.
+
+### GetResultMetaData
+
+`func (o *FunctionCallResults) GetResultMetaData() map[string]interface{}`
+
+GetResultMetaData returns the ResultMetaData field if non-nil, zero value otherwise.
+
+### GetResultMetaDataOk
+
+`func (o *FunctionCallResults) GetResultMetaDataOk() (*map[string]interface{}, bool)`
+
+GetResultMetaDataOk returns a tuple with the ResultMetaData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultMetaData
+
+`func (o *FunctionCallResults) SetResultMetaData(v map[string]interface{})`
+
+SetResultMetaData sets ResultMetaData field to given value.
+
+### HasResultMetaData
+
+`func (o *FunctionCallResults) HasResultMetaData() bool`
+
+HasResultMetaData returns a boolean if a field has been set.
 
 ### GetResultTexts
 

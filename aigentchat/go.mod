@@ -1,6 +1,6 @@
 module github.com/vaudience/nexus-go-clients/aigentchat
 
-go 1.18
+go 1.23
 
 require github.com/stretchr/testify v1.11.1
 

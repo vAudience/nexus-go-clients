@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.20.5
+  version: 0.20.10
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -23,6 +23,8 @@ tags:
 - description: "anything related to audio files and processing such as text-to-speech,\
     \ speech-to-text etc."
   name: Audio
+- description: anything related to audit trails of chat messages
+  name: AuditTrails
 - description: anything related to the chat channels
   name: Channels
 - description: anything related to the chat completions
@@ -55,7 +57,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HealthResponse'
+                $ref: "#/components/schemas/HealthResponse"
           description: OK
       summary: checks for service health
       tags:
@@ -83,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VersionResponse'
+                $ref: "#/components/schemas/VersionResponse"
           description: OK
       summary: returns the service version
       tags:
@@ -99,26 +101,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModelServiceObject'
+                  $ref: "#/components/schemas/AIModelServiceObject"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -136,26 +138,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModelServiceWithModels'
+                  $ref: "#/components/schemas/AIModelServiceWithModels"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -179,37 +181,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
+                $ref: "#/components/schemas/AIModelServiceObject"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -234,38 +236,38 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModel'
+                  $ref: "#/components/schemas/AIModel"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -283,20 +285,20 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModel'
+                  $ref: "#/components/schemas/AIModel"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -320,37 +322,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModel'
+                $ref: "#/components/schemas/AIModel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -405,26 +407,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Agent'
+                  $ref: "#/components/schemas/Agent"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -445,7 +447,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AgentWriteDto'
+              $ref: "#/components/schemas/AgentWriteDto"
         description: Agent
         required: true
       responses:
@@ -453,31 +455,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -512,32 +514,32 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Agent'
+                  $ref: "#/components/schemas/Agent"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -566,37 +568,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -624,37 +626,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -681,7 +683,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AgentWriteDto'
+              $ref: "#/components/schemas/AgentWriteDto"
         description: Agent
         required: true
       responses:
@@ -689,37 +691,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -755,37 +757,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -820,37 +822,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -886,37 +888,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -953,37 +955,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1020,37 +1022,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1087,37 +1089,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1153,37 +1155,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1218,37 +1220,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent'
+                $ref: "#/components/schemas/Agent"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1272,26 +1274,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModelServiceObject'
+                  $ref: "#/components/schemas/AIModelServiceObject"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1312,7 +1314,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIModelServiceWriteDto'
+              $ref: "#/components/schemas/AIModelServiceWriteDto"
         description: AI Model Service
         required: true
       responses:
@@ -1320,31 +1322,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
+                $ref: "#/components/schemas/AIModelServiceObject"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1369,26 +1371,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModelServiceWithModels'
+                  $ref: "#/components/schemas/AIModelServiceWithModels"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1417,37 +1419,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
+                $ref: "#/components/schemas/AIModelServiceObject"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1475,37 +1477,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
+                $ref: "#/components/schemas/AIModelServiceObject"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1532,7 +1534,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIModelServiceWriteDto'
+              $ref: "#/components/schemas/AIModelServiceWriteDto"
         description: AI Model Service
         required: true
       responses:
@@ -1540,37 +1542,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModelServiceObject'
+                $ref: "#/components/schemas/AIModelServiceObject"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1601,38 +1603,38 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModel'
+                  $ref: "#/components/schemas/AIModel"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1656,20 +1658,20 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIModel'
+                  $ref: "#/components/schemas/AIModel"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1690,7 +1692,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIModelWriteDto'
+              $ref: "#/components/schemas/AIModelWriteDto"
         description: AI Model
         required: true
       responses:
@@ -1698,31 +1700,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModel'
+                $ref: "#/components/schemas/AIModel"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1752,37 +1754,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModel'
+                $ref: "#/components/schemas/AIModel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1810,37 +1812,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModel'
+                $ref: "#/components/schemas/AIModel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1867,7 +1869,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIModel'
+              $ref: "#/components/schemas/AIModel"
         description: AI Model
         required: true
       responses:
@@ -1875,37 +1877,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIModel'
+                $ref: "#/components/schemas/AIModel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1928,7 +1930,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AudioTranscriptionRequest'
+              $ref: "#/components/schemas/AudioTranscriptionRequest"
         description: Audio Transcription Request
         required: true
       responses:
@@ -1936,31 +1938,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                $ref: "#/components/schemas/AIgencyMessage"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -1984,7 +1986,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AudioGenerationRequest'
+              $ref: "#/components/schemas/AudioGenerationRequest"
         description: Audio-Generation Request
         required: true
       responses:
@@ -1992,31 +1994,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                $ref: "#/components/schemas/AIgencyMessage"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2024,6 +2026,65 @@ paths:
       tags:
       - Audio
       x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/audit-trails/channels/{channel_id}:
+    get:
+      description: Retrieve the audit trails for a specific channel
+      operationId: GetAuditTrailsByChannelId
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: channel ID
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditTrail"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get the audit trails by channel ID
+      tags:
+      - AuditTrails
   /v1/organizations/{org_id}/budgets:
     get:
       description: Retrieve the cost budget for a specific organization
@@ -2040,37 +2101,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrgCostBudget'
+                $ref: "#/components/schemas/OrgCostBudget"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2091,7 +2152,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrgCostBudgetWriteDto'
+              $ref: "#/components/schemas/OrgCostBudgetWriteDto"
         description: New budget
         required: true
       responses:
@@ -2099,31 +2160,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrgCostBudget'
+                $ref: "#/components/schemas/OrgCostBudget"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2145,7 +2206,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrgCostBudgetWriteDto'
+              $ref: "#/components/schemas/OrgCostBudgetWriteDto"
         description: Updated budget
         required: true
       responses:
@@ -2153,37 +2214,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrgCostBudget'
+                $ref: "#/components/schemas/OrgCostBudget"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2208,37 +2269,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrgCostBudgetCheck'
+                $ref: "#/components/schemas/OrgCostBudgetCheck"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2262,26 +2323,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Channel'
+                  $ref: "#/components/schemas/Channel"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2289,6 +2350,7 @@ paths:
       tags:
       - Channels
     get:
+      deprecated: true
       description: Retrieve a list of channels belonging to a specific organization
       operationId: ListChannelsByOrgId
       parameters:
@@ -2304,26 +2366,26 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Channel'
+                  $ref: "#/components/schemas/Channel"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2344,7 +2406,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChannelWriteDto'
+              $ref: "#/components/schemas/ChannelWriteDto"
         description: Channel
         required: true
       responses:
@@ -2352,31 +2414,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Channel'
+                $ref: "#/components/schemas/Channel"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2399,50 +2461,50 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CreateChannelFile_request'
+              $ref: "#/components/schemas/CreateChannelFile_request"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileUploadResponse'
+                $ref: "#/components/schemas/FileUploadResponse"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "413":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Request Entity Too Large
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2465,25 +2527,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileSettings'
+                $ref: "#/components/schemas/FileSettings"
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
       security:
       - ApiKey: []
@@ -2507,35 +2569,93 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Channel'
+                  $ref: "#/components/schemas/Channel"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
       summary: List channels owned by the current user
       tags:
       - Channels
+  /v1/organizations/{org_id}/channels/search:
+    get:
+      description: Retrieve a list of channels matching the search query
+      operationId: SearchChannels
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: user ID or me for current user
+        in: query
+        name: user_id
+        schema:
+          type: string
+      - description: Limit the number of results
+        in: query
+        name: limit
+        schema:
+          default: 1000
+          type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChannelResults"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Search channels by query
+      tags:
+      - Channels
   /v1/organizations/{org_id}/channels/{id}:
     delete:
-      description: Delete a channel by its ID
+      description: Delete a channel by its ID and all its messages
       operationId: DeleteChannel
       parameters:
       - description: organization ID
@@ -2555,37 +2675,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Channel'
+                $ref: "#/components/schemas/Channel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2613,37 +2739,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Channel'
+                $ref: "#/components/schemas/Channel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2670,7 +2796,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChannelWriteDto'
+              $ref: "#/components/schemas/ChannelWriteDto"
         description: Channel
         required: true
       responses:
@@ -2678,37 +2804,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Channel'
+                $ref: "#/components/schemas/Channel"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2731,7 +2857,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChatCompletionRequestDto'
+              $ref: "#/components/schemas/ChatCompletionRequestDto"
         description: Chat Completion Request
         required: true
       responses:
@@ -2740,44 +2866,44 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIgencyMessage'
+                  $ref: "#/components/schemas/AIgencyMessage"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2810,19 +2936,19 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2844,7 +2970,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChatCompletionRequestDto'
+              $ref: "#/components/schemas/ChatCompletionRequestDto"
         description: Chat Completion Request
         required: true
       responses:
@@ -2853,44 +2979,44 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIgencyMessage'
+                  $ref: "#/components/schemas/AIgencyMessage"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -2920,25 +3046,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConnectionTokenResponse'
+                $ref: "#/components/schemas/ConnectionTokenResponse"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: invalid channel ID
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: unauthorized access
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: internal error
       security:
       - ApiKey: []
@@ -2960,7 +3086,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TextEmbeddingRequestDto'
+              $ref: "#/components/schemas/TextEmbeddingRequestDto"
         description: Text Embedding Request
         required: true
       responses:
@@ -2968,49 +3094,104 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextEmbedding'
+                $ref: "#/components/schemas/TextEmbedding"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "429":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Too Many Requests
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
         "503":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Service Unavailable
       security:
       - ApiKey: []
       summary: Get the embeddings for the texts
       tags:
       - Embeddings
+      x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/execution-logs/chat-completion-costs:
+    post:
+      description: Track chat completion costs to execution log
+      operationId: CreateChatCompletionCosts
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionCostTrackingRequest"
+        description: Chat completion cost tracking request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CostTrackingResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Track chat completion costs
+      tags:
+      - ExecutionLogs
       x-codegen-request-body-name: request
   /v1/organizations/{org_id}/execution-logs/costs:
     get:
@@ -3043,31 +3224,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExecutionLogCosts'
+                $ref: "#/components/schemas/ExecutionLogCosts"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3089,7 +3270,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DocumentConversionCostTrackingRequest'
+              $ref: "#/components/schemas/DocumentConversionCostTrackingRequest"
         description: Document conversion cost tracking request
         required: true
       responses:
@@ -3097,31 +3278,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CostTrackingResponse'
+                $ref: "#/components/schemas/CostTrackingResponse"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3144,7 +3325,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FileUploadCostTrackingRequest'
+              $ref: "#/components/schemas/FileUploadCostTrackingRequest"
         description: File upload cost tracking request
         required: true
       responses:
@@ -3152,31 +3333,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CostTrackingResponse'
+                $ref: "#/components/schemas/CostTrackingResponse"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3231,31 +3412,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExecutionLogResults'
+                $ref: "#/components/schemas/ExecutionLogResults"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3279,20 +3460,20 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/FunctionCall'
+                  $ref: "#/components/schemas/FunctionCall"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
       security:
       - ApiKey: []
@@ -3321,25 +3502,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FunctionCall'
+                $ref: "#/components/schemas/FunctionCall"
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
       security:
       - ApiKey: []
@@ -3374,37 +3555,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FunctionCallResults'
+                $ref: "#/components/schemas/FunctionCallResults"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3438,25 +3619,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyImageResults'
+                $ref: "#/components/schemas/AIgencyImageResults"
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3477,7 +3658,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ImageGenerationRequestDto'
+              $ref: "#/components/schemas/ImageGenerationRequestDto"
         description: Image Generation Request DTO
         required: true
       responses:
@@ -3486,32 +3667,32 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIgencyImage'
+                  $ref: "#/components/schemas/AIgencyImage"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3535,7 +3716,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EstimateImageGenerationCostRequestDto'
+              $ref: "#/components/schemas/EstimateImageGenerationCostRequestDto"
         description: Estimate Image Generation Cost Request DTO
         required: true
       responses:
@@ -3543,31 +3724,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CostEstimation'
+                $ref: "#/components/schemas/CostEstimation"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3597,37 +3778,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyImage'
+                $ref: "#/components/schemas/AIgencyImage"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3656,19 +3837,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyImage'
+                $ref: "#/components/schemas/AIgencyImage"
           description: OK
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3690,7 +3871,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIgencyMessageWriteDto'
+              $ref: "#/components/schemas/AIgencyMessageWriteDto"
         description: Message
         required: true
       responses:
@@ -3698,31 +3879,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                $ref: "#/components/schemas/AIgencyMessage"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3753,38 +3934,38 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIgencyMessage'
+                  $ref: "#/components/schemas/AIgencyMessage"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3832,31 +4013,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessageResults'
+                $ref: "#/components/schemas/AIgencyMessageResults"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3891,38 +4072,44 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AIgencyMessage'
+                  $ref: "#/components/schemas/AIgencyMessage"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -3950,37 +4137,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                $ref: "#/components/schemas/AIgencyMessage"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4007,7 +4194,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AIgencyMessageWriteDto'
+              $ref: "#/components/schemas/AIgencyMessageWriteDto"
         description: Message
         required: true
       responses:
@@ -4015,37 +4202,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AIgencyMessage'
+                $ref: "#/components/schemas/AIgencyMessage"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4079,31 +4272,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MissionResults'
+                $ref: "#/components/schemas/MissionResults"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4142,31 +4335,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MissionResults'
+                $ref: "#/components/schemas/MissionResults"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4194,7 +4387,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MissionWriteDto'
+              $ref: "#/components/schemas/MissionWriteDto"
         description: Mission object that needs to be created
         required: true
       responses:
@@ -4202,37 +4395,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Mission'
+                $ref: "#/components/schemas/Mission"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4265,31 +4458,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Conflict
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4317,37 +4516,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Mission'
+                $ref: "#/components/schemas/Mission"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4379,31 +4578,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4437,32 +4636,32 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Prompt'
+                  $ref: "#/components/schemas/Prompt"
                 type: array
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4483,7 +4682,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PromptWriteDto'
+              $ref: "#/components/schemas/PromptWriteDto"
         description: Prompt object
         required: true
       responses:
@@ -4491,31 +4690,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Prompt'
+                $ref: "#/components/schemas/Prompt"
           description: Created
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4539,7 +4738,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PromptRenderDto'
+              $ref: "#/components/schemas/PromptRenderDto"
         description: Prompt Render DTO
         required: true
       responses:
@@ -4547,37 +4746,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RenderedPrompt'
+                $ref: "#/components/schemas/RenderedPrompt"
           description: Rendered prompt content
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Invalid payload or prompt ID
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Prompt not found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal server error
       summary: Render Prompt
       tags:
@@ -4608,31 +4807,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4660,37 +4859,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Prompt'
+                $ref: "#/components/schemas/Prompt"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4717,7 +4916,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PromptWriteDto'
+              $ref: "#/components/schemas/PromptWriteDto"
         description: Updated Prompt object
         required: true
       responses:
@@ -4725,37 +4924,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Prompt'
+                $ref: "#/components/schemas/Prompt"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not Found
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
       security:
       - ApiKey: []
@@ -4780,20 +4979,20 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Tool'
+                  $ref: "#/components/schemas/Tool"
                 type: array
           description: OK
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Forbidden
       security:
       - ApiKey: []
@@ -4806,7 +5005,7 @@ components:
       example:
         internal_id: internal_id
         owner_id: owner_id
-        model_release_date: 9
+        model_release_date: 2
         abilities_v2:
         - type: type
           constraints:
@@ -4865,22 +5064,26 @@ components:
         features:
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
@@ -4893,22 +5096,26 @@ components:
             direction: input
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
@@ -4923,7 +5130,7 @@ components:
         - ""
         - ""
         owner_organization_id: owner_organization_id
-        updated_at: 3
+        updated_at: 4
         model_category: model_category
         service_id: service_id
         is_public: true
@@ -4935,11 +5142,11 @@ components:
       properties:
         abilities:
           items:
-            $ref: '#/components/schemas/Ability'
+            $ref: "#/components/schemas/Ability"
           type: array
         abilities_v2:
           items:
-            $ref: '#/components/schemas/AbilityV2'
+            $ref: "#/components/schemas/AbilityV2"
           type: array
         accepted_file_mimetypes:
           items:
@@ -4955,11 +5162,11 @@ components:
           type: string
         features:
           items:
-            $ref: '#/components/schemas/AIModelFeature'
+            $ref: "#/components/schemas/AIModelFeature"
           type: array
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AIModelI18n'
+            $ref: "#/components/schemas/AIModelI18n"
           type: object
         id:
           maxLength: 64
@@ -5001,7 +5208,7 @@ components:
           type: object
         service_host_locations:
           items:
-            $ref: '#/components/schemas/HostingLocation'
+            $ref: "#/components/schemas/HostingLocation"
           type: array
         service_id:
           maxLength: 64
@@ -5074,13 +5281,13 @@ components:
         direction: input
       properties:
         direction:
-          $ref: '#/components/schemas/AIModelConstraintDirection'
+          $ref: "#/components/schemas/AIModelConstraintDirection"
         max:
           type: integer
         min:
           type: integer
         unit:
-          $ref: '#/components/schemas/AIModelMinMaxUnit'
+          $ref: "#/components/schemas/AIModelMinMaxUnit"
       type: object
     AIModelConstraintDirection:
       enum:
@@ -5126,22 +5333,26 @@ components:
       example:
         capability: ""
         cost_items:
-        - resulting_cost_in_euro: 2.3021358869347655
-          used_units: 7.061401241503109
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
           description: description
-          cost_per_unit_in_euro: 5.637376656633329
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
           cost_unit: null
-        - resulting_cost_in_euro: 2.3021358869347655
-          used_units: 7.061401241503109
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
           description: description
-          cost_per_unit_in_euro: 5.637376656633329
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
           cost_unit: null
         cost_item_templates:
         - description: description
-          cost_per_unit_in_euro: 5.962133916683182
+          cost_per_unit_in_euro: 5.637376656633329
+          batch_cost_factor: 5.962133916683182
           cost_unit: input-tokens-per-million
         - description: description
-          cost_per_unit_in_euro: 5.962133916683182
+          cost_per_unit_in_euro: 5.637376656633329
+          batch_cost_factor: 5.962133916683182
           cost_unit: input-tokens-per-million
         constraints:
         - unit: tokens
@@ -5154,18 +5365,18 @@ components:
           direction: input
       properties:
         capability:
-          $ref: '#/components/schemas/AIModelCapability'
+          $ref: "#/components/schemas/AIModelCapability"
         constraints:
           items:
-            $ref: '#/components/schemas/AIModelConstraint'
+            $ref: "#/components/schemas/AIModelConstraint"
           type: array
         cost_item_templates:
           items:
-            $ref: '#/components/schemas/ExecutionCostTemplate'
+            $ref: "#/components/schemas/ExecutionCostTemplate"
           type: array
         cost_items:
           items:
-            $ref: '#/components/schemas/ExecutionUsageCost'
+            $ref: "#/components/schemas/ExecutionUsageCost"
           type: array
       type: object
     AIModelI18n:
@@ -5251,11 +5462,11 @@ components:
           type: string
         hosting_locations:
           additionalProperties:
-            $ref: '#/components/schemas/HostingLocation'
+            $ref: "#/components/schemas/HostingLocation"
           type: object
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AIModelServiceI18n'
+            $ref: "#/components/schemas/AIModelServiceI18n"
           type: object
         id:
           maxLength: 64
@@ -5279,7 +5490,7 @@ components:
           type: string
         service_impl:
           allOf:
-          - $ref: '#/components/schemas/AiServiceId'
+          - $ref: "#/components/schemas/AiServiceId"
           type: object
         updated_at:
           format: int64
@@ -5298,7 +5509,7 @@ components:
         models:
         - internal_id: internal_id
           owner_id: owner_id
-          model_release_date: 9
+          model_release_date: 2
           abilities_v2:
           - type: type
             constraints:
@@ -5357,22 +5568,26 @@ components:
           features:
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -5385,22 +5600,26 @@ components:
               direction: input
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -5415,7 +5634,7 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 3
+          updated_at: 4
           model_category: model_category
           service_id: service_id
           is_public: true
@@ -5426,7 +5645,7 @@ components:
           parameters: "{}"
         - internal_id: internal_id
           owner_id: owner_id
-          model_release_date: 9
+          model_release_date: 2
           abilities_v2:
           - type: type
             constraints:
@@ -5485,22 +5704,26 @@ components:
           features:
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -5513,22 +5736,26 @@ components:
               direction: input
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -5543,7 +5770,7 @@ components:
           - ""
           - ""
           owner_organization_id: owner_organization_id
-          updated_at: 3
+          updated_at: 4
           model_category: model_category
           service_id: service_id
           is_public: true
@@ -5574,10 +5801,10 @@ components:
       properties:
         models:
           items:
-            $ref: '#/components/schemas/AIModel'
+            $ref: "#/components/schemas/AIModel"
           type: array
         service:
-          $ref: '#/components/schemas/AIModelServiceObject'
+          $ref: "#/components/schemas/AIModelServiceObject"
       type: object
     AIModelServiceWriteDto:
       example:
@@ -5602,11 +5829,11 @@ components:
           type: string
         hosting_locations:
           additionalProperties:
-            $ref: '#/components/schemas/HostingLocation'
+            $ref: "#/components/schemas/HostingLocation"
           type: object
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AIModelServiceI18n'
+            $ref: "#/components/schemas/AIModelServiceI18n"
           type: object
         internal_id:
           type: string
@@ -5618,7 +5845,7 @@ components:
           type: string
         service_impl:
           allOf:
-          - $ref: '#/components/schemas/AiServiceId'
+          - $ref: "#/components/schemas/AiServiceId"
           type: object
       required:
       - name
@@ -5643,22 +5870,26 @@ components:
         features:
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
@@ -5671,22 +5902,26 @@ components:
             direction: input
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
@@ -5719,11 +5954,11 @@ components:
           type: string
         features:
           items:
-            $ref: '#/components/schemas/AIModelFeature'
+            $ref: "#/components/schemas/AIModelFeature"
           type: array
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AIModelI18n'
+            $ref: "#/components/schemas/AIModelI18n"
           type: object
         internal_id:
           type: string
@@ -5753,7 +5988,7 @@ components:
           type: object
         service_host_locations:
           items:
-            $ref: '#/components/schemas/HostingLocation'
+            $ref: "#/components/schemas/HostingLocation"
           type: array
         service_id:
           maxLength: 64
@@ -5790,6 +6025,7 @@ components:
         function_name: function_name
         is_error: true
         id: id
+        result_meta_data: "{}"
         tool_function_id: tool_function_id
       properties:
         function_name:
@@ -5804,6 +6040,9 @@ components:
           type: boolean
         result:
           type: string
+        result_meta_data:
+          properties: {}
+          type: object
         tool_function_id:
           type: string
       required:
@@ -5815,8 +6054,10 @@ components:
       example:
         id: id
         updates:
-        - updates
-        - updates
+        - meta_data: "{}"
+          message: message
+        - meta_data: "{}"
+          message: message
       properties:
         id:
           maxLength: 64
@@ -5824,11 +6065,24 @@ components:
           type: string
         updates:
           items:
-            type: string
+            $ref: "#/components/schemas/AIgencyFunctionStatusUpdateData"
           type: array
       required:
       - id
       - updates
+      type: object
+    AIgencyFunctionStatusUpdateData:
+      example:
+        meta_data: "{}"
+        message: message
+      properties:
+        message:
+          type: string
+        meta_data:
+          properties: {}
+          type: object
+      required:
+      - message
       type: object
     AIgencyImage:
       example:
@@ -5892,7 +6146,7 @@ components:
           type: object
         thumbnails:
           items:
-            $ref: '#/components/schemas/AIgencyThumbnail'
+            $ref: "#/components/schemas/AIgencyThumbnail"
           type: array
         url:
           type: string
@@ -5954,7 +6208,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/AIgencyImage'
+            $ref: "#/components/schemas/AIgencyImage"
           type: array
         total_results:
           format: int64
@@ -6002,6 +6256,7 @@ components:
               function_name: function_name
               is_error: true
               id: id
+              result_meta_data: "{}"
               tool_function_id: tool_function_id
             text: text
             type: text
@@ -6012,8 +6267,10 @@ components:
             function_status_update:
               id: id
               updates:
-              - updates
-              - updates
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
           - file: "{}"
             function_call:
               function_name: function_name
@@ -6025,6 +6282,7 @@ components:
               function_name: function_name
               is_error: true
               id: id
+              result_meta_data: "{}"
               tool_function_id: tool_function_id
             text: text
             type: text
@@ -6035,8 +6293,10 @@ components:
             function_status_update:
               id: id
               updates:
-              - updates
-              - updates
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
           full_text: full_text
         sender_id: sender_id
         execution_id: execution_id
@@ -6052,22 +6312,26 @@ components:
         created_for_feature:
           capability: ""
           cost_items:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           - description: description
-            cost_per_unit_in_euro: 5.962133916683182
+            cost_per_unit_in_euro: 5.637376656633329
+            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
@@ -6093,7 +6357,7 @@ components:
           minLength: 1
           type: string
         attachments:
-          $ref: '#/components/schemas/AIgencyMessageFileList'
+          $ref: "#/components/schemas/AIgencyMessageFileList"
         channel_id:
           maxLength: 64
           minLength: 1
@@ -6103,20 +6367,20 @@ components:
           minLength: 1
           type: string
         content:
-          $ref: '#/components/schemas/AIgencyMessageContentList'
+          $ref: "#/components/schemas/AIgencyMessageContentList"
         created_at:
           format: int64
           type: integer
         created_for_feature:
-          $ref: '#/components/schemas/AIModelFeature'
+          $ref: "#/components/schemas/AIModelFeature"
         error:
-          $ref: '#/components/schemas/AiServiceError'
+          $ref: "#/components/schemas/AiServiceError"
         execution_id:
           maxLength: 64
           minLength: 1
           type: string
         finish_reason:
-          $ref: '#/components/schemas/FinishReason'
+          $ref: "#/components/schemas/FinishReason"
         id:
           maxLength: 64
           minLength: 1
@@ -6142,7 +6406,7 @@ components:
           type: string
         sender_conversation_role:
           allOf:
-          - $ref: '#/components/schemas/ConversationRole'
+          - $ref: "#/components/schemas/ConversationRole"
           type: object
         sender_id:
           maxLength: 64
@@ -6158,11 +6422,11 @@ components:
           type: integer
         token_direction:
           allOf:
-          - $ref: '#/components/schemas/TokenDirection'
+          - $ref: "#/components/schemas/TokenDirection"
           type: object
         type:
           allOf:
-          - $ref: '#/components/schemas/AIgencyMessageType'
+          - $ref: "#/components/schemas/AIgencyMessageType"
           type: object
         updated_at:
           format: int64
@@ -6197,6 +6461,7 @@ components:
           function_name: function_name
           is_error: true
           id: id
+          result_meta_data: "{}"
           tool_function_id: tool_function_id
         text: text
         type: text
@@ -6207,26 +6472,28 @@ components:
         function_status_update:
           id: id
           updates:
-          - updates
-          - updates
+          - meta_data: "{}"
+            message: message
+          - meta_data: "{}"
+            message: message
       properties:
         file:
           allOf:
-          - $ref: '#/components/schemas/AIgencyMessageFile'
+          - $ref: "#/components/schemas/AIgencyMessageFile"
           description: Currently unused in favor of attachment list
           type: object
         function_call:
-          $ref: '#/components/schemas/AIgencyFunctionCall'
+          $ref: "#/components/schemas/AIgencyFunctionCall"
         function_responses:
-          $ref: '#/components/schemas/AIgencyFunctionResponse'
+          $ref: "#/components/schemas/AIgencyFunctionResponse"
         function_status_update:
-          $ref: '#/components/schemas/AIgencyFunctionStatusUpdate'
+          $ref: "#/components/schemas/AIgencyFunctionStatusUpdate"
         text:
           type: string
         thinking:
-          $ref: '#/components/schemas/AIgencyThinking'
+          $ref: "#/components/schemas/AIgencyThinking"
         type:
-          $ref: '#/components/schemas/AIgencyMessageContentType'
+          $ref: "#/components/schemas/AIgencyMessageContentType"
       required:
       - type
       type: object
@@ -6244,6 +6511,7 @@ components:
             function_name: function_name
             is_error: true
             id: id
+            result_meta_data: "{}"
             tool_function_id: tool_function_id
           text: text
           type: text
@@ -6254,8 +6522,10 @@ components:
           function_status_update:
             id: id
             updates:
-            - updates
-            - updates
+            - meta_data: "{}"
+              message: message
+            - meta_data: "{}"
+              message: message
         - file: "{}"
           function_call:
             function_name: function_name
@@ -6267,6 +6537,7 @@ components:
             function_name: function_name
             is_error: true
             id: id
+            result_meta_data: "{}"
             tool_function_id: tool_function_id
           text: text
           type: text
@@ -6277,13 +6548,15 @@ components:
           function_status_update:
             id: id
             updates:
-            - updates
-            - updates
+            - meta_data: "{}"
+              message: message
+            - meta_data: "{}"
+              message: message
         full_text: full_text
       properties:
         data:
           items:
-            $ref: '#/components/schemas/AIgencyMessageContent'
+            $ref: "#/components/schemas/AIgencyMessageContent"
           type: array
         full_text:
           type: string
@@ -6363,7 +6636,7 @@ components:
       properties:
         files:
           items:
-            $ref: '#/components/schemas/AIgencyMessageFile'
+            $ref: "#/components/schemas/AIgencyMessageFile"
           type: array
       required:
       - files
@@ -6413,6 +6686,7 @@ components:
                 function_name: function_name
                 is_error: true
                 id: id
+                result_meta_data: "{}"
                 tool_function_id: tool_function_id
               text: text
               type: text
@@ -6423,8 +6697,10 @@ components:
               function_status_update:
                 id: id
                 updates:
-                - updates
-                - updates
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
             - file: "{}"
               function_call:
                 function_name: function_name
@@ -6436,6 +6712,7 @@ components:
                 function_name: function_name
                 is_error: true
                 id: id
+                result_meta_data: "{}"
                 tool_function_id: tool_function_id
               text: text
               type: text
@@ -6446,8 +6723,10 @@ components:
               function_status_update:
                 id: id
                 updates:
-                - updates
-                - updates
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -6463,22 +6742,26 @@ components:
           created_for_feature:
             capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -6534,6 +6817,7 @@ components:
                 function_name: function_name
                 is_error: true
                 id: id
+                result_meta_data: "{}"
                 tool_function_id: tool_function_id
               text: text
               type: text
@@ -6544,8 +6828,10 @@ components:
               function_status_update:
                 id: id
                 updates:
-                - updates
-                - updates
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
             - file: "{}"
               function_call:
                 function_name: function_name
@@ -6557,6 +6843,7 @@ components:
                 function_name: function_name
                 is_error: true
                 id: id
+                result_meta_data: "{}"
                 tool_function_id: tool_function_id
               text: text
               type: text
@@ -6567,8 +6854,10 @@ components:
               function_status_update:
                 id: id
                 updates:
-                - updates
-                - updates
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
@@ -6584,22 +6873,26 @@ components:
           created_for_feature:
             capability: ""
             cost_items:
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 2.3021358869347655
-              used_units: 7.061401241503109
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
               description: description
-              cost_per_unit_in_euro: 5.637376656633329
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             - description: description
-              cost_per_unit_in_euro: 5.962133916683182
+              cost_per_unit_in_euro: 5.637376656633329
+              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
@@ -6619,7 +6912,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/AIgencyMessage'
+            $ref: "#/components/schemas/AIgencyMessage"
           type: array
         total_results:
           format: int64
@@ -6679,6 +6972,7 @@ components:
               function_name: function_name
               is_error: true
               id: id
+              result_meta_data: "{}"
               tool_function_id: tool_function_id
             text: text
             type: text
@@ -6689,8 +6983,10 @@ components:
             function_status_update:
               id: id
               updates:
-              - updates
-              - updates
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
           - file: "{}"
             function_call:
               function_name: function_name
@@ -6702,6 +6998,7 @@ components:
               function_name: function_name
               is_error: true
               id: id
+              result_meta_data: "{}"
               tool_function_id: tool_function_id
             text: text
             type: text
@@ -6712,8 +7009,10 @@ components:
             function_status_update:
               id: id
               updates:
-              - updates
-              - updates
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
           full_text: full_text
         sender_conversation_role: "{}"
         meta_data: "{}"
@@ -6729,7 +7028,7 @@ components:
           minLength: 1
           type: string
         attachments:
-          $ref: '#/components/schemas/AIgencyMessageFileList'
+          $ref: "#/components/schemas/AIgencyMessageFileList"
         channel_id:
           maxLength: 64
           minLength: 1
@@ -6739,7 +7038,7 @@ components:
           minLength: 1
           type: string
         content:
-          $ref: '#/components/schemas/AIgencyMessageContentList'
+          $ref: "#/components/schemas/AIgencyMessageContentList"
         meta_data:
           properties: {}
           type: object
@@ -6760,7 +7059,7 @@ components:
           type: string
         sender_conversation_role:
           allOf:
-          - $ref: '#/components/schemas/ConversationRole'
+          - $ref: "#/components/schemas/ConversationRole"
           type: object
         sender_name:
           maxLength: 255
@@ -6768,7 +7067,7 @@ components:
           type: string
         type:
           allOf:
-          - $ref: '#/components/schemas/AIgencyMessageType'
+          - $ref: "#/components/schemas/AIgencyMessageType"
           type: object
       required:
       - ai_model_id
@@ -6825,10 +7124,10 @@ components:
       properties:
         constraints:
           items:
-            $ref: '#/components/schemas/AIModelConstraint'
+            $ref: "#/components/schemas/AIModelConstraint"
           type: array
         type:
-          $ref: '#/components/schemas/AbilityType'
+          $ref: "#/components/schemas/AbilityType"
       type: object
     AbilityType:
       enum:
@@ -6859,7 +7158,7 @@ components:
       properties:
         constraints:
           items:
-            $ref: '#/components/schemas/AIModelConstraint'
+            $ref: "#/components/schemas/AIModelConstraint"
           type: array
         type:
           type: string
@@ -6955,11 +7254,11 @@ components:
       properties:
         abilities:
           items:
-            $ref: '#/components/schemas/Ability'
+            $ref: "#/components/schemas/Ability"
           type: array
         abilities_v2:
           items:
-            $ref: '#/components/schemas/AbilityV2'
+            $ref: "#/components/schemas/AbilityV2"
           type: array
         add_tool_guidelines:
           type: boolean
@@ -6983,7 +7282,7 @@ components:
           type: string
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AgentI18n'
+            $ref: "#/components/schemas/AgentI18n"
           type: object
         id:
           maxLength: 64
@@ -7009,7 +7308,7 @@ components:
           maxLength: 255
           type: string
         model_host_location:
-          $ref: '#/components/schemas/HostingLocation'
+          $ref: "#/components/schemas/HostingLocation"
         model_id:
           maxLength: 64
           minLength: 1
@@ -7045,7 +7344,7 @@ components:
           type: array
           uniqueItems: true
         type:
-          $ref: '#/components/schemas/AgentType'
+          $ref: "#/components/schemas/AgentType"
         updated_at:
           format: int64
           type: integer
@@ -7152,7 +7451,7 @@ components:
           type: string
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/AgentI18n'
+            $ref: "#/components/schemas/AgentI18n"
           type: object
         ignore_incoming_overwrite:
           type: boolean
@@ -7169,7 +7468,7 @@ components:
           properties: {}
           type: object
         model_host_location:
-          $ref: '#/components/schemas/HostingLocation'
+          $ref: "#/components/schemas/HostingLocation"
         model_id:
           maxLength: 64
           minLength: 1
@@ -7194,7 +7493,7 @@ components:
           type: array
           uniqueItems: true
         type:
-          $ref: '#/components/schemas/AgentType'
+          $ref: "#/components/schemas/AgentType"
         use_tools:
           type: boolean
       type: object
@@ -7206,7 +7505,7 @@ components:
         message: message
       properties:
         error_code:
-          $ref: '#/components/schemas/ApiErrorCode'
+          $ref: "#/components/schemas/ApiErrorCode"
         message:
           type: string
         original_status_code:
@@ -7255,7 +7554,7 @@ components:
         error: error
       properties:
         code:
-          $ref: '#/components/schemas/ApiErrorCode'
+          $ref: "#/components/schemas/ApiErrorCode"
         error:
           type: string
       type: object
@@ -7321,7 +7620,7 @@ components:
       - chat_completion_exceeds_total_temporary_file_size
       - chat_completion_exceeds_max_input_tokens
       - chat_completion_exceeds_max_tool_calls
-      - chat_completion_channel_in_progress
+      - chat_completion_in_progress
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
@@ -7439,7 +7738,7 @@ components:
       - ErrCodeChatCompletionExceedsTotalTempFileSize
       - ErrCodeChatCompletionExceedsMaxInputTokens
       - ErrCodeChatCompletionExceedsMaxToolCalls
-      - ErrCodeChatCompletionChannelInProgress
+      - ErrCodeChatCompletionInProgress
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
@@ -7606,7 +7905,7 @@ components:
         agent_id:
           type: string
         audio_file:
-          $ref: '#/components/schemas/AIgencyMessageFile'
+          $ref: "#/components/schemas/AIgencyMessageFile"
         channel_id:
           type: string
         id:
@@ -7641,6 +7940,404 @@ components:
       required:
       - language
       - transcription_format
+      type: object
+    AuditTrail:
+      example:
+        messages:
+        - channel_name: channel_name
+          response_to_id: response_to_id
+          attachments:
+            files:
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+          reference_id: reference_id
+          created_at: 0
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file: "{}"
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                result: result
+                function_name: function_name
+                is_error: true
+                id: id
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              text: text
+              type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
+              function_status_update:
+                id: id
+                updates:
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
+            - file: "{}"
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                result: result
+                function_name: function_name
+                is_error: true
+                id: id
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              text: text
+              type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
+              function_status_update:
+                id: id
+                updates:
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
+            full_text: full_text
+          sender_id: sender_id
+          token_direction: "{}"
+          token_count: 6
+          finish_reason: ""
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          state: state
+          channel_id: channel_id
+          parameters: "{}"
+        - channel_name: channel_name
+          response_to_id: response_to_id
+          attachments:
+            files:
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+            - embedded_content: embedded_content
+              mime_type: mime_type
+              file_name: file_name
+              meta_data: "{}"
+              id: id
+              file_size: 0
+              url: url
+          reference_id: reference_id
+          created_at: 0
+          sender_name: sender_name
+          error:
+            status_code: 5
+            original_status_code: 1
+            error_code: ""
+            message: message
+          type: "{}"
+          ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          content:
+            data:
+            - file: "{}"
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                result: result
+                function_name: function_name
+                is_error: true
+                id: id
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              text: text
+              type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
+              function_status_update:
+                id: id
+                updates:
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
+            - file: "{}"
+              function_call:
+                function_name: function_name
+                arguments: "{}"
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                result: result
+                function_name: function_name
+                is_error: true
+                id: id
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              text: text
+              type: text
+              thinking:
+                is_redacted: true
+                signature: signature
+                content: content
+              function_status_update:
+                id: id
+                updates:
+                - meta_data: "{}"
+                  message: message
+                - meta_data: "{}"
+                  message: message
+            full_text: full_text
+          sender_id: sender_id
+          token_direction: "{}"
+          token_count: 6
+          finish_reason: ""
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          sender_conversation_role: "{}"
+          meta_data: "{}"
+          id: id
+          state: state
+          channel_id: channel_id
+          parameters: "{}"
+        channel_id: channel_id
+      properties:
+        channel_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        messages:
+          items:
+            $ref: "#/components/schemas/AuditTrailMessage"
+          type: array
+      required:
+      - channel_id
+      type: object
+    AuditTrailMessage:
+      example:
+        channel_name: channel_name
+        response_to_id: response_to_id
+        attachments:
+          files:
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data: "{}"
+            id: id
+            file_size: 0
+            url: url
+          - embedded_content: embedded_content
+            mime_type: mime_type
+            file_name: file_name
+            meta_data: "{}"
+            id: id
+            file_size: 0
+            url: url
+        reference_id: reference_id
+        created_at: 0
+        sender_name: sender_name
+        error:
+          status_code: 5
+          original_status_code: 1
+          error_code: ""
+          message: message
+        type: "{}"
+        ai_model_id: ai_model_id
+        ai_service_id: ai_service_id
+        content:
+          data:
+          - file: "{}"
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+              tool_function_id: tool_function_id
+            function_responses:
+              result: result
+              function_name: function_name
+              is_error: true
+              id: id
+              result_meta_data: "{}"
+              tool_function_id: tool_function_id
+            text: text
+            type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
+            function_status_update:
+              id: id
+              updates:
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
+          - file: "{}"
+            function_call:
+              function_name: function_name
+              arguments: "{}"
+              id: id
+              tool_function_id: tool_function_id
+            function_responses:
+              result: result
+              function_name: function_name
+              is_error: true
+              id: id
+              result_meta_data: "{}"
+              tool_function_id: tool_function_id
+            text: text
+            type: text
+            thinking:
+              is_redacted: true
+              signature: signature
+              content: content
+            function_status_update:
+              id: id
+              updates:
+              - meta_data: "{}"
+                message: message
+              - meta_data: "{}"
+                message: message
+          full_text: full_text
+        sender_id: sender_id
+        token_direction: "{}"
+        token_count: 6
+        finish_reason: ""
+        owner_organization_id: owner_organization_id
+        updated_at: 1
+        sender_conversation_role: "{}"
+        meta_data: "{}"
+        id: id
+        state: state
+        channel_id: channel_id
+        parameters: "{}"
+      properties:
+        ai_model_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        ai_service_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        attachments:
+          $ref: "#/components/schemas/AIgencyMessageFileList"
+        channel_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        channel_name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        content:
+          $ref: "#/components/schemas/AIgencyMessageContentList"
+        created_at:
+          format: int64
+          type: integer
+        error:
+          $ref: "#/components/schemas/AiServiceError"
+        finish_reason:
+          $ref: "#/components/schemas/FinishReason"
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        meta_data:
+          properties: {}
+          type: object
+        owner_organization_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        parameters:
+          properties: {}
+          type: object
+        reference_id:
+          maxLength: 64
+          type: string
+        response_to_id:
+          maxLength: 64
+          type: string
+        sender_conversation_role:
+          allOf:
+          - $ref: "#/components/schemas/ConversationRole"
+          type: object
+        sender_id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        sender_name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        state:
+          type: string
+        token_count:
+          type: integer
+        token_direction:
+          allOf:
+          - $ref: "#/components/schemas/TokenDirection"
+          type: object
+        type:
+          allOf:
+          - $ref: "#/components/schemas/AIgencyMessageType"
+          type: object
+        updated_at:
+          format: int64
+          type: integer
+      required:
+      - ai_model_id
+      - ai_service_id
+      - attachments
+      - channel_id
+      - channel_name
+      - content
+      - created_at
+      - id
+      - owner_organization_id
+      - sender_conversation_role
+      - sender_id
+      - sender_name
+      - token_direction
+      - type
+      - updated_at
       type: object
     Channel:
       example:
@@ -7705,6 +8402,47 @@ components:
       - owner_id
       - owner_organization_id
       type: object
+    ChannelResults:
+      example:
+        results:
+        - summary: summary
+          metadata: "{}"
+          owner_id: owner_id
+          mission_id: mission_id
+          created_at: 0
+          description: description
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          is_org_public: true
+          is_public: true
+          name: name
+          last_message_at: 6
+          id: id
+        - summary: summary
+          metadata: "{}"
+          owner_id: owner_id
+          mission_id: mission_id
+          created_at: 0
+          description: description
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          is_org_public: true
+          is_public: true
+          name: name
+          last_message_at: 6
+          id: id
+        total_results: 0
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/Channel"
+          type: array
+        total_results:
+          format: int64
+          type: integer
+      required:
+      - results
+      type: object
     ChannelWriteDto:
       example:
         summary: summary
@@ -7735,6 +8473,39 @@ components:
         summary:
           maxLength: 1024
           type: string
+      type: object
+    ChatCompletionCostTrackingRequest:
+      example:
+        execution_id: execution_id
+        model_internal_id: model_internal_id
+        streaming: true
+        user_id: user_id
+        service_internal_id: service_internal_id
+        batch: true
+        output_tokens: 0
+        input_tokens: 0
+      properties:
+        batch:
+          type: boolean
+        execution_id:
+          type: string
+        input_tokens:
+          minimum: 0
+          type: integer
+        model_internal_id:
+          type: string
+        output_tokens:
+          minimum: 0
+          type: integer
+        service_internal_id:
+          type: string
+        streaming:
+          type: boolean
+        user_id:
+          type: string
+      required:
+      - model_internal_id
+      - service_internal_id
       type: object
     ChatCompletionRequestDto:
       example:
@@ -7929,14 +8700,18 @@ components:
     ExecutionCostTemplate:
       example:
         description: description
-        cost_per_unit_in_euro: 5.962133916683182
+        cost_per_unit_in_euro: 5.637376656633329
+        batch_cost_factor: 5.962133916683182
         cost_unit: input-tokens-per-million
       properties:
+        batch_cost_factor:
+          format: double
+          type: number
         cost_per_unit_in_euro:
           format: double
           type: number
         cost_unit:
-          $ref: '#/components/schemas/AIModelCostUnit'
+          $ref: "#/components/schemas/AIModelCostUnit"
         description:
           type: string
       type: object
@@ -7945,15 +8720,17 @@ components:
         agent_id: agent_id
         owner_id: owner_id
         usage:
-        - resulting_cost_in_euro: 2.3021358869347655
-          used_units: 7.061401241503109
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
           description: description
-          cost_per_unit_in_euro: 5.637376656633329
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
           cost_unit: null
-        - resulting_cost_in_euro: 2.3021358869347655
-          used_units: 7.061401241503109
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
           description: description
-          cost_per_unit_in_euro: 5.637376656633329
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
           cost_unit: null
         created_at: 0
         message_id: message_id
@@ -7994,7 +8771,7 @@ components:
           type: string
         usage:
           items:
-            $ref: '#/components/schemas/ExecutionUsageCost'
+            $ref: "#/components/schemas/ExecutionUsageCost"
           type: array
       type: object
     ExecutionLogCosts:
@@ -8011,15 +8788,17 @@ components:
         - agent_id: agent_id
           owner_id: owner_id
           usage:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           created_at: 0
           message_id: message_id
@@ -8034,15 +8813,17 @@ components:
         - agent_id: agent_id
           owner_id: owner_id
           usage:
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 2.3021358869347655
-            used_units: 7.061401241503109
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
             description: description
-            cost_per_unit_in_euro: 5.637376656633329
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           created_at: 0
           message_id: message_id
@@ -8058,7 +8839,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/ExecutionLog'
+            $ref: "#/components/schemas/ExecutionLog"
           type: array
         total_results:
           format: int64
@@ -8066,17 +8847,21 @@ components:
       type: object
     ExecutionUsageCost:
       example:
-        resulting_cost_in_euro: 2.3021358869347655
-        used_units: 7.061401241503109
+        resulting_cost_in_euro: 9.301444243932576
+        used_units: 3.616076749251911
         description: description
-        cost_per_unit_in_euro: 5.637376656633329
+        cost_per_unit_in_euro: 7.061401241503109
+        batch_cost_factor: 2.3021358869347655
         cost_unit: null
       properties:
+        batch_cost_factor:
+          format: double
+          type: number
         cost_per_unit_in_euro:
           format: double
           type: number
         cost_unit:
-          $ref: '#/components/schemas/AIModelCostUnit'
+          $ref: "#/components/schemas/AIModelCostUnit"
         description:
           type: string
         resulting_cost_in_euro:
@@ -8111,9 +8896,9 @@ components:
           max_total_file_size: 6
       properties:
         chat:
-          $ref: '#/components/schemas/FileChatSettings'
+          $ref: "#/components/schemas/FileChatSettings"
         upload:
-          $ref: '#/components/schemas/FileUploadSettings'
+          $ref: "#/components/schemas/FileUploadSettings"
       type: object
     FileUploadCostTrackingRequest:
       example:
@@ -8154,7 +8939,7 @@ components:
           type: string
         resulting_files:
           items:
-            $ref: '#/components/schemas/ResultFile'
+            $ref: "#/components/schemas/ResultFile"
           type: array
       required:
       - id
@@ -8221,7 +9006,7 @@ components:
           type: string
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/FunctionCallI18n'
+            $ref: "#/components/schemas/FunctionCallI18n"
           type: object
         icon:
           type: string
@@ -8269,6 +9054,7 @@ components:
         name: name
         tool_id: tool_id
         id: id
+        result_meta_data: "{}"
         error: error
         result_texts:
         - result_texts
@@ -8285,8 +9071,11 @@ components:
           type: string
         result_files:
           items:
-            $ref: '#/components/schemas/ResultFile'
+            $ref: "#/components/schemas/ResultFile"
           type: array
+        result_meta_data:
+          properties: {}
+          type: object
         result_texts:
           items:
             type: string
@@ -8382,7 +9171,7 @@ components:
           format: int64
           type: integer
         completion_reason:
-          $ref: '#/components/schemas/MissionCompletionReason'
+          $ref: "#/components/schemas/MissionCompletionReason"
         content:
           type: object
         created_at:
@@ -8400,7 +9189,7 @@ components:
           example: mis_1234567890123456
           type: string
         instructions:
-          $ref: '#/components/schemas/MissionInstructions'
+          $ref: "#/components/schemas/MissionInstructions"
         mission_executor_id:
           example: agent_1234567890123456
           type: string
@@ -8409,7 +9198,7 @@ components:
         owner_organization_id:
           type: string
         status_updates:
-          $ref: '#/components/schemas/MissionStatusUpdateList'
+          $ref: "#/components/schemas/MissionStatusUpdateList"
         updated_at:
           format: int64
           type: integer
@@ -8515,7 +9304,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/Mission'
+            $ref: "#/components/schemas/Mission"
           type: array
         total_results:
           format: int64
@@ -8554,7 +9343,7 @@ components:
         mission_id:
           type: string
         status:
-          $ref: '#/components/schemas/MissionStatus'
+          $ref: "#/components/schemas/MissionStatus"
         timestamp:
           type: integer
       type: object
@@ -8574,7 +9363,7 @@ components:
       properties:
         status_updates:
           items:
-            $ref: '#/components/schemas/MissionStatusUpdate'
+            $ref: "#/components/schemas/MissionStatusUpdate"
           type: array
       type: object
     MissionWriteDto:
@@ -8590,7 +9379,7 @@ components:
         description:
           type: string
         instructions:
-          $ref: '#/components/schemas/MissionInstructions'
+          $ref: "#/components/schemas/MissionInstructions"
       required:
       - instructions
       type: object
@@ -8708,10 +9497,10 @@ components:
           type: integer
         versions:
           items:
-            $ref: '#/components/schemas/PromptVersion'
+            $ref: "#/components/schemas/PromptVersion"
           type: array
         visibility:
-          $ref: '#/components/schemas/PromptVisibilityStates'
+          $ref: "#/components/schemas/PromptVisibilityStates"
       required:
       - id
       - title
@@ -8788,7 +9577,7 @@ components:
         title:
           type: string
         visibility:
-          $ref: '#/components/schemas/PromptVisibilityStates'
+          $ref: "#/components/schemas/PromptVisibilityStates"
       type: object
     RenderedPrompt:
       example:
@@ -8856,7 +9645,7 @@ components:
           type: string
         embeddings:
           items:
-            $ref: '#/components/schemas/EmbeddingItem'
+            $ref: "#/components/schemas/EmbeddingItem"
           type: array
         execution_id:
           type: string
@@ -8906,7 +9695,7 @@ components:
           type: string
         items:
           items:
-            $ref: '#/components/schemas/TextEmbeddingItemDto'
+            $ref: "#/components/schemas/TextEmbeddingItemDto"
           minItems: 1
           type: array
         parameters:
@@ -8971,7 +9760,7 @@ components:
           type: string
         functions:
           items:
-            $ref: '#/components/schemas/ToolFunction'
+            $ref: "#/components/schemas/ToolFunction"
           type: array
         hosting_locations:
           items:
@@ -8979,7 +9768,7 @@ components:
           type: array
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/ToolI18n'
+            $ref: "#/components/schemas/ToolI18n"
           type: object
         icon:
           type: string
@@ -9020,7 +9809,7 @@ components:
           type: string
         i18n:
           additionalProperties:
-            $ref: '#/components/schemas/ToolI18n'
+            $ref: "#/components/schemas/ToolI18n"
           type: object
         icon:
           type: string

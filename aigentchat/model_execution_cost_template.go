@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.5
+API version: 0.20.10
 Contact: contact@vaudience.ai
 */
 
@@ -20,6 +20,7 @@ var _ MappedNullable = &ExecutionCostTemplate{}
 
 // ExecutionCostTemplate struct for ExecutionCostTemplate
 type ExecutionCostTemplate struct {
+	BatchCostFactor *float64 `json:"batch_cost_factor,omitempty"`
 	CostPerUnitInEuro *float64 `json:"cost_per_unit_in_euro,omitempty"`
 	CostUnit *AIModelCostUnit `json:"cost_unit,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -43,6 +44,38 @@ func NewExecutionCostTemplate() *ExecutionCostTemplate {
 func NewExecutionCostTemplateWithDefaults() *ExecutionCostTemplate {
 	this := ExecutionCostTemplate{}
 	return &this
+}
+
+// GetBatchCostFactor returns the BatchCostFactor field value if set, zero value otherwise.
+func (o *ExecutionCostTemplate) GetBatchCostFactor() float64 {
+	if o == nil || IsNil(o.BatchCostFactor) {
+		var ret float64
+		return ret
+	}
+	return *o.BatchCostFactor
+}
+
+// GetBatchCostFactorOk returns a tuple with the BatchCostFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionCostTemplate) GetBatchCostFactorOk() (*float64, bool) {
+	if o == nil || IsNil(o.BatchCostFactor) {
+		return nil, false
+	}
+	return o.BatchCostFactor, true
+}
+
+// HasBatchCostFactor returns a boolean if a field has been set.
+func (o *ExecutionCostTemplate) HasBatchCostFactor() bool {
+	if o != nil && !IsNil(o.BatchCostFactor) {
+		return true
+	}
+
+	return false
+}
+
+// SetBatchCostFactor gets a reference to the given float64 and assigns it to the BatchCostFactor field.
+func (o *ExecutionCostTemplate) SetBatchCostFactor(v float64) {
+	o.BatchCostFactor = &v
 }
 
 // GetCostPerUnitInEuro returns the CostPerUnitInEuro field value if set, zero value otherwise.
@@ -151,6 +184,9 @@ func (o ExecutionCostTemplate) MarshalJSON() ([]byte, error) {
 
 func (o ExecutionCostTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BatchCostFactor) {
+		toSerialize["batch_cost_factor"] = o.BatchCostFactor
+	}
 	if !IsNil(o.CostPerUnitInEuro) {
 		toSerialize["cost_per_unit_in_euro"] = o.CostPerUnitInEuro
 	}
@@ -182,6 +218,7 @@ func (o *ExecutionCostTemplate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "batch_cost_factor")
 		delete(additionalProperties, "cost_per_unit_in_euro")
 		delete(additionalProperties, "cost_unit")
 		delete(additionalProperties, "description")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.5
+API version: 0.20.10
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type FunctionCallResults struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ResultFiles []ResultFile `json:"result_files,omitempty"`
+	ResultMetaData map[string]interface{} `json:"result_meta_data,omitempty"`
 	ResultTexts []string `json:"result_texts,omitempty"`
 	ToolFunctionId *string `json:"tool_function_id,omitempty"`
 	ToolId *string `json:"tool_id,omitempty"`
@@ -210,6 +211,38 @@ func (o *FunctionCallResults) SetResultFiles(v []ResultFile) {
 	o.ResultFiles = v
 }
 
+// GetResultMetaData returns the ResultMetaData field value if set, zero value otherwise.
+func (o *FunctionCallResults) GetResultMetaData() map[string]interface{} {
+	if o == nil || IsNil(o.ResultMetaData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ResultMetaData
+}
+
+// GetResultMetaDataOk returns a tuple with the ResultMetaData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionCallResults) GetResultMetaDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ResultMetaData) {
+		return map[string]interface{}{}, false
+	}
+	return o.ResultMetaData, true
+}
+
+// HasResultMetaData returns a boolean if a field has been set.
+func (o *FunctionCallResults) HasResultMetaData() bool {
+	if o != nil && !IsNil(o.ResultMetaData) {
+		return true
+	}
+
+	return false
+}
+
+// SetResultMetaData gets a reference to the given map[string]interface{} and assigns it to the ResultMetaData field.
+func (o *FunctionCallResults) SetResultMetaData(v map[string]interface{}) {
+	o.ResultMetaData = v
+}
+
 // GetResultTexts returns the ResultTexts field value if set, zero value otherwise.
 func (o *FunctionCallResults) GetResultTexts() []string {
 	if o == nil || IsNil(o.ResultTexts) {
@@ -331,6 +364,9 @@ func (o FunctionCallResults) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResultFiles) {
 		toSerialize["result_files"] = o.ResultFiles
 	}
+	if !IsNil(o.ResultMetaData) {
+		toSerialize["result_meta_data"] = o.ResultMetaData
+	}
 	if !IsNil(o.ResultTexts) {
 		toSerialize["result_texts"] = o.ResultTexts
 	}
@@ -367,6 +403,7 @@ func (o *FunctionCallResults) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "result_files")
+		delete(additionalProperties, "result_meta_data")
 		delete(additionalProperties, "result_texts")
 		delete(additionalProperties, "tool_function_id")
 		delete(additionalProperties, "tool_id")

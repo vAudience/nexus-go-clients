@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.5
+API version: 0.20.10
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &AIgencyFunctionStatusUpdate{}
 // AIgencyFunctionStatusUpdate struct for AIgencyFunctionStatusUpdate
 type AIgencyFunctionStatusUpdate struct {
 	Id string `json:"id"`
-	Updates []string `json:"updates"`
+	Updates []AIgencyFunctionStatusUpdateData `json:"updates"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _AIgencyFunctionStatusUpdate AIgencyFunctionStatusUpdate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyFunctionStatusUpdate(id string, updates []string) *AIgencyFunctionStatusUpdate {
+func NewAIgencyFunctionStatusUpdate(id string, updates []AIgencyFunctionStatusUpdateData) *AIgencyFunctionStatusUpdate {
 	this := AIgencyFunctionStatusUpdate{}
 	this.Id = id
 	this.Updates = updates
@@ -72,9 +72,9 @@ func (o *AIgencyFunctionStatusUpdate) SetId(v string) {
 }
 
 // GetUpdates returns the Updates field value
-func (o *AIgencyFunctionStatusUpdate) GetUpdates() []string {
+func (o *AIgencyFunctionStatusUpdate) GetUpdates() []AIgencyFunctionStatusUpdateData {
 	if o == nil {
-		var ret []string
+		var ret []AIgencyFunctionStatusUpdateData
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *AIgencyFunctionStatusUpdate) GetUpdates() []string {
 
 // GetUpdatesOk returns a tuple with the Updates field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyFunctionStatusUpdate) GetUpdatesOk() ([]string, bool) {
+func (o *AIgencyFunctionStatusUpdate) GetUpdatesOk() ([]AIgencyFunctionStatusUpdateData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *AIgencyFunctionStatusUpdate) GetUpdatesOk() ([]string, bool) {
 }
 
 // SetUpdates sets field value
-func (o *AIgencyFunctionStatusUpdate) SetUpdates(v []string) {
+func (o *AIgencyFunctionStatusUpdate) SetUpdates(v []AIgencyFunctionStatusUpdateData) {
 	o.Updates = v
 }
 
