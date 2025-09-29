@@ -1,10 +1,10 @@
 # Nexus GO Clients
 
-This repository contains the source code for the Nexus GO clients. Currently, two clients are available:
+This repository contains the source code for the Nexus GO clients:
 
 - **Core Client**: Interact with the [vAudience AI Core API](https://github.com/vAudience/vaud-ai-core)
-- **AigentChat Client**: Interact with the [AigentChat API](https://github.com/vAudience/aigentchat)
-- **FileManager Client**: Interact with the [vAudience File Manager API](https://https://github.com/vAudience/vaud-ai-file-manager)
+- **AigentChat Client**: Interact with the [vAudience AigentChat API](https://github.com/vAudience/aigentchat)
+- **FileManager Client**: Interact with the [vAudience FileManager API](https://https://github.com/vAudience/vaud-ai-file-manager)
 
 ## Installation
 
