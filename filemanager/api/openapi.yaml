@@ -1,0 +1,726 @@
+openapi: 3.0.1
+info:
+  contact: {}
+  description: API for the vAudience AI File Manager
+  license:
+    name: Copyrighted
+  title: vAudience AI File Manager API
+  version: 0.2.0
+servers:
+- url: https://file-manager.dev.ai.vaud.one/
+tags:
+- description: anything related to the Files route
+  name: Files
+- description: anything related to the Files Metadata route
+  name: Files Metadata
+- description: anything related to the Health route
+  name: Health
+- description: anything related to the Metrics route
+  name: Metrics
+- description: anything related to the Version route
+  name: Version
+paths:
+  /info/health:
+    get:
+      description: a simple 200 return endpoint to ensure the service is responsive
+      operationId: HealthGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+          description: OK
+      summary: checks for service health
+      tags:
+      - Health
+  /info/metrics:
+    get:
+      description: go prometheus client provides this standard (basic) metrics endpoint
+      operationId: MetricsGet
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "500":
+          content: {}
+          description: Internal Server Error
+      summary: Prometheus provided metrics endpoint
+      tags:
+      - Metrics
+  /info/version:
+    get:
+      description: returns the version number of this service
+      operationId: VersionGet
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionResponse"
+          description: OK
+      summary: returns the service version
+      tags:
+      - Version
+  /v1/files/{storage_path}:
+    delete:
+      description: Delete a file
+      operationId: DeleteFile
+      parameters:
+      - description: Storage path
+        in: path
+        name: storage_path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Delete a file
+      tags:
+      - Files
+    get:
+      description: Serve a file
+      operationId: ServeFile
+      parameters:
+      - description: Storage path
+        in: path
+        name: storage_path
+        required: true
+        schema:
+          type: string
+      - description: Force download as attachment
+        in: query
+        name: download
+        schema:
+          type: boolean
+      - description: Custom filename for download
+        in: query
+        name: filename
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+            image/*:
+              schema:
+                format: binary
+                type: string
+            text/*:
+              schema:
+                format: binary
+                type: string
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: File content
+        "400":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "501":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Implemented
+      security:
+      - ApiKey: []
+      summary: Serve a file
+      tags:
+      - Files
+  /v1/metadata:
+    post:
+      description: Get metadata for multiple files
+      operationId: GetFileMetadataBatch
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/FileMetadataBatchGetRequest"
+        description: Batch request with file paths
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataBatchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+      security:
+      - ApiKey: []
+      summary: Get metadata for multiple files
+      tags:
+      - Files Metadata
+      x-codegen-request-body-name: batchrequest
+  /v1/metadata/{storage_path}:
+    get:
+      description: Get file metadata by path
+      operationId: GetFileMetadata
+      parameters:
+      - description: Storage path
+        in: path
+        name: storage_path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Get file metadata by path
+      tags:
+      - Files Metadata
+  /v1/organizations/{org_id}/files/{category}:
+    post:
+      description: Create a file for a channel
+      operationId: UploadFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: category ID
+        in: path
+        name: category
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UploadFile_request"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileUploadResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Request Entity Too Large
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a file for a channel
+      tags:
+      - Files
+  /v1/organizations/{org_id}/files/{category}/settings:
+    get:
+      description: Get file upload settings for a category
+      operationId: GetFileUploadSettings
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: category ID
+        in: path
+        name: category
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileUploadSettings"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Get file upload settings for a category
+      tags:
+      - Files
+components:
+  schemas:
+    ErrorDetail:
+      example:
+        field: field
+        tag: tag
+        value: value
+      properties:
+        field:
+          type: string
+        tag:
+          type: string
+        value:
+          type: string
+      type: object
+    ErrorResponse:
+      example:
+        code: code
+        details:
+        - field: field
+          tag: tag
+          value: value
+        - field: field
+          tag: tag
+          value: value
+        message: message
+        status: 1
+      properties:
+        code:
+          type: string
+        details:
+          items:
+            $ref: "#/components/schemas/ErrorDetail"
+          type: array
+        message:
+          type: string
+        status:
+          type: integer
+      type: object
+    FileMetadataBatchGetRequest:
+      example:
+        storage_paths:
+        - storage_paths
+        - storage_paths
+      properties:
+        storage_paths:
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - storage_paths
+      type: object
+    FileMetadataBatchResponse:
+      example:
+        files:
+        - upload_category: upload_category
+          metadata: "{}"
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
+          storage_path: storage_path
+          user_id: user_id
+          organization_id: organization_id
+          original_file_name: original_file_name
+          id: id
+        - upload_category: upload_category
+          metadata: "{}"
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
+          storage_path: storage_path
+          user_id: user_id
+          organization_id: organization_id
+          original_file_name: original_file_name
+          id: id
+      properties:
+        files:
+          items:
+            $ref: "#/components/schemas/FileMetadataResponse"
+          type: array
+      required:
+      - files
+      type: object
+    FileMetadataResponse:
+      example:
+        upload_category: upload_category
+        metadata: "{}"
+        file_name: file_name
+        created_at: created_at
+        original_file_size: 6
+        team_id: team_id
+        file_size: 0
+        url: url
+        file_storage_type: temp
+        expires_at: expires_at
+        updated_at: updated_at
+        mime_type: mime_type
+        original_mime_type: original_mime_type
+        original_url: original_url
+        storage_path: storage_path
+        user_id: user_id
+        organization_id: organization_id
+        original_file_name: original_file_name
+        id: id
+      properties:
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        file_name:
+          type: string
+        file_size:
+          format: int64
+          type: integer
+        file_storage_type:
+          enum:
+          - temp
+          - public
+          - private-org
+          - private-org-user
+          - private-team
+          type: string
+        id:
+          type: string
+        metadata:
+          properties: {}
+          type: object
+        mime_type:
+          type: string
+        organization_id:
+          type: string
+        original_file_name:
+          type: string
+        original_file_size:
+          format: int64
+          type: integer
+        original_mime_type:
+          type: string
+        original_url:
+          type: string
+        storage_path:
+          type: string
+        team_id:
+          type: string
+        updated_at:
+          type: string
+        upload_category:
+          type: string
+        url:
+          type: string
+        user_id:
+          type: string
+      required:
+      - created_at
+      - file_name
+      - file_size
+      - file_storage_type
+      - id
+      - mime_type
+      - original_file_name
+      - original_file_size
+      - original_mime_type
+      - storage_path
+      - updated_at
+      - upload_category
+      - url
+      type: object
+    FileUploadResponse:
+      example:
+        files:
+        - upload_category: upload_category
+          metadata: "{}"
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
+          storage_path: storage_path
+          user_id: user_id
+          organization_id: organization_id
+          original_file_name: original_file_name
+          id: id
+        - upload_category: upload_category
+          metadata: "{}"
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          original_mime_type: original_mime_type
+          original_url: original_url
+          storage_path: storage_path
+          user_id: user_id
+          organization_id: organization_id
+          original_file_name: original_file_name
+          id: id
+        id: id
+      properties:
+        files:
+          items:
+            $ref: "#/components/schemas/FileMetadataResponse"
+          type: array
+        id:
+          type: string
+      required:
+      - files
+      - id
+      type: object
+    FileUploadSettings:
+      example:
+        min_file_size: 6
+        max_file_size: 0
+        accepted_mime_types:
+        - accepted_mime_types
+        - accepted_mime_types
+      properties:
+        accepted_mime_types:
+          items:
+            type: string
+          type: array
+        max_file_size:
+          format: int64
+          type: integer
+        min_file_size:
+          format: int64
+          type: integer
+      type: object
+    HealthResponse:
+      example:
+        health: health
+      properties:
+        health:
+          type: string
+      required:
+      - health
+      type: object
+    VersionResponse:
+      example:
+        version: version
+      properties:
+        version:
+          type: string
+      required:
+      - version
+      type: object
+    UploadFile_request:
+      properties:
+        file:
+          description: File to upload
+          format: binary
+          type: string
+        metadata:
+          description: Metadata for the uploaded file
+          type: object
+      required:
+      - file
+      type: object
+  securitySchemes:
+    ApiKey:
+      in: header
+      name: x-api-key
+      type: apiKey
+x-original-swagger-version: "2.0"
