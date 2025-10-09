@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | **string** |  | 
-**AttachedTemporaryFiles** | Pointer to **[]string** |  | [optional] 
+**AttachedFiles** | Pointer to **[]string** |  | [optional] 
+**AttachedTemporaryFiles** | Pointer to **[]string** | Deprecated, use attached_files instead | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
 **ContinueOnMaxTokens** | Pointer to **bool** |  | [optional] 
@@ -60,6 +61,31 @@ and a boolean to check if the value has been set.
 
 SetAgentId sets AgentId field to given value.
 
+
+### GetAttachedFiles
+
+`func (o *ChatCompletionRequestDto) GetAttachedFiles() []string`
+
+GetAttachedFiles returns the AttachedFiles field if non-nil, zero value otherwise.
+
+### GetAttachedFilesOk
+
+`func (o *ChatCompletionRequestDto) GetAttachedFilesOk() (*[]string, bool)`
+
+GetAttachedFilesOk returns a tuple with the AttachedFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttachedFiles
+
+`func (o *ChatCompletionRequestDto) SetAttachedFiles(v []string)`
+
+SetAttachedFiles sets AttachedFiles field to given value.
+
+### HasAttachedFiles
+
+`func (o *ChatCompletionRequestDto) HasAttachedFiles() bool`
+
+HasAttachedFiles returns a boolean if a field has been set.
 
 ### GetAttachedTemporaryFiles
 

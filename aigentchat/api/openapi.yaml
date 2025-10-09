@@ -6,11 +6,11 @@ info:
     url: https://www.vaudience.ai
   description: chat and api server for AIgents
   license:
-    name: Copyrighted
+    name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.20.10
+  version: 0.21.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -2446,112 +2446,6 @@ paths:
       tags:
       - Channels
       x-codegen-request-body-name: channel
-  /v1/organizations/{org_id}/channels/files:
-    post:
-      description: Create a file for a channel
-      operationId: CreateChannelFile
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: "#/components/schemas/CreateChannelFile_request"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileUploadResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-        "413":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Request Entity Too Large
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Create a file for a channel
-      tags:
-      - Channels
-  /v1/organizations/{org_id}/channels/files/settings:
-    get:
-      description: Get channel file settings
-      operationId: GetChannelFileSettings
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileSettings"
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: Get channel file settings
-      tags:
-      - Channels
   /v1/organizations/{org_id}/channels/me:
     get:
       description: Retrieve a list of channels owned by the current user
@@ -2953,6 +2847,47 @@ paths:
       security:
       - ApiKey: []
       summary: Cancel a chat-completion
+      tags:
+      - ChatCompletions
+  /v1/organizations/{org_id}/completions/file-settings:
+    get:
+      description: Get the file settings for chat completions for a specific organization
+      operationId: GetChatCompletionFileSettings
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionFileSettings"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: Get file settings for chat completions
       tags:
       - ChatCompletions
   /v1/organizations/{org_id}/completions/stream:
@@ -6218,14 +6153,16 @@ components:
       example:
         attachments:
           files:
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
             id: id
             file_size: 0
             url: url
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
@@ -6584,6 +6521,7 @@ components:
       - AIgencyMessageContentTypeThinking
     AIgencyMessageFile:
       example:
+        llm_input_type: llm_input_type
         embedded_content: embedded_content
         mime_type: mime_type
         file_name: file_name
@@ -6600,6 +6538,8 @@ components:
           type: integer
         id:
           type: string
+        llm_input_type:
+          type: string
         meta_data:
           properties: {}
           type: object
@@ -6612,6 +6552,7 @@ components:
       - file_name
       - file_size
       - id
+      - llm_input_type
       - meta_data
       - mime_type
       - url
@@ -6619,14 +6560,16 @@ components:
     AIgencyMessageFileList:
       example:
         files:
-        - embedded_content: embedded_content
+        - llm_input_type: llm_input_type
+          embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
           meta_data: "{}"
           id: id
           file_size: 0
           url: url
-        - embedded_content: embedded_content
+        - llm_input_type: llm_input_type
+          embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
           meta_data: "{}"
@@ -6648,14 +6591,16 @@ components:
         results:
         - attachments:
             files:
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
               id: id
               file_size: 0
               url: url
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
@@ -6779,14 +6724,16 @@ components:
           parameters: "{}"
         - attachments:
             files:
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
               id: id
               file_size: 0
               url: url
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
@@ -6939,14 +6886,16 @@ components:
         response_to_id: response_to_id
         attachments:
           files:
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
             id: id
             file_size: 0
             url: url
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
@@ -7168,6 +7117,7 @@ components:
         system_messages:
         - system_messages
         - system_messages
+        default_file_upload_category: default_file_upload_category
         owner_id: owner_id
         team_ids:
         - team_ids
@@ -7211,6 +7161,9 @@ components:
         use_tools: true
         ignore_incoming_overwrite: true
         meta_data: "{}"
+        model_capabilities:
+        - model_capabilities
+        - model_capabilities
         model_host_location: ""
         id: id
         internal_id: internal_id
@@ -7277,6 +7230,8 @@ components:
         created_at:
           format: int64
           type: integer
+        default_file_upload_category:
+          type: string
         description:
           maxLength: 1024
           type: string
@@ -7304,6 +7259,11 @@ components:
         meta_data:
           properties: {}
           type: object
+        model_capabilities:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         model_category:
           maxLength: 255
           type: string
@@ -7400,6 +7360,7 @@ components:
         system_messages:
         - system_messages
         - system_messages
+        default_file_upload_category: default_file_upload_category
         team_ids:
         - team_ids
         - team_ids
@@ -7445,6 +7406,8 @@ components:
           type: array
           uniqueItems: true
         avatar_url:
+          type: string
+        default_file_upload_category:
           type: string
         description:
           maxLength: 1024
@@ -7611,7 +7574,6 @@ components:
       - failed_to_fetch_channel
       - failed_to_fetch_channels
       - failed_to_fetch_subscribed_channels
-      - failed_to_upload_channel_file
       - failed_to_create_chat_context
       - capability_not_available
       - no_messages_found
@@ -7625,11 +7587,7 @@ components:
       - failed_to_embed_text
       - failed_to_search_execution_logs
       - invalid_file_id
-      - invalid_storage_url
-      - file_upload_info_not_found
-      - invalid_file_upload_size
-      - invalid_file_upload_mime_type
-      - processing_checks_failed
+      - file_not_found
       - functioncall_not_found
       - failed_to_generate_image
       - invalid_image_id
@@ -7729,7 +7687,6 @@ components:
       - ErrCodeFailedToFetchChannel
       - ErrCodeFailedToFetchChannels
       - ErrCodeFailedToFetchSubscribed
-      - ErrCodeFailedToUploadChannelFile
       - ErrCodeFailedToCreateChatContext
       - ErrCodeCapabilityNotAvailable
       - ErrCodeNoMessagesFound
@@ -7743,11 +7700,7 @@ components:
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
       - ErrCodeInvalidFileID
-      - ErrCodeInvalidStorageUrl
-      - ErrCodeFileUploadInfoNotFound
-      - ErrCodeInvalidFileUploadSize
-      - ErrCodeInvalidFileUploadMimeType
-      - ErrCodeProcessingChecksFailed
+      - ErrCodeFileNotFound
       - ErrCodeFunctionCallNotFound
       - ErrCodeFailedToGenerateImage
       - ErrCodeInvalidImageID
@@ -7809,6 +7762,9 @@ components:
         output_audio_file_format: output_audio_file_format
         with_timestamps: true
         speed: 0.8008281904610115
+        attached_files:
+        - attached_files
+        - attached_files
         stream_audio: true
         dictionary:
           key: dictionary
@@ -7816,16 +7772,13 @@ components:
         org_id: org_id
         message_reference_id: message_reference_id
         id: id
-        attached_temporary_files:
-        - attached_temporary_files
-        - attached_temporary_files
         channel_id: channel_id
         parameters: "{}"
         username: username
       properties:
         agent_id:
           type: string
-        attached_temporary_files:
+        attached_files:
           items:
             type: string
           type: array
@@ -7888,6 +7841,7 @@ components:
         transcription_format: transcription_format
         user_id: user_id
         audio_file:
+          llm_input_type: llm_input_type
           embedded_content: embedded_content
           mime_type: mime_type
           file_name: file_name
@@ -7948,14 +7902,16 @@ components:
           response_to_id: response_to_id
           attachments:
             files:
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
               id: id
               file_size: 0
               url: url
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
@@ -8044,14 +8000,16 @@ components:
           response_to_id: response_to_id
           attachments:
             files:
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
               id: id
               file_size: 0
               url: url
-            - embedded_content: embedded_content
+            - llm_input_type: llm_input_type
+              embedded_content: embedded_content
               mime_type: mime_type
               file_name: file_name
               meta_data: "{}"
@@ -8155,14 +8113,16 @@ components:
         response_to_id: response_to_id
         attachments:
           files:
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
             id: id
             file_size: 0
             url: url
-          - embedded_content: embedded_content
+          - llm_input_type: llm_input_type
+            embedded_content: embedded_content
             mime_type: mime_type
             file_name: file_name
             meta_data: "{}"
@@ -8507,6 +8467,18 @@ components:
       - model_internal_id
       - service_internal_id
       type: object
+    ChatCompletionFileSettings:
+      example:
+        max_files: 0
+        max_total_file_size: 6
+      properties:
+        max_files:
+          format: int
+          type: integer
+        max_total_file_size:
+          format: int64
+          type: integer
+      type: object
     ChatCompletionRequestDto:
       example:
         agent_id: agent_id
@@ -8520,6 +8492,9 @@ components:
         - set_message_history_ids
         - set_message_history_ids
         expire_messages: true
+        attached_files:
+        - attached_files
+        - attached_files
         continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
         use_summary_service: true
         use_tools: true
@@ -8536,7 +8511,12 @@ components:
       properties:
         agent_id:
           type: string
+        attached_files:
+          items:
+            type: string
+          type: array
         attached_temporary_files:
+          description: "Deprecated, use attached_files instead"
           items:
             type: string
           type: array
@@ -8680,14 +8660,14 @@ components:
     EstimateImageGenerationCostRequestDto:
       example:
         agent_id: agent_id
-        attached_temporary_files:
-        - attached_temporary_files
-        - attached_temporary_files
         parameters: "{}"
+        attached_files:
+        - attached_files
+        - attached_files
       properties:
         agent_id:
           type: string
-        attached_temporary_files:
+        attached_files:
           items:
             type: string
           type: array
@@ -8871,35 +8851,6 @@ components:
           format: double
           type: number
       type: object
-    FileChatSettings:
-      example:
-        max_files: 0
-        max_total_file_size: 6
-      properties:
-        max_files:
-          format: int
-          type: integer
-        max_total_file_size:
-          format: int64
-          type: integer
-      type: object
-    FileSettings:
-      example:
-        upload:
-          min_file_size: 5
-          max_file_size: 1
-          accepted_mime_types:
-          - accepted_mime_types
-          - accepted_mime_types
-        chat:
-          max_files: 0
-          max_total_file_size: 6
-      properties:
-        chat:
-          $ref: "#/components/schemas/FileChatSettings"
-        upload:
-          $ref: "#/components/schemas/FileUploadSettings"
-      type: object
     FileUploadCostTrackingRequest:
       example:
         execution_id: execution_id
@@ -8915,54 +8866,6 @@ components:
           type: string
       required:
       - num_files
-      type: object
-    FileUploadResponse:
-      example:
-        resulting_files:
-        - mime_type: mime_type
-          original_file_url: original_file_url
-          file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          original_file_name: original_file_name
-          file_size: 0
-          url: url
-        - mime_type: mime_type
-          original_file_url: original_file_url
-          file_name: file_name
-          original_file_mime_type: original_file_mime_type
-          original_file_name: original_file_name
-          file_size: 0
-          url: url
-        id: id
-      properties:
-        id:
-          type: string
-        resulting_files:
-          items:
-            $ref: "#/components/schemas/ResultFile"
-          type: array
-      required:
-      - id
-      - resulting_files
-      type: object
-    FileUploadSettings:
-      example:
-        min_file_size: 5
-        max_file_size: 1
-        accepted_mime_types:
-        - accepted_mime_types
-        - accepted_mime_types
-      properties:
-        accepted_mime_types:
-          items:
-            type: string
-          type: array
-        max_file_size:
-          format: int64
-          type: integer
-        min_file_size:
-          format: int64
-          type: integer
       type: object
     FinishReason:
       enum:
@@ -9114,14 +9017,14 @@ components:
       example:
         agent_id: agent_id
         message: message
-        attached_temporary_files:
-        - attached_temporary_files
-        - attached_temporary_files
         parameters: "{}"
+        attached_files:
+        - attached_files
+        - attached_files
       properties:
         agent_id:
           type: string
-        attached_temporary_files:
+        attached_files:
           items:
             type: string
           type: array
@@ -9848,18 +9751,6 @@ components:
       properties:
         version:
           type: string
-      type: object
-    CreateChannelFile_request:
-      properties:
-        file:
-          description: File to upload
-          format: binary
-          type: string
-        channel_id:
-          description: Channel id
-          type: string
-      required:
-      - file
       type: object
   securitySchemes:
     ApiKey:

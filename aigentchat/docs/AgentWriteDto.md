@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
+**DefaultFileUploadCategory** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
@@ -143,6 +144,31 @@ SetAvatarUrl sets AvatarUrl field to given value.
 `func (o *AgentWriteDto) HasAvatarUrl() bool`
 
 HasAvatarUrl returns a boolean if a field has been set.
+
+### GetDefaultFileUploadCategory
+
+`func (o *AgentWriteDto) GetDefaultFileUploadCategory() string`
+
+GetDefaultFileUploadCategory returns the DefaultFileUploadCategory field if non-nil, zero value otherwise.
+
+### GetDefaultFileUploadCategoryOk
+
+`func (o *AgentWriteDto) GetDefaultFileUploadCategoryOk() (*string, bool)`
+
+GetDefaultFileUploadCategoryOk returns a tuple with the DefaultFileUploadCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultFileUploadCategory
+
+`func (o *AgentWriteDto) SetDefaultFileUploadCategory(v string)`
+
+SetDefaultFileUploadCategory sets DefaultFileUploadCategory field to given value.
+
+### HasDefaultFileUploadCategory
+
+`func (o *AgentWriteDto) HasDefaultFileUploadCategory() bool`
+
+HasDefaultFileUploadCategory returns a boolean if a field has been set.
 
 ### GetDescription
 

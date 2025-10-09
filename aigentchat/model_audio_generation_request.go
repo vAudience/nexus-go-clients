@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &AudioGenerationRequest{}
 // AudioGenerationRequest struct for AudioGenerationRequest
 type AudioGenerationRequest struct {
 	AgentId *string `json:"agent_id,omitempty"`
-	AttachedTemporaryFiles []string `json:"attached_temporary_files,omitempty"`
+	AttachedFiles []string `json:"attached_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	Dictionary *map[string]string `json:"dictionary,omitempty"`
 	Id *string `json:"id,omitempty"`
@@ -95,36 +95,36 @@ func (o *AudioGenerationRequest) SetAgentId(v string) {
 	o.AgentId = &v
 }
 
-// GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field value if set, zero value otherwise.
-func (o *AudioGenerationRequest) GetAttachedTemporaryFiles() []string {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
+// GetAttachedFiles returns the AttachedFiles field value if set, zero value otherwise.
+func (o *AudioGenerationRequest) GetAttachedFiles() []string {
+	if o == nil || IsNil(o.AttachedFiles) {
 		var ret []string
 		return ret
 	}
-	return o.AttachedTemporaryFiles
+	return o.AttachedFiles
 }
 
-// GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field value if set, nil otherwise
+// GetAttachedFilesOk returns a tuple with the AttachedFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudioGenerationRequest) GetAttachedTemporaryFilesOk() ([]string, bool) {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
+func (o *AudioGenerationRequest) GetAttachedFilesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AttachedFiles) {
 		return nil, false
 	}
-	return o.AttachedTemporaryFiles, true
+	return o.AttachedFiles, true
 }
 
-// HasAttachedTemporaryFiles returns a boolean if a field has been set.
-func (o *AudioGenerationRequest) HasAttachedTemporaryFiles() bool {
-	if o != nil && !IsNil(o.AttachedTemporaryFiles) {
+// HasAttachedFiles returns a boolean if a field has been set.
+func (o *AudioGenerationRequest) HasAttachedFiles() bool {
+	if o != nil && !IsNil(o.AttachedFiles) {
 		return true
 	}
 
 	return false
 }
 
-// SetAttachedTemporaryFiles gets a reference to the given []string and assigns it to the AttachedTemporaryFiles field.
-func (o *AudioGenerationRequest) SetAttachedTemporaryFiles(v []string) {
-	o.AttachedTemporaryFiles = v
+// SetAttachedFiles gets a reference to the given []string and assigns it to the AttachedFiles field.
+func (o *AudioGenerationRequest) SetAttachedFiles(v []string) {
+	o.AttachedFiles = v
 }
 
 // GetChannelId returns the ChannelId field value if set, zero value otherwise.
@@ -748,8 +748,8 @@ func (o AudioGenerationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AgentId) {
 		toSerialize["agent_id"] = o.AgentId
 	}
-	if !IsNil(o.AttachedTemporaryFiles) {
-		toSerialize["attached_temporary_files"] = o.AttachedTemporaryFiles
+	if !IsNil(o.AttachedFiles) {
+		toSerialize["attached_files"] = o.AttachedFiles
 	}
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
@@ -831,7 +831,7 @@ func (o *AudioGenerationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
-		delete(additionalProperties, "attached_temporary_files")
+		delete(additionalProperties, "attached_files")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "dictionary")
 		delete(additionalProperties, "id")

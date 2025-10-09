@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &ImageGenerationRequestDto{}
 // ImageGenerationRequestDto struct for ImageGenerationRequestDto
 type ImageGenerationRequestDto struct {
 	AgentId string `json:"agent_id"`
-	AttachedTemporaryFiles []string `json:"attached_temporary_files,omitempty"`
+	AttachedFiles []string `json:"attached_files,omitempty"`
 	Message string `json:"message"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -73,36 +73,36 @@ func (o *ImageGenerationRequestDto) SetAgentId(v string) {
 	o.AgentId = v
 }
 
-// GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field value if set, zero value otherwise.
-func (o *ImageGenerationRequestDto) GetAttachedTemporaryFiles() []string {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
+// GetAttachedFiles returns the AttachedFiles field value if set, zero value otherwise.
+func (o *ImageGenerationRequestDto) GetAttachedFiles() []string {
+	if o == nil || IsNil(o.AttachedFiles) {
 		var ret []string
 		return ret
 	}
-	return o.AttachedTemporaryFiles
+	return o.AttachedFiles
 }
 
-// GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field value if set, nil otherwise
+// GetAttachedFilesOk returns a tuple with the AttachedFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageGenerationRequestDto) GetAttachedTemporaryFilesOk() ([]string, bool) {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
+func (o *ImageGenerationRequestDto) GetAttachedFilesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AttachedFiles) {
 		return nil, false
 	}
-	return o.AttachedTemporaryFiles, true
+	return o.AttachedFiles, true
 }
 
-// HasAttachedTemporaryFiles returns a boolean if a field has been set.
-func (o *ImageGenerationRequestDto) HasAttachedTemporaryFiles() bool {
-	if o != nil && !IsNil(o.AttachedTemporaryFiles) {
+// HasAttachedFiles returns a boolean if a field has been set.
+func (o *ImageGenerationRequestDto) HasAttachedFiles() bool {
+	if o != nil && !IsNil(o.AttachedFiles) {
 		return true
 	}
 
 	return false
 }
 
-// SetAttachedTemporaryFiles gets a reference to the given []string and assigns it to the AttachedTemporaryFiles field.
-func (o *ImageGenerationRequestDto) SetAttachedTemporaryFiles(v []string) {
-	o.AttachedTemporaryFiles = v
+// SetAttachedFiles gets a reference to the given []string and assigns it to the AttachedFiles field.
+func (o *ImageGenerationRequestDto) SetAttachedFiles(v []string) {
+	o.AttachedFiles = v
 }
 
 // GetMessage returns the Message field value
@@ -172,8 +172,8 @@ func (o ImageGenerationRequestDto) MarshalJSON() ([]byte, error) {
 func (o ImageGenerationRequestDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["agent_id"] = o.AgentId
-	if !IsNil(o.AttachedTemporaryFiles) {
-		toSerialize["attached_temporary_files"] = o.AttachedTemporaryFiles
+	if !IsNil(o.AttachedFiles) {
+		toSerialize["attached_files"] = o.AttachedFiles
 	}
 	toSerialize["message"] = o.Message
 	if !IsNil(o.Parameters) {
@@ -224,7 +224,7 @@ func (o *ImageGenerationRequestDto) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
-		delete(additionalProperties, "attached_temporary_files")
+		delete(additionalProperties, "attached_files")
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties

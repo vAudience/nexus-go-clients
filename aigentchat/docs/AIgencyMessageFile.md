@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FileName** | **string** |  | 
 **FileSize** | **int32** |  | 
 **Id** | **string** |  | 
+**LlmInputType** | **string** |  | 
 **MetaData** | **map[string]interface{}** |  | 
 **MimeType** | **string** |  | 
 **Url** | **string** |  | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessageFile
 
-`func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, metaData map[string]interface{}, mimeType string, url string, ) *AIgencyMessageFile`
+`func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, url string, ) *AIgencyMessageFile`
 
 NewAIgencyMessageFile instantiates a new AIgencyMessageFile object
 This constructor will assign default values to properties that have it defined,
@@ -109,6 +110,26 @@ and a boolean to check if the value has been set.
 `func (o *AIgencyMessageFile) SetId(v string)`
 
 SetId sets Id field to given value.
+
+
+### GetLlmInputType
+
+`func (o *AIgencyMessageFile) GetLlmInputType() string`
+
+GetLlmInputType returns the LlmInputType field if non-nil, zero value otherwise.
+
+### GetLlmInputTypeOk
+
+`func (o *AIgencyMessageFile) GetLlmInputTypeOk() (*string, bool)`
+
+GetLlmInputTypeOk returns a tuple with the LlmInputType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLlmInputType
+
+`func (o *AIgencyMessageFile) SetLlmInputType(v string)`
+
+SetLlmInputType sets LlmInputType field to given value.
 
 
 ### GetMetaData

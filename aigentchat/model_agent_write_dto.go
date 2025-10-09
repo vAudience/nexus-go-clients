@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type AgentWriteDto struct {
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
+	DefaultFileUploadCategory *string `json:"default_file_upload_category,omitempty"`
 	Description *string `json:"description,omitempty"`
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
@@ -188,6 +189,38 @@ func (o *AgentWriteDto) HasAvatarUrl() bool {
 // SetAvatarUrl gets a reference to the given string and assigns it to the AvatarUrl field.
 func (o *AgentWriteDto) SetAvatarUrl(v string) {
 	o.AvatarUrl = &v
+}
+
+// GetDefaultFileUploadCategory returns the DefaultFileUploadCategory field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetDefaultFileUploadCategory() string {
+	if o == nil || IsNil(o.DefaultFileUploadCategory) {
+		var ret string
+		return ret
+	}
+	return *o.DefaultFileUploadCategory
+}
+
+// GetDefaultFileUploadCategoryOk returns a tuple with the DefaultFileUploadCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetDefaultFileUploadCategoryOk() (*string, bool) {
+	if o == nil || IsNil(o.DefaultFileUploadCategory) {
+		return nil, false
+	}
+	return o.DefaultFileUploadCategory, true
+}
+
+// HasDefaultFileUploadCategory returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasDefaultFileUploadCategory() bool {
+	if o != nil && !IsNil(o.DefaultFileUploadCategory) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultFileUploadCategory gets a reference to the given string and assigns it to the DefaultFileUploadCategory field.
+func (o *AgentWriteDto) SetDefaultFileUploadCategory(v string) {
+	o.DefaultFileUploadCategory = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -724,6 +757,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AvatarUrl) {
 		toSerialize["avatar_url"] = o.AvatarUrl
 	}
+	if !IsNil(o.DefaultFileUploadCategory) {
+		toSerialize["default_file_upload_category"] = o.DefaultFileUploadCategory
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -798,6 +834,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
+		delete(additionalProperties, "default_file_upload_category")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "ignore_incoming_overwrite")

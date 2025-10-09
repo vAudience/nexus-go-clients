@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | Pointer to **string** |  | [optional] 
-**AttachedTemporaryFiles** | Pointer to **[]string** |  | [optional] 
+**AttachedFiles** | Pointer to **[]string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **Dictionary** | Pointer to **map[string]string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
@@ -70,30 +70,30 @@ SetAgentId sets AgentId field to given value.
 
 HasAgentId returns a boolean if a field has been set.
 
-### GetAttachedTemporaryFiles
+### GetAttachedFiles
 
-`func (o *AudioGenerationRequest) GetAttachedTemporaryFiles() []string`
+`func (o *AudioGenerationRequest) GetAttachedFiles() []string`
 
-GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field if non-nil, zero value otherwise.
+GetAttachedFiles returns the AttachedFiles field if non-nil, zero value otherwise.
 
-### GetAttachedTemporaryFilesOk
+### GetAttachedFilesOk
 
-`func (o *AudioGenerationRequest) GetAttachedTemporaryFilesOk() (*[]string, bool)`
+`func (o *AudioGenerationRequest) GetAttachedFilesOk() (*[]string, bool)`
 
-GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field if it's non-nil, zero value otherwise
+GetAttachedFilesOk returns a tuple with the AttachedFiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAttachedTemporaryFiles
+### SetAttachedFiles
 
-`func (o *AudioGenerationRequest) SetAttachedTemporaryFiles(v []string)`
+`func (o *AudioGenerationRequest) SetAttachedFiles(v []string)`
 
-SetAttachedTemporaryFiles sets AttachedTemporaryFiles field to given value.
+SetAttachedFiles sets AttachedFiles field to given value.
 
-### HasAttachedTemporaryFiles
+### HasAttachedFiles
 
-`func (o *AudioGenerationRequest) HasAttachedTemporaryFiles() bool`
+`func (o *AudioGenerationRequest) HasAttachedFiles() bool`
 
-HasAttachedTemporaryFiles returns a boolean if a field has been set.
+HasAttachedFiles returns a boolean if a field has been set.
 
 ### GetChannelId
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**DefaultFileUploadCategory** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **Id** | **string** |  | 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Lifecycle** | Pointer to **string** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
+**ModelCapabilities** | Pointer to **[]string** |  | [optional] 
 **ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **ModelId** | **string** |  | 
@@ -229,6 +231,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *Agent) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDefaultFileUploadCategory
+
+`func (o *Agent) GetDefaultFileUploadCategory() string`
+
+GetDefaultFileUploadCategory returns the DefaultFileUploadCategory field if non-nil, zero value otherwise.
+
+### GetDefaultFileUploadCategoryOk
+
+`func (o *Agent) GetDefaultFileUploadCategoryOk() (*string, bool)`
+
+GetDefaultFileUploadCategoryOk returns a tuple with the DefaultFileUploadCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultFileUploadCategory
+
+`func (o *Agent) SetDefaultFileUploadCategory(v string)`
+
+SetDefaultFileUploadCategory sets DefaultFileUploadCategory field to given value.
+
+### HasDefaultFileUploadCategory
+
+`func (o *Agent) HasDefaultFileUploadCategory() bool`
+
+HasDefaultFileUploadCategory returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -449,6 +476,31 @@ SetMetaData sets MetaData field to given value.
 `func (o *Agent) HasMetaData() bool`
 
 HasMetaData returns a boolean if a field has been set.
+
+### GetModelCapabilities
+
+`func (o *Agent) GetModelCapabilities() []string`
+
+GetModelCapabilities returns the ModelCapabilities field if non-nil, zero value otherwise.
+
+### GetModelCapabilitiesOk
+
+`func (o *Agent) GetModelCapabilitiesOk() (*[]string, bool)`
+
+GetModelCapabilitiesOk returns a tuple with the ModelCapabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelCapabilities
+
+`func (o *Agent) SetModelCapabilities(v []string)`
+
+SetModelCapabilities sets ModelCapabilities field to given value.
+
+### HasModelCapabilities
+
+`func (o *Agent) HasModelCapabilities() bool`
+
+HasModelCapabilities returns a boolean if a field has been set.
 
 ### GetModelCategory
 

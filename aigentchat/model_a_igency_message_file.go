@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type AIgencyMessageFile struct {
 	FileName string `json:"file_name"`
 	FileSize int32 `json:"file_size"`
 	Id string `json:"id"`
+	LlmInputType string `json:"llm_input_type"`
 	MetaData map[string]interface{} `json:"meta_data"`
 	MimeType string `json:"mime_type"`
 	Url string `json:"url"`
@@ -37,12 +38,13 @@ type _AIgencyMessageFile AIgencyMessageFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, metaData map[string]interface{}, mimeType string, url string) *AIgencyMessageFile {
+func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, url string) *AIgencyMessageFile {
 	this := AIgencyMessageFile{}
 	this.EmbeddedContent = embeddedContent
 	this.FileName = fileName
 	this.FileSize = fileSize
 	this.Id = id
+	this.LlmInputType = llmInputType
 	this.MetaData = metaData
 	this.MimeType = mimeType
 	this.Url = url
@@ -153,6 +155,30 @@ func (o *AIgencyMessageFile) SetId(v string) {
 	o.Id = v
 }
 
+// GetLlmInputType returns the LlmInputType field value
+func (o *AIgencyMessageFile) GetLlmInputType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LlmInputType
+}
+
+// GetLlmInputTypeOk returns a tuple with the LlmInputType field value
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageFile) GetLlmInputTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LlmInputType, true
+}
+
+// SetLlmInputType sets field value
+func (o *AIgencyMessageFile) SetLlmInputType(v string) {
+	o.LlmInputType = v
+}
+
 // GetMetaData returns the MetaData field value
 func (o *AIgencyMessageFile) GetMetaData() map[string]interface{} {
 	if o == nil {
@@ -239,6 +265,7 @@ func (o AIgencyMessageFile) ToMap() (map[string]interface{}, error) {
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
 	toSerialize["id"] = o.Id
+	toSerialize["llm_input_type"] = o.LlmInputType
 	toSerialize["meta_data"] = o.MetaData
 	toSerialize["mime_type"] = o.MimeType
 	toSerialize["url"] = o.Url
@@ -259,6 +286,7 @@ func (o *AIgencyMessageFile) UnmarshalJSON(data []byte) (err error) {
 		"file_name",
 		"file_size",
 		"id",
+		"llm_input_type",
 		"meta_data",
 		"mime_type",
 		"url",
@@ -295,6 +323,7 @@ func (o *AIgencyMessageFile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "llm_input_type")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "mime_type")
 		delete(additionalProperties, "url")

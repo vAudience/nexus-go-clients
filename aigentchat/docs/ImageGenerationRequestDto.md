@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | **string** |  | 
-**AttachedTemporaryFiles** | Pointer to **[]string** |  | [optional] 
+**AttachedFiles** | Pointer to **[]string** |  | [optional] 
 **Message** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 
@@ -48,30 +48,30 @@ and a boolean to check if the value has been set.
 SetAgentId sets AgentId field to given value.
 
 
-### GetAttachedTemporaryFiles
+### GetAttachedFiles
 
-`func (o *ImageGenerationRequestDto) GetAttachedTemporaryFiles() []string`
+`func (o *ImageGenerationRequestDto) GetAttachedFiles() []string`
 
-GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field if non-nil, zero value otherwise.
+GetAttachedFiles returns the AttachedFiles field if non-nil, zero value otherwise.
 
-### GetAttachedTemporaryFilesOk
+### GetAttachedFilesOk
 
-`func (o *ImageGenerationRequestDto) GetAttachedTemporaryFilesOk() (*[]string, bool)`
+`func (o *ImageGenerationRequestDto) GetAttachedFilesOk() (*[]string, bool)`
 
-GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field if it's non-nil, zero value otherwise
+GetAttachedFilesOk returns a tuple with the AttachedFiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAttachedTemporaryFiles
+### SetAttachedFiles
 
-`func (o *ImageGenerationRequestDto) SetAttachedTemporaryFiles(v []string)`
+`func (o *ImageGenerationRequestDto) SetAttachedFiles(v []string)`
 
-SetAttachedTemporaryFiles sets AttachedTemporaryFiles field to given value.
+SetAttachedFiles sets AttachedFiles field to given value.
 
-### HasAttachedTemporaryFiles
+### HasAttachedFiles
 
-`func (o *ImageGenerationRequestDto) HasAttachedTemporaryFiles() bool`
+`func (o *ImageGenerationRequestDto) HasAttachedFiles() bool`
 
-HasAttachedTemporaryFiles returns a boolean if a field has been set.
+HasAttachedFiles returns a boolean if a field has been set.
 
 ### GetMessage
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -15,37 +15,37 @@ import (
 	"encoding/json"
 )
 
-// checks if the FileChatSettings type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FileChatSettings{}
+// checks if the ChatCompletionFileSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ChatCompletionFileSettings{}
 
-// FileChatSettings struct for FileChatSettings
-type FileChatSettings struct {
+// ChatCompletionFileSettings struct for ChatCompletionFileSettings
+type ChatCompletionFileSettings struct {
 	MaxFiles *int32 `json:"max_files,omitempty"`
 	MaxTotalFileSize *int64 `json:"max_total_file_size,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _FileChatSettings FileChatSettings
+type _ChatCompletionFileSettings ChatCompletionFileSettings
 
-// NewFileChatSettings instantiates a new FileChatSettings object
+// NewChatCompletionFileSettings instantiates a new ChatCompletionFileSettings object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileChatSettings() *FileChatSettings {
-	this := FileChatSettings{}
+func NewChatCompletionFileSettings() *ChatCompletionFileSettings {
+	this := ChatCompletionFileSettings{}
 	return &this
 }
 
-// NewFileChatSettingsWithDefaults instantiates a new FileChatSettings object
+// NewChatCompletionFileSettingsWithDefaults instantiates a new ChatCompletionFileSettings object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFileChatSettingsWithDefaults() *FileChatSettings {
-	this := FileChatSettings{}
+func NewChatCompletionFileSettingsWithDefaults() *ChatCompletionFileSettings {
+	this := ChatCompletionFileSettings{}
 	return &this
 }
 
 // GetMaxFiles returns the MaxFiles field value if set, zero value otherwise.
-func (o *FileChatSettings) GetMaxFiles() int32 {
+func (o *ChatCompletionFileSettings) GetMaxFiles() int32 {
 	if o == nil || IsNil(o.MaxFiles) {
 		var ret int32
 		return ret
@@ -55,7 +55,7 @@ func (o *FileChatSettings) GetMaxFiles() int32 {
 
 // GetMaxFilesOk returns a tuple with the MaxFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileChatSettings) GetMaxFilesOk() (*int32, bool) {
+func (o *ChatCompletionFileSettings) GetMaxFilesOk() (*int32, bool) {
 	if o == nil || IsNil(o.MaxFiles) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *FileChatSettings) GetMaxFilesOk() (*int32, bool) {
 }
 
 // HasMaxFiles returns a boolean if a field has been set.
-func (o *FileChatSettings) HasMaxFiles() bool {
+func (o *ChatCompletionFileSettings) HasMaxFiles() bool {
 	if o != nil && !IsNil(o.MaxFiles) {
 		return true
 	}
@@ -72,12 +72,12 @@ func (o *FileChatSettings) HasMaxFiles() bool {
 }
 
 // SetMaxFiles gets a reference to the given int32 and assigns it to the MaxFiles field.
-func (o *FileChatSettings) SetMaxFiles(v int32) {
+func (o *ChatCompletionFileSettings) SetMaxFiles(v int32) {
 	o.MaxFiles = &v
 }
 
 // GetMaxTotalFileSize returns the MaxTotalFileSize field value if set, zero value otherwise.
-func (o *FileChatSettings) GetMaxTotalFileSize() int64 {
+func (o *ChatCompletionFileSettings) GetMaxTotalFileSize() int64 {
 	if o == nil || IsNil(o.MaxTotalFileSize) {
 		var ret int64
 		return ret
@@ -87,7 +87,7 @@ func (o *FileChatSettings) GetMaxTotalFileSize() int64 {
 
 // GetMaxTotalFileSizeOk returns a tuple with the MaxTotalFileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileChatSettings) GetMaxTotalFileSizeOk() (*int64, bool) {
+func (o *ChatCompletionFileSettings) GetMaxTotalFileSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.MaxTotalFileSize) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *FileChatSettings) GetMaxTotalFileSizeOk() (*int64, bool) {
 }
 
 // HasMaxTotalFileSize returns a boolean if a field has been set.
-func (o *FileChatSettings) HasMaxTotalFileSize() bool {
+func (o *ChatCompletionFileSettings) HasMaxTotalFileSize() bool {
 	if o != nil && !IsNil(o.MaxTotalFileSize) {
 		return true
 	}
@@ -104,11 +104,11 @@ func (o *FileChatSettings) HasMaxTotalFileSize() bool {
 }
 
 // SetMaxTotalFileSize gets a reference to the given int64 and assigns it to the MaxTotalFileSize field.
-func (o *FileChatSettings) SetMaxTotalFileSize(v int64) {
+func (o *ChatCompletionFileSettings) SetMaxTotalFileSize(v int64) {
 	o.MaxTotalFileSize = &v
 }
 
-func (o FileChatSettings) MarshalJSON() ([]byte, error) {
+func (o ChatCompletionFileSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -116,7 +116,7 @@ func (o FileChatSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FileChatSettings) ToMap() (map[string]interface{}, error) {
+func (o ChatCompletionFileSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.MaxFiles) {
 		toSerialize["max_files"] = o.MaxFiles
@@ -132,16 +132,16 @@ func (o FileChatSettings) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FileChatSettings) UnmarshalJSON(data []byte) (err error) {
-	varFileChatSettings := _FileChatSettings{}
+func (o *ChatCompletionFileSettings) UnmarshalJSON(data []byte) (err error) {
+	varChatCompletionFileSettings := _ChatCompletionFileSettings{}
 
-	err = json.Unmarshal(data, &varFileChatSettings)
+	err = json.Unmarshal(data, &varChatCompletionFileSettings)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FileChatSettings(varFileChatSettings)
+	*o = ChatCompletionFileSettings(varChatCompletionFileSettings)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -154,38 +154,38 @@ func (o *FileChatSettings) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFileChatSettings struct {
-	value *FileChatSettings
+type NullableChatCompletionFileSettings struct {
+	value *ChatCompletionFileSettings
 	isSet bool
 }
 
-func (v NullableFileChatSettings) Get() *FileChatSettings {
+func (v NullableChatCompletionFileSettings) Get() *ChatCompletionFileSettings {
 	return v.value
 }
 
-func (v *NullableFileChatSettings) Set(val *FileChatSettings) {
+func (v *NullableChatCompletionFileSettings) Set(val *ChatCompletionFileSettings) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFileChatSettings) IsSet() bool {
+func (v NullableChatCompletionFileSettings) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFileChatSettings) Unset() {
+func (v *NullableChatCompletionFileSettings) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFileChatSettings(val *FileChatSettings) *NullableFileChatSettings {
-	return &NullableFileChatSettings{value: val, isSet: true}
+func NewNullableChatCompletionFileSettings(val *ChatCompletionFileSettings) *NullableChatCompletionFileSettings {
+	return &NullableChatCompletionFileSettings{value: val, isSet: true}
 }
 
-func (v NullableFileChatSettings) MarshalJSON() ([]byte, error) {
+func (v NullableChatCompletionFileSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFileChatSettings) UnmarshalJSON(src []byte) error {
+func (v *NullableChatCompletionFileSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

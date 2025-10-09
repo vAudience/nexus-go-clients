@@ -105,8 +105,6 @@
 
 * `ErrCodeFailedToFetchSubscribed` (value: `"failed_to_fetch_subscribed_channels"`)
 
-* `ErrCodeFailedToUploadChannelFile` (value: `"failed_to_upload_channel_file"`)
-
 * `ErrCodeFailedToCreateChatContext` (value: `"failed_to_create_chat_context"`)
 
 * `ErrCodeCapabilityNotAvailable` (value: `"capability_not_available"`)
@@ -133,15 +131,7 @@
 
 * `ErrCodeInvalidFileID` (value: `"invalid_file_id"`)
 
-* `ErrCodeInvalidStorageUrl` (value: `"invalid_storage_url"`)
-
-* `ErrCodeFileUploadInfoNotFound` (value: `"file_upload_info_not_found"`)
-
-* `ErrCodeInvalidFileUploadSize` (value: `"invalid_file_upload_size"`)
-
-* `ErrCodeInvalidFileUploadMimeType` (value: `"invalid_file_upload_mime_type"`)
-
-* `ErrCodeProcessingChecksFailed` (value: `"processing_checks_failed"`)
+* `ErrCodeFileNotFound` (value: `"file_not_found"`)
 
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 

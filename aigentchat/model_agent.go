@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -28,6 +28,7 @@ type Agent struct {
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	DefaultFileUploadCategory *string `json:"default_file_upload_category,omitempty"`
 	Description *string `json:"description,omitempty"`
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
@@ -37,6 +38,7 @@ type Agent struct {
 	IsPublic *bool `json:"is_public,omitempty"`
 	Lifecycle *string `json:"lifecycle,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
+	ModelCapabilities []string `json:"model_capabilities,omitempty"`
 	ModelCategory *string `json:"model_category,omitempty"`
 	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
 	ModelId string `json:"model_id"`
@@ -301,6 +303,38 @@ func (o *Agent) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *Agent) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
+}
+
+// GetDefaultFileUploadCategory returns the DefaultFileUploadCategory field value if set, zero value otherwise.
+func (o *Agent) GetDefaultFileUploadCategory() string {
+	if o == nil || IsNil(o.DefaultFileUploadCategory) {
+		var ret string
+		return ret
+	}
+	return *o.DefaultFileUploadCategory
+}
+
+// GetDefaultFileUploadCategoryOk returns a tuple with the DefaultFileUploadCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetDefaultFileUploadCategoryOk() (*string, bool) {
+	if o == nil || IsNil(o.DefaultFileUploadCategory) {
+		return nil, false
+	}
+	return o.DefaultFileUploadCategory, true
+}
+
+// HasDefaultFileUploadCategory returns a boolean if a field has been set.
+func (o *Agent) HasDefaultFileUploadCategory() bool {
+	if o != nil && !IsNil(o.DefaultFileUploadCategory) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultFileUploadCategory gets a reference to the given string and assigns it to the DefaultFileUploadCategory field.
+func (o *Agent) SetDefaultFileUploadCategory(v string) {
+	o.DefaultFileUploadCategory = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -581,6 +615,38 @@ func (o *Agent) HasMetaData() bool {
 // SetMetaData gets a reference to the given map[string]interface{} and assigns it to the MetaData field.
 func (o *Agent) SetMetaData(v map[string]interface{}) {
 	o.MetaData = v
+}
+
+// GetModelCapabilities returns the ModelCapabilities field value if set, zero value otherwise.
+func (o *Agent) GetModelCapabilities() []string {
+	if o == nil || IsNil(o.ModelCapabilities) {
+		var ret []string
+		return ret
+	}
+	return o.ModelCapabilities
+}
+
+// GetModelCapabilitiesOk returns a tuple with the ModelCapabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetModelCapabilitiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.ModelCapabilities) {
+		return nil, false
+	}
+	return o.ModelCapabilities, true
+}
+
+// HasModelCapabilities returns a boolean if a field has been set.
+func (o *Agent) HasModelCapabilities() bool {
+	if o != nil && !IsNil(o.ModelCapabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelCapabilities gets a reference to the given []string and assigns it to the ModelCapabilities field.
+func (o *Agent) SetModelCapabilities(v []string) {
+	o.ModelCapabilities = v
 }
 
 // GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
@@ -1062,6 +1128,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.DefaultFileUploadCategory) {
+		toSerialize["default_file_upload_category"] = o.DefaultFileUploadCategory
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -1086,6 +1155,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
+	}
+	if !IsNil(o.ModelCapabilities) {
+		toSerialize["model_capabilities"] = o.ModelCapabilities
 	}
 	if !IsNil(o.ModelCategory) {
 		toSerialize["model_category"] = o.ModelCategory
@@ -1178,6 +1250,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default_file_upload_category")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
@@ -1187,6 +1260,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "lifecycle")
 		delete(additionalProperties, "meta_data")
+		delete(additionalProperties, "model_capabilities")
 		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_host_location")
 		delete(additionalProperties, "model_id")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.20.10
+API version: 0.21.0
 Contact: contact@vaudience.ai
 */
 
@@ -72,7 +72,6 @@ const (
 	ErrCodeFailedToFetchChannel ApiErrorCode = "failed_to_fetch_channel"
 	ErrCodeFailedToFetchChannels ApiErrorCode = "failed_to_fetch_channels"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
-	ErrCodeFailedToUploadChannelFile ApiErrorCode = "failed_to_upload_channel_file"
 	ErrCodeFailedToCreateChatContext ApiErrorCode = "failed_to_create_chat_context"
 	ErrCodeCapabilityNotAvailable ApiErrorCode = "capability_not_available"
 	ErrCodeNoMessagesFound ApiErrorCode = "no_messages_found"
@@ -86,11 +85,7 @@ const (
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
-	ErrCodeInvalidStorageUrl ApiErrorCode = "invalid_storage_url"
-	ErrCodeFileUploadInfoNotFound ApiErrorCode = "file_upload_info_not_found"
-	ErrCodeInvalidFileUploadSize ApiErrorCode = "invalid_file_upload_size"
-	ErrCodeInvalidFileUploadMimeType ApiErrorCode = "invalid_file_upload_mime_type"
-	ErrCodeProcessingChecksFailed ApiErrorCode = "processing_checks_failed"
+	ErrCodeFileNotFound ApiErrorCode = "file_not_found"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
 	ErrCodeFailedToGenerateImage ApiErrorCode = "failed_to_generate_image"
 	ErrCodeInvalidImageID ApiErrorCode = "invalid_image_id"
@@ -192,7 +187,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_channel",
 	"failed_to_fetch_channels",
 	"failed_to_fetch_subscribed_channels",
-	"failed_to_upload_channel_file",
 	"failed_to_create_chat_context",
 	"capability_not_available",
 	"no_messages_found",
@@ -206,11 +200,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",
 	"invalid_file_id",
-	"invalid_storage_url",
-	"file_upload_info_not_found",
-	"invalid_file_upload_size",
-	"invalid_file_upload_mime_type",
-	"processing_checks_failed",
+	"file_not_found",
 	"functioncall_not_found",
 	"failed_to_generate_image",
 	"invalid_image_id",
