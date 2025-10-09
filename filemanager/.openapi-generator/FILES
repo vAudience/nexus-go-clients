@@ -15,8 +15,8 @@ docs/ErrorResponse.md
 docs/FileMetadataBatchGetRequest.md
 docs/FileMetadataBatchResponse.md
 docs/FileMetadataResponse.md
+docs/FileUploadCategoryResponse.md
 docs/FileUploadResponse.md
-docs/FileUploadSettings.md
 docs/FilesAPI.md
 docs/FilesMetadataAPI.md
 docs/HealthAPI.md
@@ -32,8 +32,8 @@ model_error_response.go
 model_file_metadata_batch_get_request.go
 model_file_metadata_batch_response.go
 model_file_metadata_response.go
+model_file_upload_category_response.go
 model_file_upload_response.go
-model_file_upload_settings.go
 model_health_response.go
 model_version_response.go
 response.go

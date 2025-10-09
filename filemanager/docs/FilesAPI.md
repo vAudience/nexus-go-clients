@@ -5,7 +5,7 @@ All URIs are relative to *https://file-manager.dev.ai.vaud.one*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteFile**](FilesAPI.md#DeleteFile) | **Delete** /v1/files/{storage_path} | Delete a file
-[**GetFileUploadSettings**](FilesAPI.md#GetFileUploadSettings) | **Get** /v1/organizations/{org_id}/files/{category}/settings | Get file upload settings for a category
+[**GetFileUploadCategories**](FilesAPI.md#GetFileUploadCategories) | **Get** /v1/organizations/{org_id}/files/categories | Get file upload categories
 [**ServeFile**](FilesAPI.md#ServeFile) | **Get** /v1/files/{storage_path} | Serve a file
 [**UploadFile**](FilesAPI.md#UploadFile) | **Post** /v1/organizations/{org_id}/files/{category} | Create a file for a channel
 
@@ -81,11 +81,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetFileUploadSettings
+## GetFileUploadCategories
 
-> FileUploadSettings GetFileUploadSettings(ctx, orgId, category).Execute()
+> []FileUploadCategoryResponse GetFileUploadCategories(ctx, orgId).ModelCapabilities(modelCapabilities).Execute()
 
-Get file upload settings for a category
+Get file upload categories
 
 
 
@@ -103,17 +103,17 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	category := "category_example" // string | category ID
+	modelCapabilities := "modelCapabilities_example" // string | Comma separated list of model capabilities to filter by, e.g. text-to-text,image-to-text (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.GetFileUploadSettings(context.Background(), orgId, category).Execute()
+	resp, r, err := apiClient.FilesAPI.GetFileUploadCategories(context.Background(), orgId).ModelCapabilities(modelCapabilities).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.GetFileUploadSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.GetFileUploadCategories``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFileUploadSettings`: FileUploadSettings
-	fmt.Fprintf(os.Stdout, "Response from `FilesAPI.GetFileUploadSettings`: %v\n", resp)
+	// response from `GetFileUploadCategories`: []FileUploadCategoryResponse
+	fmt.Fprintf(os.Stdout, "Response from `FilesAPI.GetFileUploadCategories`: %v\n", resp)
 }
 ```
 
@@ -124,21 +124,20 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**category** | **string** | category ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetFileUploadSettingsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetFileUploadCategoriesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
+ **modelCapabilities** | **string** | Comma separated list of model capabilities to filter by, e.g. text-to-text,image-to-text | 
 
 ### Return type
 
-[**FileUploadSettings**](FileUploadSettings.md)
+[**[]FileUploadCategoryResponse**](FileUploadCategoryResponse.md)
 
 ### Authorization
 

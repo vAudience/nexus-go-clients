@@ -36,14 +36,13 @@ func Test_filemanager_FilesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test FilesAPIService GetFileUploadSettings", func(t *testing.T) {
+	t.Run("Test FilesAPIService GetFileUploadCategories", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
-		var category string
 
-		resp, httpRes, err := apiClient.FilesAPI.GetFileUploadSettings(context.Background(), orgId, category).Execute()
+		resp, httpRes, err := apiClient.FilesAPI.GetFileUploadCategories(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

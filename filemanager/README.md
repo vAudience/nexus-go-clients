@@ -79,7 +79,7 @@ All URIs are relative to *https://file-manager.dev.ai.vaud.one*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *FilesAPI* | [**DeleteFile**](docs/FilesAPI.md#deletefile) | **Delete** /v1/files/{storage_path} | Delete a file
-*FilesAPI* | [**GetFileUploadSettings**](docs/FilesAPI.md#getfileuploadsettings) | **Get** /v1/organizations/{org_id}/files/{category}/settings | Get file upload settings for a category
+*FilesAPI* | [**GetFileUploadCategories**](docs/FilesAPI.md#getfileuploadcategories) | **Get** /v1/organizations/{org_id}/files/categories | Get file upload categories
 *FilesAPI* | [**ServeFile**](docs/FilesAPI.md#servefile) | **Get** /v1/files/{storage_path} | Serve a file
 *FilesAPI* | [**UploadFile**](docs/FilesAPI.md#uploadfile) | **Post** /v1/organizations/{org_id}/files/{category} | Create a file for a channel
 *FilesMetadataAPI* | [**GetFileMetadata**](docs/FilesMetadataAPI.md#getfilemetadata) | **Get** /v1/metadata/{storage_path} | Get file metadata by path
@@ -96,8 +96,8 @@ Class | Method | HTTP request | Description
  - [FileMetadataBatchGetRequest](docs/FileMetadataBatchGetRequest.md)
  - [FileMetadataBatchResponse](docs/FileMetadataBatchResponse.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
+ - [FileUploadCategoryResponse](docs/FileUploadCategoryResponse.md)
  - [FileUploadResponse](docs/FileUploadResponse.md)
- - [FileUploadSettings](docs/FileUploadSettings.md)
  - [HealthResponse](docs/HealthResponse.md)
  - [VersionResponse](docs/VersionResponse.md)
 

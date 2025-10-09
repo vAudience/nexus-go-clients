@@ -22,6 +22,7 @@ var _ MappedNullable = &FileMetadataResponse{}
 type FileMetadataResponse struct {
 	CreatedAt string `json:"created_at"`
 	ExpiresAt *string `json:"expires_at,omitempty"`
+	FileLlmInputType string `json:"file_llm_input_type"`
 	FileName string `json:"file_name"`
 	FileSize int64 `json:"file_size"`
 	FileStorageType string `json:"file_storage_type"`
@@ -48,9 +49,10 @@ type _FileMetadataResponse FileMetadataResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string) *FileMetadataResponse {
+func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string) *FileMetadataResponse {
 	this := FileMetadataResponse{}
 	this.CreatedAt = createdAt
+	this.FileLlmInputType = fileLlmInputType
 	this.FileName = fileName
 	this.FileSize = fileSize
 	this.FileStorageType = fileStorageType
@@ -128,6 +130,30 @@ func (o *FileMetadataResponse) HasExpiresAt() bool {
 // SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
 func (o *FileMetadataResponse) SetExpiresAt(v string) {
 	o.ExpiresAt = &v
+}
+
+// GetFileLlmInputType returns the FileLlmInputType field value
+func (o *FileMetadataResponse) GetFileLlmInputType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FileLlmInputType
+}
+
+// GetFileLlmInputTypeOk returns a tuple with the FileLlmInputType field value
+// and a boolean to check if the value has been set.
+func (o *FileMetadataResponse) GetFileLlmInputTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FileLlmInputType, true
+}
+
+// SetFileLlmInputType sets field value
+func (o *FileMetadataResponse) SetFileLlmInputType(v string) {
+	o.FileLlmInputType = v
 }
 
 // GetFileName returns the FileName field value
@@ -592,6 +618,7 @@ func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
+	toSerialize["file_llm_input_type"] = o.FileLlmInputType
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
 	toSerialize["file_storage_type"] = o.FileStorageType
@@ -633,6 +660,7 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"created_at",
+		"file_llm_input_type",
 		"file_name",
 		"file_size",
 		"file_storage_type",
@@ -676,6 +704,7 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "file_llm_input_type")
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
 		delete(additionalProperties, "file_storage_type")

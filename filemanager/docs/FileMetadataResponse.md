@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | **string** |  | 
 **ExpiresAt** | Pointer to **string** |  | [optional] 
+**FileLlmInputType** | **string** |  | 
 **FileName** | **string** |  | 
 **FileSize** | **int64** |  | 
 **FileStorageType** | **string** |  | 
@@ -28,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewFileMetadataResponse
 
-`func NewFileMetadataResponse(createdAt string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
+`func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
 
 NewFileMetadataResponse instantiates a new FileMetadataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +88,26 @@ SetExpiresAt sets ExpiresAt field to given value.
 `func (o *FileMetadataResponse) HasExpiresAt() bool`
 
 HasExpiresAt returns a boolean if a field has been set.
+
+### GetFileLlmInputType
+
+`func (o *FileMetadataResponse) GetFileLlmInputType() string`
+
+GetFileLlmInputType returns the FileLlmInputType field if non-nil, zero value otherwise.
+
+### GetFileLlmInputTypeOk
+
+`func (o *FileMetadataResponse) GetFileLlmInputTypeOk() (*string, bool)`
+
+GetFileLlmInputTypeOk returns a tuple with the FileLlmInputType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileLlmInputType
+
+`func (o *FileMetadataResponse) SetFileLlmInputType(v string)`
+
+SetFileLlmInputType sets FileLlmInputType field to given value.
+
 
 ### GetFileName
 

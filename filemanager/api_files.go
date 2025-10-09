@@ -184,59 +184,65 @@ func (a *FilesAPIService) DeleteFileExecute(r ApiDeleteFileRequest) (*FileMetada
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetFileUploadSettingsRequest struct {
+type ApiGetFileUploadCategoriesRequest struct {
 	ctx context.Context
 	ApiService *FilesAPIService
 	orgId string
-	category string
+	modelCapabilities *string
 }
 
-func (r ApiGetFileUploadSettingsRequest) Execute() (*FileUploadSettings, *http.Response, error) {
-	return r.ApiService.GetFileUploadSettingsExecute(r)
+// Comma separated list of model capabilities to filter by, e.g. text-to-text,image-to-text
+func (r ApiGetFileUploadCategoriesRequest) ModelCapabilities(modelCapabilities string) ApiGetFileUploadCategoriesRequest {
+	r.modelCapabilities = &modelCapabilities
+	return r
+}
+
+func (r ApiGetFileUploadCategoriesRequest) Execute() ([]FileUploadCategoryResponse, *http.Response, error) {
+	return r.ApiService.GetFileUploadCategoriesExecute(r)
 }
 
 /*
-GetFileUploadSettings Get file upload settings for a category
+GetFileUploadCategories Get file upload categories
 
-Get file upload settings for a category
+Get file upload categories
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param category category ID
- @return ApiGetFileUploadSettingsRequest
+ @return ApiGetFileUploadCategoriesRequest
 */
-func (a *FilesAPIService) GetFileUploadSettings(ctx context.Context, orgId string, category string) ApiGetFileUploadSettingsRequest {
-	return ApiGetFileUploadSettingsRequest{
+func (a *FilesAPIService) GetFileUploadCategories(ctx context.Context, orgId string) ApiGetFileUploadCategoriesRequest {
+	return ApiGetFileUploadCategoriesRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		category: category,
 	}
 }
 
 // Execute executes the request
-//  @return FileUploadSettings
-func (a *FilesAPIService) GetFileUploadSettingsExecute(r ApiGetFileUploadSettingsRequest) (*FileUploadSettings, *http.Response, error) {
+//  @return []FileUploadCategoryResponse
+func (a *FilesAPIService) GetFileUploadCategoriesExecute(r ApiGetFileUploadCategoriesRequest) ([]FileUploadCategoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FileUploadSettings
+		localVarReturnValue  []FileUploadCategoryResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesAPIService.GetFileUploadSettings")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesAPIService.GetFileUploadCategories")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/files/{category}/settings"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/files/categories"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"category"+"}", url.PathEscape(parameterValueToString(r.category, "category")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.modelCapabilities != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "model_capabilities", r.modelCapabilities, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -302,17 +308,6 @@ func (a *FilesAPIService) GetFileUploadSettingsExecute(r ApiGetFileUploadSetting
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
