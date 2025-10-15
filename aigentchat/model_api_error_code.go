@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.0
+API version: 0.21.1
 Contact: contact@vaudience.ai
 */
 
@@ -86,6 +86,7 @@ const (
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
 	ErrCodeFileNotFound ApiErrorCode = "file_not_found"
+	ErrCodeFileUploadCategoryMismatch ApiErrorCode = "file_upload_category_mismatch"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
 	ErrCodeFailedToGenerateImage ApiErrorCode = "failed_to_generate_image"
 	ErrCodeInvalidImageID ApiErrorCode = "invalid_image_id"
@@ -201,6 +202,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_search_execution_logs",
 	"invalid_file_id",
 	"file_not_found",
+	"file_upload_category_mismatch",
 	"functioncall_not_found",
 	"failed_to_generate_image",
 	"invalid_image_id",

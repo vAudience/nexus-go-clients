@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.21.0
+  version: 0.21.1
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -7588,6 +7588,7 @@ components:
       - failed_to_search_execution_logs
       - invalid_file_id
       - file_not_found
+      - file_upload_category_mismatch
       - functioncall_not_found
       - failed_to_generate_image
       - invalid_image_id
@@ -7701,6 +7702,7 @@ components:
       - ErrCodeFailedToSearchExecutionLogs
       - ErrCodeInvalidFileID
       - ErrCodeFileNotFound
+      - ErrCodeFileUploadCategoryMismatch
       - ErrCodeFunctionCallNotFound
       - ErrCodeFailedToGenerateImage
       - ErrCodeInvalidImageID

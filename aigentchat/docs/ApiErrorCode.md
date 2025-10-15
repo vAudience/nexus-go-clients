@@ -133,6 +133,8 @@
 
 * `ErrCodeFileNotFound` (value: `"file_not_found"`)
 
+* `ErrCodeFileUploadCategoryMismatch` (value: `"file_upload_category_mismatch"`)
+
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 
 * `ErrCodeFailedToGenerateImage` (value: `"failed_to_generate_image"`)
