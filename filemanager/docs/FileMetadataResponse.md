@@ -14,10 +14,11 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **MimeType** | **string** |  | 
 **OrganizationId** | Pointer to **string** |  | [optional] 
+**OriginalFileMimeType** | **string** |  | 
 **OriginalFileName** | **string** |  | 
 **OriginalFileSize** | **int64** |  | 
-**OriginalMimeType** | **string** |  | 
-**OriginalUrl** | Pointer to **string** |  | [optional] 
+**OriginalFileStoragePath** | Pointer to **string** |  | [optional] 
+**OriginalFileUrl** | Pointer to **string** |  | [optional] 
 **StoragePath** | **string** |  | 
 **TeamId** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | **string** |  | 
@@ -29,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewFileMetadataResponse
 
-`func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileName string, originalFileSize int64, originalMimeType string, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
+`func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, storagePath string, updatedAt string, uploadCategory string, url string, ) *FileMetadataResponse`
 
 NewFileMetadataResponse instantiates a new FileMetadataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -259,6 +260,26 @@ SetOrganizationId sets OrganizationId field to given value.
 
 HasOrganizationId returns a boolean if a field has been set.
 
+### GetOriginalFileMimeType
+
+`func (o *FileMetadataResponse) GetOriginalFileMimeType() string`
+
+GetOriginalFileMimeType returns the OriginalFileMimeType field if non-nil, zero value otherwise.
+
+### GetOriginalFileMimeTypeOk
+
+`func (o *FileMetadataResponse) GetOriginalFileMimeTypeOk() (*string, bool)`
+
+GetOriginalFileMimeTypeOk returns a tuple with the OriginalFileMimeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalFileMimeType
+
+`func (o *FileMetadataResponse) SetOriginalFileMimeType(v string)`
+
+SetOriginalFileMimeType sets OriginalFileMimeType field to given value.
+
+
 ### GetOriginalFileName
 
 `func (o *FileMetadataResponse) GetOriginalFileName() string`
@@ -299,50 +320,55 @@ and a boolean to check if the value has been set.
 SetOriginalFileSize sets OriginalFileSize field to given value.
 
 
-### GetOriginalMimeType
+### GetOriginalFileStoragePath
 
-`func (o *FileMetadataResponse) GetOriginalMimeType() string`
+`func (o *FileMetadataResponse) GetOriginalFileStoragePath() string`
 
-GetOriginalMimeType returns the OriginalMimeType field if non-nil, zero value otherwise.
+GetOriginalFileStoragePath returns the OriginalFileStoragePath field if non-nil, zero value otherwise.
 
-### GetOriginalMimeTypeOk
+### GetOriginalFileStoragePathOk
 
-`func (o *FileMetadataResponse) GetOriginalMimeTypeOk() (*string, bool)`
+`func (o *FileMetadataResponse) GetOriginalFileStoragePathOk() (*string, bool)`
 
-GetOriginalMimeTypeOk returns a tuple with the OriginalMimeType field if it's non-nil, zero value otherwise
+GetOriginalFileStoragePathOk returns a tuple with the OriginalFileStoragePath field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOriginalMimeType
+### SetOriginalFileStoragePath
 
-`func (o *FileMetadataResponse) SetOriginalMimeType(v string)`
+`func (o *FileMetadataResponse) SetOriginalFileStoragePath(v string)`
 
-SetOriginalMimeType sets OriginalMimeType field to given value.
+SetOriginalFileStoragePath sets OriginalFileStoragePath field to given value.
 
+### HasOriginalFileStoragePath
 
-### GetOriginalUrl
+`func (o *FileMetadataResponse) HasOriginalFileStoragePath() bool`
 
-`func (o *FileMetadataResponse) GetOriginalUrl() string`
+HasOriginalFileStoragePath returns a boolean if a field has been set.
 
-GetOriginalUrl returns the OriginalUrl field if non-nil, zero value otherwise.
+### GetOriginalFileUrl
 
-### GetOriginalUrlOk
+`func (o *FileMetadataResponse) GetOriginalFileUrl() string`
 
-`func (o *FileMetadataResponse) GetOriginalUrlOk() (*string, bool)`
+GetOriginalFileUrl returns the OriginalFileUrl field if non-nil, zero value otherwise.
 
-GetOriginalUrlOk returns a tuple with the OriginalUrl field if it's non-nil, zero value otherwise
+### GetOriginalFileUrlOk
+
+`func (o *FileMetadataResponse) GetOriginalFileUrlOk() (*string, bool)`
+
+GetOriginalFileUrlOk returns a tuple with the OriginalFileUrl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOriginalUrl
+### SetOriginalFileUrl
 
-`func (o *FileMetadataResponse) SetOriginalUrl(v string)`
+`func (o *FileMetadataResponse) SetOriginalFileUrl(v string)`
 
-SetOriginalUrl sets OriginalUrl field to given value.
+SetOriginalFileUrl sets OriginalFileUrl field to given value.
 
-### HasOriginalUrl
+### HasOriginalFileUrl
 
-`func (o *FileMetadataResponse) HasOriginalUrl() bool`
+`func (o *FileMetadataResponse) HasOriginalFileUrl() bool`
 
-HasOriginalUrl returns a boolean if a field has been set.
+HasOriginalFileUrl returns a boolean if a field has been set.
 
 ### GetStoragePath
 
