@@ -3,10 +3,10 @@ info:
   contact: {}
   description: API for the Vaudience AI Core
   license:
-    name: Copyrighted
+    name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.3.5
+  version: 0.3.6
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -347,6 +347,42 @@ paths:
       security:
       - ApiKey: []
       summary: Get all my organizations
+      tags:
+      - Organizations
+  /v1/organizations/me/details:
+    get:
+      description: "Get all my organizations with details (subscriptions, ...)"
+      operationId: GetAllMyOrganizationsWithDetails
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/OrganizationDetailsResponse"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: "Get all my organizations with details (subscriptions, ...)"
       tags:
       - Organizations
   /v1/organizations/{id}:
@@ -4428,6 +4464,40 @@ components:
           type: string
       required:
       - url
+      type: object
+    OrganizationDetailsResponse:
+      example:
+        organization:
+          owner: owner
+          createdAt: createdAt
+          name: name
+          id: id
+          updatedAt: updatedAt
+        subscription:
+          trialEnd: trialEnd
+          productId: productId
+          currentPeriodEnd: currentPeriodEnd
+          active: true
+          seats: 0
+          trial: true
+          organizationId: organizationId
+          createdAt: createdAt
+          totalAmount: 1
+          seatsTaken: 6
+          cancelAtPeriodEnd: true
+          name: name
+          currency: currency
+          id: id
+          productType: payment
+          status: status
+          updatedAt: updatedAt
+      properties:
+        organization:
+          $ref: "#/components/schemas/OrganizationResponse"
+        subscription:
+          $ref: "#/components/schemas/OrganizationSubscriptionResponse"
+      required:
+      - organization
       type: object
     OrganizationInviteRequest:
       example:

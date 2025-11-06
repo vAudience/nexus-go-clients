@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**DeleteTeamMember**](OrganizationsAPI.md#DeleteTeamMember) | **Delete** /v1/organizations/{id}/teams/{teamId}/members/{memberId} | Remove a member from a team
 [**EndTrial**](OrganizationsAPI.md#EndTrial) | **Patch** /v1/organizations/{id}/subscription/end-trial | End the trial period early for an Organization
 [**GetAllMyOrganizations**](OrganizationsAPI.md#GetAllMyOrganizations) | **Get** /v1/organizations/me | Get all my organizations
+[**GetAllMyOrganizationsWithDetails**](OrganizationsAPI.md#GetAllMyOrganizationsWithDetails) | **Get** /v1/organizations/me/details | Get all my organizations with details (subscriptions, ...)
 [**GetAllMyTeams**](OrganizationsAPI.md#GetAllMyTeams) | **Get** /v1/organizations/{id}/teams/me | Get all teams for an Organization of the current user
 [**GetAllOrganizations**](OrganizationsAPI.md#GetAllOrganizations) | **Get** /v1/organizations | Get all Organizations
 [**GetCheckoutSession**](OrganizationsAPI.md#GetCheckoutSession) | **Get** /v1/organizations/{id}/checkout-sessions/{productId} | Get a checkout session for an Organization
@@ -1529,6 +1530,67 @@ Other parameters are passed through a pointer to a apiGetAllMyOrganizationsReque
 ### Return type
 
 [**[]OrganizationResponse**](OrganizationResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllMyOrganizationsWithDetails
+
+> []OrganizationDetailsResponse GetAllMyOrganizationsWithDetails(ctx).Execute()
+
+Get all my organizations with details (subscriptions, ...)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetAllMyOrganizationsWithDetails(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetAllMyOrganizationsWithDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllMyOrganizationsWithDetails`: []OrganizationDetailsResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetAllMyOrganizationsWithDetails`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllMyOrganizationsWithDetailsRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]OrganizationDetailsResponse**](OrganizationDetailsResponse.md)
 
 ### Authorization
 

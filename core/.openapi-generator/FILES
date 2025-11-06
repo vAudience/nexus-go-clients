@@ -35,6 +35,7 @@ docs/OrganizationCheckoutSessionResponse.md
 docs/OrganizationCreditsPaymentPostRequest.md
 docs/OrganizationCreditsPaymentResponse.md
 docs/OrganizationCustomerPortalSessionResponse.md
+docs/OrganizationDetailsResponse.md
 docs/OrganizationInviteRequest.md
 docs/OrganizationInviteResponse.md
 docs/OrganizationMemberResponse.md
@@ -95,6 +96,7 @@ model_organization_checkout_session_response.go
 model_organization_credits_payment_post_request.go
 model_organization_credits_payment_response.go
 model_organization_customer_portal_session_response.go
+model_organization_details_response.go
 model_organization_invite_request.go
 model_organization_invite_response.go
 model_organization_member_response.go
