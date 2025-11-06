@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.2.1
+  version: 0.3.0
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -63,24 +63,24 @@ paths:
       summary: returns the service version
       tags:
       - Version
-  /v1/files/{storage_path}:
-    delete:
-      description: Delete a file
-      operationId: DeleteFile
-      parameters:
-      - description: Storage path
-        in: path
-        name: storage_path
+  /v1/file-access-tokens:
+    post:
+      description: Create a file access token
+      operationId: CreateFileAccessToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileAccessTokenRequest"
+        description: File access token request
         required: true
-        schema:
-          type: string
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FileMetadataResponse"
-          description: OK
+                $ref: "#/components/schemas/FileAccessTokenResponse"
+          description: Created
         "400":
           content:
             application/json:
@@ -105,6 +105,60 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Create a file access token
+      tags:
+      - Files
+      x-codegen-request-body-name: fileAccessTokenRequest
+  /v1/files/{storage_path}:
+    delete:
+      description: Delete a file
+      operationId: DeleteFile
+      parameters:
+      - description: Storage path
+        in: path
+        name: storage_path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
       security:
       - ApiKey: []
       summary: Delete a file
@@ -130,6 +184,11 @@ paths:
         name: filename
         schema:
           type: string
+      - description: File access token
+        in: query
+        name: fat
+        schema:
+          type: string
       responses:
         "200":
           content:
@@ -150,21 +209,6 @@ paths:
                 format: binary
                 type: string
           description: File content
-        "400":
-          content:
-            application/octet-stream:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-            image/*:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-            text/*:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad Request
         "401":
           content:
             application/octet-stream:
@@ -210,7 +254,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
-        "501":
+        "500":
           content:
             application/octet-stream:
               schema:
@@ -224,7 +268,7 @@ paths:
             application/pdf:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Not Implemented
+          description: Internal Server Error
       security:
       - ApiKey: []
       summary: Serve a file
@@ -260,6 +304,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
       security:
       - ApiKey: []
       summary: Get metadata for multiple files
@@ -284,12 +334,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/FileMetadataResponse"
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad Request
         "401":
           content:
             application/json:
@@ -308,6 +352,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
       security:
       - ApiKey: []
       summary: Get file metadata by path
@@ -453,7 +503,7 @@ components:
           tag: tag
           value: value
         message: message
-        status: 1
+        status: 0
       properties:
         code:
           type: string
@@ -465,6 +515,28 @@ components:
           type: string
         status:
           type: integer
+      type: object
+    FileAccessTokenRequest:
+      example:
+        storage_path: storage_path
+      properties:
+        storage_path:
+          type: string
+      required:
+      - storage_path
+      type: object
+    FileAccessTokenResponse:
+      example:
+        url: url
+        token: token
+      properties:
+        token:
+          type: string
+        url:
+          type: string
+      required:
+      - token
+      - url
       type: object
     FileMetadataBatchGetRequest:
       example:

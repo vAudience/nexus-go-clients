@@ -4,11 +4,78 @@ All URIs are relative to *https://file-manager.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateFileAccessToken**](FilesAPI.md#CreateFileAccessToken) | **Post** /v1/file-access-tokens | Create a file access token
 [**DeleteFile**](FilesAPI.md#DeleteFile) | **Delete** /v1/files/{storage_path} | Delete a file
 [**GetFileUploadCategories**](FilesAPI.md#GetFileUploadCategories) | **Get** /v1/organizations/{org_id}/files/categories | Get file upload categories
 [**ServeFile**](FilesAPI.md#ServeFile) | **Get** /v1/files/{storage_path} | Serve a file
 [**UploadFile**](FilesAPI.md#UploadFile) | **Post** /v1/organizations/{org_id}/files/{category} | Create a file for a channel
 
+
+
+## CreateFileAccessToken
+
+> FileAccessTokenResponse CreateFileAccessToken(ctx).FileAccessTokenRequest(fileAccessTokenRequest).Execute()
+
+Create a file access token
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/filemanager"
+)
+
+func main() {
+	fileAccessTokenRequest := *openapiclient.NewFileAccessTokenRequest("StoragePath_example") // FileAccessTokenRequest | File access token request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesAPI.CreateFileAccessToken(context.Background()).FileAccessTokenRequest(fileAccessTokenRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.CreateFileAccessToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateFileAccessToken`: FileAccessTokenResponse
+	fmt.Fprintf(os.Stdout, "Response from `FilesAPI.CreateFileAccessToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFileAccessTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fileAccessTokenRequest** | [**FileAccessTokenRequest**](FileAccessTokenRequest.md) | File access token request | 
+
+### Return type
+
+[**FileAccessTokenResponse**](FileAccessTokenResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteFile
@@ -155,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ServeFile
 
-> *os.File ServeFile(ctx, storagePath).Download(download).Filename(filename).Execute()
+> *os.File ServeFile(ctx, storagePath).Download(download).Filename(filename).Fat(fat).Execute()
 
 Serve a file
 
@@ -177,10 +244,11 @@ func main() {
 	storagePath := "storagePath_example" // string | Storage path
 	download := true // bool | Force download as attachment (optional)
 	filename := "filename_example" // string | Custom filename for download (optional)
+	fat := "fat_example" // string | File access token (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.ServeFile(context.Background(), storagePath).Download(download).Filename(filename).Execute()
+	resp, r, err := apiClient.FilesAPI.ServeFile(context.Background(), storagePath).Download(download).Filename(filename).Fat(fat).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.ServeFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +276,7 @@ Name | Type | Description  | Notes
 
  **download** | **bool** | Force download as attachment | 
  **filename** | **string** | Custom filename for download | 
+ **fat** | **string** | File access token | 
 
 ### Return type
 
