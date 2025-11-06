@@ -11,9 +11,10 @@ Name | Type | Description | Notes
 **ChannelName** | **string** |  | 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
 **CreatedAt** | **int64** |  | 
-**CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) |  | [optional] 
+**CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) | Deprecated, use FeatureUsage | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
 **ExecutionId** | Pointer to **string** |  | [optional] 
+**FeatureUsage** | Pointer to [**[]ExecutionFeatureUsage**](ExecutionFeatureUsage.md) |  | [optional] 
 **FinishReason** | Pointer to [**FinishReason**](FinishReason.md) |  | [optional] 
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -264,6 +265,31 @@ SetExecutionId sets ExecutionId field to given value.
 `func (o *AIgencyMessage) HasExecutionId() bool`
 
 HasExecutionId returns a boolean if a field has been set.
+
+### GetFeatureUsage
+
+`func (o *AIgencyMessage) GetFeatureUsage() []ExecutionFeatureUsage`
+
+GetFeatureUsage returns the FeatureUsage field if non-nil, zero value otherwise.
+
+### GetFeatureUsageOk
+
+`func (o *AIgencyMessage) GetFeatureUsageOk() (*[]ExecutionFeatureUsage, bool)`
+
+GetFeatureUsageOk returns a tuple with the FeatureUsage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureUsage
+
+`func (o *AIgencyMessage) SetFeatureUsage(v []ExecutionFeatureUsage)`
+
+SetFeatureUsage sets FeatureUsage field to given value.
+
+### HasFeatureUsage
+
+`func (o *AIgencyMessage) HasFeatureUsage() bool`
+
+HasFeatureUsage returns a boolean if a field has been set.
 
 ### GetFinishReason
 

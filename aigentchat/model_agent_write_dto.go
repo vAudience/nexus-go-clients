@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -39,6 +39,7 @@ type AgentWriteDto struct {
 	RecommendedTask *string `json:"recommended_task,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
 	TeamIds []string `json:"team_ids,omitempty"`
+	ToolConfig map[string]interface{} `json:"tool_config,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -671,6 +672,38 @@ func (o *AgentWriteDto) SetTeamIds(v []string) {
 	o.TeamIds = v
 }
 
+// GetToolConfig returns the ToolConfig field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetToolConfig() map[string]interface{} {
+	if o == nil || IsNil(o.ToolConfig) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ToolConfig
+}
+
+// GetToolConfigOk returns a tuple with the ToolConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetToolConfigOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ToolConfig) {
+		return map[string]interface{}{}, false
+	}
+	return o.ToolConfig, true
+}
+
+// HasToolConfig returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasToolConfig() bool {
+	if o != nil && !IsNil(o.ToolConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolConfig gets a reference to the given map[string]interface{} and assigns it to the ToolConfig field.
+func (o *AgentWriteDto) SetToolConfig(v map[string]interface{}) {
+	o.ToolConfig = v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *AgentWriteDto) GetType() AgentType {
 	if o == nil || IsNil(o.Type) {
@@ -802,6 +835,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamIds) {
 		toSerialize["team_ids"] = o.TeamIds
 	}
+	if !IsNil(o.ToolConfig) {
+		toSerialize["tool_config"] = o.ToolConfig
+	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -849,6 +885,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "recommended_task")
 		delete(additionalProperties, "system_messages")
 		delete(additionalProperties, "team_ids")
+		delete(additionalProperties, "tool_config")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "use_tools")
 		o.AdditionalProperties = additionalProperties

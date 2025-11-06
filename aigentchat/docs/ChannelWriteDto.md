@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **MissionId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
+**ServiceChannel** | Pointer to **bool** |  | [optional] 
 **Summary** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetName sets Name field to given value.
 `func (o *ChannelWriteDto) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetServiceChannel
+
+`func (o *ChannelWriteDto) GetServiceChannel() bool`
+
+GetServiceChannel returns the ServiceChannel field if non-nil, zero value otherwise.
+
+### GetServiceChannelOk
+
+`func (o *ChannelWriteDto) GetServiceChannelOk() (*bool, bool)`
+
+GetServiceChannelOk returns a tuple with the ServiceChannel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceChannel
+
+`func (o *ChannelWriteDto) SetServiceChannel(v bool)`
+
+SetServiceChannel sets ServiceChannel field to given value.
+
+### HasServiceChannel
+
+`func (o *ChannelWriteDto) HasServiceChannel() bool`
+
+HasServiceChannel returns a boolean if a field has been set.
 
 ### GetSummary
 

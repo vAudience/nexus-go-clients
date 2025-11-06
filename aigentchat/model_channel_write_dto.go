@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type ChannelWriteDto struct {
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	MissionId *string `json:"mission_id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	ServiceChannel *bool `json:"service_channel,omitempty"`
 	Summary *string `json:"summary,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -241,6 +242,38 @@ func (o *ChannelWriteDto) SetName(v string) {
 	o.Name = &v
 }
 
+// GetServiceChannel returns the ServiceChannel field value if set, zero value otherwise.
+func (o *ChannelWriteDto) GetServiceChannel() bool {
+	if o == nil || IsNil(o.ServiceChannel) {
+		var ret bool
+		return ret
+	}
+	return *o.ServiceChannel
+}
+
+// GetServiceChannelOk returns a tuple with the ServiceChannel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChannelWriteDto) GetServiceChannelOk() (*bool, bool) {
+	if o == nil || IsNil(o.ServiceChannel) {
+		return nil, false
+	}
+	return o.ServiceChannel, true
+}
+
+// HasServiceChannel returns a boolean if a field has been set.
+func (o *ChannelWriteDto) HasServiceChannel() bool {
+	if o != nil && !IsNil(o.ServiceChannel) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceChannel gets a reference to the given bool and assigns it to the ServiceChannel field.
+func (o *ChannelWriteDto) SetServiceChannel(v bool) {
+	o.ServiceChannel = &v
+}
+
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *ChannelWriteDto) GetSummary() string {
 	if o == nil || IsNil(o.Summary) {
@@ -301,6 +334,9 @@ func (o ChannelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.ServiceChannel) {
+		toSerialize["service_channel"] = o.ServiceChannel
+	}
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
@@ -332,6 +368,7 @@ func (o *ChannelWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "service_channel")
 		delete(additionalProperties, "summary")
 		o.AdditionalProperties = additionalProperties
 	}

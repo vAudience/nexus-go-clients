@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -59,11 +59,7 @@ const (
 	ErrCodeAiServiceInternalServerError ApiErrorCode = "ai_service_internal_server_error"
 	ErrCodeAiServiceOverload ApiErrorCode = "ai_service_overload"
 	ErrCodeAiServiceUnprocessableEntity ApiErrorCode = "ai_service_unprocessable_entity"
-	ErrCodeNoAudioFileSaved ApiErrorCode = "no_audio_file_saved"
-	ErrCodeCreatingAudioTranscriptionContext ApiErrorCode = "failed_to_create_audio_transcription_context"
-	ErrCodeCreatingAudioGenerationContext ApiErrorCode = "failed_to_create_audio_generation_context"
-	ErrCodeFailedToFinalizeAudioStream ApiErrorCode = "failed_to_finalize_audio_stream"
-	ErrCodeFailedToGenerateAudio ApiErrorCode = "failed_to_generate_audio"
+	ErrCodeFailedToTranscribeAudio ApiErrorCode = "failed_to_transcribe_audio"
 	ErrCodeChannelNotFound ApiErrorCode = "channel_not_found"
 	ErrCodeInvalidChannelID ApiErrorCode = "invalid_channel_id"
 	ErrCodeFailedToCreateChannel ApiErrorCode = "failed_to_create_channel"
@@ -87,6 +83,7 @@ const (
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
 	ErrCodeFileNotFound ApiErrorCode = "file_not_found"
 	ErrCodeFileUploadCategoryMismatch ApiErrorCode = "file_upload_category_mismatch"
+	ErrCodeFileMimetypeNotAccepted ApiErrorCode = "file_mimetype_not_accepted"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
 	ErrCodeFailedToGenerateImage ApiErrorCode = "failed_to_generate_image"
 	ErrCodeInvalidImageID ApiErrorCode = "invalid_image_id"
@@ -175,11 +172,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"ai_service_internal_server_error",
 	"ai_service_overload",
 	"ai_service_unprocessable_entity",
-	"no_audio_file_saved",
-	"failed_to_create_audio_transcription_context",
-	"failed_to_create_audio_generation_context",
-	"failed_to_finalize_audio_stream",
-	"failed_to_generate_audio",
+	"failed_to_transcribe_audio",
 	"channel_not_found",
 	"invalid_channel_id",
 	"failed_to_create_channel",
@@ -203,6 +196,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_file_id",
 	"file_not_found",
 	"file_upload_category_mismatch",
+	"file_mimetype_not_accepted",
 	"functioncall_not_found",
 	"failed_to_generate_image",
 	"invalid_image_id",

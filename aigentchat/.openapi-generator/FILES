@@ -70,8 +70,7 @@ docs/AiServiceId.md
 docs/ApiError.md
 docs/ApiErrorCode.md
 docs/AudioAPI.md
-docs/AudioGenerationRequest.md
-docs/AudioTranscriptionRequest.md
+docs/AudioTranscription.md
 docs/AuditTrail.md
 docs/AuditTrailMessage.md
 docs/AuditTrailsAPI.md
@@ -93,6 +92,7 @@ docs/EmbeddingItem.md
 docs/EmbeddingsAPI.md
 docs/EstimateImageGenerationCostRequestDto.md
 docs/ExecutionCostTemplate.md
+docs/ExecutionFeatureUsage.md
 docs/ExecutionLog.md
 docs/ExecutionLogCosts.md
 docs/ExecutionLogResults.md
@@ -142,6 +142,7 @@ docs/ToolI18n.md
 docs/ToolsAPI.md
 docs/VersionAPI.md
 docs/VersionResponse.md
+docs/VoiceChatInputRequestDto.md
 git_push.sh
 go.mod
 go.sum
@@ -186,8 +187,7 @@ model_ai_service_error.go
 model_ai_service_id.go
 model_api_error.go
 model_api_error_code.go
-model_audio_generation_request.go
-model_audio_transcription_request.go
+model_audio_transcription.go
 model_audit_trail.go
 model_audit_trail_message.go
 model_channel.go
@@ -204,6 +204,7 @@ model_document_conversion_cost_tracking_request.go
 model_embedding_item.go
 model_estimate_image_generation_cost_request_dto.go
 model_execution_cost_template.go
+model_execution_feature_usage.go
 model_execution_log.go
 model_execution_log_costs.go
 model_execution_log_results.go
@@ -242,6 +243,7 @@ model_tool.go
 model_tool_function.go
 model_tool_i18n.go
 model_version_response.go
+model_voice_chat_input_request_dto.go
 response.go
 test/api_agents_test.go
 test/api_ai_model_services_test.go

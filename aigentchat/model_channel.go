@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -33,6 +33,7 @@ type Channel struct {
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Summary *string `json:"summary,omitempty"`
+	Type *string `json:"type,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -412,6 +413,38 @@ func (o *Channel) SetSummary(v string) {
 	o.Summary = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Channel) GetType() string {
+	if o == nil || IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Channel) GetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Channel) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *Channel) SetType(v string) {
+	o.Type = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Channel) GetUpdatedAt() int64 {
 	if o == nil || IsNil(o.UpdatedAt) {
@@ -482,6 +515,9 @@ func (o Channel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
@@ -543,6 +579,7 @@ func (o *Channel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "summary")
+		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
 		o.AdditionalProperties = additionalProperties
 	}

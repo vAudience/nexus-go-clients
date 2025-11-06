@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.21.1
+  version: 0.22.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -1915,10 +1915,10 @@ paths:
       tags:
       - AIModels
       x-codegen-request-body-name: aiModel
-  /v1/organizations/{org_id}/audio/transcribe:
+  /v1/organizations/{org_id}/audio/voice-chat-input:
     post:
-      description: Reads an audio file and transcribes text from it
-      operationId: CreateAudioTranscription
+      description: Takes an audio file url to transcribe voice to text
+      operationId: CreateVoiceChatInput
       parameters:
       - description: organization ID
         in: path
@@ -1930,16 +1930,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AudioTranscriptionRequest"
-        description: Audio Transcription Request
+              $ref: "#/components/schemas/VoiceChatInputRequestDto"
+        description: Voice Chat Input Request
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AIgencyMessage"
-          description: OK
+                $ref: "#/components/schemas/AudioTranscription"
+          description: Created
         "400":
           content:
             application/json:
@@ -1966,63 +1966,7 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: Transcribe speech to text
-      tags:
-      - Audio
-      x-codegen-request-body-name: request
-  /v1/organizations/{org_id}/audio/tts:
-    post:
-      description: Generates an audio file from text. attaches the resulting audiofile
-        to the incoming message
-      operationId: CreateTextToSpeech
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AudioGenerationRequest"
-        description: Audio-Generation Request
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AIgencyMessage"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Text-To-Speech
+      summary: Voice Chat Input
       tags:
       - Audio
       x-codegen-request-body-name: request
@@ -2448,6 +2392,7 @@ paths:
       x-codegen-request-body-name: channel
   /v1/organizations/{org_id}/channels/me:
     get:
+      deprecated: true
       description: Retrieve a list of channels owned by the current user
       operationId: ListChannelsByOwnerId
       parameters:
@@ -2505,6 +2450,17 @@ paths:
         name: user_id
         schema:
           type: string
+      - description: "Search term for name, description or summary"
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: Whether to include service channels in the results
+        in: query
+        name: include_services
+        schema:
+          default: false
+          type: boolean
       - description: Limit the number of results
         in: query
         name: limit
@@ -6170,8 +6126,37 @@ components:
             file_size: 0
             url: url
         reference_id: reference_id
+        feature_usage:
+        - capability: ""
+          cost_items:
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
+            description: description
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
+            cost_unit: null
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
+            description: description
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
+            cost_unit: null
+        - capability: ""
+          cost_items:
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
+            description: description
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
+            cost_unit: null
+          - resulting_cost_in_euro: 9.301444243932576
+            used_units: 3.616076749251911
+            description: description
+            cost_per_unit_in_euro: 7.061401241503109
+            batch_cost_factor: 2.3021358869347655
+            cost_unit: null
         mission_id: mission_id
-        created_at: 6
+        created_at: 0
         sender_name: sender_name
         error:
           status_code: 5
@@ -6237,48 +6222,16 @@ components:
           full_text: full_text
         sender_id: sender_id
         execution_id: execution_id
-        token_count: 5
+        token_count: 6
         finish_reason: ""
-        updated_at: 2
+        updated_at: 1
         sender_conversation_role: "{}"
         meta_data: "{}"
         id: id
         state: state
         channel_name: channel_name
         response_to_id: response_to_id
-        created_for_feature:
-          capability: ""
-          cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
-            description: description
-            cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
-            cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
-            description: description
-            cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
-            cost_unit: null
-          cost_item_templates:
-          - description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          - description: description
-            cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
-            cost_unit: input-tokens-per-million
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
+        created_for_feature: "{}"
         ai_model_id: ai_model_id
         token_direction: "{}"
         owner_organization_id: owner_organization_id
@@ -6309,13 +6262,20 @@ components:
           format: int64
           type: integer
         created_for_feature:
-          $ref: "#/components/schemas/AIModelFeature"
+          allOf:
+          - $ref: "#/components/schemas/AIModelFeature"
+          description: "Deprecated, use FeatureUsage"
+          type: object
         error:
           $ref: "#/components/schemas/AiServiceError"
         execution_id:
           maxLength: 64
           minLength: 1
           type: string
+        feature_usage:
+          items:
+            $ref: "#/components/schemas/ExecutionFeatureUsage"
+          type: array
         finish_reason:
           $ref: "#/components/schemas/FinishReason"
         id:
@@ -6608,8 +6568,37 @@ components:
               file_size: 0
               url: url
           reference_id: reference_id
+          feature_usage:
+          - capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+          - capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
           mission_id: mission_id
-          created_at: 6
+          created_at: 0
           sender_name: sender_name
           error:
             status_code: 5
@@ -6675,48 +6664,16 @@ components:
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
-          token_count: 5
+          token_count: 6
           finish_reason: ""
-          updated_at: 2
+          updated_at: 1
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
           state: state
           channel_name: channel_name
           response_to_id: response_to_id
-          created_for_feature:
-            capability: ""
-            cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
-              description: description
-              cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
-              cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
-              description: description
-              cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
-              cost_unit: null
-            cost_item_templates:
-            - description: description
-              cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
-              cost_unit: input-tokens-per-million
-            - description: description
-              cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
-              cost_unit: input-tokens-per-million
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
+          created_for_feature: "{}"
           ai_model_id: ai_model_id
           token_direction: "{}"
           owner_organization_id: owner_organization_id
@@ -6741,8 +6698,37 @@ components:
               file_size: 0
               url: url
           reference_id: reference_id
+          feature_usage:
+          - capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+          - capability: ""
+            cost_items:
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
+            - resulting_cost_in_euro: 9.301444243932576
+              used_units: 3.616076749251911
+              description: description
+              cost_per_unit_in_euro: 7.061401241503109
+              batch_cost_factor: 2.3021358869347655
+              cost_unit: null
           mission_id: mission_id
-          created_at: 6
+          created_at: 0
           sender_name: sender_name
           error:
             status_code: 5
@@ -6808,48 +6794,16 @@ components:
             full_text: full_text
           sender_id: sender_id
           execution_id: execution_id
-          token_count: 5
+          token_count: 6
           finish_reason: ""
-          updated_at: 2
+          updated_at: 1
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
           state: state
           channel_name: channel_name
           response_to_id: response_to_id
-          created_for_feature:
-            capability: ""
-            cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
-              description: description
-              cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
-              cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
-              description: description
-              cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
-              cost_unit: null
-            cost_item_templates:
-            - description: description
-              cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
-              cost_unit: input-tokens-per-million
-            - description: description
-              cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
-              cost_unit: input-tokens-per-million
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
+          created_for_feature: "{}"
           ai_model_id: ai_model_id
           token_direction: "{}"
           owner_organization_id: owner_organization_id
@@ -7165,6 +7119,7 @@ components:
         - model_capabilities
         - model_capabilities
         model_host_location: ""
+        tool_config: "{}"
         id: id
         internal_id: internal_id
         model_release_date: 6
@@ -7303,6 +7258,9 @@ components:
             type: string
           type: array
           uniqueItems: true
+        tool_config:
+          properties: {}
+          type: object
         type:
           $ref: "#/components/schemas/AgentType"
         updated_at:
@@ -7391,6 +7349,7 @@ components:
         meta_data: "{}"
         name: name
         model_host_location: ""
+        tool_config: "{}"
         parameters: "{}"
       properties:
         add_tool_guidelines:
@@ -7455,6 +7414,9 @@ components:
             type: string
           type: array
           uniqueItems: true
+        tool_config:
+          properties: {}
+          type: object
         type:
           $ref: "#/components/schemas/AgentType"
         use_tools:
@@ -7561,11 +7523,7 @@ components:
       - ai_service_internal_server_error
       - ai_service_overload
       - ai_service_unprocessable_entity
-      - no_audio_file_saved
-      - failed_to_create_audio_transcription_context
-      - failed_to_create_audio_generation_context
-      - failed_to_finalize_audio_stream
-      - failed_to_generate_audio
+      - failed_to_transcribe_audio
       - channel_not_found
       - invalid_channel_id
       - failed_to_create_channel
@@ -7589,6 +7547,7 @@ components:
       - invalid_file_id
       - file_not_found
       - file_upload_category_mismatch
+      - file_mimetype_not_accepted
       - functioncall_not_found
       - failed_to_generate_image
       - invalid_image_id
@@ -7675,11 +7634,7 @@ components:
       - ErrCodeAiServiceInternalServerError
       - ErrCodeAiServiceOverload
       - ErrCodeAiServiceUnprocessableEntity
-      - ErrCodeNoAudioFileSaved
-      - ErrCodeCreatingAudioTranscriptionContext
-      - ErrCodeCreatingAudioGenerationContext
-      - ErrCodeFailedToFinalizeAudioStream
-      - ErrCodeFailedToGenerateAudio
+      - ErrCodeFailedToTranscribeAudio
       - ErrCodeChannelNotFound
       - ErrCodeInvalidChannelID
       - ErrCodeFailedToCreateChannel
@@ -7703,6 +7658,7 @@ components:
       - ErrCodeInvalidFileID
       - ErrCodeFileNotFound
       - ErrCodeFileUploadCategoryMismatch
+      - ErrCodeFileMimetypeNotAccepted
       - ErrCodeFunctionCallNotFound
       - ErrCodeFailedToGenerateImage
       - ErrCodeInvalidImageID
@@ -7749,153 +7705,42 @@ components:
       - ErrCodeInvalidVersion
       - ErrCodeVariableNotFound
       - ErrCodeInvalidVariableValue
-    AudioGenerationRequest:
+    AudioTranscription:
       example:
+        execution_id: execution_id
         agent_id: agent_id
-        voice_id: voice_id
-        team_ids:
-        - team_ids
-        - team_ids
-        message_response_to_id: message_response_to_id
-        mission_id: mission_id
-        language: language
-        voice_name: voice_name
-        message: message
-        output_audio_file_format: output_audio_file_format
-        with_timestamps: true
-        speed: 0.8008281904610115
-        attached_files:
-        - attached_files
-        - attached_files
-        stream_audio: true
-        dictionary:
-          key: dictionary
-        user_id: user_id
-        org_id: org_id
-        message_reference_id: message_reference_id
-        id: id
-        channel_id: channel_id
-        parameters: "{}"
-        username: username
+        service_id: service_id
+        output_tokens: 6
+        model_id: model_id
+        input_file_url: input_file_url
+        input_tokens: 0
+        content: content
       properties:
         agent_id:
           type: string
-        attached_files:
-          items:
-            type: string
-          type: array
-        channel_id:
+        content:
           type: string
-        dictionary:
-          additionalProperties:
-            type: string
-          type: object
-        id:
+        execution_id:
           type: string
-        language:
+        input_file_url:
           type: string
-        message:
+        input_tokens:
+          type: integer
+        model_id:
           type: string
-        message_reference_id:
-          type: string
-        message_response_to_id:
-          type: string
-        mission_id:
-          type: string
-        org_id:
-          type: string
-        output_audio_file_format:
-          type: string
-        parameters:
-          properties: {}
-          type: object
-        speed:
-          format: double
-          type: number
-        stream_audio:
-          type: boolean
-        team_ids:
-          items:
-            type: string
-          type: array
-        user_id:
-          type: string
-        username:
-          type: string
-        voice_id:
-          type: string
-        voice_name:
-          type: string
-        with_timestamps:
-          type: boolean
-      type: object
-    AudioTranscriptionRequest:
-      example:
-        agent_id: agent_id
-        skip_ai_agency_message_generation: true
-        team_ids:
-        - team_ids
-        - team_ids
-        message_response_to_id: message_response_to_id
-        mission_id: mission_id
-        language: language
-        trigger_chat_completion: true
-        transcription_format: transcription_format
-        user_id: user_id
-        audio_file:
-          llm_input_type: llm_input_type
-          embedded_content: embedded_content
-          mime_type: mime_type
-          file_name: file_name
-          meta_data: "{}"
-          id: id
-          file_size: 0
-          url: url
-        org_id: org_id
-        message_reference_id: message_reference_id
-        id: id
-        channel_id: channel_id
-        parameters: "{}"
-        username: username
-      properties:
-        agent_id:
-          type: string
-        audio_file:
-          $ref: "#/components/schemas/AIgencyMessageFile"
-        channel_id:
-          type: string
-        id:
-          type: string
-        language:
-          type: string
-        message_reference_id:
-          type: string
-        message_response_to_id:
-          type: string
-        mission_id:
-          type: string
-        org_id:
-          type: string
-        parameters:
-          properties: {}
-          type: object
-        skip_ai_agency_message_generation:
-          type: boolean
-        team_ids:
-          items:
-            type: string
-          type: array
-        transcription_format:
-          type: string
-        trigger_chat_completion:
-          type: boolean
-        user_id:
-          type: string
-        username:
+        output_tokens:
+          type: integer
+        service_id:
           type: string
       required:
-      - language
-      - transcription_format
+      - agent_id
+      - content
+      - execution_id
+      - input_file_url
+      - input_tokens
+      - model_id
+      - output_tokens
+      - service_id
       type: object
     AuditTrail:
       example:
@@ -7921,7 +7766,7 @@ components:
               file_size: 0
               url: url
           reference_id: reference_id
-          created_at: 0
+          created_at: 6
           sender_name: sender_name
           error:
             status_code: 5
@@ -7988,10 +7833,10 @@ components:
             full_text: full_text
           sender_id: sender_id
           token_direction: "{}"
-          token_count: 6
+          token_count: 5
           finish_reason: ""
           owner_organization_id: owner_organization_id
-          updated_at: 1
+          updated_at: 2
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
@@ -8019,7 +7864,7 @@ components:
               file_size: 0
               url: url
           reference_id: reference_id
-          created_at: 0
+          created_at: 6
           sender_name: sender_name
           error:
             status_code: 5
@@ -8086,10 +7931,10 @@ components:
             full_text: full_text
           sender_id: sender_id
           token_direction: "{}"
-          token_count: 6
+          token_count: 5
           finish_reason: ""
           owner_organization_id: owner_organization_id
-          updated_at: 1
+          updated_at: 2
           sender_conversation_role: "{}"
           meta_data: "{}"
           id: id
@@ -8132,7 +7977,7 @@ components:
             file_size: 0
             url: url
         reference_id: reference_id
-        created_at: 0
+        created_at: 6
         sender_name: sender_name
         error:
           status_code: 5
@@ -8199,10 +8044,10 @@ components:
           full_text: full_text
         sender_id: sender_id
         token_direction: "{}"
-        token_count: 6
+        token_count: 5
         finish_reason: ""
         owner_organization_id: owner_organization_id
-        updated_at: 1
+        updated_at: 2
         sender_conversation_role: "{}"
         meta_data: "{}"
         id: id
@@ -8309,6 +8154,7 @@ components:
         mission_id: mission_id
         created_at: 0
         description: description
+        type: type
         owner_organization_id: owner_organization_id
         updated_at: 1
         is_org_public: true
@@ -8355,6 +8201,8 @@ components:
         summary:
           maxLength: 1024
           type: string
+        type:
+          type: string
         updated_at:
           format: int64
           type: integer
@@ -8373,6 +8221,7 @@ components:
           mission_id: mission_id
           created_at: 0
           description: description
+          type: type
           owner_organization_id: owner_organization_id
           updated_at: 1
           is_org_public: true
@@ -8386,6 +8235,7 @@ components:
           mission_id: mission_id
           created_at: 0
           description: description
+          type: type
           owner_organization_id: owner_organization_id
           updated_at: 1
           is_org_public: true
@@ -8409,6 +8259,7 @@ components:
       example:
         summary: summary
         metadata: "{}"
+        service_channel: true
         is_org_public: true
         is_public: true
         mission_id: mission_id
@@ -8432,6 +8283,8 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        service_channel:
+          type: boolean
         summary:
           maxLength: 1024
           type: string
@@ -8483,6 +8336,7 @@ components:
       type: object
     ChatCompletionRequestDto:
       example:
+        service_channel: true
         agent_id: agent_id
         var_replacements:
           key: var_replacements
@@ -8545,6 +8399,8 @@ components:
           items:
             type: string
           type: array
+        service_channel:
+          type: boolean
         set_message_history_ids:
           description: "If UseChannelMessagesAsHistory is false, this list of message\
             \ IDs will be used as history, if empty, the history will be empty, ignored\
@@ -8696,6 +8552,30 @@ components:
           $ref: "#/components/schemas/AIModelCostUnit"
         description:
           type: string
+      type: object
+    ExecutionFeatureUsage:
+      example:
+        capability: ""
+        cost_items:
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
+          description: description
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
+          cost_unit: null
+        - resulting_cost_in_euro: 9.301444243932576
+          used_units: 3.616076749251911
+          description: description
+          cost_per_unit_in_euro: 7.061401241503109
+          batch_cost_factor: 2.3021358869347655
+          cost_unit: null
+      properties:
+        capability:
+          $ref: "#/components/schemas/AIModelCapability"
+        cost_items:
+          items:
+            $ref: "#/components/schemas/ExecutionUsageCost"
+          type: array
       type: object
     ExecutionLog:
       example:
@@ -9753,6 +9633,15 @@ components:
       properties:
         version:
           type: string
+      type: object
+    VoiceChatInputRequestDto:
+      example:
+        file_url: file_url
+      properties:
+        file_url:
+          type: string
+      required:
+      - file_url
       type: object
   securitySchemes:
     ApiKey:

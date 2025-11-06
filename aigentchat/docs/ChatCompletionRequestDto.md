@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **MissionId** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SelectedTools** | Pointer to **[]string** |  | [optional] 
+**ServiceChannel** | Pointer to **bool** |  | [optional] 
 **SetMessageHistoryIds** | Pointer to **[]string** | If UseChannelMessagesAsHistory is false, this list of message IDs will be used as history, if empty, the history will be empty, ignored if UseChannelMessagesAsHistory is true | [optional] 
 **UseChannelMessagesAsHistory** | Pointer to **bool** | If true, the channel messages will be used as history and SetMessageHistoryIds will be ignored | [optional] 
 **UseSummaryService** | Pointer to **bool** |  | [optional] 
@@ -356,6 +357,31 @@ SetSelectedTools sets SelectedTools field to given value.
 `func (o *ChatCompletionRequestDto) HasSelectedTools() bool`
 
 HasSelectedTools returns a boolean if a field has been set.
+
+### GetServiceChannel
+
+`func (o *ChatCompletionRequestDto) GetServiceChannel() bool`
+
+GetServiceChannel returns the ServiceChannel field if non-nil, zero value otherwise.
+
+### GetServiceChannelOk
+
+`func (o *ChatCompletionRequestDto) GetServiceChannelOk() (*bool, bool)`
+
+GetServiceChannelOk returns a tuple with the ServiceChannel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceChannel
+
+`func (o *ChatCompletionRequestDto) SetServiceChannel(v bool)`
+
+SetServiceChannel sets ServiceChannel field to given value.
+
+### HasServiceChannel
+
+`func (o *ChatCompletionRequestDto) HasServiceChannel() bool`
+
+HasServiceChannel returns a boolean if a field has been set.
 
 ### GetSetMessageHistoryIds
 

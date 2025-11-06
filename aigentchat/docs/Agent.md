@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **RecommendedTask** | Pointer to **string** |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
+**ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
@@ -756,6 +757,31 @@ SetTeamIds sets TeamIds field to given value.
 `func (o *Agent) HasTeamIds() bool`
 
 HasTeamIds returns a boolean if a field has been set.
+
+### GetToolConfig
+
+`func (o *Agent) GetToolConfig() map[string]interface{}`
+
+GetToolConfig returns the ToolConfig field if non-nil, zero value otherwise.
+
+### GetToolConfigOk
+
+`func (o *Agent) GetToolConfigOk() (*map[string]interface{}, bool)`
+
+GetToolConfigOk returns a tuple with the ToolConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolConfig
+
+`func (o *Agent) SetToolConfig(v map[string]interface{})`
+
+SetToolConfig sets ToolConfig field to given value.
+
+### HasToolConfig
+
+`func (o *Agent) HasToolConfig() bool`
+
+HasToolConfig returns a boolean if a field has been set.
 
 ### GetType
 

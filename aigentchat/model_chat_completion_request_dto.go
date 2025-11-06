@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -35,6 +35,7 @@ type ChatCompletionRequestDto struct {
 	MissionId *string `json:"mission_id,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SelectedTools []string `json:"selected_tools,omitempty"`
+	ServiceChannel *bool `json:"service_channel,omitempty"`
 	// If UseChannelMessagesAsHistory is false, this list of message IDs will be used as history, if empty, the history will be empty, ignored if UseChannelMessagesAsHistory is true
 	SetMessageHistoryIds []string `json:"set_message_history_ids,omitempty"`
 	// If true, the channel messages will be used as history and SetMessageHistoryIds will be ignored
@@ -466,6 +467,38 @@ func (o *ChatCompletionRequestDto) SetSelectedTools(v []string) {
 	o.SelectedTools = v
 }
 
+// GetServiceChannel returns the ServiceChannel field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetServiceChannel() bool {
+	if o == nil || IsNil(o.ServiceChannel) {
+		var ret bool
+		return ret
+	}
+	return *o.ServiceChannel
+}
+
+// GetServiceChannelOk returns a tuple with the ServiceChannel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetServiceChannelOk() (*bool, bool) {
+	if o == nil || IsNil(o.ServiceChannel) {
+		return nil, false
+	}
+	return o.ServiceChannel, true
+}
+
+// HasServiceChannel returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasServiceChannel() bool {
+	if o != nil && !IsNil(o.ServiceChannel) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceChannel gets a reference to the given bool and assigns it to the ServiceChannel field.
+func (o *ChatCompletionRequestDto) SetServiceChannel(v bool) {
+	o.ServiceChannel = &v
+}
+
 // GetSetMessageHistoryIds returns the SetMessageHistoryIds field value if set, zero value otherwise.
 func (o *ChatCompletionRequestDto) GetSetMessageHistoryIds() []string {
 	if o == nil || IsNil(o.SetMessageHistoryIds) {
@@ -671,6 +704,9 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelectedTools) {
 		toSerialize["selected_tools"] = o.SelectedTools
 	}
+	if !IsNil(o.ServiceChannel) {
+		toSerialize["service_channel"] = o.ServiceChannel
+	}
 	if !IsNil(o.SetMessageHistoryIds) {
 		toSerialize["set_message_history_ids"] = o.SetMessageHistoryIds
 	}
@@ -743,6 +779,7 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "selected_tools")
+		delete(additionalProperties, "service_channel")
 		delete(additionalProperties, "set_message_history_ids")
 		delete(additionalProperties, "use_channel_messages_as_history")
 		delete(additionalProperties, "use_summary_service")

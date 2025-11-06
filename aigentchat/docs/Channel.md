@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
 **Summary** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 
 ## Methods
@@ -316,6 +317,31 @@ SetSummary sets Summary field to given value.
 `func (o *Channel) HasSummary() bool`
 
 HasSummary returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *Channel) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Channel) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Channel) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *Channel) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

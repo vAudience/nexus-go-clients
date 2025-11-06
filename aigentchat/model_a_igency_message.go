@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -28,9 +28,11 @@ type AIgencyMessage struct {
 	ChannelName string `json:"channel_name"`
 	Content AIgencyMessageContentList `json:"content"`
 	CreatedAt int64 `json:"created_at"`
+	// Deprecated, use FeatureUsage
 	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
 	Error *AiServiceError `json:"error,omitempty"`
 	ExecutionId *string `json:"execution_id,omitempty"`
+	FeatureUsage []ExecutionFeatureUsage `json:"feature_usage,omitempty"`
 	FinishReason *FinishReason `json:"finish_reason,omitempty"`
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
@@ -346,6 +348,38 @@ func (o *AIgencyMessage) HasExecutionId() bool {
 // SetExecutionId gets a reference to the given string and assigns it to the ExecutionId field.
 func (o *AIgencyMessage) SetExecutionId(v string) {
 	o.ExecutionId = &v
+}
+
+// GetFeatureUsage returns the FeatureUsage field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetFeatureUsage() []ExecutionFeatureUsage {
+	if o == nil || IsNil(o.FeatureUsage) {
+		var ret []ExecutionFeatureUsage
+		return ret
+	}
+	return o.FeatureUsage
+}
+
+// GetFeatureUsageOk returns a tuple with the FeatureUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetFeatureUsageOk() ([]ExecutionFeatureUsage, bool) {
+	if o == nil || IsNil(o.FeatureUsage) {
+		return nil, false
+	}
+	return o.FeatureUsage, true
+}
+
+// HasFeatureUsage returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasFeatureUsage() bool {
+	if o != nil && !IsNil(o.FeatureUsage) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureUsage gets a reference to the given []ExecutionFeatureUsage and assigns it to the FeatureUsage field.
+func (o *AIgencyMessage) SetFeatureUsage(v []ExecutionFeatureUsage) {
+	o.FeatureUsage = v
 }
 
 // GetFinishReason returns the FinishReason field value if set, zero value otherwise.
@@ -822,6 +856,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExecutionId) {
 		toSerialize["execution_id"] = o.ExecutionId
 	}
+	if !IsNil(o.FeatureUsage) {
+		toSerialize["feature_usage"] = o.FeatureUsage
+	}
 	if !IsNil(o.FinishReason) {
 		toSerialize["finish_reason"] = o.FinishReason
 	}
@@ -921,6 +958,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "created_for_feature")
 		delete(additionalProperties, "error")
 		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "feature_usage")
 		delete(additionalProperties, "finish_reason")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "meta_data")

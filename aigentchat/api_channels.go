@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.21.1
+API version: 0.22.3
 Contact: contact@vaudience.ai
 */
 
@@ -876,6 +876,8 @@ Retrieve a list of channels owned by the current user
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
  @return ApiListChannelsByOwnerIdRequest
+
+Deprecated
 */
 func (a *ChannelsAPIService) ListChannelsByOwnerId(ctx context.Context, orgId string) ApiListChannelsByOwnerIdRequest {
 	return ApiListChannelsByOwnerIdRequest{
@@ -887,6 +889,7 @@ func (a *ChannelsAPIService) ListChannelsByOwnerId(ctx context.Context, orgId st
 
 // Execute executes the request
 //  @return []Channel
+// Deprecated
 func (a *ChannelsAPIService) ListChannelsByOwnerIdExecute(r ApiListChannelsByOwnerIdRequest) ([]Channel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1012,6 +1015,8 @@ type ApiSearchChannelsRequest struct {
 	ApiService *ChannelsAPIService
 	orgId string
 	userId *string
+	q *string
+	includeServices *bool
 	limit *int32
 	offset *int32
 }
@@ -1019,6 +1024,18 @@ type ApiSearchChannelsRequest struct {
 // user ID or me for current user
 func (r ApiSearchChannelsRequest) UserId(userId string) ApiSearchChannelsRequest {
 	r.userId = &userId
+	return r
+}
+
+// Search term for name, description or summary
+func (r ApiSearchChannelsRequest) Q(q string) ApiSearchChannelsRequest {
+	r.q = &q
+	return r
+}
+
+// Whether to include service channels in the results
+func (r ApiSearchChannelsRequest) IncludeServices(includeServices bool) ApiSearchChannelsRequest {
+	r.includeServices = &includeServices
 	return r
 }
 
@@ -1079,6 +1096,15 @@ func (a *ChannelsAPIService) SearchChannelsExecute(r ApiSearchChannelsRequest) (
 
 	if r.userId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "", "")
+	}
+	if r.q != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "q", r.q, "", "")
+	}
+	if r.includeServices != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_services", r.includeServices, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeServices = &defaultValue
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")

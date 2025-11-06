@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ## SearchChannels
 
-> ChannelResults SearchChannels(ctx, orgId).UserId(userId).Limit(limit).Offset(offset).Execute()
+> ChannelResults SearchChannels(ctx, orgId).UserId(userId).Q(q).IncludeServices(includeServices).Limit(limit).Offset(offset).Execute()
 
 Search channels by query
 
@@ -466,12 +466,14 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	userId := "userId_example" // string | user ID or me for current user (optional)
+	q := "q_example" // string | Search term for name, description or summary (optional)
+	includeServices := true // bool | Whether to include service channels in the results (optional) (default to false)
 	limit := int32(56) // int32 | Limit the number of results (optional) (default to 1000)
 	offset := int32(56) // int32 | Offset for pagination (optional) (default to 0)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.SearchChannels(context.Background(), orgId).UserId(userId).Limit(limit).Offset(offset).Execute()
+	resp, r, err := apiClient.ChannelsAPI.SearchChannels(context.Background(), orgId).UserId(userId).Q(q).IncludeServices(includeServices).Limit(limit).Offset(offset).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.SearchChannels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -498,6 +500,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **userId** | **string** | user ID or me for current user | 
+ **q** | **string** | Search term for name, description or summary | 
+ **includeServices** | **bool** | Whether to include service channels in the results | [default to false]
  **limit** | **int32** | Limit the number of results | [default to 1000]
  **offset** | **int32** | Offset for pagination | [default to 0]
 

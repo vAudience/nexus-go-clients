@@ -79,15 +79,7 @@
 
 * `ErrCodeAiServiceUnprocessableEntity` (value: `"ai_service_unprocessable_entity"`)
 
-* `ErrCodeNoAudioFileSaved` (value: `"no_audio_file_saved"`)
-
-* `ErrCodeCreatingAudioTranscriptionContext` (value: `"failed_to_create_audio_transcription_context"`)
-
-* `ErrCodeCreatingAudioGenerationContext` (value: `"failed_to_create_audio_generation_context"`)
-
-* `ErrCodeFailedToFinalizeAudioStream` (value: `"failed_to_finalize_audio_stream"`)
-
-* `ErrCodeFailedToGenerateAudio` (value: `"failed_to_generate_audio"`)
+* `ErrCodeFailedToTranscribeAudio` (value: `"failed_to_transcribe_audio"`)
 
 * `ErrCodeChannelNotFound` (value: `"channel_not_found"`)
 
@@ -134,6 +126,8 @@
 * `ErrCodeFileNotFound` (value: `"file_not_found"`)
 
 * `ErrCodeFileUploadCategoryMismatch` (value: `"file_upload_category_mismatch"`)
+
+* `ErrCodeFileMimetypeNotAccepted` (value: `"file_mimetype_not_accepted"`)
 
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 
