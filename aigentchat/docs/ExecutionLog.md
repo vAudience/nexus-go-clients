@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **MessageId** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **OwnerOrganizationId** | Pointer to **string** |  | [optional] 
+**RequestId** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
 **Usage** | Pointer to [**[]ExecutionUsageCost**](ExecutionUsageCost.md) |  | [optional] 
 
@@ -311,6 +312,31 @@ SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 `func (o *ExecutionLog) HasOwnerOrganizationId() bool`
 
 HasOwnerOrganizationId returns a boolean if a field has been set.
+
+### GetRequestId
+
+`func (o *ExecutionLog) GetRequestId() string`
+
+GetRequestId returns the RequestId field if non-nil, zero value otherwise.
+
+### GetRequestIdOk
+
+`func (o *ExecutionLog) GetRequestIdOk() (*string, bool)`
+
+GetRequestIdOk returns a tuple with the RequestId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestId
+
+`func (o *ExecutionLog) SetRequestId(v string)`
+
+SetRequestId sets RequestId field to given value.
+
+### HasRequestId
+
+`func (o *ExecutionLog) HasRequestId() bool`
+
+HasRequestId returns a boolean if a field has been set.
 
 ### GetType
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,10 +23,13 @@ var _ MappedNullable = &ResultFile{}
 type ResultFile struct {
 	FileName string `json:"file_name"`
 	FileSize int32 `json:"file_size"`
+	LlmInputType string `json:"llm_input_type"`
+	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	MimeType string `json:"mime_type"`
 	OriginalFileMimeType string `json:"original_file_mime_type"`
 	OriginalFileName string `json:"original_file_name"`
 	OriginalFileUrl string `json:"original_file_url"`
+	UploadCategory string `json:"upload_category"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
@@ -37,14 +40,16 @@ type _ResultFile ResultFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, url string) *ResultFile {
+func NewResultFile(fileName string, fileSize int32, llmInputType string, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, uploadCategory string, url string) *ResultFile {
 	this := ResultFile{}
 	this.FileName = fileName
 	this.FileSize = fileSize
+	this.LlmInputType = llmInputType
 	this.MimeType = mimeType
 	this.OriginalFileMimeType = originalFileMimeType
 	this.OriginalFileName = originalFileName
 	this.OriginalFileUrl = originalFileUrl
+	this.UploadCategory = uploadCategory
 	this.Url = url
 	return &this
 }
@@ -103,6 +108,62 @@ func (o *ResultFile) GetFileSizeOk() (*int32, bool) {
 // SetFileSize sets field value
 func (o *ResultFile) SetFileSize(v int32) {
 	o.FileSize = v
+}
+
+// GetLlmInputType returns the LlmInputType field value
+func (o *ResultFile) GetLlmInputType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LlmInputType
+}
+
+// GetLlmInputTypeOk returns a tuple with the LlmInputType field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetLlmInputTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LlmInputType, true
+}
+
+// SetLlmInputType sets field value
+func (o *ResultFile) SetLlmInputType(v string) {
+	o.LlmInputType = v
+}
+
+// GetMetaData returns the MetaData field value if set, zero value otherwise.
+func (o *ResultFile) GetMetaData() map[string]interface{} {
+	if o == nil || IsNil(o.MetaData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.MetaData
+}
+
+// GetMetaDataOk returns a tuple with the MetaData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetMetaDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MetaData) {
+		return map[string]interface{}{}, false
+	}
+	return o.MetaData, true
+}
+
+// HasMetaData returns a boolean if a field has been set.
+func (o *ResultFile) HasMetaData() bool {
+	if o != nil && !IsNil(o.MetaData) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetaData gets a reference to the given map[string]interface{} and assigns it to the MetaData field.
+func (o *ResultFile) SetMetaData(v map[string]interface{}) {
+	o.MetaData = v
 }
 
 // GetMimeType returns the MimeType field value
@@ -201,6 +262,30 @@ func (o *ResultFile) SetOriginalFileUrl(v string) {
 	o.OriginalFileUrl = v
 }
 
+// GetUploadCategory returns the UploadCategory field value
+func (o *ResultFile) GetUploadCategory() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UploadCategory
+}
+
+// GetUploadCategoryOk returns a tuple with the UploadCategory field value
+// and a boolean to check if the value has been set.
+func (o *ResultFile) GetUploadCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UploadCategory, true
+}
+
+// SetUploadCategory sets field value
+func (o *ResultFile) SetUploadCategory(v string) {
+	o.UploadCategory = v
+}
+
 // GetUrl returns the Url field value
 func (o *ResultFile) GetUrl() string {
 	if o == nil {
@@ -237,10 +322,15 @@ func (o ResultFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["file_name"] = o.FileName
 	toSerialize["file_size"] = o.FileSize
+	toSerialize["llm_input_type"] = o.LlmInputType
+	if !IsNil(o.MetaData) {
+		toSerialize["meta_data"] = o.MetaData
+	}
 	toSerialize["mime_type"] = o.MimeType
 	toSerialize["original_file_mime_type"] = o.OriginalFileMimeType
 	toSerialize["original_file_name"] = o.OriginalFileName
 	toSerialize["original_file_url"] = o.OriginalFileUrl
+	toSerialize["upload_category"] = o.UploadCategory
 	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
@@ -257,10 +347,12 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"file_name",
 		"file_size",
+		"llm_input_type",
 		"mime_type",
 		"original_file_mime_type",
 		"original_file_name",
 		"original_file_url",
+		"upload_category",
 		"url",
 	}
 
@@ -293,10 +385,13 @@ func (o *ResultFile) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "file_name")
 		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "llm_input_type")
+		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "mime_type")
 		delete(additionalProperties, "original_file_mime_type")
 		delete(additionalProperties, "original_file_name")
 		delete(additionalProperties, "original_file_url")
+		delete(additionalProperties, "upload_category")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

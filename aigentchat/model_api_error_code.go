@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -46,19 +46,23 @@ const (
 	ErrCodeFailedToFetchAIModel ApiErrorCode = "failed_to_fetch_ai_model"
 	ErrCodeInvalidAIModelServiceID ApiErrorCode = "invalid_ai_model_service_id"
 	ErrCodeAIModelServiceNotFound ApiErrorCode = "ai_model_service_not_found"
+	ErrCodeAIModelServiceActionNotAvailable ApiErrorCode = "ai_model_service_action_not_available"
 	ErrCodeFailedToCreateAIModelService ApiErrorCode = "failed_to_create_ai_model_service"
 	ErrCodeFailedToUpdateAIModelService ApiErrorCode = "failed_to_update_ai_model_service"
 	ErrCodeFailedToDeleteAIModelService ApiErrorCode = "failed_to_delete_ai_model_service"
 	ErrCodeFailedToFetchAIModelService ApiErrorCode = "failed_to_fetch_ai_model_service"
-	ErrCodeAiServiceBadRequest ApiErrorCode = "ai_service_bad_request"
-	ErrCodeAiServiceContentFilter ApiErrorCode = "ai_service_content_filter"
-	ErrCodeAiServiceAuthentication ApiErrorCode = "ai_service_authentication"
-	ErrCodeAiServicePermissionDenied ApiErrorCode = "ai_service_permission_denied"
-	ErrCodeAiServiceRequestTooLarge ApiErrorCode = "ai_service_request_too_large"
-	ErrCodeAiServiceRateLimit ApiErrorCode = "ai_service_rate_limit"
-	ErrCodeAiServiceInternalServerError ApiErrorCode = "ai_service_internal_server_error"
-	ErrCodeAiServiceOverload ApiErrorCode = "ai_service_overload"
-	ErrCodeAiServiceUnprocessableEntity ApiErrorCode = "ai_service_unprocessable_entity"
+	ErrCodeAIRegistryServiceNotEnabled ApiErrorCode = "ai_registry_service_not_enabled"
+	ErrCodeAIRegistryServiceLocationNotEnabled ApiErrorCode = "ai_registry_service_location_not_enabled"
+	ErrCodeAIRegistryFailedToGetService ApiErrorCode = "ai_registry_failed_to_get_service"
+	ErrCodeAIServiceAuthentication ApiErrorCode = "ai_service_authentication"
+	ErrCodeAIServiceBadRequest ApiErrorCode = "ai_service_bad_request"
+	ErrCodeAIServiceContentFilter ApiErrorCode = "ai_service_content_filter"
+	ErrCodeAIServiceInternalServerError ApiErrorCode = "ai_service_internal_server_error"
+	ErrCodeAIServiceOverload ApiErrorCode = "ai_service_overload"
+	ErrCodeAIServicePermissionDenied ApiErrorCode = "ai_service_permission_denied"
+	ErrCodeAIServiceRequestTooLarge ApiErrorCode = "ai_service_request_too_large"
+	ErrCodeAIServiceRateLimit ApiErrorCode = "ai_service_rate_limit"
+	ErrCodeAIServiceUnprocessableEntity ApiErrorCode = "ai_service_unprocessable_entity"
 	ErrCodeFailedToTranscribeAudio ApiErrorCode = "failed_to_transcribe_audio"
 	ErrCodeChannelNotFound ApiErrorCode = "channel_not_found"
 	ErrCodeInvalidChannelID ApiErrorCode = "invalid_channel_id"
@@ -86,6 +90,7 @@ const (
 	ErrCodeFileMimetypeNotAccepted ApiErrorCode = "file_mimetype_not_accepted"
 	ErrCodeFunctionCallNotFound ApiErrorCode = "functioncall_not_found"
 	ErrCodeFailedToGenerateImage ApiErrorCode = "failed_to_generate_image"
+	ErrCodeFailedToGenerateImageCost ApiErrorCode = "failed_to_generate_image_cost"
 	ErrCodeInvalidImageID ApiErrorCode = "invalid_image_id"
 	ErrCodeImageNotFound ApiErrorCode = "image_not_found"
 	ErrCodeFailedToDeleteImage ApiErrorCode = "failed_to_delete_image"
@@ -159,18 +164,22 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_ai_model",
 	"invalid_ai_model_service_id",
 	"ai_model_service_not_found",
+	"ai_model_service_action_not_available",
 	"failed_to_create_ai_model_service",
 	"failed_to_update_ai_model_service",
 	"failed_to_delete_ai_model_service",
 	"failed_to_fetch_ai_model_service",
+	"ai_registry_service_not_enabled",
+	"ai_registry_service_location_not_enabled",
+	"ai_registry_failed_to_get_service",
+	"ai_service_authentication",
 	"ai_service_bad_request",
 	"ai_service_content_filter",
-	"ai_service_authentication",
+	"ai_service_internal_server_error",
+	"ai_service_overload",
 	"ai_service_permission_denied",
 	"ai_service_request_too_large",
 	"ai_service_rate_limit",
-	"ai_service_internal_server_error",
-	"ai_service_overload",
 	"ai_service_unprocessable_entity",
 	"failed_to_transcribe_audio",
 	"channel_not_found",
@@ -199,6 +208,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"file_mimetype_not_accepted",
 	"functioncall_not_found",
 	"failed_to_generate_image",
+	"failed_to_generate_image_cost",
 	"invalid_image_id",
 	"image_not_found",
 	"failed_to_delete_image",

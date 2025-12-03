@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -1019,6 +1019,7 @@ type ApiSearchChannelsRequest struct {
 	includeServices *bool
 	limit *int32
 	offset *int32
+	offsetChannelId *string
 }
 
 // user ID or me for current user
@@ -1048,6 +1049,12 @@ func (r ApiSearchChannelsRequest) Limit(limit int32) ApiSearchChannelsRequest {
 // Offset for pagination
 func (r ApiSearchChannelsRequest) Offset(offset int32) ApiSearchChannelsRequest {
 	r.offset = &offset
+	return r
+}
+
+// Offset the results to center around the specified channel ID, disables offset parameter
+func (r ApiSearchChannelsRequest) OffsetChannelId(offsetChannelId string) ApiSearchChannelsRequest {
+	r.offsetChannelId = &offsetChannelId
 	return r
 }
 
@@ -1117,6 +1124,9 @@ func (a *ChannelsAPIService) SearchChannelsExecute(r ApiSearchChannelsRequest) (
 	} else {
 		var defaultValue int32 = 0
 		r.offset = &defaultValue
+	}
+	if r.offsetChannelId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset_channel_id", r.offsetChannelId, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

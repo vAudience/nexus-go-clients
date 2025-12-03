@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &AIgencyMessageContent{}
 
 // AIgencyMessageContent struct for AIgencyMessageContent
 type AIgencyMessageContent struct {
-	// Currently unused in favor of attachment list
 	File *AIgencyMessageFile `json:"file,omitempty"`
 	FunctionCall *AIgencyFunctionCall `json:"function_call,omitempty"`
 	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`

@@ -11,13 +11,14 @@ Name | Type | Description | Notes
 **LlmInputType** | **string** |  | 
 **MetaData** | **map[string]interface{}** |  | 
 **MimeType** | **string** |  | 
+**UploadCategory** | **string** |  | 
 **Url** | **string** |  | 
 
 ## Methods
 
 ### NewAIgencyMessageFile
 
-`func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, url string, ) *AIgencyMessageFile`
+`func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, uploadCategory string, url string, ) *AIgencyMessageFile`
 
 NewAIgencyMessageFile instantiates a new AIgencyMessageFile object
 This constructor will assign default values to properties that have it defined,
@@ -170,6 +171,26 @@ and a boolean to check if the value has been set.
 `func (o *AIgencyMessageFile) SetMimeType(v string)`
 
 SetMimeType sets MimeType field to given value.
+
+
+### GetUploadCategory
+
+`func (o *AIgencyMessageFile) GetUploadCategory() string`
+
+GetUploadCategory returns the UploadCategory field if non-nil, zero value otherwise.
+
+### GetUploadCategoryOk
+
+`func (o *AIgencyMessageFile) GetUploadCategoryOk() (*string, bool)`
+
+GetUploadCategoryOk returns a tuple with the UploadCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUploadCategory
+
+`func (o *AIgencyMessageFile) SetUploadCategory(v string)`
+
+SetUploadCategory sets UploadCategory field to given value.
 
 
 ### GetUrl

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,7 @@ var _ MappedNullable = &AIgencyMessageWriteDto{}
 type AIgencyMessageWriteDto struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
+	// Deprecated, add files to content instead
 	Attachments *AIgencyMessageFileList `json:"attachments,omitempty"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`

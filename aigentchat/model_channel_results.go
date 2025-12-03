@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &ChannelResults{}
 
 // ChannelResults struct for ChannelResults
 type ChannelResults struct {
+	Limit *int64 `json:"limit,omitempty"`
+	Offset *int64 `json:"offset,omitempty"`
 	Results []Channel `json:"results"`
 	TotalResults *int64 `json:"total_results,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,6 +46,70 @@ func NewChannelResults(results []Channel) *ChannelResults {
 func NewChannelResultsWithDefaults() *ChannelResults {
 	this := ChannelResults{}
 	return &this
+}
+
+// GetLimit returns the Limit field value if set, zero value otherwise.
+func (o *ChannelResults) GetLimit() int64 {
+	if o == nil || IsNil(o.Limit) {
+		var ret int64
+		return ret
+	}
+	return *o.Limit
+}
+
+// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChannelResults) GetLimitOk() (*int64, bool) {
+	if o == nil || IsNil(o.Limit) {
+		return nil, false
+	}
+	return o.Limit, true
+}
+
+// HasLimit returns a boolean if a field has been set.
+func (o *ChannelResults) HasLimit() bool {
+	if o != nil && !IsNil(o.Limit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLimit gets a reference to the given int64 and assigns it to the Limit field.
+func (o *ChannelResults) SetLimit(v int64) {
+	o.Limit = &v
+}
+
+// GetOffset returns the Offset field value if set, zero value otherwise.
+func (o *ChannelResults) GetOffset() int64 {
+	if o == nil || IsNil(o.Offset) {
+		var ret int64
+		return ret
+	}
+	return *o.Offset
+}
+
+// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChannelResults) GetOffsetOk() (*int64, bool) {
+	if o == nil || IsNil(o.Offset) {
+		return nil, false
+	}
+	return o.Offset, true
+}
+
+// HasOffset returns a boolean if a field has been set.
+func (o *ChannelResults) HasOffset() bool {
+	if o != nil && !IsNil(o.Offset) {
+		return true
+	}
+
+	return false
+}
+
+// SetOffset gets a reference to the given int64 and assigns it to the Offset field.
+func (o *ChannelResults) SetOffset(v int64) {
+	o.Offset = &v
 }
 
 // GetResults returns the Results field value
@@ -112,6 +178,12 @@ func (o ChannelResults) MarshalJSON() ([]byte, error) {
 
 func (o ChannelResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.Offset) {
+		toSerialize["offset"] = o.Offset
+	}
 	toSerialize["results"] = o.Results
 	if !IsNil(o.TotalResults) {
 		toSerialize["total_results"] = o.TotalResults
@@ -159,6 +231,8 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "offset")
 		delete(additionalProperties, "results")
 		delete(additionalProperties, "total_results")
 		o.AdditionalProperties = additionalProperties

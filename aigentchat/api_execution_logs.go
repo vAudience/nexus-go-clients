@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -736,6 +736,7 @@ type ApiSearchExecutionLogsRequest struct {
 	orgId string
 	userId *string
 	execType *string
+	requestId *string
 	startDate *string
 	endDate *string
 	offset *int32
@@ -751,6 +752,12 @@ func (r ApiSearchExecutionLogsRequest) UserId(userId string) ApiSearchExecutionL
 // Execution log type
 func (r ApiSearchExecutionLogsRequest) ExecType(execType string) ApiSearchExecutionLogsRequest {
 	r.execType = &execType
+	return r
+}
+
+// Request ID
+func (r ApiSearchExecutionLogsRequest) RequestId(requestId string) ApiSearchExecutionLogsRequest {
+	r.requestId = &requestId
 	return r
 }
 
@@ -826,6 +833,9 @@ func (a *ExecutionLogsAPIService) SearchExecutionLogsExecute(r ApiSearchExecutio
 	}
 	if r.execType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "exec_type", r.execType, "", "")
+	}
+	if r.requestId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "", "")
 	}
 	if r.startDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date", r.startDate, "", "")

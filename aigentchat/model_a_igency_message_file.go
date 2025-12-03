@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -28,6 +28,7 @@ type AIgencyMessageFile struct {
 	LlmInputType string `json:"llm_input_type"`
 	MetaData map[string]interface{} `json:"meta_data"`
 	MimeType string `json:"mime_type"`
+	UploadCategory string `json:"upload_category"`
 	Url string `json:"url"`
 	AdditionalProperties map[string]interface{}
 }
@@ -38,7 +39,7 @@ type _AIgencyMessageFile AIgencyMessageFile
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, url string) *AIgencyMessageFile {
+func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int32, id string, llmInputType string, metaData map[string]interface{}, mimeType string, uploadCategory string, url string) *AIgencyMessageFile {
 	this := AIgencyMessageFile{}
 	this.EmbeddedContent = embeddedContent
 	this.FileName = fileName
@@ -47,6 +48,7 @@ func NewAIgencyMessageFile(embeddedContent string, fileName string, fileSize int
 	this.LlmInputType = llmInputType
 	this.MetaData = metaData
 	this.MimeType = mimeType
+	this.UploadCategory = uploadCategory
 	this.Url = url
 	return &this
 }
@@ -227,6 +229,30 @@ func (o *AIgencyMessageFile) SetMimeType(v string) {
 	o.MimeType = v
 }
 
+// GetUploadCategory returns the UploadCategory field value
+func (o *AIgencyMessageFile) GetUploadCategory() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UploadCategory
+}
+
+// GetUploadCategoryOk returns a tuple with the UploadCategory field value
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageFile) GetUploadCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UploadCategory, true
+}
+
+// SetUploadCategory sets field value
+func (o *AIgencyMessageFile) SetUploadCategory(v string) {
+	o.UploadCategory = v
+}
+
 // GetUrl returns the Url field value
 func (o *AIgencyMessageFile) GetUrl() string {
 	if o == nil {
@@ -268,6 +294,7 @@ func (o AIgencyMessageFile) ToMap() (map[string]interface{}, error) {
 	toSerialize["llm_input_type"] = o.LlmInputType
 	toSerialize["meta_data"] = o.MetaData
 	toSerialize["mime_type"] = o.MimeType
+	toSerialize["upload_category"] = o.UploadCategory
 	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
@@ -289,6 +316,7 @@ func (o *AIgencyMessageFile) UnmarshalJSON(data []byte) (err error) {
 		"llm_input_type",
 		"meta_data",
 		"mime_type",
+		"upload_category",
 		"url",
 	}
 
@@ -326,6 +354,7 @@ func (o *AIgencyMessageFile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "llm_input_type")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "upload_category")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 	}

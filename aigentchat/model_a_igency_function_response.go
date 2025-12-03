@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,7 @@ type AIgencyFunctionResponse struct {
 	Id string `json:"id"`
 	IsError *bool `json:"is_error,omitempty"`
 	Result string `json:"result"`
+	ResultFiles []AIgencyMessageFile `json:"result_files,omitempty"`
 	ResultMetaData map[string]interface{} `json:"result_meta_data,omitempty"`
 	ToolFunctionId *string `json:"tool_function_id,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -156,6 +157,38 @@ func (o *AIgencyFunctionResponse) SetResult(v string) {
 	o.Result = v
 }
 
+// GetResultFiles returns the ResultFiles field value if set, zero value otherwise.
+func (o *AIgencyFunctionResponse) GetResultFiles() []AIgencyMessageFile {
+	if o == nil || IsNil(o.ResultFiles) {
+		var ret []AIgencyMessageFile
+		return ret
+	}
+	return o.ResultFiles
+}
+
+// GetResultFilesOk returns a tuple with the ResultFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionResponse) GetResultFilesOk() ([]AIgencyMessageFile, bool) {
+	if o == nil || IsNil(o.ResultFiles) {
+		return nil, false
+	}
+	return o.ResultFiles, true
+}
+
+// HasResultFiles returns a boolean if a field has been set.
+func (o *AIgencyFunctionResponse) HasResultFiles() bool {
+	if o != nil && !IsNil(o.ResultFiles) {
+		return true
+	}
+
+	return false
+}
+
+// SetResultFiles gets a reference to the given []AIgencyMessageFile and assigns it to the ResultFiles field.
+func (o *AIgencyFunctionResponse) SetResultFiles(v []AIgencyMessageFile) {
+	o.ResultFiles = v
+}
+
 // GetResultMetaData returns the ResultMetaData field value if set, zero value otherwise.
 func (o *AIgencyFunctionResponse) GetResultMetaData() map[string]interface{} {
 	if o == nil || IsNil(o.ResultMetaData) {
@@ -236,6 +269,9 @@ func (o AIgencyFunctionResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["is_error"] = o.IsError
 	}
 	toSerialize["result"] = o.Result
+	if !IsNil(o.ResultFiles) {
+		toSerialize["result_files"] = o.ResultFiles
+	}
 	if !IsNil(o.ResultMetaData) {
 		toSerialize["result_meta_data"] = o.ResultMetaData
 	}
@@ -291,6 +327,7 @@ func (o *AIgencyFunctionResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "is_error")
 		delete(additionalProperties, "result")
+		delete(additionalProperties, "result_files")
 		delete(additionalProperties, "result_meta_data")
 		delete(additionalProperties, "tool_function_id")
 		o.AdditionalProperties = additionalProperties

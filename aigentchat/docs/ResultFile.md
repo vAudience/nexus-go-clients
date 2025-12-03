@@ -6,17 +6,20 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FileName** | **string** |  | 
 **FileSize** | **int32** |  | 
+**LlmInputType** | **string** |  | 
+**MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **MimeType** | **string** |  | 
 **OriginalFileMimeType** | **string** |  | 
 **OriginalFileName** | **string** |  | 
 **OriginalFileUrl** | **string** |  | 
+**UploadCategory** | **string** |  | 
 **Url** | **string** |  | 
 
 ## Methods
 
 ### NewResultFile
 
-`func NewResultFile(fileName string, fileSize int32, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, url string, ) *ResultFile`
+`func NewResultFile(fileName string, fileSize int32, llmInputType string, mimeType string, originalFileMimeType string, originalFileName string, originalFileUrl string, uploadCategory string, url string, ) *ResultFile`
 
 NewResultFile instantiates a new ResultFile object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +73,51 @@ and a boolean to check if the value has been set.
 
 SetFileSize sets FileSize field to given value.
 
+
+### GetLlmInputType
+
+`func (o *ResultFile) GetLlmInputType() string`
+
+GetLlmInputType returns the LlmInputType field if non-nil, zero value otherwise.
+
+### GetLlmInputTypeOk
+
+`func (o *ResultFile) GetLlmInputTypeOk() (*string, bool)`
+
+GetLlmInputTypeOk returns a tuple with the LlmInputType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLlmInputType
+
+`func (o *ResultFile) SetLlmInputType(v string)`
+
+SetLlmInputType sets LlmInputType field to given value.
+
+
+### GetMetaData
+
+`func (o *ResultFile) GetMetaData() map[string]interface{}`
+
+GetMetaData returns the MetaData field if non-nil, zero value otherwise.
+
+### GetMetaDataOk
+
+`func (o *ResultFile) GetMetaDataOk() (*map[string]interface{}, bool)`
+
+GetMetaDataOk returns a tuple with the MetaData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetaData
+
+`func (o *ResultFile) SetMetaData(v map[string]interface{})`
+
+SetMetaData sets MetaData field to given value.
+
+### HasMetaData
+
+`func (o *ResultFile) HasMetaData() bool`
+
+HasMetaData returns a boolean if a field has been set.
 
 ### GetMimeType
 
@@ -149,6 +197,26 @@ and a boolean to check if the value has been set.
 `func (o *ResultFile) SetOriginalFileUrl(v string)`
 
 SetOriginalFileUrl sets OriginalFileUrl field to given value.
+
+
+### GetUploadCategory
+
+`func (o *ResultFile) GetUploadCategory() string`
+
+GetUploadCategory returns the UploadCategory field if non-nil, zero value otherwise.
+
+### GetUploadCategoryOk
+
+`func (o *ResultFile) GetUploadCategoryOk() (*string, bool)`
+
+GetUploadCategoryOk returns a tuple with the UploadCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUploadCategory
+
+`func (o *ResultFile) SetUploadCategory(v string)`
+
+SetUploadCategory sets UploadCategory field to given value.
 
 
 ### GetUrl

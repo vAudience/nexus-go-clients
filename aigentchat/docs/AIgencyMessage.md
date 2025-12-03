@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | 
+**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Deprecated, add files to content instead | 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
 **CreatedAt** | **int64** |  | 
-**CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) | Deprecated, use FeatureUsage | [optional] 
+**CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) | Deprecated, use feature_usage | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
 **ExecutionId** | Pointer to **string** |  | [optional] 
 **FeatureUsage** | Pointer to [**[]ExecutionFeatureUsage**](ExecutionFeatureUsage.md) |  | [optional] 

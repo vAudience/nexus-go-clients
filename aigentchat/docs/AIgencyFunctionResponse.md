@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **IsError** | Pointer to **bool** |  | [optional] 
 **Result** | **string** |  | 
+**ResultFiles** | Pointer to [**[]AIgencyMessageFile**](AIgencyMessageFile.md) |  | [optional] 
 **ResultMetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **ToolFunctionId** | Pointer to **string** |  | [optional] 
 
@@ -114,6 +115,31 @@ and a boolean to check if the value has been set.
 
 SetResult sets Result field to given value.
 
+
+### GetResultFiles
+
+`func (o *AIgencyFunctionResponse) GetResultFiles() []AIgencyMessageFile`
+
+GetResultFiles returns the ResultFiles field if non-nil, zero value otherwise.
+
+### GetResultFilesOk
+
+`func (o *AIgencyFunctionResponse) GetResultFilesOk() (*[]AIgencyMessageFile, bool)`
+
+GetResultFilesOk returns a tuple with the ResultFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultFiles
+
+`func (o *AIgencyFunctionResponse) SetResultFiles(v []AIgencyMessageFile)`
+
+SetResultFiles sets ResultFiles field to given value.
+
+### HasResultFiles
+
+`func (o *AIgencyFunctionResponse) HasResultFiles() bool`
+
+HasResultFiles returns a boolean if a field has been set.
 
 ### GetResultMetaData
 

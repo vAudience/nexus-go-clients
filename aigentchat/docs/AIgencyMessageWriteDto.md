@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | [optional] 
+**Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Deprecated, add files to content instead | [optional] 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | Pointer to [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | [optional] 

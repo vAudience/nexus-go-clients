@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AiServiceId** | **string** |  | 
 **CostMultiplier** | Pointer to **float32** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) |  | 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated: use ai_service_id instead | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAIModelServiceObject
 
-`func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
+`func NewAIModelServiceObject(aiServiceId string, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
 
 NewAIModelServiceObject instantiates a new AIModelServiceObject object
 This constructor will assign default values to properties that have it defined,
@@ -37,6 +38,26 @@ will change when the set of required properties is changed
 NewAIModelServiceObjectWithDefaults instantiates a new AIModelServiceObject object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAiServiceId
+
+`func (o *AIModelServiceObject) GetAiServiceId() string`
+
+GetAiServiceId returns the AiServiceId field if non-nil, zero value otherwise.
+
+### GetAiServiceIdOk
+
+`func (o *AIModelServiceObject) GetAiServiceIdOk() (*string, bool)`
+
+GetAiServiceIdOk returns a tuple with the AiServiceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiServiceId
+
+`func (o *AIModelServiceObject) SetAiServiceId(v string)`
+
+SetAiServiceId sets AiServiceId field to given value.
+
 
 ### GetCostMultiplier
 

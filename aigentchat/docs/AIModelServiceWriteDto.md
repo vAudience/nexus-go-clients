@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AiServiceId** | **string** |  | 
 **CostMultiplier** | Pointer to **float64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
@@ -11,13 +12,13 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Name** | **string** |  | 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) |  | 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated: use ai_service_id instead | 
 
 ## Methods
 
 ### NewAIModelServiceWriteDto
 
-`func NewAIModelServiceWriteDto(name string, serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
+`func NewAIModelServiceWriteDto(aiServiceId string, name string, serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
 
 NewAIModelServiceWriteDto instantiates a new AIModelServiceWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +32,26 @@ will change when the set of required properties is changed
 NewAIModelServiceWriteDtoWithDefaults instantiates a new AIModelServiceWriteDto object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAiServiceId
+
+`func (o *AIModelServiceWriteDto) GetAiServiceId() string`
+
+GetAiServiceId returns the AiServiceId field if non-nil, zero value otherwise.
+
+### GetAiServiceIdOk
+
+`func (o *AIModelServiceWriteDto) GetAiServiceIdOk() (*string, bool)`
+
+GetAiServiceIdOk returns a tuple with the AiServiceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiServiceId
+
+`func (o *AIModelServiceWriteDto) SetAiServiceId(v string)`
+
+SetAiServiceId sets AiServiceId field to given value.
+
 
 ### GetCostMultiplier
 

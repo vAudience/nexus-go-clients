@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -31,6 +31,7 @@ type ExecutionLog struct {
 	MessageId *string `json:"message_id,omitempty"`
 	OwnerId *string `json:"owner_id,omitempty"`
 	OwnerOrganizationId *string `json:"owner_organization_id,omitempty"`
+	RequestId *string `json:"request_id,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Usage []ExecutionUsageCost `json:"usage,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -407,6 +408,38 @@ func (o *ExecutionLog) SetOwnerOrganizationId(v string) {
 	o.OwnerOrganizationId = &v
 }
 
+// GetRequestId returns the RequestId field value if set, zero value otherwise.
+func (o *ExecutionLog) GetRequestId() string {
+	if o == nil || IsNil(o.RequestId) {
+		var ret string
+		return ret
+	}
+	return *o.RequestId
+}
+
+// GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetRequestIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RequestId) {
+		return nil, false
+	}
+	return o.RequestId, true
+}
+
+// HasRequestId returns a boolean if a field has been set.
+func (o *ExecutionLog) HasRequestId() bool {
+	if o != nil && !IsNil(o.RequestId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestId gets a reference to the given string and assigns it to the RequestId field.
+func (o *ExecutionLog) SetRequestId(v string) {
+	o.RequestId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ExecutionLog) GetType() string {
 	if o == nil || IsNil(o.Type) {
@@ -514,6 +547,9 @@ func (o ExecutionLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OwnerOrganizationId) {
 		toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	}
+	if !IsNil(o.RequestId) {
+		toSerialize["request_id"] = o.RequestId
+	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -553,6 +589,7 @@ func (o *ExecutionLog) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "message_id")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
+		delete(additionalProperties, "request_id")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "usage")
 		o.AdditionalProperties = additionalProperties

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
+**InternalId** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **OwnerOrganizationId** | Pointer to **string** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
@@ -156,6 +157,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetInternalId
+
+`func (o *Prompt) GetInternalId() string`
+
+GetInternalId returns the InternalId field if non-nil, zero value otherwise.
+
+### GetInternalIdOk
+
+`func (o *Prompt) GetInternalIdOk() (*string, bool)`
+
+GetInternalIdOk returns a tuple with the InternalId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalId
+
+`func (o *Prompt) SetInternalId(v string)`
+
+SetInternalId sets InternalId field to given value.
+
+### HasInternalId
+
+`func (o *Prompt) HasInternalId() bool`
+
+HasInternalId returns a boolean if a field has been set.
 
 ### GetOwnerId
 

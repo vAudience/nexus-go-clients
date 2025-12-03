@@ -53,6 +53,8 @@
 
 * `ErrCodeAIModelServiceNotFound` (value: `"ai_model_service_not_found"`)
 
+* `ErrCodeAIModelServiceActionNotAvailable` (value: `"ai_model_service_action_not_available"`)
+
 * `ErrCodeFailedToCreateAIModelService` (value: `"failed_to_create_ai_model_service"`)
 
 * `ErrCodeFailedToUpdateAIModelService` (value: `"failed_to_update_ai_model_service"`)
@@ -61,23 +63,29 @@
 
 * `ErrCodeFailedToFetchAIModelService` (value: `"failed_to_fetch_ai_model_service"`)
 
-* `ErrCodeAiServiceBadRequest` (value: `"ai_service_bad_request"`)
+* `ErrCodeAIRegistryServiceNotEnabled` (value: `"ai_registry_service_not_enabled"`)
 
-* `ErrCodeAiServiceContentFilter` (value: `"ai_service_content_filter"`)
+* `ErrCodeAIRegistryServiceLocationNotEnabled` (value: `"ai_registry_service_location_not_enabled"`)
 
-* `ErrCodeAiServiceAuthentication` (value: `"ai_service_authentication"`)
+* `ErrCodeAIRegistryFailedToGetService` (value: `"ai_registry_failed_to_get_service"`)
 
-* `ErrCodeAiServicePermissionDenied` (value: `"ai_service_permission_denied"`)
+* `ErrCodeAIServiceAuthentication` (value: `"ai_service_authentication"`)
 
-* `ErrCodeAiServiceRequestTooLarge` (value: `"ai_service_request_too_large"`)
+* `ErrCodeAIServiceBadRequest` (value: `"ai_service_bad_request"`)
 
-* `ErrCodeAiServiceRateLimit` (value: `"ai_service_rate_limit"`)
+* `ErrCodeAIServiceContentFilter` (value: `"ai_service_content_filter"`)
 
-* `ErrCodeAiServiceInternalServerError` (value: `"ai_service_internal_server_error"`)
+* `ErrCodeAIServiceInternalServerError` (value: `"ai_service_internal_server_error"`)
 
-* `ErrCodeAiServiceOverload` (value: `"ai_service_overload"`)
+* `ErrCodeAIServiceOverload` (value: `"ai_service_overload"`)
 
-* `ErrCodeAiServiceUnprocessableEntity` (value: `"ai_service_unprocessable_entity"`)
+* `ErrCodeAIServicePermissionDenied` (value: `"ai_service_permission_denied"`)
+
+* `ErrCodeAIServiceRequestTooLarge` (value: `"ai_service_request_too_large"`)
+
+* `ErrCodeAIServiceRateLimit` (value: `"ai_service_rate_limit"`)
+
+* `ErrCodeAIServiceUnprocessableEntity` (value: `"ai_service_unprocessable_entity"`)
 
 * `ErrCodeFailedToTranscribeAudio` (value: `"failed_to_transcribe_audio"`)
 
@@ -132,6 +140,8 @@
 * `ErrCodeFunctionCallNotFound` (value: `"functioncall_not_found"`)
 
 * `ErrCodeFailedToGenerateImage` (value: `"failed_to_generate_image"`)
+
+* `ErrCodeFailedToGenerateImageCost` (value: `"failed_to_generate_image_cost"`)
 
 * `ErrCodeInvalidImageID` (value: `"invalid_image_id"`)
 

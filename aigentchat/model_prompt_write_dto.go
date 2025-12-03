@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,7 @@ type PromptWriteDto struct {
 	Content *string `json:"content,omitempty"`
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
+	InternalId *string `json:"internal_id,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title *string `json:"title,omitempty"`
@@ -143,6 +144,38 @@ func (o *PromptWriteDto) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *PromptWriteDto) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetInternalId returns the InternalId field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetInternalId() string {
+	if o == nil || IsNil(o.InternalId) {
+		var ret string
+		return ret
+	}
+	return *o.InternalId
+}
+
+// GetInternalIdOk returns a tuple with the InternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptWriteDto) GetInternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.InternalId) {
+		return nil, false
+	}
+	return o.InternalId, true
+}
+
+// HasInternalId returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasInternalId() bool {
+	if o != nil && !IsNil(o.InternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalId gets a reference to the given string and assigns it to the InternalId field.
+func (o *PromptWriteDto) SetInternalId(v string) {
+	o.InternalId = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -292,6 +325,9 @@ func (o PromptWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.InternalId) {
+		toSerialize["internal_id"] = o.InternalId
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -329,6 +365,7 @@ func (o *PromptWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")

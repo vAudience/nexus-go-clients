@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &AIModelServiceObject{}
 
 // AIModelServiceObject struct for AIModelServiceObject
 type AIModelServiceObject struct {
+	AiServiceId string `json:"ai_service_id"`
 	CostMultiplier *float32 `json:"cost_multiplier,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -32,6 +33,7 @@ type AIModelServiceObject struct {
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
+	// Deprecated: use ai_service_id instead
 	ServiceImpl AiServiceId `json:"service_impl"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
@@ -44,8 +46,9 @@ type _AIModelServiceObject AIModelServiceObject
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
+func NewAIModelServiceObject(aiServiceId string, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
 	this := AIModelServiceObject{}
+	this.AiServiceId = aiServiceId
 	this.Id = id
 	this.Name = name
 	this.OwnerId = ownerId
@@ -60,6 +63,30 @@ func NewAIModelServiceObject(id string, name string, ownerId string, ownerOrgani
 func NewAIModelServiceObjectWithDefaults() *AIModelServiceObject {
 	this := AIModelServiceObject{}
 	return &this
+}
+
+// GetAiServiceId returns the AiServiceId field value
+func (o *AIModelServiceObject) GetAiServiceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AiServiceId
+}
+
+// GetAiServiceIdOk returns a tuple with the AiServiceId field value
+// and a boolean to check if the value has been set.
+func (o *AIModelServiceObject) GetAiServiceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AiServiceId, true
+}
+
+// SetAiServiceId sets field value
+func (o *AIModelServiceObject) SetAiServiceId(v string) {
+	o.AiServiceId = v
 }
 
 // GetCostMultiplier returns the CostMultiplier field value if set, zero value otherwise.
@@ -480,6 +507,7 @@ func (o AIModelServiceObject) MarshalJSON() ([]byte, error) {
 
 func (o AIModelServiceObject) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["ai_service_id"] = o.AiServiceId
 	if !IsNil(o.CostMultiplier) {
 		toSerialize["cost_multiplier"] = o.CostMultiplier
 	}
@@ -525,6 +553,7 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"ai_service_id",
 		"id",
 		"name",
 		"owner_id",
@@ -559,6 +588,7 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ai_service_id")
 		delete(additionalProperties, "cost_multiplier")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")

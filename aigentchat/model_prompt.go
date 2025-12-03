@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.3
+API version: 0.22.9
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type Prompt struct {
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
+	InternalId *string `json:"internal_id,omitempty"`
 	OwnerId *string `json:"owner_id,omitempty"`
 	OwnerOrganizationId *string `json:"owner_organization_id,omitempty"`
 	Tags []string `json:"tags,omitempty"`
@@ -208,6 +209,38 @@ func (o *Prompt) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *Prompt) SetId(v string) {
 	o.Id = v
+}
+
+// GetInternalId returns the InternalId field value if set, zero value otherwise.
+func (o *Prompt) GetInternalId() string {
+	if o == nil || IsNil(o.InternalId) {
+		var ret string
+		return ret
+	}
+	return *o.InternalId
+}
+
+// GetInternalIdOk returns a tuple with the InternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetInternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.InternalId) {
+		return nil, false
+	}
+	return o.InternalId, true
+}
+
+// HasInternalId returns a boolean if a field has been set.
+func (o *Prompt) HasInternalId() bool {
+	if o != nil && !IsNil(o.InternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalId gets a reference to the given string and assigns it to the InternalId field.
+func (o *Prompt) SetInternalId(v string) {
+	o.InternalId = &v
 }
 
 // GetOwnerId returns the OwnerId field value if set, zero value otherwise.
@@ -481,6 +514,9 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.InternalId) {
+		toSerialize["internal_id"] = o.InternalId
+	}
 	if !IsNil(o.OwnerId) {
 		toSerialize["owner_id"] = o.OwnerId
 	}
@@ -552,6 +588,7 @@ func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "tags")

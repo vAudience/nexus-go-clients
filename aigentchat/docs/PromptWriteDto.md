@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Content** | Pointer to **string** |  | [optional] 
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**InternalId** | Pointer to **string** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
@@ -105,6 +106,31 @@ SetDescription sets Description field to given value.
 `func (o *PromptWriteDto) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetInternalId
+
+`func (o *PromptWriteDto) GetInternalId() string`
+
+GetInternalId returns the InternalId field if non-nil, zero value otherwise.
+
+### GetInternalIdOk
+
+`func (o *PromptWriteDto) GetInternalIdOk() (*string, bool)`
+
+GetInternalIdOk returns a tuple with the InternalId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalId
+
+`func (o *PromptWriteDto) SetInternalId(v string)`
+
+SetInternalId sets InternalId field to given value.
+
+### HasInternalId
+
+`func (o *PromptWriteDto) HasInternalId() bool`
+
+HasInternalId returns a boolean if a field has been set.
 
 ### GetTags
 
