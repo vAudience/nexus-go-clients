@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**CreateOrganization**](OrganizationsAPI.md#CreateOrganization) | **Post** /v1/organizations | Create an Organization
 [**CreateOrganizationApiKey**](OrganizationsAPI.md#CreateOrganizationApiKey) | **Post** /v1/organizations/{id}/keys | Create an api key for an Organization
 [**CreateOrganizationRole**](OrganizationsAPI.md#CreateOrganizationRole) | **Post** /v1/organizations/{id}/roles | Create a role for an Organization
-[**CreateOrganizationSettings**](OrganizationsAPI.md#CreateOrganizationSettings) | **Post** /v1/organizations/{id}/settings | Create settings for an Organization
 [**CreateSubscription**](OrganizationsAPI.md#CreateSubscription) | **Post** /v1/organizations/{id}/subscription | Create a subscription for an Organization
 [**CreateTeam**](OrganizationsAPI.md#CreateTeam) | **Post** /v1/organizations/{id}/teams | Create a team for an Organization
 [**CreateTeamMember**](OrganizationsAPI.md#CreateTeamMember) | **Post** /v1/organizations/{id}/teams/{teamId}/members | Add a member to a team
@@ -34,6 +33,7 @@ Method | HTTP request | Description
 [**GetInvite**](OrganizationsAPI.md#GetInvite) | **Get** /v1/organizations/{id}/invites/{inviteId} | Get an invite for an Organization
 [**GetInvites**](OrganizationsAPI.md#GetInvites) | **Get** /v1/organizations/{id}/invites | Get all invites for an Organization
 [**GetMember**](OrganizationsAPI.md#GetMember) | **Get** /v1/organizations/{id}/members/{memberId} | Get a member for an Organization
+[**GetMemberSettings**](OrganizationsAPI.md#GetMemberSettings) | **Get** /v1/organizations/{id}/members/{memberId}/settings | Get member settings for an Organization
 [**GetMembers**](OrganizationsAPI.md#GetMembers) | **Get** /v1/organizations/{id}/members | Get all members for an Organization
 [**GetOrganization**](OrganizationsAPI.md#GetOrganization) | **Get** /v1/organizations/{id} | Get an Organization by id
 [**GetOrganizationApiKeys**](OrganizationsAPI.md#GetOrganizationApiKeys) | **Get** /v1/organizations/{id}/keys | Get all api keys for an Organization
@@ -47,6 +47,7 @@ Method | HTTP request | Description
 [**GetTeams**](OrganizationsAPI.md#GetTeams) | **Get** /v1/organizations/{id}/teams | Get all teams for an Organization
 [**Invite**](OrganizationsAPI.md#Invite) | **Post** /v1/organizations/{id}/invites | Invite a user to an Organization
 [**PatchMember**](OrganizationsAPI.md#PatchMember) | **Patch** /v1/organizations/{id}/members/{memberId} | Patch a member for an Organization
+[**PatchMemberSettings**](OrganizationsAPI.md#PatchMemberSettings) | **Patch** /v1/organizations/{id}/members/{memberId}/settings | Patch member settings for an Organization
 [**PatchOrganization**](OrganizationsAPI.md#PatchOrganization) | **Patch** /v1/organizations/{id} | Patch an Organization by ID
 [**PatchOrganizationApiKey**](OrganizationsAPI.md#PatchOrganizationApiKey) | **Patch** /v1/organizations/{id}/keys/{keyId} | Patch an api key for an Organization
 [**PatchOrganizationOwnership**](OrganizationsAPI.md#PatchOrganizationOwnership) | **Patch** /v1/organizations/{id}/owner | Transfer the ownership of an organization
@@ -401,78 +402,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationRoleResponse**](OrganizationRoleResponse.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateOrganizationSettings
-
-> OrganizationSettingsResponse CreateOrganizationSettings(ctx, id).Settings(settings).Execute()
-
-Create settings for an Organization
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/core"
-)
-
-func main() {
-	id := "id_example" // string | id of the organization
-	settings := *openapiclient.NewOrganizationSettingsPostRequest() // OrganizationSettingsPostRequest | settings object
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.CreateOrganizationSettings(context.Background(), id).Settings(settings).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.CreateOrganizationSettings``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateOrganizationSettings`: OrganizationSettingsResponse
-	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.CreateOrganizationSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | id of the organization | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateOrganizationSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **settings** | [**OrganizationSettingsPostRequest**](OrganizationSettingsPostRequest.md) | settings object | 
-
-### Return type
-
-[**OrganizationSettingsResponse**](OrganizationSettingsResponse.md)
 
 ### Authorization
 
@@ -2196,6 +2125,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetMemberSettings
+
+> OrganizationMemberSettingsResponse GetMemberSettings(ctx, id, memberId).Execute()
+
+Get member settings for an Organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+	memberId := "memberId_example" // string | id of the member
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetMemberSettings(context.Background(), id, memberId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetMemberSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMemberSettings`: OrganizationMemberSettingsResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetMemberSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+**memberId** | **string** | id of the member | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMemberSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationMemberSettingsResponse**](OrganizationMemberSettingsResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetMembers
 
 > []OrganizationMemberResponse GetMembers(ctx, id).Execute()
@@ -3113,6 +3115,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationMemberResponse**](OrganizationMemberResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchMemberSettings
+
+> OrganizationMemberSettingsResponse PatchMemberSettings(ctx, id, memberId).Settings(settings).Execute()
+
+Patch member settings for an Organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+	memberId := "memberId_example" // string | id of the member
+	settings := *openapiclient.NewOrganizationMemberSettingsPatchRequest() // OrganizationMemberSettingsPatchRequest | settings object
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.PatchMemberSettings(context.Background(), id, memberId).Settings(settings).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.PatchMemberSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchMemberSettings`: OrganizationMemberSettingsResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.PatchMemberSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+**memberId** | **string** | id of the member | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchMemberSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **settings** | [**OrganizationMemberSettingsPatchRequest**](OrganizationMemberSettingsPatchRequest.md) | settings object | 
+
+### Return type
+
+[**OrganizationMemberSettingsResponse**](OrganizationMemberSettingsResponse.md)
 
 ### Authorization
 

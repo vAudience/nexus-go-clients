@@ -91,20 +91,6 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test OrganizationsAPIService CreateOrganizationSettings", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.OrganizationsAPI.CreateOrganizationSettings(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test OrganizationsAPIService CreateSubscription", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -438,6 +424,21 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OrganizationsAPIService GetMemberSettings", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+		var memberId string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.GetMemberSettings(context.Background(), id, memberId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test OrganizationsAPIService GetMembers", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -619,6 +620,21 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 		var memberId string
 
 		resp, httpRes, err := apiClient.OrganizationsAPI.PatchMember(context.Background(), id, memberId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test OrganizationsAPIService PatchMemberSettings", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+		var memberId string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.PatchMemberSettings(context.Background(), id, memberId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

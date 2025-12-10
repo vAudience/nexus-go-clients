@@ -4,9 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
-**AllowedPredefinedAgentIds** | Pointer to **[]string** |  | [optional] 
-**DefaultAgentId** | Pointer to **string** |  | [optional] 
+**AudioAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
+**ChatAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
+**ChatDefaultAgentId** | Pointer to **string** |  | [optional] 
+**EmbeddingAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
+**EmbeddingDefaultAgentId** | Pointer to **string** |  | [optional] 
+**ImageAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
+**ImageDefaultAgentId** | Pointer to **string** |  | [optional] 
+**ToolsAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -27,80 +32,205 @@ NewOrganizationSettingsPatchRequestWithDefaults instantiates a new OrganizationS
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAllowedHostingLocations
+### GetAudioAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) GetAllowedHostingLocations() []string`
+`func (o *OrganizationSettingsPatchRequest) GetAudioAllowedHostingLocations() []string`
 
-GetAllowedHostingLocations returns the AllowedHostingLocations field if non-nil, zero value otherwise.
+GetAudioAllowedHostingLocations returns the AudioAllowedHostingLocations field if non-nil, zero value otherwise.
 
-### GetAllowedHostingLocationsOk
+### GetAudioAllowedHostingLocationsOk
 
-`func (o *OrganizationSettingsPatchRequest) GetAllowedHostingLocationsOk() (*[]string, bool)`
+`func (o *OrganizationSettingsPatchRequest) GetAudioAllowedHostingLocationsOk() (*[]string, bool)`
 
-GetAllowedHostingLocationsOk returns a tuple with the AllowedHostingLocations field if it's non-nil, zero value otherwise
+GetAudioAllowedHostingLocationsOk returns a tuple with the AudioAllowedHostingLocations field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAllowedHostingLocations
+### SetAudioAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) SetAllowedHostingLocations(v []string)`
+`func (o *OrganizationSettingsPatchRequest) SetAudioAllowedHostingLocations(v []string)`
 
-SetAllowedHostingLocations sets AllowedHostingLocations field to given value.
+SetAudioAllowedHostingLocations sets AudioAllowedHostingLocations field to given value.
 
-### HasAllowedHostingLocations
+### HasAudioAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) HasAllowedHostingLocations() bool`
+`func (o *OrganizationSettingsPatchRequest) HasAudioAllowedHostingLocations() bool`
 
-HasAllowedHostingLocations returns a boolean if a field has been set.
+HasAudioAllowedHostingLocations returns a boolean if a field has been set.
 
-### GetAllowedPredefinedAgentIds
+### GetChatAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) GetAllowedPredefinedAgentIds() []string`
+`func (o *OrganizationSettingsPatchRequest) GetChatAllowedHostingLocations() []string`
 
-GetAllowedPredefinedAgentIds returns the AllowedPredefinedAgentIds field if non-nil, zero value otherwise.
+GetChatAllowedHostingLocations returns the ChatAllowedHostingLocations field if non-nil, zero value otherwise.
 
-### GetAllowedPredefinedAgentIdsOk
+### GetChatAllowedHostingLocationsOk
 
-`func (o *OrganizationSettingsPatchRequest) GetAllowedPredefinedAgentIdsOk() (*[]string, bool)`
+`func (o *OrganizationSettingsPatchRequest) GetChatAllowedHostingLocationsOk() (*[]string, bool)`
 
-GetAllowedPredefinedAgentIdsOk returns a tuple with the AllowedPredefinedAgentIds field if it's non-nil, zero value otherwise
+GetChatAllowedHostingLocationsOk returns a tuple with the ChatAllowedHostingLocations field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAllowedPredefinedAgentIds
+### SetChatAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) SetAllowedPredefinedAgentIds(v []string)`
+`func (o *OrganizationSettingsPatchRequest) SetChatAllowedHostingLocations(v []string)`
 
-SetAllowedPredefinedAgentIds sets AllowedPredefinedAgentIds field to given value.
+SetChatAllowedHostingLocations sets ChatAllowedHostingLocations field to given value.
 
-### HasAllowedPredefinedAgentIds
+### HasChatAllowedHostingLocations
 
-`func (o *OrganizationSettingsPatchRequest) HasAllowedPredefinedAgentIds() bool`
+`func (o *OrganizationSettingsPatchRequest) HasChatAllowedHostingLocations() bool`
 
-HasAllowedPredefinedAgentIds returns a boolean if a field has been set.
+HasChatAllowedHostingLocations returns a boolean if a field has been set.
 
-### GetDefaultAgentId
+### GetChatDefaultAgentId
 
-`func (o *OrganizationSettingsPatchRequest) GetDefaultAgentId() string`
+`func (o *OrganizationSettingsPatchRequest) GetChatDefaultAgentId() string`
 
-GetDefaultAgentId returns the DefaultAgentId field if non-nil, zero value otherwise.
+GetChatDefaultAgentId returns the ChatDefaultAgentId field if non-nil, zero value otherwise.
 
-### GetDefaultAgentIdOk
+### GetChatDefaultAgentIdOk
 
-`func (o *OrganizationSettingsPatchRequest) GetDefaultAgentIdOk() (*string, bool)`
+`func (o *OrganizationSettingsPatchRequest) GetChatDefaultAgentIdOk() (*string, bool)`
 
-GetDefaultAgentIdOk returns a tuple with the DefaultAgentId field if it's non-nil, zero value otherwise
+GetChatDefaultAgentIdOk returns a tuple with the ChatDefaultAgentId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDefaultAgentId
+### SetChatDefaultAgentId
 
-`func (o *OrganizationSettingsPatchRequest) SetDefaultAgentId(v string)`
+`func (o *OrganizationSettingsPatchRequest) SetChatDefaultAgentId(v string)`
 
-SetDefaultAgentId sets DefaultAgentId field to given value.
+SetChatDefaultAgentId sets ChatDefaultAgentId field to given value.
 
-### HasDefaultAgentId
+### HasChatDefaultAgentId
 
-`func (o *OrganizationSettingsPatchRequest) HasDefaultAgentId() bool`
+`func (o *OrganizationSettingsPatchRequest) HasChatDefaultAgentId() bool`
 
-HasDefaultAgentId returns a boolean if a field has been set.
+HasChatDefaultAgentId returns a boolean if a field has been set.
+
+### GetEmbeddingAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) GetEmbeddingAllowedHostingLocations() []string`
+
+GetEmbeddingAllowedHostingLocations returns the EmbeddingAllowedHostingLocations field if non-nil, zero value otherwise.
+
+### GetEmbeddingAllowedHostingLocationsOk
+
+`func (o *OrganizationSettingsPatchRequest) GetEmbeddingAllowedHostingLocationsOk() (*[]string, bool)`
+
+GetEmbeddingAllowedHostingLocationsOk returns a tuple with the EmbeddingAllowedHostingLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmbeddingAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) SetEmbeddingAllowedHostingLocations(v []string)`
+
+SetEmbeddingAllowedHostingLocations sets EmbeddingAllowedHostingLocations field to given value.
+
+### HasEmbeddingAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) HasEmbeddingAllowedHostingLocations() bool`
+
+HasEmbeddingAllowedHostingLocations returns a boolean if a field has been set.
+
+### GetEmbeddingDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) GetEmbeddingDefaultAgentId() string`
+
+GetEmbeddingDefaultAgentId returns the EmbeddingDefaultAgentId field if non-nil, zero value otherwise.
+
+### GetEmbeddingDefaultAgentIdOk
+
+`func (o *OrganizationSettingsPatchRequest) GetEmbeddingDefaultAgentIdOk() (*string, bool)`
+
+GetEmbeddingDefaultAgentIdOk returns a tuple with the EmbeddingDefaultAgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmbeddingDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) SetEmbeddingDefaultAgentId(v string)`
+
+SetEmbeddingDefaultAgentId sets EmbeddingDefaultAgentId field to given value.
+
+### HasEmbeddingDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) HasEmbeddingDefaultAgentId() bool`
+
+HasEmbeddingDefaultAgentId returns a boolean if a field has been set.
+
+### GetImageAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) GetImageAllowedHostingLocations() []string`
+
+GetImageAllowedHostingLocations returns the ImageAllowedHostingLocations field if non-nil, zero value otherwise.
+
+### GetImageAllowedHostingLocationsOk
+
+`func (o *OrganizationSettingsPatchRequest) GetImageAllowedHostingLocationsOk() (*[]string, bool)`
+
+GetImageAllowedHostingLocationsOk returns a tuple with the ImageAllowedHostingLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) SetImageAllowedHostingLocations(v []string)`
+
+SetImageAllowedHostingLocations sets ImageAllowedHostingLocations field to given value.
+
+### HasImageAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) HasImageAllowedHostingLocations() bool`
+
+HasImageAllowedHostingLocations returns a boolean if a field has been set.
+
+### GetImageDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) GetImageDefaultAgentId() string`
+
+GetImageDefaultAgentId returns the ImageDefaultAgentId field if non-nil, zero value otherwise.
+
+### GetImageDefaultAgentIdOk
+
+`func (o *OrganizationSettingsPatchRequest) GetImageDefaultAgentIdOk() (*string, bool)`
+
+GetImageDefaultAgentIdOk returns a tuple with the ImageDefaultAgentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) SetImageDefaultAgentId(v string)`
+
+SetImageDefaultAgentId sets ImageDefaultAgentId field to given value.
+
+### HasImageDefaultAgentId
+
+`func (o *OrganizationSettingsPatchRequest) HasImageDefaultAgentId() bool`
+
+HasImageDefaultAgentId returns a boolean if a field has been set.
+
+### GetToolsAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) GetToolsAllowedHostingLocations() []string`
+
+GetToolsAllowedHostingLocations returns the ToolsAllowedHostingLocations field if non-nil, zero value otherwise.
+
+### GetToolsAllowedHostingLocationsOk
+
+`func (o *OrganizationSettingsPatchRequest) GetToolsAllowedHostingLocationsOk() (*[]string, bool)`
+
+GetToolsAllowedHostingLocationsOk returns a tuple with the ToolsAllowedHostingLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToolsAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) SetToolsAllowedHostingLocations(v []string)`
+
+SetToolsAllowedHostingLocations sets ToolsAllowedHostingLocations field to given value.
+
+### HasToolsAllowedHostingLocations
+
+`func (o *OrganizationSettingsPatchRequest) HasToolsAllowedHostingLocations() bool`
+
+HasToolsAllowedHostingLocations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

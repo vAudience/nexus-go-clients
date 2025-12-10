@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.3.6
+  version: 0.4.0
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -1638,6 +1638,125 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: member
+  /v1/organizations/{id}/members/{memberId}/settings:
+    get:
+      description: Get member settings for an Organization
+      operationId: GetMemberSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrganizationMemberSettingsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Organization Member Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Get member settings for an Organization
+      tags:
+      - Organizations
+    patch:
+      description: Patch member settings for an Organization
+      operationId: PatchMemberSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: id of the member
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrganizationMemberSettingsPatchRequest"
+        description: settings object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrganizationMemberSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Organization Member Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Patch member settings for an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: settings
   /v1/organizations/{id}/owner:
     patch:
       description: Transfer the ownership of an organization
@@ -2135,72 +2254,6 @@ paths:
       security:
       - ApiKey: []
       summary: Patch settings for an Organization
-      tags:
-      - Organizations
-      x-codegen-request-body-name: settings
-    post:
-      description: Create settings for an Organization
-      operationId: CreateOrganizationSettings
-      parameters:
-      - description: id of the organization
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/OrganizationSettingsPostRequest"
-        description: settings object
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrganizationSettingsResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Organization Not Found
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Organization Settings Exists
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Server or Database Internal Error
-      security:
-      - ApiKey: []
-      summary: Create settings for an Organization
       tags:
       - Organizations
       x-codegen-request-body-name: settings
@@ -4620,6 +4673,56 @@ components:
       - updatedAt
       - user
       type: object
+    OrganizationMemberSettingsPatchRequest:
+      example:
+        imageDefaultAgentId: imageDefaultAgentId
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        chatDefaultAgentId: chatDefaultAgentId
+      properties:
+        chatDefaultAgentId:
+          minLength: 1
+          type: string
+        embeddingDefaultAgentId:
+          minLength: 1
+          type: string
+        imageDefaultAgentId:
+          minLength: 1
+          type: string
+      type: object
+    OrganizationMemberSettingsResponse:
+      example:
+        organizationId: organizationId
+        createdAt: createdAt
+        imageDefaultAgentId: imageDefaultAgentId
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        id: id
+        chatDefaultAgentId: chatDefaultAgentId
+        memberId: memberId
+        updatedAt: updatedAt
+      properties:
+        chatDefaultAgentId:
+          type: string
+        createdAt:
+          type: string
+        embeddingDefaultAgentId:
+          type: string
+        id:
+          type: string
+        imageDefaultAgentId:
+          type: string
+        memberId:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - createdAt
+      - id
+      - memberId
+      - organizationId
+      - updatedAt
+      type: object
     OrganizationPatchOwnershipRequest:
       example:
         targetOwnerId: targetOwnerId
@@ -4767,83 +4870,116 @@ components:
       type: object
     OrganizationSettingsPatchRequest:
       example:
-        allowedPredefinedAgentIds:
-        - allowedPredefinedAgentIds
-        - allowedPredefinedAgentIds
-        allowedHostingLocations:
-        - allowedHostingLocations
-        - allowedHostingLocations
-        defaultAgentId: defaultAgentId
+        imageDefaultAgentId: imageDefaultAgentId
+        chatAllowedHostingLocations:
+        - chatAllowedHostingLocations
+        - chatAllowedHostingLocations
+        audioAllowedHostingLocations:
+        - audioAllowedHostingLocations
+        - audioAllowedHostingLocations
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        imageAllowedHostingLocations:
+        - imageAllowedHostingLocations
+        - imageAllowedHostingLocations
+        embeddingAllowedHostingLocations:
+        - embeddingAllowedHostingLocations
+        - embeddingAllowedHostingLocations
+        chatDefaultAgentId: chatDefaultAgentId
+        toolsAllowedHostingLocations:
+        - toolsAllowedHostingLocations
+        - toolsAllowedHostingLocations
       properties:
-        allowedHostingLocations:
+        audioAllowedHostingLocations:
           items:
             type: string
           type: array
-        allowedPredefinedAgentIds:
+        chatAllowedHostingLocations:
           items:
             type: string
           type: array
-        defaultAgentId:
+        chatDefaultAgentId:
+          minLength: 1
           type: string
-      type: object
-    OrganizationSettingsPostRequest:
-      example:
-        allowedPredefinedAgentIds:
-        - allowedPredefinedAgentIds
-        - allowedPredefinedAgentIds
-        allowedHostingLocations:
-        - allowedHostingLocations
-        - allowedHostingLocations
-        defaultAgentId: defaultAgentId
-      properties:
-        allowedHostingLocations:
+        embeddingAllowedHostingLocations:
           items:
             type: string
           type: array
-        allowedPredefinedAgentIds:
-          items:
-            type: string
-          type: array
-        defaultAgentId:
+        embeddingDefaultAgentId:
+          minLength: 1
           type: string
+        imageAllowedHostingLocations:
+          items:
+            type: string
+          type: array
+        imageDefaultAgentId:
+          minLength: 1
+          type: string
+        toolsAllowedHostingLocations:
+          items:
+            type: string
+          type: array
       type: object
     OrganizationSettingsResponse:
       example:
         organizationId: organizationId
         createdAt: createdAt
-        allowedPredefinedAgentIds:
-        - allowedPredefinedAgentIds
-        - allowedPredefinedAgentIds
-        allowedHostingLocations:
-        - allowedHostingLocations
-        - allowedHostingLocations
-        defaultAgentId: defaultAgentId
+        imageDefaultAgentId: imageDefaultAgentId
+        chatAllowedHostingLocations:
+        - chatAllowedHostingLocations
+        - chatAllowedHostingLocations
+        audioAllowedHostingLocations:
+        - audioAllowedHostingLocations
+        - audioAllowedHostingLocations
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        imageAllowedHostingLocations:
+        - imageAllowedHostingLocations
+        - imageAllowedHostingLocations
+        embeddingAllowedHostingLocations:
+        - embeddingAllowedHostingLocations
+        - embeddingAllowedHostingLocations
         id: id
+        chatDefaultAgentId: chatDefaultAgentId
+        toolsAllowedHostingLocations:
+        - toolsAllowedHostingLocations
+        - toolsAllowedHostingLocations
         updatedAt: updatedAt
       properties:
-        allowedHostingLocations:
+        audioAllowedHostingLocations:
           items:
             type: string
           type: array
-        allowedPredefinedAgentIds:
+        chatAllowedHostingLocations:
           items:
             type: string
           type: array
+        chatDefaultAgentId:
+          type: string
         createdAt:
           type: string
-        defaultAgentId:
+        embeddingAllowedHostingLocations:
+          items:
+            type: string
+          type: array
+        embeddingDefaultAgentId:
           type: string
         id:
           type: string
+        imageAllowedHostingLocations:
+          items:
+            type: string
+          type: array
+        imageDefaultAgentId:
+          type: string
         organizationId:
           type: string
+        toolsAllowedHostingLocations:
+          items:
+            type: string
+          type: array
         updatedAt:
           type: string
       required:
-      - allowedHostingLocations
-      - allowedPredefinedAgentIds
       - createdAt
-      - defaultAgentId
       - id
       - organizationId
       - updatedAt
