@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,23 +22,19 @@ type HostingLocation string
 // List of HostingLocation
 const (
 	HostingLocationNil HostingLocation = ""
-	HostingLocationUSA HostingLocation = "usa"
-	HostingLocationEU HostingLocation = "europe"
-	HostingLocationGERMANY HostingLocation = "germany"
-	HostingLocationSWISS HostingLocation = "swiss"
-	HostingLocationUK HostingLocation = "uk"
 	HostingLocationANY HostingLocation = "any"
+	HostingLocationEU HostingLocation = "europe"
+	HostingLocationUK HostingLocation = "uk"
+	HostingLocationUSA HostingLocation = "usa"
 )
 
 // All allowed values of HostingLocation enum
 var AllowedHostingLocationEnumValues = []HostingLocation{
 	"",
-	"usa",
-	"europe",
-	"germany",
-	"swiss",
-	"uk",
 	"any",
+	"europe",
+	"uk",
+	"usa",
 }
 
 func (v *HostingLocation) UnmarshalJSON(src []byte) error {

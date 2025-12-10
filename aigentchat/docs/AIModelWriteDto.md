@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
+**Actions** | Pointer to **[]string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
 **Features** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
@@ -64,6 +65,31 @@ SetAcceptedFileMimetypes sets AcceptedFileMimetypes field to given value.
 `func (o *AIModelWriteDto) HasAcceptedFileMimetypes() bool`
 
 HasAcceptedFileMimetypes returns a boolean if a field has been set.
+
+### GetActions
+
+`func (o *AIModelWriteDto) GetActions() []string`
+
+GetActions returns the Actions field if non-nil, zero value otherwise.
+
+### GetActionsOk
+
+`func (o *AIModelWriteDto) GetActionsOk() (*[]string, bool)`
+
+GetActionsOk returns a tuple with the Actions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActions
+
+`func (o *AIModelWriteDto) SetActions(v []string)`
+
+SetActions sets Actions field to given value.
+
+### HasActions
+
+`func (o *AIModelWriteDto) HasActions() bool`
+
+HasActions returns a boolean if a field has been set.
 
 ### GetDescription
 

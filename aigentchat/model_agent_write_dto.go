@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -32,10 +32,12 @@ type AgentWriteDto struct {
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
+	ModelActions []string `json:"model_actions,omitempty"`
 	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
 	ModelId *string `json:"model_id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	// TODO: will be replaced by tags
 	RecommendedTask *string `json:"recommended_task,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
 	TeamIds []string `json:"team_ids,omitempty"`
@@ -448,6 +450,38 @@ func (o *AgentWriteDto) SetMetaData(v map[string]interface{}) {
 	o.MetaData = v
 }
 
+// GetModelActions returns the ModelActions field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetModelActions() []string {
+	if o == nil || IsNil(o.ModelActions) {
+		var ret []string
+		return ret
+	}
+	return o.ModelActions
+}
+
+// GetModelActionsOk returns a tuple with the ModelActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetModelActionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ModelActions) {
+		return nil, false
+	}
+	return o.ModelActions, true
+}
+
+// HasModelActions returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasModelActions() bool {
+	if o != nil && !IsNil(o.ModelActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelActions gets a reference to the given []string and assigns it to the ModelActions field.
+func (o *AgentWriteDto) SetModelActions(v []string) {
+	o.ModelActions = v
+}
+
 // GetModelHostLocation returns the ModelHostLocation field value if set, zero value otherwise.
 func (o *AgentWriteDto) GetModelHostLocation() HostingLocation {
 	if o == nil || IsNil(o.ModelHostLocation) {
@@ -814,6 +848,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
 	}
+	if !IsNil(o.ModelActions) {
+		toSerialize["model_actions"] = o.ModelActions
+	}
 	if !IsNil(o.ModelHostLocation) {
 		toSerialize["model_host_location"] = o.ModelHostLocation
 	}
@@ -878,6 +915,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "meta_data")
+		delete(additionalProperties, "model_actions")
 		delete(additionalProperties, "model_host_location")
 		delete(additionalProperties, "model_id")
 		delete(additionalProperties, "name")

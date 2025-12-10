@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AiServiceId** | **string** |  | 
+**AiServiceId** | Pointer to **string** |  | [optional] 
 **CostMultiplier** | Pointer to **float64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
 **I18n** | Pointer to [**map[string]AIModelServiceI18n**](AIModelServiceI18n.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**Name** | **string** |  | 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated: use ai_service_id instead | 
+**Name** | Pointer to **string** |  | [optional] 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated fields | 
 
 ## Methods
 
 ### NewAIModelServiceWriteDto
 
-`func NewAIModelServiceWriteDto(aiServiceId string, name string, serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
+`func NewAIModelServiceWriteDto(serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
 
 NewAIModelServiceWriteDto instantiates a new AIModelServiceWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -52,6 +52,11 @@ and a boolean to check if the value has been set.
 
 SetAiServiceId sets AiServiceId field to given value.
 
+### HasAiServiceId
+
+`func (o *AIModelServiceWriteDto) HasAiServiceId() bool`
+
+HasAiServiceId returns a boolean if a field has been set.
 
 ### GetCostMultiplier
 
@@ -222,6 +227,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *AIModelServiceWriteDto) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetServiceImpl
 

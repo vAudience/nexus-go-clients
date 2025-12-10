@@ -5,17 +5,13 @@
 
 * `HostingLocationNil` (value: `""`)
 
-* `HostingLocationUSA` (value: `"usa"`)
+* `HostingLocationANY` (value: `"any"`)
 
 * `HostingLocationEU` (value: `"europe"`)
 
-* `HostingLocationGERMANY` (value: `"germany"`)
-
-* `HostingLocationSWISS` (value: `"swiss"`)
-
 * `HostingLocationUK` (value: `"uk"`)
 
-* `HostingLocationANY` (value: `"any"`)
+* `HostingLocationUSA` (value: `"usa"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

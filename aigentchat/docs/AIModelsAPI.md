@@ -456,7 +456,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | AI Model ID
-	aiModel := *openapiclient.NewAIModel("Id_example", "ModelId_example", "Name_example", "OwnerId_example", "OwnerOrganizationId_example", "ServiceId_example") // AIModel | AI Model
+	aiModel := *openapiclient.NewAIModel([]string{"Actions_example"}, "Id_example", "ModelId_example", "Name_example", "OwnerId_example", "OwnerOrganizationId_example", []openapiclient.HostingLocation{openapiclient.HostingLocation("")}, "ServiceId_example") // AIModel | AI Model
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

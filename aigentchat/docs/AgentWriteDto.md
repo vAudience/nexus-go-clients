@@ -16,11 +16,12 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
+**ModelActions** | Pointer to **[]string** |  | [optional] 
 **ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**RecommendedTask** | Pointer to **string** |  | [optional] 
+**RecommendedTask** | Pointer to **string** | TODO: will be replaced by tags | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
 **ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -345,6 +346,31 @@ SetMetaData sets MetaData field to given value.
 `func (o *AgentWriteDto) HasMetaData() bool`
 
 HasMetaData returns a boolean if a field has been set.
+
+### GetModelActions
+
+`func (o *AgentWriteDto) GetModelActions() []string`
+
+GetModelActions returns the ModelActions field if non-nil, zero value otherwise.
+
+### GetModelActionsOk
+
+`func (o *AgentWriteDto) GetModelActionsOk() (*[]string, bool)`
+
+GetModelActionsOk returns a tuple with the ModelActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelActions
+
+`func (o *AgentWriteDto) SetModelActions(v []string)`
+
+SetModelActions sets ModelActions field to given value.
+
+### HasModelActions
+
+`func (o *AgentWriteDto) HasModelActions() bool`
+
+HasModelActions returns a boolean if a field has been set.
 
 ### GetModelHostLocation
 

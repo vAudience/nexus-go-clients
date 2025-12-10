@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &AIModelWriteDto{}
 // AIModelWriteDto struct for AIModelWriteDto
 type AIModelWriteDto struct {
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
+	Actions []string `json:"actions,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
 	Features []AIModelFeature `json:"features,omitempty"`
@@ -88,6 +89,38 @@ func (o *AIModelWriteDto) HasAcceptedFileMimetypes() bool {
 // SetAcceptedFileMimetypes gets a reference to the given []string and assigns it to the AcceptedFileMimetypes field.
 func (o *AIModelWriteDto) SetAcceptedFileMimetypes(v []string) {
 	o.AcceptedFileMimetypes = v
+}
+
+// GetActions returns the Actions field value if set, zero value otherwise.
+func (o *AIModelWriteDto) GetActions() []string {
+	if o == nil || IsNil(o.Actions) {
+		var ret []string
+		return ret
+	}
+	return o.Actions
+}
+
+// GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelWriteDto) GetActionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Actions) {
+		return nil, false
+	}
+	return o.Actions, true
+}
+
+// HasActions returns a boolean if a field has been set.
+func (o *AIModelWriteDto) HasActions() bool {
+	if o != nil && !IsNil(o.Actions) {
+		return true
+	}
+
+	return false
+}
+
+// SetActions gets a reference to the given []string and assigns it to the Actions field.
+func (o *AIModelWriteDto) SetActions(v []string) {
+	o.Actions = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -583,6 +616,9 @@ func (o AIModelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AcceptedFileMimetypes) {
 		toSerialize["accepted_file_mimetypes"] = o.AcceptedFileMimetypes
 	}
+	if !IsNil(o.Actions) {
+		toSerialize["actions"] = o.Actions
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -651,6 +687,7 @@ func (o *AIModelWriteDto) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "accepted_file_mimetypes")
+		delete(additionalProperties, "actions")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")
 		delete(additionalProperties, "features")

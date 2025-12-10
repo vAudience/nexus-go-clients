@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,8 +22,8 @@ var _ MappedNullable = &AgentI18n{}
 // AgentI18n struct for AgentI18n
 type AgentI18n struct {
 	Description *string `json:"description,omitempty"`
-	ModelCategory *string `json:"model_category,omitempty"`
 	Name string `json:"name"`
+	// TODO: will be replaced by tags
 	RecommendedTask *string `json:"recommended_task,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -78,38 +78,6 @@ func (o *AgentI18n) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *AgentI18n) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
-func (o *AgentI18n) GetModelCategory() string {
-	if o == nil || IsNil(o.ModelCategory) {
-		var ret string
-		return ret
-	}
-	return *o.ModelCategory
-}
-
-// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AgentI18n) GetModelCategoryOk() (*string, bool) {
-	if o == nil || IsNil(o.ModelCategory) {
-		return nil, false
-	}
-	return o.ModelCategory, true
-}
-
-// HasModelCategory returns a boolean if a field has been set.
-func (o *AgentI18n) HasModelCategory() bool {
-	if o != nil && !IsNil(o.ModelCategory) {
-		return true
-	}
-
-	return false
-}
-
-// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
-func (o *AgentI18n) SetModelCategory(v string) {
-	o.ModelCategory = &v
 }
 
 // GetName returns the Name field value
@@ -181,9 +149,6 @@ func (o AgentI18n) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.ModelCategory) {
-		toSerialize["model_category"] = o.ModelCategory
-	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.RecommendedTask) {
 		toSerialize["recommended_task"] = o.RecommendedTask
@@ -232,7 +197,6 @@ func (o *AgentI18n) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "recommended_task")
 		o.AdditionalProperties = additionalProperties

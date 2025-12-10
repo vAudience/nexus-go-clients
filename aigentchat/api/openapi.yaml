@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.22.9
+  version: 0.23.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -370,37 +370,26 @@ paths:
         required: true
         schema:
           type: string
+      - description: Filter agents by model action
+        in: query
+        name: action
+        schema:
+          enum:
+          - chat
+          - embedding
+          - image
+          - transcribe
+          type: string
       - description: Include default agents to the list of org owned agents
         in: query
         name: add_default_agents
         schema:
           type: boolean
-      - description: Skip the default agent filtering of the organization settings
-        in: query
-        name: skip_default_agents_filter
-        schema:
-          type: boolean
-      - description: Filter agents by ability type
-        in: query
-        name: ability
-        schema:
-          enum:
-          - text
-          - chat
-          - embedding
-          - image
-          - tool-function
-          type: string
       - description: Ignore hasManageBasicAgentsAccess when listing agents
         in: query
         name: ignore_manage_basic_agents_access
         schema:
           type: boolean
-      - description: Filter agents by lifecycle status
-        in: query
-        name: lifecycle
-        schema:
-          type: string
       responses:
         "200":
           content:
@@ -4947,31 +4936,13 @@ components:
   schemas:
     AIModel:
       example:
+        capabilities:
+        - capabilities
+        - capabilities
         internal_id: internal_id
         owner_id: owner_id
         model_release_date: 2
-        abilities_v2:
-        - type: type
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        - type: type
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        created_at: 1
+        created_at: 0
         description: description
         model_id: model_id
         documentation_url: documentation_url
@@ -4983,27 +4954,6 @@ components:
             model_category: model_category
             name: name
             description: description
-        abilities:
-        - type: text
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        - type: text
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
         lifecycle: lifecycle
         features:
         - capability: ""
@@ -5031,12 +4981,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
         - capability: ""
           cost_items:
@@ -5063,12 +5013,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
         service_host_locations:
         - ""
@@ -5082,20 +5032,28 @@ components:
         updated_by: updated_by
         parameter_definitions: "{}"
         id: id
+        actions:
+        - actions
+        - actions
         parameters: "{}"
       properties:
-        abilities:
-          items:
-            $ref: "#/components/schemas/Ability"
-          type: array
-        abilities_v2:
-          items:
-            $ref: "#/components/schemas/AbilityV2"
-          type: array
         accepted_file_mimetypes:
           items:
             type: string
           type: array
+          uniqueItems: true
+        actions:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        capabilities:
+          description: "Note: only set when returning the model (not stored at model\
+            \ level), derived from features"
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         created_at:
           format: int64
           type: integer
@@ -5113,8 +5071,6 @@ components:
             $ref: "#/components/schemas/AIModelI18n"
           type: object
         id:
-          maxLength: 64
-          minLength: 1
           type: string
         internal_id:
           type: string
@@ -5126,8 +5082,6 @@ components:
           maxLength: 255
           type: string
         model_id:
-          maxLength: 64
-          minLength: 1
           type: string
         model_release_date:
           format: int64
@@ -5137,12 +5091,8 @@ components:
           minLength: 1
           type: string
         owner_id:
-          maxLength: 64
-          minLength: 1
           type: string
         owner_organization_id:
-          maxLength: 64
-          minLength: 1
           type: string
         parameter_definitions:
           properties: {}
@@ -5155,8 +5105,6 @@ components:
             $ref: "#/components/schemas/HostingLocation"
           type: array
         service_id:
-          maxLength: 64
-          minLength: 1
           type: string
         updated_at:
           format: int64
@@ -5164,11 +5112,13 @@ components:
         updated_by:
           type: string
       required:
+      - actions
       - id
       - model_id
       - name
       - owner_id
       - owner_organization_id
+      - service_host_locations
       - service_id
       type: object
     AIModelCapability:
@@ -5220,8 +5170,8 @@ components:
     AIModelConstraint:
       example:
         unit: tokens
-        min: 6
-        max: 0
+        min: 1
+        max: 6
         direction: input
       properties:
         direction:
@@ -5300,12 +5250,12 @@ components:
           cost_unit: input-tokens-per-million
         constraints:
         - unit: tokens
-          min: 6
-          max: 0
+          min: 1
+          max: 6
           direction: input
         - unit: tokens
-          min: 6
-          max: 0
+          min: 1
+          max: 6
           direction: input
       properties:
         capability:
@@ -5398,8 +5348,6 @@ components:
         service_impl: "{}"
       properties:
         ai_service_id:
-          maxLength: 64
-          minLength: 1
           type: string
         cost_multiplier:
           type: number
@@ -5418,8 +5366,6 @@ components:
             $ref: "#/components/schemas/AIModelServiceI18n"
           type: object
         id:
-          maxLength: 64
-          minLength: 1
           type: string
         internal_id:
           type: string
@@ -5430,17 +5376,13 @@ components:
           minLength: 1
           type: string
         owner_id:
-          maxLength: 64
-          minLength: 1
           type: string
         owner_organization_id:
-          maxLength: 64
-          minLength: 1
           type: string
         service_impl:
           allOf:
           - $ref: "#/components/schemas/AiServiceId"
-          description: "Deprecated: use ai_service_id instead"
+          description: Deprecated fields
           type: object
         updated_at:
           format: int64
@@ -5449,6 +5391,7 @@ components:
           type: string
       required:
       - ai_service_id
+      - cost_multiplier
       - id
       - name
       - owner_id
@@ -5458,31 +5401,13 @@ components:
     AIModelServiceWithModels:
       example:
         models:
-        - internal_id: internal_id
+        - capabilities:
+          - capabilities
+          - capabilities
+          internal_id: internal_id
           owner_id: owner_id
           model_release_date: 2
-          abilities_v2:
-          - type: type
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          - type: type
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          created_at: 1
+          created_at: 0
           description: description
           model_id: model_id
           documentation_url: documentation_url
@@ -5494,27 +5419,6 @@ components:
               model_category: model_category
               name: name
               description: description
-          abilities:
-          - type: text
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          - type: text
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
           lifecycle: lifecycle
           features:
           - capability: ""
@@ -5542,12 +5446,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
           - capability: ""
             cost_items:
@@ -5574,12 +5478,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
           service_host_locations:
           - ""
@@ -5593,32 +5497,17 @@ components:
           updated_by: updated_by
           parameter_definitions: "{}"
           id: id
+          actions:
+          - actions
+          - actions
           parameters: "{}"
-        - internal_id: internal_id
+        - capabilities:
+          - capabilities
+          - capabilities
+          internal_id: internal_id
           owner_id: owner_id
           model_release_date: 2
-          abilities_v2:
-          - type: type
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          - type: type
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          created_at: 1
+          created_at: 0
           description: description
           model_id: model_id
           documentation_url: documentation_url
@@ -5630,27 +5519,6 @@ components:
               model_category: model_category
               name: name
               description: description
-          abilities:
-          - type: text
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-          - type: text
-            constraints:
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
-            - unit: tokens
-              min: 6
-              max: 0
-              direction: input
           lifecycle: lifecycle
           features:
           - capability: ""
@@ -5678,12 +5546,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
           - capability: ""
             cost_items:
@@ -5710,12 +5578,12 @@ components:
               cost_unit: input-tokens-per-million
             constraints:
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
             - unit: tokens
-              min: 6
-              max: 0
+              min: 1
+              max: 6
               direction: input
           service_host_locations:
           - ""
@@ -5729,6 +5597,9 @@ components:
           updated_by: updated_by
           parameter_definitions: "{}"
           id: id
+          actions:
+          - actions
+          - actions
           parameters: "{}"
         service:
           internal_id: internal_id
@@ -5775,8 +5646,6 @@ components:
             description: description
       properties:
         ai_service_id:
-          maxLength: 64
-          minLength: 1
           type: string
         cost_multiplier:
           format: double
@@ -5803,11 +5672,9 @@ components:
         service_impl:
           allOf:
           - $ref: "#/components/schemas/AiServiceId"
-          description: "Deprecated: use ai_service_id instead"
+          description: Deprecated fields
           type: object
       required:
-      - ai_service_id
-      - name
       - service_impl
       type: object
     AIModelWriteDto:
@@ -5852,12 +5719,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
         - capability: ""
           cost_items:
@@ -5884,12 +5751,12 @@ components:
             cost_unit: input-tokens-per-million
           constraints:
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
           - unit: tokens
-            min: 6
-            max: 0
+            min: 1
+            max: 6
             direction: input
         service_host_locations:
         - ""
@@ -5899,6 +5766,9 @@ components:
         is_public: true
         name: name
         parameter_definitions: "{}"
+        actions:
+        - actions
+        - actions
         parameters:
           key: "{}"
       properties:
@@ -5906,6 +5776,11 @@ components:
           items:
             type: string
           type: array
+        actions:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         description:
           maxLength: 1024
           type: string
@@ -5929,8 +5804,6 @@ components:
           maxLength: 255
           type: string
         model_id:
-          maxLength: 64
-          minLength: 1
           type: string
         model_release_date:
           type: integer
@@ -5950,8 +5823,6 @@ components:
             $ref: "#/components/schemas/HostingLocation"
           type: array
         service_id:
-          maxLength: 64
-          minLength: 1
           type: string
       type: object
     AIgencyFunctionCall:
@@ -7350,60 +7221,6 @@ components:
       required:
       - url
       type: object
-    Ability:
-      example:
-        type: text
-        constraints:
-        - unit: tokens
-          min: 6
-          max: 0
-          direction: input
-        - unit: tokens
-          min: 6
-          max: 0
-          direction: input
-      properties:
-        constraints:
-          items:
-            $ref: "#/components/schemas/AIModelConstraint"
-          type: array
-        type:
-          $ref: "#/components/schemas/AbilityType"
-      type: object
-    AbilityType:
-      enum:
-      - text
-      - chat
-      - embedding
-      - image
-      - tool-function
-      type: string
-      x-enum-varnames:
-      - AbilityTypeText
-      - AbilityTypeChat
-      - AbilityTypeEmbedding
-      - AbilityTypeImage
-      - AbilityTypeToolFunction
-    AbilityV2:
-      example:
-        type: type
-        constraints:
-        - unit: tokens
-          min: 6
-          max: 0
-          direction: input
-        - unit: tokens
-          min: 6
-          max: 0
-          direction: input
-      properties:
-        constraints:
-          items:
-            $ref: "#/components/schemas/AIModelConstraint"
-          type: array
-        type:
-          type: string
-      type: object
     Agent:
       example:
         system_messages:
@@ -7426,66 +7243,21 @@ components:
         attached_file_ids:
         - attached_file_ids
         - attached_file_ids
-        abilities:
-        - type: text
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        - type: text
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        lifecycle: lifecycle
-        updated_at: 1
-        model_category: model_category
+        updated_at: 6
         use_tools: true
         ignore_incoming_overwrite: true
         meta_data: "{}"
-        model_capabilities:
-        - model_capabilities
-        - model_capabilities
+        model: "{}"
         model_host_location: ""
         tool_config: "{}"
         id: id
         internal_id: internal_id
-        model_release_date: 6
-        abilities_v2:
-        - type: type
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-        - type: type
-          constraints:
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
-          - unit: tokens
-            min: 6
-            max: 0
-            direction: input
+        model_actions:
+        - model_actions
+        - model_actions
         model_id: model_id
         i18n:
           key:
-            model_category: model_category
             recommended_task: recommended_task
             name: name
             description: description
@@ -7498,14 +7270,6 @@ components:
         updated_by: updated_by
         parameters: "{}"
       properties:
-        abilities:
-          items:
-            $ref: "#/components/schemas/Ability"
-          type: array
-        abilities_v2:
-          items:
-            $ref: "#/components/schemas/AbilityV2"
-          type: array
         add_tool_guidelines:
           type: boolean
         assigned_tools:
@@ -7547,28 +7311,25 @@ components:
           type: string
         is_public:
           type: boolean
-        lifecycle:
-          type: string
         meta_data:
           properties: {}
           type: object
-        model_capabilities:
+        model:
+          allOf:
+          - $ref: "#/components/schemas/AIModel"
+          description: "Note: only set when returning the agent (not stored at agent\
+            \ level)"
+          type: object
+        model_actions:
           items:
             type: string
           type: array
-          uniqueItems: true
-        model_category:
-          maxLength: 255
-          type: string
         model_host_location:
           $ref: "#/components/schemas/HostingLocation"
         model_id:
           maxLength: 64
           minLength: 1
           type: string
-        model_release_date:
-          format: int64
-          type: integer
         name:
           maxLength: 255
           minLength: 1
@@ -7585,6 +7346,7 @@ components:
           properties: {}
           type: object
         recommended_task:
+          description: "TODO: will be replaced by tags"
           type: string
         system_messages:
           items:
@@ -7619,7 +7381,6 @@ components:
       type: object
     AgentI18n:
       example:
-        model_category: model_category
         recommended_task: recommended_task
         name: name
         description: description
@@ -7627,14 +7388,12 @@ components:
         description:
           maxLength: 1024
           type: string
-        model_category:
-          maxLength: 255
-          type: string
         name:
           maxLength: 255
           minLength: 1
           type: string
         recommended_task:
+          description: "TODO: will be replaced by tags"
           maxLength: 255
           type: string
       required:
@@ -7664,11 +7423,13 @@ components:
         - assigned_tools
         - assigned_tools
         description: description
+        model_actions:
+        - model_actions
+        - model_actions
         model_id: model_id
         type: ""
         i18n:
           key:
-            model_category: model_category
             recommended_task: recommended_task
             name: name
             description: description
@@ -7727,6 +7488,10 @@ components:
         meta_data:
           properties: {}
           type: object
+        model_actions:
+          items:
+            type: string
+          type: array
         model_host_location:
           $ref: "#/components/schemas/HostingLocation"
         model_id:
@@ -7741,6 +7506,7 @@ components:
           properties: {}
           type: object
         recommended_task:
+          description: "TODO: will be replaced by tags"
           type: string
         system_messages:
           items:
@@ -9421,21 +9187,19 @@ components:
     HostingLocation:
       enum:
       - ""
-      - usa
-      - europe
-      - germany
-      - swiss
-      - uk
       - any
+      - europe
+      - uk
+      - usa
       type: string
+      x-enum-comments:
+        HostingLocationANY: global
       x-enum-varnames:
       - HostingLocationNil
-      - HostingLocationUSA
-      - HostingLocationEU
-      - HostingLocationGERMANY
-      - HostingLocationSWISS
-      - HostingLocationUK
       - HostingLocationANY
+      - HostingLocationEU
+      - HostingLocationUK
+      - HostingLocationUSA
     ImageGenerationRequestDto:
       example:
         agent_id: agent_id

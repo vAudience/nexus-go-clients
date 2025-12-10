@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,9 +21,10 @@ var _ MappedNullable = &AIModel{}
 
 // AIModel struct for AIModel
 type AIModel struct {
-	Abilities []Ability `json:"abilities,omitempty"`
-	AbilitiesV2 []AbilityV2 `json:"abilities_v2,omitempty"`
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
+	Actions []string `json:"actions"`
+	// Note: only set when returning the model (not stored at model level), derived from features
+	Capabilities []string `json:"capabilities,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
@@ -41,7 +42,7 @@ type AIModel struct {
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	ParameterDefinitions map[string]interface{} `json:"parameter_definitions,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
-	ServiceHostLocations []HostingLocation `json:"service_host_locations,omitempty"`
+	ServiceHostLocations []HostingLocation `json:"service_host_locations"`
 	ServiceId string `json:"service_id"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
@@ -54,13 +55,15 @@ type _AIModel AIModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModel(id string, modelId string, name string, ownerId string, ownerOrganizationId string, serviceId string) *AIModel {
+func NewAIModel(actions []string, id string, modelId string, name string, ownerId string, ownerOrganizationId string, serviceHostLocations []HostingLocation, serviceId string) *AIModel {
 	this := AIModel{}
+	this.Actions = actions
 	this.Id = id
 	this.ModelId = modelId
 	this.Name = name
 	this.OwnerId = ownerId
 	this.OwnerOrganizationId = ownerOrganizationId
+	this.ServiceHostLocations = serviceHostLocations
 	this.ServiceId = serviceId
 	return &this
 }
@@ -71,70 +74,6 @@ func NewAIModel(id string, modelId string, name string, ownerId string, ownerOrg
 func NewAIModelWithDefaults() *AIModel {
 	this := AIModel{}
 	return &this
-}
-
-// GetAbilities returns the Abilities field value if set, zero value otherwise.
-func (o *AIModel) GetAbilities() []Ability {
-	if o == nil || IsNil(o.Abilities) {
-		var ret []Ability
-		return ret
-	}
-	return o.Abilities
-}
-
-// GetAbilitiesOk returns a tuple with the Abilities field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetAbilitiesOk() ([]Ability, bool) {
-	if o == nil || IsNil(o.Abilities) {
-		return nil, false
-	}
-	return o.Abilities, true
-}
-
-// HasAbilities returns a boolean if a field has been set.
-func (o *AIModel) HasAbilities() bool {
-	if o != nil && !IsNil(o.Abilities) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
-func (o *AIModel) SetAbilities(v []Ability) {
-	o.Abilities = v
-}
-
-// GetAbilitiesV2 returns the AbilitiesV2 field value if set, zero value otherwise.
-func (o *AIModel) GetAbilitiesV2() []AbilityV2 {
-	if o == nil || IsNil(o.AbilitiesV2) {
-		var ret []AbilityV2
-		return ret
-	}
-	return o.AbilitiesV2
-}
-
-// GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetAbilitiesV2Ok() ([]AbilityV2, bool) {
-	if o == nil || IsNil(o.AbilitiesV2) {
-		return nil, false
-	}
-	return o.AbilitiesV2, true
-}
-
-// HasAbilitiesV2 returns a boolean if a field has been set.
-func (o *AIModel) HasAbilitiesV2() bool {
-	if o != nil && !IsNil(o.AbilitiesV2) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbilitiesV2 gets a reference to the given []AbilityV2 and assigns it to the AbilitiesV2 field.
-func (o *AIModel) SetAbilitiesV2(v []AbilityV2) {
-	o.AbilitiesV2 = v
 }
 
 // GetAcceptedFileMimetypes returns the AcceptedFileMimetypes field value if set, zero value otherwise.
@@ -167,6 +106,62 @@ func (o *AIModel) HasAcceptedFileMimetypes() bool {
 // SetAcceptedFileMimetypes gets a reference to the given []string and assigns it to the AcceptedFileMimetypes field.
 func (o *AIModel) SetAcceptedFileMimetypes(v []string) {
 	o.AcceptedFileMimetypes = v
+}
+
+// GetActions returns the Actions field value
+func (o *AIModel) GetActions() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Actions
+}
+
+// GetActionsOk returns a tuple with the Actions field value
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetActionsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Actions, true
+}
+
+// SetActions sets field value
+func (o *AIModel) SetActions(v []string) {
+	o.Actions = v
+}
+
+// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
+func (o *AIModel) GetCapabilities() []string {
+	if o == nil || IsNil(o.Capabilities) {
+		var ret []string
+		return ret
+	}
+	return o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetCapabilitiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Capabilities) {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// HasCapabilities returns a boolean if a field has been set.
+func (o *AIModel) HasCapabilities() bool {
+	if o != nil && !IsNil(o.Capabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilities gets a reference to the given []string and assigns it to the Capabilities field.
+func (o *AIModel) SetCapabilities(v []string) {
+	o.Capabilities = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -673,34 +668,26 @@ func (o *AIModel) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
-// GetServiceHostLocations returns the ServiceHostLocations field value if set, zero value otherwise.
+// GetServiceHostLocations returns the ServiceHostLocations field value
 func (o *AIModel) GetServiceHostLocations() []HostingLocation {
-	if o == nil || IsNil(o.ServiceHostLocations) {
+	if o == nil {
 		var ret []HostingLocation
 		return ret
 	}
+
 	return o.ServiceHostLocations
 }
 
-// GetServiceHostLocationsOk returns a tuple with the ServiceHostLocations field value if set, nil otherwise
+// GetServiceHostLocationsOk returns a tuple with the ServiceHostLocations field value
 // and a boolean to check if the value has been set.
 func (o *AIModel) GetServiceHostLocationsOk() ([]HostingLocation, bool) {
-	if o == nil || IsNil(o.ServiceHostLocations) {
+	if o == nil {
 		return nil, false
 	}
 	return o.ServiceHostLocations, true
 }
 
-// HasServiceHostLocations returns a boolean if a field has been set.
-func (o *AIModel) HasServiceHostLocations() bool {
-	if o != nil && !IsNil(o.ServiceHostLocations) {
-		return true
-	}
-
-	return false
-}
-
-// SetServiceHostLocations gets a reference to the given []HostingLocation and assigns it to the ServiceHostLocations field.
+// SetServiceHostLocations sets field value
 func (o *AIModel) SetServiceHostLocations(v []HostingLocation) {
 	o.ServiceHostLocations = v
 }
@@ -803,14 +790,12 @@ func (o AIModel) MarshalJSON() ([]byte, error) {
 
 func (o AIModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Abilities) {
-		toSerialize["abilities"] = o.Abilities
-	}
-	if !IsNil(o.AbilitiesV2) {
-		toSerialize["abilities_v2"] = o.AbilitiesV2
-	}
 	if !IsNil(o.AcceptedFileMimetypes) {
 		toSerialize["accepted_file_mimetypes"] = o.AcceptedFileMimetypes
+	}
+	toSerialize["actions"] = o.Actions
+	if !IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
@@ -853,9 +838,7 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.ServiceHostLocations) {
-		toSerialize["service_host_locations"] = o.ServiceHostLocations
-	}
+	toSerialize["service_host_locations"] = o.ServiceHostLocations
 	toSerialize["service_id"] = o.ServiceId
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
@@ -876,11 +859,13 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"actions",
 		"id",
 		"model_id",
 		"name",
 		"owner_id",
 		"owner_organization_id",
+		"service_host_locations",
 		"service_id",
 	}
 
@@ -911,9 +896,9 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "abilities")
-		delete(additionalProperties, "abilities_v2")
 		delete(additionalProperties, "accepted_file_mimetypes")
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")

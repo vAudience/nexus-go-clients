@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,8 +21,6 @@ var _ MappedNullable = &Agent{}
 
 // Agent struct for Agent
 type Agent struct {
-	Abilities []Ability `json:"abilities,omitempty"`
-	AbilitiesV2 []AbilityV2 `json:"abilities_v2,omitempty"`
 	AddToolGuidelines *bool `json:"add_tool_guidelines,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
@@ -36,17 +34,17 @@ type Agent struct {
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
-	Lifecycle *string `json:"lifecycle,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
-	ModelCapabilities []string `json:"model_capabilities,omitempty"`
-	ModelCategory *string `json:"model_category,omitempty"`
+	// Note: only set when returning the agent (not stored at agent level)
+	Model *AIModel `json:"model,omitempty"`
+	ModelActions []string `json:"model_actions,omitempty"`
 	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
 	ModelId string `json:"model_id"`
-	ModelReleaseDate *int64 `json:"model_release_date,omitempty"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	// TODO: will be replaced by tags
 	RecommendedTask *string `json:"recommended_task,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
 	TeamIds []string `json:"team_ids,omitempty"`
@@ -80,70 +78,6 @@ func NewAgent(id string, modelId string, name string, ownerId string, ownerOrgan
 func NewAgentWithDefaults() *Agent {
 	this := Agent{}
 	return &this
-}
-
-// GetAbilities returns the Abilities field value if set, zero value otherwise.
-func (o *Agent) GetAbilities() []Ability {
-	if o == nil || IsNil(o.Abilities) {
-		var ret []Ability
-		return ret
-	}
-	return o.Abilities
-}
-
-// GetAbilitiesOk returns a tuple with the Abilities field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetAbilitiesOk() ([]Ability, bool) {
-	if o == nil || IsNil(o.Abilities) {
-		return nil, false
-	}
-	return o.Abilities, true
-}
-
-// HasAbilities returns a boolean if a field has been set.
-func (o *Agent) HasAbilities() bool {
-	if o != nil && !IsNil(o.Abilities) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbilities gets a reference to the given []Ability and assigns it to the Abilities field.
-func (o *Agent) SetAbilities(v []Ability) {
-	o.Abilities = v
-}
-
-// GetAbilitiesV2 returns the AbilitiesV2 field value if set, zero value otherwise.
-func (o *Agent) GetAbilitiesV2() []AbilityV2 {
-	if o == nil || IsNil(o.AbilitiesV2) {
-		var ret []AbilityV2
-		return ret
-	}
-	return o.AbilitiesV2
-}
-
-// GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetAbilitiesV2Ok() ([]AbilityV2, bool) {
-	if o == nil || IsNil(o.AbilitiesV2) {
-		return nil, false
-	}
-	return o.AbilitiesV2, true
-}
-
-// HasAbilitiesV2 returns a boolean if a field has been set.
-func (o *Agent) HasAbilitiesV2() bool {
-	if o != nil && !IsNil(o.AbilitiesV2) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbilitiesV2 gets a reference to the given []AbilityV2 and assigns it to the AbilitiesV2 field.
-func (o *Agent) SetAbilitiesV2(v []AbilityV2) {
-	o.AbilitiesV2 = v
 }
 
 // GetAddToolGuidelines returns the AddToolGuidelines field value if set, zero value otherwise.
@@ -554,38 +488,6 @@ func (o *Agent) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
-// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
-func (o *Agent) GetLifecycle() string {
-	if o == nil || IsNil(o.Lifecycle) {
-		var ret string
-		return ret
-	}
-	return *o.Lifecycle
-}
-
-// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetLifecycleOk() (*string, bool) {
-	if o == nil || IsNil(o.Lifecycle) {
-		return nil, false
-	}
-	return o.Lifecycle, true
-}
-
-// HasLifecycle returns a boolean if a field has been set.
-func (o *Agent) HasLifecycle() bool {
-	if o != nil && !IsNil(o.Lifecycle) {
-		return true
-	}
-
-	return false
-}
-
-// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
-func (o *Agent) SetLifecycle(v string) {
-	o.Lifecycle = &v
-}
-
 // GetMetaData returns the MetaData field value if set, zero value otherwise.
 func (o *Agent) GetMetaData() map[string]interface{} {
 	if o == nil || IsNil(o.MetaData) {
@@ -618,68 +520,68 @@ func (o *Agent) SetMetaData(v map[string]interface{}) {
 	o.MetaData = v
 }
 
-// GetModelCapabilities returns the ModelCapabilities field value if set, zero value otherwise.
-func (o *Agent) GetModelCapabilities() []string {
-	if o == nil || IsNil(o.ModelCapabilities) {
+// GetModel returns the Model field value if set, zero value otherwise.
+func (o *Agent) GetModel() AIModel {
+	if o == nil || IsNil(o.Model) {
+		var ret AIModel
+		return ret
+	}
+	return *o.Model
+}
+
+// GetModelOk returns a tuple with the Model field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetModelOk() (*AIModel, bool) {
+	if o == nil || IsNil(o.Model) {
+		return nil, false
+	}
+	return o.Model, true
+}
+
+// HasModel returns a boolean if a field has been set.
+func (o *Agent) HasModel() bool {
+	if o != nil && !IsNil(o.Model) {
+		return true
+	}
+
+	return false
+}
+
+// SetModel gets a reference to the given AIModel and assigns it to the Model field.
+func (o *Agent) SetModel(v AIModel) {
+	o.Model = &v
+}
+
+// GetModelActions returns the ModelActions field value if set, zero value otherwise.
+func (o *Agent) GetModelActions() []string {
+	if o == nil || IsNil(o.ModelActions) {
 		var ret []string
 		return ret
 	}
-	return o.ModelCapabilities
+	return o.ModelActions
 }
 
-// GetModelCapabilitiesOk returns a tuple with the ModelCapabilities field value if set, nil otherwise
+// GetModelActionsOk returns a tuple with the ModelActions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Agent) GetModelCapabilitiesOk() ([]string, bool) {
-	if o == nil || IsNil(o.ModelCapabilities) {
+func (o *Agent) GetModelActionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ModelActions) {
 		return nil, false
 	}
-	return o.ModelCapabilities, true
+	return o.ModelActions, true
 }
 
-// HasModelCapabilities returns a boolean if a field has been set.
-func (o *Agent) HasModelCapabilities() bool {
-	if o != nil && !IsNil(o.ModelCapabilities) {
+// HasModelActions returns a boolean if a field has been set.
+func (o *Agent) HasModelActions() bool {
+	if o != nil && !IsNil(o.ModelActions) {
 		return true
 	}
 
 	return false
 }
 
-// SetModelCapabilities gets a reference to the given []string and assigns it to the ModelCapabilities field.
-func (o *Agent) SetModelCapabilities(v []string) {
-	o.ModelCapabilities = v
-}
-
-// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
-func (o *Agent) GetModelCategory() string {
-	if o == nil || IsNil(o.ModelCategory) {
-		var ret string
-		return ret
-	}
-	return *o.ModelCategory
-}
-
-// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetModelCategoryOk() (*string, bool) {
-	if o == nil || IsNil(o.ModelCategory) {
-		return nil, false
-	}
-	return o.ModelCategory, true
-}
-
-// HasModelCategory returns a boolean if a field has been set.
-func (o *Agent) HasModelCategory() bool {
-	if o != nil && !IsNil(o.ModelCategory) {
-		return true
-	}
-
-	return false
-}
-
-// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
-func (o *Agent) SetModelCategory(v string) {
-	o.ModelCategory = &v
+// SetModelActions gets a reference to the given []string and assigns it to the ModelActions field.
+func (o *Agent) SetModelActions(v []string) {
+	o.ModelActions = v
 }
 
 // GetModelHostLocation returns the ModelHostLocation field value if set, zero value otherwise.
@@ -736,38 +638,6 @@ func (o *Agent) GetModelIdOk() (*string, bool) {
 // SetModelId sets field value
 func (o *Agent) SetModelId(v string) {
 	o.ModelId = v
-}
-
-// GetModelReleaseDate returns the ModelReleaseDate field value if set, zero value otherwise.
-func (o *Agent) GetModelReleaseDate() int64 {
-	if o == nil || IsNil(o.ModelReleaseDate) {
-		var ret int64
-		return ret
-	}
-	return *o.ModelReleaseDate
-}
-
-// GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetModelReleaseDateOk() (*int64, bool) {
-	if o == nil || IsNil(o.ModelReleaseDate) {
-		return nil, false
-	}
-	return o.ModelReleaseDate, true
-}
-
-// HasModelReleaseDate returns a boolean if a field has been set.
-func (o *Agent) HasModelReleaseDate() bool {
-	if o != nil && !IsNil(o.ModelReleaseDate) {
-		return true
-	}
-
-	return false
-}
-
-// SetModelReleaseDate gets a reference to the given int64 and assigns it to the ModelReleaseDate field.
-func (o *Agent) SetModelReleaseDate(v int64) {
-	o.ModelReleaseDate = &v
 }
 
 // GetName returns the Name field value
@@ -1140,12 +1010,6 @@ func (o Agent) MarshalJSON() ([]byte, error) {
 
 func (o Agent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Abilities) {
-		toSerialize["abilities"] = o.Abilities
-	}
-	if !IsNil(o.AbilitiesV2) {
-		toSerialize["abilities_v2"] = o.AbilitiesV2
-	}
 	if !IsNil(o.AddToolGuidelines) {
 		toSerialize["add_tool_guidelines"] = o.AddToolGuidelines
 	}
@@ -1183,25 +1047,19 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	if !IsNil(o.Lifecycle) {
-		toSerialize["lifecycle"] = o.Lifecycle
-	}
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
 	}
-	if !IsNil(o.ModelCapabilities) {
-		toSerialize["model_capabilities"] = o.ModelCapabilities
+	if !IsNil(o.Model) {
+		toSerialize["model"] = o.Model
 	}
-	if !IsNil(o.ModelCategory) {
-		toSerialize["model_category"] = o.ModelCategory
+	if !IsNil(o.ModelActions) {
+		toSerialize["model_actions"] = o.ModelActions
 	}
 	if !IsNil(o.ModelHostLocation) {
 		toSerialize["model_host_location"] = o.ModelHostLocation
 	}
 	toSerialize["model_id"] = o.ModelId
-	if !IsNil(o.ModelReleaseDate) {
-		toSerialize["model_release_date"] = o.ModelReleaseDate
-	}
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
@@ -1279,8 +1137,6 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "abilities")
-		delete(additionalProperties, "abilities_v2")
 		delete(additionalProperties, "add_tool_guidelines")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
@@ -1294,13 +1150,11 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "initial_user_messages")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
-		delete(additionalProperties, "lifecycle")
 		delete(additionalProperties, "meta_data")
-		delete(additionalProperties, "model_capabilities")
-		delete(additionalProperties, "model_category")
+		delete(additionalProperties, "model")
+		delete(additionalProperties, "model_actions")
 		delete(additionalProperties, "model_host_location")
 		delete(additionalProperties, "model_id")
-		delete(additionalProperties, "model_release_date")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

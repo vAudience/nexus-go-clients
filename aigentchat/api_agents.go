@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -1282,11 +1282,15 @@ type ApiListAgentsRequest struct {
 	ctx context.Context
 	ApiService *AgentsAPIService
 	orgId string
+	action *string
 	addDefaultAgents *bool
-	skipDefaultAgentsFilter *bool
-	ability *string
 	ignoreManageBasicAgentsAccess *bool
-	lifecycle *string
+}
+
+// Filter agents by model action
+func (r ApiListAgentsRequest) Action(action string) ApiListAgentsRequest {
+	r.action = &action
+	return r
 }
 
 // Include default agents to the list of org owned agents
@@ -1295,27 +1299,9 @@ func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents bool) ApiListAge
 	return r
 }
 
-// Skip the default agent filtering of the organization settings
-func (r ApiListAgentsRequest) SkipDefaultAgentsFilter(skipDefaultAgentsFilter bool) ApiListAgentsRequest {
-	r.skipDefaultAgentsFilter = &skipDefaultAgentsFilter
-	return r
-}
-
-// Filter agents by ability type
-func (r ApiListAgentsRequest) Ability(ability string) ApiListAgentsRequest {
-	r.ability = &ability
-	return r
-}
-
 // Ignore hasManageBasicAgentsAccess when listing agents
 func (r ApiListAgentsRequest) IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess bool) ApiListAgentsRequest {
 	r.ignoreManageBasicAgentsAccess = &ignoreManageBasicAgentsAccess
-	return r
-}
-
-// Filter agents by lifecycle status
-func (r ApiListAgentsRequest) Lifecycle(lifecycle string) ApiListAgentsRequest {
-	r.lifecycle = &lifecycle
 	return r
 }
 
@@ -1362,20 +1348,14 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.action != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
+	}
 	if r.addDefaultAgents != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "add_default_agents", r.addDefaultAgents, "", "")
 	}
-	if r.skipDefaultAgentsFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "skip_default_agents_filter", r.skipDefaultAgentsFilter, "", "")
-	}
-	if r.ability != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ability", r.ability, "", "")
-	}
 	if r.ignoreManageBasicAgentsAccess != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignore_manage_basic_agents_access", r.ignoreManageBasicAgentsAccess, "", "")
-	}
-	if r.lifecycle != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "lifecycle", r.lifecycle, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

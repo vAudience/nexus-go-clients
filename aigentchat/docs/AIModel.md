@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Abilities** | Pointer to [**[]Ability**](Ability.md) |  | [optional] 
-**AbilitiesV2** | Pointer to [**[]AbilityV2**](AbilityV2.md) |  | [optional] 
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
+**Actions** | **[]string** |  | 
+**Capabilities** | Pointer to **[]string** | Note: only set when returning the model (not stored at model level), derived from features | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **OwnerOrganizationId** | **string** |  | 
 **ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**ServiceHostLocations** | Pointer to [**[]HostingLocation**](HostingLocation.md) |  | [optional] 
+**ServiceHostLocations** | [**[]HostingLocation**](HostingLocation.md) |  | 
 **ServiceId** | **string** |  | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 
 ### NewAIModel
 
-`func NewAIModel(id string, modelId string, name string, ownerId string, ownerOrganizationId string, serviceId string, ) *AIModel`
+`func NewAIModel(actions []string, id string, modelId string, name string, ownerId string, ownerOrganizationId string, serviceHostLocations []HostingLocation, serviceId string, ) *AIModel`
 
 NewAIModel instantiates a new AIModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,56 +47,6 @@ will change when the set of required properties is changed
 NewAIModelWithDefaults instantiates a new AIModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAbilities
-
-`func (o *AIModel) GetAbilities() []Ability`
-
-GetAbilities returns the Abilities field if non-nil, zero value otherwise.
-
-### GetAbilitiesOk
-
-`func (o *AIModel) GetAbilitiesOk() (*[]Ability, bool)`
-
-GetAbilitiesOk returns a tuple with the Abilities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAbilities
-
-`func (o *AIModel) SetAbilities(v []Ability)`
-
-SetAbilities sets Abilities field to given value.
-
-### HasAbilities
-
-`func (o *AIModel) HasAbilities() bool`
-
-HasAbilities returns a boolean if a field has been set.
-
-### GetAbilitiesV2
-
-`func (o *AIModel) GetAbilitiesV2() []AbilityV2`
-
-GetAbilitiesV2 returns the AbilitiesV2 field if non-nil, zero value otherwise.
-
-### GetAbilitiesV2Ok
-
-`func (o *AIModel) GetAbilitiesV2Ok() (*[]AbilityV2, bool)`
-
-GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAbilitiesV2
-
-`func (o *AIModel) SetAbilitiesV2(v []AbilityV2)`
-
-SetAbilitiesV2 sets AbilitiesV2 field to given value.
-
-### HasAbilitiesV2
-
-`func (o *AIModel) HasAbilitiesV2() bool`
-
-HasAbilitiesV2 returns a boolean if a field has been set.
 
 ### GetAcceptedFileMimetypes
 
@@ -122,6 +72,51 @@ SetAcceptedFileMimetypes sets AcceptedFileMimetypes field to given value.
 `func (o *AIModel) HasAcceptedFileMimetypes() bool`
 
 HasAcceptedFileMimetypes returns a boolean if a field has been set.
+
+### GetActions
+
+`func (o *AIModel) GetActions() []string`
+
+GetActions returns the Actions field if non-nil, zero value otherwise.
+
+### GetActionsOk
+
+`func (o *AIModel) GetActionsOk() (*[]string, bool)`
+
+GetActionsOk returns a tuple with the Actions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActions
+
+`func (o *AIModel) SetActions(v []string)`
+
+SetActions sets Actions field to given value.
+
+
+### GetCapabilities
+
+`func (o *AIModel) GetCapabilities() []string`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *AIModel) GetCapabilitiesOk() (*[]string, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *AIModel) SetCapabilities(v []string)`
+
+SetCapabilities sets Capabilities field to given value.
+
+### HasCapabilities
+
+`func (o *AIModel) HasCapabilities() bool`
+
+HasCapabilities returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -542,11 +537,6 @@ and a boolean to check if the value has been set.
 
 SetServiceHostLocations sets ServiceHostLocations field to given value.
 
-### HasServiceHostLocations
-
-`func (o *AIModel) HasServiceHostLocations() bool`
-
-HasServiceHostLocations returns a boolean if a field has been set.
 
 ### GetServiceId
 

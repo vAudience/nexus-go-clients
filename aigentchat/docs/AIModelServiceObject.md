@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiServiceId** | **string** |  | 
-**CostMultiplier** | Pointer to **float32** |  | [optional] 
+**CostMultiplier** | **float32** |  | 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated: use ai_service_id instead | 
+**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated fields | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAIModelServiceObject
 
-`func NewAIModelServiceObject(aiServiceId string, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
+`func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
 
 NewAIModelServiceObject instantiates a new AIModelServiceObject object
 This constructor will assign default values to properties that have it defined,
@@ -78,11 +78,6 @@ and a boolean to check if the value has been set.
 
 SetCostMultiplier sets CostMultiplier field to given value.
 
-### HasCostMultiplier
-
-`func (o *AIModelServiceObject) HasCostMultiplier() bool`
-
-HasCostMultiplier returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

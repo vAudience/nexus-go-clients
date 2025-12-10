@@ -40,7 +40,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	service := *openapiclient.NewAIModelServiceWriteDto("AiServiceId_example", "Name_example", openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
+	service := *openapiclient.NewAIModelServiceWriteDto(openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -734,7 +734,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | AI Model Service ID
-	service := *openapiclient.NewAIModelServiceWriteDto("AiServiceId_example", "Name_example", openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
+	service := *openapiclient.NewAIModelServiceWriteDto(openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

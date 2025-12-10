@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Abilities** | Pointer to [**[]Ability**](Ability.md) |  | [optional] 
-**AbilitiesV2** | Pointer to [**[]AbilityV2**](AbilityV2.md) |  | [optional] 
 **AddToolGuidelines** | Pointer to **bool** |  | [optional] 
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
@@ -19,18 +17,16 @@ Name | Type | Description | Notes
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**Lifecycle** | Pointer to **string** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
-**ModelCapabilities** | Pointer to **[]string** |  | [optional] 
-**ModelCategory** | Pointer to **string** |  | [optional] 
+**Model** | Pointer to [**AIModel**](AIModel.md) | Note: only set when returning the agent (not stored at agent level) | [optional] 
+**ModelActions** | Pointer to **[]string** |  | [optional] 
 **ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **ModelId** | **string** |  | 
-**ModelReleaseDate** | Pointer to **int64** |  | [optional] 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**RecommendedTask** | Pointer to **string** |  | [optional] 
+**RecommendedTask** | Pointer to **string** | TODO: will be replaced by tags | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
 **ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -57,56 +53,6 @@ will change when the set of required properties is changed
 NewAgentWithDefaults instantiates a new Agent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAbilities
-
-`func (o *Agent) GetAbilities() []Ability`
-
-GetAbilities returns the Abilities field if non-nil, zero value otherwise.
-
-### GetAbilitiesOk
-
-`func (o *Agent) GetAbilitiesOk() (*[]Ability, bool)`
-
-GetAbilitiesOk returns a tuple with the Abilities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAbilities
-
-`func (o *Agent) SetAbilities(v []Ability)`
-
-SetAbilities sets Abilities field to given value.
-
-### HasAbilities
-
-`func (o *Agent) HasAbilities() bool`
-
-HasAbilities returns a boolean if a field has been set.
-
-### GetAbilitiesV2
-
-`func (o *Agent) GetAbilitiesV2() []AbilityV2`
-
-GetAbilitiesV2 returns the AbilitiesV2 field if non-nil, zero value otherwise.
-
-### GetAbilitiesV2Ok
-
-`func (o *Agent) GetAbilitiesV2Ok() (*[]AbilityV2, bool)`
-
-GetAbilitiesV2Ok returns a tuple with the AbilitiesV2 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAbilitiesV2
-
-`func (o *Agent) SetAbilitiesV2(v []AbilityV2)`
-
-SetAbilitiesV2 sets AbilitiesV2 field to given value.
-
-### HasAbilitiesV2
-
-`func (o *Agent) HasAbilitiesV2() bool`
-
-HasAbilitiesV2 returns a boolean if a field has been set.
 
 ### GetAddToolGuidelines
 
@@ -428,31 +374,6 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
-### GetLifecycle
-
-`func (o *Agent) GetLifecycle() string`
-
-GetLifecycle returns the Lifecycle field if non-nil, zero value otherwise.
-
-### GetLifecycleOk
-
-`func (o *Agent) GetLifecycleOk() (*string, bool)`
-
-GetLifecycleOk returns a tuple with the Lifecycle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLifecycle
-
-`func (o *Agent) SetLifecycle(v string)`
-
-SetLifecycle sets Lifecycle field to given value.
-
-### HasLifecycle
-
-`func (o *Agent) HasLifecycle() bool`
-
-HasLifecycle returns a boolean if a field has been set.
-
 ### GetMetaData
 
 `func (o *Agent) GetMetaData() map[string]interface{}`
@@ -478,55 +399,55 @@ SetMetaData sets MetaData field to given value.
 
 HasMetaData returns a boolean if a field has been set.
 
-### GetModelCapabilities
+### GetModel
 
-`func (o *Agent) GetModelCapabilities() []string`
+`func (o *Agent) GetModel() AIModel`
 
-GetModelCapabilities returns the ModelCapabilities field if non-nil, zero value otherwise.
+GetModel returns the Model field if non-nil, zero value otherwise.
 
-### GetModelCapabilitiesOk
+### GetModelOk
 
-`func (o *Agent) GetModelCapabilitiesOk() (*[]string, bool)`
+`func (o *Agent) GetModelOk() (*AIModel, bool)`
 
-GetModelCapabilitiesOk returns a tuple with the ModelCapabilities field if it's non-nil, zero value otherwise
+GetModelOk returns a tuple with the Model field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModelCapabilities
+### SetModel
 
-`func (o *Agent) SetModelCapabilities(v []string)`
+`func (o *Agent) SetModel(v AIModel)`
 
-SetModelCapabilities sets ModelCapabilities field to given value.
+SetModel sets Model field to given value.
 
-### HasModelCapabilities
+### HasModel
 
-`func (o *Agent) HasModelCapabilities() bool`
+`func (o *Agent) HasModel() bool`
 
-HasModelCapabilities returns a boolean if a field has been set.
+HasModel returns a boolean if a field has been set.
 
-### GetModelCategory
+### GetModelActions
 
-`func (o *Agent) GetModelCategory() string`
+`func (o *Agent) GetModelActions() []string`
 
-GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
+GetModelActions returns the ModelActions field if non-nil, zero value otherwise.
 
-### GetModelCategoryOk
+### GetModelActionsOk
 
-`func (o *Agent) GetModelCategoryOk() (*string, bool)`
+`func (o *Agent) GetModelActionsOk() (*[]string, bool)`
 
-GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
+GetModelActionsOk returns a tuple with the ModelActions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModelCategory
+### SetModelActions
 
-`func (o *Agent) SetModelCategory(v string)`
+`func (o *Agent) SetModelActions(v []string)`
 
-SetModelCategory sets ModelCategory field to given value.
+SetModelActions sets ModelActions field to given value.
 
-### HasModelCategory
+### HasModelActions
 
-`func (o *Agent) HasModelCategory() bool`
+`func (o *Agent) HasModelActions() bool`
 
-HasModelCategory returns a boolean if a field has been set.
+HasModelActions returns a boolean if a field has been set.
 
 ### GetModelHostLocation
 
@@ -572,31 +493,6 @@ and a boolean to check if the value has been set.
 
 SetModelId sets ModelId field to given value.
 
-
-### GetModelReleaseDate
-
-`func (o *Agent) GetModelReleaseDate() int64`
-
-GetModelReleaseDate returns the ModelReleaseDate field if non-nil, zero value otherwise.
-
-### GetModelReleaseDateOk
-
-`func (o *Agent) GetModelReleaseDateOk() (*int64, bool)`
-
-GetModelReleaseDateOk returns a tuple with the ModelReleaseDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelReleaseDate
-
-`func (o *Agent) SetModelReleaseDate(v int64)`
-
-SetModelReleaseDate sets ModelReleaseDate field to given value.
-
-### HasModelReleaseDate
-
-`func (o *Agent) HasModelReleaseDate() bool`
-
-HasModelReleaseDate returns a boolean if a field has been set.
 
 ### GetName
 

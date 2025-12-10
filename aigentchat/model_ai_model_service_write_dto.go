@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,15 +21,15 @@ var _ MappedNullable = &AIModelServiceWriteDto{}
 
 // AIModelServiceWriteDto struct for AIModelServiceWriteDto
 type AIModelServiceWriteDto struct {
-	AiServiceId string `json:"ai_service_id"`
+	AiServiceId *string `json:"ai_service_id,omitempty"`
 	CostMultiplier *float64 `json:"cost_multiplier,omitempty"`
 	Description *string `json:"description,omitempty"`
 	HostingLocations *map[string]HostingLocation `json:"hosting_locations,omitempty"`
 	I18n *map[string]AIModelServiceI18n `json:"i18n,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
-	Name string `json:"name"`
-	// Deprecated: use ai_service_id instead
+	Name *string `json:"name,omitempty"`
+	// Deprecated fields
 	ServiceImpl AiServiceId `json:"service_impl"`
 	AdditionalProperties map[string]interface{}
 }
@@ -40,10 +40,8 @@ type _AIModelServiceWriteDto AIModelServiceWriteDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceWriteDto(aiServiceId string, name string, serviceImpl AiServiceId) *AIModelServiceWriteDto {
+func NewAIModelServiceWriteDto(serviceImpl AiServiceId) *AIModelServiceWriteDto {
 	this := AIModelServiceWriteDto{}
-	this.AiServiceId = aiServiceId
-	this.Name = name
 	this.ServiceImpl = serviceImpl
 	return &this
 }
@@ -56,28 +54,36 @@ func NewAIModelServiceWriteDtoWithDefaults() *AIModelServiceWriteDto {
 	return &this
 }
 
-// GetAiServiceId returns the AiServiceId field value
+// GetAiServiceId returns the AiServiceId field value if set, zero value otherwise.
 func (o *AIModelServiceWriteDto) GetAiServiceId() string {
-	if o == nil {
+	if o == nil || IsNil(o.AiServiceId) {
 		var ret string
 		return ret
 	}
-
-	return o.AiServiceId
+	return *o.AiServiceId
 }
 
-// GetAiServiceIdOk returns a tuple with the AiServiceId field value
+// GetAiServiceIdOk returns a tuple with the AiServiceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AIModelServiceWriteDto) GetAiServiceIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AiServiceId) {
 		return nil, false
 	}
-	return &o.AiServiceId, true
+	return o.AiServiceId, true
 }
 
-// SetAiServiceId sets field value
+// HasAiServiceId returns a boolean if a field has been set.
+func (o *AIModelServiceWriteDto) HasAiServiceId() bool {
+	if o != nil && !IsNil(o.AiServiceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiServiceId gets a reference to the given string and assigns it to the AiServiceId field.
 func (o *AIModelServiceWriteDto) SetAiServiceId(v string) {
-	o.AiServiceId = v
+	o.AiServiceId = &v
 }
 
 // GetCostMultiplier returns the CostMultiplier field value if set, zero value otherwise.
@@ -272,28 +278,36 @@ func (o *AIModelServiceWriteDto) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *AIModelServiceWriteDto) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AIModelServiceWriteDto) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *AIModelServiceWriteDto) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *AIModelServiceWriteDto) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetServiceImpl returns the ServiceImpl field value
@@ -330,7 +344,9 @@ func (o AIModelServiceWriteDto) MarshalJSON() ([]byte, error) {
 
 func (o AIModelServiceWriteDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["ai_service_id"] = o.AiServiceId
+	if !IsNil(o.AiServiceId) {
+		toSerialize["ai_service_id"] = o.AiServiceId
+	}
 	if !IsNil(o.CostMultiplier) {
 		toSerialize["cost_multiplier"] = o.CostMultiplier
 	}
@@ -349,7 +365,9 @@ func (o AIModelServiceWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["service_impl"] = o.ServiceImpl
 
 	for key, value := range o.AdditionalProperties {
@@ -364,8 +382,6 @@ func (o *AIModelServiceWriteDto) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"ai_service_id",
-		"name",
 		"service_impl",
 	}
 

@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Lifecycle(lifecycle).Execute()
+> []Agent ListAgents(ctx, orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Execute()
 
 List agents
 
@@ -563,15 +563,13 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
+	action := "action_example" // string | Filter agents by model action (optional)
 	addDefaultAgents := true // bool | Include default agents to the list of org owned agents (optional)
-	skipDefaultAgentsFilter := true // bool | Skip the default agent filtering of the organization settings (optional)
-	ability := "ability_example" // string | Filter agents by ability type (optional)
 	ignoreManageBasicAgentsAccess := true // bool | Ignore hasManageBasicAgentsAccess when listing agents (optional)
-	lifecycle := "lifecycle_example" // string | Filter agents by lifecycle status (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).AddDefaultAgents(addDefaultAgents).SkipDefaultAgentsFilter(skipDefaultAgentsFilter).Ability(ability).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Lifecycle(lifecycle).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -597,11 +595,9 @@ Other parameters are passed through a pointer to a apiListAgentsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **action** | **string** | Filter agents by model action | 
  **addDefaultAgents** | **bool** | Include default agents to the list of org owned agents | 
- **skipDefaultAgentsFilter** | **bool** | Skip the default agent filtering of the organization settings | 
- **ability** | **string** | Filter agents by ability type | 
  **ignoreManageBasicAgentsAccess** | **bool** | Ignore hasManageBasicAgentsAccess when listing agents | 
- **lifecycle** | **string** | Filter agents by lifecycle status | 
 
 ### Return type
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.22.9
+API version: 0.23.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &AIModelServiceObject{}
 // AIModelServiceObject struct for AIModelServiceObject
 type AIModelServiceObject struct {
 	AiServiceId string `json:"ai_service_id"`
-	CostMultiplier *float32 `json:"cost_multiplier,omitempty"`
+	CostMultiplier float32 `json:"cost_multiplier"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	HostingLocations *map[string]HostingLocation `json:"hosting_locations,omitempty"`
@@ -33,7 +33,7 @@ type AIModelServiceObject struct {
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	// Deprecated: use ai_service_id instead
+	// Deprecated fields
 	ServiceImpl AiServiceId `json:"service_impl"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
@@ -46,9 +46,10 @@ type _AIModelServiceObject AIModelServiceObject
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceObject(aiServiceId string, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
+func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
 	this := AIModelServiceObject{}
 	this.AiServiceId = aiServiceId
+	this.CostMultiplier = costMultiplier
 	this.Id = id
 	this.Name = name
 	this.OwnerId = ownerId
@@ -89,36 +90,28 @@ func (o *AIModelServiceObject) SetAiServiceId(v string) {
 	o.AiServiceId = v
 }
 
-// GetCostMultiplier returns the CostMultiplier field value if set, zero value otherwise.
+// GetCostMultiplier returns the CostMultiplier field value
 func (o *AIModelServiceObject) GetCostMultiplier() float32 {
-	if o == nil || IsNil(o.CostMultiplier) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.CostMultiplier
+
+	return o.CostMultiplier
 }
 
-// GetCostMultiplierOk returns a tuple with the CostMultiplier field value if set, nil otherwise
+// GetCostMultiplierOk returns a tuple with the CostMultiplier field value
 // and a boolean to check if the value has been set.
 func (o *AIModelServiceObject) GetCostMultiplierOk() (*float32, bool) {
-	if o == nil || IsNil(o.CostMultiplier) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CostMultiplier, true
+	return &o.CostMultiplier, true
 }
 
-// HasCostMultiplier returns a boolean if a field has been set.
-func (o *AIModelServiceObject) HasCostMultiplier() bool {
-	if o != nil && !IsNil(o.CostMultiplier) {
-		return true
-	}
-
-	return false
-}
-
-// SetCostMultiplier gets a reference to the given float32 and assigns it to the CostMultiplier field.
+// SetCostMultiplier sets field value
 func (o *AIModelServiceObject) SetCostMultiplier(v float32) {
-	o.CostMultiplier = &v
+	o.CostMultiplier = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -508,9 +501,7 @@ func (o AIModelServiceObject) MarshalJSON() ([]byte, error) {
 func (o AIModelServiceObject) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_service_id"] = o.AiServiceId
-	if !IsNil(o.CostMultiplier) {
-		toSerialize["cost_multiplier"] = o.CostMultiplier
-	}
+	toSerialize["cost_multiplier"] = o.CostMultiplier
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -554,6 +545,7 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"ai_service_id",
+		"cost_multiplier",
 		"id",
 		"name",
 		"owner_id",
