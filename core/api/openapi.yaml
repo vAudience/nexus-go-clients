@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.4.0
+  version: 0.4.2
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -2257,6 +2257,67 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: settings
+  /v1/organizations/{id}/settings/reset:
+    patch:
+      description: Reset settings for an Organization to default values
+      operationId: ResetOrganizationSettings
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrganizationSettingsResetRequest"
+        description: "fields to reset, if empty all fields will be reset"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrganizationSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Reset settings for an Organization to default values
+      tags:
+      - Organizations
+      x-codegen-request-body-name: fields
   /v1/organizations/{id}/subscription:
     delete:
       description: Delete a subscription for an Organization
@@ -3146,8 +3207,8 @@ paths:
       - Organizations
   /v1/organizations/{id}/vaud-credits-payments:
     post:
-      description: Create a credits payment for an vaud enterprise Organization
-      operationId: CreateVaudEnterpriseCreditsPayment
+      description: Create a vaud credits payment for an organization with active subscription
+      operationId: CreateVaudCreditsPayment
       parameters:
       - description: id of the organization
         in: path
@@ -3198,7 +3259,7 @@ paths:
           description: Server or Database Internal Error
       security:
       - ApiKey: []
-      summary: Create a credits payment for an vaud enterprise Organization
+      summary: Create a vaud credits payment for an organization with active subscription
       tags:
       - Organizations
       x-codegen-request-body-name: organizationCreditsPayment
@@ -4680,13 +4741,10 @@ components:
         chatDefaultAgentId: chatDefaultAgentId
       properties:
         chatDefaultAgentId:
-          minLength: 1
           type: string
         embeddingDefaultAgentId:
-          minLength: 1
           type: string
         imageDefaultAgentId:
-          minLength: 1
           type: string
       type: object
     OrganizationMemberSettingsResponse:
@@ -4915,6 +4973,17 @@ components:
           minLength: 1
           type: string
         toolsAllowedHostingLocations:
+          items:
+            type: string
+          type: array
+      type: object
+    OrganizationSettingsResetRequest:
+      example:
+        fields:
+        - fields
+        - fields
+      properties:
+        fields:
           items:
             type: string
           type: array

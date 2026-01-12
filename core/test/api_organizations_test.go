@@ -134,13 +134,13 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test OrganizationsAPIService CreateVaudEnterpriseCreditsPayment", func(t *testing.T) {
+	t.Run("Test OrganizationsAPIService CreateVaudCreditsPayment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		httpRes, err := apiClient.OrganizationsAPI.CreateVaudEnterpriseCreditsPayment(context.Background(), id).Execute()
+		httpRes, err := apiClient.OrganizationsAPI.CreateVaudCreditsPayment(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -751,6 +751,20 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 		var inviteId string
 
 		resp, httpRes, err := apiClient.OrganizationsAPI.ResendInvite(context.Background(), id, inviteId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test OrganizationsAPIService ResetOrganizationSettings", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.ResetOrganizationSettings(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

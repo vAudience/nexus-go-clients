@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**CreateSubscription**](OrganizationsAPI.md#CreateSubscription) | **Post** /v1/organizations/{id}/subscription | Create a subscription for an Organization
 [**CreateTeam**](OrganizationsAPI.md#CreateTeam) | **Post** /v1/organizations/{id}/teams | Create a team for an Organization
 [**CreateTeamMember**](OrganizationsAPI.md#CreateTeamMember) | **Post** /v1/organizations/{id}/teams/{teamId}/members | Add a member to a team
-[**CreateVaudEnterpriseCreditsPayment**](OrganizationsAPI.md#CreateVaudEnterpriseCreditsPayment) | **Post** /v1/organizations/{id}/vaud-credits-payments | Create a credits payment for an vaud enterprise Organization
+[**CreateVaudCreditsPayment**](OrganizationsAPI.md#CreateVaudCreditsPayment) | **Post** /v1/organizations/{id}/vaud-credits-payments | Create a vaud credits payment for an organization with active subscription
 [**DeleteInvite**](OrganizationsAPI.md#DeleteInvite) | **Delete** /v1/organizations/{id}/invites/{inviteId} | Delete Organization Invite by ID
 [**DeleteMember**](OrganizationsAPI.md#DeleteMember) | **Delete** /v1/organizations/{id}/members/{memberId} | Delete a member for an Organization
 [**DeleteOrganization**](OrganizationsAPI.md#DeleteOrganization) | **Delete** /v1/organizations/{id} | Delete Organization by ID
@@ -56,6 +56,7 @@ Method | HTTP request | Description
 [**PatchTeam**](OrganizationsAPI.md#PatchTeam) | **Patch** /v1/organizations/{id}/teams/{teamId} | Patch a team for an Organization
 [**ReactivateSubscription**](OrganizationsAPI.md#ReactivateSubscription) | **Patch** /v1/organizations/{id}/subscription/reactivate | Reactivate a subscription for an Organization
 [**ResendInvite**](OrganizationsAPI.md#ResendInvite) | **Post** /v1/organizations/{id}/invites/{inviteId}/resend | Resend Organization Invite by ID
+[**ResetOrganizationSettings**](OrganizationsAPI.md#ResetOrganizationSettings) | **Patch** /v1/organizations/{id}/settings/reset | Reset settings for an Organization to default values
 [**UpdateSubscription**](OrganizationsAPI.md#UpdateSubscription) | **Patch** /v1/organizations/{id}/subscription | Update a subscription for an Organization
 
 
@@ -636,11 +637,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateVaudEnterpriseCreditsPayment
+## CreateVaudCreditsPayment
 
-> CreateVaudEnterpriseCreditsPayment(ctx, id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
+> CreateVaudCreditsPayment(ctx, id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
 
-Create a credits payment for an vaud enterprise Organization
+Create a vaud credits payment for an organization with active subscription
 
 
 
@@ -662,9 +663,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.OrganizationsAPI.CreateVaudEnterpriseCreditsPayment(context.Background(), id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
+	r, err := apiClient.OrganizationsAPI.CreateVaudCreditsPayment(context.Background(), id).OrganizationCreditsPayment(organizationCreditsPayment).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.CreateVaudEnterpriseCreditsPayment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.CreateVaudCreditsPayment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -680,7 +681,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateVaudEnterpriseCreditsPaymentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateVaudCreditsPaymentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3782,6 +3783,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResetOrganizationSettings
+
+> OrganizationSettingsResponse ResetOrganizationSettings(ctx, id).Fields(fields).Execute()
+
+Reset settings for an Organization to default values
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+	fields := *openapiclient.NewOrganizationSettingsResetRequest() // OrganizationSettingsResetRequest | fields to reset, if empty all fields will be reset
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.ResetOrganizationSettings(context.Background(), id).Fields(fields).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.ResetOrganizationSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResetOrganizationSettings`: OrganizationSettingsResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.ResetOrganizationSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResetOrganizationSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fields** | [**OrganizationSettingsResetRequest**](OrganizationSettingsResetRequest.md) | fields to reset, if empty all fields will be reset | 
+
+### Return type
+
+[**OrganizationSettingsResponse**](OrganizationSettingsResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -49,6 +49,7 @@ docs/OrganizationResultsResponse.md
 docs/OrganizationRoleReducedResponse.md
 docs/OrganizationRoleResponse.md
 docs/OrganizationSettingsPatchRequest.md
+docs/OrganizationSettingsResetRequest.md
 docs/OrganizationSettingsResponse.md
 docs/OrganizationSubscriptionPatchRequest.md
 docs/OrganizationSubscriptionPostRequest.md
@@ -111,6 +112,7 @@ model_organization_results_response.go
 model_organization_role_reduced_response.go
 model_organization_role_response.go
 model_organization_settings_patch_request.go
+model_organization_settings_reset_request.go
 model_organization_settings_response.go
 model_organization_subscription_patch_request.go
 model_organization_subscription_post_request.go
