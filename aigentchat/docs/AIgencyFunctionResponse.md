@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ContinuationInstructions** | Pointer to [**ToolContinuationInstructions**](ToolContinuationInstructions.md) |  | [optional] 
 **FunctionName** | **string** |  | 
 **Id** | **string** |  | 
 **IsError** | Pointer to **bool** |  | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewAIgencyFunctionResponseWithDefaults instantiates a new AIgencyFunctionResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetContinuationInstructions
+
+`func (o *AIgencyFunctionResponse) GetContinuationInstructions() ToolContinuationInstructions`
+
+GetContinuationInstructions returns the ContinuationInstructions field if non-nil, zero value otherwise.
+
+### GetContinuationInstructionsOk
+
+`func (o *AIgencyFunctionResponse) GetContinuationInstructionsOk() (*ToolContinuationInstructions, bool)`
+
+GetContinuationInstructionsOk returns a tuple with the ContinuationInstructions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContinuationInstructions
+
+`func (o *AIgencyFunctionResponse) SetContinuationInstructions(v ToolContinuationInstructions)`
+
+SetContinuationInstructions sets ContinuationInstructions field to given value.
+
+### HasContinuationInstructions
+
+`func (o *AIgencyFunctionResponse) HasContinuationInstructions() bool`
+
+HasContinuationInstructions returns a boolean if a field has been set.
 
 ### GetFunctionName
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
+**ContinuationInstructions** | Pointer to [**ToolContinuationInstructions**](ToolContinuationInstructions.md) |  | [optional] 
 **CreatedAt** | **int64** |  | 
 **CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) | Deprecated, use feature_usage | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
@@ -170,6 +171,31 @@ and a boolean to check if the value has been set.
 
 SetContent sets Content field to given value.
 
+
+### GetContinuationInstructions
+
+`func (o *AIgencyMessage) GetContinuationInstructions() ToolContinuationInstructions`
+
+GetContinuationInstructions returns the ContinuationInstructions field if non-nil, zero value otherwise.
+
+### GetContinuationInstructionsOk
+
+`func (o *AIgencyMessage) GetContinuationInstructionsOk() (*ToolContinuationInstructions, bool)`
+
+GetContinuationInstructionsOk returns a tuple with the ContinuationInstructions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContinuationInstructions
+
+`func (o *AIgencyMessage) SetContinuationInstructions(v ToolContinuationInstructions)`
+
+SetContinuationInstructions sets ContinuationInstructions field to given value.
+
+### HasContinuationInstructions
+
+`func (o *AIgencyMessage) HasContinuationInstructions() bool`
+
+HasContinuationInstructions returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

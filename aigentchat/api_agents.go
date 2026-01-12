@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.0
+API version: 0.23.2
 Contact: contact@vaudience.ai
 */
 
@@ -1285,6 +1285,7 @@ type ApiListAgentsRequest struct {
 	action *string
 	addDefaultAgents *bool
 	ignoreManageBasicAgentsAccess *bool
+	visibility *string
 }
 
 // Filter agents by model action
@@ -1302,6 +1303,12 @@ func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents bool) ApiListAge
 // Ignore hasManageBasicAgentsAccess when listing agents
 func (r ApiListAgentsRequest) IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess bool) ApiListAgentsRequest {
 	r.ignoreManageBasicAgentsAccess = &ignoreManageBasicAgentsAccess
+	return r
+}
+
+// Filter agents by access visibility
+func (r ApiListAgentsRequest) Visibility(visibility string) ApiListAgentsRequest {
+	r.visibility = &visibility
 	return r
 }
 
@@ -1356,6 +1363,9 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 	}
 	if r.ignoreManageBasicAgentsAccess != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignore_manage_basic_agents_access", r.ignoreManageBasicAgentsAccess, "", "")
+	}
+	if r.visibility != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "visibility", r.visibility, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

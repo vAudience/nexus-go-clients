@@ -134,6 +134,7 @@ docs/TextEmbeddingItemDto.md
 docs/TextEmbeddingRequestDto.md
 docs/TokenDirection.md
 docs/Tool.md
+docs/ToolContinuationInstructions.md
 docs/ToolFunction.md
 docs/ToolI18n.md
 docs/ToolsAPI.md
@@ -234,6 +235,7 @@ model_text_embedding_item_dto.go
 model_text_embedding_request_dto.go
 model_token_direction.go
 model_tool.go
+model_tool_continuation_instructions.go
 model_tool_function.go
 model_tool_i18n.go
 model_version_response.go

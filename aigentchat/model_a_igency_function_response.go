@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.0
+API version: 0.23.2
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &AIgencyFunctionResponse{}
 
 // AIgencyFunctionResponse struct for AIgencyFunctionResponse
 type AIgencyFunctionResponse struct {
+	ContinuationInstructions *ToolContinuationInstructions `json:"continuation_instructions,omitempty"`
 	FunctionName string `json:"function_name"`
 	Id string `json:"id"`
 	IsError *bool `json:"is_error,omitempty"`
@@ -51,6 +52,38 @@ func NewAIgencyFunctionResponse(functionName string, id string, result string) *
 func NewAIgencyFunctionResponseWithDefaults() *AIgencyFunctionResponse {
 	this := AIgencyFunctionResponse{}
 	return &this
+}
+
+// GetContinuationInstructions returns the ContinuationInstructions field value if set, zero value otherwise.
+func (o *AIgencyFunctionResponse) GetContinuationInstructions() ToolContinuationInstructions {
+	if o == nil || IsNil(o.ContinuationInstructions) {
+		var ret ToolContinuationInstructions
+		return ret
+	}
+	return *o.ContinuationInstructions
+}
+
+// GetContinuationInstructionsOk returns a tuple with the ContinuationInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyFunctionResponse) GetContinuationInstructionsOk() (*ToolContinuationInstructions, bool) {
+	if o == nil || IsNil(o.ContinuationInstructions) {
+		return nil, false
+	}
+	return o.ContinuationInstructions, true
+}
+
+// HasContinuationInstructions returns a boolean if a field has been set.
+func (o *AIgencyFunctionResponse) HasContinuationInstructions() bool {
+	if o != nil && !IsNil(o.ContinuationInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetContinuationInstructions gets a reference to the given ToolContinuationInstructions and assigns it to the ContinuationInstructions field.
+func (o *AIgencyFunctionResponse) SetContinuationInstructions(v ToolContinuationInstructions) {
+	o.ContinuationInstructions = &v
 }
 
 // GetFunctionName returns the FunctionName field value
@@ -263,6 +296,9 @@ func (o AIgencyFunctionResponse) MarshalJSON() ([]byte, error) {
 
 func (o AIgencyFunctionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ContinuationInstructions) {
+		toSerialize["continuation_instructions"] = o.ContinuationInstructions
+	}
 	toSerialize["function_name"] = o.FunctionName
 	toSerialize["id"] = o.Id
 	if !IsNil(o.IsError) {
@@ -323,6 +359,7 @@ func (o *AIgencyFunctionResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "continuation_instructions")
 		delete(additionalProperties, "function_name")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "is_error")

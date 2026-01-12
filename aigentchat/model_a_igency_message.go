@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.0
+API version: 0.23.2
 Contact: contact@vaudience.ai
 */
 
@@ -28,6 +28,7 @@ type AIgencyMessage struct {
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
 	Content AIgencyMessageContentList `json:"content"`
+	ContinuationInstructions *ToolContinuationInstructions `json:"continuation_instructions,omitempty"`
 	CreatedAt int64 `json:"created_at"`
 	// Deprecated, use feature_usage
 	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
@@ -229,6 +230,38 @@ func (o *AIgencyMessage) GetContentOk() (*AIgencyMessageContentList, bool) {
 // SetContent sets field value
 func (o *AIgencyMessage) SetContent(v AIgencyMessageContentList) {
 	o.Content = v
+}
+
+// GetContinuationInstructions returns the ContinuationInstructions field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetContinuationInstructions() ToolContinuationInstructions {
+	if o == nil || IsNil(o.ContinuationInstructions) {
+		var ret ToolContinuationInstructions
+		return ret
+	}
+	return *o.ContinuationInstructions
+}
+
+// GetContinuationInstructionsOk returns a tuple with the ContinuationInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetContinuationInstructionsOk() (*ToolContinuationInstructions, bool) {
+	if o == nil || IsNil(o.ContinuationInstructions) {
+		return nil, false
+	}
+	return o.ContinuationInstructions, true
+}
+
+// HasContinuationInstructions returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasContinuationInstructions() bool {
+	if o != nil && !IsNil(o.ContinuationInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetContinuationInstructions gets a reference to the given ToolContinuationInstructions and assigns it to the ContinuationInstructions field.
+func (o *AIgencyMessage) SetContinuationInstructions(v ToolContinuationInstructions) {
+	o.ContinuationInstructions = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -847,6 +880,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["channel_name"] = o.ChannelName
 	toSerialize["content"] = o.Content
+	if !IsNil(o.ContinuationInstructions) {
+		toSerialize["continuation_instructions"] = o.ContinuationInstructions
+	}
 	toSerialize["created_at"] = o.CreatedAt
 	if !IsNil(o.CreatedForFeature) {
 		toSerialize["created_for_feature"] = o.CreatedForFeature
@@ -955,6 +991,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")
 		delete(additionalProperties, "content")
+		delete(additionalProperties, "continuation_instructions")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "created_for_feature")
 		delete(additionalProperties, "error")

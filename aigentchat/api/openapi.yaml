@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.23.0
+  version: 0.23.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -390,6 +390,13 @@ paths:
         name: ignore_manage_basic_agents_access
         schema:
           type: boolean
+      - description: Filter agents by access visibility
+        in: query
+        name: visibility
+        schema:
+          enum:
+          - organization
+          type: string
       responses:
         "200":
           content:
@@ -5852,6 +5859,10 @@ components:
     AIgencyFunctionResponse:
       example:
         result: result
+        continuation_instructions:
+          continuation_id: continuation_id
+          human_input_prompt: human_input_prompt
+          continuation_function_call: continuation_function_call
         result_files:
         - llm_input_type: llm_input_type
           upload_category: upload_category
@@ -5877,6 +5888,8 @@ components:
         result_meta_data: "{}"
         tool_function_id: tool_function_id
       properties:
+        continuation_instructions:
+          $ref: "#/components/schemas/ToolContinuationInstructions"
         function_name:
           maxLength: 64
           minLength: 1
@@ -6069,6 +6082,10 @@ components:
       type: object
     AIgencyMessage:
       example:
+        continuation_instructions:
+          continuation_id: continuation_id
+          human_input_prompt: human_input_prompt
+          continuation_function_call: continuation_function_call
         attachments: "{}"
         reference_id: reference_id
         feature_usage:
@@ -6129,6 +6146,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -6183,6 +6204,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -6262,6 +6287,8 @@ components:
           type: string
         content:
           $ref: "#/components/schemas/AIgencyMessageContentList"
+        continuation_instructions:
+          $ref: "#/components/schemas/ToolContinuationInstructions"
         created_at:
           format: int64
           type: integer
@@ -6368,6 +6395,10 @@ components:
           tool_function_id: tool_function_id
         function_responses:
           result: result
+          continuation_instructions:
+            continuation_id: continuation_id
+            human_input_prompt: human_input_prompt
+            continuation_function_call: continuation_function_call
           result_files:
           - llm_input_type: llm_input_type
             upload_category: upload_category
@@ -6443,6 +6474,10 @@ components:
             tool_function_id: tool_function_id
           function_responses:
             result: result
+            continuation_instructions:
+              continuation_id: continuation_id
+              human_input_prompt: human_input_prompt
+              continuation_function_call: continuation_function_call
             result_files:
             - llm_input_type: llm_input_type
               upload_category: upload_category
@@ -6497,6 +6532,10 @@ components:
             tool_function_id: tool_function_id
           function_responses:
             result: result
+            continuation_instructions:
+              continuation_id: continuation_id
+              human_input_prompt: human_input_prompt
+              continuation_function_call: continuation_function_call
             result_files:
             - llm_input_type: llm_input_type
               upload_category: upload_category
@@ -6638,7 +6677,11 @@ components:
     AIgencyMessageResults:
       example:
         results:
-        - attachments: "{}"
+        - continuation_instructions:
+            continuation_id: continuation_id
+            human_input_prompt: human_input_prompt
+            continuation_function_call: continuation_function_call
+          attachments: "{}"
           reference_id: reference_id
           feature_usage:
           - capability: ""
@@ -6698,6 +6741,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -6752,6 +6799,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -6807,7 +6858,11 @@ components:
           owner_organization_id: owner_organization_id
           channel_id: channel_id
           parameters: "{}"
-        - attachments: "{}"
+        - continuation_instructions:
+            continuation_id: continuation_id
+            human_input_prompt: human_input_prompt
+            continuation_function_call: continuation_function_call
+          attachments: "{}"
           reference_id: reference_id
           feature_usage:
           - capability: ""
@@ -6867,6 +6922,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -6921,6 +6980,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -7031,6 +7094,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -7085,6 +7152,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -7911,6 +7982,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -7965,6 +8040,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -8067,6 +8146,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -8121,6 +8204,10 @@ components:
                 tool_function_id: tool_function_id
               function_responses:
                 result: result
+                continuation_instructions:
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                  continuation_function_call: continuation_function_call
                 result_files:
                 - llm_input_type: llm_input_type
                   upload_category: upload_category
@@ -8238,6 +8325,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -8292,6 +8383,10 @@ components:
               tool_function_id: tool_function_id
             function_responses:
               result: result
+              continuation_instructions:
+                continuation_id: continuation_id
+                human_input_prompt: human_input_prompt
+                continuation_function_call: continuation_function_call
               result_files:
               - llm_input_type: llm_input_type
                 upload_category: upload_category
@@ -9894,6 +9989,19 @@ components:
       - is_public
       - name
       - version
+      type: object
+    ToolContinuationInstructions:
+      example:
+        continuation_id: continuation_id
+        human_input_prompt: human_input_prompt
+        continuation_function_call: continuation_function_call
+      properties:
+        continuation_function_call:
+          type: string
+        continuation_id:
+          type: string
+        human_input_prompt:
+          type: string
       type: object
     ToolFunction:
       example:

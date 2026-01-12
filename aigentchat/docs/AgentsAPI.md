@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Execute()
+> []Agent ListAgents(ctx, orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Visibility(visibility).Execute()
 
 List agents
 
@@ -566,10 +566,11 @@ func main() {
 	action := "action_example" // string | Filter agents by model action (optional)
 	addDefaultAgents := true // bool | Include default agents to the list of org owned agents (optional)
 	ignoreManageBasicAgentsAccess := true // bool | Ignore hasManageBasicAgentsAccess when listing agents (optional)
+	visibility := "visibility_example" // string | Filter agents by access visibility (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Visibility(visibility).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -598,6 +599,7 @@ Name | Type | Description  | Notes
  **action** | **string** | Filter agents by model action | 
  **addDefaultAgents** | **bool** | Include default agents to the list of org owned agents | 
  **ignoreManageBasicAgentsAccess** | **bool** | Ignore hasManageBasicAgentsAccess when listing agents | 
+ **visibility** | **string** | Filter agents by access visibility | 
 
 ### Return type
 
