@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -730,7 +730,7 @@ func (a *ExecutionLogsAPIService) GetExecutionLogsCostsExecute(r ApiGetExecution
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchExecutionLogsRequest struct {
+type ApiListExecutionLogsRequest struct {
 	ctx context.Context
 	ApiService *ExecutionLogsAPIService
 	orgId string
@@ -744,62 +744,62 @@ type ApiSearchExecutionLogsRequest struct {
 }
 
 // User ID or me
-func (r ApiSearchExecutionLogsRequest) UserId(userId string) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) UserId(userId string) ApiListExecutionLogsRequest {
 	r.userId = &userId
 	return r
 }
 
 // Execution log type
-func (r ApiSearchExecutionLogsRequest) ExecType(execType string) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) ExecType(execType string) ApiListExecutionLogsRequest {
 	r.execType = &execType
 	return r
 }
 
 // Request ID
-func (r ApiSearchExecutionLogsRequest) RequestId(requestId string) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) RequestId(requestId string) ApiListExecutionLogsRequest {
 	r.requestId = &requestId
 	return r
 }
 
 // Start date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) StartDate(startDate string) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) StartDate(startDate string) ApiListExecutionLogsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiSearchExecutionLogsRequest) EndDate(endDate string) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) EndDate(endDate string) ApiListExecutionLogsRequest {
 	r.endDate = &endDate
 	return r
 }
 
 // Offset
-func (r ApiSearchExecutionLogsRequest) Offset(offset int32) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) Offset(offset int32) ApiListExecutionLogsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Limit
-func (r ApiSearchExecutionLogsRequest) Limit(limit int32) ApiSearchExecutionLogsRequest {
+func (r ApiListExecutionLogsRequest) Limit(limit int32) ApiListExecutionLogsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchExecutionLogsRequest) Execute() (*ExecutionLogResults, *http.Response, error) {
-	return r.ApiService.SearchExecutionLogsExecute(r)
+func (r ApiListExecutionLogsRequest) Execute() (*ExecutionLogResults, *http.Response, error) {
+	return r.ApiService.ListExecutionLogsExecute(r)
 }
 
 /*
-SearchExecutionLogs Search execution logs
+ListExecutionLogs List execution logs
 
-Search for execution logs by user, org, API key, and date range. leave any field empty to no limit by that field.
+List execution logs by user, org, API key, and date range. leave any field empty to no limit by that field.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @return ApiSearchExecutionLogsRequest
+ @return ApiListExecutionLogsRequest
 */
-func (a *ExecutionLogsAPIService) SearchExecutionLogs(ctx context.Context, orgId string) ApiSearchExecutionLogsRequest {
-	return ApiSearchExecutionLogsRequest{
+func (a *ExecutionLogsAPIService) ListExecutionLogs(ctx context.Context, orgId string) ApiListExecutionLogsRequest {
+	return ApiListExecutionLogsRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -808,7 +808,7 @@ func (a *ExecutionLogsAPIService) SearchExecutionLogs(ctx context.Context, orgId
 
 // Execute executes the request
 //  @return ExecutionLogResults
-func (a *ExecutionLogsAPIService) SearchExecutionLogsExecute(r ApiSearchExecutionLogsRequest) (*ExecutionLogResults, *http.Response, error) {
+func (a *ExecutionLogsAPIService) ListExecutionLogsExecute(r ApiListExecutionLogsRequest) (*ExecutionLogResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -816,12 +816,12 @@ func (a *ExecutionLogsAPIService) SearchExecutionLogsExecute(r ApiSearchExecutio
 		localVarReturnValue  *ExecutionLogResults
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExecutionLogsAPIService.SearchExecutionLogs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExecutionLogsAPIService.ListExecutionLogs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/execution-logs/search"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/execution-logs"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

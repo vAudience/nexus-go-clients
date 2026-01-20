@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**DeleteChannelsByOwnerId**](ChannelsAPI.md#DeleteChannelsByOwnerId) | **Delete** /v1/organizations/{org_id}/channels | Delete channels by their owner ID
 [**GetChannel**](ChannelsAPI.md#GetChannel) | **Get** /v1/organizations/{org_id}/channels/{id} | Get a channel by ID
 [**ListChannelsByOrgId**](ChannelsAPI.md#ListChannelsByOrgId) | **Get** /v1/organizations/{org_id}/channels | List channels by organization ID
-[**ListChannelsByOwnerId**](ChannelsAPI.md#ListChannelsByOwnerId) | **Get** /v1/organizations/{org_id}/channels/me | List channels owned by the current user
 [**SearchChannels**](ChannelsAPI.md#SearchChannels) | **Get** /v1/organizations/{org_id}/channels/search | Search channels by query
 [**UpdateChannel**](ChannelsAPI.md#UpdateChannel) | **Put** /v1/organizations/{org_id}/channels/{id} | Update a channel
 
@@ -349,76 +348,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListChannelsByOrgIdRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]Channel**](Channel.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListChannelsByOwnerId
-
-> []Channel ListChannelsByOwnerId(ctx, orgId).Execute()
-
-List channels owned by the current user
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	orgId := "orgId_example" // string | organization ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChannelsAPI.ListChannelsByOwnerId(context.Background(), orgId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ChannelsAPI.ListChannelsByOwnerId``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListChannelsByOwnerId`: []Channel
-	fmt.Fprintf(os.Stdout, "Response from `ChannelsAPI.ListChannelsByOwnerId`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgId** | **string** | organization ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListChannelsByOwnerIdRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

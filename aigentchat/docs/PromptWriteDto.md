@@ -8,10 +8,11 @@ Name | Type | Description | Notes
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
+**ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
-**Visibility** | Pointer to [**PromptVisibilityStates**](PromptVisibilityStates.md) |  | [optional] 
+**WriteAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 
 ## Methods
 
@@ -132,6 +133,31 @@ SetInternalId sets InternalId field to given value.
 
 HasInternalId returns a boolean if a field has been set.
 
+### GetReadAccess
+
+`func (o *PromptWriteDto) GetReadAccess() AccessScope`
+
+GetReadAccess returns the ReadAccess field if non-nil, zero value otherwise.
+
+### GetReadAccessOk
+
+`func (o *PromptWriteDto) GetReadAccessOk() (*AccessScope, bool)`
+
+GetReadAccessOk returns a tuple with the ReadAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadAccess
+
+`func (o *PromptWriteDto) SetReadAccess(v AccessScope)`
+
+SetReadAccess sets ReadAccess field to given value.
+
+### HasReadAccess
+
+`func (o *PromptWriteDto) HasReadAccess() bool`
+
+HasReadAccess returns a boolean if a field has been set.
+
 ### GetTags
 
 `func (o *PromptWriteDto) GetTags() []string`
@@ -207,30 +233,30 @@ SetTitle sets Title field to given value.
 
 HasTitle returns a boolean if a field has been set.
 
-### GetVisibility
+### GetWriteAccess
 
-`func (o *PromptWriteDto) GetVisibility() PromptVisibilityStates`
+`func (o *PromptWriteDto) GetWriteAccess() AccessScope`
 
-GetVisibility returns the Visibility field if non-nil, zero value otherwise.
+GetWriteAccess returns the WriteAccess field if non-nil, zero value otherwise.
 
-### GetVisibilityOk
+### GetWriteAccessOk
 
-`func (o *PromptWriteDto) GetVisibilityOk() (*PromptVisibilityStates, bool)`
+`func (o *PromptWriteDto) GetWriteAccessOk() (*AccessScope, bool)`
 
-GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
+GetWriteAccessOk returns a tuple with the WriteAccess field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVisibility
+### SetWriteAccess
 
-`func (o *PromptWriteDto) SetVisibility(v PromptVisibilityStates)`
+`func (o *PromptWriteDto) SetWriteAccess(v AccessScope)`
 
-SetVisibility sets Visibility field to given value.
+SetWriteAccess sets WriteAccess field to given value.
 
-### HasVisibility
+### HasWriteAccess
 
-`func (o *PromptWriteDto) HasVisibility() bool`
+`func (o *PromptWriteDto) HasWriteAccess() bool`
 
-HasVisibility returns a boolean if a field has been set.
+HasWriteAccess returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -1282,33 +1282,89 @@ type ApiListAgentsRequest struct {
 	ctx context.Context
 	ApiService *AgentsAPIService
 	orgId string
+	modelIds *[]string
+	tagIds *[]string
+	q *string
 	action *string
-	addDefaultAgents *bool
-	ignoreManageBasicAgentsAccess *bool
+	types *[]string
+	addPredefinedAgents *bool
+	adminMode *bool
 	visibility *string
+	limit *int32
+	offset *int32
+	sortBy *string
+	sortOrder *string
 }
 
-// Filter agents by model action
+// Model ID to filter by (comma separated)
+func (r ApiListAgentsRequest) ModelIds(modelIds []string) ApiListAgentsRequest {
+	r.modelIds = &modelIds
+	return r
+}
+
+// Tag IDs to filter by (comma separated)
+func (r ApiListAgentsRequest) TagIds(tagIds []string) ApiListAgentsRequest {
+	r.tagIds = &tagIds
+	return r
+}
+
+// Search term for name or description
+func (r ApiListAgentsRequest) Q(q string) ApiListAgentsRequest {
+	r.q = &q
+	return r
+}
+
+// Filter agents by model action (chat, image, etc.)
 func (r ApiListAgentsRequest) Action(action string) ApiListAgentsRequest {
 	r.action = &action
 	return r
 }
 
+// Filter agents by types (basic, background, service - comma separated)
+func (r ApiListAgentsRequest) Types(types []string) ApiListAgentsRequest {
+	r.types = &types
+	return r
+}
+
 // Include default agents to the list of org owned agents
-func (r ApiListAgentsRequest) AddDefaultAgents(addDefaultAgents bool) ApiListAgentsRequest {
-	r.addDefaultAgents = &addDefaultAgents
+func (r ApiListAgentsRequest) AddPredefinedAgents(addPredefinedAgents bool) ApiListAgentsRequest {
+	r.addPredefinedAgents = &addPredefinedAgents
 	return r
 }
 
-// Ignore hasManageBasicAgentsAccess when listing agents
-func (r ApiListAgentsRequest) IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess bool) ApiListAgentsRequest {
-	r.ignoreManageBasicAgentsAccess = &ignoreManageBasicAgentsAccess
+// Admin mode to bypass certain permission checks
+func (r ApiListAgentsRequest) AdminMode(adminMode bool) ApiListAgentsRequest {
+	r.adminMode = &adminMode
 	return r
 }
 
-// Filter agents by access visibility
+// Filter agents by access visibility (public, organization)
 func (r ApiListAgentsRequest) Visibility(visibility string) ApiListAgentsRequest {
 	r.visibility = &visibility
+	return r
+}
+
+// Limit the number of results
+func (r ApiListAgentsRequest) Limit(limit int32) ApiListAgentsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Offset for pagination
+func (r ApiListAgentsRequest) Offset(offset int32) ApiListAgentsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Field to sort by (name, createdat, updatedat)
+func (r ApiListAgentsRequest) SortBy(sortBy string) ApiListAgentsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// Sort order (asc or desc)
+func (r ApiListAgentsRequest) SortOrder(sortOrder string) ApiListAgentsRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -1319,7 +1375,7 @@ func (r ApiListAgentsRequest) Execute() ([]Agent, *http.Response, error) {
 /*
 ListAgents List agents
 
-Retrieve a list of agents by ownership and organization
+Retrieve a list of agents based on criteria
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
@@ -1355,17 +1411,53 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.modelIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "model_ids", r.modelIds, "form", "csv")
+	}
+	if r.tagIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", r.tagIds, "form", "csv")
+	}
+	if r.q != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "q", r.q, "", "")
+	}
 	if r.action != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
 	}
-	if r.addDefaultAgents != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "add_default_agents", r.addDefaultAgents, "", "")
+	if r.types != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "types", r.types, "form", "csv")
 	}
-	if r.ignoreManageBasicAgentsAccess != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ignore_manage_basic_agents_access", r.ignoreManageBasicAgentsAccess, "", "")
+	if r.addPredefinedAgents != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "add_predefined_agents", r.addPredefinedAgents, "", "")
+	}
+	if r.adminMode != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "admin_mode", r.adminMode, "", "")
 	}
 	if r.visibility != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "visibility", r.visibility, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 1000
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
+	} else {
+		var defaultValue int32 = 0
+		r.offset = &defaultValue
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "", "")
+	} else {
+		var defaultValue string = "\"name\""
+		r.sortBy = &defaultValue
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "", "")
+	} else {
+		var defaultValue string = "\"asc\""
+		r.sortOrder = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2164,186 +2256,6 @@ func (a *AgentsAPIService) RemoveSystemMessageExecute(r ApiRemoveSystemMessageRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSearchAgentsRequest struct {
-	ctx context.Context
-	ApiService *AgentsAPIService
-	orgId string
-	name *string
-	modelID *string
-}
-
-// Agent Name
-func (r ApiSearchAgentsRequest) Name(name string) ApiSearchAgentsRequest {
-	r.name = &name
-	return r
-}
-
-// Model ID
-func (r ApiSearchAgentsRequest) ModelID(modelID string) ApiSearchAgentsRequest {
-	r.modelID = &modelID
-	return r
-}
-
-func (r ApiSearchAgentsRequest) Execute() ([]Agent, *http.Response, error) {
-	return r.ApiService.SearchAgentsExecute(r)
-}
-
-/*
-SearchAgents Search agents
-
-Search agents based on criteria
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId organization ID
- @return ApiSearchAgentsRequest
-*/
-func (a *AgentsAPIService) SearchAgents(ctx context.Context, orgId string) ApiSearchAgentsRequest {
-	return ApiSearchAgentsRequest{
-		ApiService: a,
-		ctx: ctx,
-		orgId: orgId,
-	}
-}
-
-// Execute executes the request
-//  @return []Agent
-func (a *AgentsAPIService) SearchAgentsExecute(r ApiSearchAgentsRequest) ([]Agent, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Agent
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.SearchAgents")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/agents/search"
-	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
-	}
-	if r.modelID != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "modelID", r.modelID, "", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-api-key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -204,20 +204,6 @@ func Test_aigentchat_AgentsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentsAPIService SearchAgents", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-
-		resp, httpRes, err := apiClient.AgentsAPI.SearchAgents(context.Background(), orgId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AgentsAPIService UpdateAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

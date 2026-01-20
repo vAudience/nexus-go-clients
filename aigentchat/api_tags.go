@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,234 +21,66 @@ import (
 )
 
 
-// MissionsAPIService MissionsAPI service
-type MissionsAPIService service
+// TagsAPIService TagsAPI service
+type TagsAPIService service
 
-type ApiCancelMissionRequest struct {
+type ApiCreateTagRequest struct {
 	ctx context.Context
-	ApiService *MissionsAPIService
+	ApiService *TagsAPIService
 	orgId string
-	missionId string
+	tag *TagWriteDto
 }
 
-func (r ApiCancelMissionRequest) Execute() (*http.Response, error) {
-	return r.ApiService.CancelMissionExecute(r)
-}
-
-/*
-CancelMission Cancel a mission
-
-Cancel a mission
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @param missionId Mission ID
- @return ApiCancelMissionRequest
-*/
-func (a *MissionsAPIService) CancelMission(ctx context.Context, orgId string, missionId string) ApiCancelMissionRequest {
-	return ApiCancelMissionRequest{
-		ApiService: a,
-		ctx: ctx,
-		orgId: orgId,
-		missionId: missionId,
-	}
-}
-
-// Execute executes the request
-func (a *MissionsAPIService) CancelMissionExecute(r ApiCancelMissionRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.CancelMission")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}/cancel"
-	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-api-key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiCreateMissionRequest struct {
-	ctx context.Context
-	ApiService *MissionsAPIService
-	orgId string
-	missionExecutorId string
-	mission *MissionWriteDto
-}
-
-// Mission object that needs to be created
-func (r ApiCreateMissionRequest) Mission(mission MissionWriteDto) ApiCreateMissionRequest {
-	r.mission = &mission
+// Tag
+func (r ApiCreateTagRequest) Tag(tag TagWriteDto) ApiCreateTagRequest {
+	r.tag = &tag
 	return r
 }
 
-func (r ApiCreateMissionRequest) Execute() (*Mission, *http.Response, error) {
-	return r.ApiService.CreateMissionExecute(r)
+func (r ApiCreateTagRequest) Execute() (*Tag, *http.Response, error) {
+	return r.ApiService.CreateTagExecute(r)
 }
 
 /*
-CreateMission Create a new mission
+CreateTag Create a new tag
 
-Create a new mission
+Create a new tag with the provided details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @param missionExecutorId Agent ID to run the mission with
- @return ApiCreateMissionRequest
+ @param orgId organization ID
+ @return ApiCreateTagRequest
 */
-func (a *MissionsAPIService) CreateMission(ctx context.Context, orgId string, missionExecutorId string) ApiCreateMissionRequest {
-	return ApiCreateMissionRequest{
+func (a *TagsAPIService) CreateTag(ctx context.Context, orgId string) ApiCreateTagRequest {
+	return ApiCreateTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		missionExecutorId: missionExecutorId,
 	}
 }
 
 // Execute executes the request
-//  @return Mission
-func (a *MissionsAPIService) CreateMissionExecute(r ApiCreateMissionRequest) (*Mission, *http.Response, error) {
+//  @return Tag
+func (a *TagsAPIService) CreateTagExecute(r ApiCreateTagRequest) (*Tag, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Mission
+		localVarReturnValue  *Tag
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.CreateMission")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.CreateTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_executor_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/tags"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mission_executor_id"+"}", url.PathEscape(parameterValueToString(r.missionExecutorId, "missionExecutorId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.mission == nil {
-		return localVarReturnValue, nil, reportError("mission is required and must be specified")
+	if r.tag == nil {
+		return localVarReturnValue, nil, reportError("tag is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -269,7 +101,7 @@ func (a *MissionsAPIService) CreateMissionExecute(r ApiCreateMissionRequest) (*M
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.mission
+	localVarPostBody = r.tag
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -328,29 +160,7 @@ func (a *MissionsAPIService) CreateMissionExecute(r ApiCreateMissionRequest) (*M
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -386,229 +196,54 @@ func (a *MissionsAPIService) CreateMissionExecute(r ApiCreateMissionRequest) (*M
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteMissionRequest struct {
+type ApiDeleteTagRequest struct {
 	ctx context.Context
-	ApiService *MissionsAPIService
+	ApiService *TagsAPIService
 	orgId string
-	missionId string
+	id string
 }
 
-func (r ApiDeleteMissionRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteMissionExecute(r)
+func (r ApiDeleteTagRequest) Execute() (*Tag, *http.Response, error) {
+	return r.ApiService.DeleteTagExecute(r)
 }
 
 /*
-DeleteMission Delete a mission
+DeleteTag Delete a tag
 
-Delete a mission
+Delete a tag by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @param missionId Mission ID
- @return ApiDeleteMissionRequest
+ @param orgId organization ID
+ @param id Tag ID
+ @return ApiDeleteTagRequest
 */
-func (a *MissionsAPIService) DeleteMission(ctx context.Context, orgId string, missionId string) ApiDeleteMissionRequest {
-	return ApiDeleteMissionRequest{
+func (a *TagsAPIService) DeleteTag(ctx context.Context, orgId string, id string) ApiDeleteTagRequest {
+	return ApiDeleteTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		missionId: missionId,
+		id: id,
 	}
 }
 
 // Execute executes the request
-func (a *MissionsAPIService) DeleteMissionExecute(r ApiDeleteMissionRequest) (*http.Response, error) {
+//  @return Tag
+func (a *TagsAPIService) DeleteTagExecute(r ApiDeleteTagRequest) (*Tag, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *Tag
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.DeleteMission")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-api-key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiGetMissionRequest struct {
-	ctx context.Context
-	ApiService *MissionsAPIService
-	orgId string
-	missionId string
-}
-
-func (r ApiGetMissionRequest) Execute() (*Mission, *http.Response, error) {
-	return r.ApiService.GetMissionExecute(r)
-}
-
-/*
-GetMission Get a mission
-
-Get a mission
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @param missionId Mission ID
- @return ApiGetMissionRequest
-*/
-func (a *MissionsAPIService) GetMission(ctx context.Context, orgId string, missionId string) ApiGetMissionRequest {
-	return ApiGetMissionRequest{
-		ApiService: a,
-		ctx: ctx,
-		orgId: orgId,
-		missionId: missionId,
-	}
-}
-
-// Execute executes the request
-//  @return Mission
-func (a *MissionsAPIService) GetMissionExecute(r ApiGetMissionRequest) (*Mission, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Mission
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.GetMission")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.DeleteTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/{mission_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/tags/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mission_id"+"}", url.PathEscape(parameterValueToString(r.missionId, "missionId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -736,79 +371,59 @@ func (a *MissionsAPIService) GetMissionExecute(r ApiGetMissionRequest) (*Mission
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListMissionsByExecutorIDRequest struct {
+type ApiGetTagRequest struct {
 	ctx context.Context
-	ApiService *MissionsAPIService
+	ApiService *TagsAPIService
 	orgId string
-	missionExecutorId string
-	offset *int32
-	limit *int32
+	id string
 }
 
-// Offset the number of missions returned
-func (r ApiListMissionsByExecutorIDRequest) Offset(offset int32) ApiListMissionsByExecutorIDRequest {
-	r.offset = &offset
-	return r
-}
-
-// Limit the number of missions returned
-func (r ApiListMissionsByExecutorIDRequest) Limit(limit int32) ApiListMissionsByExecutorIDRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiListMissionsByExecutorIDRequest) Execute() (*MissionResults, *http.Response, error) {
-	return r.ApiService.ListMissionsByExecutorIDExecute(r)
+func (r ApiGetTagRequest) Execute() (*Tag, *http.Response, error) {
+	return r.ApiService.GetTagExecute(r)
 }
 
 /*
-ListMissionsByExecutorID List all missions by a executorID (Executing Agent)
+GetTag Get a tag
 
-List all missions by a a executorID (Executing Agent)
+Retrieve a tag by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @param missionExecutorId Executor Agent ID
- @return ApiListMissionsByExecutorIDRequest
+ @param orgId organization ID
+ @param id Tag ID
+ @return ApiGetTagRequest
 */
-func (a *MissionsAPIService) ListMissionsByExecutorID(ctx context.Context, orgId string, missionExecutorId string) ApiListMissionsByExecutorIDRequest {
-	return ApiListMissionsByExecutorIDRequest{
+func (a *TagsAPIService) GetTag(ctx context.Context, orgId string, id string) ApiGetTagRequest {
+	return ApiGetTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		missionExecutorId: missionExecutorId,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//  @return MissionResults
-func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsByExecutorIDRequest) (*MissionResults, *http.Response, error) {
+//  @return Tag
+func (a *TagsAPIService) GetTagExecute(r ApiGetTagRequest) (*Tag, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MissionResults
+		localVarReturnValue  *Tag
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.ListMissionsByExecutorID")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.GetTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions/executor/{mission_executor_id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/tags/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mission_executor_id"+"}", url.PathEscape(parameterValueToString(r.missionExecutorId, "missionExecutorId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -872,6 +487,212 @@ func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsBy
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSearchTagsRequest struct {
+	ctx context.Context
+	ApiService *TagsAPIService
+	orgId string
+	type_ *string
+	addPredefinedTags *bool
+	limit *int32
+	offset *int32
+}
+
+// Filter tags by type
+func (r ApiSearchTagsRequest) Type_(type_ string) ApiSearchTagsRequest {
+	r.type_ = &type_
+	return r
+}
+
+// Include predefined tags to the list of org owned tags
+func (r ApiSearchTagsRequest) AddPredefinedTags(addPredefinedTags bool) ApiSearchTagsRequest {
+	r.addPredefinedTags = &addPredefinedTags
+	return r
+}
+
+// Limit the number of results
+func (r ApiSearchTagsRequest) Limit(limit int32) ApiSearchTagsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Offset for pagination
+func (r ApiSearchTagsRequest) Offset(offset int32) ApiSearchTagsRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiSearchTagsRequest) Execute() ([]Tag, *http.Response, error) {
+	return r.ApiService.SearchTagsExecute(r)
+}
+
+/*
+SearchTags Search tags
+
+Search tags based on criteria
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId organization ID
+ @return ApiSearchTagsRequest
+*/
+func (a *TagsAPIService) SearchTags(ctx context.Context, orgId string) ApiSearchTagsRequest {
+	return ApiSearchTagsRequest{
+		ApiService: a,
+		ctx: ctx,
+		orgId: orgId,
+	}
+}
+
+// Execute executes the request
+//  @return []Tag
+func (a *TagsAPIService) SearchTagsExecute(r ApiSearchTagsRequest) ([]Tag, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []Tag
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.SearchTags")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/tags"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.type_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
+	}
+	if r.addPredefinedTags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "add_predefined_tags", r.addPredefinedTags, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 1000
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
+	} else {
+		var defaultValue int32 = 0
+		r.offset = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiError
@@ -920,77 +741,71 @@ func (a *MissionsAPIService) ListMissionsByExecutorIDExecute(r ApiListMissionsBy
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListMissionsByOrgRequest struct {
+type ApiUpdateTagRequest struct {
 	ctx context.Context
-	ApiService *MissionsAPIService
+	ApiService *TagsAPIService
 	orgId string
-	offset *int32
-	limit *int32
+	id string
+	tag *TagWriteDto
 }
 
-// Offset the number of missions returned
-func (r ApiListMissionsByOrgRequest) Offset(offset int32) ApiListMissionsByOrgRequest {
-	r.offset = &offset
+// Tag
+func (r ApiUpdateTagRequest) Tag(tag TagWriteDto) ApiUpdateTagRequest {
+	r.tag = &tag
 	return r
 }
 
-// Limit the number of missions returned
-func (r ApiListMissionsByOrgRequest) Limit(limit int32) ApiListMissionsByOrgRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiListMissionsByOrgRequest) Execute() (*MissionResults, *http.Response, error) {
-	return r.ApiService.ListMissionsByOrgExecute(r)
+func (r ApiUpdateTagRequest) Execute() (*Tag, *http.Response, error) {
+	return r.ApiService.UpdateTagExecute(r)
 }
 
 /*
-ListMissionsByOrg List all missions of an organization and owned by the current user
+UpdateTag Update a tag
 
-List all missions of an organization and owned by the current user
+Update a tag by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
- @return ApiListMissionsByOrgRequest
+ @param orgId organization ID
+ @param id Tag ID
+ @return ApiUpdateTagRequest
 */
-func (a *MissionsAPIService) ListMissionsByOrg(ctx context.Context, orgId string) ApiListMissionsByOrgRequest {
-	return ApiListMissionsByOrgRequest{
+func (a *TagsAPIService) UpdateTag(ctx context.Context, orgId string, id string) ApiUpdateTagRequest {
+	return ApiUpdateTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//  @return MissionResults
-func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequest) (*MissionResults, *http.Response, error) {
+//  @return Tag
+func (a *TagsAPIService) UpdateTagExecute(r ApiUpdateTagRequest) (*Tag, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MissionResults
+		localVarReturnValue  *Tag
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MissionsAPIService.ListMissionsByOrg")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.UpdateTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/missions"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/tags/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.tag == nil {
+		return localVarReturnValue, nil, reportError("tag is required and must be specified")
+	}
 
-	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1006,6 +821,8 @@ func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.tag
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1065,6 +882,17 @@ func (a *MissionsAPIService) ListMissionsByOrgExecute(r ApiListMissionsByOrgRequ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **I18n** | Pointer to [**map[string]AIModelI18n**](AIModelI18n.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**Lifecycle** | Pointer to **string** |  | [optional] 
-**ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelId** | Pointer to **string** |  | [optional] 
+**ModelKnowledgeCutoff** | Pointer to **int32** |  | [optional] 
 **ModelReleaseDate** | Pointer to **int32** |  | [optional] 
+**ModelStats** | Pointer to [**AIModelStats**](AIModelStats.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
 **Parameters** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
@@ -241,56 +241,6 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
-### GetLifecycle
-
-`func (o *AIModelWriteDto) GetLifecycle() string`
-
-GetLifecycle returns the Lifecycle field if non-nil, zero value otherwise.
-
-### GetLifecycleOk
-
-`func (o *AIModelWriteDto) GetLifecycleOk() (*string, bool)`
-
-GetLifecycleOk returns a tuple with the Lifecycle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLifecycle
-
-`func (o *AIModelWriteDto) SetLifecycle(v string)`
-
-SetLifecycle sets Lifecycle field to given value.
-
-### HasLifecycle
-
-`func (o *AIModelWriteDto) HasLifecycle() bool`
-
-HasLifecycle returns a boolean if a field has been set.
-
-### GetModelCategory
-
-`func (o *AIModelWriteDto) GetModelCategory() string`
-
-GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
-
-### GetModelCategoryOk
-
-`func (o *AIModelWriteDto) GetModelCategoryOk() (*string, bool)`
-
-GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelCategory
-
-`func (o *AIModelWriteDto) SetModelCategory(v string)`
-
-SetModelCategory sets ModelCategory field to given value.
-
-### HasModelCategory
-
-`func (o *AIModelWriteDto) HasModelCategory() bool`
-
-HasModelCategory returns a boolean if a field has been set.
-
 ### GetModelId
 
 `func (o *AIModelWriteDto) GetModelId() string`
@@ -316,6 +266,31 @@ SetModelId sets ModelId field to given value.
 
 HasModelId returns a boolean if a field has been set.
 
+### GetModelKnowledgeCutoff
+
+`func (o *AIModelWriteDto) GetModelKnowledgeCutoff() int32`
+
+GetModelKnowledgeCutoff returns the ModelKnowledgeCutoff field if non-nil, zero value otherwise.
+
+### GetModelKnowledgeCutoffOk
+
+`func (o *AIModelWriteDto) GetModelKnowledgeCutoffOk() (*int32, bool)`
+
+GetModelKnowledgeCutoffOk returns a tuple with the ModelKnowledgeCutoff field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelKnowledgeCutoff
+
+`func (o *AIModelWriteDto) SetModelKnowledgeCutoff(v int32)`
+
+SetModelKnowledgeCutoff sets ModelKnowledgeCutoff field to given value.
+
+### HasModelKnowledgeCutoff
+
+`func (o *AIModelWriteDto) HasModelKnowledgeCutoff() bool`
+
+HasModelKnowledgeCutoff returns a boolean if a field has been set.
+
 ### GetModelReleaseDate
 
 `func (o *AIModelWriteDto) GetModelReleaseDate() int32`
@@ -340,6 +315,31 @@ SetModelReleaseDate sets ModelReleaseDate field to given value.
 `func (o *AIModelWriteDto) HasModelReleaseDate() bool`
 
 HasModelReleaseDate returns a boolean if a field has been set.
+
+### GetModelStats
+
+`func (o *AIModelWriteDto) GetModelStats() AIModelStats`
+
+GetModelStats returns the ModelStats field if non-nil, zero value otherwise.
+
+### GetModelStatsOk
+
+`func (o *AIModelWriteDto) GetModelStatsOk() (*AIModelStats, bool)`
+
+GetModelStatsOk returns a tuple with the ModelStats field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelStats
+
+`func (o *AIModelWriteDto) SetModelStats(v AIModelStats)`
+
+SetModelStats sets ModelStats field to given value.
+
+### HasModelStats
+
+`func (o *AIModelWriteDto) HasModelStats() bool`
+
+HasModelStats returns a boolean if a field has been set.
 
 ### GetName
 

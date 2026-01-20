@@ -78,13 +78,13 @@ func Test_aigentchat_ExecutionLogsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ExecutionLogsAPIService SearchExecutionLogs", func(t *testing.T) {
+	t.Run("Test ExecutionLogsAPIService ListExecutionLogs", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.ExecutionLogsAPI.SearchExecutionLogs(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.ExecutionLogsAPI.ListExecutionLogs(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) |  | 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
@@ -32,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewAuditTrailMessage
 
-`func NewAuditTrailMessage(aiModelId string, aiServiceId string, attachments AIgencyMessageFileList, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AuditTrailMessage`
+`func NewAuditTrailMessage(aiModelId string, aiServiceId string, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64, ) *AuditTrailMessage`
 
 NewAuditTrailMessage instantiates a new AuditTrailMessage object
 This constructor will assign default values to properties that have it defined,
@@ -85,26 +84,6 @@ and a boolean to check if the value has been set.
 `func (o *AuditTrailMessage) SetAiServiceId(v string)`
 
 SetAiServiceId sets AiServiceId field to given value.
-
-
-### GetAttachments
-
-`func (o *AuditTrailMessage) GetAttachments() AIgencyMessageFileList`
-
-GetAttachments returns the Attachments field if non-nil, zero value otherwise.
-
-### GetAttachmentsOk
-
-`func (o *AuditTrailMessage) GetAttachmentsOk() (*AIgencyMessageFileList, bool)`
-
-GetAttachmentsOk returns a tuple with the Attachments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAttachments
-
-`func (o *AuditTrailMessage) SetAttachments(v AIgencyMessageFileList)`
-
-SetAttachments sets Attachments field to given value.
 
 
 ### GetChannelId

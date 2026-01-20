@@ -7,6 +7,8 @@
 
 * `AgentTypeBasic` (value: `"basic"`)
 
+* `AgentTypeBackground` (value: `"background"`)
+
 * `AgentTypeService` (value: `"service"`)
 
 

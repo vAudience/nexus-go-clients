@@ -6,20 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Deprecated, add files to content instead | 
+**Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Note: deprecated, but we need to keep it for backward compatibility or do a message data migration | 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
 **ContinuationInstructions** | Pointer to [**ToolContinuationInstructions**](ToolContinuationInstructions.md) |  | [optional] 
 **CreatedAt** | **int64** |  | 
-**CreatedForFeature** | Pointer to [**AIModelFeature**](AIModelFeature.md) | Deprecated, use feature_usage | [optional] 
 **Error** | Pointer to [**AiServiceError**](AiServiceError.md) |  | [optional] 
 **ExecutionId** | Pointer to **string** |  | [optional] 
 **FeatureUsage** | Pointer to [**[]ExecutionFeatureUsage**](ExecutionFeatureUsage.md) |  | [optional] 
 **FinishReason** | Pointer to [**FinishReason**](FinishReason.md) |  | [optional] 
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
-**MissionId** | Pointer to **string** |  | [optional] 
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
@@ -217,31 +215,6 @@ and a boolean to check if the value has been set.
 SetCreatedAt sets CreatedAt field to given value.
 
 
-### GetCreatedForFeature
-
-`func (o *AIgencyMessage) GetCreatedForFeature() AIModelFeature`
-
-GetCreatedForFeature returns the CreatedForFeature field if non-nil, zero value otherwise.
-
-### GetCreatedForFeatureOk
-
-`func (o *AIgencyMessage) GetCreatedForFeatureOk() (*AIModelFeature, bool)`
-
-GetCreatedForFeatureOk returns a tuple with the CreatedForFeature field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedForFeature
-
-`func (o *AIgencyMessage) SetCreatedForFeature(v AIModelFeature)`
-
-SetCreatedForFeature sets CreatedForFeature field to given value.
-
-### HasCreatedForFeature
-
-`func (o *AIgencyMessage) HasCreatedForFeature() bool`
-
-HasCreatedForFeature returns a boolean if a field has been set.
-
 ### GetError
 
 `func (o *AIgencyMessage) GetError() AiServiceError`
@@ -386,31 +359,6 @@ SetMetaData sets MetaData field to given value.
 `func (o *AIgencyMessage) HasMetaData() bool`
 
 HasMetaData returns a boolean if a field has been set.
-
-### GetMissionId
-
-`func (o *AIgencyMessage) GetMissionId() string`
-
-GetMissionId returns the MissionId field if non-nil, zero value otherwise.
-
-### GetMissionIdOk
-
-`func (o *AIgencyMessage) GetMissionIdOk() (*string, bool)`
-
-GetMissionIdOk returns a tuple with the MissionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMissionId
-
-`func (o *AIgencyMessage) SetMissionId(v string)`
-
-SetMissionId sets MissionId field to given value.
-
-### HasMissionId
-
-`func (o *AIgencyMessage) HasMissionId() bool`
-
-HasMissionId returns a boolean if a field has been set.
 
 ### GetOwnerOrganizationId
 

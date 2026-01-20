@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
-**IsPublic** | Pointer to **bool** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **Model** | Pointer to [**AIModel**](AIModel.md) | Note: only set when returning the agent (not stored at agent level) | [optional] 
 **ModelActions** | Pointer to **[]string** |  | [optional] 
@@ -26,14 +25,16 @@ Name | Type | Description | Notes
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
-**RecommendedTask** | Pointer to **string** | TODO: will be replaced by tags | [optional] 
+**ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
-**TeamIds** | Pointer to **[]string** |  | [optional] 
+**TagIds** | Pointer to **[]string** |  | [optional] 
 **ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 **UseTools** | Pointer to **bool** |  | [optional] 
+**UserAccess** | Pointer to [**UserAccessView**](UserAccessView.md) |  | [optional] 
+**WriteAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 
 ## Methods
 
@@ -349,31 +350,6 @@ SetInternalId sets InternalId field to given value.
 
 HasInternalId returns a boolean if a field has been set.
 
-### GetIsPublic
-
-`func (o *Agent) GetIsPublic() bool`
-
-GetIsPublic returns the IsPublic field if non-nil, zero value otherwise.
-
-### GetIsPublicOk
-
-`func (o *Agent) GetIsPublicOk() (*bool, bool)`
-
-GetIsPublicOk returns a tuple with the IsPublic field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsPublic
-
-`func (o *Agent) SetIsPublic(v bool)`
-
-SetIsPublic sets IsPublic field to given value.
-
-### HasIsPublic
-
-`func (o *Agent) HasIsPublic() bool`
-
-HasIsPublic returns a boolean if a field has been set.
-
 ### GetMetaData
 
 `func (o *Agent) GetMetaData() map[string]interface{}`
@@ -579,30 +555,30 @@ SetParameters sets Parameters field to given value.
 
 HasParameters returns a boolean if a field has been set.
 
-### GetRecommendedTask
+### GetReadAccess
 
-`func (o *Agent) GetRecommendedTask() string`
+`func (o *Agent) GetReadAccess() AccessScope`
 
-GetRecommendedTask returns the RecommendedTask field if non-nil, zero value otherwise.
+GetReadAccess returns the ReadAccess field if non-nil, zero value otherwise.
 
-### GetRecommendedTaskOk
+### GetReadAccessOk
 
-`func (o *Agent) GetRecommendedTaskOk() (*string, bool)`
+`func (o *Agent) GetReadAccessOk() (*AccessScope, bool)`
 
-GetRecommendedTaskOk returns a tuple with the RecommendedTask field if it's non-nil, zero value otherwise
+GetReadAccessOk returns a tuple with the ReadAccess field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRecommendedTask
+### SetReadAccess
 
-`func (o *Agent) SetRecommendedTask(v string)`
+`func (o *Agent) SetReadAccess(v AccessScope)`
 
-SetRecommendedTask sets RecommendedTask field to given value.
+SetReadAccess sets ReadAccess field to given value.
 
-### HasRecommendedTask
+### HasReadAccess
 
-`func (o *Agent) HasRecommendedTask() bool`
+`func (o *Agent) HasReadAccess() bool`
 
-HasRecommendedTask returns a boolean if a field has been set.
+HasReadAccess returns a boolean if a field has been set.
 
 ### GetSystemMessages
 
@@ -629,30 +605,30 @@ SetSystemMessages sets SystemMessages field to given value.
 
 HasSystemMessages returns a boolean if a field has been set.
 
-### GetTeamIds
+### GetTagIds
 
-`func (o *Agent) GetTeamIds() []string`
+`func (o *Agent) GetTagIds() []string`
 
-GetTeamIds returns the TeamIds field if non-nil, zero value otherwise.
+GetTagIds returns the TagIds field if non-nil, zero value otherwise.
 
-### GetTeamIdsOk
+### GetTagIdsOk
 
-`func (o *Agent) GetTeamIdsOk() (*[]string, bool)`
+`func (o *Agent) GetTagIdsOk() (*[]string, bool)`
 
-GetTeamIdsOk returns a tuple with the TeamIds field if it's non-nil, zero value otherwise
+GetTagIdsOk returns a tuple with the TagIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTeamIds
+### SetTagIds
 
-`func (o *Agent) SetTeamIds(v []string)`
+`func (o *Agent) SetTagIds(v []string)`
 
-SetTeamIds sets TeamIds field to given value.
+SetTagIds sets TagIds field to given value.
 
-### HasTeamIds
+### HasTagIds
 
-`func (o *Agent) HasTeamIds() bool`
+`func (o *Agent) HasTagIds() bool`
 
-HasTeamIds returns a boolean if a field has been set.
+HasTagIds returns a boolean if a field has been set.
 
 ### GetToolConfig
 
@@ -778,6 +754,56 @@ SetUseTools sets UseTools field to given value.
 `func (o *Agent) HasUseTools() bool`
 
 HasUseTools returns a boolean if a field has been set.
+
+### GetUserAccess
+
+`func (o *Agent) GetUserAccess() UserAccessView`
+
+GetUserAccess returns the UserAccess field if non-nil, zero value otherwise.
+
+### GetUserAccessOk
+
+`func (o *Agent) GetUserAccessOk() (*UserAccessView, bool)`
+
+GetUserAccessOk returns a tuple with the UserAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserAccess
+
+`func (o *Agent) SetUserAccess(v UserAccessView)`
+
+SetUserAccess sets UserAccess field to given value.
+
+### HasUserAccess
+
+`func (o *Agent) HasUserAccess() bool`
+
+HasUserAccess returns a boolean if a field has been set.
+
+### GetWriteAccess
+
+`func (o *Agent) GetWriteAccess() AccessScope`
+
+GetWriteAccess returns the WriteAccess field if non-nil, zero value otherwise.
+
+### GetWriteAccessOk
+
+`func (o *Agent) GetWriteAccessOk() (*AccessScope, bool)`
+
+GetWriteAccessOk returns a tuple with the WriteAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWriteAccess
+
+`func (o *Agent) SetWriteAccess(v AccessScope)`
+
+SetWriteAccess sets WriteAccess field to given value.
+
+### HasWriteAccess
+
+`func (o *Agent) HasWriteAccess() bool`
+
+HasWriteAccess returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

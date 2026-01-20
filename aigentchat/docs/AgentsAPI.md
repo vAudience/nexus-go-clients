@@ -16,7 +16,6 @@ Method | HTTP request | Description
 [**RemoveAttachedFileID**](AgentsAPI.md#RemoveAttachedFileID) | **Patch** /v1/organizations/{org_id}/agents/{id}/remove-file/{file_id} | Remove an attached file ID from an agent
 [**RemoveInitialUserMessage**](AgentsAPI.md#RemoveInitialUserMessage) | **Patch** /v1/organizations/{org_id}/agents/{id}/messages/remove-user-message | Remove an initial user message from an agent
 [**RemoveSystemMessage**](AgentsAPI.md#RemoveSystemMessage) | **Patch** /v1/organizations/{org_id}/agents/{id}/messages/remove-system-message | Remove a system message from an agent
-[**SearchAgents**](AgentsAPI.md#SearchAgents) | **Get** /v1/organizations/{org_id}/agents/search | Search agents
 [**UpdateAgent**](AgentsAPI.md#UpdateAgent) | **Put** /v1/organizations/{org_id}/agents/{id} | Update an agent
 
 
@@ -543,7 +542,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Visibility(visibility).Execute()
+> []Agent ListAgents(ctx, orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
 
 List agents
 
@@ -563,14 +562,22 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	action := "action_example" // string | Filter agents by model action (optional)
-	addDefaultAgents := true // bool | Include default agents to the list of org owned agents (optional)
-	ignoreManageBasicAgentsAccess := true // bool | Ignore hasManageBasicAgentsAccess when listing agents (optional)
-	visibility := "visibility_example" // string | Filter agents by access visibility (optional)
+	modelIds := []string{"Inner_example"} // []string | Model ID to filter by (comma separated) (optional)
+	tagIds := []string{"Inner_example"} // []string | Tag IDs to filter by (comma separated) (optional)
+	q := "q_example" // string | Search term for name or description (optional)
+	action := "action_example" // string | Filter agents by model action (chat, image, etc.) (optional)
+	types := []string{"Types_example"} // []string | Filter agents by types (basic, background, service - comma separated) (optional)
+	addPredefinedAgents := true // bool | Include default agents to the list of org owned agents (optional)
+	adminMode := true // bool | Admin mode to bypass certain permission checks (optional)
+	visibility := "visibility_example" // string | Filter agents by access visibility (public, organization) (optional)
+	limit := int32(56) // int32 | Limit the number of results (optional) (default to 1000)
+	offset := int32(56) // int32 | Offset for pagination (optional) (default to 0)
+	sortBy := "sortBy_example" // string | Field to sort by (name, createdat, updatedat) (optional) (default to "\"name\"")
+	sortOrder := "sortOrder_example" // string | Sort order (asc or desc) (optional) (default to "\"asc\"")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).Action(action).AddDefaultAgents(addDefaultAgents).IgnoreManageBasicAgentsAccess(ignoreManageBasicAgentsAccess).Visibility(visibility).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -596,10 +603,18 @@ Other parameters are passed through a pointer to a apiListAgentsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **action** | **string** | Filter agents by model action | 
- **addDefaultAgents** | **bool** | Include default agents to the list of org owned agents | 
- **ignoreManageBasicAgentsAccess** | **bool** | Ignore hasManageBasicAgentsAccess when listing agents | 
- **visibility** | **string** | Filter agents by access visibility | 
+ **modelIds** | **[]string** | Model ID to filter by (comma separated) | 
+ **tagIds** | **[]string** | Tag IDs to filter by (comma separated) | 
+ **q** | **string** | Search term for name or description | 
+ **action** | **string** | Filter agents by model action (chat, image, etc.) | 
+ **types** | **[]string** | Filter agents by types (basic, background, service - comma separated) | 
+ **addPredefinedAgents** | **bool** | Include default agents to the list of org owned agents | 
+ **adminMode** | **bool** | Admin mode to bypass certain permission checks | 
+ **visibility** | **string** | Filter agents by access visibility (public, organization) | 
+ **limit** | **int32** | Limit the number of results | [default to 1000]
+ **offset** | **int32** | Offset for pagination | [default to 0]
+ **sortBy** | **string** | Field to sort by (name, createdat, updatedat) | [default to &quot;\&quot;name\&quot;&quot;]
+ **sortOrder** | **string** | Sort order (asc or desc) | [default to &quot;\&quot;asc\&quot;&quot;]
 
 ### Return type
 
@@ -914,80 +929,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SearchAgents
-
-> []Agent SearchAgents(ctx, orgId).Name(name).ModelID(modelID).Execute()
-
-Search agents
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	orgId := "orgId_example" // string | organization ID
-	name := "name_example" // string | Agent Name (optional)
-	modelID := "modelID_example" // string | Model ID (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.SearchAgents(context.Background(), orgId).Name(name).ModelID(modelID).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.SearchAgents``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SearchAgents`: []Agent
-	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.SearchAgents`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgId** | **string** | organization ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSearchAgentsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **name** | **string** | Agent Name | 
- **modelID** | **string** | Model ID | 
-
-### Return type
-
-[**[]Agent**](Agent.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

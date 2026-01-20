@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -33,10 +33,10 @@ type AIModel struct {
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
-	Lifecycle *string `json:"lifecycle,omitempty"`
-	ModelCategory *string `json:"model_category,omitempty"`
 	ModelId string `json:"model_id"`
+	ModelKnowledgeCutoff *int64 `json:"model_knowledge_cutoff,omitempty"`
 	ModelReleaseDate *int64 `json:"model_release_date,omitempty"`
+	ModelStats *AIModelStats `json:"model_stats,omitempty"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
@@ -412,70 +412,6 @@ func (o *AIModel) SetIsPublic(v bool) {
 	o.IsPublic = &v
 }
 
-// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
-func (o *AIModel) GetLifecycle() string {
-	if o == nil || IsNil(o.Lifecycle) {
-		var ret string
-		return ret
-	}
-	return *o.Lifecycle
-}
-
-// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetLifecycleOk() (*string, bool) {
-	if o == nil || IsNil(o.Lifecycle) {
-		return nil, false
-	}
-	return o.Lifecycle, true
-}
-
-// HasLifecycle returns a boolean if a field has been set.
-func (o *AIModel) HasLifecycle() bool {
-	if o != nil && !IsNil(o.Lifecycle) {
-		return true
-	}
-
-	return false
-}
-
-// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
-func (o *AIModel) SetLifecycle(v string) {
-	o.Lifecycle = &v
-}
-
-// GetModelCategory returns the ModelCategory field value if set, zero value otherwise.
-func (o *AIModel) GetModelCategory() string {
-	if o == nil || IsNil(o.ModelCategory) {
-		var ret string
-		return ret
-	}
-	return *o.ModelCategory
-}
-
-// GetModelCategoryOk returns a tuple with the ModelCategory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIModel) GetModelCategoryOk() (*string, bool) {
-	if o == nil || IsNil(o.ModelCategory) {
-		return nil, false
-	}
-	return o.ModelCategory, true
-}
-
-// HasModelCategory returns a boolean if a field has been set.
-func (o *AIModel) HasModelCategory() bool {
-	if o != nil && !IsNil(o.ModelCategory) {
-		return true
-	}
-
-	return false
-}
-
-// SetModelCategory gets a reference to the given string and assigns it to the ModelCategory field.
-func (o *AIModel) SetModelCategory(v string) {
-	o.ModelCategory = &v
-}
-
 // GetModelId returns the ModelId field value
 func (o *AIModel) GetModelId() string {
 	if o == nil {
@@ -498,6 +434,38 @@ func (o *AIModel) GetModelIdOk() (*string, bool) {
 // SetModelId sets field value
 func (o *AIModel) SetModelId(v string) {
 	o.ModelId = v
+}
+
+// GetModelKnowledgeCutoff returns the ModelKnowledgeCutoff field value if set, zero value otherwise.
+func (o *AIModel) GetModelKnowledgeCutoff() int64 {
+	if o == nil || IsNil(o.ModelKnowledgeCutoff) {
+		var ret int64
+		return ret
+	}
+	return *o.ModelKnowledgeCutoff
+}
+
+// GetModelKnowledgeCutoffOk returns a tuple with the ModelKnowledgeCutoff field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetModelKnowledgeCutoffOk() (*int64, bool) {
+	if o == nil || IsNil(o.ModelKnowledgeCutoff) {
+		return nil, false
+	}
+	return o.ModelKnowledgeCutoff, true
+}
+
+// HasModelKnowledgeCutoff returns a boolean if a field has been set.
+func (o *AIModel) HasModelKnowledgeCutoff() bool {
+	if o != nil && !IsNil(o.ModelKnowledgeCutoff) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelKnowledgeCutoff gets a reference to the given int64 and assigns it to the ModelKnowledgeCutoff field.
+func (o *AIModel) SetModelKnowledgeCutoff(v int64) {
+	o.ModelKnowledgeCutoff = &v
 }
 
 // GetModelReleaseDate returns the ModelReleaseDate field value if set, zero value otherwise.
@@ -530,6 +498,38 @@ func (o *AIModel) HasModelReleaseDate() bool {
 // SetModelReleaseDate gets a reference to the given int64 and assigns it to the ModelReleaseDate field.
 func (o *AIModel) SetModelReleaseDate(v int64) {
 	o.ModelReleaseDate = &v
+}
+
+// GetModelStats returns the ModelStats field value if set, zero value otherwise.
+func (o *AIModel) GetModelStats() AIModelStats {
+	if o == nil || IsNil(o.ModelStats) {
+		var ret AIModelStats
+		return ret
+	}
+	return *o.ModelStats
+}
+
+// GetModelStatsOk returns a tuple with the ModelStats field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetModelStatsOk() (*AIModelStats, bool) {
+	if o == nil || IsNil(o.ModelStats) {
+		return nil, false
+	}
+	return o.ModelStats, true
+}
+
+// HasModelStats returns a boolean if a field has been set.
+func (o *AIModel) HasModelStats() bool {
+	if o != nil && !IsNil(o.ModelStats) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelStats gets a reference to the given AIModelStats and assigns it to the ModelStats field.
+func (o *AIModel) SetModelStats(v AIModelStats) {
+	o.ModelStats = &v
 }
 
 // GetName returns the Name field value
@@ -819,15 +819,15 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	if !IsNil(o.Lifecycle) {
-		toSerialize["lifecycle"] = o.Lifecycle
-	}
-	if !IsNil(o.ModelCategory) {
-		toSerialize["model_category"] = o.ModelCategory
-	}
 	toSerialize["model_id"] = o.ModelId
+	if !IsNil(o.ModelKnowledgeCutoff) {
+		toSerialize["model_knowledge_cutoff"] = o.ModelKnowledgeCutoff
+	}
 	if !IsNil(o.ModelReleaseDate) {
 		toSerialize["model_release_date"] = o.ModelReleaseDate
+	}
+	if !IsNil(o.ModelStats) {
+		toSerialize["model_stats"] = o.ModelStats
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
@@ -907,10 +907,10 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
-		delete(additionalProperties, "lifecycle")
-		delete(additionalProperties, "model_category")
 		delete(additionalProperties, "model_id")
+		delete(additionalProperties, "model_knowledge_cutoff")
 		delete(additionalProperties, "model_release_date")
+		delete(additionalProperties, "model_stats")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

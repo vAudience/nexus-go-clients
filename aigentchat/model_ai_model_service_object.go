@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -33,8 +33,6 @@ type AIModelServiceObject struct {
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	// Deprecated fields
-	ServiceImpl AiServiceId `json:"service_impl"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -46,7 +44,7 @@ type _AIModelServiceObject AIModelServiceObject
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId) *AIModelServiceObject {
+func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string) *AIModelServiceObject {
 	this := AIModelServiceObject{}
 	this.AiServiceId = aiServiceId
 	this.CostMultiplier = costMultiplier
@@ -54,7 +52,6 @@ func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id stri
 	this.Name = name
 	this.OwnerId = ownerId
 	this.OwnerOrganizationId = ownerOrganizationId
-	this.ServiceImpl = serviceImpl
 	return &this
 }
 
@@ -402,30 +399,6 @@ func (o *AIModelServiceObject) SetOwnerOrganizationId(v string) {
 	o.OwnerOrganizationId = v
 }
 
-// GetServiceImpl returns the ServiceImpl field value
-func (o *AIModelServiceObject) GetServiceImpl() AiServiceId {
-	if o == nil {
-		var ret AiServiceId
-		return ret
-	}
-
-	return o.ServiceImpl
-}
-
-// GetServiceImplOk returns a tuple with the ServiceImpl field value
-// and a boolean to check if the value has been set.
-func (o *AIModelServiceObject) GetServiceImplOk() (*AiServiceId, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ServiceImpl, true
-}
-
-// SetServiceImpl sets field value
-func (o *AIModelServiceObject) SetServiceImpl(v AiServiceId) {
-	o.ServiceImpl = v
-}
-
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *AIModelServiceObject) GetUpdatedAt() int64 {
 	if o == nil || IsNil(o.UpdatedAt) {
@@ -524,7 +497,6 @@ func (o AIModelServiceObject) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
-	toSerialize["service_impl"] = o.ServiceImpl
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
@@ -550,7 +522,6 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"owner_id",
 		"owner_organization_id",
-		"service_impl",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -592,7 +563,6 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
-		delete(additionalProperties, "service_impl")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "updated_by")
 		o.AdditionalProperties = additionalProperties

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DeleteMessage**](MessagesAPI.md#DeleteMessage) | **Delete** /v1/organizations/{org_id}/messages/{id} | Delete a message
 [**GetChannelMessages**](MessagesAPI.md#GetChannelMessages) | **Get** /v1/organizations/{org_id}/messages/channel/{channel_id} | Get messages for a channel
 [**GetMessage**](MessagesAPI.md#GetMessage) | **Get** /v1/organizations/{org_id}/messages/{id} | Get a message by ID
-[**SearchMessages**](MessagesAPI.md#SearchMessages) | **Get** /v1/organizations/{org_id}/messages/search | Search messages
+[**ListMessages**](MessagesAPI.md#ListMessages) | **Get** /v1/organizations/{org_id}/messages | List messages
 [**UpdateMessage**](MessagesAPI.md#UpdateMessage) | **Put** /v1/organizations/{org_id}/messages/{id} | Update a message
 
 
@@ -35,7 +35,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
+	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -306,11 +306,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SearchMessages
+## ListMessages
 
-> AIgencyMessageResults SearchMessages(ctx, orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+> AIgencyMessageResults ListMessages(ctx, orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 
-Search messages
+List messages
 
 
 
@@ -336,13 +336,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MessagesAPI.SearchMessages(context.Background(), orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+	resp, r, err := apiClient.MessagesAPI.ListMessages(context.Background(), orgId).Content(content).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.SearchMessages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MessagesAPI.ListMessages``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchMessages`: AIgencyMessageResults
-	fmt.Fprintf(os.Stdout, "Response from `MessagesAPI.SearchMessages`: %v\n", resp)
+	// response from `ListMessages`: AIgencyMessageResults
+	fmt.Fprintf(os.Stdout, "Response from `MessagesAPI.ListMessages`: %v\n", resp)
 }
 ```
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSearchMessagesRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListMessagesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -409,7 +409,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | Message ID
-	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", "MissionId_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
+	message := *openapiclient.NewAIgencyMessageWriteDto("AiModelId_example", "AiServiceId_example", "ChannelId_example", "ChannelName_example", openapiclient.ConversationRole("unknown"), "SenderName_example", openapiclient.AIgencyMessageType("message")) // AIgencyMessageWriteDto | Message
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

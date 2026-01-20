@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,10 +24,11 @@ type PromptWriteDto struct {
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
+	ReadAccess *AccessScope `json:"read_access,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title *string `json:"title,omitempty"`
-	Visibility *PromptVisibilityStates `json:"visibility,omitempty"`
+	WriteAccess *AccessScope `json:"write_access,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -178,6 +179,38 @@ func (o *PromptWriteDto) SetInternalId(v string) {
 	o.InternalId = &v
 }
 
+// GetReadAccess returns the ReadAccess field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetReadAccess() AccessScope {
+	if o == nil || IsNil(o.ReadAccess) {
+		var ret AccessScope
+		return ret
+	}
+	return *o.ReadAccess
+}
+
+// GetReadAccessOk returns a tuple with the ReadAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptWriteDto) GetReadAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.ReadAccess) {
+		return nil, false
+	}
+	return o.ReadAccess, true
+}
+
+// HasReadAccess returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasReadAccess() bool {
+	if o != nil && !IsNil(o.ReadAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadAccess gets a reference to the given AccessScope and assigns it to the ReadAccess field.
+func (o *PromptWriteDto) SetReadAccess(v AccessScope) {
+	o.ReadAccess = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *PromptWriteDto) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
@@ -274,36 +307,36 @@ func (o *PromptWriteDto) SetTitle(v string) {
 	o.Title = &v
 }
 
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *PromptWriteDto) GetVisibility() PromptVisibilityStates {
-	if o == nil || IsNil(o.Visibility) {
-		var ret PromptVisibilityStates
+// GetWriteAccess returns the WriteAccess field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetWriteAccess() AccessScope {
+	if o == nil || IsNil(o.WriteAccess) {
+		var ret AccessScope
 		return ret
 	}
-	return *o.Visibility
+	return *o.WriteAccess
 }
 
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// GetWriteAccessOk returns a tuple with the WriteAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptWriteDto) GetVisibilityOk() (*PromptVisibilityStates, bool) {
-	if o == nil || IsNil(o.Visibility) {
+func (o *PromptWriteDto) GetWriteAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.WriteAccess) {
 		return nil, false
 	}
-	return o.Visibility, true
+	return o.WriteAccess, true
 }
 
-// HasVisibility returns a boolean if a field has been set.
-func (o *PromptWriteDto) HasVisibility() bool {
-	if o != nil && !IsNil(o.Visibility) {
+// HasWriteAccess returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasWriteAccess() bool {
+	if o != nil && !IsNil(o.WriteAccess) {
 		return true
 	}
 
 	return false
 }
 
-// SetVisibility gets a reference to the given PromptVisibilityStates and assigns it to the Visibility field.
-func (o *PromptWriteDto) SetVisibility(v PromptVisibilityStates) {
-	o.Visibility = &v
+// SetWriteAccess gets a reference to the given AccessScope and assigns it to the WriteAccess field.
+func (o *PromptWriteDto) SetWriteAccess(v AccessScope) {
+	o.WriteAccess = &v
 }
 
 func (o PromptWriteDto) MarshalJSON() ([]byte, error) {
@@ -328,6 +361,9 @@ func (o PromptWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
+	if !IsNil(o.ReadAccess) {
+		toSerialize["read_access"] = o.ReadAccess
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -337,8 +373,8 @@ func (o PromptWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
 	}
-	if !IsNil(o.Visibility) {
-		toSerialize["visibility"] = o.Visibility
+	if !IsNil(o.WriteAccess) {
+		toSerialize["write_access"] = o.WriteAccess
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -366,10 +402,11 @@ func (o *PromptWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "internal_id")
+		delete(additionalProperties, "read_access")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")
-		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "write_access")
 		o.AdditionalProperties = additionalProperties
 	}
 

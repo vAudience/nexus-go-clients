@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -28,7 +28,6 @@ type Channel struct {
 	IsPublic *bool `json:"is_public,omitempty"`
 	LastMessageAt *int64 `json:"last_message_at,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	MissionId *string `json:"mission_id,omitempty"`
 	Name string `json:"name"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
@@ -277,38 +276,6 @@ func (o *Channel) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetMissionId returns the MissionId field value if set, zero value otherwise.
-func (o *Channel) GetMissionId() string {
-	if o == nil || IsNil(o.MissionId) {
-		var ret string
-		return ret
-	}
-	return *o.MissionId
-}
-
-// GetMissionIdOk returns a tuple with the MissionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Channel) GetMissionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MissionId) {
-		return nil, false
-	}
-	return o.MissionId, true
-}
-
-// HasMissionId returns a boolean if a field has been set.
-func (o *Channel) HasMissionId() bool {
-	if o != nil && !IsNil(o.MissionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMissionId gets a reference to the given string and assigns it to the MissionId field.
-func (o *Channel) SetMissionId(v string) {
-	o.MissionId = &v
-}
-
 // GetName returns the Name field value
 func (o *Channel) GetName() string {
 	if o == nil {
@@ -506,9 +473,6 @@ func (o Channel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if !IsNil(o.MissionId) {
-		toSerialize["mission_id"] = o.MissionId
-	}
 	toSerialize["name"] = o.Name
 	toSerialize["owner_id"] = o.OwnerId
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
@@ -574,7 +538,6 @@ func (o *Channel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "last_message_at")
 		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

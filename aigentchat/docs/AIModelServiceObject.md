@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated fields | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewAIModelServiceObject
 
-`func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string, serviceImpl AiServiceId, ) *AIModelServiceObject`
+`func NewAIModelServiceObject(aiServiceId string, costMultiplier float32, id string, name string, ownerId string, ownerOrganizationId string, ) *AIModelServiceObject`
 
 NewAIModelServiceObject instantiates a new AIModelServiceObject object
 This constructor will assign default values to properties that have it defined,
@@ -307,26 +306,6 @@ and a boolean to check if the value has been set.
 `func (o *AIModelServiceObject) SetOwnerOrganizationId(v string)`
 
 SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
-
-
-### GetServiceImpl
-
-`func (o *AIModelServiceObject) GetServiceImpl() AiServiceId`
-
-GetServiceImpl returns the ServiceImpl field if non-nil, zero value otherwise.
-
-### GetServiceImplOk
-
-`func (o *AIModelServiceObject) GetServiceImplOk() (*AiServiceId, bool)`
-
-GetServiceImplOk returns a tuple with the ServiceImpl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetServiceImpl
-
-`func (o *AIModelServiceObject) SetServiceImpl(v AiServiceId)`
-
-SetServiceImpl sets ServiceImpl field to given value.
 
 
 ### GetUpdatedAt

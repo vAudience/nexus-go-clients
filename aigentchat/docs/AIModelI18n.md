@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | Pointer to **string** |  | [optional] 
-**ModelCategory** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
 
 ## Methods
@@ -51,31 +50,6 @@ SetDescription sets Description field to given value.
 `func (o *AIModelI18n) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
-
-### GetModelCategory
-
-`func (o *AIModelI18n) GetModelCategory() string`
-
-GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
-
-### GetModelCategoryOk
-
-`func (o *AIModelI18n) GetModelCategoryOk() (*string, bool)`
-
-GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelCategory
-
-`func (o *AIModelI18n) SetModelCategory(v string)`
-
-SetModelCategory sets ModelCategory field to given value.
-
-### HasModelCategory
-
-`func (o *AIModelI18n) HasModelCategory() bool`
-
-HasModelCategory returns a boolean if a field has been set.
 
 ### GetName
 

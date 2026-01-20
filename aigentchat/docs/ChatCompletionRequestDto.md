@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | **string** |  | 
 **AttachedFiles** | Pointer to **[]string** |  | [optional] 
-**AttachedTemporaryFiles** | Pointer to **[]string** | Deprecated, use attached_files instead | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
 **ContinueOnMaxTokens** | Pointer to **bool** |  | [optional] 
@@ -14,7 +13,6 @@ Name | Type | Description | Notes
 **Message** | **string** |  | 
 **MessageReferenceId** | Pointer to **string** |  | [optional] 
 **MessageResponseToId** | Pointer to **string** |  | [optional] 
-**MissionId** | Pointer to **string** |  | [optional] 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **SelectedTools** | Pointer to **[]string** |  | [optional] 
 **ServiceChannel** | Pointer to **bool** |  | [optional] 
@@ -87,31 +85,6 @@ SetAttachedFiles sets AttachedFiles field to given value.
 `func (o *ChatCompletionRequestDto) HasAttachedFiles() bool`
 
 HasAttachedFiles returns a boolean if a field has been set.
-
-### GetAttachedTemporaryFiles
-
-`func (o *ChatCompletionRequestDto) GetAttachedTemporaryFiles() []string`
-
-GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field if non-nil, zero value otherwise.
-
-### GetAttachedTemporaryFilesOk
-
-`func (o *ChatCompletionRequestDto) GetAttachedTemporaryFilesOk() (*[]string, bool)`
-
-GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAttachedTemporaryFiles
-
-`func (o *ChatCompletionRequestDto) SetAttachedTemporaryFiles(v []string)`
-
-SetAttachedTemporaryFiles sets AttachedTemporaryFiles field to given value.
-
-### HasAttachedTemporaryFiles
-
-`func (o *ChatCompletionRequestDto) HasAttachedTemporaryFiles() bool`
-
-HasAttachedTemporaryFiles returns a boolean if a field has been set.
 
 ### GetChannelId
 
@@ -282,31 +255,6 @@ SetMessageResponseToId sets MessageResponseToId field to given value.
 `func (o *ChatCompletionRequestDto) HasMessageResponseToId() bool`
 
 HasMessageResponseToId returns a boolean if a field has been set.
-
-### GetMissionId
-
-`func (o *ChatCompletionRequestDto) GetMissionId() string`
-
-GetMissionId returns the MissionId field if non-nil, zero value otherwise.
-
-### GetMissionIdOk
-
-`func (o *ChatCompletionRequestDto) GetMissionIdOk() (*string, bool)`
-
-GetMissionIdOk returns a tuple with the MissionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMissionId
-
-`func (o *ChatCompletionRequestDto) SetMissionId(v string)`
-
-SetMissionId sets MissionId field to given value.
-
-### HasMissionId
-
-`func (o *ChatCompletionRequestDto) HasMissionId() bool`
-
-HasMissionId returns a boolean if a field has been set.
 
 ### GetParameters
 

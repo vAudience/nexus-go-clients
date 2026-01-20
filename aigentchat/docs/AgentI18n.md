@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
-**RecommendedTask** | Pointer to **string** | TODO: will be replaced by tags | [optional] 
 
 ## Methods
 
@@ -71,31 +70,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-
-### GetRecommendedTask
-
-`func (o *AgentI18n) GetRecommendedTask() string`
-
-GetRecommendedTask returns the RecommendedTask field if non-nil, zero value otherwise.
-
-### GetRecommendedTaskOk
-
-`func (o *AgentI18n) GetRecommendedTaskOk() (*string, bool)`
-
-GetRecommendedTaskOk returns a tuple with the RecommendedTask field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRecommendedTask
-
-`func (o *AgentI18n) SetRecommendedTask(v string)`
-
-SetRecommendedTask sets RecommendedTask field to given value.
-
-### HasRecommendedTask
-
-`func (o *AgentI18n) HasRecommendedTask() bool`
-
-HasRecommendedTask returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

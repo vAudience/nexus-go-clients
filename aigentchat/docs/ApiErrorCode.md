@@ -175,24 +175,6 @@
 
 * `ErrCodeFailedToFormUserMessage` (value: `"failed_to_form_user_message"`)
 
-* `ErrCodeMissionNotFound` (value: `"mission_not_found"`)
-
-* `ErrCodeMissionsNotFound` (value: `"missions_not_found"`)
-
-* `ErrCodeFailedToGetMission` (value: `"failed_to_get_mission"`)
-
-* `ErrCodeFailedToCreateMission` (value: `"failed_to_create_mission"`)
-
-* `ErrCodeFailedToDeleteMission` (value: `"failed_to_delete_mission"`)
-
-* `ErrCodeInvalidMissionID` (value: `"invalid_mission_id"`)
-
-* `ErrCodeInvalidMissionExecutorID` (value: `"invalid mission executor ID"`)
-
-* `ErrCodeMissionNotDone` (value: `"mission_not_done"`)
-
-* `ErrCodeInvalidExecutorID` (value: `"invalid_executor_id"`)
-
 * `ErrCodeInvalidOrgID` (value: `"invalid_organization_id"`)
 
 * `ErrCodeOrgCostBudgetNotFound` (value: `"organization_cost_budget_not_found"`)
@@ -206,6 +188,20 @@
 * `ErrCodeInsufficientBudget` (value: `"insufficient_budget"`)
 
 * `ErrCodeOrgCostBudgetExists` (value: `"organization_cost_budget_exists"`)
+
+* `ErrCodeTagNotFound` (value: `"tag_not_found"`)
+
+* `ErrCodeInvalidTagID` (value: `"invalid_tag_id"`)
+
+* `ErrCodeFailedToCreateTag` (value: `"failed_to_create_tag"`)
+
+* `ErrCodeFailedToUpdateTag` (value: `"failed_to_update_tag"`)
+
+* `ErrCodeFailedToDeleteTag` (value: `"failed_to_delete_tag"`)
+
+* `ErrCodeFailedToFetchTag` (value: `"failed_to_fetch_tag"`)
+
+* `ErrCodeFailedToFetchTags` (value: `"failed_to_fetch_tags"`)
 
 * `ErrCodeInvalidToolID` (value: `"invalid_tool_id"`)
 

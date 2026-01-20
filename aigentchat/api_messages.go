@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -742,7 +742,7 @@ func (a *MessagesAPIService) GetMessageExecute(r ApiGetMessageRequest) (*AIgency
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchMessagesRequest struct {
+type ApiListMessagesRequest struct {
 	ctx context.Context
 	ApiService *MessagesAPIService
 	orgId string
@@ -754,50 +754,50 @@ type ApiSearchMessagesRequest struct {
 }
 
 // Search by content
-func (r ApiSearchMessagesRequest) Content(content string) ApiSearchMessagesRequest {
+func (r ApiListMessagesRequest) Content(content string) ApiListMessagesRequest {
 	r.content = &content
 	return r
 }
 
 // Start date in Unix milliseconds
-func (r ApiSearchMessagesRequest) StartDate(startDate string) ApiSearchMessagesRequest {
+func (r ApiListMessagesRequest) StartDate(startDate string) ApiListMessagesRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date in Unix milliseconds
-func (r ApiSearchMessagesRequest) EndDate(endDate string) ApiSearchMessagesRequest {
+func (r ApiListMessagesRequest) EndDate(endDate string) ApiListMessagesRequest {
 	r.endDate = &endDate
 	return r
 }
 
 // Offset
-func (r ApiSearchMessagesRequest) Offset(offset int32) ApiSearchMessagesRequest {
+func (r ApiListMessagesRequest) Offset(offset int32) ApiListMessagesRequest {
 	r.offset = &offset
 	return r
 }
 
 // Limit results
-func (r ApiSearchMessagesRequest) Limit(limit int32) ApiSearchMessagesRequest {
+func (r ApiListMessagesRequest) Limit(limit int32) ApiListMessagesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchMessagesRequest) Execute() (*AIgencyMessageResults, *http.Response, error) {
-	return r.ApiService.SearchMessagesExecute(r)
+func (r ApiListMessagesRequest) Execute() (*AIgencyMessageResults, *http.Response, error) {
+	return r.ApiService.ListMessagesExecute(r)
 }
 
 /*
-SearchMessages Search messages
+ListMessages List messages
 
-Search for messages based on content, sender ID, and date range
+List messages based on content, sender ID, and date range
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @return ApiSearchMessagesRequest
+ @return ApiListMessagesRequest
 */
-func (a *MessagesAPIService) SearchMessages(ctx context.Context, orgId string) ApiSearchMessagesRequest {
-	return ApiSearchMessagesRequest{
+func (a *MessagesAPIService) ListMessages(ctx context.Context, orgId string) ApiListMessagesRequest {
+	return ApiListMessagesRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -806,7 +806,7 @@ func (a *MessagesAPIService) SearchMessages(ctx context.Context, orgId string) A
 
 // Execute executes the request
 //  @return AIgencyMessageResults
-func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (*AIgencyMessageResults, *http.Response, error) {
+func (a *MessagesAPIService) ListMessagesExecute(r ApiListMessagesRequest) (*AIgencyMessageResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -814,12 +814,12 @@ func (a *MessagesAPIService) SearchMessagesExecute(r ApiSearchMessagesRequest) (
 		localVarReturnValue  *AIgencyMessageResults
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessagesAPIService.SearchMessages")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessagesAPIService.ListMessages")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages/search"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/messages"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

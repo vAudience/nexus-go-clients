@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -13,7 +13,6 @@ package aigentchat
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the AIModelServiceWriteDto type satisfies the MappedNullable interface at compile time
@@ -29,8 +28,6 @@ type AIModelServiceWriteDto struct {
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	Name *string `json:"name,omitempty"`
-	// Deprecated fields
-	ServiceImpl AiServiceId `json:"service_impl"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,9 +37,8 @@ type _AIModelServiceWriteDto AIModelServiceWriteDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIModelServiceWriteDto(serviceImpl AiServiceId) *AIModelServiceWriteDto {
+func NewAIModelServiceWriteDto() *AIModelServiceWriteDto {
 	this := AIModelServiceWriteDto{}
-	this.ServiceImpl = serviceImpl
 	return &this
 }
 
@@ -310,30 +306,6 @@ func (o *AIModelServiceWriteDto) SetName(v string) {
 	o.Name = &v
 }
 
-// GetServiceImpl returns the ServiceImpl field value
-func (o *AIModelServiceWriteDto) GetServiceImpl() AiServiceId {
-	if o == nil {
-		var ret AiServiceId
-		return ret
-	}
-
-	return o.ServiceImpl
-}
-
-// GetServiceImplOk returns a tuple with the ServiceImpl field value
-// and a boolean to check if the value has been set.
-func (o *AIModelServiceWriteDto) GetServiceImplOk() (*AiServiceId, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ServiceImpl, true
-}
-
-// SetServiceImpl sets field value
-func (o *AIModelServiceWriteDto) SetServiceImpl(v AiServiceId) {
-	o.ServiceImpl = v
-}
-
 func (o AIModelServiceWriteDto) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -368,7 +340,6 @@ func (o AIModelServiceWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["service_impl"] = o.ServiceImpl
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -378,27 +349,6 @@ func (o AIModelServiceWriteDto) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AIModelServiceWriteDto) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"service_impl",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varAIModelServiceWriteDto := _AIModelServiceWriteDto{}
 
 	err = json.Unmarshal(data, &varAIModelServiceWriteDto)
@@ -420,7 +370,6 @@ func (o *AIModelServiceWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "service_impl")
 		o.AdditionalProperties = additionalProperties
 	}
 

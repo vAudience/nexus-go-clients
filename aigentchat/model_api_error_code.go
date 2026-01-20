@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -107,15 +107,6 @@ const (
 	ErrCodeFailedToRetrieveChannelMessages ApiErrorCode = "failed_to_retrieve_channel_messages"
 	ErrCodeFailedToRetrieveMessagesFromList ApiErrorCode = "failed_to_retrieve_messages_from_list"
 	ErrCodeFailedToFormUserMessage ApiErrorCode = "failed_to_form_user_message"
-	ErrCodeMissionNotFound ApiErrorCode = "mission_not_found"
-	ErrCodeMissionsNotFound ApiErrorCode = "missions_not_found"
-	ErrCodeFailedToGetMission ApiErrorCode = "failed_to_get_mission"
-	ErrCodeFailedToCreateMission ApiErrorCode = "failed_to_create_mission"
-	ErrCodeFailedToDeleteMission ApiErrorCode = "failed_to_delete_mission"
-	ErrCodeInvalidMissionID ApiErrorCode = "invalid_mission_id"
-	ErrCodeInvalidMissionExecutorID ApiErrorCode = "invalid mission executor ID"
-	ErrCodeMissionNotDone ApiErrorCode = "mission_not_done"
-	ErrCodeInvalidExecutorID ApiErrorCode = "invalid_executor_id"
 	ErrCodeInvalidOrgID ApiErrorCode = "invalid_organization_id"
 	ErrCodeOrgCostBudgetNotFound ApiErrorCode = "organization_cost_budget_not_found"
 	ErrCodeFailedToCreateBudget ApiErrorCode = "failed_to_create_organization_cost_budget"
@@ -123,6 +114,13 @@ const (
 	ErrCodeFailedToGetOrgCostBudget ApiErrorCode = "failed_to_get_organization_cost_budget"
 	ErrCodeInsufficientBudget ApiErrorCode = "insufficient_budget"
 	ErrCodeOrgCostBudgetExists ApiErrorCode = "organization_cost_budget_exists"
+	ErrCodeTagNotFound ApiErrorCode = "tag_not_found"
+	ErrCodeInvalidTagID ApiErrorCode = "invalid_tag_id"
+	ErrCodeFailedToCreateTag ApiErrorCode = "failed_to_create_tag"
+	ErrCodeFailedToUpdateTag ApiErrorCode = "failed_to_update_tag"
+	ErrCodeFailedToDeleteTag ApiErrorCode = "failed_to_delete_tag"
+	ErrCodeFailedToFetchTag ApiErrorCode = "failed_to_fetch_tag"
+	ErrCodeFailedToFetchTags ApiErrorCode = "failed_to_fetch_tags"
 	ErrCodeInvalidToolID ApiErrorCode = "invalid_tool_id"
 	ErrCodeFailedToCreateTempApiKey ApiErrorCode = "failed_to_create_temp_api_key"
 	ErrCodeInvalidPromptID ApiErrorCode = "invalid_prompt_id"
@@ -225,15 +223,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_retrieve_channel_messages",
 	"failed_to_retrieve_messages_from_list",
 	"failed_to_form_user_message",
-	"mission_not_found",
-	"missions_not_found",
-	"failed_to_get_mission",
-	"failed_to_create_mission",
-	"failed_to_delete_mission",
-	"invalid_mission_id",
-	"invalid mission executor ID",
-	"mission_not_done",
-	"invalid_executor_id",
 	"invalid_organization_id",
 	"organization_cost_budget_not_found",
 	"failed_to_create_organization_cost_budget",
@@ -241,6 +230,13 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_get_organization_cost_budget",
 	"insufficient_budget",
 	"organization_cost_budget_exists",
+	"tag_not_found",
+	"invalid_tag_id",
+	"failed_to_create_tag",
+	"failed_to_update_tag",
+	"failed_to_delete_tag",
+	"failed_to_fetch_tag",
+	"failed_to_fetch_tags",
 	"invalid_tool_id",
 	"failed_to_create_temp_api_key",
 	"invalid_prompt_id",

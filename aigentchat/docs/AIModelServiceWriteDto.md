@@ -12,13 +12,12 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**ServiceImpl** | [**AiServiceId**](AiServiceId.md) | Deprecated fields | 
 
 ## Methods
 
 ### NewAIModelServiceWriteDto
 
-`func NewAIModelServiceWriteDto(serviceImpl AiServiceId, ) *AIModelServiceWriteDto`
+`func NewAIModelServiceWriteDto() *AIModelServiceWriteDto`
 
 NewAIModelServiceWriteDto instantiates a new AIModelServiceWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -232,26 +231,6 @@ SetName sets Name field to given value.
 `func (o *AIModelServiceWriteDto) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetServiceImpl
-
-`func (o *AIModelServiceWriteDto) GetServiceImpl() AiServiceId`
-
-GetServiceImpl returns the ServiceImpl field if non-nil, zero value otherwise.
-
-### GetServiceImplOk
-
-`func (o *AIModelServiceWriteDto) GetServiceImplOk() (*AiServiceId, bool)`
-
-GetServiceImplOk returns a tuple with the ServiceImpl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetServiceImpl
-
-`func (o *AIModelServiceWriteDto) SetServiceImpl(v AiServiceId)`
-
-SetServiceImpl sets ServiceImpl field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

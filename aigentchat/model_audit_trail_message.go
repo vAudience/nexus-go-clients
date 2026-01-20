@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,7 +23,6 @@ var _ MappedNullable = &AuditTrailMessage{}
 type AuditTrailMessage struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
-	Attachments AIgencyMessageFileList `json:"attachments"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
 	Content AIgencyMessageContentList `json:"content"`
@@ -53,11 +52,10 @@ type _AuditTrailMessage AuditTrailMessage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditTrailMessage(aiModelId string, aiServiceId string, attachments AIgencyMessageFileList, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AuditTrailMessage {
+func NewAuditTrailMessage(aiModelId string, aiServiceId string, channelId string, channelName string, content AIgencyMessageContentList, createdAt int64, id string, ownerOrganizationId string, senderConversationRole ConversationRole, senderId string, senderName string, tokenDirection TokenDirection, type_ AIgencyMessageType, updatedAt int64) *AuditTrailMessage {
 	this := AuditTrailMessage{}
 	this.AiModelId = aiModelId
 	this.AiServiceId = aiServiceId
-	this.Attachments = attachments
 	this.ChannelId = channelId
 	this.ChannelName = channelName
 	this.Content = content
@@ -127,30 +125,6 @@ func (o *AuditTrailMessage) GetAiServiceIdOk() (*string, bool) {
 // SetAiServiceId sets field value
 func (o *AuditTrailMessage) SetAiServiceId(v string) {
 	o.AiServiceId = v
-}
-
-// GetAttachments returns the Attachments field value
-func (o *AuditTrailMessage) GetAttachments() AIgencyMessageFileList {
-	if o == nil {
-		var ret AIgencyMessageFileList
-		return ret
-	}
-
-	return o.Attachments
-}
-
-// GetAttachmentsOk returns a tuple with the Attachments field value
-// and a boolean to check if the value has been set.
-func (o *AuditTrailMessage) GetAttachmentsOk() (*AIgencyMessageFileList, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Attachments, true
-}
-
-// SetAttachments sets field value
-func (o *AuditTrailMessage) SetAttachments(v AIgencyMessageFileList) {
-	o.Attachments = v
 }
 
 // GetChannelId returns the ChannelId field value
@@ -709,7 +683,6 @@ func (o AuditTrailMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ai_model_id"] = o.AiModelId
 	toSerialize["ai_service_id"] = o.AiServiceId
-	toSerialize["attachments"] = o.Attachments
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["channel_name"] = o.ChannelName
 	toSerialize["content"] = o.Content
@@ -761,7 +734,6 @@ func (o *AuditTrailMessage) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"ai_model_id",
 		"ai_service_id",
-		"attachments",
 		"channel_id",
 		"channel_name",
 		"content",
@@ -805,7 +777,6 @@ func (o *AuditTrailMessage) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ai_model_id")
 		delete(additionalProperties, "ai_service_id")
-		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")
 		delete(additionalProperties, "content")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -33,7 +33,6 @@ type Agent struct {
 	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
-	IsPublic *bool `json:"is_public,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	// Note: only set when returning the agent (not stored at agent level)
 	Model *AIModel `json:"model,omitempty"`
@@ -44,15 +43,16 @@ type Agent struct {
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
-	// TODO: will be replaced by tags
-	RecommendedTask *string `json:"recommended_task,omitempty"`
+	ReadAccess *AccessScope `json:"read_access,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
-	TeamIds []string `json:"team_ids,omitempty"`
+	TagIds []string `json:"tag_ids,omitempty"`
 	ToolConfig map[string]interface{} `json:"tool_config,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
 	UpdatedBy *string `json:"updated_by,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
+	UserAccess *UserAccessView `json:"user_access,omitempty"`
+	WriteAccess *AccessScope `json:"write_access,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -456,38 +456,6 @@ func (o *Agent) SetInternalId(v string) {
 	o.InternalId = &v
 }
 
-// GetIsPublic returns the IsPublic field value if set, zero value otherwise.
-func (o *Agent) GetIsPublic() bool {
-	if o == nil || IsNil(o.IsPublic) {
-		var ret bool
-		return ret
-	}
-	return *o.IsPublic
-}
-
-// GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Agent) GetIsPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsPublic) {
-		return nil, false
-	}
-	return o.IsPublic, true
-}
-
-// HasIsPublic returns a boolean if a field has been set.
-func (o *Agent) HasIsPublic() bool {
-	if o != nil && !IsNil(o.IsPublic) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
-func (o *Agent) SetIsPublic(v bool) {
-	o.IsPublic = &v
-}
-
 // GetMetaData returns the MetaData field value if set, zero value otherwise.
 func (o *Agent) GetMetaData() map[string]interface{} {
 	if o == nil || IsNil(o.MetaData) {
@@ -744,36 +712,36 @@ func (o *Agent) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 
-// GetRecommendedTask returns the RecommendedTask field value if set, zero value otherwise.
-func (o *Agent) GetRecommendedTask() string {
-	if o == nil || IsNil(o.RecommendedTask) {
-		var ret string
+// GetReadAccess returns the ReadAccess field value if set, zero value otherwise.
+func (o *Agent) GetReadAccess() AccessScope {
+	if o == nil || IsNil(o.ReadAccess) {
+		var ret AccessScope
 		return ret
 	}
-	return *o.RecommendedTask
+	return *o.ReadAccess
 }
 
-// GetRecommendedTaskOk returns a tuple with the RecommendedTask field value if set, nil otherwise
+// GetReadAccessOk returns a tuple with the ReadAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Agent) GetRecommendedTaskOk() (*string, bool) {
-	if o == nil || IsNil(o.RecommendedTask) {
+func (o *Agent) GetReadAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.ReadAccess) {
 		return nil, false
 	}
-	return o.RecommendedTask, true
+	return o.ReadAccess, true
 }
 
-// HasRecommendedTask returns a boolean if a field has been set.
-func (o *Agent) HasRecommendedTask() bool {
-	if o != nil && !IsNil(o.RecommendedTask) {
+// HasReadAccess returns a boolean if a field has been set.
+func (o *Agent) HasReadAccess() bool {
+	if o != nil && !IsNil(o.ReadAccess) {
 		return true
 	}
 
 	return false
 }
 
-// SetRecommendedTask gets a reference to the given string and assigns it to the RecommendedTask field.
-func (o *Agent) SetRecommendedTask(v string) {
-	o.RecommendedTask = &v
+// SetReadAccess gets a reference to the given AccessScope and assigns it to the ReadAccess field.
+func (o *Agent) SetReadAccess(v AccessScope) {
+	o.ReadAccess = &v
 }
 
 // GetSystemMessages returns the SystemMessages field value if set, zero value otherwise.
@@ -808,36 +776,36 @@ func (o *Agent) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
-// GetTeamIds returns the TeamIds field value if set, zero value otherwise.
-func (o *Agent) GetTeamIds() []string {
-	if o == nil || IsNil(o.TeamIds) {
+// GetTagIds returns the TagIds field value if set, zero value otherwise.
+func (o *Agent) GetTagIds() []string {
+	if o == nil || IsNil(o.TagIds) {
 		var ret []string
 		return ret
 	}
-	return o.TeamIds
+	return o.TagIds
 }
 
-// GetTeamIdsOk returns a tuple with the TeamIds field value if set, nil otherwise
+// GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Agent) GetTeamIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.TeamIds) {
+func (o *Agent) GetTagIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.TagIds) {
 		return nil, false
 	}
-	return o.TeamIds, true
+	return o.TagIds, true
 }
 
-// HasTeamIds returns a boolean if a field has been set.
-func (o *Agent) HasTeamIds() bool {
-	if o != nil && !IsNil(o.TeamIds) {
+// HasTagIds returns a boolean if a field has been set.
+func (o *Agent) HasTagIds() bool {
+	if o != nil && !IsNil(o.TagIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetTeamIds gets a reference to the given []string and assigns it to the TeamIds field.
-func (o *Agent) SetTeamIds(v []string) {
-	o.TeamIds = v
+// SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
+func (o *Agent) SetTagIds(v []string) {
+	o.TagIds = v
 }
 
 // GetToolConfig returns the ToolConfig field value if set, zero value otherwise.
@@ -1000,6 +968,70 @@ func (o *Agent) SetUseTools(v bool) {
 	o.UseTools = &v
 }
 
+// GetUserAccess returns the UserAccess field value if set, zero value otherwise.
+func (o *Agent) GetUserAccess() UserAccessView {
+	if o == nil || IsNil(o.UserAccess) {
+		var ret UserAccessView
+		return ret
+	}
+	return *o.UserAccess
+}
+
+// GetUserAccessOk returns a tuple with the UserAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetUserAccessOk() (*UserAccessView, bool) {
+	if o == nil || IsNil(o.UserAccess) {
+		return nil, false
+	}
+	return o.UserAccess, true
+}
+
+// HasUserAccess returns a boolean if a field has been set.
+func (o *Agent) HasUserAccess() bool {
+	if o != nil && !IsNil(o.UserAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAccess gets a reference to the given UserAccessView and assigns it to the UserAccess field.
+func (o *Agent) SetUserAccess(v UserAccessView) {
+	o.UserAccess = &v
+}
+
+// GetWriteAccess returns the WriteAccess field value if set, zero value otherwise.
+func (o *Agent) GetWriteAccess() AccessScope {
+	if o == nil || IsNil(o.WriteAccess) {
+		var ret AccessScope
+		return ret
+	}
+	return *o.WriteAccess
+}
+
+// GetWriteAccessOk returns a tuple with the WriteAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetWriteAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.WriteAccess) {
+		return nil, false
+	}
+	return o.WriteAccess, true
+}
+
+// HasWriteAccess returns a boolean if a field has been set.
+func (o *Agent) HasWriteAccess() bool {
+	if o != nil && !IsNil(o.WriteAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetWriteAccess gets a reference to the given AccessScope and assigns it to the WriteAccess field.
+func (o *Agent) SetWriteAccess(v AccessScope) {
+	o.WriteAccess = &v
+}
+
 func (o Agent) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1044,9 +1076,6 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
-	if !IsNil(o.IsPublic) {
-		toSerialize["is_public"] = o.IsPublic
-	}
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
 	}
@@ -1066,14 +1095,14 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.RecommendedTask) {
-		toSerialize["recommended_task"] = o.RecommendedTask
+	if !IsNil(o.ReadAccess) {
+		toSerialize["read_access"] = o.ReadAccess
 	}
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
-	if !IsNil(o.TeamIds) {
-		toSerialize["team_ids"] = o.TeamIds
+	if !IsNil(o.TagIds) {
+		toSerialize["tag_ids"] = o.TagIds
 	}
 	if !IsNil(o.ToolConfig) {
 		toSerialize["tool_config"] = o.ToolConfig
@@ -1089,6 +1118,12 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UseTools) {
 		toSerialize["use_tools"] = o.UseTools
+	}
+	if !IsNil(o.UserAccess) {
+		toSerialize["user_access"] = o.UserAccess
+	}
+	if !IsNil(o.WriteAccess) {
+		toSerialize["write_access"] = o.WriteAccess
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1149,7 +1184,6 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ignore_incoming_overwrite")
 		delete(additionalProperties, "initial_user_messages")
 		delete(additionalProperties, "internal_id")
-		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "model")
 		delete(additionalProperties, "model_actions")
@@ -1159,14 +1193,16 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
-		delete(additionalProperties, "recommended_task")
+		delete(additionalProperties, "read_access")
 		delete(additionalProperties, "system_messages")
-		delete(additionalProperties, "team_ids")
+		delete(additionalProperties, "tag_ids")
 		delete(additionalProperties, "tool_config")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "updated_by")
 		delete(additionalProperties, "use_tools")
+		delete(additionalProperties, "user_access")
+		delete(additionalProperties, "write_access")
 		o.AdditionalProperties = additionalProperties
 	}
 

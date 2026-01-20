@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## ExecuteFunctionCall
 
-> FunctionCallResults ExecuteFunctionCall(ctx, orgId, ref).Arguments(arguments).Execute()
+> FunctionCallResults ExecuteFunctionCall(ctx, orgId, ref).Request(request).Execute()
 
 Execute a function call
 
@@ -33,11 +33,11 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	ref := "ref_example" // string | Function call name or ID
-	arguments := map[string]interface{}{ ... } // map[string]interface{} | Function call arguments
+	request := *openapiclient.NewFunctionCallRequestDto() // FunctionCallRequestDto | Function call request
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, ref).Arguments(arguments).Execute()
+	resp, r, err := apiClient.FunctionCallsAPI.ExecuteFunctionCall(context.Background(), orgId, ref).Request(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FunctionCallsAPI.ExecuteFunctionCall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **arguments** | **map[string]interface{}** | Function call arguments | 
+ **request** | [**FunctionCallRequestDto**](FunctionCallRequestDto.md) | Function call request | 
 
 ### Return type
 

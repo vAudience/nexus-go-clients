@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -29,12 +29,14 @@ type Prompt struct {
 	InternalId *string `json:"internal_id,omitempty"`
 	OwnerId *string `json:"owner_id,omitempty"`
 	OwnerOrganizationId *string `json:"owner_organization_id,omitempty"`
+	ReadAccess *AccessScope `json:"read_access,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title string `json:"title"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
+	UserAccess *UserAccessView `json:"user_access,omitempty"`
 	Versions []PromptVersion `json:"versions,omitempty"`
-	Visibility *PromptVisibilityStates `json:"visibility,omitempty"`
+	WriteAccess *AccessScope `json:"write_access,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -307,6 +309,38 @@ func (o *Prompt) SetOwnerOrganizationId(v string) {
 	o.OwnerOrganizationId = &v
 }
 
+// GetReadAccess returns the ReadAccess field value if set, zero value otherwise.
+func (o *Prompt) GetReadAccess() AccessScope {
+	if o == nil || IsNil(o.ReadAccess) {
+		var ret AccessScope
+		return ret
+	}
+	return *o.ReadAccess
+}
+
+// GetReadAccessOk returns a tuple with the ReadAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetReadAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.ReadAccess) {
+		return nil, false
+	}
+	return o.ReadAccess, true
+}
+
+// HasReadAccess returns a boolean if a field has been set.
+func (o *Prompt) HasReadAccess() bool {
+	if o != nil && !IsNil(o.ReadAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadAccess gets a reference to the given AccessScope and assigns it to the ReadAccess field.
+func (o *Prompt) SetReadAccess(v AccessScope) {
+	o.ReadAccess = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *Prompt) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
@@ -427,6 +461,38 @@ func (o *Prompt) SetUpdatedAt(v int64) {
 	o.UpdatedAt = &v
 }
 
+// GetUserAccess returns the UserAccess field value if set, zero value otherwise.
+func (o *Prompt) GetUserAccess() UserAccessView {
+	if o == nil || IsNil(o.UserAccess) {
+		var ret UserAccessView
+		return ret
+	}
+	return *o.UserAccess
+}
+
+// GetUserAccessOk returns a tuple with the UserAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetUserAccessOk() (*UserAccessView, bool) {
+	if o == nil || IsNil(o.UserAccess) {
+		return nil, false
+	}
+	return o.UserAccess, true
+}
+
+// HasUserAccess returns a boolean if a field has been set.
+func (o *Prompt) HasUserAccess() bool {
+	if o != nil && !IsNil(o.UserAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAccess gets a reference to the given UserAccessView and assigns it to the UserAccess field.
+func (o *Prompt) SetUserAccess(v UserAccessView) {
+	o.UserAccess = &v
+}
+
 // GetVersions returns the Versions field value if set, zero value otherwise.
 func (o *Prompt) GetVersions() []PromptVersion {
 	if o == nil || IsNil(o.Versions) {
@@ -459,36 +525,36 @@ func (o *Prompt) SetVersions(v []PromptVersion) {
 	o.Versions = v
 }
 
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *Prompt) GetVisibility() PromptVisibilityStates {
-	if o == nil || IsNil(o.Visibility) {
-		var ret PromptVisibilityStates
+// GetWriteAccess returns the WriteAccess field value if set, zero value otherwise.
+func (o *Prompt) GetWriteAccess() AccessScope {
+	if o == nil || IsNil(o.WriteAccess) {
+		var ret AccessScope
 		return ret
 	}
-	return *o.Visibility
+	return *o.WriteAccess
 }
 
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// GetWriteAccessOk returns a tuple with the WriteAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Prompt) GetVisibilityOk() (*PromptVisibilityStates, bool) {
-	if o == nil || IsNil(o.Visibility) {
+func (o *Prompt) GetWriteAccessOk() (*AccessScope, bool) {
+	if o == nil || IsNil(o.WriteAccess) {
 		return nil, false
 	}
-	return o.Visibility, true
+	return o.WriteAccess, true
 }
 
-// HasVisibility returns a boolean if a field has been set.
-func (o *Prompt) HasVisibility() bool {
-	if o != nil && !IsNil(o.Visibility) {
+// HasWriteAccess returns a boolean if a field has been set.
+func (o *Prompt) HasWriteAccess() bool {
+	if o != nil && !IsNil(o.WriteAccess) {
 		return true
 	}
 
 	return false
 }
 
-// SetVisibility gets a reference to the given PromptVisibilityStates and assigns it to the Visibility field.
-func (o *Prompt) SetVisibility(v PromptVisibilityStates) {
-	o.Visibility = &v
+// SetWriteAccess gets a reference to the given AccessScope and assigns it to the WriteAccess field.
+func (o *Prompt) SetWriteAccess(v AccessScope) {
+	o.WriteAccess = &v
 }
 
 func (o Prompt) MarshalJSON() ([]byte, error) {
@@ -523,6 +589,9 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OwnerOrganizationId) {
 		toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	}
+	if !IsNil(o.ReadAccess) {
+		toSerialize["read_access"] = o.ReadAccess
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -533,11 +602,14 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
+	if !IsNil(o.UserAccess) {
+		toSerialize["user_access"] = o.UserAccess
+	}
 	if !IsNil(o.Versions) {
 		toSerialize["versions"] = o.Versions
 	}
-	if !IsNil(o.Visibility) {
-		toSerialize["visibility"] = o.Visibility
+	if !IsNil(o.WriteAccess) {
+		toSerialize["write_access"] = o.WriteAccess
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -591,12 +663,14 @@ func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
+		delete(additionalProperties, "read_access")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_access")
 		delete(additionalProperties, "versions")
-		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "write_access")
 		o.AdditionalProperties = additionalProperties
 	}
 

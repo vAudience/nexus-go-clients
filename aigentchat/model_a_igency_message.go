@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,22 +23,19 @@ var _ MappedNullable = &AIgencyMessage{}
 type AIgencyMessage struct {
 	AiModelId string `json:"ai_model_id"`
 	AiServiceId string `json:"ai_service_id"`
-	// Deprecated, add files to content instead
+	// Note: deprecated, but we need to keep it for backward compatibility or do a message data migration
 	Attachments AIgencyMessageFileList `json:"attachments"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
 	Content AIgencyMessageContentList `json:"content"`
 	ContinuationInstructions *ToolContinuationInstructions `json:"continuation_instructions,omitempty"`
 	CreatedAt int64 `json:"created_at"`
-	// Deprecated, use feature_usage
-	CreatedForFeature *AIModelFeature `json:"created_for_feature,omitempty"`
 	Error *AiServiceError `json:"error,omitempty"`
 	ExecutionId *string `json:"execution_id,omitempty"`
 	FeatureUsage []ExecutionFeatureUsage `json:"feature_usage,omitempty"`
 	FinishReason *FinishReason `json:"finish_reason,omitempty"`
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
-	MissionId *string `json:"mission_id,omitempty"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	ReferenceId *string `json:"reference_id,omitempty"`
@@ -288,38 +285,6 @@ func (o *AIgencyMessage) SetCreatedAt(v int64) {
 	o.CreatedAt = v
 }
 
-// GetCreatedForFeature returns the CreatedForFeature field value if set, zero value otherwise.
-func (o *AIgencyMessage) GetCreatedForFeature() AIModelFeature {
-	if o == nil || IsNil(o.CreatedForFeature) {
-		var ret AIModelFeature
-		return ret
-	}
-	return *o.CreatedForFeature
-}
-
-// GetCreatedForFeatureOk returns a tuple with the CreatedForFeature field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessage) GetCreatedForFeatureOk() (*AIModelFeature, bool) {
-	if o == nil || IsNil(o.CreatedForFeature) {
-		return nil, false
-	}
-	return o.CreatedForFeature, true
-}
-
-// HasCreatedForFeature returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasCreatedForFeature() bool {
-	if o != nil && !IsNil(o.CreatedForFeature) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedForFeature gets a reference to the given AIModelFeature and assigns it to the CreatedForFeature field.
-func (o *AIgencyMessage) SetCreatedForFeature(v AIModelFeature) {
-	o.CreatedForFeature = &v
-}
-
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *AIgencyMessage) GetError() AiServiceError {
 	if o == nil || IsNil(o.Error) {
@@ -502,38 +467,6 @@ func (o *AIgencyMessage) HasMetaData() bool {
 // SetMetaData gets a reference to the given map[string]interface{} and assigns it to the MetaData field.
 func (o *AIgencyMessage) SetMetaData(v map[string]interface{}) {
 	o.MetaData = v
-}
-
-// GetMissionId returns the MissionId field value if set, zero value otherwise.
-func (o *AIgencyMessage) GetMissionId() string {
-	if o == nil || IsNil(o.MissionId) {
-		var ret string
-		return ret
-	}
-	return *o.MissionId
-}
-
-// GetMissionIdOk returns a tuple with the MissionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AIgencyMessage) GetMissionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MissionId) {
-		return nil, false
-	}
-	return o.MissionId, true
-}
-
-// HasMissionId returns a boolean if a field has been set.
-func (o *AIgencyMessage) HasMissionId() bool {
-	if o != nil && !IsNil(o.MissionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMissionId gets a reference to the given string and assigns it to the MissionId field.
-func (o *AIgencyMessage) SetMissionId(v string) {
-	o.MissionId = &v
 }
 
 // GetOwnerOrganizationId returns the OwnerOrganizationId field value
@@ -884,9 +817,6 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 		toSerialize["continuation_instructions"] = o.ContinuationInstructions
 	}
 	toSerialize["created_at"] = o.CreatedAt
-	if !IsNil(o.CreatedForFeature) {
-		toSerialize["created_for_feature"] = o.CreatedForFeature
-	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
@@ -902,9 +832,6 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	if !IsNil(o.MetaData) {
 		toSerialize["meta_data"] = o.MetaData
-	}
-	if !IsNil(o.MissionId) {
-		toSerialize["mission_id"] = o.MissionId
 	}
 	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	if !IsNil(o.Parameters) {
@@ -993,14 +920,12 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "continuation_instructions")
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "created_for_feature")
 		delete(additionalProperties, "error")
 		delete(additionalProperties, "execution_id")
 		delete(additionalProperties, "feature_usage")
 		delete(additionalProperties, "finish_reason")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "meta_data")
-		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "reference_id")

@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 **InternalId** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **OwnerOrganizationId** | Pointer to **string** |  | [optional] 
+**ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | **string** |  | 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
+**UserAccess** | Pointer to [**UserAccessView**](UserAccessView.md) |  | [optional] 
 **Versions** | Pointer to [**[]PromptVersion**](PromptVersion.md) |  | [optional] 
-**Visibility** | Pointer to [**PromptVisibilityStates**](PromptVisibilityStates.md) |  | [optional] 
+**WriteAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 
 ## Methods
 
@@ -233,6 +235,31 @@ SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
 HasOwnerOrganizationId returns a boolean if a field has been set.
 
+### GetReadAccess
+
+`func (o *Prompt) GetReadAccess() AccessScope`
+
+GetReadAccess returns the ReadAccess field if non-nil, zero value otherwise.
+
+### GetReadAccessOk
+
+`func (o *Prompt) GetReadAccessOk() (*AccessScope, bool)`
+
+GetReadAccessOk returns a tuple with the ReadAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadAccess
+
+`func (o *Prompt) SetReadAccess(v AccessScope)`
+
+SetReadAccess sets ReadAccess field to given value.
+
+### HasReadAccess
+
+`func (o *Prompt) HasReadAccess() bool`
+
+HasReadAccess returns a boolean if a field has been set.
+
 ### GetTags
 
 `func (o *Prompt) GetTags() []string`
@@ -328,6 +355,31 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetUserAccess
+
+`func (o *Prompt) GetUserAccess() UserAccessView`
+
+GetUserAccess returns the UserAccess field if non-nil, zero value otherwise.
+
+### GetUserAccessOk
+
+`func (o *Prompt) GetUserAccessOk() (*UserAccessView, bool)`
+
+GetUserAccessOk returns a tuple with the UserAccess field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserAccess
+
+`func (o *Prompt) SetUserAccess(v UserAccessView)`
+
+SetUserAccess sets UserAccess field to given value.
+
+### HasUserAccess
+
+`func (o *Prompt) HasUserAccess() bool`
+
+HasUserAccess returns a boolean if a field has been set.
+
 ### GetVersions
 
 `func (o *Prompt) GetVersions() []PromptVersion`
@@ -353,30 +405,30 @@ SetVersions sets Versions field to given value.
 
 HasVersions returns a boolean if a field has been set.
 
-### GetVisibility
+### GetWriteAccess
 
-`func (o *Prompt) GetVisibility() PromptVisibilityStates`
+`func (o *Prompt) GetWriteAccess() AccessScope`
 
-GetVisibility returns the Visibility field if non-nil, zero value otherwise.
+GetWriteAccess returns the WriteAccess field if non-nil, zero value otherwise.
 
-### GetVisibilityOk
+### GetWriteAccessOk
 
-`func (o *Prompt) GetVisibilityOk() (*PromptVisibilityStates, bool)`
+`func (o *Prompt) GetWriteAccessOk() (*AccessScope, bool)`
 
-GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
+GetWriteAccessOk returns a tuple with the WriteAccess field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVisibility
+### SetWriteAccess
 
-`func (o *Prompt) SetVisibility(v PromptVisibilityStates)`
+`func (o *Prompt) SetWriteAccess(v AccessScope)`
 
-SetVisibility sets Visibility field to given value.
+SetWriteAccess sets WriteAccess field to given value.
 
-### HasVisibility
+### HasWriteAccess
 
-`func (o *Prompt) HasVisibility() bool`
+`func (o *Prompt) HasWriteAccess() bool`
 
-HasVisibility returns a boolean if a field has been set.
+HasWriteAccess returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

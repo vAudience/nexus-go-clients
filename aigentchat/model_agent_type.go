@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,7 @@ type AgentType string
 const (
 	AgentTypeNil AgentType = ""
 	AgentTypeBasic AgentType = "basic"
+	AgentTypeBackground AgentType = "background"
 	AgentTypeService AgentType = "service"
 )
 
@@ -30,6 +31,7 @@ const (
 var AllowedAgentTypeEnumValues = []AgentType{
 	"",
 	"basic",
+	"background",
 	"service",
 }
 

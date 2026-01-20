@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -29,12 +29,12 @@ type ApiExecuteFunctionCallRequest struct {
 	ApiService *FunctionCallsAPIService
 	orgId string
 	ref string
-	arguments *map[string]interface{}
+	request *FunctionCallRequestDto
 }
 
-// Function call arguments
-func (r ApiExecuteFunctionCallRequest) Arguments(arguments map[string]interface{}) ApiExecuteFunctionCallRequest {
-	r.arguments = &arguments
+// Function call request
+func (r ApiExecuteFunctionCallRequest) Request(request FunctionCallRequestDto) ApiExecuteFunctionCallRequest {
+	r.request = &request
 	return r
 }
 
@@ -83,8 +83,8 @@ func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctio
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.arguments == nil {
-		return localVarReturnValue, nil, reportError("arguments is required and must be specified")
+	if r.request == nil {
+		return localVarReturnValue, nil, reportError("request is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -105,7 +105,7 @@ func (a *FunctionCallsAPIService) ExecuteFunctionCallExecute(r ApiExecuteFunctio
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.arguments
+	localVarPostBody = r.request
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

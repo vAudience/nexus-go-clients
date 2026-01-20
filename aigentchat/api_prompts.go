@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -539,8 +539,15 @@ type ApiListPromptsRequest struct {
 	ctx context.Context
 	ApiService *PromptsAPIService
 	orgId string
+	visibility *string
 	offset *int32
 	limit *int32
+}
+
+// Filter prompts by access visibility
+func (r ApiListPromptsRequest) Visibility(visibility string) ApiListPromptsRequest {
+	r.visibility = &visibility
+	return r
 }
 
 // Offset
@@ -598,6 +605,9 @@ func (a *PromptsAPIService) ListPromptsExecute(r ApiListPromptsRequest) ([]Promp
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.visibility != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "visibility", r.visibility, "", "")
+	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
 	}

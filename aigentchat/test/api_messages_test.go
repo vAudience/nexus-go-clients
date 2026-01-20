@@ -81,13 +81,13 @@ func Test_aigentchat_MessagesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MessagesAPIService SearchMessages", func(t *testing.T) {
+	t.Run("Test MessagesAPIService ListMessages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.MessagesAPI.SearchMessages(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.MessagesAPI.ListMessages(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

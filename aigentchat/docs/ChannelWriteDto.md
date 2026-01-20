@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **IsOrgPublic** | Pointer to **bool** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**MissionId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ServiceChannel** | Pointer to **bool** |  | [optional] 
 **Summary** | Pointer to **string** |  | [optional] 
@@ -131,31 +130,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *ChannelWriteDto) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetMissionId
-
-`func (o *ChannelWriteDto) GetMissionId() string`
-
-GetMissionId returns the MissionId field if non-nil, zero value otherwise.
-
-### GetMissionIdOk
-
-`func (o *ChannelWriteDto) GetMissionIdOk() (*string, bool)`
-
-GetMissionIdOk returns a tuple with the MissionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMissionId
-
-`func (o *ChannelWriteDto) SetMissionId(v string)`
-
-SetMissionId sets MissionId field to given value.
-
-### HasMissionId
-
-`func (o *ChannelWriteDto) HasMissionId() bool`
-
-HasMissionId returns a boolean if a field has been set.
 
 ### GetName
 

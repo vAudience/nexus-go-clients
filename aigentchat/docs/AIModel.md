@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
-**Lifecycle** | Pointer to **string** |  | [optional] 
-**ModelCategory** | Pointer to **string** |  | [optional] 
 **ModelId** | **string** |  | 
+**ModelKnowledgeCutoff** | Pointer to **int64** |  | [optional] 
 **ModelReleaseDate** | Pointer to **int64** |  | [optional] 
+**ModelStats** | Pointer to [**AIModelStats**](AIModelStats.md) |  | [optional] 
 **Name** | **string** |  | 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
@@ -313,56 +313,6 @@ SetIsPublic sets IsPublic field to given value.
 
 HasIsPublic returns a boolean if a field has been set.
 
-### GetLifecycle
-
-`func (o *AIModel) GetLifecycle() string`
-
-GetLifecycle returns the Lifecycle field if non-nil, zero value otherwise.
-
-### GetLifecycleOk
-
-`func (o *AIModel) GetLifecycleOk() (*string, bool)`
-
-GetLifecycleOk returns a tuple with the Lifecycle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLifecycle
-
-`func (o *AIModel) SetLifecycle(v string)`
-
-SetLifecycle sets Lifecycle field to given value.
-
-### HasLifecycle
-
-`func (o *AIModel) HasLifecycle() bool`
-
-HasLifecycle returns a boolean if a field has been set.
-
-### GetModelCategory
-
-`func (o *AIModel) GetModelCategory() string`
-
-GetModelCategory returns the ModelCategory field if non-nil, zero value otherwise.
-
-### GetModelCategoryOk
-
-`func (o *AIModel) GetModelCategoryOk() (*string, bool)`
-
-GetModelCategoryOk returns a tuple with the ModelCategory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModelCategory
-
-`func (o *AIModel) SetModelCategory(v string)`
-
-SetModelCategory sets ModelCategory field to given value.
-
-### HasModelCategory
-
-`func (o *AIModel) HasModelCategory() bool`
-
-HasModelCategory returns a boolean if a field has been set.
-
 ### GetModelId
 
 `func (o *AIModel) GetModelId() string`
@@ -382,6 +332,31 @@ and a boolean to check if the value has been set.
 
 SetModelId sets ModelId field to given value.
 
+
+### GetModelKnowledgeCutoff
+
+`func (o *AIModel) GetModelKnowledgeCutoff() int64`
+
+GetModelKnowledgeCutoff returns the ModelKnowledgeCutoff field if non-nil, zero value otherwise.
+
+### GetModelKnowledgeCutoffOk
+
+`func (o *AIModel) GetModelKnowledgeCutoffOk() (*int64, bool)`
+
+GetModelKnowledgeCutoffOk returns a tuple with the ModelKnowledgeCutoff field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelKnowledgeCutoff
+
+`func (o *AIModel) SetModelKnowledgeCutoff(v int64)`
+
+SetModelKnowledgeCutoff sets ModelKnowledgeCutoff field to given value.
+
+### HasModelKnowledgeCutoff
+
+`func (o *AIModel) HasModelKnowledgeCutoff() bool`
+
+HasModelKnowledgeCutoff returns a boolean if a field has been set.
 
 ### GetModelReleaseDate
 
@@ -407,6 +382,31 @@ SetModelReleaseDate sets ModelReleaseDate field to given value.
 `func (o *AIModel) HasModelReleaseDate() bool`
 
 HasModelReleaseDate returns a boolean if a field has been set.
+
+### GetModelStats
+
+`func (o *AIModel) GetModelStats() AIModelStats`
+
+GetModelStats returns the ModelStats field if non-nil, zero value otherwise.
+
+### GetModelStatsOk
+
+`func (o *AIModel) GetModelStatsOk() (*AIModelStats, bool)`
+
+GetModelStatsOk returns a tuple with the ModelStats field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelStats
+
+`func (o *AIModel) SetModelStats(v AIModelStats)`
+
+SetModelStats sets ModelStats field to given value.
+
+### HasModelStats
+
+`func (o *AIModel) HasModelStats() bool`
+
+HasModelStats returns a boolean if a field has been set.
 
 ### GetName
 

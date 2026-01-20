@@ -7,13 +7,9 @@ Method | HTTP request | Description
 [**CreateAIModelService**](AIModelServicesAPI.md#CreateAIModelService) | **Post** /v1/organizations/{org_id}/ai-model-services | Create a new AI model service
 [**DeleteAIModelService**](AIModelServicesAPI.md#DeleteAIModelService) | **Delete** /v1/organizations/{org_id}/ai-model-services/{id} | Delete an AI model service
 [**GetAIModelService**](AIModelServicesAPI.md#GetAIModelService) | **Get** /v1/organizations/{org_id}/ai-model-services/{id} | Get an AI model service by ID
-[**GetAIModelServiceLegacy**](AIModelServicesAPI.md#GetAIModelServiceLegacy) | **Get** /v1/ai-model-services/{id} | Get an AI model service by ID
 [**ListAIModelServices**](AIModelServicesAPI.md#ListAIModelServices) | **Get** /v1/organizations/{org_id}/ai-model-services | List AI model services
-[**ListAIModelServicesLegacy**](AIModelServicesAPI.md#ListAIModelServicesLegacy) | **Get** /v1/ai-model-services | List AI model services
 [**ListAIModelServicesWithModels**](AIModelServicesAPI.md#ListAIModelServicesWithModels) | **Get** /v1/organizations/{org_id}/ai-model-services-with-models | List AI services with models
-[**ListAIModelServicesWithModelsLegacy**](AIModelServicesAPI.md#ListAIModelServicesWithModelsLegacy) | **Get** /v1/ai-model-services-with-models | List AI services with models
 [**ListAIModelsForService**](AIModelServicesAPI.md#ListAIModelsForService) | **Get** /v1/organizations/{org_id}/ai-model-services/{id}/models | List AI models for a service
-[**ListAIModelsForServiceLegacy**](AIModelServicesAPI.md#ListAIModelsForServiceLegacy) | **Get** /v1/ai-model-services/{id}/models | List AI models for a service
 [**UpdateAIModelService**](AIModelServicesAPI.md#UpdateAIModelService) | **Put** /v1/organizations/{org_id}/ai-model-services/{id} | Update an AI model service
 
 
@@ -40,7 +36,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	service := *openapiclient.NewAIModelServiceWriteDto(openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
+	service := *openapiclient.NewAIModelServiceWriteDto() // AIModelServiceWriteDto | AI Model Service
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -236,76 +232,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetAIModelServiceLegacy
-
-> AIModelServiceObject GetAIModelServiceLegacy(ctx, id).Execute()
-
-Get an AI model service by ID
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	id := "id_example" // string | AI Model Service ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.GetAIModelServiceLegacy(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.GetAIModelServiceLegacy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAIModelServiceLegacy`: AIModelServiceObject
-	fmt.Fprintf(os.Stdout, "Response from `AIModelServicesAPI.GetAIModelServiceLegacy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | AI Model Service ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAIModelServiceLegacyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AIModelServiceObject**](AIModelServiceObject.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListAIModelServices
 
 > []AIModelServiceObject ListAIModelServices(ctx, orgId).Execute()
@@ -376,67 +302,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListAIModelServicesLegacy
-
-> []AIModelServiceObject ListAIModelServicesLegacy(ctx).Execute()
-
-List AI model services
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesLegacy(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelServicesLegacy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListAIModelServicesLegacy`: []AIModelServiceObject
-	fmt.Fprintf(os.Stdout, "Response from `AIModelServicesAPI.ListAIModelServicesLegacy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAIModelServicesLegacyRequest struct via the builder pattern
-
-
-### Return type
-
-[**[]AIModelServiceObject**](AIModelServiceObject.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListAIModelServicesWithModels
 
 > []AIModelServiceWithModels ListAIModelServicesWithModels(ctx, orgId).Execute()
@@ -487,67 +352,6 @@ Other parameters are passed through a pointer to a apiListAIModelServicesWithMod
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]AIModelServiceWithModels**](AIModelServiceWithModels.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAIModelServicesWithModelsLegacy
-
-> []AIModelServiceWithModels ListAIModelServicesWithModelsLegacy(ctx).Execute()
-
-List AI services with models
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModelsLegacy(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelServicesWithModelsLegacy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListAIModelServicesWithModelsLegacy`: []AIModelServiceWithModels
-	fmt.Fprintf(os.Stdout, "Response from `AIModelServicesAPI.ListAIModelServicesWithModelsLegacy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAIModelServicesWithModelsLegacyRequest struct via the builder pattern
 
 
 ### Return type
@@ -641,76 +445,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListAIModelsForServiceLegacy
-
-> []AIModel ListAIModelsForServiceLegacy(ctx, id).Execute()
-
-List AI models for a service
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
-)
-
-func main() {
-	id := "id_example" // string | AI Model Service ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelsForServiceLegacy(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelsForServiceLegacy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListAIModelsForServiceLegacy`: []AIModel
-	fmt.Fprintf(os.Stdout, "Response from `AIModelServicesAPI.ListAIModelsForServiceLegacy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | AI Model Service ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAIModelsForServiceLegacyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]AIModel**](AIModel.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateAIModelService
 
 > AIModelServiceObject UpdateAIModelService(ctx, orgId, id).Service(service).Execute()
@@ -734,7 +468,7 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | AI Model Service ID
-	service := *openapiclient.NewAIModelServiceWriteDto(openapiclient.AiServiceId("anthropic")) // AIModelServiceWriteDto | AI Model Service
+	service := *openapiclient.NewAIModelServiceWriteDto() // AIModelServiceWriteDto | AI Model Service
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

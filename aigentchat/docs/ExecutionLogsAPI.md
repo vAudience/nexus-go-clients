@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**CreateDocumentConversionCosts**](ExecutionLogsAPI.md#CreateDocumentConversionCosts) | **Post** /v1/organizations/{org_id}/execution-logs/document-conversion-costs | Track document conversion costs
 [**CreateFileUploadCosts**](ExecutionLogsAPI.md#CreateFileUploadCosts) | **Post** /v1/organizations/{org_id}/execution-logs/file-upload-costs | Track file upload costs
 [**GetExecutionLogsCosts**](ExecutionLogsAPI.md#GetExecutionLogsCosts) | **Get** /v1/organizations/{org_id}/execution-logs/costs | Get execution logs costs
-[**SearchExecutionLogs**](ExecutionLogsAPI.md#SearchExecutionLogs) | **Get** /v1/organizations/{org_id}/execution-logs/search | Search execution logs
+[**ListExecutionLogs**](ExecutionLogsAPI.md#ListExecutionLogs) | **Get** /v1/organizations/{org_id}/execution-logs | List execution logs
 
 
 
@@ -304,11 +304,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SearchExecutionLogs
+## ListExecutionLogs
 
-> ExecutionLogResults SearchExecutionLogs(ctx, orgId).UserId(userId).ExecType(execType).RequestId(requestId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+> ExecutionLogResults ListExecutionLogs(ctx, orgId).UserId(userId).ExecType(execType).RequestId(requestId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 
-Search execution logs
+List execution logs
 
 
 
@@ -336,13 +336,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExecutionLogsAPI.SearchExecutionLogs(context.Background(), orgId).UserId(userId).ExecType(execType).RequestId(requestId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
+	resp, r, err := apiClient.ExecutionLogsAPI.ListExecutionLogs(context.Background(), orgId).UserId(userId).ExecType(execType).RequestId(requestId).StartDate(startDate).EndDate(endDate).Offset(offset).Limit(limit).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ExecutionLogsAPI.SearchExecutionLogs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ExecutionLogsAPI.ListExecutionLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchExecutionLogs`: ExecutionLogResults
-	fmt.Fprintf(os.Stdout, "Response from `ExecutionLogsAPI.SearchExecutionLogs`: %v\n", resp)
+	// response from `ListExecutionLogs`: ExecutionLogResults
+	fmt.Fprintf(os.Stdout, "Response from `ExecutionLogsAPI.ListExecutionLogs`: %v\n", resp)
 }
 ```
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSearchExecutionLogsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListExecutionLogsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,8 +23,6 @@ var _ MappedNullable = &ChatCompletionRequestDto{}
 type ChatCompletionRequestDto struct {
 	AgentId string `json:"agent_id"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
-	// Deprecated, use attached_files instead
-	AttachedTemporaryFiles []string `json:"attached_temporary_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	ContinueInstructionOnMaxTokens *string `json:"continue_instruction_on_max_tokens,omitempty"`
 	ContinueOnMaxTokens *bool `json:"continue_on_max_tokens,omitempty"`
@@ -32,7 +30,6 @@ type ChatCompletionRequestDto struct {
 	Message string `json:"message"`
 	MessageReferenceId *string `json:"message_reference_id,omitempty"`
 	MessageResponseToId *string `json:"message_response_to_id,omitempty"`
-	MissionId *string `json:"mission_id,omitempty"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	SelectedTools []string `json:"selected_tools,omitempty"`
 	ServiceChannel *bool `json:"service_channel,omitempty"`
@@ -121,38 +118,6 @@ func (o *ChatCompletionRequestDto) HasAttachedFiles() bool {
 // SetAttachedFiles gets a reference to the given []string and assigns it to the AttachedFiles field.
 func (o *ChatCompletionRequestDto) SetAttachedFiles(v []string) {
 	o.AttachedFiles = v
-}
-
-// GetAttachedTemporaryFiles returns the AttachedTemporaryFiles field value if set, zero value otherwise.
-func (o *ChatCompletionRequestDto) GetAttachedTemporaryFiles() []string {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
-		var ret []string
-		return ret
-	}
-	return o.AttachedTemporaryFiles
-}
-
-// GetAttachedTemporaryFilesOk returns a tuple with the AttachedTemporaryFiles field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChatCompletionRequestDto) GetAttachedTemporaryFilesOk() ([]string, bool) {
-	if o == nil || IsNil(o.AttachedTemporaryFiles) {
-		return nil, false
-	}
-	return o.AttachedTemporaryFiles, true
-}
-
-// HasAttachedTemporaryFiles returns a boolean if a field has been set.
-func (o *ChatCompletionRequestDto) HasAttachedTemporaryFiles() bool {
-	if o != nil && !IsNil(o.AttachedTemporaryFiles) {
-		return true
-	}
-
-	return false
-}
-
-// SetAttachedTemporaryFiles gets a reference to the given []string and assigns it to the AttachedTemporaryFiles field.
-func (o *ChatCompletionRequestDto) SetAttachedTemporaryFiles(v []string) {
-	o.AttachedTemporaryFiles = v
 }
 
 // GetChannelId returns the ChannelId field value if set, zero value otherwise.
@@ -369,38 +334,6 @@ func (o *ChatCompletionRequestDto) HasMessageResponseToId() bool {
 // SetMessageResponseToId gets a reference to the given string and assigns it to the MessageResponseToId field.
 func (o *ChatCompletionRequestDto) SetMessageResponseToId(v string) {
 	o.MessageResponseToId = &v
-}
-
-// GetMissionId returns the MissionId field value if set, zero value otherwise.
-func (o *ChatCompletionRequestDto) GetMissionId() string {
-	if o == nil || IsNil(o.MissionId) {
-		var ret string
-		return ret
-	}
-	return *o.MissionId
-}
-
-// GetMissionIdOk returns a tuple with the MissionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChatCompletionRequestDto) GetMissionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.MissionId) {
-		return nil, false
-	}
-	return o.MissionId, true
-}
-
-// HasMissionId returns a boolean if a field has been set.
-func (o *ChatCompletionRequestDto) HasMissionId() bool {
-	if o != nil && !IsNil(o.MissionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMissionId gets a reference to the given string and assigns it to the MissionId field.
-func (o *ChatCompletionRequestDto) SetMissionId(v string) {
-	o.MissionId = &v
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
@@ -673,9 +606,6 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AttachedFiles) {
 		toSerialize["attached_files"] = o.AttachedFiles
 	}
-	if !IsNil(o.AttachedTemporaryFiles) {
-		toSerialize["attached_temporary_files"] = o.AttachedTemporaryFiles
-	}
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
 	}
@@ -694,9 +624,6 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MessageResponseToId) {
 		toSerialize["message_response_to_id"] = o.MessageResponseToId
-	}
-	if !IsNil(o.MissionId) {
-		toSerialize["mission_id"] = o.MissionId
 	}
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
@@ -768,7 +695,6 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "attached_files")
-		delete(additionalProperties, "attached_temporary_files")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "continue_instruction_on_max_tokens")
 		delete(additionalProperties, "continue_on_max_tokens")
@@ -776,7 +702,6 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "message_reference_id")
 		delete(additionalProperties, "message_response_to_id")
-		delete(additionalProperties, "mission_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "selected_tools")
 		delete(additionalProperties, "service_channel")

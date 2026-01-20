@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.23.2
+API version: 0.25.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,8 +23,6 @@ var _ MappedNullable = &AgentI18n{}
 type AgentI18n struct {
 	Description *string `json:"description,omitempty"`
 	Name string `json:"name"`
-	// TODO: will be replaced by tags
-	RecommendedTask *string `json:"recommended_task,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,38 +102,6 @@ func (o *AgentI18n) SetName(v string) {
 	o.Name = v
 }
 
-// GetRecommendedTask returns the RecommendedTask field value if set, zero value otherwise.
-func (o *AgentI18n) GetRecommendedTask() string {
-	if o == nil || IsNil(o.RecommendedTask) {
-		var ret string
-		return ret
-	}
-	return *o.RecommendedTask
-}
-
-// GetRecommendedTaskOk returns a tuple with the RecommendedTask field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AgentI18n) GetRecommendedTaskOk() (*string, bool) {
-	if o == nil || IsNil(o.RecommendedTask) {
-		return nil, false
-	}
-	return o.RecommendedTask, true
-}
-
-// HasRecommendedTask returns a boolean if a field has been set.
-func (o *AgentI18n) HasRecommendedTask() bool {
-	if o != nil && !IsNil(o.RecommendedTask) {
-		return true
-	}
-
-	return false
-}
-
-// SetRecommendedTask gets a reference to the given string and assigns it to the RecommendedTask field.
-func (o *AgentI18n) SetRecommendedTask(v string) {
-	o.RecommendedTask = &v
-}
-
 func (o AgentI18n) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -150,9 +116,6 @@ func (o AgentI18n) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.RecommendedTask) {
-		toSerialize["recommended_task"] = o.RecommendedTask
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -198,7 +161,6 @@ func (o *AgentI18n) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "recommended_task")
 		o.AdditionalProperties = additionalProperties
 	}
 

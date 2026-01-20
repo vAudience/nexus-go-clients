@@ -6,12 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AiModelId** | **string** |  | 
 **AiServiceId** | **string** |  | 
-**Attachments** | Pointer to [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Deprecated, add files to content instead | [optional] 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
 **Content** | Pointer to [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
-**MissionId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
 **ResponseToId** | Pointer to **string** |  | [optional] 
@@ -23,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewAIgencyMessageWriteDto
 
-`func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, channelId string, channelName string, missionId string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType, ) *AIgencyMessageWriteDto`
+`func NewAIgencyMessageWriteDto(aiModelId string, aiServiceId string, channelId string, channelName string, senderConversationRole ConversationRole, senderName string, type_ AIgencyMessageType, ) *AIgencyMessageWriteDto`
 
 NewAIgencyMessageWriteDto instantiates a new AIgencyMessageWriteDto object
 This constructor will assign default values to properties that have it defined,
@@ -77,31 +75,6 @@ and a boolean to check if the value has been set.
 
 SetAiServiceId sets AiServiceId field to given value.
 
-
-### GetAttachments
-
-`func (o *AIgencyMessageWriteDto) GetAttachments() AIgencyMessageFileList`
-
-GetAttachments returns the Attachments field if non-nil, zero value otherwise.
-
-### GetAttachmentsOk
-
-`func (o *AIgencyMessageWriteDto) GetAttachmentsOk() (*AIgencyMessageFileList, bool)`
-
-GetAttachmentsOk returns a tuple with the Attachments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAttachments
-
-`func (o *AIgencyMessageWriteDto) SetAttachments(v AIgencyMessageFileList)`
-
-SetAttachments sets Attachments field to given value.
-
-### HasAttachments
-
-`func (o *AIgencyMessageWriteDto) HasAttachments() bool`
-
-HasAttachments returns a boolean if a field has been set.
 
 ### GetChannelId
 
@@ -192,26 +165,6 @@ SetMetaData sets MetaData field to given value.
 `func (o *AIgencyMessageWriteDto) HasMetaData() bool`
 
 HasMetaData returns a boolean if a field has been set.
-
-### GetMissionId
-
-`func (o *AIgencyMessageWriteDto) GetMissionId() string`
-
-GetMissionId returns the MissionId field if non-nil, zero value otherwise.
-
-### GetMissionIdOk
-
-`func (o *AIgencyMessageWriteDto) GetMissionIdOk() (*string, bool)`
-
-GetMissionIdOk returns a tuple with the MissionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMissionId
-
-`func (o *AIgencyMessageWriteDto) SetMissionId(v string)`
-
-SetMissionId sets MissionId field to given value.
-
 
 ### GetParameters
 

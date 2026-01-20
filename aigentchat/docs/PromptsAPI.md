@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## ListPrompts
 
-> []Prompt ListPrompts(ctx, orgId).Offset(offset).Limit(limit).Execute()
+> []Prompt ListPrompts(ctx, orgId).Visibility(visibility).Offset(offset).Limit(limit).Execute()
 
 List prompts
 
@@ -251,12 +251,13 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | Organization ID
+	visibility := "visibility_example" // string | Filter prompts by access visibility (optional)
 	offset := int32(56) // int32 | Offset (optional)
 	limit := int32(56) // int32 | Limit (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PromptsAPI.ListPrompts(context.Background(), orgId).Offset(offset).Limit(limit).Execute()
+	resp, r, err := apiClient.PromptsAPI.ListPrompts(context.Background(), orgId).Visibility(visibility).Offset(offset).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.ListPrompts``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,6 +283,7 @@ Other parameters are passed through a pointer to a apiListPromptsRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **visibility** | **string** | Filter prompts by access visibility | 
  **offset** | **int32** | Offset | 
  **limit** | **int32** | Limit | 
 
