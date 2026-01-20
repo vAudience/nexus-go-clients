@@ -15,41 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the OrganizationResultsResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &OrganizationResultsResponse{}
+// checks if the OrganizationDetailsResultsResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationDetailsResultsResponse{}
 
-// OrganizationResultsResponse struct for OrganizationResultsResponse
-type OrganizationResultsResponse struct {
-	Results []OrganizationResponse `json:"results"`
+// OrganizationDetailsResultsResponse struct for OrganizationDetailsResultsResponse
+type OrganizationDetailsResultsResponse struct {
+	Results []OrganizationDetailsResponse `json:"results"`
 	TotalResults int32 `json:"totalResults"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _OrganizationResultsResponse OrganizationResultsResponse
+type _OrganizationDetailsResultsResponse OrganizationDetailsResultsResponse
 
-// NewOrganizationResultsResponse instantiates a new OrganizationResultsResponse object
+// NewOrganizationDetailsResultsResponse instantiates a new OrganizationDetailsResultsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationResultsResponse(results []OrganizationResponse, totalResults int32) *OrganizationResultsResponse {
-	this := OrganizationResultsResponse{}
+func NewOrganizationDetailsResultsResponse(results []OrganizationDetailsResponse, totalResults int32) *OrganizationDetailsResultsResponse {
+	this := OrganizationDetailsResultsResponse{}
 	this.Results = results
 	this.TotalResults = totalResults
 	return &this
 }
 
-// NewOrganizationResultsResponseWithDefaults instantiates a new OrganizationResultsResponse object
+// NewOrganizationDetailsResultsResponseWithDefaults instantiates a new OrganizationDetailsResultsResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOrganizationResultsResponseWithDefaults() *OrganizationResultsResponse {
-	this := OrganizationResultsResponse{}
+func NewOrganizationDetailsResultsResponseWithDefaults() *OrganizationDetailsResultsResponse {
+	this := OrganizationDetailsResultsResponse{}
 	return &this
 }
 
 // GetResults returns the Results field value
-func (o *OrganizationResultsResponse) GetResults() []OrganizationResponse {
+func (o *OrganizationDetailsResultsResponse) GetResults() []OrganizationDetailsResponse {
 	if o == nil {
-		var ret []OrganizationResponse
+		var ret []OrganizationDetailsResponse
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *OrganizationResultsResponse) GetResults() []OrganizationResponse {
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *OrganizationResultsResponse) GetResultsOk() ([]OrganizationResponse, bool) {
+func (o *OrganizationDetailsResultsResponse) GetResultsOk() ([]OrganizationDetailsResponse, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *OrganizationResultsResponse) GetResultsOk() ([]OrganizationResponse, bo
 }
 
 // SetResults sets field value
-func (o *OrganizationResultsResponse) SetResults(v []OrganizationResponse) {
+func (o *OrganizationDetailsResultsResponse) SetResults(v []OrganizationDetailsResponse) {
 	o.Results = v
 }
 
 // GetTotalResults returns the TotalResults field value
-func (o *OrganizationResultsResponse) GetTotalResults() int32 {
+func (o *OrganizationDetailsResultsResponse) GetTotalResults() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -82,7 +82,7 @@ func (o *OrganizationResultsResponse) GetTotalResults() int32 {
 
 // GetTotalResultsOk returns a tuple with the TotalResults field value
 // and a boolean to check if the value has been set.
-func (o *OrganizationResultsResponse) GetTotalResultsOk() (*int32, bool) {
+func (o *OrganizationDetailsResultsResponse) GetTotalResultsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,11 +90,11 @@ func (o *OrganizationResultsResponse) GetTotalResultsOk() (*int32, bool) {
 }
 
 // SetTotalResults sets field value
-func (o *OrganizationResultsResponse) SetTotalResults(v int32) {
+func (o *OrganizationDetailsResultsResponse) SetTotalResults(v int32) {
 	o.TotalResults = v
 }
 
-func (o OrganizationResultsResponse) MarshalJSON() ([]byte, error) {
+func (o OrganizationDetailsResultsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,7 +102,7 @@ func (o OrganizationResultsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OrganizationResultsResponse) ToMap() (map[string]interface{}, error) {
+func (o OrganizationDetailsResultsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["results"] = o.Results
 	toSerialize["totalResults"] = o.TotalResults
@@ -114,7 +114,7 @@ func (o OrganizationResultsResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *OrganizationResultsResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *OrganizationDetailsResultsResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -137,15 +137,15 @@ func (o *OrganizationResultsResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varOrganizationResultsResponse := _OrganizationResultsResponse{}
+	varOrganizationDetailsResultsResponse := _OrganizationDetailsResultsResponse{}
 
-	err = json.Unmarshal(data, &varOrganizationResultsResponse)
+	err = json.Unmarshal(data, &varOrganizationDetailsResultsResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = OrganizationResultsResponse(varOrganizationResultsResponse)
+	*o = OrganizationDetailsResultsResponse(varOrganizationDetailsResultsResponse)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -158,38 +158,38 @@ func (o *OrganizationResultsResponse) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableOrganizationResultsResponse struct {
-	value *OrganizationResultsResponse
+type NullableOrganizationDetailsResultsResponse struct {
+	value *OrganizationDetailsResultsResponse
 	isSet bool
 }
 
-func (v NullableOrganizationResultsResponse) Get() *OrganizationResultsResponse {
+func (v NullableOrganizationDetailsResultsResponse) Get() *OrganizationDetailsResultsResponse {
 	return v.value
 }
 
-func (v *NullableOrganizationResultsResponse) Set(val *OrganizationResultsResponse) {
+func (v *NullableOrganizationDetailsResultsResponse) Set(val *OrganizationDetailsResultsResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOrganizationResultsResponse) IsSet() bool {
+func (v NullableOrganizationDetailsResultsResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOrganizationResultsResponse) Unset() {
+func (v *NullableOrganizationDetailsResultsResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOrganizationResultsResponse(val *OrganizationResultsResponse) *NullableOrganizationResultsResponse {
-	return &NullableOrganizationResultsResponse{value: val, isSet: true}
+func NewNullableOrganizationDetailsResultsResponse(val *OrganizationDetailsResultsResponse) *NullableOrganizationDetailsResultsResponse {
+	return &NullableOrganizationDetailsResultsResponse{value: val, isSet: true}
 }
 
-func (v NullableOrganizationResultsResponse) MarshalJSON() ([]byte, error) {
+func (v NullableOrganizationDetailsResultsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableOrganizationResultsResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableOrganizationDetailsResultsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

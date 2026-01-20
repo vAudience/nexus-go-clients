@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AudioAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
+**ChatAgentQuickFilters** | Pointer to [**[]AgentQuickFilter**](AgentQuickFilter.md) |  | [optional] 
 **ChatAllowedHostingLocations** | Pointer to **[]string** |  | [optional] 
 **ChatDefaultAgentId** | Pointer to **string** |  | [optional] 
 **CreatedAt** | **string** |  | 
@@ -60,6 +61,31 @@ SetAudioAllowedHostingLocations sets AudioAllowedHostingLocations field to given
 `func (o *OrganizationSettingsResponse) HasAudioAllowedHostingLocations() bool`
 
 HasAudioAllowedHostingLocations returns a boolean if a field has been set.
+
+### GetChatAgentQuickFilters
+
+`func (o *OrganizationSettingsResponse) GetChatAgentQuickFilters() []AgentQuickFilter`
+
+GetChatAgentQuickFilters returns the ChatAgentQuickFilters field if non-nil, zero value otherwise.
+
+### GetChatAgentQuickFiltersOk
+
+`func (o *OrganizationSettingsResponse) GetChatAgentQuickFiltersOk() (*[]AgentQuickFilter, bool)`
+
+GetChatAgentQuickFiltersOk returns a tuple with the ChatAgentQuickFilters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChatAgentQuickFilters
+
+`func (o *OrganizationSettingsResponse) SetChatAgentQuickFilters(v []AgentQuickFilter)`
+
+SetChatAgentQuickFilters sets ChatAgentQuickFilters field to given value.
+
+### HasChatAgentQuickFilters
+
+`func (o *OrganizationSettingsResponse) HasChatAgentQuickFilters() bool`
+
+HasChatAgentQuickFilters returns a boolean if a field has been set.
 
 ### GetChatAllowedHostingLocations
 

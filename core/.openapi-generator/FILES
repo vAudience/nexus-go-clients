@@ -15,8 +15,12 @@ api_users.go
 api_version.go
 client.go
 configuration.go
+docs/AgentFilterOptions.md
+docs/AgentQuickFilter.md
+docs/AgentQuickFilterI18n.md
 docs/AuthAPI.md
 docs/AuthenticatedResponse.md
+docs/CredentialsResponse.md
 docs/EntitlementResponse.md
 docs/EntitlementsAPI.md
 docs/ErrorCode.md
@@ -36,6 +40,7 @@ docs/OrganizationCreditsPaymentPostRequest.md
 docs/OrganizationCreditsPaymentResponse.md
 docs/OrganizationCustomerPortalSessionResponse.md
 docs/OrganizationDetailsResponse.md
+docs/OrganizationDetailsResultsResponse.md
 docs/OrganizationInviteRequest.md
 docs/OrganizationInviteResponse.md
 docs/OrganizationMemberResponse.md
@@ -82,7 +87,11 @@ docs/VersionResponse.md
 git_push.sh
 go.mod
 go.sum
+model_agent_filter_options.go
+model_agent_quick_filter.go
+model_agent_quick_filter_i18n.go
 model_authenticated_response.go
+model_credentials_response.go
 model_entitlement_response.go
 model_error_code.go
 model_error_detail.go
@@ -99,6 +108,7 @@ model_organization_credits_payment_post_request.go
 model_organization_credits_payment_response.go
 model_organization_customer_portal_session_response.go
 model_organization_details_response.go
+model_organization_details_results_response.go
 model_organization_invite_request.go
 model_organization_invite_response.go
 model_organization_member_response.go

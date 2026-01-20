@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.4.2
+  version: 0.5.1
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -73,6 +73,92 @@ paths:
       summary: returns the service version
       tags:
       - Version
+  /v1/auth/2fa:
+    delete:
+      description: Remove the 2FA credential from the keycloak user
+      operationId: Remove2FA
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      summary: Remove 2FA
+      tags:
+      - Auth
+    get:
+      description: Checks whether the user has 2FA configured
+      operationId: Has2FA
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CredentialsResponse"
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      summary: Has 2FA configured
+      tags:
+      - Auth
+  /v1/auth/2fa/setup:
+    get:
+      description: Starts login and triggers an app-initiated Keycloak 2FA configuration
+      operationId: Setup2FA
+      parameters:
+      - description: encoded return to url after the action
+        in: query
+        name: returnTo
+        required: true
+        schema:
+          type: string
+      - description: Step of the configuration process. Normally not set manually
+        in: query
+        name: step
+        schema:
+          type: string
+      responses:
+        "302":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Redirect to keycloak configure TOTP page
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      summary: Setup 2FA
+      tags:
+      - Auth
   /v1/auth/authenticated:
     get:
       description: Authenticated
@@ -353,14 +439,25 @@ paths:
     get:
       description: "Get all my organizations with details (subscriptions, ...)"
       operationId: GetAllMyOrganizationsWithDetails
+      parameters:
+      - description: "Limit the number of results, 0 > limit <= 100"
+        in: query
+        name: limit
+        schema:
+          default: 20
+          type: integer
+      - description: "Offset for pagination, 0 >= offset"
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
       responses:
         "200":
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/OrganizationDetailsResponse"
-                type: array
+                $ref: "#/components/schemas/OrganizationDetailsResultsResponse"
           description: OK
         "400":
           content:
@@ -4042,6 +4139,66 @@ paths:
       - Users
 components:
   schemas:
+    AgentFilterOptions:
+      example:
+        q: q
+        visibility: visibility
+        modelIds:
+        - modelIds
+        - modelIds
+        tagIds:
+        - tagIds
+        - tagIds
+        addPredefinedAgents: true
+      properties:
+        addPredefinedAgents:
+          type: boolean
+        modelIds:
+          items:
+            type: string
+          type: array
+        q:
+          type: string
+        tagIds:
+          items:
+            type: string
+          type: array
+        visibility:
+          type: string
+      type: object
+    AgentQuickFilter:
+      example:
+        name: name
+        options:
+          q: q
+          visibility: visibility
+          modelIds:
+          - modelIds
+          - modelIds
+          tagIds:
+          - tagIds
+          - tagIds
+          addPredefinedAgents: true
+        i18n:
+          key:
+            name: name
+      properties:
+        i18n:
+          additionalProperties:
+            $ref: "#/components/schemas/AgentQuickFilterI18n"
+          type: object
+        name:
+          type: string
+        options:
+          $ref: "#/components/schemas/AgentFilterOptions"
+      type: object
+    AgentQuickFilterI18n:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
     AuthenticatedResponse:
       example:
         authenticated: true
@@ -4065,6 +4222,19 @@ components:
           type: string
       required:
       - authenticated
+      type: object
+    CredentialsResponse:
+      example:
+        otp_allowed: true
+        otp_enabled: true
+      properties:
+        otp_allowed:
+          type: boolean
+        otp_enabled:
+          type: boolean
+      required:
+      - otp_allowed
+      - otp_enabled
       type: object
     EntitlementResponse:
       properties:
@@ -4613,6 +4783,69 @@ components:
       required:
       - organization
       type: object
+    OrganizationDetailsResultsResponse:
+      example:
+        totalResults: 5
+        results:
+        - organization:
+            owner: owner
+            createdAt: createdAt
+            name: name
+            id: id
+            updatedAt: updatedAt
+          subscription:
+            trialEnd: trialEnd
+            productId: productId
+            currentPeriodEnd: currentPeriodEnd
+            active: true
+            seats: 0
+            trial: true
+            organizationId: organizationId
+            createdAt: createdAt
+            totalAmount: 1
+            seatsTaken: 6
+            cancelAtPeriodEnd: true
+            name: name
+            currency: currency
+            id: id
+            productType: payment
+            status: status
+            updatedAt: updatedAt
+        - organization:
+            owner: owner
+            createdAt: createdAt
+            name: name
+            id: id
+            updatedAt: updatedAt
+          subscription:
+            trialEnd: trialEnd
+            productId: productId
+            currentPeriodEnd: currentPeriodEnd
+            active: true
+            seats: 0
+            trial: true
+            organizationId: organizationId
+            createdAt: createdAt
+            totalAmount: 1
+            seatsTaken: 6
+            cancelAtPeriodEnd: true
+            name: name
+            currency: currency
+            id: id
+            productType: payment
+            status: status
+            updatedAt: updatedAt
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/OrganizationDetailsResponse"
+          type: array
+        totalResults:
+          type: integer
+      required:
+      - results
+      - totalResults
+      type: object
     OrganizationInviteRequest:
       example:
         email: email
@@ -4990,24 +5223,53 @@ components:
       type: object
     OrganizationSettingsResponse:
       example:
+        imageDefaultAgentId: imageDefaultAgentId
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        embeddingAllowedHostingLocations:
+        - embeddingAllowedHostingLocations
+        - embeddingAllowedHostingLocations
+        chatDefaultAgentId: chatDefaultAgentId
+        chatAgentQuickFilters:
+        - name: name
+          options:
+            q: q
+            visibility: visibility
+            modelIds:
+            - modelIds
+            - modelIds
+            tagIds:
+            - tagIds
+            - tagIds
+            addPredefinedAgents: true
+          i18n:
+            key:
+              name: name
+        - name: name
+          options:
+            q: q
+            visibility: visibility
+            modelIds:
+            - modelIds
+            - modelIds
+            tagIds:
+            - tagIds
+            - tagIds
+            addPredefinedAgents: true
+          i18n:
+            key:
+              name: name
         organizationId: organizationId
         createdAt: createdAt
-        imageDefaultAgentId: imageDefaultAgentId
         chatAllowedHostingLocations:
         - chatAllowedHostingLocations
         - chatAllowedHostingLocations
         audioAllowedHostingLocations:
         - audioAllowedHostingLocations
         - audioAllowedHostingLocations
-        embeddingDefaultAgentId: embeddingDefaultAgentId
         imageAllowedHostingLocations:
         - imageAllowedHostingLocations
         - imageAllowedHostingLocations
-        embeddingAllowedHostingLocations:
-        - embeddingAllowedHostingLocations
-        - embeddingAllowedHostingLocations
         id: id
-        chatDefaultAgentId: chatDefaultAgentId
         toolsAllowedHostingLocations:
         - toolsAllowedHostingLocations
         - toolsAllowedHostingLocations
@@ -5016,6 +5278,10 @@ components:
         audioAllowedHostingLocations:
           items:
             type: string
+          type: array
+        chatAgentQuickFilters:
+          items:
+            $ref: "#/components/schemas/AgentQuickFilter"
           type: array
         chatAllowedHostingLocations:
           items:

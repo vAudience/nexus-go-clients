@@ -1477,7 +1477,7 @@ Other parameters are passed through a pointer to a apiGetAllMyOrganizationsReque
 
 ## GetAllMyOrganizationsWithDetails
 
-> []OrganizationDetailsResponse GetAllMyOrganizationsWithDetails(ctx).Execute()
+> OrganizationDetailsResultsResponse GetAllMyOrganizationsWithDetails(ctx).Limit(limit).Offset(offset).Execute()
 
 Get all my organizations with details (subscriptions, ...)
 
@@ -1496,31 +1496,38 @@ import (
 )
 
 func main() {
+	limit := int32(56) // int32 | Limit the number of results, 0 > limit <= 100 (optional) (default to 20)
+	offset := int32(56) // int32 | Offset for pagination, 0 >= offset (optional) (default to 0)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.GetAllMyOrganizationsWithDetails(context.Background()).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.GetAllMyOrganizationsWithDetails(context.Background()).Limit(limit).Offset(offset).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetAllMyOrganizationsWithDetails``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAllMyOrganizationsWithDetails`: []OrganizationDetailsResponse
+	// response from `GetAllMyOrganizationsWithDetails`: OrganizationDetailsResultsResponse
 	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetAllMyOrganizationsWithDetails`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllMyOrganizationsWithDetailsRequest struct via the builder pattern
 
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Limit the number of results, 0 &gt; limit &lt;&#x3D; 100 | [default to 20]
+ **offset** | **int32** | Offset for pagination, 0 &gt;&#x3D; offset | [default to 0]
+
 ### Return type
 
-[**[]OrganizationDetailsResponse**](OrganizationDetailsResponse.md)
+[**OrganizationDetailsResultsResponse**](OrganizationDetailsResultsResponse.md)
 
 ### Authorization
 
