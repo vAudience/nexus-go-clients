@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.0
+API version: 0.25.1
 Contact: contact@vaudience.ai
 */
 
@@ -562,7 +562,7 @@ func (r ApiListPromptsRequest) Limit(limit int32) ApiListPromptsRequest {
 	return r
 }
 
-func (r ApiListPromptsRequest) Execute() ([]Prompt, *http.Response, error) {
+func (r ApiListPromptsRequest) Execute() (*PromptResults, *http.Response, error) {
 	return r.ApiService.ListPromptsExecute(r)
 }
 
@@ -584,13 +584,13 @@ func (a *PromptsAPIService) ListPrompts(ctx context.Context, orgId string) ApiLi
 }
 
 // Execute executes the request
-//  @return []Prompt
-func (a *PromptsAPIService) ListPromptsExecute(r ApiListPromptsRequest) ([]Prompt, *http.Response, error) {
+//  @return PromptResults
+func (a *PromptsAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*PromptResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Prompt
+		localVarReturnValue  *PromptResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.ListPrompts")

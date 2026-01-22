@@ -66,13 +66,13 @@ func Test_aigentchat_TagsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test TagsAPIService SearchTags", func(t *testing.T) {
+	t.Run("Test TagsAPIService ListTags", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
 
-		resp, httpRes, err := apiClient.TagsAPI.SearchTags(context.Background(), orgId).Execute()
+		resp, httpRes, err := apiClient.TagsAPI.ListTags(context.Background(), orgId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

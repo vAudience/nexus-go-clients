@@ -16,40 +16,41 @@ import (
 	"fmt"
 )
 
-// checks if the ChannelResults type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChannelResults{}
+// checks if the AgentResults type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentResults{}
 
-// ChannelResults struct for ChannelResults
-type ChannelResults struct {
+// AgentResults struct for AgentResults
+type AgentResults struct {
 	Limit *int64 `json:"limit,omitempty"`
 	Offset *int64 `json:"offset,omitempty"`
-	Results []Channel `json:"results"`
+	Results []Agent `json:"results"`
+	Stats *AgentStatistics `json:"stats,omitempty"`
 	TotalResults *int64 `json:"total_results,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ChannelResults ChannelResults
+type _AgentResults AgentResults
 
-// NewChannelResults instantiates a new ChannelResults object
+// NewAgentResults instantiates a new AgentResults object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChannelResults(results []Channel) *ChannelResults {
-	this := ChannelResults{}
+func NewAgentResults(results []Agent) *AgentResults {
+	this := AgentResults{}
 	this.Results = results
 	return &this
 }
 
-// NewChannelResultsWithDefaults instantiates a new ChannelResults object
+// NewAgentResultsWithDefaults instantiates a new AgentResults object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChannelResultsWithDefaults() *ChannelResults {
-	this := ChannelResults{}
+func NewAgentResultsWithDefaults() *AgentResults {
+	this := AgentResults{}
 	return &this
 }
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
-func (o *ChannelResults) GetLimit() int64 {
+func (o *AgentResults) GetLimit() int64 {
 	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
@@ -59,7 +60,7 @@ func (o *ChannelResults) GetLimit() int64 {
 
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetLimitOk() (*int64, bool) {
+func (o *AgentResults) GetLimitOk() (*int64, bool) {
 	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
@@ -67,7 +68,7 @@ func (o *ChannelResults) GetLimitOk() (*int64, bool) {
 }
 
 // HasLimit returns a boolean if a field has been set.
-func (o *ChannelResults) HasLimit() bool {
+func (o *AgentResults) HasLimit() bool {
 	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
@@ -76,12 +77,12 @@ func (o *ChannelResults) HasLimit() bool {
 }
 
 // SetLimit gets a reference to the given int64 and assigns it to the Limit field.
-func (o *ChannelResults) SetLimit(v int64) {
+func (o *AgentResults) SetLimit(v int64) {
 	o.Limit = &v
 }
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *ChannelResults) GetOffset() int64 {
+func (o *AgentResults) GetOffset() int64 {
 	if o == nil || IsNil(o.Offset) {
 		var ret int64
 		return ret
@@ -91,7 +92,7 @@ func (o *ChannelResults) GetOffset() int64 {
 
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetOffsetOk() (*int64, bool) {
+func (o *AgentResults) GetOffsetOk() (*int64, bool) {
 	if o == nil || IsNil(o.Offset) {
 		return nil, false
 	}
@@ -99,7 +100,7 @@ func (o *ChannelResults) GetOffsetOk() (*int64, bool) {
 }
 
 // HasOffset returns a boolean if a field has been set.
-func (o *ChannelResults) HasOffset() bool {
+func (o *AgentResults) HasOffset() bool {
 	if o != nil && !IsNil(o.Offset) {
 		return true
 	}
@@ -108,14 +109,14 @@ func (o *ChannelResults) HasOffset() bool {
 }
 
 // SetOffset gets a reference to the given int64 and assigns it to the Offset field.
-func (o *ChannelResults) SetOffset(v int64) {
+func (o *AgentResults) SetOffset(v int64) {
 	o.Offset = &v
 }
 
 // GetResults returns the Results field value
-func (o *ChannelResults) GetResults() []Channel {
+func (o *AgentResults) GetResults() []Agent {
 	if o == nil {
-		var ret []Channel
+		var ret []Agent
 		return ret
 	}
 
@@ -124,7 +125,7 @@ func (o *ChannelResults) GetResults() []Channel {
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetResultsOk() ([]Channel, bool) {
+func (o *AgentResults) GetResultsOk() ([]Agent, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,12 +133,44 @@ func (o *ChannelResults) GetResultsOk() ([]Channel, bool) {
 }
 
 // SetResults sets field value
-func (o *ChannelResults) SetResults(v []Channel) {
+func (o *AgentResults) SetResults(v []Agent) {
 	o.Results = v
 }
 
+// GetStats returns the Stats field value if set, zero value otherwise.
+func (o *AgentResults) GetStats() AgentStatistics {
+	if o == nil || IsNil(o.Stats) {
+		var ret AgentStatistics
+		return ret
+	}
+	return *o.Stats
+}
+
+// GetStatsOk returns a tuple with the Stats field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentResults) GetStatsOk() (*AgentStatistics, bool) {
+	if o == nil || IsNil(o.Stats) {
+		return nil, false
+	}
+	return o.Stats, true
+}
+
+// HasStats returns a boolean if a field has been set.
+func (o *AgentResults) HasStats() bool {
+	if o != nil && !IsNil(o.Stats) {
+		return true
+	}
+
+	return false
+}
+
+// SetStats gets a reference to the given AgentStatistics and assigns it to the Stats field.
+func (o *AgentResults) SetStats(v AgentStatistics) {
+	o.Stats = &v
+}
+
 // GetTotalResults returns the TotalResults field value if set, zero value otherwise.
-func (o *ChannelResults) GetTotalResults() int64 {
+func (o *AgentResults) GetTotalResults() int64 {
 	if o == nil || IsNil(o.TotalResults) {
 		var ret int64
 		return ret
@@ -147,7 +180,7 @@ func (o *ChannelResults) GetTotalResults() int64 {
 
 // GetTotalResultsOk returns a tuple with the TotalResults field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetTotalResultsOk() (*int64, bool) {
+func (o *AgentResults) GetTotalResultsOk() (*int64, bool) {
 	if o == nil || IsNil(o.TotalResults) {
 		return nil, false
 	}
@@ -155,7 +188,7 @@ func (o *ChannelResults) GetTotalResultsOk() (*int64, bool) {
 }
 
 // HasTotalResults returns a boolean if a field has been set.
-func (o *ChannelResults) HasTotalResults() bool {
+func (o *AgentResults) HasTotalResults() bool {
 	if o != nil && !IsNil(o.TotalResults) {
 		return true
 	}
@@ -164,11 +197,11 @@ func (o *ChannelResults) HasTotalResults() bool {
 }
 
 // SetTotalResults gets a reference to the given int64 and assigns it to the TotalResults field.
-func (o *ChannelResults) SetTotalResults(v int64) {
+func (o *AgentResults) SetTotalResults(v int64) {
 	o.TotalResults = &v
 }
 
-func (o ChannelResults) MarshalJSON() ([]byte, error) {
+func (o AgentResults) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -176,7 +209,7 @@ func (o ChannelResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChannelResults) ToMap() (map[string]interface{}, error) {
+func (o AgentResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
@@ -185,6 +218,9 @@ func (o ChannelResults) ToMap() (map[string]interface{}, error) {
 		toSerialize["offset"] = o.Offset
 	}
 	toSerialize["results"] = o.Results
+	if !IsNil(o.Stats) {
+		toSerialize["stats"] = o.Stats
+	}
 	if !IsNil(o.TotalResults) {
 		toSerialize["total_results"] = o.TotalResults
 	}
@@ -196,7 +232,7 @@ func (o ChannelResults) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
+func (o *AgentResults) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -218,15 +254,15 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varChannelResults := _ChannelResults{}
+	varAgentResults := _AgentResults{}
 
-	err = json.Unmarshal(data, &varChannelResults)
+	err = json.Unmarshal(data, &varAgentResults)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ChannelResults(varChannelResults)
+	*o = AgentResults(varAgentResults)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -234,6 +270,7 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "limit")
 		delete(additionalProperties, "offset")
 		delete(additionalProperties, "results")
+		delete(additionalProperties, "stats")
 		delete(additionalProperties, "total_results")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -241,38 +278,38 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableChannelResults struct {
-	value *ChannelResults
+type NullableAgentResults struct {
+	value *AgentResults
 	isSet bool
 }
 
-func (v NullableChannelResults) Get() *ChannelResults {
+func (v NullableAgentResults) Get() *AgentResults {
 	return v.value
 }
 
-func (v *NullableChannelResults) Set(val *ChannelResults) {
+func (v *NullableAgentResults) Set(val *AgentResults) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChannelResults) IsSet() bool {
+func (v NullableAgentResults) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChannelResults) Unset() {
+func (v *NullableAgentResults) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChannelResults(val *ChannelResults) *NullableChannelResults {
-	return &NullableChannelResults{value: val, isSet: true}
+func NewNullableAgentResults(val *AgentResults) *NullableAgentResults {
+	return &NullableAgentResults{value: val, isSet: true}
 }
 
-func (v NullableChannelResults) MarshalJSON() ([]byte, error) {
+func (v NullableAgentResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChannelResults) UnmarshalJSON(src []byte) error {
+func (v *NullableAgentResults) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

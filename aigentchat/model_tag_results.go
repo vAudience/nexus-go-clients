@@ -16,40 +16,40 @@ import (
 	"fmt"
 )
 
-// checks if the ChannelResults type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChannelResults{}
+// checks if the TagResults type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TagResults{}
 
-// ChannelResults struct for ChannelResults
-type ChannelResults struct {
+// TagResults struct for TagResults
+type TagResults struct {
 	Limit *int64 `json:"limit,omitempty"`
 	Offset *int64 `json:"offset,omitempty"`
-	Results []Channel `json:"results"`
+	Results []Tag `json:"results"`
 	TotalResults *int64 `json:"total_results,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ChannelResults ChannelResults
+type _TagResults TagResults
 
-// NewChannelResults instantiates a new ChannelResults object
+// NewTagResults instantiates a new TagResults object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChannelResults(results []Channel) *ChannelResults {
-	this := ChannelResults{}
+func NewTagResults(results []Tag) *TagResults {
+	this := TagResults{}
 	this.Results = results
 	return &this
 }
 
-// NewChannelResultsWithDefaults instantiates a new ChannelResults object
+// NewTagResultsWithDefaults instantiates a new TagResults object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChannelResultsWithDefaults() *ChannelResults {
-	this := ChannelResults{}
+func NewTagResultsWithDefaults() *TagResults {
+	this := TagResults{}
 	return &this
 }
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
-func (o *ChannelResults) GetLimit() int64 {
+func (o *TagResults) GetLimit() int64 {
 	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
@@ -59,7 +59,7 @@ func (o *ChannelResults) GetLimit() int64 {
 
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetLimitOk() (*int64, bool) {
+func (o *TagResults) GetLimitOk() (*int64, bool) {
 	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *ChannelResults) GetLimitOk() (*int64, bool) {
 }
 
 // HasLimit returns a boolean if a field has been set.
-func (o *ChannelResults) HasLimit() bool {
+func (o *TagResults) HasLimit() bool {
 	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
@@ -76,12 +76,12 @@ func (o *ChannelResults) HasLimit() bool {
 }
 
 // SetLimit gets a reference to the given int64 and assigns it to the Limit field.
-func (o *ChannelResults) SetLimit(v int64) {
+func (o *TagResults) SetLimit(v int64) {
 	o.Limit = &v
 }
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *ChannelResults) GetOffset() int64 {
+func (o *TagResults) GetOffset() int64 {
 	if o == nil || IsNil(o.Offset) {
 		var ret int64
 		return ret
@@ -91,7 +91,7 @@ func (o *ChannelResults) GetOffset() int64 {
 
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetOffsetOk() (*int64, bool) {
+func (o *TagResults) GetOffsetOk() (*int64, bool) {
 	if o == nil || IsNil(o.Offset) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *ChannelResults) GetOffsetOk() (*int64, bool) {
 }
 
 // HasOffset returns a boolean if a field has been set.
-func (o *ChannelResults) HasOffset() bool {
+func (o *TagResults) HasOffset() bool {
 	if o != nil && !IsNil(o.Offset) {
 		return true
 	}
@@ -108,14 +108,14 @@ func (o *ChannelResults) HasOffset() bool {
 }
 
 // SetOffset gets a reference to the given int64 and assigns it to the Offset field.
-func (o *ChannelResults) SetOffset(v int64) {
+func (o *TagResults) SetOffset(v int64) {
 	o.Offset = &v
 }
 
 // GetResults returns the Results field value
-func (o *ChannelResults) GetResults() []Channel {
+func (o *TagResults) GetResults() []Tag {
 	if o == nil {
-		var ret []Channel
+		var ret []Tag
 		return ret
 	}
 
@@ -124,7 +124,7 @@ func (o *ChannelResults) GetResults() []Channel {
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetResultsOk() ([]Channel, bool) {
+func (o *TagResults) GetResultsOk() ([]Tag, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,12 +132,12 @@ func (o *ChannelResults) GetResultsOk() ([]Channel, bool) {
 }
 
 // SetResults sets field value
-func (o *ChannelResults) SetResults(v []Channel) {
+func (o *TagResults) SetResults(v []Tag) {
 	o.Results = v
 }
 
 // GetTotalResults returns the TotalResults field value if set, zero value otherwise.
-func (o *ChannelResults) GetTotalResults() int64 {
+func (o *TagResults) GetTotalResults() int64 {
 	if o == nil || IsNil(o.TotalResults) {
 		var ret int64
 		return ret
@@ -147,7 +147,7 @@ func (o *ChannelResults) GetTotalResults() int64 {
 
 // GetTotalResultsOk returns a tuple with the TotalResults field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChannelResults) GetTotalResultsOk() (*int64, bool) {
+func (o *TagResults) GetTotalResultsOk() (*int64, bool) {
 	if o == nil || IsNil(o.TotalResults) {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *ChannelResults) GetTotalResultsOk() (*int64, bool) {
 }
 
 // HasTotalResults returns a boolean if a field has been set.
-func (o *ChannelResults) HasTotalResults() bool {
+func (o *TagResults) HasTotalResults() bool {
 	if o != nil && !IsNil(o.TotalResults) {
 		return true
 	}
@@ -164,11 +164,11 @@ func (o *ChannelResults) HasTotalResults() bool {
 }
 
 // SetTotalResults gets a reference to the given int64 and assigns it to the TotalResults field.
-func (o *ChannelResults) SetTotalResults(v int64) {
+func (o *TagResults) SetTotalResults(v int64) {
 	o.TotalResults = &v
 }
 
-func (o ChannelResults) MarshalJSON() ([]byte, error) {
+func (o TagResults) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -176,7 +176,7 @@ func (o ChannelResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChannelResults) ToMap() (map[string]interface{}, error) {
+func (o TagResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
@@ -196,7 +196,7 @@ func (o ChannelResults) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
+func (o *TagResults) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -218,15 +218,15 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varChannelResults := _ChannelResults{}
+	varTagResults := _TagResults{}
 
-	err = json.Unmarshal(data, &varChannelResults)
+	err = json.Unmarshal(data, &varTagResults)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ChannelResults(varChannelResults)
+	*o = TagResults(varTagResults)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -241,38 +241,38 @@ func (o *ChannelResults) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableChannelResults struct {
-	value *ChannelResults
+type NullableTagResults struct {
+	value *TagResults
 	isSet bool
 }
 
-func (v NullableChannelResults) Get() *ChannelResults {
+func (v NullableTagResults) Get() *TagResults {
 	return v.value
 }
 
-func (v *NullableChannelResults) Set(val *ChannelResults) {
+func (v *NullableTagResults) Set(val *TagResults) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChannelResults) IsSet() bool {
+func (v NullableTagResults) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChannelResults) Unset() {
+func (v *NullableTagResults) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChannelResults(val *ChannelResults) *NullableChannelResults {
-	return &NullableChannelResults{value: val, isSet: true}
+func NewNullableTagResults(val *TagResults) *NullableTagResults {
+	return &NullableTagResults{value: val, isSet: true}
 }
 
-func (v NullableChannelResults) MarshalJSON() ([]byte, error) {
+func (v NullableTagResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChannelResults) UnmarshalJSON(src []byte) error {
+func (v *NullableTagResults) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

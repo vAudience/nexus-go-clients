@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## ListPrompts
 
-> []Prompt ListPrompts(ctx, orgId).Visibility(visibility).Offset(offset).Limit(limit).Execute()
+> PromptResults ListPrompts(ctx, orgId).Visibility(visibility).Offset(offset).Limit(limit).Execute()
 
 List prompts
 
@@ -262,7 +262,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PromptsAPI.ListPrompts``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListPrompts`: []Prompt
+	// response from `ListPrompts`: PromptResults
 	fmt.Fprintf(os.Stdout, "Response from `PromptsAPI.ListPrompts`: %v\n", resp)
 }
 ```
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Prompt**](Prompt.md)
+[**PromptResults**](PromptResults.md)
 
 ### Authorization
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.0
+API version: 0.25.1
 Contact: contact@vaudience.ai
 */
 
@@ -546,7 +546,7 @@ func (a *TagsAPIService) GetTagExecute(r ApiGetTagRequest) (*Tag, *http.Response
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchTagsRequest struct {
+type ApiListTagsRequest struct {
 	ctx context.Context
 	ApiService *TagsAPIService
 	orgId string
@@ -557,44 +557,44 @@ type ApiSearchTagsRequest struct {
 }
 
 // Filter tags by type
-func (r ApiSearchTagsRequest) Type_(type_ string) ApiSearchTagsRequest {
+func (r ApiListTagsRequest) Type_(type_ string) ApiListTagsRequest {
 	r.type_ = &type_
 	return r
 }
 
 // Include predefined tags to the list of org owned tags
-func (r ApiSearchTagsRequest) AddPredefinedTags(addPredefinedTags bool) ApiSearchTagsRequest {
+func (r ApiListTagsRequest) AddPredefinedTags(addPredefinedTags bool) ApiListTagsRequest {
 	r.addPredefinedTags = &addPredefinedTags
 	return r
 }
 
 // Limit the number of results
-func (r ApiSearchTagsRequest) Limit(limit int32) ApiSearchTagsRequest {
+func (r ApiListTagsRequest) Limit(limit int32) ApiListTagsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Offset for pagination
-func (r ApiSearchTagsRequest) Offset(offset int32) ApiSearchTagsRequest {
+func (r ApiListTagsRequest) Offset(offset int32) ApiListTagsRequest {
 	r.offset = &offset
 	return r
 }
 
-func (r ApiSearchTagsRequest) Execute() ([]Tag, *http.Response, error) {
-	return r.ApiService.SearchTagsExecute(r)
+func (r ApiListTagsRequest) Execute() (*TagResults, *http.Response, error) {
+	return r.ApiService.ListTagsExecute(r)
 }
 
 /*
-SearchTags Search tags
+ListTags List tags
 
-Search tags based on criteria
+List tags based on criteria
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @return ApiSearchTagsRequest
+ @return ApiListTagsRequest
 */
-func (a *TagsAPIService) SearchTags(ctx context.Context, orgId string) ApiSearchTagsRequest {
-	return ApiSearchTagsRequest{
+func (a *TagsAPIService) ListTags(ctx context.Context, orgId string) ApiListTagsRequest {
+	return ApiListTagsRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
@@ -602,16 +602,16 @@ func (a *TagsAPIService) SearchTags(ctx context.Context, orgId string) ApiSearch
 }
 
 // Execute executes the request
-//  @return []Tag
-func (a *TagsAPIService) SearchTagsExecute(r ApiSearchTagsRequest) ([]Tag, *http.Response, error) {
+//  @return TagResults
+func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) (*TagResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Tag
+		localVarReturnValue  *TagResults
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.SearchTags")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.ListTags")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

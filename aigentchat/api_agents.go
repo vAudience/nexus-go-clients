@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.0
+API version: 0.25.1
 Contact: contact@vaudience.ai
 */
 
@@ -1368,7 +1368,7 @@ func (r ApiListAgentsRequest) SortOrder(sortOrder string) ApiListAgentsRequest {
 	return r
 }
 
-func (r ApiListAgentsRequest) Execute() ([]Agent, *http.Response, error) {
+func (r ApiListAgentsRequest) Execute() (*AgentResults, *http.Response, error) {
 	return r.ApiService.ListAgentsExecute(r)
 }
 
@@ -1390,13 +1390,13 @@ func (a *AgentsAPIService) ListAgents(ctx context.Context, orgId string) ApiList
 }
 
 // Execute executes the request
-//  @return []Agent
-func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) ([]Agent, *http.Response, error) {
+//  @return AgentResults
+func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*AgentResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Agent
+		localVarReturnValue  *AgentResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.ListAgents")

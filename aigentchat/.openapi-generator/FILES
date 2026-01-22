@@ -61,6 +61,8 @@ docs/AIgencyThumbnail.md
 docs/AccessScope.md
 docs/Agent.md
 docs/AgentI18n.md
+docs/AgentResults.md
+docs/AgentStatistics.md
 docs/AgentType.md
 docs/AgentWriteDto.md
 docs/AgentsAPI.md
@@ -116,6 +118,7 @@ docs/OrgCostBudgetWriteDto.md
 docs/OrgCostBudgetsAPI.md
 docs/Prompt.md
 docs/PromptRenderDto.md
+docs/PromptResults.md
 docs/PromptVersion.md
 docs/PromptWriteDto.md
 docs/PromptsAPI.md
@@ -123,6 +126,7 @@ docs/RenderedPrompt.md
 docs/ResultFile.md
 docs/Tag.md
 docs/TagI18n.md
+docs/TagResults.md
 docs/TagWriteDto.md
 docs/TagsAPI.md
 docs/TextEmbedding.md
@@ -161,6 +165,8 @@ model_a_igency_thumbnail.go
 model_access_scope.go
 model_agent.go
 model_agent_i18n.go
+model_agent_results.go
+model_agent_statistics.go
 model_agent_type.go
 model_agent_write_dto.go
 model_ai_model.go
@@ -216,12 +222,14 @@ model_org_cost_budget_check.go
 model_org_cost_budget_write_dto.go
 model_prompt.go
 model_prompt_render_dto.go
+model_prompt_results.go
 model_prompt_version.go
 model_prompt_write_dto.go
 model_rendered_prompt.go
 model_result_file.go
 model_tag.go
 model_tag_i18n.go
+model_tag_results.go
 model_tag_write_dto.go
 model_text_embedding.go
 model_text_embedding_item_dto.go

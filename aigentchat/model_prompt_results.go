@@ -16,41 +16,41 @@ import (
 	"fmt"
 )
 
-// checks if the AIgencyMessageResults type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AIgencyMessageResults{}
+// checks if the PromptResults type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PromptResults{}
 
-// AIgencyMessageResults struct for AIgencyMessageResults
-type AIgencyMessageResults struct {
-	Results []AIgencyMessage `json:"results"`
+// PromptResults struct for PromptResults
+type PromptResults struct {
+	Results []Prompt `json:"results"`
 	TotalResults int64 `json:"total_results"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _AIgencyMessageResults AIgencyMessageResults
+type _PromptResults PromptResults
 
-// NewAIgencyMessageResults instantiates a new AIgencyMessageResults object
+// NewPromptResults instantiates a new PromptResults object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAIgencyMessageResults(results []AIgencyMessage, totalResults int64) *AIgencyMessageResults {
-	this := AIgencyMessageResults{}
+func NewPromptResults(results []Prompt, totalResults int64) *PromptResults {
+	this := PromptResults{}
 	this.Results = results
 	this.TotalResults = totalResults
 	return &this
 }
 
-// NewAIgencyMessageResultsWithDefaults instantiates a new AIgencyMessageResults object
+// NewPromptResultsWithDefaults instantiates a new PromptResults object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAIgencyMessageResultsWithDefaults() *AIgencyMessageResults {
-	this := AIgencyMessageResults{}
+func NewPromptResultsWithDefaults() *PromptResults {
+	this := PromptResults{}
 	return &this
 }
 
 // GetResults returns the Results field value
-func (o *AIgencyMessageResults) GetResults() []AIgencyMessage {
+func (o *PromptResults) GetResults() []Prompt {
 	if o == nil {
-		var ret []AIgencyMessage
+		var ret []Prompt
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *AIgencyMessageResults) GetResults() []AIgencyMessage {
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessageResults) GetResultsOk() ([]AIgencyMessage, bool) {
+func (o *PromptResults) GetResultsOk() ([]Prompt, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *AIgencyMessageResults) GetResultsOk() ([]AIgencyMessage, bool) {
 }
 
 // SetResults sets field value
-func (o *AIgencyMessageResults) SetResults(v []AIgencyMessage) {
+func (o *PromptResults) SetResults(v []Prompt) {
 	o.Results = v
 }
 
 // GetTotalResults returns the TotalResults field value
-func (o *AIgencyMessageResults) GetTotalResults() int64 {
+func (o *PromptResults) GetTotalResults() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -83,7 +83,7 @@ func (o *AIgencyMessageResults) GetTotalResults() int64 {
 
 // GetTotalResultsOk returns a tuple with the TotalResults field value
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessageResults) GetTotalResultsOk() (*int64, bool) {
+func (o *PromptResults) GetTotalResultsOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,11 +91,11 @@ func (o *AIgencyMessageResults) GetTotalResultsOk() (*int64, bool) {
 }
 
 // SetTotalResults sets field value
-func (o *AIgencyMessageResults) SetTotalResults(v int64) {
+func (o *PromptResults) SetTotalResults(v int64) {
 	o.TotalResults = v
 }
 
-func (o AIgencyMessageResults) MarshalJSON() ([]byte, error) {
+func (o PromptResults) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,7 +103,7 @@ func (o AIgencyMessageResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AIgencyMessageResults) ToMap() (map[string]interface{}, error) {
+func (o PromptResults) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["results"] = o.Results
 	toSerialize["total_results"] = o.TotalResults
@@ -115,7 +115,7 @@ func (o AIgencyMessageResults) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AIgencyMessageResults) UnmarshalJSON(data []byte) (err error) {
+func (o *PromptResults) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -138,15 +138,15 @@ func (o *AIgencyMessageResults) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAIgencyMessageResults := _AIgencyMessageResults{}
+	varPromptResults := _PromptResults{}
 
-	err = json.Unmarshal(data, &varAIgencyMessageResults)
+	err = json.Unmarshal(data, &varPromptResults)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AIgencyMessageResults(varAIgencyMessageResults)
+	*o = PromptResults(varPromptResults)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -159,38 +159,38 @@ func (o *AIgencyMessageResults) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAIgencyMessageResults struct {
-	value *AIgencyMessageResults
+type NullablePromptResults struct {
+	value *PromptResults
 	isSet bool
 }
 
-func (v NullableAIgencyMessageResults) Get() *AIgencyMessageResults {
+func (v NullablePromptResults) Get() *PromptResults {
 	return v.value
 }
 
-func (v *NullableAIgencyMessageResults) Set(val *AIgencyMessageResults) {
+func (v *NullablePromptResults) Set(val *PromptResults) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAIgencyMessageResults) IsSet() bool {
+func (v NullablePromptResults) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAIgencyMessageResults) Unset() {
+func (v *NullablePromptResults) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAIgencyMessageResults(val *AIgencyMessageResults) *NullableAIgencyMessageResults {
-	return &NullableAIgencyMessageResults{value: val, isSet: true}
+func NewNullablePromptResults(val *PromptResults) *NullablePromptResults {
+	return &NullablePromptResults{value: val, isSet: true}
 }
 
-func (v NullableAIgencyMessageResults) MarshalJSON() ([]byte, error) {
+func (v NullablePromptResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAIgencyMessageResults) UnmarshalJSON(src []byte) error {
+func (v *NullablePromptResults) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

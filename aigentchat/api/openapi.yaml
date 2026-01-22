@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.25.0
+  version: 0.25.1
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -196,9 +196,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/Agent"
-                type: array
+                $ref: "#/components/schemas/AgentResults"
           description: OK
         "401":
           content:
@@ -3905,9 +3903,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/Prompt"
-                type: array
+                $ref: "#/components/schemas/PromptResults"
           description: OK
         "400":
           content:
@@ -4234,8 +4230,8 @@ paths:
       x-codegen-request-body-name: prompt
   /v1/organizations/{org_id}/tags:
     get:
-      description: Search tags based on criteria
-      operationId: SearchTags
+      description: List tags based on criteria
+      operationId: ListTags
       parameters:
       - description: organization ID
         in: path
@@ -4273,9 +4269,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/Tag"
-                type: array
+                $ref: "#/components/schemas/TagResults"
           description: OK
         "401":
           content:
@@ -4297,7 +4291,7 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: Search tags
+      summary: List tags
       tags:
       - Tags
     post:
@@ -6943,7 +6937,7 @@ components:
         assigned_tools:
         - assigned_tools
         - assigned_tools
-        created_at: 0
+        created_at: 1
         description: description
         type: ""
         initial_user_messages:
@@ -6952,7 +6946,7 @@ components:
         attached_file_ids:
         - attached_file_ids
         - attached_file_ids
-        updated_at: 6
+        updated_at: 5
         use_tools: true
         ignore_incoming_overwrite: true
         meta_data: "{}"
@@ -7129,6 +7123,190 @@ components:
           type: string
       required:
       - name
+      type: object
+    AgentResults:
+      example:
+        offset: 6
+        stats:
+          model_occurrences:
+            key: 5
+          tag_occurrences:
+            key: 2
+        limit: 0
+        results:
+        - system_messages:
+          - system_messages
+          - system_messages
+          default_file_upload_category: default_file_upload_category
+          owner_id: owner_id
+          assigned_tools:
+          - assigned_tools
+          - assigned_tools
+          created_at: 1
+          description: description
+          type: ""
+          initial_user_messages:
+          - initial_user_messages
+          - initial_user_messages
+          attached_file_ids:
+          - attached_file_ids
+          - attached_file_ids
+          updated_at: 5
+          use_tools: true
+          ignore_incoming_overwrite: true
+          meta_data: "{}"
+          model: "{}"
+          model_host_location: ""
+          tool_config: "{}"
+          id: id
+          read_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+          tag_ids:
+          - tag_ids
+          - tag_ids
+          internal_id: internal_id
+          model_actions:
+          - model_actions
+          - model_actions
+          model_id: model_id
+          i18n:
+            key:
+              name: name
+              description: description
+          owner_organization_id: owner_organization_id
+          add_tool_guidelines: true
+          avatar_url: avatar_url
+          name: name
+          updated_by: updated_by
+          user_access:
+            read: true
+            update: true
+            delete: true
+          parameters: "{}"
+          write_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+        - system_messages:
+          - system_messages
+          - system_messages
+          default_file_upload_category: default_file_upload_category
+          owner_id: owner_id
+          assigned_tools:
+          - assigned_tools
+          - assigned_tools
+          created_at: 1
+          description: description
+          type: ""
+          initial_user_messages:
+          - initial_user_messages
+          - initial_user_messages
+          attached_file_ids:
+          - attached_file_ids
+          - attached_file_ids
+          updated_at: 5
+          use_tools: true
+          ignore_incoming_overwrite: true
+          meta_data: "{}"
+          model: "{}"
+          model_host_location: ""
+          tool_config: "{}"
+          id: id
+          read_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+          tag_ids:
+          - tag_ids
+          - tag_ids
+          internal_id: internal_id
+          model_actions:
+          - model_actions
+          - model_actions
+          model_id: model_id
+          i18n:
+            key:
+              name: name
+              description: description
+          owner_organization_id: owner_organization_id
+          add_tool_guidelines: true
+          avatar_url: avatar_url
+          name: name
+          updated_by: updated_by
+          user_access:
+            read: true
+            update: true
+            delete: true
+          parameters: "{}"
+          write_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+        total_results: 7
+      properties:
+        limit:
+          format: int64
+          type: integer
+        offset:
+          format: int64
+          type: integer
+        results:
+          items:
+            $ref: "#/components/schemas/Agent"
+          type: array
+        stats:
+          $ref: "#/components/schemas/AgentStatistics"
+        total_results:
+          format: int64
+          type: integer
+      required:
+      - results
+      type: object
+    AgentStatistics:
+      example:
+        model_occurrences:
+          key: 5
+        tag_occurrences:
+          key: 2
+      properties:
+        model_occurrences:
+          additionalProperties:
+            type: integer
+          type: object
+        tag_occurrences:
+          additionalProperties:
+            type: integer
+          type: object
       type: object
     AgentType:
       enum:
@@ -9063,6 +9241,120 @@ components:
             type: string
           type: object
       type: object
+    PromptResults:
+      example:
+        results:
+        - read_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+          internal_id: internal_id
+          owner_id: owner_id
+          created_at: 0
+          current_version: 6
+          description: description
+          default_agent_id: default_agent_id
+          thumbnail_url: thumbnail_url
+          title: title
+          tags:
+          - tags
+          - tags
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          versions:
+          - created_at: 5
+            created_by: created_by
+            version: 5
+            content: content
+          - created_at: 5
+            created_by: created_by
+            version: 5
+            content: content
+          user_access:
+            read: true
+            update: true
+            delete: true
+          id: id
+          write_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+        - read_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+          internal_id: internal_id
+          owner_id: owner_id
+          created_at: 0
+          current_version: 6
+          description: description
+          default_agent_id: default_agent_id
+          thumbnail_url: thumbnail_url
+          title: title
+          tags:
+          - tags
+          - tags
+          owner_organization_id: owner_organization_id
+          updated_at: 1
+          versions:
+          - created_at: 5
+            created_by: created_by
+            version: 5
+            content: content
+          - created_at: 5
+            created_by: created_by
+            version: 5
+            content: content
+          user_access:
+            read: true
+            update: true
+            delete: true
+          id: id
+          write_access:
+            is_private: true
+            include_organization: true
+            team_ids:
+            - team_ids
+            - team_ids
+            user_ids:
+            - user_ids
+            - user_ids
+            is_public: true
+            has_teams: true
+        total_results: 2
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/Prompt"
+          type: array
+        total_results:
+          format: int64
+          type: integer
+      required:
+      - results
+      - total_results
+      type: object
     PromptVersion:
       example:
         created_at: 5
@@ -9192,12 +9484,12 @@ components:
     Tag:
       example:
         internal_id: internal_id
-        updated_at: 6
+        updated_at: 5
         organization_id: organization_id
         is_public: true
         name: name
         updated_by: updated_by
-        created_at: 0
+        created_at: 1
         id: id
         type: agent
         i18n:
@@ -9255,6 +9547,53 @@ components:
           type: string
       required:
       - name
+      type: object
+    TagResults:
+      example:
+        offset: 6
+        limit: 0
+        results:
+        - internal_id: internal_id
+          updated_at: 5
+          organization_id: organization_id
+          is_public: true
+          name: name
+          updated_by: updated_by
+          created_at: 1
+          id: id
+          type: agent
+          i18n:
+            key:
+              name: name
+        - internal_id: internal_id
+          updated_at: 5
+          organization_id: organization_id
+          is_public: true
+          name: name
+          updated_by: updated_by
+          created_at: 1
+          id: id
+          type: agent
+          i18n:
+            key:
+              name: name
+        total_results: 5
+      properties:
+        limit:
+          format: int64
+          type: integer
+        offset:
+          format: int64
+          type: integer
+        results:
+          items:
+            $ref: "#/components/schemas/Tag"
+          type: array
+        total_results:
+          format: int64
+          type: integer
+      required:
+      - results
       type: object
     TagWriteDto:
       example:

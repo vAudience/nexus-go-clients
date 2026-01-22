@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> []Agent ListAgents(ctx, orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+> AgentResults ListAgents(ctx, orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
 
 List agents
 
@@ -582,7 +582,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListAgents`: []Agent
+	// response from `ListAgents`: AgentResults
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.ListAgents`: %v\n", resp)
 }
 ```
@@ -618,7 +618,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Agent**](Agent.md)
+[**AgentResults**](AgentResults.md)
 
 ### Authorization
 

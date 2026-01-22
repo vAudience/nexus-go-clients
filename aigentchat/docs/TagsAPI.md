@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateTag**](TagsAPI.md#CreateTag) | **Post** /v1/organizations/{org_id}/tags | Create a new tag
 [**DeleteTag**](TagsAPI.md#DeleteTag) | **Delete** /v1/organizations/{org_id}/tags/{id} | Delete a tag
 [**GetTag**](TagsAPI.md#GetTag) | **Get** /v1/organizations/{org_id}/tags/{id} | Get a tag
-[**SearchTags**](TagsAPI.md#SearchTags) | **Get** /v1/organizations/{org_id}/tags | Search tags
+[**ListTags**](TagsAPI.md#ListTags) | **Get** /v1/organizations/{org_id}/tags | List tags
 [**UpdateTag**](TagsAPI.md#UpdateTag) | **Patch** /v1/organizations/{org_id}/tags/{id} | Update a tag
 
 
@@ -230,11 +230,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SearchTags
+## ListTags
 
-> []Tag SearchTags(ctx, orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
+> TagResults ListTags(ctx, orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
 
-Search tags
+List tags
 
 
 
@@ -259,13 +259,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TagsAPI.SearchTags(context.Background(), orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
+	resp, r, err := apiClient.TagsAPI.ListTags(context.Background(), orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.SearchTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.ListTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchTags`: []Tag
-	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.SearchTags`: %v\n", resp)
+	// response from `ListTags`: TagResults
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.ListTags`: %v\n", resp)
 }
 ```
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSearchTagsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListTagsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Tag**](Tag.md)
+[**TagResults**](TagResults.md)
 
 ### Authorization
 
