@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.25.1
+  version: 0.25.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -158,7 +158,7 @@ paths:
         name: admin_mode
         schema:
           type: boolean
-      - description: "Filter agents by access visibility (public, organization)"
+      - description: "Filter agents by access visibility (public, private, organization)"
         in: query
         name: visibility
         schema:
@@ -4667,9 +4667,9 @@ components:
         parameter_definitions: "{}"
         id: id
         model_stats:
-          cost: 3
-          speed: 1
-          intelligence: 1
+          cost: 2
+          speed: 0
+          intelligence: 0
         actions:
         - actions
         - actions
@@ -5123,9 +5123,9 @@ components:
           parameter_definitions: "{}"
           id: id
           model_stats:
-            cost: 3
-            speed: 1
-            intelligence: 1
+            cost: 2
+            speed: 0
+            intelligence: 0
           actions:
           - actions
           - actions
@@ -5225,9 +5225,9 @@ components:
           parameter_definitions: "{}"
           id: id
           model_stats:
-            cost: 3
-            speed: 1
-            intelligence: 1
+            cost: 2
+            speed: 0
+            intelligence: 0
           actions:
           - actions
           - actions
@@ -5301,21 +5301,21 @@ components:
       type: object
     AIModelStats:
       example:
-        cost: 3
-        speed: 1
-        intelligence: 1
+        cost: 2
+        speed: 0
+        intelligence: 0
       properties:
         cost:
           maximum: 4
-          minimum: 1
+          minimum: 0
           type: integer
         intelligence:
           maximum: 4
-          minimum: 1
+          minimum: 0
           type: integer
         speed:
           maximum: 4
-          minimum: 1
+          minimum: 0
           type: integer
       type: object
     AIModelWriteDto:
@@ -5406,9 +5406,9 @@ components:
         name: name
         parameter_definitions: "{}"
         model_stats:
-          cost: 3
-          speed: 1
-          intelligence: 1
+          cost: 2
+          speed: 0
+          intelligence: 0
         actions:
         - actions
         - actions
@@ -6898,7 +6898,7 @@ components:
         include_organization:
           description: |-
             Organization-wide access - all organization members
-            Cannot be combined with IsPrivate and IsPublic
+            When true, all other settings need to be false or empty
           type: boolean
         is_private:
           description: |-
@@ -6913,7 +6913,7 @@ components:
         team_ids:
           description: |-
             Team-based access - members of these teams
-            Can be combined with IncludeOrganization and UserIDs, but not with IsPrivate and IsPublic
+            Can be combined with UserIDs, but not with IsPrivate, IsPublic and IncludeOrganization
           items:
             type: string
           type: array
@@ -6921,7 +6921,7 @@ components:
         user_ids:
           description: |-
             User-specific access - these specific users
-            Can be combined with IncludeOrganization and TeamIDs, but not with IsPrivate and IsPublic
+            Can be combined with TeamIDs, but not with IsPrivate, IsPublic and IncludeOrganization
           items:
             type: string
           type: array

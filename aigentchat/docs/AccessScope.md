@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **HasTeams** | Pointer to **bool** |  | [optional] 
-**IncludeOrganization** | Pointer to **bool** | Organization-wide access - all organization members Cannot be combined with IsPrivate and IsPublic | [optional] 
+**IncludeOrganization** | Pointer to **bool** | Organization-wide access - all organization members When true, all other settings need to be false or empty | [optional] 
 **IsPrivate** | Pointer to **bool** | Private access - only owner When true, all other settings need to be false or empty | [optional] 
 **IsPublic** | Pointer to **bool** | Public access - all authenticated users can access When true, all other settings need to be false or empty | [optional] 
-**TeamIds** | Pointer to **[]string** | Team-based access - members of these teams Can be combined with IncludeOrganization and UserIDs, but not with IsPrivate and IsPublic | [optional] 
-**UserIds** | Pointer to **[]string** | User-specific access - these specific users Can be combined with IncludeOrganization and TeamIDs, but not with IsPrivate and IsPublic | [optional] 
+**TeamIds** | Pointer to **[]string** | Team-based access - members of these teams Can be combined with UserIDs, but not with IsPrivate, IsPublic and IncludeOrganization | [optional] 
+**UserIds** | Pointer to **[]string** | User-specific access - these specific users Can be combined with TeamIDs, but not with IsPrivate, IsPublic and IncludeOrganization | [optional] 
 
 ## Methods
 

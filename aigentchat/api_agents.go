@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.1
+API version: 0.25.2
 Contact: contact@vaudience.ai
 */
 
@@ -1338,7 +1338,7 @@ func (r ApiListAgentsRequest) AdminMode(adminMode bool) ApiListAgentsRequest {
 	return r
 }
 
-// Filter agents by access visibility (public, organization)
+// Filter agents by access visibility (public, private, organization)
 func (r ApiListAgentsRequest) Visibility(visibility string) ApiListAgentsRequest {
 	r.visibility = &visibility
 	return r

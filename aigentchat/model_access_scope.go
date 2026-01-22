@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.1
+API version: 0.25.2
 Contact: contact@vaudience.ai
 */
 
@@ -21,15 +21,15 @@ var _ MappedNullable = &AccessScope{}
 // AccessScope struct for AccessScope
 type AccessScope struct {
 	HasTeams *bool `json:"has_teams,omitempty"`
-	// Organization-wide access - all organization members Cannot be combined with IsPrivate and IsPublic
+	// Organization-wide access - all organization members When true, all other settings need to be false or empty
 	IncludeOrganization *bool `json:"include_organization,omitempty"`
 	// Private access - only owner When true, all other settings need to be false or empty
 	IsPrivate *bool `json:"is_private,omitempty"`
 	// Public access - all authenticated users can access When true, all other settings need to be false or empty
 	IsPublic *bool `json:"is_public,omitempty"`
-	// Team-based access - members of these teams Can be combined with IncludeOrganization and UserIDs, but not with IsPrivate and IsPublic
+	// Team-based access - members of these teams Can be combined with UserIDs, but not with IsPrivate, IsPublic and IncludeOrganization
 	TeamIds []string `json:"team_ids,omitempty"`
-	// User-specific access - these specific users Can be combined with IncludeOrganization and TeamIDs, but not with IsPrivate and IsPublic
+	// User-specific access - these specific users Can be combined with TeamIDs, but not with IsPrivate, IsPublic and IncludeOrganization
 	UserIds []string `json:"user_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

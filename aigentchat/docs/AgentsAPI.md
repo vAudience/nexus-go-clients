@@ -569,7 +569,7 @@ func main() {
 	types := []string{"Types_example"} // []string | Filter agents by types (basic, background, service - comma separated) (optional)
 	addPredefinedAgents := true // bool | Include default agents to the list of org owned agents (optional)
 	adminMode := true // bool | Admin mode to bypass certain permission checks (optional)
-	visibility := "visibility_example" // string | Filter agents by access visibility (public, organization) (optional)
+	visibility := "visibility_example" // string | Filter agents by access visibility (public, private, organization) (optional)
 	limit := int32(56) // int32 | Limit the number of results (optional) (default to 1000)
 	offset := int32(56) // int32 | Offset for pagination (optional) (default to 0)
 	sortBy := "sortBy_example" // string | Field to sort by (name, createdat, updatedat) (optional) (default to "\"name\"")
@@ -610,7 +610,7 @@ Name | Type | Description  | Notes
  **types** | **[]string** | Filter agents by types (basic, background, service - comma separated) | 
  **addPredefinedAgents** | **bool** | Include default agents to the list of org owned agents | 
  **adminMode** | **bool** | Admin mode to bypass certain permission checks | 
- **visibility** | **string** | Filter agents by access visibility (public, organization) | 
+ **visibility** | **string** | Filter agents by access visibility (public, private, organization) | 
  **limit** | **int32** | Limit the number of results | [default to 1000]
  **offset** | **int32** | Offset for pagination | [default to 0]
  **sortBy** | **string** | Field to sort by (name, createdat, updatedat) | [default to &quot;\&quot;name\&quot;&quot;]
