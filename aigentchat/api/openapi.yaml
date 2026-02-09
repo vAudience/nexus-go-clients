@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.25.2
+  version: 0.25.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -133,6 +133,19 @@ paths:
           - embedding
           - image
           - transcribe
+          type: string
+      - description: "Filter agents by the model hosting location (europe, usa, etc.).\
+          \ If this violates the organization's allowed hosting locations, the parameter\
+          \ will be ignored."
+        in: query
+        name: location
+        schema:
+          enum:
+          - ""
+          - any
+          - europe
+          - uk
+          - usa
           type: string
       - description: "Filter agents by types (basic, background, service - comma separated)"
         explode: false
@@ -1094,6 +1107,16 @@ paths:
         required: true
         schema:
           type: string
+      - description: "Filter models by action (chat, image, etc.)"
+        in: query
+        name: action
+        schema:
+          enum:
+          - chat
+          - embedding
+          - image
+          - transcribe
+          type: string
       responses:
         "200":
           content:
@@ -1326,6 +1349,16 @@ paths:
         required: true
         schema:
           type: string
+      - description: "Filter models by action (chat, image, etc.)"
+        in: query
+        name: action
+        schema:
+          enum:
+          - chat
+          - embedding
+          - image
+          - transcribe
+          type: string
       responses:
         "200":
           content:
@@ -1380,6 +1413,16 @@ paths:
         name: org_id
         required: true
         schema:
+          type: string
+      - description: "Filter models by action (chat, image, etc.)"
+        in: query
+        name: action
+        schema:
+          enum:
+          - chat
+          - embedding
+          - image
+          - transcribe
           type: string
       responses:
         "200":

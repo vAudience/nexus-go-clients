@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 
 ## ListAgents
 
-> AgentResults ListAgents(ctx, orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+> AgentResults ListAgents(ctx, orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Location(location).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
 
 List agents
 
@@ -566,6 +566,7 @@ func main() {
 	tagIds := []string{"Inner_example"} // []string | Tag IDs to filter by (comma separated) (optional)
 	q := "q_example" // string | Search term for name or description (optional)
 	action := "action_example" // string | Filter agents by model action (chat, image, etc.) (optional)
+	location := "location_example" // string | Filter agents by the model hosting location (europe, usa, etc.). If this violates the organization's allowed hosting locations, the parameter will be ignored. (optional)
 	types := []string{"Types_example"} // []string | Filter agents by types (basic, background, service - comma separated) (optional)
 	addPredefinedAgents := true // bool | Include default agents to the list of org owned agents (optional)
 	adminMode := true // bool | Admin mode to bypass certain permission checks (optional)
@@ -577,7 +578,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
+	resp, r, err := apiClient.AgentsAPI.ListAgents(context.Background(), orgId).ModelIds(modelIds).TagIds(tagIds).Q(q).Action(action).Location(location).Types(types).AddPredefinedAgents(addPredefinedAgents).AdminMode(adminMode).Visibility(visibility).Limit(limit).Offset(offset).SortBy(sortBy).SortOrder(sortOrder).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ListAgents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -607,6 +608,7 @@ Name | Type | Description  | Notes
  **tagIds** | **[]string** | Tag IDs to filter by (comma separated) | 
  **q** | **string** | Search term for name or description | 
  **action** | **string** | Filter agents by model action (chat, image, etc.) | 
+ **location** | **string** | Filter agents by the model hosting location (europe, usa, etc.). If this violates the organization&#39;s allowed hosting locations, the parameter will be ignored. | 
  **types** | **[]string** | Filter agents by types (basic, background, service - comma separated) | 
  **addPredefinedAgents** | **bool** | Include default agents to the list of org owned agents | 
  **adminMode** | **bool** | Admin mode to bypass certain permission checks | 

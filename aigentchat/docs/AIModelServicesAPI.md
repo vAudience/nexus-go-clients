@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ## ListAIModelServicesWithModels
 
-> []AIModelServiceWithModels ListAIModelServicesWithModels(ctx, orgId).Execute()
+> []AIModelServiceWithModels ListAIModelServicesWithModels(ctx, orgId).Action(action).Execute()
 
 List AI services with models
 
@@ -324,10 +324,11 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
+	action := "action_example" // string | Filter models by action (chat, image, etc.) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background(), orgId).Execute()
+	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelServicesWithModels(context.Background(), orgId).Action(action).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelServicesWithModels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -353,6 +354,7 @@ Other parameters are passed through a pointer to a apiListAIModelServicesWithMod
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **action** | **string** | Filter models by action (chat, image, etc.) | 
 
 ### Return type
 
@@ -374,7 +376,7 @@ Name | Type | Description  | Notes
 
 ## ListAIModelsForService
 
-> []AIModel ListAIModelsForService(ctx, orgId, id).Execute()
+> []AIModel ListAIModelsForService(ctx, orgId, id).Action(action).Execute()
 
 List AI models for a service
 
@@ -395,10 +397,11 @@ import (
 func main() {
 	orgId := "orgId_example" // string | organization ID
 	id := "id_example" // string | AI Model Service ID
+	action := "action_example" // string | Filter models by action (chat, image, etc.) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelsForService(context.Background(), orgId, id).Execute()
+	resp, r, err := apiClient.AIModelServicesAPI.ListAIModelsForService(context.Background(), orgId, id).Action(action).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIModelServicesAPI.ListAIModelsForService``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -426,6 +429,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **action** | **string** | Filter models by action (chat, image, etc.) | 
 
 ### Return type
 

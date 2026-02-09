@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.2
+API version: 0.25.3
 Contact: contact@vaudience.ai
 */
 
@@ -550,6 +550,13 @@ type ApiListAIModelsRequest struct {
 	ctx context.Context
 	ApiService *AIModelsAPIService
 	orgId string
+	action *string
+}
+
+// Filter models by action (chat, image, etc.)
+func (r ApiListAIModelsRequest) Action(action string) ApiListAIModelsRequest {
+	r.action = &action
+	return r
 }
 
 func (r ApiListAIModelsRequest) Execute() ([]AIModel, *http.Response, error) {
@@ -595,6 +602,9 @@ func (a *AIModelsAPIService) ListAIModelsExecute(r ApiListAIModelsRequest) ([]AI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.action != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

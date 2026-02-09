@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.2
+API version: 0.25.3
 Contact: contact@vaudience.ai
 */
 
@@ -1286,6 +1286,7 @@ type ApiListAgentsRequest struct {
 	tagIds *[]string
 	q *string
 	action *string
+	location *string
 	types *[]string
 	addPredefinedAgents *bool
 	adminMode *bool
@@ -1317,6 +1318,12 @@ func (r ApiListAgentsRequest) Q(q string) ApiListAgentsRequest {
 // Filter agents by model action (chat, image, etc.)
 func (r ApiListAgentsRequest) Action(action string) ApiListAgentsRequest {
 	r.action = &action
+	return r
+}
+
+// Filter agents by the model hosting location (europe, usa, etc.). If this violates the organization&#39;s allowed hosting locations, the parameter will be ignored.
+func (r ApiListAgentsRequest) Location(location string) ApiListAgentsRequest {
+	r.location = &location
 	return r
 }
 
@@ -1422,6 +1429,9 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*AgentResu
 	}
 	if r.action != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
+	}
+	if r.location != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "", "")
 	}
 	if r.types != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "types", r.types, "form", "csv")

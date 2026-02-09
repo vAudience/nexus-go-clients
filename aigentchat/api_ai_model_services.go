@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.2
+API version: 0.25.3
 Contact: contact@vaudience.ai
 */
 
@@ -699,6 +699,13 @@ type ApiListAIModelServicesWithModelsRequest struct {
 	ctx context.Context
 	ApiService *AIModelServicesAPIService
 	orgId string
+	action *string
+}
+
+// Filter models by action (chat, image, etc.)
+func (r ApiListAIModelServicesWithModelsRequest) Action(action string) ApiListAIModelServicesWithModelsRequest {
+	r.action = &action
+	return r
 }
 
 func (r ApiListAIModelServicesWithModelsRequest) Execute() ([]AIModelServiceWithModels, *http.Response, error) {
@@ -744,6 +751,9 @@ func (a *AIModelServicesAPIService) ListAIModelServicesWithModelsExecute(r ApiLi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.action != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -849,6 +859,13 @@ type ApiListAIModelsForServiceRequest struct {
 	ApiService *AIModelServicesAPIService
 	orgId string
 	id string
+	action *string
+}
+
+// Filter models by action (chat, image, etc.)
+func (r ApiListAIModelsForServiceRequest) Action(action string) ApiListAIModelsForServiceRequest {
+	r.action = &action
+	return r
 }
 
 func (r ApiListAIModelsForServiceRequest) Execute() ([]AIModel, *http.Response, error) {
@@ -897,6 +914,9 @@ func (a *AIModelServicesAPIService) ListAIModelsForServiceExecute(r ApiListAIMod
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.action != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "action", r.action, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
