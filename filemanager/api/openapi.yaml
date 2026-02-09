@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.3.0
+  version: 0.4.0
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -280,7 +280,7 @@ paths:
       operationId: GetFileMetadataBatch
       requestBody:
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: "#/components/schemas/FileMetadataBatchGetRequest"
         description: Batch request with file paths
@@ -406,9 +406,70 @@ paths:
       summary: Get file upload categories
       tags:
       - Files
+  /v1/organizations/{org_id}/files/duplicate:
+    post:
+      description: Duplicate a file
+      operationId: DuplicateFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileDuplicateRequest"
+        description: File duplicate request
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Duplicate a file
+      tags:
+      - Files
+      x-codegen-request-body-name: fileDuplicateRequest
   /v1/organizations/{org_id}/files/{category}:
     post:
-      description: Create a file for a channel
+      description: Upload a file by upload category
       operationId: UploadFile
       parameters:
       - description: organization ID
@@ -474,7 +535,7 @@ paths:
           description: Internal Server Error
       security:
       - ApiKey: []
-      summary: Create a file for a channel
+      summary: Upload a file
       tags:
       - Files
 components:
@@ -537,6 +598,15 @@ components:
       required:
       - token
       - url
+      type: object
+    FileDuplicateRequest:
+      example:
+        storage_path: storage_path
+      properties:
+        storage_path:
+          type: string
+      required:
+      - storage_path
       type: object
     FileMetadataBatchGetRequest:
       example:

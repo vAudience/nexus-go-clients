@@ -6,9 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateFileAccessToken**](FilesAPI.md#CreateFileAccessToken) | **Post** /v1/file-access-tokens | Create a file access token
 [**DeleteFile**](FilesAPI.md#DeleteFile) | **Delete** /v1/files/{storage_path} | Delete a file
+[**DuplicateFile**](FilesAPI.md#DuplicateFile) | **Post** /v1/organizations/{org_id}/files/duplicate | Duplicate a file
 [**GetFileUploadCategories**](FilesAPI.md#GetFileUploadCategories) | **Get** /v1/organizations/{org_id}/files/categories | Get file upload categories
 [**ServeFile**](FilesAPI.md#ServeFile) | **Get** /v1/files/{storage_path} | Serve a file
-[**UploadFile**](FilesAPI.md#UploadFile) | **Post** /v1/organizations/{org_id}/files/{category} | Create a file for a channel
+[**UploadFile**](FilesAPI.md#UploadFile) | **Post** /v1/organizations/{org_id}/files/{category} | Upload a file
 
 
 
@@ -141,6 +142,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DuplicateFile
+
+> FileMetadataResponse DuplicateFile(ctx, orgId).FileDuplicateRequest(fileDuplicateRequest).Execute()
+
+Duplicate a file
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/filemanager"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	fileDuplicateRequest := *openapiclient.NewFileDuplicateRequest("StoragePath_example") // FileDuplicateRequest | File duplicate request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesAPI.DuplicateFile(context.Background(), orgId).FileDuplicateRequest(fileDuplicateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.DuplicateFile``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DuplicateFile`: FileMetadataResponse
+	fmt.Fprintf(os.Stdout, "Response from `FilesAPI.DuplicateFile`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDuplicateFileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fileDuplicateRequest** | [**FileDuplicateRequest**](FileDuplicateRequest.md) | File duplicate request | 
+
+### Return type
+
+[**FileMetadataResponse**](FileMetadataResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -300,7 +373,7 @@ Name | Type | Description  | Notes
 
 > FileUploadResponse UploadFile(ctx, orgId, category).File(file).Metadata(metadata).Execute()
 
-Create a file for a channel
+Upload a file
 
 
 

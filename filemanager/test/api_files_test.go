@@ -48,6 +48,20 @@ func Test_filemanager_FilesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FilesAPIService DuplicateFile", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		resp, httpRes, err := apiClient.FilesAPI.DuplicateFile(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FilesAPIService GetFileUploadCategories", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

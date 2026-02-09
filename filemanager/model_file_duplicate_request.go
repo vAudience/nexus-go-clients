@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the FileAccessTokenRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FileAccessTokenRequest{}
+// checks if the FileDuplicateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FileDuplicateRequest{}
 
-// FileAccessTokenRequest struct for FileAccessTokenRequest
-type FileAccessTokenRequest struct {
+// FileDuplicateRequest struct for FileDuplicateRequest
+type FileDuplicateRequest struct {
 	StoragePath string `json:"storage_path"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _FileAccessTokenRequest FileAccessTokenRequest
+type _FileDuplicateRequest FileDuplicateRequest
 
-// NewFileAccessTokenRequest instantiates a new FileAccessTokenRequest object
+// NewFileDuplicateRequest instantiates a new FileDuplicateRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileAccessTokenRequest(storagePath string) *FileAccessTokenRequest {
-	this := FileAccessTokenRequest{}
+func NewFileDuplicateRequest(storagePath string) *FileDuplicateRequest {
+	this := FileDuplicateRequest{}
 	this.StoragePath = storagePath
 	return &this
 }
 
-// NewFileAccessTokenRequestWithDefaults instantiates a new FileAccessTokenRequest object
+// NewFileDuplicateRequestWithDefaults instantiates a new FileDuplicateRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFileAccessTokenRequestWithDefaults() *FileAccessTokenRequest {
-	this := FileAccessTokenRequest{}
+func NewFileDuplicateRequestWithDefaults() *FileDuplicateRequest {
+	this := FileDuplicateRequest{}
 	return &this
 }
 
 // GetStoragePath returns the StoragePath field value
-func (o *FileAccessTokenRequest) GetStoragePath() string {
+func (o *FileDuplicateRequest) GetStoragePath() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *FileAccessTokenRequest) GetStoragePath() string {
 
 // GetStoragePathOk returns a tuple with the StoragePath field value
 // and a boolean to check if the value has been set.
-func (o *FileAccessTokenRequest) GetStoragePathOk() (*string, bool) {
+func (o *FileDuplicateRequest) GetStoragePathOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *FileAccessTokenRequest) GetStoragePathOk() (*string, bool) {
 }
 
 // SetStoragePath sets field value
-func (o *FileAccessTokenRequest) SetStoragePath(v string) {
+func (o *FileDuplicateRequest) SetStoragePath(v string) {
 	o.StoragePath = v
 }
 
-func (o FileAccessTokenRequest) MarshalJSON() ([]byte, error) {
+func (o FileDuplicateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o FileAccessTokenRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FileAccessTokenRequest) ToMap() (map[string]interface{}, error) {
+func (o FileDuplicateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["storage_path"] = o.StoragePath
 
@@ -87,7 +87,7 @@ func (o FileAccessTokenRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FileAccessTokenRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *FileDuplicateRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *FileAccessTokenRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFileAccessTokenRequest := _FileAccessTokenRequest{}
+	varFileDuplicateRequest := _FileDuplicateRequest{}
 
-	err = json.Unmarshal(data, &varFileAccessTokenRequest)
+	err = json.Unmarshal(data, &varFileDuplicateRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FileAccessTokenRequest(varFileAccessTokenRequest)
+	*o = FileDuplicateRequest(varFileDuplicateRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *FileAccessTokenRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFileAccessTokenRequest struct {
-	value *FileAccessTokenRequest
+type NullableFileDuplicateRequest struct {
+	value *FileDuplicateRequest
 	isSet bool
 }
 
-func (v NullableFileAccessTokenRequest) Get() *FileAccessTokenRequest {
+func (v NullableFileDuplicateRequest) Get() *FileDuplicateRequest {
 	return v.value
 }
 
-func (v *NullableFileAccessTokenRequest) Set(val *FileAccessTokenRequest) {
+func (v *NullableFileDuplicateRequest) Set(val *FileDuplicateRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFileAccessTokenRequest) IsSet() bool {
+func (v NullableFileDuplicateRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFileAccessTokenRequest) Unset() {
+func (v *NullableFileDuplicateRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFileAccessTokenRequest(val *FileAccessTokenRequest) *NullableFileAccessTokenRequest {
-	return &NullableFileAccessTokenRequest{value: val, isSet: true}
+func NewNullableFileDuplicateRequest(val *FileDuplicateRequest) *NullableFileDuplicateRequest {
+	return &NullableFileDuplicateRequest{value: val, isSet: true}
 }
 
-func (v NullableFileAccessTokenRequest) MarshalJSON() ([]byte, error) {
+func (v NullableFileDuplicateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFileAccessTokenRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableFileDuplicateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
