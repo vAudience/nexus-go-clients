@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-	userSettings := *openapiclient.NewUserSettingsPostRequest("ColorScheme_example", "Language_example") // UserSettingsPostRequest | userSettings object
+	userSettings := *openapiclient.NewUserSettingsPostRequest("ColorScheme_example") // UserSettingsPostRequest | userSettings object
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

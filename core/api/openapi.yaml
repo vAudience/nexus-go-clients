@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.5.1
+  version: 0.5.2
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -5819,26 +5819,51 @@ components:
       type: object
     UserSettingsPatchRequest:
       example:
-        language: language
-        colorScheme: colorScheme
+        onboardingHoldUntil: onboardingHoldUntil
+        onboardingDone: true
+        language: ""
+        colorScheme: auto
       properties:
         colorScheme:
-          minLength: 1
+          enum:
+          - auto
+          - light
+          - dark
           type: string
         language:
+          enum:
+          - ""
+          - en
+          - de
+          type: string
+        onboardingDone:
+          type: boolean
+        onboardingHoldUntil:
           minLength: 1
           type: string
       type: object
     UserSettingsPostRequest:
       example:
-        language: language
+        onboardingHoldUntil: onboardingHoldUntil
+        onboardingDone: true
+        language: en
         userId: userId
-        colorScheme: colorScheme
+        colorScheme: auto
       properties:
         colorScheme:
-          minLength: 1
+          enum:
+          - auto
+          - light
+          - dark
           type: string
         language:
+          enum:
+          - en
+          - de
+          type: string
+        onboardingDone:
+          type: boolean
+        onboardingHoldUntil:
           minLength: 1
           type: string
         userId:
@@ -5846,10 +5871,11 @@ components:
           type: string
       required:
       - colorScheme
-      - language
       type: object
     UserSettingsResponse:
       example:
+        onboardingHoldUntil: onboardingHoldUntil
+        onboardingDone: true
         language: language
         id: id
         userId: userId
@@ -5861,12 +5887,15 @@ components:
           type: string
         language:
           type: string
+        onboardingDone:
+          type: boolean
+        onboardingHoldUntil:
+          type: string
         userId:
           type: string
       required:
       - colorScheme
       - id
-      - language
       - userId
       type: object
     VersionResponse:

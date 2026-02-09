@@ -6,14 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ColorScheme** | **string** |  | 
 **Id** | **string** |  | 
-**Language** | **string** |  | 
+**Language** | Pointer to **string** |  | [optional] 
+**OnboardingDone** | Pointer to **bool** |  | [optional] 
+**OnboardingHoldUntil** | Pointer to **string** |  | [optional] 
 **UserId** | **string** |  | 
 
 ## Methods
 
 ### NewUserSettingsResponse
 
-`func NewUserSettingsResponse(colorScheme string, id string, language string, userId string, ) *UserSettingsResponse`
+`func NewUserSettingsResponse(colorScheme string, id string, userId string, ) *UserSettingsResponse`
 
 NewUserSettingsResponse instantiates a new UserSettingsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +89,61 @@ and a boolean to check if the value has been set.
 
 SetLanguage sets Language field to given value.
 
+### HasLanguage
+
+`func (o *UserSettingsResponse) HasLanguage() bool`
+
+HasLanguage returns a boolean if a field has been set.
+
+### GetOnboardingDone
+
+`func (o *UserSettingsResponse) GetOnboardingDone() bool`
+
+GetOnboardingDone returns the OnboardingDone field if non-nil, zero value otherwise.
+
+### GetOnboardingDoneOk
+
+`func (o *UserSettingsResponse) GetOnboardingDoneOk() (*bool, bool)`
+
+GetOnboardingDoneOk returns a tuple with the OnboardingDone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnboardingDone
+
+`func (o *UserSettingsResponse) SetOnboardingDone(v bool)`
+
+SetOnboardingDone sets OnboardingDone field to given value.
+
+### HasOnboardingDone
+
+`func (o *UserSettingsResponse) HasOnboardingDone() bool`
+
+HasOnboardingDone returns a boolean if a field has been set.
+
+### GetOnboardingHoldUntil
+
+`func (o *UserSettingsResponse) GetOnboardingHoldUntil() string`
+
+GetOnboardingHoldUntil returns the OnboardingHoldUntil field if non-nil, zero value otherwise.
+
+### GetOnboardingHoldUntilOk
+
+`func (o *UserSettingsResponse) GetOnboardingHoldUntilOk() (*string, bool)`
+
+GetOnboardingHoldUntilOk returns a tuple with the OnboardingHoldUntil field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnboardingHoldUntil
+
+`func (o *UserSettingsResponse) SetOnboardingHoldUntil(v string)`
+
+SetOnboardingHoldUntil sets OnboardingHoldUntil field to given value.
+
+### HasOnboardingHoldUntil
+
+`func (o *UserSettingsResponse) HasOnboardingHoldUntil() bool`
+
+HasOnboardingHoldUntil returns a boolean if a field has been set.
 
 ### GetUserId
 
