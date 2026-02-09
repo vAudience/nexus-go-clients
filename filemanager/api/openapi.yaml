@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.4.0
+  version: 0.4.1
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -135,6 +135,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/FileMetadataResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -209,6 +215,21 @@ paths:
                 format: binary
                 type: string
           description: File content
+        "400":
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            text/*:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+            application/pdf:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/octet-stream:
@@ -334,6 +355,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/FileMetadataResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
