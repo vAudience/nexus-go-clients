@@ -286,6 +286,20 @@ func Test_core_OrganizationsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OrganizationsAPIService ExportMembers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.ExportMembers(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test OrganizationsAPIService GetAllMyOrganizations", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

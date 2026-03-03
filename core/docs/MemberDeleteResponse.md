@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**ResourceIds** | **[]string** |  | 
-**ResourcesAction** | **string** |  | 
+**ResourcesDeleted** | Pointer to **[]string** |  | [optional] 
+**ResourcesTransferred** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
 ### NewMemberDeleteResponse
 
-`func NewMemberDeleteResponse(id string, resourceIds []string, resourcesAction string, ) *MemberDeleteResponse`
+`func NewMemberDeleteResponse(id string, ) *MemberDeleteResponse`
 
 NewMemberDeleteResponse instantiates a new MemberDeleteResponse object
 This constructor will assign default values to properties that have it defined,
@@ -47,45 +47,55 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
-### GetResourceIds
+### GetResourcesDeleted
 
-`func (o *MemberDeleteResponse) GetResourceIds() []string`
+`func (o *MemberDeleteResponse) GetResourcesDeleted() []string`
 
-GetResourceIds returns the ResourceIds field if non-nil, zero value otherwise.
+GetResourcesDeleted returns the ResourcesDeleted field if non-nil, zero value otherwise.
 
-### GetResourceIdsOk
+### GetResourcesDeletedOk
 
-`func (o *MemberDeleteResponse) GetResourceIdsOk() (*[]string, bool)`
+`func (o *MemberDeleteResponse) GetResourcesDeletedOk() (*[]string, bool)`
 
-GetResourceIdsOk returns a tuple with the ResourceIds field if it's non-nil, zero value otherwise
+GetResourcesDeletedOk returns a tuple with the ResourcesDeleted field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResourceIds
+### SetResourcesDeleted
 
-`func (o *MemberDeleteResponse) SetResourceIds(v []string)`
+`func (o *MemberDeleteResponse) SetResourcesDeleted(v []string)`
 
-SetResourceIds sets ResourceIds field to given value.
+SetResourcesDeleted sets ResourcesDeleted field to given value.
 
+### HasResourcesDeleted
 
-### GetResourcesAction
+`func (o *MemberDeleteResponse) HasResourcesDeleted() bool`
 
-`func (o *MemberDeleteResponse) GetResourcesAction() string`
+HasResourcesDeleted returns a boolean if a field has been set.
 
-GetResourcesAction returns the ResourcesAction field if non-nil, zero value otherwise.
+### GetResourcesTransferred
 
-### GetResourcesActionOk
+`func (o *MemberDeleteResponse) GetResourcesTransferred() []string`
 
-`func (o *MemberDeleteResponse) GetResourcesActionOk() (*string, bool)`
+GetResourcesTransferred returns the ResourcesTransferred field if non-nil, zero value otherwise.
 
-GetResourcesActionOk returns a tuple with the ResourcesAction field if it's non-nil, zero value otherwise
+### GetResourcesTransferredOk
+
+`func (o *MemberDeleteResponse) GetResourcesTransferredOk() (*[]string, bool)`
+
+GetResourcesTransferredOk returns a tuple with the ResourcesTransferred field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResourcesAction
+### SetResourcesTransferred
 
-`func (o *MemberDeleteResponse) SetResourcesAction(v string)`
+`func (o *MemberDeleteResponse) SetResourcesTransferred(v []string)`
 
-SetResourcesAction sets ResourcesAction field to given value.
+SetResourcesTransferred sets ResourcesTransferred field to given value.
 
+### HasResourcesTransferred
+
+`func (o *MemberDeleteResponse) HasResourcesTransferred() bool`
+
+HasResourcesTransferred returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

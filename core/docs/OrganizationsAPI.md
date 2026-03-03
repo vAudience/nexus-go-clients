@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**DeleteTeam**](OrganizationsAPI.md#DeleteTeam) | **Delete** /v1/organizations/{id}/teams/{teamId} | Delete a team for an Organization
 [**DeleteTeamMember**](OrganizationsAPI.md#DeleteTeamMember) | **Delete** /v1/organizations/{id}/teams/{teamId}/members/{memberId} | Remove a member from a team
 [**EndTrial**](OrganizationsAPI.md#EndTrial) | **Patch** /v1/organizations/{id}/subscription/end-trial | End the trial period early for an Organization
+[**ExportMembers**](OrganizationsAPI.md#ExportMembers) | **Get** /v1/organizations/{id}/members/export | Export all members for an Organization as CSV
 [**GetAllMyOrganizations**](OrganizationsAPI.md#GetAllMyOrganizations) | **Get** /v1/organizations/me | Get all my organizations
 [**GetAllMyOrganizationsWithDetails**](OrganizationsAPI.md#GetAllMyOrganizationsWithDetails) | **Get** /v1/organizations/me/details | Get all my organizations with details (subscriptions, ...)
 [**GetAllMyTeams**](OrganizationsAPI.md#GetAllMyTeams) | **Get** /v1/organizations/{id}/teams/me | Get all teams for an Organization of the current user
@@ -780,7 +781,7 @@ Name | Type | Description  | Notes
 
 ## DeleteMember
 
-> MemberDeleteResponse DeleteMember(ctx, id, memberId).ResourcesAction(resourcesAction).Execute()
+> MemberDeleteResponse DeleteMember(ctx, id, memberId).Execute()
 
 Delete a member for an Organization
 
@@ -801,11 +802,10 @@ import (
 func main() {
 	id := "id_example" // string | id of the organization
 	memberId := "memberId_example" // string | id of the member
-	resourcesAction := "resourcesAction_example" // string | action to take on resources owned by the member (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.DeleteMember(context.Background(), id, memberId).ResourcesAction(resourcesAction).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.DeleteMember(context.Background(), id, memberId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.DeleteMember``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -833,7 +833,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **resourcesAction** | **string** | action to take on resources owned by the member | 
 
 ### Return type
 
@@ -1408,6 +1407,76 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ExportMembers
+
+> *os.File ExportMembers(ctx, id).Execute()
+
+Export all members for an Organization as CSV
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/core"
+)
+
+func main() {
+	id := "id_example" // string | id of the organization
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.ExportMembers(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.ExportMembers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ExportMembers`: *os.File
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.ExportMembers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportMembersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[***os.File**](*os.File.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/csv
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

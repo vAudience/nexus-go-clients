@@ -4,7 +4,7 @@ All URIs are relative to *https://core.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HealthGet**](HealthAPI.md#HealthGet) | **Get** /info/health | checks for service health
+[**HealthGet**](HealthAPI.md#HealthGet) | **Get** /info/health | aggregated health check for all service dependencies
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > HealthResponse HealthGet(ctx).Execute()
 
-checks for service health
+aggregated health check for all service dependencies
 
 
 

@@ -67,6 +67,7 @@ docs/RolePostRequest.md
 docs/RoleReducedResponse.md
 docs/RoleResponse.md
 docs/RolesAPI.md
+docs/ServiceStatus.md
 docs/StripeAPI.md
 docs/TeamMemberResponse.md
 docs/TeamPatchRequest.md
@@ -133,6 +134,7 @@ model_role_patch_request.go
 model_role_post_request.go
 model_role_reduced_response.go
 model_role_response.go
+model_service_status.go
 model_team_member_response.go
 model_team_patch_request.go
 model_team_post_request.go

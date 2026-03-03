@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **AddPredefinedAgents** | Pointer to **bool** |  | [optional] 
 **ModelIds** | Pointer to **[]string** |  | [optional] 
 **Q** | Pointer to **string** |  | [optional] 
-**TagIds** | Pointer to **[]string** |  | [optional] 
+**SystemTags** | Pointer to **[]string** |  | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
 **Visibility** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -104,30 +105,55 @@ SetQ sets Q field to given value.
 
 HasQ returns a boolean if a field has been set.
 
-### GetTagIds
+### GetSystemTags
 
-`func (o *AgentFilterOptions) GetTagIds() []string`
+`func (o *AgentFilterOptions) GetSystemTags() []string`
 
-GetTagIds returns the TagIds field if non-nil, zero value otherwise.
+GetSystemTags returns the SystemTags field if non-nil, zero value otherwise.
 
-### GetTagIdsOk
+### GetSystemTagsOk
 
-`func (o *AgentFilterOptions) GetTagIdsOk() (*[]string, bool)`
+`func (o *AgentFilterOptions) GetSystemTagsOk() (*[]string, bool)`
 
-GetTagIdsOk returns a tuple with the TagIds field if it's non-nil, zero value otherwise
+GetSystemTagsOk returns a tuple with the SystemTags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTagIds
+### SetSystemTags
 
-`func (o *AgentFilterOptions) SetTagIds(v []string)`
+`func (o *AgentFilterOptions) SetSystemTags(v []string)`
 
-SetTagIds sets TagIds field to given value.
+SetSystemTags sets SystemTags field to given value.
 
-### HasTagIds
+### HasSystemTags
 
-`func (o *AgentFilterOptions) HasTagIds() bool`
+`func (o *AgentFilterOptions) HasSystemTags() bool`
 
-HasTagIds returns a boolean if a field has been set.
+HasSystemTags returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *AgentFilterOptions) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *AgentFilterOptions) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *AgentFilterOptions) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *AgentFilterOptions) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 ### GetVisibility
 

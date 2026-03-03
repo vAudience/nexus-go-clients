@@ -175,6 +175,8 @@
 
 * `ErrCodeUserRoleExists` (value: `"user_role_exists"`)
 
+* `ErrCode2FADisabled` (value: `"2fa_disabled"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
