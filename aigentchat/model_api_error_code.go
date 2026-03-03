@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -53,6 +53,7 @@ const (
 	ErrCodeFailedToFetchAIModelService ApiErrorCode = "failed_to_fetch_ai_model_service"
 	ErrCodeAIRegistryServiceNotEnabled ApiErrorCode = "ai_registry_service_not_enabled"
 	ErrCodeAIRegistryServiceLocationNotEnabled ApiErrorCode = "ai_registry_service_location_not_enabled"
+	ErrCodeAIRegistryModelNotFound ApiErrorCode = "ai_registry_model_not_found"
 	ErrCodeAIRegistryFailedToGetService ApiErrorCode = "ai_registry_failed_to_get_service"
 	ErrCodeAIServiceAuthentication ApiErrorCode = "ai_service_authentication"
 	ErrCodeAIServiceBadRequest ApiErrorCode = "ai_service_bad_request"
@@ -169,6 +170,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_ai_model_service",
 	"ai_registry_service_not_enabled",
 	"ai_registry_service_location_not_enabled",
+	"ai_registry_model_not_found",
 	"ai_registry_failed_to_get_service",
 	"ai_service_authentication",
 	"ai_service_bad_request",

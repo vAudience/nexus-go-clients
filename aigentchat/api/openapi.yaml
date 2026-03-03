@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.25.3
+  version: 0.27.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -50,7 +50,8 @@ tags:
 paths:
   /info/health:
     get:
-      description: a simple 200 return endpoint to ensure the service is responsive
+      description: "returns health status of all dependent services (Redis, NATS).\
+        \ Returns 200 when all services are healthy, 503 when any service is unhealthy."
       operationId: HealthGet
       responses:
         "200":
@@ -59,6 +60,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthResponse"
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+          description: Service Unavailable
       summary: checks for service health
       tags:
       - Health
@@ -110,16 +117,25 @@ paths:
             type: string
           type: array
         style: form
-      - description: Tag IDs to filter by (comma separated)
+      - description: Tags to filter by (comma separated)
         explode: false
         in: query
-        name: tag_ids
+        name: tags
         schema:
           items:
             type: string
           type: array
         style: form
-      - description: Search term for name or description
+      - description: System tags to filter by (comma separated)
+        explode: false
+        in: query
+        name: system_tags
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "Search term for name, description or tags"
         in: query
         name: q
         schema:
@@ -601,274 +617,6 @@ paths:
       summary: Add an assigned tool to an agent
       tags:
       - Agents
-  /v1/organizations/{org_id}/agents/{id}/messages/add-system-message:
-    patch:
-      description: Add a system message to an agent
-      operationId: AddSystemMessage
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: System Message
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Agent"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Add a system message to an agent
-      tags:
-      - Agents
-      x-codegen-request-body-name: message
-  /v1/organizations/{org_id}/agents/{id}/messages/add-user-message:
-    patch:
-      description: Add an initial user message to an agent
-      operationId: AddInitialUserMessage
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: Initial User Message
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Agent"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Add an initial user message to an agent
-      tags:
-      - Agents
-      x-codegen-request-body-name: message
-  /v1/organizations/{org_id}/agents/{id}/messages/remove-system-message:
-    patch:
-      description: Remove a system message from an agent
-      operationId: RemoveSystemMessage
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: System Message
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Agent"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Remove a system message from an agent
-      tags:
-      - Agents
-      x-codegen-request-body-name: message
-  /v1/organizations/{org_id}/agents/{id}/messages/remove-user-message:
-    patch:
-      description: Remove an initial user message from an agent
-      operationId: RemoveInitialUserMessage
-      parameters:
-      - description: organization ID
-        in: path
-        name: org_id
-        required: true
-        schema:
-          type: string
-      - description: Agent ID
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: Initial User Message
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Agent"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Not Found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Internal Server Error
-      security:
-      - ApiKey: []
-      summary: Remove an initial user message from an agent
-      tags:
-      - Agents
-      x-codegen-request-body-name: message
   /v1/organizations/{org_id}/agents/{id}/remove-file/{file_id}:
     patch:
       description: Remove an attached file ID from an agent
@@ -3916,13 +3664,41 @@ paths:
       description: List prompts for an organization
       operationId: ListPrompts
       parameters:
-      - description: Organization ID
+      - description: Organization ID to filter by
         in: path
         name: org_id
         required: true
         schema:
           type: string
-      - description: Filter prompts by access visibility
+      - description: Owner ID to filter by
+        in: query
+        name: owner_id
+        schema:
+          type: string
+      - description: Tags to filter by (comma separated)
+        explode: false
+        in: query
+        name: tags
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: System tags to filter by (comma separated)
+        explode: false
+        in: query
+        name: system_tags
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "Search term for title, description or tags"
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: "Filter prompts by access visibility (public, private, organization)"
         in: query
         name: visibility
         schema:
@@ -3931,16 +3707,30 @@ paths:
           - public
           - organization
           type: string
-      - description: Offset
-        in: query
-        name: offset
-        schema:
-          type: integer
-      - description: Limit
+      - description: Limit the number of results
         in: query
         name: limit
         schema:
+          default: 1000
           type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
+      - description: "Field to sort by (title, createdat, updatedat)"
+        in: query
+        name: sort_by
+        schema:
+          default: '"title"'
+          type: string
+      - description: Sort order (asc or desc)
+        in: query
+        name: sort_order
+        schema:
+          default: '"asc"'
+          type: string
       responses:
         "200":
           content:
@@ -4271,6 +4061,63 @@ paths:
       tags:
       - Prompts
       x-codegen-request-body-name: prompt
+  /v1/organizations/{org_id}/prompts/{prompt_id}/duplicate:
+    post:
+      description: Duplicates an existing prompt.
+      operationId: DuplicatePrompt
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: Prompt ID
+        in: path
+        name: prompt_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prompt"
+          description: Duplicated prompt
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Invalid payload or prompt ID
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Prompt not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal server error
+      summary: Duplicate Prompt
+      tags:
+      - Prompts
   /v1/organizations/{org_id}/tags:
     get:
       description: List tags based on criteria
@@ -4282,19 +4129,18 @@ paths:
         required: true
         schema:
           type: string
-      - description: Filter tags by type
+      - description: "Filter tags by types (comma separated, defaults to 'user')"
+        explode: false
         in: query
-        name: type
+        name: types
         schema:
-          enum:
-          - agent
-          - prompt
-          type: string
-      - description: Include predefined tags to the list of org owned tags
-        in: query
-        name: add_predefined_tags
-        schema:
-          type: boolean
+          items:
+            enum:
+            - user
+            - system
+            type: string
+          type: array
+        style: form
       - description: Limit the number of results
         in: query
         name: limit
@@ -4615,23 +4461,12 @@ components:
   schemas:
     AIModel:
       example:
-        capabilities:
-        - capabilities
-        - capabilities
-        internal_id: internal_id
         owner_id: owner_id
-        model_release_date: 4
         created_at: 0
         description: description
-        model_id: model_id
-        documentation_url: documentation_url
         accepted_file_mimetypes:
         - accepted_file_mimetypes
         - accepted_file_mimetypes
-        i18n:
-          key:
-            name: name
-            description: description
         features:
         - capability: ""
           cost_items:
@@ -4700,19 +4535,31 @@ components:
         service_host_locations:
         - ""
         - ""
-        owner_organization_id: owner_organization_id
         updated_at: 1
         service_id: service_id
-        is_public: true
-        model_knowledge_cutoff: 2
-        name: name
-        updated_by: updated_by
-        parameter_definitions: "{}"
         id: id
         model_stats:
           cost: 2
           speed: 0
           intelligence: 0
+        capabilities:
+        - capabilities
+        - capabilities
+        internal_id: internal_id
+        model_release_date: 4
+        model_id: model_id
+        documentation_url: documentation_url
+        i18n:
+          key:
+            name: name
+            description: description
+        deleted: true
+        owner_organization_id: owner_organization_id
+        is_public: true
+        model_knowledge_cutoff: 2
+        name: name
+        updated_by: updated_by
+        parameter_definitions: "{}"
         actions:
         - actions
         - actions
@@ -4738,6 +4585,8 @@ components:
         created_at:
           format: int64
           type: integer
+        deleted:
+          type: boolean
         description:
           maxLength: 1024
           type: string
@@ -5013,6 +4862,7 @@ components:
           key:
             name: name
             description: description
+        deleted: true
         owner_organization_id: owner_organization_id
         hosting_locations:
           key: ""
@@ -5030,6 +4880,8 @@ components:
         created_at:
           format: int64
           type: integer
+        deleted:
+          type: boolean
         description:
           maxLength: 1024
           type: string
@@ -5071,23 +4923,12 @@ components:
     AIModelServiceWithModels:
       example:
         models:
-        - capabilities:
-          - capabilities
-          - capabilities
-          internal_id: internal_id
-          owner_id: owner_id
-          model_release_date: 4
+        - owner_id: owner_id
           created_at: 0
           description: description
-          model_id: model_id
-          documentation_url: documentation_url
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
-          i18n:
-            key:
-              name: name
-              description: description
           features:
           - capability: ""
             cost_items:
@@ -5156,40 +4997,41 @@ components:
           service_host_locations:
           - ""
           - ""
-          owner_organization_id: owner_organization_id
           updated_at: 1
           service_id: service_id
-          is_public: true
-          model_knowledge_cutoff: 2
-          name: name
-          updated_by: updated_by
-          parameter_definitions: "{}"
           id: id
           model_stats:
             cost: 2
             speed: 0
             intelligence: 0
+          capabilities:
+          - capabilities
+          - capabilities
+          internal_id: internal_id
+          model_release_date: 4
+          model_id: model_id
+          documentation_url: documentation_url
+          i18n:
+            key:
+              name: name
+              description: description
+          deleted: true
+          owner_organization_id: owner_organization_id
+          is_public: true
+          model_knowledge_cutoff: 2
+          name: name
+          updated_by: updated_by
+          parameter_definitions: "{}"
           actions:
           - actions
           - actions
           parameters: "{}"
-        - capabilities:
-          - capabilities
-          - capabilities
-          internal_id: internal_id
-          owner_id: owner_id
-          model_release_date: 4
+        - owner_id: owner_id
           created_at: 0
           description: description
-          model_id: model_id
-          documentation_url: documentation_url
           accepted_file_mimetypes:
           - accepted_file_mimetypes
           - accepted_file_mimetypes
-          i18n:
-            key:
-              name: name
-              description: description
           features:
           - capability: ""
             cost_items:
@@ -5258,19 +5100,31 @@ components:
           service_host_locations:
           - ""
           - ""
-          owner_organization_id: owner_organization_id
           updated_at: 1
           service_id: service_id
-          is_public: true
-          model_knowledge_cutoff: 2
-          name: name
-          updated_by: updated_by
-          parameter_definitions: "{}"
           id: id
           model_stats:
             cost: 2
             speed: 0
             intelligence: 0
+          capabilities:
+          - capabilities
+          - capabilities
+          internal_id: internal_id
+          model_release_date: 4
+          model_id: model_id
+          documentation_url: documentation_url
+          i18n:
+            key:
+              name: name
+              description: description
+          deleted: true
+          owner_organization_id: owner_organization_id
+          is_public: true
+          model_knowledge_cutoff: 2
+          name: name
+          updated_by: updated_by
+          parameter_definitions: "{}"
           actions:
           - actions
           - actions
@@ -5285,6 +5139,7 @@ components:
             key:
               name: name
               description: description
+          deleted: true
           owner_organization_id: owner_organization_id
           hosting_locations:
             key: ""
@@ -6982,6 +6837,43 @@ components:
         - assigned_tools
         created_at: 1
         description: description
+        system_prompt:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
         type: ""
         initial_user_messages:
         - initial_user_messages
@@ -6992,6 +6884,12 @@ components:
         updated_at: 5
         use_tools: true
         ignore_incoming_overwrite: true
+        system_tags:
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
         meta_data: "{}"
         model: "{}"
         model_host_location: ""
@@ -7020,6 +6918,13 @@ components:
           key:
             name: name
             description: description
+        tags:
+        - tags
+        - tags
+        - tags
+        - tags
+        - tags
+        deleted: true
         owner_organization_id: owner_organization_id
         add_tool_guidelines: true
         avatar_url: avatar_url
@@ -7030,6 +6935,43 @@ components:
           update: true
           delete: true
         parameters: "{}"
+        initial_user_prompt:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
         write_access:
           is_private: true
           include_organization: true
@@ -7061,6 +7003,8 @@ components:
           type: integer
         default_file_upload_category:
           type: string
+        deleted:
+          type: boolean
         description:
           maxLength: 1024
           type: string
@@ -7079,6 +7023,10 @@ components:
             type: string
           type: array
           uniqueItems: true
+        initial_user_prompt:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
         internal_id:
           type: string
         meta_data:
@@ -7122,9 +7070,26 @@ components:
             type: string
           type: array
           uniqueItems: true
-        tag_ids:
+        system_prompt:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
+        system_tags:
           items:
             type: string
+          maxItems: 64
+          type: array
+          uniqueItems: true
+        tag_ids:
+          description: "Deprecated: use Tags and/or SystemTags instead"
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        tags:
+          items:
+            type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         tool_config:
@@ -7172,9 +7137,9 @@ components:
         offset: 6
         stats:
           model_occurrences:
-            key: 5
-          tag_occurrences:
             key: 2
+          tag_occurrences:
+            key: 7
         limit: 0
         results:
         - system_messages:
@@ -7187,6 +7152,43 @@ components:
           - assigned_tools
           created_at: 1
           description: description
+          system_prompt:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
           type: ""
           initial_user_messages:
           - initial_user_messages
@@ -7197,6 +7199,12 @@ components:
           updated_at: 5
           use_tools: true
           ignore_incoming_overwrite: true
+          system_tags:
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
           meta_data: "{}"
           model: "{}"
           model_host_location: ""
@@ -7225,6 +7233,13 @@ components:
             key:
               name: name
               description: description
+          tags:
+          - tags
+          - tags
+          - tags
+          - tags
+          - tags
+          deleted: true
           owner_organization_id: owner_organization_id
           add_tool_guidelines: true
           avatar_url: avatar_url
@@ -7235,6 +7250,43 @@ components:
             update: true
             delete: true
           parameters: "{}"
+          initial_user_prompt:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
           write_access:
             is_private: true
             include_organization: true
@@ -7256,6 +7308,43 @@ components:
           - assigned_tools
           created_at: 1
           description: description
+          system_prompt:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
           type: ""
           initial_user_messages:
           - initial_user_messages
@@ -7266,6 +7355,12 @@ components:
           updated_at: 5
           use_tools: true
           ignore_incoming_overwrite: true
+          system_tags:
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
           meta_data: "{}"
           model: "{}"
           model_host_location: ""
@@ -7294,6 +7389,13 @@ components:
             key:
               name: name
               description: description
+          tags:
+          - tags
+          - tags
+          - tags
+          - tags
+          - tags
+          deleted: true
           owner_organization_id: owner_organization_id
           add_tool_guidelines: true
           avatar_url: avatar_url
@@ -7304,6 +7406,43 @@ components:
             update: true
             delete: true
           parameters: "{}"
+          initial_user_prompt:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
           write_access:
             is_private: true
             include_organization: true
@@ -7315,7 +7454,7 @@ components:
             - user_ids
             is_public: true
             has_teams: true
-        total_results: 7
+        total_results: 9
       properties:
         limit:
           format: int64
@@ -7338,16 +7477,18 @@ components:
     AgentStatistics:
       example:
         model_occurrences:
-          key: 5
-        tag_occurrences:
           key: 2
+        tag_occurrences:
+          key: 7
       properties:
         model_occurrences:
           additionalProperties:
+            format: int64
             type: integer
           type: object
         tag_occurrences:
           additionalProperties:
+            format: int64
             type: integer
           type: object
       type: object
@@ -7365,6 +7506,69 @@ components:
       - AgentTypeService
     AgentWriteDto:
       example:
+        system_messages:
+        - system_messages
+        - system_messages
+        default_file_upload_category: default_file_upload_category
+        assigned_tools:
+        - assigned_tools
+        - assigned_tools
+        description: description
+        system_prompt:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        type: ""
+        initial_user_messages:
+        - initial_user_messages
+        - initial_user_messages
+        attached_file_ids:
+        - attached_file_ids
+        - attached_file_ids
+        use_tools: true
+        ignore_incoming_overwrite: true
+        system_tags:
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
+        meta_data: "{}"
+        model_host_location: ""
+        tool_config: "{}"
         read_access:
           is_private: true
           include_organization: true
@@ -7376,42 +7580,62 @@ components:
           - user_ids
           is_public: true
           has_teams: true
-        tag_ids:
-        - tag_ids
-        - tag_ids
         internal_id: internal_id
-        system_messages:
-        - system_messages
-        - system_messages
-        default_file_upload_category: default_file_upload_category
-        assigned_tools:
-        - assigned_tools
-        - assigned_tools
-        description: description
         model_actions:
         - model_actions
         - model_actions
         model_id: model_id
-        type: ""
         i18n:
           key:
             name: name
             description: description
-        initial_user_messages:
-        - initial_user_messages
-        - initial_user_messages
-        attached_file_ids:
-        - attached_file_ids
-        - attached_file_ids
+        tags:
+        - tags
+        - tags
+        - tags
+        - tags
+        - tags
         add_tool_guidelines: true
         avatar_url: avatar_url
-        use_tools: true
-        ignore_incoming_overwrite: true
-        meta_data: "{}"
         name: name
-        model_host_location: ""
-        tool_config: "{}"
         parameters: "{}"
+        initial_user_prompt:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
         write_access:
           is_private: true
           include_organization: true
@@ -7454,6 +7678,10 @@ components:
             type: string
           type: array
           uniqueItems: true
+        initial_user_prompt:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
         internal_id:
           type: string
         meta_data:
@@ -7483,9 +7711,20 @@ components:
             type: string
           type: array
           uniqueItems: true
-        tag_ids:
+        system_prompt:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
+        system_tags:
           items:
             type: string
+          maxItems: 64
+          type: array
+          uniqueItems: true
+        tags:
+          items:
+            type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         tool_config:
@@ -7563,6 +7802,7 @@ components:
       - failed_to_fetch_ai_model_service
       - ai_registry_service_not_enabled
       - ai_registry_service_location_not_enabled
+      - ai_registry_model_not_found
       - ai_registry_failed_to_get_service
       - ai_service_authentication
       - ai_service_bad_request
@@ -7677,6 +7917,7 @@ components:
       - ErrCodeFailedToFetchAIModelService
       - ErrCodeAIRegistryServiceNotEnabled
       - ErrCodeAIRegistryServiceLocationNotEnabled
+      - ErrCodeAIRegistryModelNotFound
       - ErrCodeAIRegistryFailedToGetService
       - ErrCodeAIServiceAuthentication
       - ErrCodeAIServiceBadRequest
@@ -8595,7 +8836,6 @@ components:
             type: string
           type: object
       required:
-      - agent_id
       - message
       type: object
     ConnectionTokenResponse:
@@ -9069,9 +9309,17 @@ components:
       type: object
     HealthResponse:
       example:
-        health: health
+        services:
+          key:
+            message: message
+            status: status
+        status: status
       properties:
-        health:
+        services:
+          additionalProperties:
+            $ref: "#/components/schemas/ServiceStatus"
+          type: object
+        status:
           type: string
       type: object
     HostingLocation:
@@ -9084,6 +9332,12 @@ components:
       type: string
       x-enum-comments:
         HostingLocationANY: global
+      x-enum-descriptions:
+      - ""
+      - global
+      - ""
+      - ""
+      - ""
       x-enum-varnames:
       - HostingLocationNil
       - HostingLocationANY
@@ -9188,9 +9442,10 @@ components:
           is_public: true
           has_teams: true
         internal_id: internal_id
+        image_url: image_url
         owner_id: owner_id
-        created_at: 0
-        current_version: 6
+        created_at: 1
+        current_version: 5
         description: description
         default_agent_id: default_agent_id
         thumbnail_url: thumbnail_url
@@ -9198,17 +9453,101 @@ components:
         tags:
         - tags
         - tags
+        - tags
+        - tags
+        - tags
         owner_organization_id: owner_organization_id
-        updated_at: 1
+        updated_at: 5
+        legacy_uuid: legacy_uuid
         versions:
-        - created_at: 5
+        - created_at: 2
           created_by: created_by
-          version: 5
+          version: 7
           content: content
-        - created_at: 5
+          structured_content:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+        - created_at: 2
           created_by: created_by
-          version: 5
+          version: 7
           content: content
+          structured_content:
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+          - constant:
+              name: name
+            variable:
+              default: default
+              name: name
+              options:
+              - label: label
+                value: value
+              - label: label
+                value: value
+              multi: true
+            text: text
+            type: "{}"
+            prompt:
+              id: id
+              vars:
+                key: vars
+              version: 5
+        system_tags:
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
         user_access:
           read: true
           update: true
@@ -9236,19 +9575,37 @@ components:
         description:
           type: string
         id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        image_url:
           type: string
         internal_id:
           type: string
+        legacy_uuid:
+          type: string
         owner_id:
+          maxLength: 64
+          minLength: 1
           type: string
         owner_organization_id:
+          maxLength: 64
+          minLength: 1
           type: string
         read_access:
           $ref: "#/components/schemas/AccessScope"
+        system_tags:
+          items:
+            type: string
+          maxItems: 64
+          type: array
+          uniqueItems: true
         tags:
           items:
             type: string
+          maxItems: 64
           type: array
+          uniqueItems: true
         thumbnail_url:
           type: string
         title:
@@ -9266,7 +9623,84 @@ components:
           $ref: "#/components/schemas/AccessScope"
       required:
       - id
+      - owner_id
+      - owner_organization_id
       - title
+      type: object
+    PromptConstant:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    PromptContent:
+      example:
+        constant:
+          name: name
+        variable:
+          default: default
+          name: name
+          options:
+          - label: label
+            value: value
+          - label: label
+            value: value
+          multi: true
+        text: text
+        type: "{}"
+        prompt:
+          id: id
+          vars:
+            key: vars
+          version: 5
+      properties:
+        constant:
+          $ref: "#/components/schemas/PromptConstant"
+        prompt:
+          $ref: "#/components/schemas/PromptReference"
+        text:
+          type: string
+        type:
+          allOf:
+          - $ref: "#/components/schemas/PromptContentType"
+          type: object
+        variable:
+          $ref: "#/components/schemas/PromptVariable"
+      required:
+      - type
+      type: object
+    PromptContentType:
+      enum:
+      - text
+      - variable
+      - constant
+      - prompt
+      type: string
+      x-enum-varnames:
+      - PromptContentTypeText
+      - PromptContentTypeVariable
+      - PromptContentTypeConstant
+      - PromptContentTypePrompt
+    PromptReference:
+      example:
+        id: id
+        vars:
+          key: vars
+        version: 5
+      properties:
+        id:
+          type: string
+        vars:
+          additionalProperties:
+            type: string
+          type: object
+        version:
+          type: integer
+      required:
+      - id
       type: object
     PromptRenderDto:
       example:
@@ -9286,6 +9720,11 @@ components:
       type: object
     PromptResults:
       example:
+        offset: 6
+        stats:
+          tag_occurrences:
+            key: 9
+        limit: 0
         results:
         - read_access:
             is_private: true
@@ -9299,9 +9738,10 @@ components:
             is_public: true
             has_teams: true
           internal_id: internal_id
+          image_url: image_url
           owner_id: owner_id
-          created_at: 0
-          current_version: 6
+          created_at: 1
+          current_version: 5
           description: description
           default_agent_id: default_agent_id
           thumbnail_url: thumbnail_url
@@ -9309,17 +9749,101 @@ components:
           tags:
           - tags
           - tags
+          - tags
+          - tags
+          - tags
           owner_organization_id: owner_organization_id
-          updated_at: 1
+          updated_at: 5
+          legacy_uuid: legacy_uuid
           versions:
-          - created_at: 5
+          - created_at: 2
             created_by: created_by
-            version: 5
+            version: 7
             content: content
-          - created_at: 5
+            structured_content:
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+          - created_at: 2
             created_by: created_by
-            version: 5
+            version: 7
             content: content
+            structured_content:
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+          system_tags:
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
           user_access:
             read: true
             update: true
@@ -9348,9 +9872,10 @@ components:
             is_public: true
             has_teams: true
           internal_id: internal_id
+          image_url: image_url
           owner_id: owner_id
-          created_at: 0
-          current_version: 6
+          created_at: 1
+          current_version: 5
           description: description
           default_agent_id: default_agent_id
           thumbnail_url: thumbnail_url
@@ -9358,17 +9883,101 @@ components:
           tags:
           - tags
           - tags
+          - tags
+          - tags
+          - tags
           owner_organization_id: owner_organization_id
-          updated_at: 1
+          updated_at: 5
+          legacy_uuid: legacy_uuid
           versions:
-          - created_at: 5
+          - created_at: 2
             created_by: created_by
-            version: 5
+            version: 7
             content: content
-          - created_at: 5
+            structured_content:
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+          - created_at: 2
             created_by: created_by
-            version: 5
+            version: 7
             content: content
+            structured_content:
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+            - constant:
+                name: name
+              variable:
+                default: default
+                name: name
+                options:
+                - label: label
+                  value: value
+                - label: label
+                  value: value
+                multi: true
+              text: text
+              type: "{}"
+              prompt:
+                id: id
+                vars:
+                  key: vars
+                version: 5
+          system_tags:
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
+          - system_tags
           user_access:
             read: true
             update: true
@@ -9385,25 +9994,116 @@ components:
             - user_ids
             is_public: true
             has_teams: true
-        total_results: 2
+        total_results: 3
       properties:
+        limit:
+          format: int64
+          type: integer
+        offset:
+          format: int64
+          type: integer
         results:
           items:
             $ref: "#/components/schemas/Prompt"
           type: array
+        stats:
+          $ref: "#/components/schemas/PromptStatistics"
         total_results:
           format: int64
           type: integer
       required:
       - results
-      - total_results
+      type: object
+    PromptStatistics:
+      example:
+        tag_occurrences:
+          key: 9
+      properties:
+        tag_occurrences:
+          additionalProperties:
+            format: int64
+            type: integer
+          type: object
+      type: object
+    PromptVariable:
+      example:
+        default: default
+        name: name
+        options:
+        - label: label
+          value: value
+        - label: label
+          value: value
+        multi: true
+      properties:
+        default:
+          type: string
+        multi:
+          type: boolean
+        name:
+          type: string
+        options:
+          items:
+            $ref: "#/components/schemas/PromptVariableOption"
+          type: array
+      required:
+      - name
+      type: object
+    PromptVariableOption:
+      example:
+        label: label
+        value: value
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - value
       type: object
     PromptVersion:
       example:
-        created_at: 5
+        created_at: 2
         created_by: created_by
-        version: 5
+        version: 7
         content: content
+        structured_content:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
       properties:
         content:
           type: string
@@ -9412,6 +10112,10 @@ components:
           type: integer
         created_by:
           type: string
+        structured_content:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
         version:
           type: integer
       type: object
@@ -9429,12 +10133,59 @@ components:
           is_public: true
           has_teams: true
         internal_id: internal_id
+        image_url: image_url
+        system_tags:
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
+        - system_tags
         description: description
         default_agent_id: default_agent_id
         thumbnail_url: thumbnail_url
         title: title
         content: content
+        structured_content:
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
+        - constant:
+            name: name
+          variable:
+            default: default
+            name: name
+            options:
+            - label: label
+              value: value
+            - label: label
+              value: value
+            multi: true
+          text: text
+          type: "{}"
+          prompt:
+            id: id
+            vars:
+              key: vars
+            version: 5
         tags:
+        - tags
+        - tags
+        - tags
         - tags
         - tags
         write_access:
@@ -9455,14 +10206,28 @@ components:
           type: string
         description:
           type: string
+        image_url:
+          type: string
         internal_id:
           type: string
         read_access:
           $ref: "#/components/schemas/AccessScope"
+        structured_content:
+          items:
+            $ref: "#/components/schemas/PromptContent"
+          type: array
+        system_tags:
+          items:
+            type: string
+          maxItems: 64
+          type: array
+          uniqueItems: true
         tags:
           items:
             type: string
+          maxItems: 64
           type: array
+          uniqueItems: true
         thumbnail_url:
           type: string
         title:
@@ -9524,6 +10289,16 @@ components:
       - upload_category
       - url
       type: object
+    ServiceStatus:
+      example:
+        message: message
+        status: status
+      properties:
+        message:
+          type: string
+        status:
+          type: string
+      type: object
     Tag:
       example:
         internal_id: internal_id
@@ -9534,18 +10309,11 @@ components:
         updated_by: updated_by
         created_at: 1
         id: id
-        type: agent
-        i18n:
-          key:
-            name: name
+        type: user
       properties:
         created_at:
           format: int64
           type: integer
-        i18n:
-          additionalProperties:
-            $ref: "#/components/schemas/TagI18n"
-          type: object
         id:
           maxLength: 64
           minLength: 1
@@ -9564,8 +10332,8 @@ components:
           type: string
         type:
           enum:
-          - agent
-          - prompt
+          - user
+          - system
           type: string
         updated_at:
           format: int64
@@ -9580,17 +10348,6 @@ components:
       - organization_id
       - type
       type: object
-    TagI18n:
-      example:
-        name: name
-      properties:
-        name:
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - name
-      type: object
     TagResults:
       example:
         offset: 6
@@ -9604,10 +10361,7 @@ components:
           updated_by: updated_by
           created_at: 1
           id: id
-          type: agent
-          i18n:
-            key:
-              name: name
+          type: user
         - internal_id: internal_id
           updated_at: 5
           organization_id: organization_id
@@ -9616,10 +10370,7 @@ components:
           updated_by: updated_by
           created_at: 1
           id: id
-          type: agent
-          i18n:
-            key:
-              name: name
+          type: user
         total_results: 5
       properties:
         limit:
@@ -9644,14 +10395,7 @@ components:
         is_public: true
         name: name
         type: type
-        i18n:
-          key:
-            name: name
       properties:
-        i18n:
-          additionalProperties:
-            $ref: "#/components/schemas/TagI18n"
-          type: object
         internal_id:
           type: string
         is_public:

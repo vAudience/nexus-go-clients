@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -29,6 +29,7 @@ type AgentWriteDto struct {
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
+	InitialUserPrompt []PromptContent `json:"initial_user_prompt,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	ModelActions []string `json:"model_actions,omitempty"`
@@ -38,7 +39,9 @@ type AgentWriteDto struct {
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	ReadAccess *AccessScope `json:"read_access,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
-	TagIds []string `json:"tag_ids,omitempty"`
+	SystemPrompt []PromptContent `json:"system_prompt,omitempty"`
+	SystemTags []string `json:"system_tags,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 	ToolConfig map[string]interface{} `json:"tool_config,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
 	UseTools *bool `json:"use_tools,omitempty"`
@@ -353,6 +356,38 @@ func (o *AgentWriteDto) SetInitialUserMessages(v []string) {
 	o.InitialUserMessages = v
 }
 
+// GetInitialUserPrompt returns the InitialUserPrompt field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetInitialUserPrompt() []PromptContent {
+	if o == nil || IsNil(o.InitialUserPrompt) {
+		var ret []PromptContent
+		return ret
+	}
+	return o.InitialUserPrompt
+}
+
+// GetInitialUserPromptOk returns a tuple with the InitialUserPrompt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetInitialUserPromptOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.InitialUserPrompt) {
+		return nil, false
+	}
+	return o.InitialUserPrompt, true
+}
+
+// HasInitialUserPrompt returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasInitialUserPrompt() bool {
+	if o != nil && !IsNil(o.InitialUserPrompt) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialUserPrompt gets a reference to the given []PromptContent and assigns it to the InitialUserPrompt field.
+func (o *AgentWriteDto) SetInitialUserPrompt(v []PromptContent) {
+	o.InitialUserPrompt = v
+}
+
 // GetInternalId returns the InternalId field value if set, zero value otherwise.
 func (o *AgentWriteDto) GetInternalId() string {
 	if o == nil || IsNil(o.InternalId) {
@@ -641,36 +676,100 @@ func (o *AgentWriteDto) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
-// GetTagIds returns the TagIds field value if set, zero value otherwise.
-func (o *AgentWriteDto) GetTagIds() []string {
-	if o == nil || IsNil(o.TagIds) {
-		var ret []string
+// GetSystemPrompt returns the SystemPrompt field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetSystemPrompt() []PromptContent {
+	if o == nil || IsNil(o.SystemPrompt) {
+		var ret []PromptContent
 		return ret
 	}
-	return o.TagIds
+	return o.SystemPrompt
 }
 
-// GetTagIdsOk returns a tuple with the TagIds field value if set, nil otherwise
+// GetSystemPromptOk returns a tuple with the SystemPrompt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentWriteDto) GetTagIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.TagIds) {
+func (o *AgentWriteDto) GetSystemPromptOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.SystemPrompt) {
 		return nil, false
 	}
-	return o.TagIds, true
+	return o.SystemPrompt, true
 }
 
-// HasTagIds returns a boolean if a field has been set.
-func (o *AgentWriteDto) HasTagIds() bool {
-	if o != nil && !IsNil(o.TagIds) {
+// HasSystemPrompt returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasSystemPrompt() bool {
+	if o != nil && !IsNil(o.SystemPrompt) {
 		return true
 	}
 
 	return false
 }
 
-// SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
-func (o *AgentWriteDto) SetTagIds(v []string) {
-	o.TagIds = v
+// SetSystemPrompt gets a reference to the given []PromptContent and assigns it to the SystemPrompt field.
+func (o *AgentWriteDto) SetSystemPrompt(v []PromptContent) {
+	o.SystemPrompt = v
+}
+
+// GetSystemTags returns the SystemTags field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetSystemTags() []string {
+	if o == nil || IsNil(o.SystemTags) {
+		var ret []string
+		return ret
+	}
+	return o.SystemTags
+}
+
+// GetSystemTagsOk returns a tuple with the SystemTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetSystemTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SystemTags) {
+		return nil, false
+	}
+	return o.SystemTags, true
+}
+
+// HasSystemTags returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasSystemTags() bool {
+	if o != nil && !IsNil(o.SystemTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemTags gets a reference to the given []string and assigns it to the SystemTags field.
+func (o *AgentWriteDto) SetSystemTags(v []string) {
+	o.SystemTags = v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *AgentWriteDto) SetTags(v []string) {
+	o.Tags = v
 }
 
 // GetToolConfig returns the ToolConfig field value if set, zero value otherwise.
@@ -838,6 +937,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InitialUserMessages) {
 		toSerialize["initial_user_messages"] = o.InitialUserMessages
 	}
+	if !IsNil(o.InitialUserPrompt) {
+		toSerialize["initial_user_prompt"] = o.InitialUserPrompt
+	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
@@ -865,8 +967,14 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
-	if !IsNil(o.TagIds) {
-		toSerialize["tag_ids"] = o.TagIds
+	if !IsNil(o.SystemPrompt) {
+		toSerialize["system_prompt"] = o.SystemPrompt
+	}
+	if !IsNil(o.SystemTags) {
+		toSerialize["system_tags"] = o.SystemTags
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 	if !IsNil(o.ToolConfig) {
 		toSerialize["tool_config"] = o.ToolConfig
@@ -911,6 +1019,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "ignore_incoming_overwrite")
 		delete(additionalProperties, "initial_user_messages")
+		delete(additionalProperties, "initial_user_prompt")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "model_actions")
@@ -920,7 +1029,9 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "read_access")
 		delete(additionalProperties, "system_messages")
-		delete(additionalProperties, "tag_ids")
+		delete(additionalProperties, "system_prompt")
+		delete(additionalProperties, "system_tags")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "tool_config")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "use_tools")

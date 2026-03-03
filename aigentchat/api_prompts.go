@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -360,6 +360,167 @@ func (a *PromptsAPIService) DeletePromptExecute(r ApiDeletePromptRequest) (*http
 	return localVarHTTPResponse, nil
 }
 
+type ApiDuplicatePromptRequest struct {
+	ctx context.Context
+	ApiService *PromptsAPIService
+	orgId string
+	promptId string
+}
+
+func (r ApiDuplicatePromptRequest) Execute() (*Prompt, *http.Response, error) {
+	return r.ApiService.DuplicatePromptExecute(r)
+}
+
+/*
+DuplicatePrompt Duplicate Prompt
+
+Duplicates an existing prompt.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param orgId Organization ID
+ @param promptId Prompt ID
+ @return ApiDuplicatePromptRequest
+*/
+func (a *PromptsAPIService) DuplicatePrompt(ctx context.Context, orgId string, promptId string) ApiDuplicatePromptRequest {
+	return ApiDuplicatePromptRequest{
+		ApiService: a,
+		ctx: ctx,
+		orgId: orgId,
+		promptId: promptId,
+	}
+}
+
+// Execute executes the request
+//  @return Prompt
+func (a *PromptsAPIService) DuplicatePromptExecute(r ApiDuplicatePromptRequest) (*Prompt, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Prompt
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptsAPIService.DuplicatePrompt")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/prompts/{prompt_id}/duplicate"
+	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"prompt_id"+"}", url.PathEscape(parameterValueToString(r.promptId, "promptId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetPromptRequest struct {
 	ctx context.Context
 	ApiService *PromptsAPIService
@@ -539,26 +700,68 @@ type ApiListPromptsRequest struct {
 	ctx context.Context
 	ApiService *PromptsAPIService
 	orgId string
+	ownerId *string
+	tags *[]string
+	systemTags *[]string
+	q *string
 	visibility *string
-	offset *int32
 	limit *int32
+	offset *int32
+	sortBy *string
+	sortOrder *string
 }
 
-// Filter prompts by access visibility
+// Owner ID to filter by
+func (r ApiListPromptsRequest) OwnerId(ownerId string) ApiListPromptsRequest {
+	r.ownerId = &ownerId
+	return r
+}
+
+// Tags to filter by (comma separated)
+func (r ApiListPromptsRequest) Tags(tags []string) ApiListPromptsRequest {
+	r.tags = &tags
+	return r
+}
+
+// System tags to filter by (comma separated)
+func (r ApiListPromptsRequest) SystemTags(systemTags []string) ApiListPromptsRequest {
+	r.systemTags = &systemTags
+	return r
+}
+
+// Search term for title, description or tags
+func (r ApiListPromptsRequest) Q(q string) ApiListPromptsRequest {
+	r.q = &q
+	return r
+}
+
+// Filter prompts by access visibility (public, private, organization)
 func (r ApiListPromptsRequest) Visibility(visibility string) ApiListPromptsRequest {
 	r.visibility = &visibility
 	return r
 }
 
-// Offset
+// Limit the number of results
+func (r ApiListPromptsRequest) Limit(limit int32) ApiListPromptsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Offset for pagination
 func (r ApiListPromptsRequest) Offset(offset int32) ApiListPromptsRequest {
 	r.offset = &offset
 	return r
 }
 
-// Limit
-func (r ApiListPromptsRequest) Limit(limit int32) ApiListPromptsRequest {
-	r.limit = &limit
+// Field to sort by (title, createdat, updatedat)
+func (r ApiListPromptsRequest) SortBy(sortBy string) ApiListPromptsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// Sort order (asc or desc)
+func (r ApiListPromptsRequest) SortOrder(sortOrder string) ApiListPromptsRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -572,7 +775,7 @@ ListPrompts List prompts
 List prompts for an organization
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param orgId Organization ID
+ @param orgId Organization ID to filter by
  @return ApiListPromptsRequest
 */
 func (a *PromptsAPIService) ListPrompts(ctx context.Context, orgId string) ApiListPromptsRequest {
@@ -605,14 +808,44 @@ func (a *PromptsAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*Prompt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.ownerId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_id", r.ownerId, "", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.systemTags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "system_tags", r.systemTags, "form", "csv")
+	}
+	if r.q != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "q", r.q, "", "")
+	}
 	if r.visibility != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "visibility", r.visibility, "", "")
 	}
-	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
-	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 1000
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
+	} else {
+		var defaultValue int32 = 0
+		r.offset = &defaultValue
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "", "")
+	} else {
+		var defaultValue string = "\"title\""
+		r.sortBy = &defaultValue
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "", "")
+	} else {
+		var defaultValue string = "\"asc\""
+		r.sortOrder = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

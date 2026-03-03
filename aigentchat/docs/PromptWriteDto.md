@@ -7,8 +7,11 @@ Name | Type | Description | Notes
 **Content** | Pointer to **string** |  | [optional] 
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**ImageUrl** | Pointer to **string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
+**StructuredContent** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
+**SystemTags** | Pointer to **[]string** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
@@ -108,6 +111,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetImageUrl
+
+`func (o *PromptWriteDto) GetImageUrl() string`
+
+GetImageUrl returns the ImageUrl field if non-nil, zero value otherwise.
+
+### GetImageUrlOk
+
+`func (o *PromptWriteDto) GetImageUrlOk() (*string, bool)`
+
+GetImageUrlOk returns a tuple with the ImageUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageUrl
+
+`func (o *PromptWriteDto) SetImageUrl(v string)`
+
+SetImageUrl sets ImageUrl field to given value.
+
+### HasImageUrl
+
+`func (o *PromptWriteDto) HasImageUrl() bool`
+
+HasImageUrl returns a boolean if a field has been set.
+
 ### GetInternalId
 
 `func (o *PromptWriteDto) GetInternalId() string`
@@ -157,6 +185,56 @@ SetReadAccess sets ReadAccess field to given value.
 `func (o *PromptWriteDto) HasReadAccess() bool`
 
 HasReadAccess returns a boolean if a field has been set.
+
+### GetStructuredContent
+
+`func (o *PromptWriteDto) GetStructuredContent() []PromptContent`
+
+GetStructuredContent returns the StructuredContent field if non-nil, zero value otherwise.
+
+### GetStructuredContentOk
+
+`func (o *PromptWriteDto) GetStructuredContentOk() (*[]PromptContent, bool)`
+
+GetStructuredContentOk returns a tuple with the StructuredContent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStructuredContent
+
+`func (o *PromptWriteDto) SetStructuredContent(v []PromptContent)`
+
+SetStructuredContent sets StructuredContent field to given value.
+
+### HasStructuredContent
+
+`func (o *PromptWriteDto) HasStructuredContent() bool`
+
+HasStructuredContent returns a boolean if a field has been set.
+
+### GetSystemTags
+
+`func (o *PromptWriteDto) GetSystemTags() []string`
+
+GetSystemTags returns the SystemTags field if non-nil, zero value otherwise.
+
+### GetSystemTagsOk
+
+`func (o *PromptWriteDto) GetSystemTagsOk() (*[]string, bool)`
+
+GetSystemTagsOk returns a tuple with the SystemTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemTags
+
+`func (o *PromptWriteDto) SetSystemTags(v []string)`
+
+SetSystemTags sets SystemTags field to given value.
+
+### HasSystemTags
+
+`func (o *PromptWriteDto) HasSystemTags() bool`
+
+HasSystemTags returns a boolean if a field has been set.
 
 ### GetTags
 

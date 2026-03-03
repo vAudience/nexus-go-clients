@@ -9,10 +9,13 @@ Name | Type | Description | Notes
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
+**ImageUrl** | Pointer to **string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
-**OwnerId** | Pointer to **string** |  | [optional] 
-**OwnerOrganizationId** | Pointer to **string** |  | [optional] 
+**LegacyUuid** | Pointer to **string** |  | [optional] 
+**OwnerId** | **string** |  | 
+**OwnerOrganizationId** | **string** |  | 
 **ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
+**SystemTags** | Pointer to **[]string** |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThumbnailUrl** | Pointer to **string** |  | [optional] 
 **Title** | **string** |  | 
@@ -25,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewPrompt
 
-`func NewPrompt(id string, title string, ) *Prompt`
+`func NewPrompt(id string, ownerId string, ownerOrganizationId string, title string, ) *Prompt`
 
 NewPrompt instantiates a new Prompt object
 This constructor will assign default values to properties that have it defined,
@@ -160,6 +163,31 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
+### GetImageUrl
+
+`func (o *Prompt) GetImageUrl() string`
+
+GetImageUrl returns the ImageUrl field if non-nil, zero value otherwise.
+
+### GetImageUrlOk
+
+`func (o *Prompt) GetImageUrlOk() (*string, bool)`
+
+GetImageUrlOk returns a tuple with the ImageUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageUrl
+
+`func (o *Prompt) SetImageUrl(v string)`
+
+SetImageUrl sets ImageUrl field to given value.
+
+### HasImageUrl
+
+`func (o *Prompt) HasImageUrl() bool`
+
+HasImageUrl returns a boolean if a field has been set.
+
 ### GetInternalId
 
 `func (o *Prompt) GetInternalId() string`
@@ -185,6 +213,31 @@ SetInternalId sets InternalId field to given value.
 
 HasInternalId returns a boolean if a field has been set.
 
+### GetLegacyUuid
+
+`func (o *Prompt) GetLegacyUuid() string`
+
+GetLegacyUuid returns the LegacyUuid field if non-nil, zero value otherwise.
+
+### GetLegacyUuidOk
+
+`func (o *Prompt) GetLegacyUuidOk() (*string, bool)`
+
+GetLegacyUuidOk returns a tuple with the LegacyUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyUuid
+
+`func (o *Prompt) SetLegacyUuid(v string)`
+
+SetLegacyUuid sets LegacyUuid field to given value.
+
+### HasLegacyUuid
+
+`func (o *Prompt) HasLegacyUuid() bool`
+
+HasLegacyUuid returns a boolean if a field has been set.
+
 ### GetOwnerId
 
 `func (o *Prompt) GetOwnerId() string`
@@ -204,11 +257,6 @@ and a boolean to check if the value has been set.
 
 SetOwnerId sets OwnerId field to given value.
 
-### HasOwnerId
-
-`func (o *Prompt) HasOwnerId() bool`
-
-HasOwnerId returns a boolean if a field has been set.
 
 ### GetOwnerOrganizationId
 
@@ -229,11 +277,6 @@ and a boolean to check if the value has been set.
 
 SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
-### HasOwnerOrganizationId
-
-`func (o *Prompt) HasOwnerOrganizationId() bool`
-
-HasOwnerOrganizationId returns a boolean if a field has been set.
 
 ### GetReadAccess
 
@@ -259,6 +302,31 @@ SetReadAccess sets ReadAccess field to given value.
 `func (o *Prompt) HasReadAccess() bool`
 
 HasReadAccess returns a boolean if a field has been set.
+
+### GetSystemTags
+
+`func (o *Prompt) GetSystemTags() []string`
+
+GetSystemTags returns the SystemTags field if non-nil, zero value otherwise.
+
+### GetSystemTagsOk
+
+`func (o *Prompt) GetSystemTagsOk() (*[]string, bool)`
+
+GetSystemTagsOk returns a tuple with the SystemTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemTags
+
+`func (o *Prompt) SetSystemTags(v []string)`
+
+SetSystemTags sets SystemTags field to given value.
+
+### HasSystemTags
+
+`func (o *Prompt) HasSystemTags() bool`
+
+HasSystemTags returns a boolean if a field has been set.
 
 ### GetTags
 

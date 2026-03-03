@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &ChatCompletionRequestDto{}
 
 // ChatCompletionRequestDto struct for ChatCompletionRequestDto
 type ChatCompletionRequestDto struct {
-	AgentId string `json:"agent_id"`
+	AgentId *string `json:"agent_id,omitempty"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	ContinueInstructionOnMaxTokens *string `json:"continue_instruction_on_max_tokens,omitempty"`
@@ -49,9 +49,8 @@ type _ChatCompletionRequestDto ChatCompletionRequestDto
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChatCompletionRequestDto(agentId string, message string) *ChatCompletionRequestDto {
+func NewChatCompletionRequestDto(message string) *ChatCompletionRequestDto {
 	this := ChatCompletionRequestDto{}
-	this.AgentId = agentId
 	this.Message = message
 	return &this
 }
@@ -64,28 +63,36 @@ func NewChatCompletionRequestDtoWithDefaults() *ChatCompletionRequestDto {
 	return &this
 }
 
-// GetAgentId returns the AgentId field value
+// GetAgentId returns the AgentId field value if set, zero value otherwise.
 func (o *ChatCompletionRequestDto) GetAgentId() string {
-	if o == nil {
+	if o == nil || IsNil(o.AgentId) {
 		var ret string
 		return ret
 	}
-
-	return o.AgentId
+	return *o.AgentId
 }
 
-// GetAgentIdOk returns a tuple with the AgentId field value
+// GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChatCompletionRequestDto) GetAgentIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AgentId) {
 		return nil, false
 	}
-	return &o.AgentId, true
+	return o.AgentId, true
 }
 
-// SetAgentId sets field value
+// HasAgentId returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasAgentId() bool {
+	if o != nil && !IsNil(o.AgentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentId gets a reference to the given string and assigns it to the AgentId field.
 func (o *ChatCompletionRequestDto) SetAgentId(v string) {
-	o.AgentId = v
+	o.AgentId = &v
 }
 
 // GetAttachedFiles returns the AttachedFiles field value if set, zero value otherwise.
@@ -602,7 +609,9 @@ func (o ChatCompletionRequestDto) MarshalJSON() ([]byte, error) {
 
 func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["agent_id"] = o.AgentId
+	if !IsNil(o.AgentId) {
+		toSerialize["agent_id"] = o.AgentId
+	}
 	if !IsNil(o.AttachedFiles) {
 		toSerialize["attached_files"] = o.AttachedFiles
 	}
@@ -662,7 +671,6 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"agent_id",
 		"message",
 	}
 

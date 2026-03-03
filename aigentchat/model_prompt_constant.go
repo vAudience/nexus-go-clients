@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -16,37 +16,37 @@ import (
 	"fmt"
 )
 
-// checks if the TagI18n type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TagI18n{}
+// checks if the PromptConstant type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PromptConstant{}
 
-// TagI18n struct for TagI18n
-type TagI18n struct {
+// PromptConstant struct for PromptConstant
+type PromptConstant struct {
 	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _TagI18n TagI18n
+type _PromptConstant PromptConstant
 
-// NewTagI18n instantiates a new TagI18n object
+// NewPromptConstant instantiates a new PromptConstant object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTagI18n(name string) *TagI18n {
-	this := TagI18n{}
+func NewPromptConstant(name string) *PromptConstant {
+	this := PromptConstant{}
 	this.Name = name
 	return &this
 }
 
-// NewTagI18nWithDefaults instantiates a new TagI18n object
+// NewPromptConstantWithDefaults instantiates a new PromptConstant object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTagI18nWithDefaults() *TagI18n {
-	this := TagI18n{}
+func NewPromptConstantWithDefaults() *PromptConstant {
+	this := PromptConstant{}
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *TagI18n) GetName() string {
+func (o *PromptConstant) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *TagI18n) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *TagI18n) GetNameOk() (*string, bool) {
+func (o *PromptConstant) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,11 +65,11 @@ func (o *TagI18n) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *TagI18n) SetName(v string) {
+func (o *PromptConstant) SetName(v string) {
 	o.Name = v
 }
 
-func (o TagI18n) MarshalJSON() ([]byte, error) {
+func (o PromptConstant) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -77,7 +77,7 @@ func (o TagI18n) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TagI18n) ToMap() (map[string]interface{}, error) {
+func (o PromptConstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 
@@ -88,7 +88,7 @@ func (o TagI18n) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *TagI18n) UnmarshalJSON(data []byte) (err error) {
+func (o *PromptConstant) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -110,15 +110,15 @@ func (o *TagI18n) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varTagI18n := _TagI18n{}
+	varPromptConstant := _PromptConstant{}
 
-	err = json.Unmarshal(data, &varTagI18n)
+	err = json.Unmarshal(data, &varPromptConstant)
 
 	if err != nil {
 		return err
 	}
 
-	*o = TagI18n(varTagI18n)
+	*o = PromptConstant(varPromptConstant)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -130,38 +130,38 @@ func (o *TagI18n) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableTagI18n struct {
-	value *TagI18n
+type NullablePromptConstant struct {
+	value *PromptConstant
 	isSet bool
 }
 
-func (v NullableTagI18n) Get() *TagI18n {
+func (v NullablePromptConstant) Get() *PromptConstant {
 	return v.value
 }
 
-func (v *NullableTagI18n) Set(val *TagI18n) {
+func (v *NullablePromptConstant) Set(val *PromptConstant) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTagI18n) IsSet() bool {
+func (v NullablePromptConstant) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTagI18n) Unset() {
+func (v *NullablePromptConstant) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTagI18n(val *TagI18n) *NullableTagI18n {
-	return &NullableTagI18n{value: val, isSet: true}
+func NewNullablePromptConstant(val *PromptConstant) *NullablePromptConstant {
+	return &NullablePromptConstant{value: val, isSet: true}
 }
 
-func (v NullableTagI18n) MarshalJSON() ([]byte, error) {
+func (v NullablePromptConstant) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTagI18n) UnmarshalJSON(src []byte) error {
+func (v *NullablePromptConstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

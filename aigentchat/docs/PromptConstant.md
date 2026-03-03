@@ -1,4 +1,4 @@
-# TagI18n
+# PromptConstant
 
 ## Properties
 
@@ -8,39 +8,39 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewTagI18n
+### NewPromptConstant
 
-`func NewTagI18n(name string, ) *TagI18n`
+`func NewPromptConstant(name string, ) *PromptConstant`
 
-NewTagI18n instantiates a new TagI18n object
+NewPromptConstant instantiates a new PromptConstant object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTagI18nWithDefaults
+### NewPromptConstantWithDefaults
 
-`func NewTagI18nWithDefaults() *TagI18n`
+`func NewPromptConstantWithDefaults() *PromptConstant`
 
-NewTagI18nWithDefaults instantiates a new TagI18n object
+NewPromptConstantWithDefaults instantiates a new PromptConstant object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *TagI18n) GetName() string`
+`func (o *PromptConstant) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *TagI18n) GetNameOk() (*string, bool)`
+`func (o *PromptConstant) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *TagI18n) SetName(v string)`
+`func (o *PromptConstant) SetName(v string)`
 
 SetName sets Name field to given value.
 

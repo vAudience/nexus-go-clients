@@ -54,36 +54,6 @@ func Test_aigentchat_AgentsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AgentsAPIService AddInitialUserMessage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var id string
-
-		resp, httpRes, err := apiClient.AgentsAPI.AddInitialUserMessage(context.Background(), orgId, id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AgentsAPIService AddSystemMessage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var id string
-
-		resp, httpRes, err := apiClient.AgentsAPI.AddSystemMessage(context.Background(), orgId, id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AgentsAPIService CreateAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -167,36 +137,6 @@ func Test_aigentchat_AgentsAPIService(t *testing.T) {
 		var fileId string
 
 		resp, httpRes, err := apiClient.AgentsAPI.RemoveAttachedFileID(context.Background(), orgId, id, fileId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AgentsAPIService RemoveInitialUserMessage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var id string
-
-		resp, httpRes, err := apiClient.AgentsAPI.RemoveInitialUserMessage(context.Background(), orgId, id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test AgentsAPIService RemoveSystemMessage", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var orgId string
-		var id string
-
-		resp, httpRes, err := apiClient.AgentsAPI.RemoveSystemMessage(context.Background(), orgId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

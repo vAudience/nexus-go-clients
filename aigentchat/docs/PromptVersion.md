@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Content** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **CreatedBy** | Pointer to **string** |  | [optional] 
+**StructuredContent** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -102,6 +103,31 @@ SetCreatedBy sets CreatedBy field to given value.
 `func (o *PromptVersion) HasCreatedBy() bool`
 
 HasCreatedBy returns a boolean if a field has been set.
+
+### GetStructuredContent
+
+`func (o *PromptVersion) GetStructuredContent() []PromptContent`
+
+GetStructuredContent returns the StructuredContent field if non-nil, zero value otherwise.
+
+### GetStructuredContentOk
+
+`func (o *PromptVersion) GetStructuredContentOk() (*[]PromptContent, bool)`
+
+GetStructuredContentOk returns a tuple with the StructuredContent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStructuredContent
+
+`func (o *PromptVersion) SetStructuredContent(v []PromptContent)`
+
+SetStructuredContent sets StructuredContent field to given value.
+
+### HasStructuredContent
+
+`func (o *PromptVersion) HasStructuredContent() bool`
+
+HasStructuredContent returns a boolean if a field has been set.
 
 ### GetVersion
 

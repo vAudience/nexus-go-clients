@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Health** | Pointer to **string** |  | [optional] 
+**Services** | Pointer to [**map[string]ServiceStatus**](ServiceStatus.md) |  | [optional] 
+**Status** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -25,30 +26,55 @@ NewHealthResponseWithDefaults instantiates a new HealthResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetHealth
+### GetServices
 
-`func (o *HealthResponse) GetHealth() string`
+`func (o *HealthResponse) GetServices() map[string]ServiceStatus`
 
-GetHealth returns the Health field if non-nil, zero value otherwise.
+GetServices returns the Services field if non-nil, zero value otherwise.
 
-### GetHealthOk
+### GetServicesOk
 
-`func (o *HealthResponse) GetHealthOk() (*string, bool)`
+`func (o *HealthResponse) GetServicesOk() (*map[string]ServiceStatus, bool)`
 
-GetHealthOk returns a tuple with the Health field if it's non-nil, zero value otherwise
+GetServicesOk returns a tuple with the Services field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHealth
+### SetServices
 
-`func (o *HealthResponse) SetHealth(v string)`
+`func (o *HealthResponse) SetServices(v map[string]ServiceStatus)`
 
-SetHealth sets Health field to given value.
+SetServices sets Services field to given value.
 
-### HasHealth
+### HasServices
 
-`func (o *HealthResponse) HasHealth() bool`
+`func (o *HealthResponse) HasServices() bool`
 
-HasHealth returns a boolean if a field has been set.
+HasServices returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *HealthResponse) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *HealthResponse) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *HealthResponse) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *HealthResponse) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

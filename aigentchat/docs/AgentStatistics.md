@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ModelOccurrences** | Pointer to **map[string]int32** |  | [optional] 
-**TagOccurrences** | Pointer to **map[string]int32** |  | [optional] 
+**ModelOccurrences** | Pointer to **map[string]int64** |  | [optional] 
+**TagOccurrences** | Pointer to **map[string]int64** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetModelOccurrences
 
-`func (o *AgentStatistics) GetModelOccurrences() map[string]int32`
+`func (o *AgentStatistics) GetModelOccurrences() map[string]int64`
 
 GetModelOccurrences returns the ModelOccurrences field if non-nil, zero value otherwise.
 
 ### GetModelOccurrencesOk
 
-`func (o *AgentStatistics) GetModelOccurrencesOk() (*map[string]int32, bool)`
+`func (o *AgentStatistics) GetModelOccurrencesOk() (*map[string]int64, bool)`
 
 GetModelOccurrencesOk returns a tuple with the ModelOccurrences field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetModelOccurrences
 
-`func (o *AgentStatistics) SetModelOccurrences(v map[string]int32)`
+`func (o *AgentStatistics) SetModelOccurrences(v map[string]int64)`
 
 SetModelOccurrences sets ModelOccurrences field to given value.
 
@@ -53,20 +53,20 @@ HasModelOccurrences returns a boolean if a field has been set.
 
 ### GetTagOccurrences
 
-`func (o *AgentStatistics) GetTagOccurrences() map[string]int32`
+`func (o *AgentStatistics) GetTagOccurrences() map[string]int64`
 
 GetTagOccurrences returns the TagOccurrences field if non-nil, zero value otherwise.
 
 ### GetTagOccurrencesOk
 
-`func (o *AgentStatistics) GetTagOccurrencesOk() (*map[string]int32, bool)`
+`func (o *AgentStatistics) GetTagOccurrencesOk() (*map[string]int64, bool)`
 
 GetTagOccurrencesOk returns a tuple with the TagOccurrences field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTagOccurrences
 
-`func (o *AgentStatistics) SetTagOccurrences(v map[string]int32)`
+`func (o *AgentStatistics) SetTagOccurrences(v map[string]int64)`
 
 SetTagOccurrences sets TagOccurrences field to given value.
 

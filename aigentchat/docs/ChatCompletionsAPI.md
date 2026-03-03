@@ -104,7 +104,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	request := *openapiclient.NewChatCompletionRequestDto("AgentId_example", "Message_example") // ChatCompletionRequestDto | Chat Completion Request
+	request := *openapiclient.NewChatCompletionRequestDto("Message_example") // ChatCompletionRequestDto | Chat Completion Request
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -176,7 +176,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	request := *openapiclient.NewChatCompletionRequestDto("AgentId_example", "Message_example") // ChatCompletionRequestDto | Chat Completion Request
+	request := *openapiclient.NewChatCompletionRequestDto("Message_example") // ChatCompletionRequestDto | Chat Completion Request
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

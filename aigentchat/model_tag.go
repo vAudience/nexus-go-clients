@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,6 @@ var _ MappedNullable = &Tag{}
 // Tag struct for Tag
 type Tag struct {
 	CreatedAt *int64 `json:"created_at,omitempty"`
-	I18n *map[string]TagI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -87,38 +86,6 @@ func (o *Tag) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *Tag) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
-}
-
-// GetI18n returns the I18n field value if set, zero value otherwise.
-func (o *Tag) GetI18n() map[string]TagI18n {
-	if o == nil || IsNil(o.I18n) {
-		var ret map[string]TagI18n
-		return ret
-	}
-	return *o.I18n
-}
-
-// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetI18nOk() (*map[string]TagI18n, bool) {
-	if o == nil || IsNil(o.I18n) {
-		return nil, false
-	}
-	return o.I18n, true
-}
-
-// HasI18n returns a boolean if a field has been set.
-func (o *Tag) HasI18n() bool {
-	if o != nil && !IsNil(o.I18n) {
-		return true
-	}
-
-	return false
-}
-
-// SetI18n gets a reference to the given map[string]TagI18n and assigns it to the I18n field.
-func (o *Tag) SetI18n(v map[string]TagI18n) {
-	o.I18n = &v
 }
 
 // GetId returns the Id field value
@@ -358,9 +325,6 @@ func (o Tag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !IsNil(o.I18n) {
-		toSerialize["i18n"] = o.I18n
-	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
@@ -424,7 +388,6 @@ func (o *Tag) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")

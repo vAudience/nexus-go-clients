@@ -67,6 +67,8 @@
 
 * `ErrCodeAIRegistryServiceLocationNotEnabled` (value: `"ai_registry_service_location_not_enabled"`)
 
+* `ErrCodeAIRegistryModelNotFound` (value: `"ai_registry_model_not_found"`)
+
 * `ErrCodeAIRegistryFailedToGetService` (value: `"ai_registry_failed_to_get_service"`)
 
 * `ErrCodeAIServiceAuthentication` (value: `"ai_service_authentication"`)

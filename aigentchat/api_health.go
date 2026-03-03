@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -35,7 +35,7 @@ func (r ApiHealthGetRequest) Execute() (*HealthResponse, *http.Response, error) 
 /*
 HealthGet checks for service health
 
-a simple 200 return endpoint to ensure the service is responsive
+returns health status of all dependent services (Redis, NATS). Returns 200 when all services are healthy, 503 when any service is unhealthy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiHealthGetRequest
@@ -106,6 +106,16 @@ func (a *HealthAPIService) HealthGetExecute(r ApiHealthGetRequest) (*HealthRespo
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v HealthResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

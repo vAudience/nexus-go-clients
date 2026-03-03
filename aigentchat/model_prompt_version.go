@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,7 @@ type PromptVersion struct {
 	Content *string `json:"content,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	StructuredContent []PromptContent `json:"structured_content,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -142,6 +143,38 @@ func (o *PromptVersion) SetCreatedBy(v string) {
 	o.CreatedBy = &v
 }
 
+// GetStructuredContent returns the StructuredContent field value if set, zero value otherwise.
+func (o *PromptVersion) GetStructuredContent() []PromptContent {
+	if o == nil || IsNil(o.StructuredContent) {
+		var ret []PromptContent
+		return ret
+	}
+	return o.StructuredContent
+}
+
+// GetStructuredContentOk returns a tuple with the StructuredContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptVersion) GetStructuredContentOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.StructuredContent) {
+		return nil, false
+	}
+	return o.StructuredContent, true
+}
+
+// HasStructuredContent returns a boolean if a field has been set.
+func (o *PromptVersion) HasStructuredContent() bool {
+	if o != nil && !IsNil(o.StructuredContent) {
+		return true
+	}
+
+	return false
+}
+
+// SetStructuredContent gets a reference to the given []PromptContent and assigns it to the StructuredContent field.
+func (o *PromptVersion) SetStructuredContent(v []PromptContent) {
+	o.StructuredContent = v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *PromptVersion) GetVersion() int32 {
 	if o == nil || IsNil(o.Version) {
@@ -193,6 +226,9 @@ func (o PromptVersion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedBy) {
 		toSerialize["created_by"] = o.CreatedBy
 	}
+	if !IsNil(o.StructuredContent) {
+		toSerialize["structured_content"] = o.StructuredContent
+	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
@@ -221,6 +257,7 @@ func (o *PromptVersion) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "created_by")
+		delete(additionalProperties, "structured_content")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}

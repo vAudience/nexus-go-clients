@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type AIModelServiceObject struct {
 	AiServiceId string `json:"ai_service_id"`
 	CostMultiplier float32 `json:"cost_multiplier"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	Deleted *bool `json:"deleted,omitempty"`
 	Description *string `json:"description,omitempty"`
 	HostingLocations *map[string]HostingLocation `json:"hosting_locations,omitempty"`
 	I18n *map[string]AIModelServiceI18n `json:"i18n,omitempty"`
@@ -141,6 +142,38 @@ func (o *AIModelServiceObject) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *AIModelServiceObject) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *AIModelServiceObject) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelServiceObject) GetDeletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Deleted) {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *AIModelServiceObject) HasDeleted() bool {
+	if o != nil && !IsNil(o.Deleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *AIModelServiceObject) SetDeleted(v bool) {
+	o.Deleted = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -478,6 +511,9 @@ func (o AIModelServiceObject) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -554,6 +590,7 @@ func (o *AIModelServiceObject) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ai_service_id")
 		delete(additionalProperties, "cost_multiplier")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "hosting_locations")
 		delete(additionalProperties, "i18n")

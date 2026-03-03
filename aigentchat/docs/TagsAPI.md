@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## ListTags
 
-> TagResults ListTags(ctx, orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
+> TagResults ListTags(ctx, orgId).Types(types).Limit(limit).Offset(offset).Execute()
 
 List tags
 
@@ -252,14 +252,13 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	type_ := "type__example" // string | Filter tags by type (optional)
-	addPredefinedTags := true // bool | Include predefined tags to the list of org owned tags (optional)
+	types := []string{"Types_example"} // []string | Filter tags by types (comma separated, defaults to 'user') (optional)
 	limit := int32(56) // int32 | Limit the number of results (optional) (default to 1000)
 	offset := int32(56) // int32 | Offset for pagination (optional) (default to 0)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TagsAPI.ListTags(context.Background(), orgId).Type_(type_).AddPredefinedTags(addPredefinedTags).Limit(limit).Offset(offset).Execute()
+	resp, r, err := apiClient.TagsAPI.ListTags(context.Background(), orgId).Types(types).Limit(limit).Offset(offset).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.ListTags``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -285,8 +284,7 @@ Other parameters are passed through a pointer to a apiListTagsRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **type_** | **string** | Filter tags by type | 
- **addPredefinedTags** | **bool** | Include predefined tags to the list of org owned tags | 
+ **types** | **[]string** | Filter tags by types (comma separated, defaults to &#39;user&#39;) | 
  **limit** | **int32** | Limit the number of results | [default to 1000]
  **offset** | **int32** | Offset for pagination | [default to 0]
 

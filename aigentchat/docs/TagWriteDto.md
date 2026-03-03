@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**I18n** | Pointer to [**map[string]TagI18n**](TagI18n.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
@@ -28,31 +27,6 @@ will change when the set of required properties is changed
 NewTagWriteDtoWithDefaults instantiates a new TagWriteDto object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetI18n
-
-`func (o *TagWriteDto) GetI18n() map[string]TagI18n`
-
-GetI18n returns the I18n field if non-nil, zero value otherwise.
-
-### GetI18nOk
-
-`func (o *TagWriteDto) GetI18nOk() (*map[string]TagI18n, bool)`
-
-GetI18nOk returns a tuple with the I18n field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetI18n
-
-`func (o *TagWriteDto) SetI18n(v map[string]TagI18n)`
-
-SetI18n sets I18n field to given value.
-
-### HasI18n
-
-`func (o *TagWriteDto) HasI18n() bool`
-
-HasI18n returns a boolean if a field has been set.
 
 ### GetInternalId
 

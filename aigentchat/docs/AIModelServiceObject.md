@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AiServiceId** | **string** |  | 
 **CostMultiplier** | **float32** |  | 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**Deleted** | Pointer to **bool** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **HostingLocations** | Pointer to [**map[string]HostingLocation**](HostingLocation.md) |  | [optional] 
 **I18n** | Pointer to [**map[string]AIModelServiceI18n**](AIModelServiceI18n.md) |  | [optional] 
@@ -102,6 +103,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *AIModelServiceObject) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *AIModelServiceObject) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *AIModelServiceObject) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *AIModelServiceObject) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *AIModelServiceObject) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
 
 ### GetDescription
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -20,7 +20,8 @@ var _ MappedNullable = &HealthResponse{}
 
 // HealthResponse struct for HealthResponse
 type HealthResponse struct {
-	Health *string `json:"health,omitempty"`
+	Services *map[string]ServiceStatus `json:"services,omitempty"`
+	Status *string `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,36 +44,68 @@ func NewHealthResponseWithDefaults() *HealthResponse {
 	return &this
 }
 
-// GetHealth returns the Health field value if set, zero value otherwise.
-func (o *HealthResponse) GetHealth() string {
-	if o == nil || IsNil(o.Health) {
-		var ret string
+// GetServices returns the Services field value if set, zero value otherwise.
+func (o *HealthResponse) GetServices() map[string]ServiceStatus {
+	if o == nil || IsNil(o.Services) {
+		var ret map[string]ServiceStatus
 		return ret
 	}
-	return *o.Health
+	return *o.Services
 }
 
-// GetHealthOk returns a tuple with the Health field value if set, nil otherwise
+// GetServicesOk returns a tuple with the Services field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HealthResponse) GetHealthOk() (*string, bool) {
-	if o == nil || IsNil(o.Health) {
+func (o *HealthResponse) GetServicesOk() (*map[string]ServiceStatus, bool) {
+	if o == nil || IsNil(o.Services) {
 		return nil, false
 	}
-	return o.Health, true
+	return o.Services, true
 }
 
-// HasHealth returns a boolean if a field has been set.
-func (o *HealthResponse) HasHealth() bool {
-	if o != nil && !IsNil(o.Health) {
+// HasServices returns a boolean if a field has been set.
+func (o *HealthResponse) HasServices() bool {
+	if o != nil && !IsNil(o.Services) {
 		return true
 	}
 
 	return false
 }
 
-// SetHealth gets a reference to the given string and assigns it to the Health field.
-func (o *HealthResponse) SetHealth(v string) {
-	o.Health = &v
+// SetServices gets a reference to the given map[string]ServiceStatus and assigns it to the Services field.
+func (o *HealthResponse) SetServices(v map[string]ServiceStatus) {
+	o.Services = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *HealthResponse) GetStatus() string {
+	if o == nil || IsNil(o.Status) {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HealthResponse) GetStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *HealthResponse) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *HealthResponse) SetStatus(v string) {
+	o.Status = &v
 }
 
 func (o HealthResponse) MarshalJSON() ([]byte, error) {
@@ -85,8 +118,11 @@ func (o HealthResponse) MarshalJSON() ([]byte, error) {
 
 func (o HealthResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Health) {
-		toSerialize["health"] = o.Health
+	if !IsNil(o.Services) {
+		toSerialize["services"] = o.Services
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -110,7 +146,8 @@ func (o *HealthResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "health")
+		delete(additionalProperties, "services")
+		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}
 

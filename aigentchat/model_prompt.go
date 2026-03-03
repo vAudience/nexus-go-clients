@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -26,10 +26,13 @@ type Prompt struct {
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
+	ImageUrl *string `json:"image_url,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
-	OwnerId *string `json:"owner_id,omitempty"`
-	OwnerOrganizationId *string `json:"owner_organization_id,omitempty"`
+	LegacyUuid *string `json:"legacy_uuid,omitempty"`
+	OwnerId string `json:"owner_id"`
+	OwnerOrganizationId string `json:"owner_organization_id"`
 	ReadAccess *AccessScope `json:"read_access,omitempty"`
+	SystemTags []string `json:"system_tags,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title string `json:"title"`
@@ -46,9 +49,11 @@ type _Prompt Prompt
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrompt(id string, title string) *Prompt {
+func NewPrompt(id string, ownerId string, ownerOrganizationId string, title string) *Prompt {
 	this := Prompt{}
 	this.Id = id
+	this.OwnerId = ownerId
+	this.OwnerOrganizationId = ownerOrganizationId
 	this.Title = title
 	return &this
 }
@@ -213,6 +218,38 @@ func (o *Prompt) SetId(v string) {
 	o.Id = v
 }
 
+// GetImageUrl returns the ImageUrl field value if set, zero value otherwise.
+func (o *Prompt) GetImageUrl() string {
+	if o == nil || IsNil(o.ImageUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ImageUrl
+}
+
+// GetImageUrlOk returns a tuple with the ImageUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetImageUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ImageUrl) {
+		return nil, false
+	}
+	return o.ImageUrl, true
+}
+
+// HasImageUrl returns a boolean if a field has been set.
+func (o *Prompt) HasImageUrl() bool {
+	if o != nil && !IsNil(o.ImageUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetImageUrl gets a reference to the given string and assigns it to the ImageUrl field.
+func (o *Prompt) SetImageUrl(v string) {
+	o.ImageUrl = &v
+}
+
 // GetInternalId returns the InternalId field value if set, zero value otherwise.
 func (o *Prompt) GetInternalId() string {
 	if o == nil || IsNil(o.InternalId) {
@@ -245,68 +282,84 @@ func (o *Prompt) SetInternalId(v string) {
 	o.InternalId = &v
 }
 
-// GetOwnerId returns the OwnerId field value if set, zero value otherwise.
-func (o *Prompt) GetOwnerId() string {
-	if o == nil || IsNil(o.OwnerId) {
+// GetLegacyUuid returns the LegacyUuid field value if set, zero value otherwise.
+func (o *Prompt) GetLegacyUuid() string {
+	if o == nil || IsNil(o.LegacyUuid) {
 		var ret string
 		return ret
 	}
-	return *o.OwnerId
+	return *o.LegacyUuid
 }
 
-// GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
+// GetLegacyUuidOk returns a tuple with the LegacyUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetLegacyUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.LegacyUuid) {
+		return nil, false
+	}
+	return o.LegacyUuid, true
+}
+
+// HasLegacyUuid returns a boolean if a field has been set.
+func (o *Prompt) HasLegacyUuid() bool {
+	if o != nil && !IsNil(o.LegacyUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetLegacyUuid gets a reference to the given string and assigns it to the LegacyUuid field.
+func (o *Prompt) SetLegacyUuid(v string) {
+	o.LegacyUuid = &v
+}
+
+// GetOwnerId returns the OwnerId field value
+func (o *Prompt) GetOwnerId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OwnerId
+}
+
+// GetOwnerIdOk returns a tuple with the OwnerId field value
 // and a boolean to check if the value has been set.
 func (o *Prompt) GetOwnerIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OwnerId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OwnerId, true
+	return &o.OwnerId, true
 }
 
-// HasOwnerId returns a boolean if a field has been set.
-func (o *Prompt) HasOwnerId() bool {
-	if o != nil && !IsNil(o.OwnerId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOwnerId gets a reference to the given string and assigns it to the OwnerId field.
+// SetOwnerId sets field value
 func (o *Prompt) SetOwnerId(v string) {
-	o.OwnerId = &v
+	o.OwnerId = v
 }
 
-// GetOwnerOrganizationId returns the OwnerOrganizationId field value if set, zero value otherwise.
+// GetOwnerOrganizationId returns the OwnerOrganizationId field value
 func (o *Prompt) GetOwnerOrganizationId() string {
-	if o == nil || IsNil(o.OwnerOrganizationId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OwnerOrganizationId
+
+	return o.OwnerOrganizationId
 }
 
-// GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field value if set, nil otherwise
+// GetOwnerOrganizationIdOk returns a tuple with the OwnerOrganizationId field value
 // and a boolean to check if the value has been set.
 func (o *Prompt) GetOwnerOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OwnerOrganizationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OwnerOrganizationId, true
+	return &o.OwnerOrganizationId, true
 }
 
-// HasOwnerOrganizationId returns a boolean if a field has been set.
-func (o *Prompt) HasOwnerOrganizationId() bool {
-	if o != nil && !IsNil(o.OwnerOrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOwnerOrganizationId gets a reference to the given string and assigns it to the OwnerOrganizationId field.
+// SetOwnerOrganizationId sets field value
 func (o *Prompt) SetOwnerOrganizationId(v string) {
-	o.OwnerOrganizationId = &v
+	o.OwnerOrganizationId = v
 }
 
 // GetReadAccess returns the ReadAccess field value if set, zero value otherwise.
@@ -339,6 +392,38 @@ func (o *Prompt) HasReadAccess() bool {
 // SetReadAccess gets a reference to the given AccessScope and assigns it to the ReadAccess field.
 func (o *Prompt) SetReadAccess(v AccessScope) {
 	o.ReadAccess = &v
+}
+
+// GetSystemTags returns the SystemTags field value if set, zero value otherwise.
+func (o *Prompt) GetSystemTags() []string {
+	if o == nil || IsNil(o.SystemTags) {
+		var ret []string
+		return ret
+	}
+	return o.SystemTags
+}
+
+// GetSystemTagsOk returns a tuple with the SystemTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetSystemTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SystemTags) {
+		return nil, false
+	}
+	return o.SystemTags, true
+}
+
+// HasSystemTags returns a boolean if a field has been set.
+func (o *Prompt) HasSystemTags() bool {
+	if o != nil && !IsNil(o.SystemTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemTags gets a reference to the given []string and assigns it to the SystemTags field.
+func (o *Prompt) SetSystemTags(v []string) {
+	o.SystemTags = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -580,17 +665,22 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.ImageUrl) {
+		toSerialize["image_url"] = o.ImageUrl
+	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
-	if !IsNil(o.OwnerId) {
-		toSerialize["owner_id"] = o.OwnerId
+	if !IsNil(o.LegacyUuid) {
+		toSerialize["legacy_uuid"] = o.LegacyUuid
 	}
-	if !IsNil(o.OwnerOrganizationId) {
-		toSerialize["owner_organization_id"] = o.OwnerOrganizationId
-	}
+	toSerialize["owner_id"] = o.OwnerId
+	toSerialize["owner_organization_id"] = o.OwnerOrganizationId
 	if !IsNil(o.ReadAccess) {
 		toSerialize["read_access"] = o.ReadAccess
+	}
+	if !IsNil(o.SystemTags) {
+		toSerialize["system_tags"] = o.SystemTags
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
@@ -625,6 +715,8 @@ func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"owner_id",
+		"owner_organization_id",
 		"title",
 	}
 
@@ -660,10 +752,13 @@ func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "image_url")
 		delete(additionalProperties, "internal_id")
+		delete(additionalProperties, "legacy_uuid")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "read_access")
+		delete(additionalProperties, "system_tags")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type AIModel struct {
 	// Note: only set when returning the model (not stored at model level), derived from features
 	Capabilities []string `json:"capabilities,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	Deleted *bool `json:"deleted,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
 	Features []AIModelFeature `json:"features,omitempty"`
@@ -194,6 +195,38 @@ func (o *AIModel) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *AIModel) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *AIModel) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetDeletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Deleted) {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *AIModel) HasDeleted() bool {
+	if o != nil && !IsNil(o.Deleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *AIModel) SetDeleted(v bool) {
+	o.Deleted = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -800,6 +833,9 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -900,6 +936,7 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")
 		delete(additionalProperties, "features")

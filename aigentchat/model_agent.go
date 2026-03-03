@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -27,11 +27,13 @@ type Agent struct {
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	DefaultFileUploadCategory *string `json:"default_file_upload_category,omitempty"`
+	Deleted *bool `json:"deleted,omitempty"`
 	Description *string `json:"description,omitempty"`
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
 	InitialUserMessages []string `json:"initial_user_messages,omitempty"`
+	InitialUserPrompt []PromptContent `json:"initial_user_prompt,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	// Note: only set when returning the agent (not stored at agent level)
@@ -45,7 +47,11 @@ type Agent struct {
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	ReadAccess *AccessScope `json:"read_access,omitempty"`
 	SystemMessages []string `json:"system_messages,omitempty"`
+	SystemPrompt []PromptContent `json:"system_prompt,omitempty"`
+	SystemTags []string `json:"system_tags,omitempty"`
+	// Deprecated: use Tags and/or SystemTags instead
 	TagIds []string `json:"tag_ids,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 	ToolConfig map[string]interface{} `json:"tool_config,omitempty"`
 	Type *AgentType `json:"type,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
@@ -272,6 +278,38 @@ func (o *Agent) SetDefaultFileUploadCategory(v string) {
 	o.DefaultFileUploadCategory = &v
 }
 
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *Agent) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetDeletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Deleted) {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *Agent) HasDeleted() bool {
+	if o != nil && !IsNil(o.Deleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *Agent) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Agent) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -422,6 +460,38 @@ func (o *Agent) HasInitialUserMessages() bool {
 // SetInitialUserMessages gets a reference to the given []string and assigns it to the InitialUserMessages field.
 func (o *Agent) SetInitialUserMessages(v []string) {
 	o.InitialUserMessages = v
+}
+
+// GetInitialUserPrompt returns the InitialUserPrompt field value if set, zero value otherwise.
+func (o *Agent) GetInitialUserPrompt() []PromptContent {
+	if o == nil || IsNil(o.InitialUserPrompt) {
+		var ret []PromptContent
+		return ret
+	}
+	return o.InitialUserPrompt
+}
+
+// GetInitialUserPromptOk returns a tuple with the InitialUserPrompt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetInitialUserPromptOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.InitialUserPrompt) {
+		return nil, false
+	}
+	return o.InitialUserPrompt, true
+}
+
+// HasInitialUserPrompt returns a boolean if a field has been set.
+func (o *Agent) HasInitialUserPrompt() bool {
+	if o != nil && !IsNil(o.InitialUserPrompt) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialUserPrompt gets a reference to the given []PromptContent and assigns it to the InitialUserPrompt field.
+func (o *Agent) SetInitialUserPrompt(v []PromptContent) {
+	o.InitialUserPrompt = v
 }
 
 // GetInternalId returns the InternalId field value if set, zero value otherwise.
@@ -776,6 +846,70 @@ func (o *Agent) SetSystemMessages(v []string) {
 	o.SystemMessages = v
 }
 
+// GetSystemPrompt returns the SystemPrompt field value if set, zero value otherwise.
+func (o *Agent) GetSystemPrompt() []PromptContent {
+	if o == nil || IsNil(o.SystemPrompt) {
+		var ret []PromptContent
+		return ret
+	}
+	return o.SystemPrompt
+}
+
+// GetSystemPromptOk returns a tuple with the SystemPrompt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetSystemPromptOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.SystemPrompt) {
+		return nil, false
+	}
+	return o.SystemPrompt, true
+}
+
+// HasSystemPrompt returns a boolean if a field has been set.
+func (o *Agent) HasSystemPrompt() bool {
+	if o != nil && !IsNil(o.SystemPrompt) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemPrompt gets a reference to the given []PromptContent and assigns it to the SystemPrompt field.
+func (o *Agent) SetSystemPrompt(v []PromptContent) {
+	o.SystemPrompt = v
+}
+
+// GetSystemTags returns the SystemTags field value if set, zero value otherwise.
+func (o *Agent) GetSystemTags() []string {
+	if o == nil || IsNil(o.SystemTags) {
+		var ret []string
+		return ret
+	}
+	return o.SystemTags
+}
+
+// GetSystemTagsOk returns a tuple with the SystemTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetSystemTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SystemTags) {
+		return nil, false
+	}
+	return o.SystemTags, true
+}
+
+// HasSystemTags returns a boolean if a field has been set.
+func (o *Agent) HasSystemTags() bool {
+	if o != nil && !IsNil(o.SystemTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemTags gets a reference to the given []string and assigns it to the SystemTags field.
+func (o *Agent) SetSystemTags(v []string) {
+	o.SystemTags = v
+}
+
 // GetTagIds returns the TagIds field value if set, zero value otherwise.
 func (o *Agent) GetTagIds() []string {
 	if o == nil || IsNil(o.TagIds) {
@@ -806,6 +940,38 @@ func (o *Agent) HasTagIds() bool {
 // SetTagIds gets a reference to the given []string and assigns it to the TagIds field.
 func (o *Agent) SetTagIds(v []string) {
 	o.TagIds = v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *Agent) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *Agent) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *Agent) SetTags(v []string) {
+	o.Tags = v
 }
 
 // GetToolConfig returns the ToolConfig field value if set, zero value otherwise.
@@ -1060,6 +1226,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultFileUploadCategory) {
 		toSerialize["default_file_upload_category"] = o.DefaultFileUploadCategory
 	}
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -1072,6 +1241,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.InitialUserMessages) {
 		toSerialize["initial_user_messages"] = o.InitialUserMessages
+	}
+	if !IsNil(o.InitialUserPrompt) {
+		toSerialize["initial_user_prompt"] = o.InitialUserPrompt
 	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
@@ -1101,8 +1273,17 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SystemMessages) {
 		toSerialize["system_messages"] = o.SystemMessages
 	}
+	if !IsNil(o.SystemPrompt) {
+		toSerialize["system_prompt"] = o.SystemPrompt
+	}
+	if !IsNil(o.SystemTags) {
+		toSerialize["system_tags"] = o.SystemTags
+	}
 	if !IsNil(o.TagIds) {
 		toSerialize["tag_ids"] = o.TagIds
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 	if !IsNil(o.ToolConfig) {
 		toSerialize["tool_config"] = o.ToolConfig
@@ -1178,11 +1359,13 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "avatar_url")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "default_file_upload_category")
+		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "ignore_incoming_overwrite")
 		delete(additionalProperties, "initial_user_messages")
+		delete(additionalProperties, "initial_user_prompt")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "meta_data")
 		delete(additionalProperties, "model")
@@ -1195,7 +1378,10 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "read_access")
 		delete(additionalProperties, "system_messages")
+		delete(additionalProperties, "system_prompt")
+		delete(additionalProperties, "system_tags")
 		delete(additionalProperties, "tag_ids")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "tool_config")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")

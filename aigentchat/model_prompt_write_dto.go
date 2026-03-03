@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -23,8 +23,11 @@ type PromptWriteDto struct {
 	Content *string `json:"content,omitempty"`
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
+	ImageUrl *string `json:"image_url,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	ReadAccess *AccessScope `json:"read_access,omitempty"`
+	StructuredContent []PromptContent `json:"structured_content,omitempty"`
+	SystemTags []string `json:"system_tags,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
 	Title *string `json:"title,omitempty"`
@@ -147,6 +150,38 @@ func (o *PromptWriteDto) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetImageUrl returns the ImageUrl field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetImageUrl() string {
+	if o == nil || IsNil(o.ImageUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ImageUrl
+}
+
+// GetImageUrlOk returns a tuple with the ImageUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptWriteDto) GetImageUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ImageUrl) {
+		return nil, false
+	}
+	return o.ImageUrl, true
+}
+
+// HasImageUrl returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasImageUrl() bool {
+	if o != nil && !IsNil(o.ImageUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetImageUrl gets a reference to the given string and assigns it to the ImageUrl field.
+func (o *PromptWriteDto) SetImageUrl(v string) {
+	o.ImageUrl = &v
+}
+
 // GetInternalId returns the InternalId field value if set, zero value otherwise.
 func (o *PromptWriteDto) GetInternalId() string {
 	if o == nil || IsNil(o.InternalId) {
@@ -209,6 +244,70 @@ func (o *PromptWriteDto) HasReadAccess() bool {
 // SetReadAccess gets a reference to the given AccessScope and assigns it to the ReadAccess field.
 func (o *PromptWriteDto) SetReadAccess(v AccessScope) {
 	o.ReadAccess = &v
+}
+
+// GetStructuredContent returns the StructuredContent field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetStructuredContent() []PromptContent {
+	if o == nil || IsNil(o.StructuredContent) {
+		var ret []PromptContent
+		return ret
+	}
+	return o.StructuredContent
+}
+
+// GetStructuredContentOk returns a tuple with the StructuredContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptWriteDto) GetStructuredContentOk() ([]PromptContent, bool) {
+	if o == nil || IsNil(o.StructuredContent) {
+		return nil, false
+	}
+	return o.StructuredContent, true
+}
+
+// HasStructuredContent returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasStructuredContent() bool {
+	if o != nil && !IsNil(o.StructuredContent) {
+		return true
+	}
+
+	return false
+}
+
+// SetStructuredContent gets a reference to the given []PromptContent and assigns it to the StructuredContent field.
+func (o *PromptWriteDto) SetStructuredContent(v []PromptContent) {
+	o.StructuredContent = v
+}
+
+// GetSystemTags returns the SystemTags field value if set, zero value otherwise.
+func (o *PromptWriteDto) GetSystemTags() []string {
+	if o == nil || IsNil(o.SystemTags) {
+		var ret []string
+		return ret
+	}
+	return o.SystemTags
+}
+
+// GetSystemTagsOk returns a tuple with the SystemTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptWriteDto) GetSystemTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SystemTags) {
+		return nil, false
+	}
+	return o.SystemTags, true
+}
+
+// HasSystemTags returns a boolean if a field has been set.
+func (o *PromptWriteDto) HasSystemTags() bool {
+	if o != nil && !IsNil(o.SystemTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemTags gets a reference to the given []string and assigns it to the SystemTags field.
+func (o *PromptWriteDto) SetSystemTags(v []string) {
+	o.SystemTags = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -358,11 +457,20 @@ func (o PromptWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.ImageUrl) {
+		toSerialize["image_url"] = o.ImageUrl
+	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
 	if !IsNil(o.ReadAccess) {
 		toSerialize["read_access"] = o.ReadAccess
+	}
+	if !IsNil(o.StructuredContent) {
+		toSerialize["structured_content"] = o.StructuredContent
+	}
+	if !IsNil(o.SystemTags) {
+		toSerialize["system_tags"] = o.SystemTags
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
@@ -401,8 +509,11 @@ func (o *PromptWriteDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "image_url")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "read_access")
+		delete(additionalProperties, "structured_content")
+		delete(additionalProperties, "system_tags")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "thumbnail_url")
 		delete(additionalProperties, "title")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -550,21 +550,14 @@ type ApiListTagsRequest struct {
 	ctx context.Context
 	ApiService *TagsAPIService
 	orgId string
-	type_ *string
-	addPredefinedTags *bool
+	types *[]string
 	limit *int32
 	offset *int32
 }
 
-// Filter tags by type
-func (r ApiListTagsRequest) Type_(type_ string) ApiListTagsRequest {
-	r.type_ = &type_
-	return r
-}
-
-// Include predefined tags to the list of org owned tags
-func (r ApiListTagsRequest) AddPredefinedTags(addPredefinedTags bool) ApiListTagsRequest {
-	r.addPredefinedTags = &addPredefinedTags
+// Filter tags by types (comma separated, defaults to &#39;user&#39;)
+func (r ApiListTagsRequest) Types(types []string) ApiListTagsRequest {
+	r.types = &types
 	return r
 }
 
@@ -623,11 +616,8 @@ func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) (*TagResults, *ht
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
-	}
-	if r.addPredefinedTags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "add_predefined_tags", r.addPredefinedTags, "", "")
+	if r.types != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "types", r.types, "form", "csv")
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")

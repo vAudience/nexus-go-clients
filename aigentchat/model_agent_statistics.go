@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -20,8 +20,8 @@ var _ MappedNullable = &AgentStatistics{}
 
 // AgentStatistics struct for AgentStatistics
 type AgentStatistics struct {
-	ModelOccurrences *map[string]int32 `json:"model_occurrences,omitempty"`
-	TagOccurrences *map[string]int32 `json:"tag_occurrences,omitempty"`
+	ModelOccurrences *map[string]int64 `json:"model_occurrences,omitempty"`
+	TagOccurrences *map[string]int64 `json:"tag_occurrences,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,9 +45,9 @@ func NewAgentStatisticsWithDefaults() *AgentStatistics {
 }
 
 // GetModelOccurrences returns the ModelOccurrences field value if set, zero value otherwise.
-func (o *AgentStatistics) GetModelOccurrences() map[string]int32 {
+func (o *AgentStatistics) GetModelOccurrences() map[string]int64 {
 	if o == nil || IsNil(o.ModelOccurrences) {
-		var ret map[string]int32
+		var ret map[string]int64
 		return ret
 	}
 	return *o.ModelOccurrences
@@ -55,7 +55,7 @@ func (o *AgentStatistics) GetModelOccurrences() map[string]int32 {
 
 // GetModelOccurrencesOk returns a tuple with the ModelOccurrences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentStatistics) GetModelOccurrencesOk() (*map[string]int32, bool) {
+func (o *AgentStatistics) GetModelOccurrencesOk() (*map[string]int64, bool) {
 	if o == nil || IsNil(o.ModelOccurrences) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *AgentStatistics) HasModelOccurrences() bool {
 	return false
 }
 
-// SetModelOccurrences gets a reference to the given map[string]int32 and assigns it to the ModelOccurrences field.
-func (o *AgentStatistics) SetModelOccurrences(v map[string]int32) {
+// SetModelOccurrences gets a reference to the given map[string]int64 and assigns it to the ModelOccurrences field.
+func (o *AgentStatistics) SetModelOccurrences(v map[string]int64) {
 	o.ModelOccurrences = &v
 }
 
 // GetTagOccurrences returns the TagOccurrences field value if set, zero value otherwise.
-func (o *AgentStatistics) GetTagOccurrences() map[string]int32 {
+func (o *AgentStatistics) GetTagOccurrences() map[string]int64 {
 	if o == nil || IsNil(o.TagOccurrences) {
-		var ret map[string]int32
+		var ret map[string]int64
 		return ret
 	}
 	return *o.TagOccurrences
@@ -87,7 +87,7 @@ func (o *AgentStatistics) GetTagOccurrences() map[string]int32 {
 
 // GetTagOccurrencesOk returns a tuple with the TagOccurrences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AgentStatistics) GetTagOccurrencesOk() (*map[string]int32, bool) {
+func (o *AgentStatistics) GetTagOccurrencesOk() (*map[string]int64, bool) {
 	if o == nil || IsNil(o.TagOccurrences) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *AgentStatistics) HasTagOccurrences() bool {
 	return false
 }
 
-// SetTagOccurrences gets a reference to the given map[string]int32 and assigns it to the TagOccurrences field.
-func (o *AgentStatistics) SetTagOccurrences(v map[string]int32) {
+// SetTagOccurrences gets a reference to the given map[string]int64 and assigns it to the TagOccurrences field.
+func (o *AgentStatistics) SetTagOccurrences(v map[string]int64) {
 	o.TagOccurrences = &v
 }
 

@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 **AvatarUrl** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **DefaultFileUploadCategory** | Pointer to **string** |  | [optional] 
+**Deleted** | Pointer to **bool** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **Id** | **string** |  | 
 **IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
+**InitialUserPrompt** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **Model** | Pointer to [**AIModel**](AIModel.md) | Note: only set when returning the agent (not stored at agent level) | [optional] 
@@ -27,7 +29,10 @@ Name | Type | Description | Notes
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
-**TagIds** | Pointer to **[]string** |  | [optional] 
+**SystemPrompt** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
+**SystemTags** | Pointer to **[]string** |  | [optional] 
+**TagIds** | Pointer to **[]string** | Deprecated: use Tags and/or SystemTags instead | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
 **ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
@@ -205,6 +210,31 @@ SetDefaultFileUploadCategory sets DefaultFileUploadCategory field to given value
 
 HasDefaultFileUploadCategory returns a boolean if a field has been set.
 
+### GetDeleted
+
+`func (o *Agent) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *Agent) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *Agent) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *Agent) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
+
 ### GetDescription
 
 `func (o *Agent) GetDescription() string`
@@ -324,6 +354,31 @@ SetInitialUserMessages sets InitialUserMessages field to given value.
 `func (o *Agent) HasInitialUserMessages() bool`
 
 HasInitialUserMessages returns a boolean if a field has been set.
+
+### GetInitialUserPrompt
+
+`func (o *Agent) GetInitialUserPrompt() []PromptContent`
+
+GetInitialUserPrompt returns the InitialUserPrompt field if non-nil, zero value otherwise.
+
+### GetInitialUserPromptOk
+
+`func (o *Agent) GetInitialUserPromptOk() (*[]PromptContent, bool)`
+
+GetInitialUserPromptOk returns a tuple with the InitialUserPrompt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialUserPrompt
+
+`func (o *Agent) SetInitialUserPrompt(v []PromptContent)`
+
+SetInitialUserPrompt sets InitialUserPrompt field to given value.
+
+### HasInitialUserPrompt
+
+`func (o *Agent) HasInitialUserPrompt() bool`
+
+HasInitialUserPrompt returns a boolean if a field has been set.
 
 ### GetInternalId
 
@@ -605,6 +660,56 @@ SetSystemMessages sets SystemMessages field to given value.
 
 HasSystemMessages returns a boolean if a field has been set.
 
+### GetSystemPrompt
+
+`func (o *Agent) GetSystemPrompt() []PromptContent`
+
+GetSystemPrompt returns the SystemPrompt field if non-nil, zero value otherwise.
+
+### GetSystemPromptOk
+
+`func (o *Agent) GetSystemPromptOk() (*[]PromptContent, bool)`
+
+GetSystemPromptOk returns a tuple with the SystemPrompt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemPrompt
+
+`func (o *Agent) SetSystemPrompt(v []PromptContent)`
+
+SetSystemPrompt sets SystemPrompt field to given value.
+
+### HasSystemPrompt
+
+`func (o *Agent) HasSystemPrompt() bool`
+
+HasSystemPrompt returns a boolean if a field has been set.
+
+### GetSystemTags
+
+`func (o *Agent) GetSystemTags() []string`
+
+GetSystemTags returns the SystemTags field if non-nil, zero value otherwise.
+
+### GetSystemTagsOk
+
+`func (o *Agent) GetSystemTagsOk() (*[]string, bool)`
+
+GetSystemTagsOk returns a tuple with the SystemTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemTags
+
+`func (o *Agent) SetSystemTags(v []string)`
+
+SetSystemTags sets SystemTags field to given value.
+
+### HasSystemTags
+
+`func (o *Agent) HasSystemTags() bool`
+
+HasSystemTags returns a boolean if a field has been set.
+
 ### GetTagIds
 
 `func (o *Agent) GetTagIds() []string`
@@ -629,6 +734,31 @@ SetTagIds sets TagIds field to given value.
 `func (o *Agent) HasTagIds() bool`
 
 HasTagIds returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *Agent) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *Agent) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *Agent) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *Agent) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 ### GetToolConfig
 

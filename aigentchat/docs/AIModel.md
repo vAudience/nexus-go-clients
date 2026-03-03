@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Actions** | **[]string** |  | 
 **Capabilities** | Pointer to **[]string** | Note: only set when returning the model (not stored at model level), derived from features | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**Deleted** | Pointer to **bool** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
 **Features** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
@@ -142,6 +143,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *AIModel) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *AIModel) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *AIModel) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *AIModel) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *AIModel) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
 
 ### GetDescription
 

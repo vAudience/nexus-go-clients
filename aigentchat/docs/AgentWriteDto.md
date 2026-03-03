@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
 **InitialUserMessages** | Pointer to **[]string** |  | [optional] 
+**InitialUserPrompt** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **ModelActions** | Pointer to **[]string** |  | [optional] 
@@ -22,7 +23,9 @@ Name | Type | Description | Notes
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ReadAccess** | Pointer to [**AccessScope**](AccessScope.md) |  | [optional] 
 **SystemMessages** | Pointer to **[]string** |  | [optional] 
-**TagIds** | Pointer to **[]string** |  | [optional] 
+**SystemPrompt** | Pointer to [**[]PromptContent**](PromptContent.md) |  | [optional] 
+**SystemTags** | Pointer to **[]string** |  | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
 **ToolConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 **Type** | Pointer to [**AgentType**](AgentType.md) |  | [optional] 
 **UseTools** | Pointer to **bool** |  | [optional] 
@@ -272,6 +275,31 @@ SetInitialUserMessages sets InitialUserMessages field to given value.
 
 HasInitialUserMessages returns a boolean if a field has been set.
 
+### GetInitialUserPrompt
+
+`func (o *AgentWriteDto) GetInitialUserPrompt() []PromptContent`
+
+GetInitialUserPrompt returns the InitialUserPrompt field if non-nil, zero value otherwise.
+
+### GetInitialUserPromptOk
+
+`func (o *AgentWriteDto) GetInitialUserPromptOk() (*[]PromptContent, bool)`
+
+GetInitialUserPromptOk returns a tuple with the InitialUserPrompt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialUserPrompt
+
+`func (o *AgentWriteDto) SetInitialUserPrompt(v []PromptContent)`
+
+SetInitialUserPrompt sets InitialUserPrompt field to given value.
+
+### HasInitialUserPrompt
+
+`func (o *AgentWriteDto) HasInitialUserPrompt() bool`
+
+HasInitialUserPrompt returns a boolean if a field has been set.
+
 ### GetInternalId
 
 `func (o *AgentWriteDto) GetInternalId() string`
@@ -497,30 +525,80 @@ SetSystemMessages sets SystemMessages field to given value.
 
 HasSystemMessages returns a boolean if a field has been set.
 
-### GetTagIds
+### GetSystemPrompt
 
-`func (o *AgentWriteDto) GetTagIds() []string`
+`func (o *AgentWriteDto) GetSystemPrompt() []PromptContent`
 
-GetTagIds returns the TagIds field if non-nil, zero value otherwise.
+GetSystemPrompt returns the SystemPrompt field if non-nil, zero value otherwise.
 
-### GetTagIdsOk
+### GetSystemPromptOk
 
-`func (o *AgentWriteDto) GetTagIdsOk() (*[]string, bool)`
+`func (o *AgentWriteDto) GetSystemPromptOk() (*[]PromptContent, bool)`
 
-GetTagIdsOk returns a tuple with the TagIds field if it's non-nil, zero value otherwise
+GetSystemPromptOk returns a tuple with the SystemPrompt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTagIds
+### SetSystemPrompt
 
-`func (o *AgentWriteDto) SetTagIds(v []string)`
+`func (o *AgentWriteDto) SetSystemPrompt(v []PromptContent)`
 
-SetTagIds sets TagIds field to given value.
+SetSystemPrompt sets SystemPrompt field to given value.
 
-### HasTagIds
+### HasSystemPrompt
 
-`func (o *AgentWriteDto) HasTagIds() bool`
+`func (o *AgentWriteDto) HasSystemPrompt() bool`
 
-HasTagIds returns a boolean if a field has been set.
+HasSystemPrompt returns a boolean if a field has been set.
+
+### GetSystemTags
+
+`func (o *AgentWriteDto) GetSystemTags() []string`
+
+GetSystemTags returns the SystemTags field if non-nil, zero value otherwise.
+
+### GetSystemTagsOk
+
+`func (o *AgentWriteDto) GetSystemTagsOk() (*[]string, bool)`
+
+GetSystemTagsOk returns a tuple with the SystemTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemTags
+
+`func (o *AgentWriteDto) SetSystemTags(v []string)`
+
+SetSystemTags sets SystemTags field to given value.
+
+### HasSystemTags
+
+`func (o *AgentWriteDto) HasSystemTags() bool`
+
+HasSystemTags returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *AgentWriteDto) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *AgentWriteDto) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *AgentWriteDto) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *AgentWriteDto) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 ### GetToolConfig
 

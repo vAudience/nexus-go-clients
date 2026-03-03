@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.25.3
+API version: 0.27.3
 Contact: contact@vaudience.ai
 */
 
@@ -20,7 +20,6 @@ var _ MappedNullable = &TagWriteDto{}
 
 // TagWriteDto struct for TagWriteDto
 type TagWriteDto struct {
-	I18n *map[string]TagI18n `json:"i18n,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -45,38 +44,6 @@ func NewTagWriteDto() *TagWriteDto {
 func NewTagWriteDtoWithDefaults() *TagWriteDto {
 	this := TagWriteDto{}
 	return &this
-}
-
-// GetI18n returns the I18n field value if set, zero value otherwise.
-func (o *TagWriteDto) GetI18n() map[string]TagI18n {
-	if o == nil || IsNil(o.I18n) {
-		var ret map[string]TagI18n
-		return ret
-	}
-	return *o.I18n
-}
-
-// GetI18nOk returns a tuple with the I18n field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TagWriteDto) GetI18nOk() (*map[string]TagI18n, bool) {
-	if o == nil || IsNil(o.I18n) {
-		return nil, false
-	}
-	return o.I18n, true
-}
-
-// HasI18n returns a boolean if a field has been set.
-func (o *TagWriteDto) HasI18n() bool {
-	if o != nil && !IsNil(o.I18n) {
-		return true
-	}
-
-	return false
-}
-
-// SetI18n gets a reference to the given map[string]TagI18n and assigns it to the I18n field.
-func (o *TagWriteDto) SetI18n(v map[string]TagI18n) {
-	o.I18n = &v
 }
 
 // GetInternalId returns the InternalId field value if set, zero value otherwise.
@@ -217,9 +184,6 @@ func (o TagWriteDto) MarshalJSON() ([]byte, error) {
 
 func (o TagWriteDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.I18n) {
-		toSerialize["i18n"] = o.I18n
-	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
 	}
@@ -254,7 +218,6 @@ func (o *TagWriteDto) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "internal_id")
 		delete(additionalProperties, "is_public")
 		delete(additionalProperties, "name")

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentId** | **string** |  | 
+**AgentId** | Pointer to **string** |  | [optional] 
 **AttachedFiles** | Pointer to **[]string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewChatCompletionRequestDto
 
-`func NewChatCompletionRequestDto(agentId string, message string, ) *ChatCompletionRequestDto`
+`func NewChatCompletionRequestDto(message string, ) *ChatCompletionRequestDto`
 
 NewChatCompletionRequestDto instantiates a new ChatCompletionRequestDto object
 This constructor will assign default values to properties that have it defined,
@@ -60,6 +60,11 @@ and a boolean to check if the value has been set.
 
 SetAgentId sets AgentId field to given value.
 
+### HasAgentId
+
+`func (o *ChatCompletionRequestDto) HasAgentId() bool`
+
+HasAgentId returns a boolean if a field has been set.
 
 ### GetAttachedFiles
 
