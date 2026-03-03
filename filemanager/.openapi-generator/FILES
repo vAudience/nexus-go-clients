@@ -25,6 +25,7 @@ docs/FilesMetadataAPI.md
 docs/HealthAPI.md
 docs/HealthResponse.md
 docs/MetricsAPI.md
+docs/ServiceStatus.md
 docs/VersionAPI.md
 docs/VersionResponse.md
 git_push.sh
@@ -41,6 +42,7 @@ model_file_metadata_response.go
 model_file_upload_category_response.go
 model_file_upload_response.go
 model_health_response.go
+model_service_status.go
 model_version_response.go
 response.go
 test/api_files_metadata_test.go

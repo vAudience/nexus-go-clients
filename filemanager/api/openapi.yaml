@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.4.1
+  version: 0.4.3
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -23,7 +23,8 @@ tags:
 paths:
   /info/health:
     get:
-      description: a simple 200 return endpoint to ensure the service is responsive
+      description: returns the health status of all registered service dependencies;
+        responds with 200 when all checks pass or 503 when any dependency is unhealthy
       operationId: HealthGet
       responses:
         "200":
@@ -32,7 +33,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthResponse"
           description: OK
-      summary: checks for service health
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+          description: Service Unavailable
+      summary: aggregated health check for all service dependencies
       tags:
       - Health
   /info/metrics:
@@ -882,12 +889,28 @@ components:
       type: object
     HealthResponse:
       example:
-        health: health
+        services:
+          key:
+            message: message
+            status: status
+        status: status
       properties:
-        health:
+        services:
+          additionalProperties:
+            $ref: "#/components/schemas/ServiceStatus"
+          type: object
+        status:
           type: string
-      required:
-      - health
+      type: object
+    ServiceStatus:
+      example:
+        message: message
+        status: status
+      properties:
+        message:
+          type: string
+        status:
+          type: string
       type: object
     VersionResponse:
       example:
@@ -903,6 +926,9 @@ components:
         file:
           description: File to upload
           format: binary
+          type: string
+        for_user_id:
+          description: User ID to upload the file for
           type: string
         metadata:
           description: Metadata for the uploaded file
