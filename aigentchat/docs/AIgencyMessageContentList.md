@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | [**[]AIgencyMessageContent**](AIgencyMessageContent.md) |  | 
 **FullText** | **string** |  | 
+**FullTextMimeType** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetFullText sets FullText field to given value.
 
+
+### GetFullTextMimeType
+
+`func (o *AIgencyMessageContentList) GetFullTextMimeType() string`
+
+GetFullTextMimeType returns the FullTextMimeType field if non-nil, zero value otherwise.
+
+### GetFullTextMimeTypeOk
+
+`func (o *AIgencyMessageContentList) GetFullTextMimeTypeOk() (*string, bool)`
+
+GetFullTextMimeTypeOk returns a tuple with the FullTextMimeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullTextMimeType
+
+`func (o *AIgencyMessageContentList) SetFullTextMimeType(v string)`
+
+SetFullTextMimeType sets FullTextMimeType field to given value.
+
+### HasFullTextMimeType
+
+`func (o *AIgencyMessageContentList) HasFullTextMimeType() bool`
+
+HasFullTextMimeType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

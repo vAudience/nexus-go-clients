@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Batch** | Pointer to **bool** |  | [optional] 
 **ExecutionId** | Pointer to **string** |  | [optional] 
 **InputTokens** | Pointer to **int32** |  | [optional] 
+**ModelHostLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **ModelInternalId** | **string** |  | 
 **OutputTokens** | Pointer to **int32** |  | [optional] 
 **ServiceInternalId** | **string** |  | 
@@ -106,6 +107,31 @@ SetInputTokens sets InputTokens field to given value.
 `func (o *ChatCompletionCostTrackingRequest) HasInputTokens() bool`
 
 HasInputTokens returns a boolean if a field has been set.
+
+### GetModelHostLocation
+
+`func (o *ChatCompletionCostTrackingRequest) GetModelHostLocation() HostingLocation`
+
+GetModelHostLocation returns the ModelHostLocation field if non-nil, zero value otherwise.
+
+### GetModelHostLocationOk
+
+`func (o *ChatCompletionCostTrackingRequest) GetModelHostLocationOk() (*HostingLocation, bool)`
+
+GetModelHostLocationOk returns a tuple with the ModelHostLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelHostLocation
+
+`func (o *ChatCompletionCostTrackingRequest) SetModelHostLocation(v HostingLocation)`
+
+SetModelHostLocation sets ModelHostLocation field to given value.
+
+### HasModelHostLocation
+
+`func (o *ChatCompletionCostTrackingRequest) HasModelHostLocation() bool`
+
+HasModelHostLocation returns a boolean if a field has been set.
 
 ### GetModelInternalId
 

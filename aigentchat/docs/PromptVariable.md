@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Default** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
 **Multi** | Pointer to **bool** |  | [optional] 
 **Name** | **string** |  | 
 **Options** | Pointer to [**[]PromptVariableOption**](PromptVariableOption.md) |  | [optional] 
@@ -52,6 +53,31 @@ SetDefault sets Default field to given value.
 `func (o *PromptVariable) HasDefault() bool`
 
 HasDefault returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *PromptVariable) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *PromptVariable) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *PromptVariable) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *PromptVariable) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetMulti
 

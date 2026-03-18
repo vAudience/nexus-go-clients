@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BatchCostFactor** | Pointer to **float64** |  | [optional] 
 **CostPerUnitInEuro** | Pointer to **float64** |  | [optional] 
 **CostUnit** | Pointer to [**AIModelCostUnit**](AIModelCostUnit.md) |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**LongContextCostPerUnitInEuro** | Pointer to **float64** |  | [optional] 
 **ResultingCostInEuro** | Pointer to **float64** |  | [optional] 
 **UsedUnits** | Pointer to **float64** |  | [optional] 
 
@@ -29,31 +29,6 @@ will change when the set of required properties is changed
 NewExecutionUsageCostWithDefaults instantiates a new ExecutionUsageCost object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetBatchCostFactor
-
-`func (o *ExecutionUsageCost) GetBatchCostFactor() float64`
-
-GetBatchCostFactor returns the BatchCostFactor field if non-nil, zero value otherwise.
-
-### GetBatchCostFactorOk
-
-`func (o *ExecutionUsageCost) GetBatchCostFactorOk() (*float64, bool)`
-
-GetBatchCostFactorOk returns a tuple with the BatchCostFactor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBatchCostFactor
-
-`func (o *ExecutionUsageCost) SetBatchCostFactor(v float64)`
-
-SetBatchCostFactor sets BatchCostFactor field to given value.
-
-### HasBatchCostFactor
-
-`func (o *ExecutionUsageCost) HasBatchCostFactor() bool`
-
-HasBatchCostFactor returns a boolean if a field has been set.
 
 ### GetCostPerUnitInEuro
 
@@ -129,6 +104,31 @@ SetDescription sets Description field to given value.
 `func (o *ExecutionUsageCost) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetLongContextCostPerUnitInEuro
+
+`func (o *ExecutionUsageCost) GetLongContextCostPerUnitInEuro() float64`
+
+GetLongContextCostPerUnitInEuro returns the LongContextCostPerUnitInEuro field if non-nil, zero value otherwise.
+
+### GetLongContextCostPerUnitInEuroOk
+
+`func (o *ExecutionUsageCost) GetLongContextCostPerUnitInEuroOk() (*float64, bool)`
+
+GetLongContextCostPerUnitInEuroOk returns a tuple with the LongContextCostPerUnitInEuro field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContextCostPerUnitInEuro
+
+`func (o *ExecutionUsageCost) SetLongContextCostPerUnitInEuro(v float64)`
+
+SetLongContextCostPerUnitInEuro sets LongContextCostPerUnitInEuro field to given value.
+
+### HasLongContextCostPerUnitInEuro
+
+`func (o *ExecutionUsageCost) HasLongContextCostPerUnitInEuro() bool`
+
+HasLongContextCostPerUnitInEuro returns a boolean if a field has been set.
 
 ### GetResultingCostInEuro
 

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -22,12 +22,12 @@ var _ MappedNullable = &Prompt{}
 // Prompt struct for Prompt
 type Prompt struct {
 	CreatedAt *int64 `json:"created_at,omitempty"`
-	CurrentVersion *int32 `json:"current_version,omitempty"`
 	DefaultAgentId *string `json:"default_agent_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
 	ImageUrl *string `json:"image_url,omitempty"`
 	InternalId *string `json:"internal_id,omitempty"`
+	LatestVersion *int32 `json:"latest_version,omitempty"`
 	LegacyUuid *string `json:"legacy_uuid,omitempty"`
 	OwnerId string `json:"owner_id"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
@@ -96,38 +96,6 @@ func (o *Prompt) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *Prompt) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
-}
-
-// GetCurrentVersion returns the CurrentVersion field value if set, zero value otherwise.
-func (o *Prompt) GetCurrentVersion() int32 {
-	if o == nil || IsNil(o.CurrentVersion) {
-		var ret int32
-		return ret
-	}
-	return *o.CurrentVersion
-}
-
-// GetCurrentVersionOk returns a tuple with the CurrentVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Prompt) GetCurrentVersionOk() (*int32, bool) {
-	if o == nil || IsNil(o.CurrentVersion) {
-		return nil, false
-	}
-	return o.CurrentVersion, true
-}
-
-// HasCurrentVersion returns a boolean if a field has been set.
-func (o *Prompt) HasCurrentVersion() bool {
-	if o != nil && !IsNil(o.CurrentVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentVersion gets a reference to the given int32 and assigns it to the CurrentVersion field.
-func (o *Prompt) SetCurrentVersion(v int32) {
-	o.CurrentVersion = &v
 }
 
 // GetDefaultAgentId returns the DefaultAgentId field value if set, zero value otherwise.
@@ -280,6 +248,38 @@ func (o *Prompt) HasInternalId() bool {
 // SetInternalId gets a reference to the given string and assigns it to the InternalId field.
 func (o *Prompt) SetInternalId(v string) {
 	o.InternalId = &v
+}
+
+// GetLatestVersion returns the LatestVersion field value if set, zero value otherwise.
+func (o *Prompt) GetLatestVersion() int32 {
+	if o == nil || IsNil(o.LatestVersion) {
+		var ret int32
+		return ret
+	}
+	return *o.LatestVersion
+}
+
+// GetLatestVersionOk returns a tuple with the LatestVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Prompt) GetLatestVersionOk() (*int32, bool) {
+	if o == nil || IsNil(o.LatestVersion) {
+		return nil, false
+	}
+	return o.LatestVersion, true
+}
+
+// HasLatestVersion returns a boolean if a field has been set.
+func (o *Prompt) HasLatestVersion() bool {
+	if o != nil && !IsNil(o.LatestVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestVersion gets a reference to the given int32 and assigns it to the LatestVersion field.
+func (o *Prompt) SetLatestVersion(v int32) {
+	o.LatestVersion = &v
 }
 
 // GetLegacyUuid returns the LegacyUuid field value if set, zero value otherwise.
@@ -655,9 +655,6 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !IsNil(o.CurrentVersion) {
-		toSerialize["current_version"] = o.CurrentVersion
-	}
 	if !IsNil(o.DefaultAgentId) {
 		toSerialize["default_agent_id"] = o.DefaultAgentId
 	}
@@ -670,6 +667,9 @@ func (o Prompt) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.InternalId) {
 		toSerialize["internal_id"] = o.InternalId
+	}
+	if !IsNil(o.LatestVersion) {
+		toSerialize["latest_version"] = o.LatestVersion
 	}
 	if !IsNil(o.LegacyUuid) {
 		toSerialize["legacy_uuid"] = o.LegacyUuid
@@ -748,12 +748,12 @@ func (o *Prompt) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "current_version")
 		delete(additionalProperties, "default_agent_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "image_url")
 		delete(additionalProperties, "internal_id")
+		delete(additionalProperties, "latest_version")
 		delete(additionalProperties, "legacy_uuid")
 		delete(additionalProperties, "owner_id")
 		delete(additionalProperties, "owner_organization_id")

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,7 @@ var _ MappedNullable = &AIgencyMessageContentList{}
 type AIgencyMessageContentList struct {
 	Data []AIgencyMessageContent `json:"data"`
 	FullText string `json:"full_text"`
+	FullTextMimeType *string `json:"full_text_mime_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -95,6 +96,38 @@ func (o *AIgencyMessageContentList) SetFullText(v string) {
 	o.FullText = v
 }
 
+// GetFullTextMimeType returns the FullTextMimeType field value if set, zero value otherwise.
+func (o *AIgencyMessageContentList) GetFullTextMimeType() string {
+	if o == nil || IsNil(o.FullTextMimeType) {
+		var ret string
+		return ret
+	}
+	return *o.FullTextMimeType
+}
+
+// GetFullTextMimeTypeOk returns a tuple with the FullTextMimeType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContentList) GetFullTextMimeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.FullTextMimeType) {
+		return nil, false
+	}
+	return o.FullTextMimeType, true
+}
+
+// HasFullTextMimeType returns a boolean if a field has been set.
+func (o *AIgencyMessageContentList) HasFullTextMimeType() bool {
+	if o != nil && !IsNil(o.FullTextMimeType) {
+		return true
+	}
+
+	return false
+}
+
+// SetFullTextMimeType gets a reference to the given string and assigns it to the FullTextMimeType field.
+func (o *AIgencyMessageContentList) SetFullTextMimeType(v string) {
+	o.FullTextMimeType = &v
+}
+
 func (o AIgencyMessageContentList) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,6 +140,9 @@ func (o AIgencyMessageContentList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["full_text"] = o.FullText
+	if !IsNil(o.FullTextMimeType) {
+		toSerialize["full_text_mime_type"] = o.FullTextMimeType
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -153,6 +189,7 @@ func (o *AIgencyMessageContentList) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "data")
 		delete(additionalProperties, "full_text")
+		delete(additionalProperties, "full_text_mime_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

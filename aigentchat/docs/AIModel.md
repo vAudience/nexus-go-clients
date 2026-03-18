@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Actions** | **[]string** |  | 
 **Capabilities** | Pointer to **[]string** | Note: only set when returning the model (not stored at model level), derived from features | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**DefaultHostingLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **Deleted** | Pointer to **bool** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
@@ -143,6 +144,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *AIModel) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDefaultHostingLocation
+
+`func (o *AIModel) GetDefaultHostingLocation() HostingLocation`
+
+GetDefaultHostingLocation returns the DefaultHostingLocation field if non-nil, zero value otherwise.
+
+### GetDefaultHostingLocationOk
+
+`func (o *AIModel) GetDefaultHostingLocationOk() (*HostingLocation, bool)`
+
+GetDefaultHostingLocationOk returns a tuple with the DefaultHostingLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultHostingLocation
+
+`func (o *AIModel) SetDefaultHostingLocation(v HostingLocation)`
+
+SetDefaultHostingLocation sets DefaultHostingLocation field to given value.
+
+### HasDefaultHostingLocation
+
+`func (o *AIModel) HasDefaultHostingLocation() bool`
+
+HasDefaultHostingLocation returns a boolean if a field has been set.
 
 ### GetDeleted
 

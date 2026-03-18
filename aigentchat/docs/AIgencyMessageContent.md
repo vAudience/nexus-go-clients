@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **FunctionResponses** | Pointer to [**AIgencyFunctionResponse**](AIgencyFunctionResponse.md) |  | [optional] 
 **FunctionStatusUpdate** | Pointer to [**AIgencyFunctionStatusUpdate**](AIgencyFunctionStatusUpdate.md) |  | [optional] 
 **Text** | Pointer to **string** |  | [optional] 
+**TextMimeType** | Pointer to **string** |  | [optional] 
 **Thinking** | Pointer to [**AIgencyThinking**](AIgencyThinking.md) |  | [optional] 
 **Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
 
@@ -155,6 +156,31 @@ SetText sets Text field to given value.
 `func (o *AIgencyMessageContent) HasText() bool`
 
 HasText returns a boolean if a field has been set.
+
+### GetTextMimeType
+
+`func (o *AIgencyMessageContent) GetTextMimeType() string`
+
+GetTextMimeType returns the TextMimeType field if non-nil, zero value otherwise.
+
+### GetTextMimeTypeOk
+
+`func (o *AIgencyMessageContent) GetTextMimeTypeOk() (*string, bool)`
+
+GetTextMimeTypeOk returns a tuple with the TextMimeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTextMimeType
+
+`func (o *AIgencyMessageContent) SetTextMimeType(v string)`
+
+SetTextMimeType sets TextMimeType field to given value.
+
+### HasTextMimeType
+
+`func (o *AIgencyMessageContent) HasTextMimeType() bool`
+
+HasTextMimeType returns a boolean if a field has been set.
 
 ### GetThinking
 
