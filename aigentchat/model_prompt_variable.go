@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &PromptVariable{}
 // PromptVariable struct for PromptVariable
 type PromptVariable struct {
 	Default *string `json:"default,omitempty"`
+	Description *string `json:"description,omitempty"`
 	Multi *bool `json:"multi,omitempty"`
 	Name string `json:"name"`
 	Options []PromptVariableOption `json:"options,omitempty"`
@@ -78,6 +79,38 @@ func (o *PromptVariable) HasDefault() bool {
 // SetDefault gets a reference to the given string and assigns it to the Default field.
 func (o *PromptVariable) SetDefault(v string) {
 	o.Default = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *PromptVariable) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptVariable) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *PromptVariable) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *PromptVariable) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetMulti returns the Multi field value if set, zero value otherwise.
@@ -181,6 +214,9 @@ func (o PromptVariable) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Default) {
 		toSerialize["default"] = o.Default
 	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !IsNil(o.Multi) {
 		toSerialize["multi"] = o.Multi
 	}
@@ -232,6 +268,7 @@ func (o *PromptVariable) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "default")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "multi")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "options")

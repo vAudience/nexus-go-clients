@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -20,10 +20,10 @@ var _ MappedNullable = &ExecutionCostTemplate{}
 
 // ExecutionCostTemplate struct for ExecutionCostTemplate
 type ExecutionCostTemplate struct {
-	BatchCostFactor *float64 `json:"batch_cost_factor,omitempty"`
 	CostPerUnitInEuro *float64 `json:"cost_per_unit_in_euro,omitempty"`
 	CostUnit *AIModelCostUnit `json:"cost_unit,omitempty"`
 	Description *string `json:"description,omitempty"`
+	LongContextCostPerUnitInEuro *float64 `json:"long_context_cost_per_unit_in_euro,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,38 +44,6 @@ func NewExecutionCostTemplate() *ExecutionCostTemplate {
 func NewExecutionCostTemplateWithDefaults() *ExecutionCostTemplate {
 	this := ExecutionCostTemplate{}
 	return &this
-}
-
-// GetBatchCostFactor returns the BatchCostFactor field value if set, zero value otherwise.
-func (o *ExecutionCostTemplate) GetBatchCostFactor() float64 {
-	if o == nil || IsNil(o.BatchCostFactor) {
-		var ret float64
-		return ret
-	}
-	return *o.BatchCostFactor
-}
-
-// GetBatchCostFactorOk returns a tuple with the BatchCostFactor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ExecutionCostTemplate) GetBatchCostFactorOk() (*float64, bool) {
-	if o == nil || IsNil(o.BatchCostFactor) {
-		return nil, false
-	}
-	return o.BatchCostFactor, true
-}
-
-// HasBatchCostFactor returns a boolean if a field has been set.
-func (o *ExecutionCostTemplate) HasBatchCostFactor() bool {
-	if o != nil && !IsNil(o.BatchCostFactor) {
-		return true
-	}
-
-	return false
-}
-
-// SetBatchCostFactor gets a reference to the given float64 and assigns it to the BatchCostFactor field.
-func (o *ExecutionCostTemplate) SetBatchCostFactor(v float64) {
-	o.BatchCostFactor = &v
 }
 
 // GetCostPerUnitInEuro returns the CostPerUnitInEuro field value if set, zero value otherwise.
@@ -174,6 +142,38 @@ func (o *ExecutionCostTemplate) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetLongContextCostPerUnitInEuro returns the LongContextCostPerUnitInEuro field value if set, zero value otherwise.
+func (o *ExecutionCostTemplate) GetLongContextCostPerUnitInEuro() float64 {
+	if o == nil || IsNil(o.LongContextCostPerUnitInEuro) {
+		var ret float64
+		return ret
+	}
+	return *o.LongContextCostPerUnitInEuro
+}
+
+// GetLongContextCostPerUnitInEuroOk returns a tuple with the LongContextCostPerUnitInEuro field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionCostTemplate) GetLongContextCostPerUnitInEuroOk() (*float64, bool) {
+	if o == nil || IsNil(o.LongContextCostPerUnitInEuro) {
+		return nil, false
+	}
+	return o.LongContextCostPerUnitInEuro, true
+}
+
+// HasLongContextCostPerUnitInEuro returns a boolean if a field has been set.
+func (o *ExecutionCostTemplate) HasLongContextCostPerUnitInEuro() bool {
+	if o != nil && !IsNil(o.LongContextCostPerUnitInEuro) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContextCostPerUnitInEuro gets a reference to the given float64 and assigns it to the LongContextCostPerUnitInEuro field.
+func (o *ExecutionCostTemplate) SetLongContextCostPerUnitInEuro(v float64) {
+	o.LongContextCostPerUnitInEuro = &v
+}
+
 func (o ExecutionCostTemplate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -184,9 +184,6 @@ func (o ExecutionCostTemplate) MarshalJSON() ([]byte, error) {
 
 func (o ExecutionCostTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BatchCostFactor) {
-		toSerialize["batch_cost_factor"] = o.BatchCostFactor
-	}
 	if !IsNil(o.CostPerUnitInEuro) {
 		toSerialize["cost_per_unit_in_euro"] = o.CostPerUnitInEuro
 	}
@@ -195,6 +192,9 @@ func (o ExecutionCostTemplate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.LongContextCostPerUnitInEuro) {
+		toSerialize["long_context_cost_per_unit_in_euro"] = o.LongContextCostPerUnitInEuro
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -218,10 +218,10 @@ func (o *ExecutionCostTemplate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "batch_cost_factor")
 		delete(additionalProperties, "cost_per_unit_in_euro")
 		delete(additionalProperties, "cost_unit")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "long_context_cost_per_unit_in_euro")
 		o.AdditionalProperties = additionalProperties
 	}
 

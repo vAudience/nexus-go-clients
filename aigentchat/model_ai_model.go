@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type AIModel struct {
 	// Note: only set when returning the model (not stored at model level), derived from features
 	Capabilities []string `json:"capabilities,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	DefaultHostingLocation *HostingLocation `json:"default_hosting_location,omitempty"`
 	Deleted *bool `json:"deleted,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
@@ -195,6 +196,38 @@ func (o *AIModel) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
 func (o *AIModel) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
+}
+
+// GetDefaultHostingLocation returns the DefaultHostingLocation field value if set, zero value otherwise.
+func (o *AIModel) GetDefaultHostingLocation() HostingLocation {
+	if o == nil || IsNil(o.DefaultHostingLocation) {
+		var ret HostingLocation
+		return ret
+	}
+	return *o.DefaultHostingLocation
+}
+
+// GetDefaultHostingLocationOk returns a tuple with the DefaultHostingLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetDefaultHostingLocationOk() (*HostingLocation, bool) {
+	if o == nil || IsNil(o.DefaultHostingLocation) {
+		return nil, false
+	}
+	return o.DefaultHostingLocation, true
+}
+
+// HasDefaultHostingLocation returns a boolean if a field has been set.
+func (o *AIModel) HasDefaultHostingLocation() bool {
+	if o != nil && !IsNil(o.DefaultHostingLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultHostingLocation gets a reference to the given HostingLocation and assigns it to the DefaultHostingLocation field.
+func (o *AIModel) SetDefaultHostingLocation(v HostingLocation) {
+	o.DefaultHostingLocation = &v
 }
 
 // GetDeleted returns the Deleted field value if set, zero value otherwise.
@@ -833,6 +866,9 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.DefaultHostingLocation) {
+		toSerialize["default_hosting_location"] = o.DefaultHostingLocation
+	}
 	if !IsNil(o.Deleted) {
 		toSerialize["deleted"] = o.Deleted
 	}
@@ -936,6 +972,7 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "capabilities")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default_hosting_location")
 		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")

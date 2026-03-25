@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type AIgencyMessageContent struct {
 	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`
 	FunctionStatusUpdate *AIgencyFunctionStatusUpdate `json:"function_status_update,omitempty"`
 	Text *string `json:"text,omitempty"`
+	TextMimeType *string `json:"text_mime_type,omitempty"`
 	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
 	AdditionalProperties map[string]interface{}
@@ -211,6 +212,38 @@ func (o *AIgencyMessageContent) SetText(v string) {
 	o.Text = &v
 }
 
+// GetTextMimeType returns the TextMimeType field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetTextMimeType() string {
+	if o == nil || IsNil(o.TextMimeType) {
+		var ret string
+		return ret
+	}
+	return *o.TextMimeType
+}
+
+// GetTextMimeTypeOk returns a tuple with the TextMimeType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetTextMimeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.TextMimeType) {
+		return nil, false
+	}
+	return o.TextMimeType, true
+}
+
+// HasTextMimeType returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasTextMimeType() bool {
+	if o != nil && !IsNil(o.TextMimeType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTextMimeType gets a reference to the given string and assigns it to the TextMimeType field.
+func (o *AIgencyMessageContent) SetTextMimeType(v string) {
+	o.TextMimeType = &v
+}
+
 // GetThinking returns the Thinking field value if set, zero value otherwise.
 func (o *AIgencyMessageContent) GetThinking() AIgencyThinking {
 	if o == nil || IsNil(o.Thinking) {
@@ -292,6 +325,9 @@ func (o AIgencyMessageContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+	if !IsNil(o.TextMimeType) {
+		toSerialize["text_mime_type"] = o.TextMimeType
+	}
 	if !IsNil(o.Thinking) {
 		toSerialize["thinking"] = o.Thinking
 	}
@@ -344,6 +380,7 @@ func (o *AIgencyMessageContent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_responses")
 		delete(additionalProperties, "function_status_update")
 		delete(additionalProperties, "text")
+		delete(additionalProperties, "text_mime_type")
 		delete(additionalProperties, "thinking")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties

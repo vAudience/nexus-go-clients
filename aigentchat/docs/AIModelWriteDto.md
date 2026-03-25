@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
 **Actions** | Pointer to **[]string** |  | [optional] 
+**DefaultHostingLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DocumentationUrl** | Pointer to **string** |  | [optional] 
 **Features** | Pointer to [**[]AIModelFeature**](AIModelFeature.md) |  | [optional] 
@@ -90,6 +91,31 @@ SetActions sets Actions field to given value.
 `func (o *AIModelWriteDto) HasActions() bool`
 
 HasActions returns a boolean if a field has been set.
+
+### GetDefaultHostingLocation
+
+`func (o *AIModelWriteDto) GetDefaultHostingLocation() HostingLocation`
+
+GetDefaultHostingLocation returns the DefaultHostingLocation field if non-nil, zero value otherwise.
+
+### GetDefaultHostingLocationOk
+
+`func (o *AIModelWriteDto) GetDefaultHostingLocationOk() (*HostingLocation, bool)`
+
+GetDefaultHostingLocationOk returns a tuple with the DefaultHostingLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultHostingLocation
+
+`func (o *AIModelWriteDto) SetDefaultHostingLocation(v HostingLocation)`
+
+SetDefaultHostingLocation sets DefaultHostingLocation field to given value.
+
+### HasDefaultHostingLocation
+
+`func (o *AIModelWriteDto) HasDefaultHostingLocation() bool`
+
+HasDefaultHostingLocation returns a boolean if a field has been set.
 
 ### GetDescription
 

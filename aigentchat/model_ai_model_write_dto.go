@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &AIModelWriteDto{}
 type AIModelWriteDto struct {
 	AcceptedFileMimetypes []string `json:"accepted_file_mimetypes,omitempty"`
 	Actions []string `json:"actions,omitempty"`
+	DefaultHostingLocation *HostingLocation `json:"default_hosting_location,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DocumentationUrl *string `json:"documentation_url,omitempty"`
 	Features []AIModelFeature `json:"features,omitempty"`
@@ -121,6 +122,38 @@ func (o *AIModelWriteDto) HasActions() bool {
 // SetActions gets a reference to the given []string and assigns it to the Actions field.
 func (o *AIModelWriteDto) SetActions(v []string) {
 	o.Actions = v
+}
+
+// GetDefaultHostingLocation returns the DefaultHostingLocation field value if set, zero value otherwise.
+func (o *AIModelWriteDto) GetDefaultHostingLocation() HostingLocation {
+	if o == nil || IsNil(o.DefaultHostingLocation) {
+		var ret HostingLocation
+		return ret
+	}
+	return *o.DefaultHostingLocation
+}
+
+// GetDefaultHostingLocationOk returns a tuple with the DefaultHostingLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelWriteDto) GetDefaultHostingLocationOk() (*HostingLocation, bool) {
+	if o == nil || IsNil(o.DefaultHostingLocation) {
+		return nil, false
+	}
+	return o.DefaultHostingLocation, true
+}
+
+// HasDefaultHostingLocation returns a boolean if a field has been set.
+func (o *AIModelWriteDto) HasDefaultHostingLocation() bool {
+	if o != nil && !IsNil(o.DefaultHostingLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultHostingLocation gets a reference to the given HostingLocation and assigns it to the DefaultHostingLocation field.
+func (o *AIModelWriteDto) SetDefaultHostingLocation(v HostingLocation) {
+	o.DefaultHostingLocation = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -619,6 +652,9 @@ func (o AIModelWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
+	if !IsNil(o.DefaultHostingLocation) {
+		toSerialize["default_hosting_location"] = o.DefaultHostingLocation
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -688,6 +724,7 @@ func (o *AIModelWriteDto) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "accepted_file_mimetypes")
 		delete(additionalProperties, "actions")
+		delete(additionalProperties, "default_hosting_location")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "documentation_url")
 		delete(additionalProperties, "features")

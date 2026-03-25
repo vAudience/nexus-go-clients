@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | Pointer to **int64** |  | [optional] 
-**CurrentVersion** | Pointer to **int32** |  | [optional] 
 **DefaultAgentId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
 **ImageUrl** | Pointer to **string** |  | [optional] 
 **InternalId** | Pointer to **string** |  | [optional] 
+**LatestVersion** | Pointer to **int32** |  | [optional] 
 **LegacyUuid** | Pointer to **string** |  | [optional] 
 **OwnerId** | **string** |  | 
 **OwnerOrganizationId** | **string** |  | 
@@ -67,31 +67,6 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *Prompt) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
-
-### GetCurrentVersion
-
-`func (o *Prompt) GetCurrentVersion() int32`
-
-GetCurrentVersion returns the CurrentVersion field if non-nil, zero value otherwise.
-
-### GetCurrentVersionOk
-
-`func (o *Prompt) GetCurrentVersionOk() (*int32, bool)`
-
-GetCurrentVersionOk returns a tuple with the CurrentVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentVersion
-
-`func (o *Prompt) SetCurrentVersion(v int32)`
-
-SetCurrentVersion sets CurrentVersion field to given value.
-
-### HasCurrentVersion
-
-`func (o *Prompt) HasCurrentVersion() bool`
-
-HasCurrentVersion returns a boolean if a field has been set.
 
 ### GetDefaultAgentId
 
@@ -212,6 +187,31 @@ SetInternalId sets InternalId field to given value.
 `func (o *Prompt) HasInternalId() bool`
 
 HasInternalId returns a boolean if a field has been set.
+
+### GetLatestVersion
+
+`func (o *Prompt) GetLatestVersion() int32`
+
+GetLatestVersion returns the LatestVersion field if non-nil, zero value otherwise.
+
+### GetLatestVersionOk
+
+`func (o *Prompt) GetLatestVersionOk() (*int32, bool)`
+
+GetLatestVersionOk returns a tuple with the LatestVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatestVersion
+
+`func (o *Prompt) SetLatestVersion(v int32)`
+
+SetLatestVersion sets LatestVersion field to given value.
+
+### HasLatestVersion
+
+`func (o *Prompt) HasLatestVersion() bool`
+
+HasLatestVersion returns a boolean if a field has been set.
 
 ### GetLegacyUuid
 

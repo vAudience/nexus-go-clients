@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -20,10 +20,13 @@ var _ MappedNullable = &AIModelFeature{}
 
 // AIModelFeature struct for AIModelFeature
 type AIModelFeature struct {
+	BatchCostFactor *float64 `json:"batch_cost_factor,omitempty"`
 	Capability *AIModelCapability `json:"capability,omitempty"`
 	Constraints []AIModelConstraint `json:"constraints,omitempty"`
 	CostItemTemplates []ExecutionCostTemplate `json:"cost_item_templates,omitempty"`
 	CostItems []ExecutionUsageCost `json:"cost_items,omitempty"`
+	LongContextThresholdTokens *int32 `json:"long_context_threshold_tokens,omitempty"`
+	NonDefaultHostingLocationCostFactor *float64 `json:"non_default_hosting_location_cost_factor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,6 +47,38 @@ func NewAIModelFeature() *AIModelFeature {
 func NewAIModelFeatureWithDefaults() *AIModelFeature {
 	this := AIModelFeature{}
 	return &this
+}
+
+// GetBatchCostFactor returns the BatchCostFactor field value if set, zero value otherwise.
+func (o *AIModelFeature) GetBatchCostFactor() float64 {
+	if o == nil || IsNil(o.BatchCostFactor) {
+		var ret float64
+		return ret
+	}
+	return *o.BatchCostFactor
+}
+
+// GetBatchCostFactorOk returns a tuple with the BatchCostFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelFeature) GetBatchCostFactorOk() (*float64, bool) {
+	if o == nil || IsNil(o.BatchCostFactor) {
+		return nil, false
+	}
+	return o.BatchCostFactor, true
+}
+
+// HasBatchCostFactor returns a boolean if a field has been set.
+func (o *AIModelFeature) HasBatchCostFactor() bool {
+	if o != nil && !IsNil(o.BatchCostFactor) {
+		return true
+	}
+
+	return false
+}
+
+// SetBatchCostFactor gets a reference to the given float64 and assigns it to the BatchCostFactor field.
+func (o *AIModelFeature) SetBatchCostFactor(v float64) {
+	o.BatchCostFactor = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -174,6 +209,70 @@ func (o *AIModelFeature) SetCostItems(v []ExecutionUsageCost) {
 	o.CostItems = v
 }
 
+// GetLongContextThresholdTokens returns the LongContextThresholdTokens field value if set, zero value otherwise.
+func (o *AIModelFeature) GetLongContextThresholdTokens() int32 {
+	if o == nil || IsNil(o.LongContextThresholdTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.LongContextThresholdTokens
+}
+
+// GetLongContextThresholdTokensOk returns a tuple with the LongContextThresholdTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelFeature) GetLongContextThresholdTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.LongContextThresholdTokens) {
+		return nil, false
+	}
+	return o.LongContextThresholdTokens, true
+}
+
+// HasLongContextThresholdTokens returns a boolean if a field has been set.
+func (o *AIModelFeature) HasLongContextThresholdTokens() bool {
+	if o != nil && !IsNil(o.LongContextThresholdTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContextThresholdTokens gets a reference to the given int32 and assigns it to the LongContextThresholdTokens field.
+func (o *AIModelFeature) SetLongContextThresholdTokens(v int32) {
+	o.LongContextThresholdTokens = &v
+}
+
+// GetNonDefaultHostingLocationCostFactor returns the NonDefaultHostingLocationCostFactor field value if set, zero value otherwise.
+func (o *AIModelFeature) GetNonDefaultHostingLocationCostFactor() float64 {
+	if o == nil || IsNil(o.NonDefaultHostingLocationCostFactor) {
+		var ret float64
+		return ret
+	}
+	return *o.NonDefaultHostingLocationCostFactor
+}
+
+// GetNonDefaultHostingLocationCostFactorOk returns a tuple with the NonDefaultHostingLocationCostFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModelFeature) GetNonDefaultHostingLocationCostFactorOk() (*float64, bool) {
+	if o == nil || IsNil(o.NonDefaultHostingLocationCostFactor) {
+		return nil, false
+	}
+	return o.NonDefaultHostingLocationCostFactor, true
+}
+
+// HasNonDefaultHostingLocationCostFactor returns a boolean if a field has been set.
+func (o *AIModelFeature) HasNonDefaultHostingLocationCostFactor() bool {
+	if o != nil && !IsNil(o.NonDefaultHostingLocationCostFactor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNonDefaultHostingLocationCostFactor gets a reference to the given float64 and assigns it to the NonDefaultHostingLocationCostFactor field.
+func (o *AIModelFeature) SetNonDefaultHostingLocationCostFactor(v float64) {
+	o.NonDefaultHostingLocationCostFactor = &v
+}
+
 func (o AIModelFeature) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -184,6 +283,9 @@ func (o AIModelFeature) MarshalJSON() ([]byte, error) {
 
 func (o AIModelFeature) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BatchCostFactor) {
+		toSerialize["batch_cost_factor"] = o.BatchCostFactor
+	}
 	if !IsNil(o.Capability) {
 		toSerialize["capability"] = o.Capability
 	}
@@ -195,6 +297,12 @@ func (o AIModelFeature) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CostItems) {
 		toSerialize["cost_items"] = o.CostItems
+	}
+	if !IsNil(o.LongContextThresholdTokens) {
+		toSerialize["long_context_threshold_tokens"] = o.LongContextThresholdTokens
+	}
+	if !IsNil(o.NonDefaultHostingLocationCostFactor) {
+		toSerialize["non_default_hosting_location_cost_factor"] = o.NonDefaultHostingLocationCostFactor
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -218,10 +326,13 @@ func (o *AIModelFeature) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "batch_cost_factor")
 		delete(additionalProperties, "capability")
 		delete(additionalProperties, "constraints")
 		delete(additionalProperties, "cost_item_templates")
 		delete(additionalProperties, "cost_items")
+		delete(additionalProperties, "long_context_threshold_tokens")
+		delete(additionalProperties, "non_default_hosting_location_cost_factor")
 		o.AdditionalProperties = additionalProperties
 	}
 

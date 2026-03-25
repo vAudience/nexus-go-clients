@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.3
+API version: 0.27.9
 Contact: contact@vaudience.ai
 */
 
@@ -24,6 +24,7 @@ type ChatCompletionCostTrackingRequest struct {
 	Batch *bool `json:"batch,omitempty"`
 	ExecutionId *string `json:"execution_id,omitempty"`
 	InputTokens *int32 `json:"input_tokens,omitempty"`
+	ModelHostLocation *HostingLocation `json:"model_host_location,omitempty"`
 	ModelInternalId string `json:"model_internal_id"`
 	OutputTokens *int32 `json:"output_tokens,omitempty"`
 	ServiceInternalId string `json:"service_internal_id"`
@@ -147,6 +148,38 @@ func (o *ChatCompletionCostTrackingRequest) HasInputTokens() bool {
 // SetInputTokens gets a reference to the given int32 and assigns it to the InputTokens field.
 func (o *ChatCompletionCostTrackingRequest) SetInputTokens(v int32) {
 	o.InputTokens = &v
+}
+
+// GetModelHostLocation returns the ModelHostLocation field value if set, zero value otherwise.
+func (o *ChatCompletionCostTrackingRequest) GetModelHostLocation() HostingLocation {
+	if o == nil || IsNil(o.ModelHostLocation) {
+		var ret HostingLocation
+		return ret
+	}
+	return *o.ModelHostLocation
+}
+
+// GetModelHostLocationOk returns a tuple with the ModelHostLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionCostTrackingRequest) GetModelHostLocationOk() (*HostingLocation, bool) {
+	if o == nil || IsNil(o.ModelHostLocation) {
+		return nil, false
+	}
+	return o.ModelHostLocation, true
+}
+
+// HasModelHostLocation returns a boolean if a field has been set.
+func (o *ChatCompletionCostTrackingRequest) HasModelHostLocation() bool {
+	if o != nil && !IsNil(o.ModelHostLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelHostLocation gets a reference to the given HostingLocation and assigns it to the ModelHostLocation field.
+func (o *ChatCompletionCostTrackingRequest) SetModelHostLocation(v HostingLocation) {
+	o.ModelHostLocation = &v
 }
 
 // GetModelInternalId returns the ModelInternalId field value
@@ -312,6 +345,9 @@ func (o ChatCompletionCostTrackingRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.InputTokens) {
 		toSerialize["input_tokens"] = o.InputTokens
 	}
+	if !IsNil(o.ModelHostLocation) {
+		toSerialize["model_host_location"] = o.ModelHostLocation
+	}
 	toSerialize["model_internal_id"] = o.ModelInternalId
 	if !IsNil(o.OutputTokens) {
 		toSerialize["output_tokens"] = o.OutputTokens
@@ -370,6 +406,7 @@ func (o *ChatCompletionCostTrackingRequest) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "batch")
 		delete(additionalProperties, "execution_id")
 		delete(additionalProperties, "input_tokens")
+		delete(additionalProperties, "model_host_location")
 		delete(additionalProperties, "model_internal_id")
 		delete(additionalProperties, "output_tokens")
 		delete(additionalProperties, "service_internal_id")

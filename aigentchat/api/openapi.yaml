@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.27.3
+  version: 0.27.9
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -4469,84 +4469,90 @@ components:
         - accepted_file_mimetypes
         features:
         - capability: ""
+          long_context_threshold_tokens: 4
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
+          non_default_hosting_location_cost_factor: 7.386281948385884
+          batch_cost_factor: 6.027456183070403
           constraints:
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
         - capability: ""
+          long_context_threshold_tokens: 4
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
+          non_default_hosting_location_cost_factor: 7.386281948385884
+          batch_cost_factor: 6.027456183070403
           constraints:
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
         service_host_locations:
-        - ""
-        - ""
+        - null
+        - null
         updated_at: 1
         service_id: service_id
         id: id
         model_stats:
-          cost: 2
-          speed: 0
-          intelligence: 0
+          cost: 0
+          speed: 2
+          intelligence: 2
         capabilities:
         - capabilities
         - capabilities
         internal_id: internal_id
-        model_release_date: 4
+        model_release_date: 1
         model_id: model_id
         documentation_url: documentation_url
         i18n:
@@ -4555,8 +4561,9 @@ components:
             description: description
         deleted: true
         owner_organization_id: owner_organization_id
+        default_hosting_location: ""
         is_public: true
-        model_knowledge_cutoff: 2
+        model_knowledge_cutoff: 1
         name: name
         updated_by: updated_by
         parameter_definitions: "{}"
@@ -4585,6 +4592,8 @@ components:
         created_at:
           format: int64
           type: integer
+        default_hosting_location:
+          $ref: "#/components/schemas/HostingLocation"
         deleted:
           type: boolean
         description:
@@ -4700,8 +4709,8 @@ components:
     AIModelConstraint:
       example:
         unit: tokens
-        min: 1
-        max: 6
+        min: 5
+        max: 1
         direction: input
       properties:
         direction:
@@ -4756,38 +4765,44 @@ components:
     AIModelFeature:
       example:
         capability: ""
+        long_context_threshold_tokens: 4
         cost_items:
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
         cost_item_templates:
-        - description: description
+        - long_context_cost_per_unit_in_euro: 2.3021358869347655
+          description: description
           cost_per_unit_in_euro: 5.637376656633329
-          batch_cost_factor: 5.962133916683182
           cost_unit: input-tokens-per-million
-        - description: description
+        - long_context_cost_per_unit_in_euro: 2.3021358869347655
+          description: description
           cost_per_unit_in_euro: 5.637376656633329
-          batch_cost_factor: 5.962133916683182
           cost_unit: input-tokens-per-million
+        non_default_hosting_location_cost_factor: 7.386281948385884
+        batch_cost_factor: 6.027456183070403
         constraints:
         - unit: tokens
-          min: 1
-          max: 6
+          min: 5
+          max: 1
           direction: input
         - unit: tokens
-          min: 1
-          max: 6
+          min: 5
+          max: 1
           direction: input
       properties:
+        batch_cost_factor:
+          format: double
+          type: number
         capability:
           $ref: "#/components/schemas/AIModelCapability"
         constraints:
@@ -4802,6 +4817,11 @@ components:
           items:
             $ref: "#/components/schemas/ExecutionUsageCost"
           type: array
+        long_context_threshold_tokens:
+          type: integer
+        non_default_hosting_location_cost_factor:
+          format: double
+          type: number
       type: object
     AIModelI18n:
       example:
@@ -4931,84 +4951,90 @@ components:
           - accepted_file_mimetypes
           features:
           - capability: ""
+            long_context_threshold_tokens: 4
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
+            non_default_hosting_location_cost_factor: 7.386281948385884
+            batch_cost_factor: 6.027456183070403
             constraints:
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
           - capability: ""
+            long_context_threshold_tokens: 4
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
+            non_default_hosting_location_cost_factor: 7.386281948385884
+            batch_cost_factor: 6.027456183070403
             constraints:
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
           service_host_locations:
-          - ""
-          - ""
+          - null
+          - null
           updated_at: 1
           service_id: service_id
           id: id
           model_stats:
-            cost: 2
-            speed: 0
-            intelligence: 0
+            cost: 0
+            speed: 2
+            intelligence: 2
           capabilities:
           - capabilities
           - capabilities
           internal_id: internal_id
-          model_release_date: 4
+          model_release_date: 1
           model_id: model_id
           documentation_url: documentation_url
           i18n:
@@ -5017,8 +5043,9 @@ components:
               description: description
           deleted: true
           owner_organization_id: owner_organization_id
+          default_hosting_location: ""
           is_public: true
-          model_knowledge_cutoff: 2
+          model_knowledge_cutoff: 1
           name: name
           updated_by: updated_by
           parameter_definitions: "{}"
@@ -5034,84 +5061,90 @@ components:
           - accepted_file_mimetypes
           features:
           - capability: ""
+            long_context_threshold_tokens: 4
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
+            non_default_hosting_location_cost_factor: 7.386281948385884
+            batch_cost_factor: 6.027456183070403
             constraints:
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
           - capability: ""
+            long_context_threshold_tokens: 4
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
             cost_item_templates:
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
-            - description: description
+            - long_context_cost_per_unit_in_euro: 2.3021358869347655
+              description: description
               cost_per_unit_in_euro: 5.637376656633329
-              batch_cost_factor: 5.962133916683182
               cost_unit: input-tokens-per-million
+            non_default_hosting_location_cost_factor: 7.386281948385884
+            batch_cost_factor: 6.027456183070403
             constraints:
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
             - unit: tokens
-              min: 1
-              max: 6
+              min: 5
+              max: 1
               direction: input
           service_host_locations:
-          - ""
-          - ""
+          - null
+          - null
           updated_at: 1
           service_id: service_id
           id: id
           model_stats:
-            cost: 2
-            speed: 0
-            intelligence: 0
+            cost: 0
+            speed: 2
+            intelligence: 2
           capabilities:
           - capabilities
           - capabilities
           internal_id: internal_id
-          model_release_date: 4
+          model_release_date: 1
           model_id: model_id
           documentation_url: documentation_url
           i18n:
@@ -5120,8 +5153,9 @@ components:
               description: description
           deleted: true
           owner_organization_id: owner_organization_id
+          default_hosting_location: ""
           is_public: true
-          model_knowledge_cutoff: 2
+          model_knowledge_cutoff: 1
           name: name
           updated_by: updated_by
           parameter_definitions: "{}"
@@ -5199,9 +5233,9 @@ components:
       type: object
     AIModelStats:
       example:
-        cost: 2
-        speed: 0
-        intelligence: 0
+        cost: 0
+        speed: 2
+        intelligence: 2
       properties:
         cost:
           maximum: 4
@@ -5232,81 +5266,88 @@ components:
             description: description
         features:
         - capability: ""
+          long_context_threshold_tokens: 4
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
+          non_default_hosting_location_cost_factor: 7.386281948385884
+          batch_cost_factor: 6.027456183070403
           constraints:
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
         - capability: ""
+          long_context_threshold_tokens: 4
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           cost_item_templates:
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
-          - description: description
+          - long_context_cost_per_unit_in_euro: 2.3021358869347655
+            description: description
             cost_per_unit_in_euro: 5.637376656633329
-            batch_cost_factor: 5.962133916683182
             cost_unit: input-tokens-per-million
+          non_default_hosting_location_cost_factor: 7.386281948385884
+          batch_cost_factor: 6.027456183070403
           constraints:
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
           - unit: tokens
-            min: 1
-            max: 6
+            min: 5
+            max: 1
             direction: input
         service_host_locations:
-        - ""
-        - ""
+        - null
+        - null
+        default_hosting_location: ""
         service_id: service_id
         is_public: true
         model_knowledge_cutoff: 0
         name: name
         parameter_definitions: "{}"
         model_stats:
-          cost: 2
-          speed: 0
-          intelligence: 0
+          cost: 0
+          speed: 2
+          intelligence: 2
         actions:
         - actions
         - actions
@@ -5322,6 +5363,8 @@ components:
             type: string
           type: array
           uniqueItems: true
+        default_hosting_location:
+          $ref: "#/components/schemas/HostingLocation"
         description:
           maxLength: 1024
           type: string
@@ -5624,31 +5667,31 @@ components:
         feature_usage:
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
         - capability: ""
           cost_items:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
         created_at: 0
         sender_name: sender_name
@@ -5706,6 +5749,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -5764,6 +5808,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -5778,6 +5823,7 @@ components:
               - meta_data: "{}"
                 message: message
           full_text: full_text
+          full_text_mime_type: full_text_mime_type
         sender_id: sender_id
         execution_id: execution_id
         token_count: 6
@@ -5947,6 +5993,7 @@ components:
           id: id
           result_meta_data: "{}"
           tool_function_id: tool_function_id
+        text_mime_type: text_mime_type
         text: text
         type: text
         thinking:
@@ -5970,6 +6017,8 @@ components:
         function_status_update:
           $ref: "#/components/schemas/AIgencyFunctionStatusUpdate"
         text:
+          type: string
+        text_mime_type:
           type: string
         thinking:
           $ref: "#/components/schemas/AIgencyThinking"
@@ -6026,6 +6075,7 @@ components:
             id: id
             result_meta_data: "{}"
             tool_function_id: tool_function_id
+          text_mime_type: text_mime_type
           text: text
           type: text
           thinking:
@@ -6084,6 +6134,7 @@ components:
             id: id
             result_meta_data: "{}"
             tool_function_id: tool_function_id
+          text_mime_type: text_mime_type
           text: text
           type: text
           thinking:
@@ -6098,12 +6149,15 @@ components:
             - meta_data: "{}"
               message: message
         full_text: full_text
+        full_text_mime_type: full_text_mime_type
       properties:
         data:
           items:
             $ref: "#/components/schemas/AIgencyMessageContent"
           type: array
         full_text:
+          type: string
+        full_text_mime_type:
           type: string
       required:
       - data
@@ -6188,31 +6242,31 @@ components:
           feature_usage:
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
           created_at: 0
           sender_name: sender_name
@@ -6270,6 +6324,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -6328,6 +6383,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -6342,6 +6398,7 @@ components:
                 - meta_data: "{}"
                   message: message
             full_text: full_text
+            full_text_mime_type: full_text_mime_type
           sender_id: sender_id
           execution_id: execution_id
           token_count: 6
@@ -6367,31 +6424,31 @@ components:
           feature_usage:
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
           - capability: ""
             cost_items:
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
-            - resulting_cost_in_euro: 9.301444243932576
-              used_units: 3.616076749251911
+            - long_context_cost_per_unit_in_euro: 9.301444243932576
+              resulting_cost_in_euro: 3.616076749251911
+              used_units: 2.027123023002322
               description: description
               cost_per_unit_in_euro: 7.061401241503109
-              batch_cost_factor: 2.3021358869347655
               cost_unit: null
           created_at: 0
           sender_name: sender_name
@@ -6449,6 +6506,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -6507,6 +6565,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -6521,6 +6580,7 @@ components:
                 - meta_data: "{}"
                   message: message
             full_text: full_text
+            full_text_mime_type: full_text_mime_type
           sender_id: sender_id
           execution_id: execution_id
           token_count: 6
@@ -6622,6 +6682,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -6680,6 +6741,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -6694,6 +6756,7 @@ components:
               - meta_data: "{}"
                 message: message
           full_text: full_text
+          full_text_mime_type: full_text_mime_type
       properties:
         ai_model_id:
           maxLength: 64
@@ -6848,6 +6911,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -6866,6 +6930,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -6946,6 +7011,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -6964,6 +7030,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -7163,6 +7230,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7181,6 +7249,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7261,6 +7330,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7279,6 +7349,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7319,6 +7390,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7337,6 +7409,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7417,6 +7490,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7435,6 +7509,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -7525,6 +7600,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -7543,6 +7619,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -7610,6 +7687,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -7628,6 +7706,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -8098,6 +8177,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -8156,6 +8236,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -8170,6 +8251,7 @@ components:
                 - meta_data: "{}"
                   message: message
             full_text: full_text
+            full_text_mime_type: full_text_mime_type
           sender_id: sender_id
           token_direction: "{}"
           token_count: 5
@@ -8242,6 +8324,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -8300,6 +8383,7 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_mime_type: text_mime_type
               text: text
               type: text
               thinking:
@@ -8314,6 +8398,7 @@ components:
                 - meta_data: "{}"
                   message: message
             full_text: full_text
+            full_text_mime_type: full_text_mime_type
           sender_id: sender_id
           token_direction: "{}"
           token_count: 5
@@ -8401,6 +8486,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -8459,6 +8545,7 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_mime_type: text_mime_type
             text: text
             type: text
             thinking:
@@ -8473,6 +8560,7 @@ components:
               - meta_data: "{}"
                 message: message
           full_text: full_text
+          full_text_mime_type: full_text_mime_type
         sender_id: sender_id
         token_direction: "{}"
         token_count: 5
@@ -8723,6 +8811,7 @@ components:
         user_id: user_id
         service_internal_id: service_internal_id
         batch: true
+        model_host_location: ""
         output_tokens: 0
         input_tokens: 0
       properties:
@@ -8733,6 +8822,8 @@ components:
         input_tokens:
           minimum: 0
           type: integer
+        model_host_location:
+          $ref: "#/components/schemas/HostingLocation"
         model_internal_id:
           type: string
         output_tokens:
@@ -8951,14 +9042,11 @@ components:
       type: object
     ExecutionCostTemplate:
       example:
+        long_context_cost_per_unit_in_euro: 2.3021358869347655
         description: description
         cost_per_unit_in_euro: 5.637376656633329
-        batch_cost_factor: 5.962133916683182
         cost_unit: input-tokens-per-million
       properties:
-        batch_cost_factor:
-          format: double
-          type: number
         cost_per_unit_in_euro:
           format: double
           type: number
@@ -8966,22 +9054,25 @@ components:
           $ref: "#/components/schemas/AIModelCostUnit"
         description:
           type: string
+        long_context_cost_per_unit_in_euro:
+          format: double
+          type: number
       type: object
     ExecutionFeatureUsage:
       example:
         capability: ""
         cost_items:
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
       properties:
         capability:
@@ -8996,17 +9087,17 @@ components:
         agent_id: agent_id
         owner_id: owner_id
         usage:
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
-        - resulting_cost_in_euro: 9.301444243932576
-          used_units: 3.616076749251911
+        - long_context_cost_per_unit_in_euro: 9.301444243932576
+          resulting_cost_in_euro: 3.616076749251911
+          used_units: 2.027123023002322
           description: description
           cost_per_unit_in_euro: 7.061401241503109
-          batch_cost_factor: 2.3021358869347655
           cost_unit: null
         created_at: 0
         message_id: message_id
@@ -9067,17 +9158,17 @@ components:
         - agent_id: agent_id
           owner_id: owner_id
           usage:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           created_at: 0
           message_id: message_id
@@ -9093,17 +9184,17 @@ components:
         - agent_id: agent_id
           owner_id: owner_id
           usage:
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
-          - resulting_cost_in_euro: 9.301444243932576
-            used_units: 3.616076749251911
+          - long_context_cost_per_unit_in_euro: 9.301444243932576
+            resulting_cost_in_euro: 3.616076749251911
+            used_units: 2.027123023002322
             description: description
             cost_per_unit_in_euro: 7.061401241503109
-            batch_cost_factor: 2.3021358869347655
             cost_unit: null
           created_at: 0
           message_id: message_id
@@ -9128,16 +9219,13 @@ components:
       type: object
     ExecutionUsageCost:
       example:
-        resulting_cost_in_euro: 9.301444243932576
-        used_units: 3.616076749251911
+        long_context_cost_per_unit_in_euro: 9.301444243932576
+        resulting_cost_in_euro: 3.616076749251911
+        used_units: 2.027123023002322
         description: description
         cost_per_unit_in_euro: 7.061401241503109
-        batch_cost_factor: 2.3021358869347655
         cost_unit: null
       properties:
-        batch_cost_factor:
-          format: double
-          type: number
         cost_per_unit_in_euro:
           format: double
           type: number
@@ -9145,6 +9233,9 @@ components:
           $ref: "#/components/schemas/AIModelCostUnit"
         description:
           type: string
+        long_context_cost_per_unit_in_euro:
+          format: double
+          type: number
         resulting_cost_in_euro:
           format: double
           type: number
@@ -9445,7 +9536,6 @@ components:
         image_url: image_url
         owner_id: owner_id
         created_at: 1
-        current_version: 5
         description: description
         default_agent_id: default_agent_id
         thumbnail_url: thumbnail_url
@@ -9457,6 +9547,7 @@ components:
         - tags
         - tags
         owner_organization_id: owner_organization_id
+        latest_version: 5
         updated_at: 5
         legacy_uuid: legacy_uuid
         versions:
@@ -9475,6 +9566,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -9493,6 +9585,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -9516,6 +9609,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -9534,6 +9628,7 @@ components:
                 value: value
               - label: label
                 value: value
+              description: description
               multi: true
             text: text
             type: "{}"
@@ -9568,8 +9663,6 @@ components:
         created_at:
           format: int64
           type: integer
-        current_version:
-          type: integer
         default_agent_id:
           type: string
         description:
@@ -9582,6 +9675,8 @@ components:
           type: string
         internal_id:
           type: string
+        latest_version:
+          type: integer
         legacy_uuid:
           type: string
         owner_id:
@@ -9648,6 +9743,7 @@ components:
             value: value
           - label: label
             value: value
+          description: description
           multi: true
         text: text
         type: "{}"
@@ -9741,7 +9837,6 @@ components:
           image_url: image_url
           owner_id: owner_id
           created_at: 1
-          current_version: 5
           description: description
           default_agent_id: default_agent_id
           thumbnail_url: thumbnail_url
@@ -9753,6 +9848,7 @@ components:
           - tags
           - tags
           owner_organization_id: owner_organization_id
+          latest_version: 5
           updated_at: 5
           legacy_uuid: legacy_uuid
           versions:
@@ -9771,6 +9867,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9789,6 +9886,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9812,6 +9910,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9830,6 +9929,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9875,7 +9975,6 @@ components:
           image_url: image_url
           owner_id: owner_id
           created_at: 1
-          current_version: 5
           description: description
           default_agent_id: default_agent_id
           thumbnail_url: thumbnail_url
@@ -9887,6 +9986,7 @@ components:
           - tags
           - tags
           owner_organization_id: owner_organization_id
+          latest_version: 5
           updated_at: 5
           legacy_uuid: legacy_uuid
           versions:
@@ -9905,6 +10005,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9923,6 +10024,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9946,6 +10048,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -9964,6 +10067,7 @@ components:
                   value: value
                 - label: label
                   value: value
+                description: description
                 multi: true
               text: text
               type: "{}"
@@ -10034,9 +10138,12 @@ components:
           value: value
         - label: label
           value: value
+        description: description
         multi: true
       properties:
         default:
+          type: string
+        description:
           type: string
         multi:
           type: boolean
@@ -10078,6 +10185,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -10096,6 +10204,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -10156,6 +10265,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -10174,6 +10284,7 @@ components:
               value: value
             - label: label
               value: value
+            description: description
             multi: true
           text: text
           type: "{}"
@@ -10323,7 +10434,7 @@ components:
         is_public:
           type: boolean
         name:
-          maxLength: 255
+          maxLength: 64
           minLength: 1
           type: string
         organization_id:
@@ -10401,7 +10512,7 @@ components:
         is_public:
           type: boolean
         name:
-          maxLength: 255
+          maxLength: 64
           minLength: 1
           type: string
         type:
