@@ -18,20 +18,10 @@ go get github.com/vaudience/nexus-go-clients/filemanager
 
 ## Updating Clients
 
-To update the clients, execute the following commands:
+To regenerate a client, run its generation script. The script will generate the client, and if there are changes, automatically commit, tag, and push:
 
 ```bash
 ./generateCoreClient.sh
 ./generateAigentChatClient.sh
 ./generateFileManagerClient.sh
-```
-
-## Tags
-
-To create tags, use the following commands:
-
-```bash
-git tag core/v0.1.0
-git tag aigentchat/v0.1.0
-git tag filemanager/v0.1.0
 ```

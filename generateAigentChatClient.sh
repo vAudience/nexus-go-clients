@@ -25,7 +25,7 @@ if [ -z "$(git status --porcelain)" ]; then
 fi
 
 # Extract version from generated README.md
-VERSION=$(sed -n 's/^API version: \([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\)/\1/p' aigentchat/README.md)
+VERSION=$(sed -n 's/^- API version: \([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\)/\1/p' aigentchat/README.md)
 if [ -z "$VERSION" ]; then
   echo "Could not extract version from README.md. Exiting."
   exit 1
