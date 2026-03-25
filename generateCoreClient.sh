@@ -1,6 +1,8 @@
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+git pull origin main
+
 rm -rf core
 openapi-generator generate \
   -o core \
