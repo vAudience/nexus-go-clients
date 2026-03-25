@@ -38,9 +38,9 @@ func Test_filemanager_FilesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var storagePath string
+		var idOrStoragePath string
 
-		resp, httpRes, err := apiClient.FilesAPI.DeleteFile(context.Background(), storagePath).Execute()
+		resp, httpRes, err := apiClient.FilesAPI.DeleteFile(context.Background(), idOrStoragePath).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -80,9 +80,9 @@ func Test_filemanager_FilesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var storagePath string
+		var idOrStoragePath string
 
-		resp, httpRes, err := apiClient.FilesAPI.ServeFile(context.Background(), storagePath).Execute()
+		resp, httpRes, err := apiClient.FilesAPI.ServeFile(context.Background(), idOrStoragePath).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

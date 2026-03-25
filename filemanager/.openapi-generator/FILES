@@ -17,6 +17,7 @@ docs/FileAccessTokenResponse.md
 docs/FileDuplicateRequest.md
 docs/FileMetadataBatchGetRequest.md
 docs/FileMetadataBatchResponse.md
+docs/FileMetadataListResponse.md
 docs/FileMetadataResponse.md
 docs/FileUploadCategoryResponse.md
 docs/FileUploadResponse.md
@@ -38,6 +39,7 @@ model_file_access_token_response.go
 model_file_duplicate_request.go
 model_file_metadata_batch_get_request.go
 model_file_metadata_batch_response.go
+model_file_metadata_list_response.go
 model_file_metadata_response.go
 model_file_upload_category_response.go
 model_file_upload_response.go

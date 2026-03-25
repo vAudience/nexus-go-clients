@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.4.3
+  version: 0.4.4
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -124,14 +124,14 @@ paths:
       tags:
       - Files
       x-codegen-request-body-name: fileAccessTokenRequest
-  /v1/files/{storage_path}:
+  /v1/files/{id_or_storage_path}:
     delete:
       description: Delete a file
       operationId: DeleteFile
       parameters:
-      - description: Storage path
+      - description: File metadata ID (UUID) or storage path
         in: path
-        name: storage_path
+        name: id_or_storage_path
         required: true
         schema:
           type: string
@@ -181,9 +181,9 @@ paths:
       description: Serve a file
       operationId: ServeFile
       parameters:
-      - description: Storage path
+      - description: File metadata ID (UUID) or storage path
         in: path
-        name: storage_path
+        name: id_or_storage_path
         required: true
         schema:
           type: string
@@ -303,6 +303,92 @@ paths:
       tags:
       - Files
   /v1/metadata:
+    get:
+      description: List file metadata with comprehensive filtering options
+      operationId: ListFileMetadata
+      parameters:
+      - description: "Scope: temp, public, private-org, private-org-user, private-team"
+        in: query
+        name: scope
+        required: true
+        schema:
+          type: string
+      - description: User ID filter
+        in: query
+        name: user_id
+        schema:
+          type: string
+      - description: Organization ID filter
+        in: query
+        name: org_id
+        schema:
+          type: string
+      - description: Team ID filter
+        in: query
+        name: team_id
+        schema:
+          type: string
+      - description: Upload category filter
+        in: query
+        name: upload_category
+        schema:
+          type: string
+      - description: "Offset (default: 0)"
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: "Limit (default: 50, max: 100)"
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: "Sort field: created_at, file_name, file_size (default: created_at)"
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: "Sort order: asc, desc (default: desc)"
+        in: query
+        name: order
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileMetadataListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List file metadata
+      tags:
+      - Files Metadata
     post:
       description: Get metadata for multiple files
       operationId: GetFileMetadataBatch
@@ -708,6 +794,71 @@ components:
           type: array
       required:
       - files
+      type: object
+    FileMetadataListResponse:
+      example:
+        total: 1
+        offset: 6
+        limit: 0
+        files:
+        - upload_category: upload_category
+          metadata: "{}"
+          original_file_url: original_file_url
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          original_file_storage_path: original_file_storage_path
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          storage_path: storage_path
+          user_id: user_id
+          original_file_mime_type: original_file_mime_type
+          organization_id: organization_id
+          file_llm_input_type: embedded
+          original_file_name: original_file_name
+          id: id
+        - upload_category: upload_category
+          metadata: "{}"
+          original_file_url: original_file_url
+          file_name: file_name
+          created_at: created_at
+          original_file_size: 6
+          team_id: team_id
+          file_size: 0
+          url: url
+          file_storage_type: temp
+          original_file_storage_path: original_file_storage_path
+          expires_at: expires_at
+          updated_at: updated_at
+          mime_type: mime_type
+          storage_path: storage_path
+          user_id: user_id
+          original_file_mime_type: original_file_mime_type
+          organization_id: organization_id
+          file_llm_input_type: embedded
+          original_file_name: original_file_name
+          id: id
+      properties:
+        files:
+          items:
+            $ref: "#/components/schemas/FileMetadataResponse"
+          type: array
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+      required:
+      - files
+      - limit
+      - offset
+      - total
       type: object
     FileMetadataResponse:
       example:

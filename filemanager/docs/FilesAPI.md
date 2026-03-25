@@ -5,10 +5,10 @@ All URIs are relative to *https://file-manager.dev.ai.vaud.one*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateFileAccessToken**](FilesAPI.md#CreateFileAccessToken) | **Post** /v1/file-access-tokens | Create a file access token
-[**DeleteFile**](FilesAPI.md#DeleteFile) | **Delete** /v1/files/{storage_path} | Delete a file
+[**DeleteFile**](FilesAPI.md#DeleteFile) | **Delete** /v1/files/{id_or_storage_path} | Delete a file
 [**DuplicateFile**](FilesAPI.md#DuplicateFile) | **Post** /v1/organizations/{org_id}/files/duplicate | Duplicate a file
 [**GetFileUploadCategories**](FilesAPI.md#GetFileUploadCategories) | **Get** /v1/organizations/{org_id}/files/categories | Get file upload categories
-[**ServeFile**](FilesAPI.md#ServeFile) | **Get** /v1/files/{storage_path} | Serve a file
+[**ServeFile**](FilesAPI.md#ServeFile) | **Get** /v1/files/{id_or_storage_path} | Serve a file
 [**UploadFile**](FilesAPI.md#UploadFile) | **Post** /v1/organizations/{org_id}/files/{category} | Upload a file
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## DeleteFile
 
-> FileMetadataResponse DeleteFile(ctx, storagePath).Execute()
+> FileMetadataResponse DeleteFile(ctx, idOrStoragePath).Execute()
 
 Delete a file
 
@@ -100,11 +100,11 @@ import (
 )
 
 func main() {
-	storagePath := "storagePath_example" // string | Storage path
+	idOrStoragePath := "idOrStoragePath_example" // string | File metadata ID (UUID) or storage path
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.DeleteFile(context.Background(), storagePath).Execute()
+	resp, r, err := apiClient.FilesAPI.DeleteFile(context.Background(), idOrStoragePath).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.DeleteFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -120,7 +120,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**storagePath** | **string** | Storage path | 
+**idOrStoragePath** | **string** | File metadata ID (UUID) or storage path | 
 
 ### Other Parameters
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ## ServeFile
 
-> *os.File ServeFile(ctx, storagePath).Download(download).Filename(filename).Fat(fat).Execute()
+> *os.File ServeFile(ctx, idOrStoragePath).Download(download).Filename(filename).Fat(fat).Execute()
 
 Serve a file
 
@@ -314,14 +314,14 @@ import (
 )
 
 func main() {
-	storagePath := "storagePath_example" // string | Storage path
+	idOrStoragePath := "idOrStoragePath_example" // string | File metadata ID (UUID) or storage path
 	download := true // bool | Force download as attachment (optional)
 	filename := "filename_example" // string | Custom filename for download (optional)
 	fat := "fat_example" // string | File access token (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.ServeFile(context.Background(), storagePath).Download(download).Filename(filename).Fat(fat).Execute()
+	resp, r, err := apiClient.FilesAPI.ServeFile(context.Background(), idOrStoragePath).Download(download).Filename(filename).Fat(fat).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.ServeFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -337,7 +337,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**storagePath** | **string** | Storage path | 
+**idOrStoragePath** | **string** | File metadata ID (UUID) or storage path | 
 
 ### Other Parameters
 
