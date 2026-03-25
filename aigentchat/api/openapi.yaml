@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.27.9
+  version: 0.28.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -5749,6 +5749,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text
@@ -5808,6 +5810,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text
@@ -5993,6 +5997,8 @@ components:
           id: id
           result_meta_data: "{}"
           tool_function_id: tool_function_id
+        text_meta_data:
+          key: "{}"
         text_mime_type: text_mime_type
         text: text
         type: text
@@ -6018,6 +6024,10 @@ components:
           $ref: "#/components/schemas/AIgencyFunctionStatusUpdate"
         text:
           type: string
+        text_meta_data:
+          additionalProperties:
+            type: object
+          type: object
         text_mime_type:
           type: string
         thinking:
@@ -6075,6 +6085,8 @@ components:
             id: id
             result_meta_data: "{}"
             tool_function_id: tool_function_id
+          text_meta_data:
+            key: "{}"
           text_mime_type: text_mime_type
           text: text
           type: text
@@ -6134,6 +6146,8 @@ components:
             id: id
             result_meta_data: "{}"
             tool_function_id: tool_function_id
+          text_meta_data:
+            key: "{}"
           text_mime_type: text_mime_type
           text: text
           type: text
@@ -6324,6 +6338,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -6383,6 +6399,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -6506,6 +6524,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -6565,6 +6585,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -6682,6 +6704,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text
@@ -6741,6 +6765,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text
@@ -8177,6 +8203,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -8236,6 +8264,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -8324,6 +8354,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -8383,6 +8415,8 @@ components:
                 id: id
                 result_meta_data: "{}"
                 tool_function_id: tool_function_id
+              text_meta_data:
+                key: "{}"
               text_mime_type: text_mime_type
               text: text
               type: text
@@ -8486,6 +8520,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text
@@ -8545,6 +8581,8 @@ components:
               id: id
               result_meta_data: "{}"
               tool_function_id: tool_function_id
+            text_meta_data:
+              key: "{}"
             text_mime_type: text_mime_type
             text: text
             type: text

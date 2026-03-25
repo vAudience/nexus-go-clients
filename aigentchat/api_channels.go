@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.9
+API version: 0.28.0
 Contact: contact@vaudience.ai
 */
 
@@ -959,21 +959,18 @@ func (a *ChannelsAPIService) SearchChannelsExecute(r ApiSearchChannelsRequest) (
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_services", r.includeServices, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_services", defaultValue, "", "")
 		r.includeServices = &defaultValue
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 1000
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
 	} else {
 		var defaultValue int32 = 0
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", defaultValue, "", "")
 		r.offset = &defaultValue
 	}
 	if r.offsetChannelId != nil {

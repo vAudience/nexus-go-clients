@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.27.9
+API version: 0.28.0
 Contact: contact@vaudience.ai
 */
 
@@ -26,6 +26,7 @@ type AIgencyMessageContent struct {
 	FunctionResponses *AIgencyFunctionResponse `json:"function_responses,omitempty"`
 	FunctionStatusUpdate *AIgencyFunctionStatusUpdate `json:"function_status_update,omitempty"`
 	Text *string `json:"text,omitempty"`
+	TextMetaData map[string]map[string]interface{} `json:"text_meta_data,omitempty"`
 	TextMimeType *string `json:"text_mime_type,omitempty"`
 	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
@@ -212,6 +213,38 @@ func (o *AIgencyMessageContent) SetText(v string) {
 	o.Text = &v
 }
 
+// GetTextMetaData returns the TextMetaData field value if set, zero value otherwise.
+func (o *AIgencyMessageContent) GetTextMetaData() map[string]map[string]interface{} {
+	if o == nil || IsNil(o.TextMetaData) {
+		var ret map[string]map[string]interface{}
+		return ret
+	}
+	return o.TextMetaData
+}
+
+// GetTextMetaDataOk returns a tuple with the TextMetaData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessageContent) GetTextMetaDataOk() (map[string]map[string]interface{}, bool) {
+	if o == nil || IsNil(o.TextMetaData) {
+		return map[string]map[string]interface{}{}, false
+	}
+	return o.TextMetaData, true
+}
+
+// HasTextMetaData returns a boolean if a field has been set.
+func (o *AIgencyMessageContent) HasTextMetaData() bool {
+	if o != nil && !IsNil(o.TextMetaData) {
+		return true
+	}
+
+	return false
+}
+
+// SetTextMetaData gets a reference to the given map[string]map[string]interface{} and assigns it to the TextMetaData field.
+func (o *AIgencyMessageContent) SetTextMetaData(v map[string]map[string]interface{}) {
+	o.TextMetaData = v
+}
+
 // GetTextMimeType returns the TextMimeType field value if set, zero value otherwise.
 func (o *AIgencyMessageContent) GetTextMimeType() string {
 	if o == nil || IsNil(o.TextMimeType) {
@@ -325,6 +358,9 @@ func (o AIgencyMessageContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+	if !IsNil(o.TextMetaData) {
+		toSerialize["text_meta_data"] = o.TextMetaData
+	}
 	if !IsNil(o.TextMimeType) {
 		toSerialize["text_mime_type"] = o.TextMimeType
 	}
@@ -380,6 +416,7 @@ func (o *AIgencyMessageContent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "function_responses")
 		delete(additionalProperties, "function_status_update")
 		delete(additionalProperties, "text")
+		delete(additionalProperties, "text_meta_data")
 		delete(additionalProperties, "text_mime_type")
 		delete(additionalProperties, "thinking")
 		delete(additionalProperties, "type")
