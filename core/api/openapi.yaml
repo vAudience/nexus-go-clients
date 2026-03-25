@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.6.0
+  version: 0.6.1
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
