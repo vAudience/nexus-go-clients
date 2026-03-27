@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.28.0
+  version: 0.29.1
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -304,6 +304,45 @@ paths:
       tags:
       - Agents
       x-codegen-request-body-name: agent
+  /v1/organizations/{org_id}/agents/export:
+    get:
+      description: Download a CSV file containing all agents in the organization for
+        audit/compliance purposes.
+      operationId: ExportAgents
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "401":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "500":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      summary: Export agents as CSV
+      tags:
+      - Agents
   /v1/organizations/{org_id}/agents/{id}:
     delete:
       description: Delete an agent by its ID
@@ -3821,6 +3860,45 @@ paths:
       tags:
       - Prompts
       x-codegen-request-body-name: prompt
+  /v1/organizations/{org_id}/prompts/export:
+    get:
+      description: Download a CSV file containing all prompt templates in the organization
+        for audit/compliance purposes.
+      operationId: ExportPrompts
+      parameters:
+      - description: Organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "401":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "500":
+          content:
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      summary: Export prompts as CSV
+      tags:
+      - Prompts
   /v1/organizations/{org_id}/prompts/render:
     post:
       description: Renders a prompt by resolving references and replacing variables

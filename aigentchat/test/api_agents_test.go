@@ -83,6 +83,19 @@ func Test_aigentchat_AgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AgentsAPIService ExportAgents", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		httpRes, err := apiClient.AgentsAPI.ExportAgents(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AgentsAPIService GetAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

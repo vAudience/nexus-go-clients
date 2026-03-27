@@ -65,6 +65,19 @@ func Test_aigentchat_PromptsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PromptsAPIService ExportPrompts", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+
+		httpRes, err := apiClient.PromptsAPI.ExportPrompts(context.Background(), orgId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PromptsAPIService GetPrompt", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

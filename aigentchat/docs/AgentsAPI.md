@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**AddAttachedFileID**](AgentsAPI.md#AddAttachedFileID) | **Patch** /v1/organizations/{org_id}/agents/{id}/add-file/{file_id} | Add an attached file ID to an agent
 [**CreateAgent**](AgentsAPI.md#CreateAgent) | **Post** /v1/organizations/{org_id}/agents | Create a new agent
 [**DeleteAgent**](AgentsAPI.md#DeleteAgent) | **Delete** /v1/organizations/{org_id}/agents/{id} | Delete an agent
+[**ExportAgents**](AgentsAPI.md#ExportAgents) | **Get** /v1/organizations/{org_id}/agents/export | Export agents as CSV
 [**GetAgent**](AgentsAPI.md#GetAgent) | **Get** /v1/organizations/{org_id}/agents/{id} | Get an agent
 [**ListAgents**](AgentsAPI.md#ListAgents) | **Get** /v1/organizations/{org_id}/agents | List agents
 [**RemoveAssignedTool**](AgentsAPI.md#RemoveAssignedTool) | **Patch** /v1/organizations/{org_id}/agents/{id}/remove-tool/{tool_id} | Remove an assigned tool from an agent
@@ -307,6 +308,74 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ExportAgents
+
+> ExportAgents(ctx, orgId).Execute()
+
+Export agents as CSV
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | Organization ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.AgentsAPI.ExportAgents(context.Background(), orgId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.ExportAgents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | Organization ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportAgentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/csv
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
