@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.6.1
+  version: 0.6.3
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -81,34 +81,6 @@ paths:
       tags:
       - Version
   /v1/auth/2fa:
-    delete:
-      description: Remove the 2FA credential from the keycloak user
-      operationId: Remove2FA
-      responses:
-        "200":
-          content: {}
-          description: OK
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad Request
-        "500":
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Server or Database Internal Error
-        "503":
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: "Service unavailable: 2FA is disabled"
-      summary: Remove 2FA
-      tags:
-      - Auth
     get:
       description: Checks whether the user has 2FA configured
       operationId: Has2FA
@@ -132,6 +104,51 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Server or Database Internal Error
       summary: Has 2FA configured
+      tags:
+      - Auth
+  /v1/auth/2fa/remove:
+    get:
+      description: Starts login and triggers an app-initiated Keycloak 2FA removal
+        via kc_action
+      operationId: Remove2FA
+      parameters:
+      - description: encoded return to url after the action
+        in: query
+        name: returnTo
+        required: true
+        schema:
+          type: string
+      - description: Step of the removal process. Normally not set manually
+        in: query
+        name: step
+        schema:
+          type: string
+      responses:
+        "302":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Redirect to keycloak delete credential page
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+        "503":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Service unavailable: 2FA is disabled"
+      summary: Remove 2FA
       tags:
       - Auth
   /v1/auth/2fa/setup:
@@ -4356,6 +4373,24 @@ components:
       - auth_refresh_token_is_required
       - auth_verifier_is_required
       - auth_invalid_token_info
+      - auth_invalid_step_parameter
+      - auth_invalid_return_url
+      - invalid_request
+      - unauthorized_client
+      - access_denied
+      - unsupported_response_type
+      - invalid_scope
+      - server_error
+      - temporarily_unavailable
+      - interaction_required
+      - login_required
+      - account_selection_required
+      - consent_required
+      - invalid_request_uri
+      - invalid_request_object
+      - request_not_supported
+      - request_uri_not_supported
+      - registration_not_supported
       - association_role_is_default
       - association_role_in_use
       - association_member_has_role
@@ -4445,6 +4480,24 @@ components:
       - ErrCodeAuthRefreshTokenIsRequired
       - ErrCodeAuthVerifierIsRequired
       - ErrCodeAuthInvalidTokenInfo
+      - ErrCodeAuthInvalidStepParameter
+      - ErrCodeAuthInvalidReturnURL
+      - ErrCodeOAuthInvalidRequest
+      - ErrCodeOAuthUnauthorizedClient
+      - ErrCodeOAuthAccessDenied
+      - ErrCodeOAuthUnsupportedResponseType
+      - ErrCodeOAuthInvalidScope
+      - ErrCodeOAuthServerError
+      - ErrCodeOAuthTemporarilyUnavailable
+      - ErrCodeOIDCInteractionRequired
+      - ErrCodeOIDCLoginRequired
+      - ErrCodeOIDCAccountSelectionRequired
+      - ErrCodeOIDCConsentRequired
+      - ErrCodeOIDCInvalidRequestURI
+      - ErrCodeOIDCInvalidRequestObject
+      - ErrCodeOIDCRequestNotSupported
+      - ErrCodeOIDCRequestURINotSupported
+      - ErrCodeOIDCRegistrationNotSupported
       - ErrCodeAssociationRoleIsDefault
       - ErrCodeAssociationRoleInUse
       - ErrCodeAssociationMemberHasRole

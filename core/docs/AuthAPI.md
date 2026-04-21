@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**Login**](AuthAPI.md#Login) | **Get** /v1/auth/login | Login
 [**Logout**](AuthAPI.md#Logout) | **Post** /v1/auth/logout | Logout
 [**Refresh**](AuthAPI.md#Refresh) | **Post** /v1/auth/refresh | Refresh
-[**Remove2FA**](AuthAPI.md#Remove2FA) | **Delete** /v1/auth/2fa | Remove 2FA
+[**Remove2FA**](AuthAPI.md#Remove2FA) | **Get** /v1/auth/2fa/remove | Remove 2FA
 [**Setup2FA**](AuthAPI.md#Setup2FA) | **Get** /v1/auth/2fa/setup | Setup 2FA
 
 
@@ -322,7 +322,7 @@ No authorization required
 
 ## Remove2FA
 
-> Remove2FA(ctx).Execute()
+> Remove2FA(ctx).ReturnTo(returnTo).Step(step).Execute()
 
 Remove 2FA
 
@@ -341,10 +341,12 @@ import (
 )
 
 func main() {
+	returnTo := "returnTo_example" // string | encoded return to url after the action
+	step := "step_example" // string | Step of the removal process. Normally not set manually (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AuthAPI.Remove2FA(context.Background()).Execute()
+	r, err := apiClient.AuthAPI.Remove2FA(context.Background()).ReturnTo(returnTo).Step(step).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthAPI.Remove2FA``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,12 +356,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRemove2FARequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **returnTo** | **string** | encoded return to url after the action | 
+ **step** | **string** | Step of the removal process. Normally not set manually | 
 
 ### Return type
 

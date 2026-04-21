@@ -81,6 +81,42 @@
 
 * `ErrCodeAuthInvalidTokenInfo` (value: `"auth_invalid_token_info"`)
 
+* `ErrCodeAuthInvalidStepParameter` (value: `"auth_invalid_step_parameter"`)
+
+* `ErrCodeAuthInvalidReturnURL` (value: `"auth_invalid_return_url"`)
+
+* `ErrCodeOAuthInvalidRequest` (value: `"invalid_request"`)
+
+* `ErrCodeOAuthUnauthorizedClient` (value: `"unauthorized_client"`)
+
+* `ErrCodeOAuthAccessDenied` (value: `"access_denied"`)
+
+* `ErrCodeOAuthUnsupportedResponseType` (value: `"unsupported_response_type"`)
+
+* `ErrCodeOAuthInvalidScope` (value: `"invalid_scope"`)
+
+* `ErrCodeOAuthServerError` (value: `"server_error"`)
+
+* `ErrCodeOAuthTemporarilyUnavailable` (value: `"temporarily_unavailable"`)
+
+* `ErrCodeOIDCInteractionRequired` (value: `"interaction_required"`)
+
+* `ErrCodeOIDCLoginRequired` (value: `"login_required"`)
+
+* `ErrCodeOIDCAccountSelectionRequired` (value: `"account_selection_required"`)
+
+* `ErrCodeOIDCConsentRequired` (value: `"consent_required"`)
+
+* `ErrCodeOIDCInvalidRequestURI` (value: `"invalid_request_uri"`)
+
+* `ErrCodeOIDCInvalidRequestObject` (value: `"invalid_request_object"`)
+
+* `ErrCodeOIDCRequestNotSupported` (value: `"request_not_supported"`)
+
+* `ErrCodeOIDCRequestURINotSupported` (value: `"request_uri_not_supported"`)
+
+* `ErrCodeOIDCRegistrationNotSupported` (value: `"registration_not_supported"`)
+
 * `ErrCodeAssociationRoleIsDefault` (value: `"association_role_is_default"`)
 
 * `ErrCodeAssociationRoleInUse` (value: `"association_role_in_use"`)
