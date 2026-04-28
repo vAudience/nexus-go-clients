@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.29.5
+API version: 0.30.1
 Contact: contact@vaudience.ai
 */
 
@@ -134,6 +134,8 @@ const (
 	ErrCodeInvalidVersion ApiErrorCode = "invalid_prompt_version"
 	ErrCodeVariableNotFound ApiErrorCode = "variable_not_found"
 	ErrCodeInvalidVariableValue ApiErrorCode = "invalid_variable_value"
+	ErrCodeResourceTransferFailed ApiErrorCode = "resource_transfer_failed"
+	ErrCodeTargetOrganizationNotFound ApiErrorCode = "target_organization_not_found"
 )
 
 // All allowed values of ApiErrorCode enum
@@ -251,6 +253,8 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_prompt_version",
 	"variable_not_found",
 	"invalid_variable_value",
+	"resource_transfer_failed",
+	"target_organization_not_found",
 }
 
 func (v *ApiErrorCode) UnmarshalJSON(src []byte) error {

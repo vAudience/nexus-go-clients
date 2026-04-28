@@ -3,6 +3,7 @@
 .travis.yml
 README.md
 api/openapi.yaml
+api_admin.go
 api_agents.go
 api_ai_model_services.go
 api_ai_models.go
@@ -59,6 +60,7 @@ docs/AIgencyMessageWriteDto.md
 docs/AIgencyThinking.md
 docs/AIgencyThumbnail.md
 docs/AccessScope.md
+docs/AdminAPI.md
 docs/Agent.md
 docs/AgentI18n.md
 docs/AgentResults.md
@@ -130,6 +132,8 @@ docs/PromptVersion.md
 docs/PromptWriteDto.md
 docs/PromptsAPI.md
 docs/RenderedPrompt.md
+docs/ResourceTransferRequest.md
+docs/ResourceTransferResult.md
 docs/ResultFile.md
 docs/ServiceStatus.md
 docs/Tag.md
@@ -145,6 +149,7 @@ docs/ToolContinuationInstructions.md
 docs/ToolFunction.md
 docs/ToolI18n.md
 docs/ToolsAPI.md
+docs/TransferableResourceType.md
 docs/UserAccessView.md
 docs/VersionAPI.md
 docs/VersionResponse.md
@@ -240,6 +245,8 @@ model_prompt_variable_option.go
 model_prompt_version.go
 model_prompt_write_dto.go
 model_rendered_prompt.go
+model_resource_transfer_request.go
+model_resource_transfer_result.go
 model_result_file.go
 model_service_status.go
 model_tag.go
@@ -253,10 +260,12 @@ model_tool.go
 model_tool_continuation_instructions.go
 model_tool_function.go
 model_tool_i18n.go
+model_transferable_resource_type.go
 model_user_access_view.go
 model_version_response.go
 model_voice_chat_input_request_dto.go
 response.go
+test/api_admin_test.go
 test/api_agents_test.go
 test/api_ai_model_services_test.go
 test/api_ai_models_test.go

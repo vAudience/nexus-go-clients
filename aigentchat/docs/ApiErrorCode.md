@@ -229,6 +229,10 @@
 
 * `ErrCodeInvalidVariableValue` (value: `"invalid_variable_value"`)
 
+* `ErrCodeResourceTransferFailed` (value: `"resource_transfer_failed"`)
+
+* `ErrCodeTargetOrganizationNotFound` (value: `"target_organization_not_found"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
