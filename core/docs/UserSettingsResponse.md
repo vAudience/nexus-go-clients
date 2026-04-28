@@ -7,8 +7,10 @@ Name | Type | Description | Notes
 **ColorScheme** | **string** |  | 
 **Id** | **string** |  | 
 **Language** | Pointer to **string** |  | [optional] 
+**OnboardingCompletedTours** | Pointer to **[]string** |  | [optional] 
 **OnboardingDone** | Pointer to **bool** |  | [optional] 
 **OnboardingHoldUntil** | Pointer to **string** |  | [optional] 
+**OnboardingState** | Pointer to **string** |  | [optional] 
 **UserId** | **string** |  | 
 
 ## Methods
@@ -95,6 +97,31 @@ SetLanguage sets Language field to given value.
 
 HasLanguage returns a boolean if a field has been set.
 
+### GetOnboardingCompletedTours
+
+`func (o *UserSettingsResponse) GetOnboardingCompletedTours() []string`
+
+GetOnboardingCompletedTours returns the OnboardingCompletedTours field if non-nil, zero value otherwise.
+
+### GetOnboardingCompletedToursOk
+
+`func (o *UserSettingsResponse) GetOnboardingCompletedToursOk() (*[]string, bool)`
+
+GetOnboardingCompletedToursOk returns a tuple with the OnboardingCompletedTours field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnboardingCompletedTours
+
+`func (o *UserSettingsResponse) SetOnboardingCompletedTours(v []string)`
+
+SetOnboardingCompletedTours sets OnboardingCompletedTours field to given value.
+
+### HasOnboardingCompletedTours
+
+`func (o *UserSettingsResponse) HasOnboardingCompletedTours() bool`
+
+HasOnboardingCompletedTours returns a boolean if a field has been set.
+
 ### GetOnboardingDone
 
 `func (o *UserSettingsResponse) GetOnboardingDone() bool`
@@ -144,6 +171,31 @@ SetOnboardingHoldUntil sets OnboardingHoldUntil field to given value.
 `func (o *UserSettingsResponse) HasOnboardingHoldUntil() bool`
 
 HasOnboardingHoldUntil returns a boolean if a field has been set.
+
+### GetOnboardingState
+
+`func (o *UserSettingsResponse) GetOnboardingState() string`
+
+GetOnboardingState returns the OnboardingState field if non-nil, zero value otherwise.
+
+### GetOnboardingStateOk
+
+`func (o *UserSettingsResponse) GetOnboardingStateOk() (*string, bool)`
+
+GetOnboardingStateOk returns a tuple with the OnboardingState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnboardingState
+
+`func (o *UserSettingsResponse) SetOnboardingState(v string)`
+
+SetOnboardingState sets OnboardingState field to given value.
+
+### HasOnboardingState
+
+`func (o *UserSettingsResponse) HasOnboardingState() bool`
+
+HasOnboardingState returns a boolean if a field has been set.
 
 ### GetUserId
 

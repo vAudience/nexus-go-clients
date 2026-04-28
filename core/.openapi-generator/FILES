@@ -8,6 +8,7 @@ api_entitlements.go
 api_health.go
 api_metrics.go
 api_organizations.go
+api_products.go
 api_roles.go
 api_stripe.go
 api_user_settings.go
@@ -20,6 +21,7 @@ docs/AgentQuickFilter.md
 docs/AgentQuickFilterI18n.md
 docs/AuthAPI.md
 docs/AuthenticatedResponse.md
+docs/BillingModel.md
 docs/CredentialsResponse.md
 docs/EntitlementResponse.md
 docs/EntitlementsAPI.md
@@ -60,7 +62,11 @@ docs/OrganizationSubscriptionPatchRequest.md
 docs/OrganizationSubscriptionPostRequest.md
 docs/OrganizationSubscriptionResponse.md
 docs/OrganizationsAPI.md
+docs/PriceTierResponse.md
+docs/ProductI18nResponse.md
+docs/ProductResponse.md
 docs/ProductType.md
+docs/ProductsAPI.md
 docs/RefreshResponse.md
 docs/RolePatchRequest.md
 docs/RolePostRequest.md
@@ -92,6 +98,7 @@ model_agent_filter_options.go
 model_agent_quick_filter.go
 model_agent_quick_filter_i18n.go
 model_authenticated_response.go
+model_billing_model.go
 model_credentials_response.go
 model_entitlement_response.go
 model_error_code.go
@@ -128,6 +135,9 @@ model_organization_settings_response.go
 model_organization_subscription_patch_request.go
 model_organization_subscription_post_request.go
 model_organization_subscription_response.go
+model_price_tier_response.go
+model_product_i18n_response.go
+model_product_response.go
 model_product_type.go
 model_refresh_response.go
 model_role_patch_request.go
@@ -154,6 +164,7 @@ test/api_entitlements_test.go
 test/api_health_test.go
 test/api_metrics_test.go
 test/api_organizations_test.go
+test/api_products_test.go
 test/api_roles_test.go
 test/api_stripe_test.go
 test/api_user_settings_test.go

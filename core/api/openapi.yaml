@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.6.3
+  version: 0.10.0
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -22,6 +22,8 @@ tags:
   name: Entitlements
 - description: anything related to the Organizations route
   name: Organizations
+- description: anything related to the Products route
+  name: Products
 - description: anything related to the Roles route
   name: Roles
 - description: anything related to the Stripe route
@@ -3436,6 +3438,38 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: organizationCreditsPayment
+  /v1/products:
+    get:
+      description: |-
+        Returns all subscription plans and credit packs with current Stripe pricing.
+        Includes disabled products. Results are sorted by display order.
+      operationId: GetProducts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductResponse"
+                type: array
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: Get all products
+      tags:
+      - Products
   /v1/roles:
     get:
       description: Get all Roles
@@ -4309,6 +4343,18 @@ components:
       required:
       - authenticated
       type: object
+    BillingModel:
+      enum:
+      - monthlySubscription
+      - yearlySubscription
+      - creditPack
+      - vaudSubscription
+      type: string
+      x-enum-varnames:
+      - BillingModelMonthlySubscription
+      - BillingModelYearlySubscription
+      - BillingModelCreditPack
+      - BillingModelVaudSubscription
     CredentialsResponse:
       example:
         otp_allowed: true
@@ -5565,6 +5611,143 @@ components:
       - trialEnd
       - updatedAt
       type: object
+    PriceTierResponse:
+      example:
+        upTo: 2
+        unitAmount: 5
+      properties:
+        unitAmount:
+          description: price per seat in smallest currency unit (e.g. cents)
+          type: integer
+        upTo:
+          description: max seats for this tier; 0 means unlimited (last tier)
+          type: integer
+      type: object
+    ProductI18nResponse:
+      example:
+        badge: badge
+        features:
+        - features
+        - features
+        bannerText: bannerText
+        name: name
+        description: description
+        priceSupplement: priceSupplement
+      properties:
+        badge:
+          type: string
+        bannerText:
+          type: string
+        description:
+          type: string
+        features:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        priceSupplement:
+          type: string
+      type: object
+    ProductResponse:
+      example:
+        bannerTooltip: bannerTooltip
+        tiers:
+        - upTo: 2
+          unitAmount: 5
+        - upTo: 2
+          unitAmount: 5
+        trialDays: 7
+        billingModel: monthlySubscription
+        displayOrder: 0
+        description: description
+        maxSeats: 6
+        type: payment
+        priceSupplement: priceSupplement
+        i18n:
+          key:
+            badge: badge
+            features:
+            - features
+            - features
+            bannerText: bannerText
+            name: name
+            description: description
+            priceSupplement: priceSupplement
+        badge: badge
+        features:
+        - features
+        - features
+        price: 5
+        bannerText: bannerText
+        minSeats: 1
+        name: name
+        currency: currency
+        disabled: true
+        id: id
+        bannerColor: bannerColor
+      properties:
+        badge:
+          type: string
+        bannerColor:
+          description: "optional; when present: \"success\" | \"brand\" — UI accent\
+            \ hint, not localized. Independent of bannerText"
+          type: string
+        bannerText:
+          type: string
+        bannerTooltip:
+          description: "optional; when present: \"tiersMenu\" — UI tooltip hint, not\
+            \ localized. Independent of bannerText"
+          type: string
+        billingModel:
+          $ref: "#/components/schemas/BillingModel"
+        currency:
+          description: "ISO currency code, e.g. \"eur\""
+          type: string
+        description:
+          type: string
+        disabled:
+          type: boolean
+        displayOrder:
+          type: integer
+        features:
+          items:
+            type: string
+          type: array
+        i18n:
+          additionalProperties:
+            $ref: "#/components/schemas/ProductI18nResponse"
+          description: "per-language variants; keys match additionalLanguages in products_i18n.go,\
+            \ always present (serializes to {} when empty)"
+          type: object
+        id:
+          type: string
+        maxSeats:
+          type: integer
+        minSeats:
+          type: integer
+        name:
+          type: string
+        price:
+          description: nil for tiered products; non-nil for flat (may be 0 for free)
+          type: integer
+        priceSupplement:
+          type: string
+        tiers:
+          description: nil/omitted for flat-price products
+          items:
+            $ref: "#/components/schemas/PriceTierResponse"
+          type: array
+        trialDays:
+          type: integer
+        type:
+          $ref: "#/components/schemas/ProductType"
+      required:
+      - billingModel
+      - id
+      - name
+      - type
+      type: object
     ProductType:
       enum:
       - payment
@@ -5967,9 +6150,16 @@ components:
       type: object
     UserSettingsPatchRequest:
       example:
+        onboardingCompletedTours:
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
         onboardingDone: true
         language: ""
+        onboardingState: pending
         colorScheme: auto
       properties:
         colorScheme:
@@ -5984,17 +6174,34 @@ components:
           - en
           - de
           type: string
+        onboardingCompletedTours:
+          items:
+            type: string
+          maxItems: 100
+          type: array
         onboardingDone:
           type: boolean
         onboardingHoldUntil:
-          minLength: 1
+          type: string
+        onboardingState:
+          enum:
+          - pending
+          - dismissed
+          - started
           type: string
       type: object
     UserSettingsPostRequest:
       example:
+        onboardingCompletedTours:
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
+        - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
         onboardingDone: true
         language: en
+        onboardingState: pending
         userId: userId
         colorScheme: auto
       properties:
@@ -6009,10 +6216,20 @@ components:
           - en
           - de
           type: string
+        onboardingCompletedTours:
+          items:
+            type: string
+          maxItems: 100
+          type: array
         onboardingDone:
           type: boolean
         onboardingHoldUntil:
-          minLength: 1
+          type: string
+        onboardingState:
+          enum:
+          - pending
+          - dismissed
+          - started
           type: string
         userId:
           minLength: 1
@@ -6022,10 +6239,14 @@ components:
       type: object
     UserSettingsResponse:
       example:
+        onboardingCompletedTours:
+        - onboardingCompletedTours
+        - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
         onboardingDone: true
         language: language
         id: id
+        onboardingState: onboardingState
         userId: userId
         colorScheme: colorScheme
       properties:
@@ -6035,9 +6256,15 @@ components:
           type: string
         language:
           type: string
+        onboardingCompletedTours:
+          items:
+            type: string
+          type: array
         onboardingDone:
           type: boolean
         onboardingHoldUntil:
+          type: string
+        onboardingState:
           type: string
         userId:
           type: string

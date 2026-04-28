@@ -19,49 +19,50 @@ import (
 )
 
 
-// HealthAPIService HealthAPI service
-type HealthAPIService service
+// ProductsAPIService ProductsAPI service
+type ProductsAPIService service
 
-type ApiHealthGetRequest struct {
+type ApiGetProductsRequest struct {
 	ctx context.Context
-	ApiService *HealthAPIService
+	ApiService *ProductsAPIService
 }
 
-func (r ApiHealthGetRequest) Execute() (*HealthResponse, *http.Response, error) {
-	return r.ApiService.HealthGetExecute(r)
+func (r ApiGetProductsRequest) Execute() ([]ProductResponse, *http.Response, error) {
+	return r.ApiService.GetProductsExecute(r)
 }
 
 /*
-HealthGet aggregated health check for all service dependencies
+GetProducts Get all products
 
-returns the health status of all registered service dependencies; responds with 200 when all checks pass or 503 when any dependency is unhealthy
+Returns all subscription plans and credit packs with current Stripe pricing.
+Includes disabled products. Results are sorted by display order.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiHealthGetRequest
+ @return ApiGetProductsRequest
 */
-func (a *HealthAPIService) HealthGet(ctx context.Context) ApiHealthGetRequest {
-	return ApiHealthGetRequest{
+func (a *ProductsAPIService) GetProducts(ctx context.Context) ApiGetProductsRequest {
+	return ApiGetProductsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return HealthResponse
-func (a *HealthAPIService) HealthGetExecute(r ApiHealthGetRequest) (*HealthResponse, *http.Response, error) {
+//  @return []ProductResponse
+func (a *ProductsAPIService) GetProductsExecute(r ApiGetProductsRequest) ([]ProductResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HealthResponse
+		localVarReturnValue  []ProductResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HealthAPIService.HealthGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.GetProducts")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/info/health"
+	localVarPath := localBasePath + "/v1/products"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -83,6 +84,20 @@ func (a *HealthAPIService) HealthGetExecute(r ApiHealthGetRequest) (*HealthRespo
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -106,8 +121,19 @@ func (a *HealthAPIService) HealthGetExecute(r ApiHealthGetRequest) (*HealthRespo
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v HealthResponse
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
