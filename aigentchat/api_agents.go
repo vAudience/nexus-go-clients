@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.30.1
+API version: 0.30.2
 Contact: contact@vaudience.ai
 */
 
@@ -1209,24 +1209,28 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*AgentResu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 1000
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
 	} else {
 		var defaultValue int32 = 0
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", defaultValue, "", "")
 		r.offset = &defaultValue
 	}
 	if r.sortBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "", "")
 	} else {
 		var defaultValue string = "\"name\""
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", defaultValue, "", "")
 		r.sortBy = &defaultValue
 	}
 	if r.sortOrder != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "", "")
 	} else {
 		var defaultValue string = "\"asc\""
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", defaultValue, "", "")
 		r.sortOrder = &defaultValue
 	}
 	// to determine the Content-Type header
