@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Badge** | Pointer to **string** |  | [optional] 
-**BannerColor** | Pointer to **string** | optional; when present: \&quot;success\&quot; | \&quot;brand\&quot; — UI accent hint, not localized. Independent of bannerText | [optional] 
+**BannerColor** | Pointer to **string** | optional; when present: \&quot;success\&quot; | \&quot;brand\&quot; | \&quot;error\&quot; — UI accent hint, not localized. Independent of bannerText | [optional] 
 **BannerText** | Pointer to **string** |  | [optional] 
 **BannerTooltip** | Pointer to **string** | optional; when present: \&quot;tiersMenu\&quot; — UI tooltip hint, not localized. Independent of bannerText | [optional] 
 **BillingModel** | [**BillingModel**](BillingModel.md) |  | 

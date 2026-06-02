@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.10.0
+  version: 0.10.5
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -5690,8 +5690,8 @@ components:
         badge:
           type: string
         bannerColor:
-          description: "optional; when present: \"success\" | \"brand\" — UI accent\
-            \ hint, not localized. Independent of bannerText"
+          description: "optional; when present: \"success\" | \"brand\" | \"error\"\
+            \ — UI accent hint, not localized. Independent of bannerText"
           type: string
         bannerText:
           type: string
