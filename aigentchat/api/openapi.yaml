@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.30.2
+  version: 0.31.8
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -416,7 +416,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -474,7 +475,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -532,7 +534,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -599,7 +602,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -664,7 +668,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -729,7 +734,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -794,7 +800,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: Agent ID
+      - description: "Agent ID, organization-scoped internal id, or predefined-agent\
+          \ internal id"
         in: path
         name: id
         required: true
@@ -8031,6 +8038,8 @@ components:
       - failed_to_delete_agent
       - failed_to_get_agent
       - failed_to_update_agent
+      - agent_internal_id_invalid
+      - agent_internal_id_conflict
       - ai_model_not_found
       - invalid_ai_model_id
       - invalid_ai_model_definition
@@ -8148,6 +8157,8 @@ components:
       - ErrCodeFailedToDeleteAgent
       - ErrCodeFailedToGetAgent
       - ErrCodeFailedToUpdateAgent
+      - ErrCodeAgentInternalIdInvalid
+      - ErrCodeAgentInternalIdConflict
       - ErrCodeAIModelNotFound
       - ErrCodeInvalidAIModelID
       - ErrCodeInvalidAIModelDefinition

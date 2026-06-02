@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.30.2
+API version: 0.31.8
 Contact: contact@vaudience.ai
 */
 
@@ -37,6 +37,8 @@ const (
 	ErrCodeFailedToDeleteAgent ApiErrorCode = "failed_to_delete_agent"
 	ErrCodeFailedToGetAgent ApiErrorCode = "failed_to_get_agent"
 	ErrCodeFailedToUpdateAgent ApiErrorCode = "failed_to_update_agent"
+	ErrCodeAgentInternalIdInvalid ApiErrorCode = "agent_internal_id_invalid"
+	ErrCodeAgentInternalIdConflict ApiErrorCode = "agent_internal_id_conflict"
 	ErrCodeAIModelNotFound ApiErrorCode = "ai_model_not_found"
 	ErrCodeInvalidAIModelID ApiErrorCode = "invalid_ai_model_id"
 	ErrCodeInvalidAIModelDefinition ApiErrorCode = "invalid_ai_model_definition"
@@ -156,6 +158,8 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_delete_agent",
 	"failed_to_get_agent",
 	"failed_to_update_agent",
+	"agent_internal_id_invalid",
+	"agent_internal_id_conflict",
 	"ai_model_not_found",
 	"invalid_ai_model_id",
 	"invalid_ai_model_definition",

@@ -39,7 +39,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 	toolId := "toolId_example" // string | Tool ID
 
 	configuration := openapiclient.NewConfiguration()
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 **toolId** | **string** | Tool ID | 
 
 ### Other Parameters
@@ -115,7 +115,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 	fileId := "fileId_example" // string | File ID
 
 	configuration := openapiclient.NewConfiguration()
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 **fileId** | **string** | File ID | 
 
 ### Other Parameters
@@ -263,7 +263,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 
 ### Other Parameters
 
@@ -404,7 +404,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 
 ### Other Parameters
 
@@ -575,7 +575,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 	toolId := "toolId_example" // string | Tool ID
 
 	configuration := openapiclient.NewConfiguration()
@@ -597,7 +597,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 **toolId** | **string** | Tool ID | 
 
 ### Other Parameters
@@ -651,7 +651,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 	fileId := "fileId_example" // string | File ID
 
 	configuration := openapiclient.NewConfiguration()
@@ -673,7 +673,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 **fileId** | **string** | File ID | 
 
 ### Other Parameters
@@ -727,7 +727,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Agent ID
+	id := "id_example" // string | Agent ID, organization-scoped internal id, or predefined-agent internal id
 	agent := *openapiclient.NewAgentWriteDto() // AgentWriteDto | Agent
 
 	configuration := openapiclient.NewConfiguration()
@@ -749,7 +749,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Agent ID | 
+**id** | **string** | Agent ID, organization-scoped internal id, or predefined-agent internal id | 
 
 ### Other Parameters
 

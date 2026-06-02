@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.30.2
+API version: 0.31.8
 Contact: contact@vaudience.ai
 */
 
@@ -43,7 +43,7 @@ Add an assigned tool to an agent
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @param toolId Tool ID
  @return ApiAddAssignedToolRequest
 */
@@ -222,7 +222,7 @@ Add an attached file ID to an agent
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @param fileId File ID
  @return ApiAddAttachedFileIDRequest
 */
@@ -572,7 +572,7 @@ Delete an agent by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @return ApiDeleteAgentRequest
 */
 func (a *AgentsAPIService) DeleteAgent(ctx context.Context, orgId string, id string) ApiDeleteAgentRequest {
@@ -871,7 +871,7 @@ Retrieve an agent by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @return ApiGetAgentRequest
 */
 func (a *AgentsAPIService) GetAgent(ctx context.Context, orgId string, id string) ApiGetAgentRequest {
@@ -1209,28 +1209,24 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*AgentResu
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 1000
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "", "")
 	} else {
 		var defaultValue int32 = 0
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", defaultValue, "", "")
 		r.offset = &defaultValue
 	}
 	if r.sortBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "", "")
 	} else {
 		var defaultValue string = "\"name\""
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", defaultValue, "", "")
 		r.sortBy = &defaultValue
 	}
 	if r.sortOrder != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "", "")
 	} else {
 		var defaultValue string = "\"asc\""
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", defaultValue, "", "")
 		r.sortOrder = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1352,7 +1348,7 @@ Remove an assigned tool from an agent
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @param toolId Tool ID
  @return ApiRemoveAssignedToolRequest
 */
@@ -1531,7 +1527,7 @@ Remove an attached file ID from an agent
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @param fileId File ID
  @return ApiRemoveAttachedFileIDRequest
 */
@@ -1716,7 +1712,7 @@ Update an agent by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Agent ID
+ @param id Agent ID, organization-scoped internal id, or predefined-agent internal id
  @return ApiUpdateAgentRequest
 */
 func (a *AgentsAPIService) UpdateAgent(ctx context.Context, orgId string, id string) ApiUpdateAgentRequest {

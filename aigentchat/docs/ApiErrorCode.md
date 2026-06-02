@@ -35,6 +35,10 @@
 
 * `ErrCodeFailedToUpdateAgent` (value: `"failed_to_update_agent"`)
 
+* `ErrCodeAgentInternalIdInvalid` (value: `"agent_internal_id_invalid"`)
+
+* `ErrCodeAgentInternalIdConflict` (value: `"agent_internal_id_conflict"`)
+
 * `ErrCodeAIModelNotFound` (value: `"ai_model_not_found"`)
 
 * `ErrCodeInvalidAIModelID` (value: `"invalid_ai_model_id"`)
