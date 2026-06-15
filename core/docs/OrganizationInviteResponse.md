@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | **string** |  | 
 **Id** | **string** |  | 
 **OrganizationId** | **string** |  | 
+**RoleId** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | **string** |  | 
 
 ## Methods
@@ -192,6 +193,31 @@ and a boolean to check if the value has been set.
 
 SetOrganizationId sets OrganizationId field to given value.
 
+
+### GetRoleId
+
+`func (o *OrganizationInviteResponse) GetRoleId() string`
+
+GetRoleId returns the RoleId field if non-nil, zero value otherwise.
+
+### GetRoleIdOk
+
+`func (o *OrganizationInviteResponse) GetRoleIdOk() (*string, bool)`
+
+GetRoleIdOk returns a tuple with the RoleId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoleId
+
+`func (o *OrganizationInviteResponse) SetRoleId(v string)`
+
+SetRoleId sets RoleId field to given value.
+
+### HasRoleId
+
+`func (o *OrganizationInviteResponse) HasRoleId() bool`
+
+HasRoleId returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

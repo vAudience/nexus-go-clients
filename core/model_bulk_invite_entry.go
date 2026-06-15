@@ -15,39 +15,39 @@ import (
 	"fmt"
 )
 
-// checks if the OrganizationInviteRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &OrganizationInviteRequest{}
+// checks if the BulkInviteEntry type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkInviteEntry{}
 
-// OrganizationInviteRequest struct for OrganizationInviteRequest
-type OrganizationInviteRequest struct {
+// BulkInviteEntry struct for BulkInviteEntry
+type BulkInviteEntry struct {
 	Email string `json:"email"`
 	// RoleId validity is enforced by json.Unmarshal (uuid.UUID implements TextUnmarshaler); the validate tag only gates presence.
 	RoleId *string `json:"roleId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _OrganizationInviteRequest OrganizationInviteRequest
+type _BulkInviteEntry BulkInviteEntry
 
-// NewOrganizationInviteRequest instantiates a new OrganizationInviteRequest object
+// NewBulkInviteEntry instantiates a new BulkInviteEntry object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationInviteRequest(email string) *OrganizationInviteRequest {
-	this := OrganizationInviteRequest{}
+func NewBulkInviteEntry(email string) *BulkInviteEntry {
+	this := BulkInviteEntry{}
 	this.Email = email
 	return &this
 }
 
-// NewOrganizationInviteRequestWithDefaults instantiates a new OrganizationInviteRequest object
+// NewBulkInviteEntryWithDefaults instantiates a new BulkInviteEntry object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOrganizationInviteRequestWithDefaults() *OrganizationInviteRequest {
-	this := OrganizationInviteRequest{}
+func NewBulkInviteEntryWithDefaults() *BulkInviteEntry {
+	this := BulkInviteEntry{}
 	return &this
 }
 
 // GetEmail returns the Email field value
-func (o *OrganizationInviteRequest) GetEmail() string {
+func (o *BulkInviteEntry) GetEmail() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -58,7 +58,7 @@ func (o *OrganizationInviteRequest) GetEmail() string {
 
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
-func (o *OrganizationInviteRequest) GetEmailOk() (*string, bool) {
+func (o *BulkInviteEntry) GetEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *OrganizationInviteRequest) GetEmailOk() (*string, bool) {
 }
 
 // SetEmail sets field value
-func (o *OrganizationInviteRequest) SetEmail(v string) {
+func (o *BulkInviteEntry) SetEmail(v string) {
 	o.Email = v
 }
 
 // GetRoleId returns the RoleId field value if set, zero value otherwise.
-func (o *OrganizationInviteRequest) GetRoleId() string {
+func (o *BulkInviteEntry) GetRoleId() string {
 	if o == nil || IsNil(o.RoleId) {
 		var ret string
 		return ret
@@ -81,7 +81,7 @@ func (o *OrganizationInviteRequest) GetRoleId() string {
 
 // GetRoleIdOk returns a tuple with the RoleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrganizationInviteRequest) GetRoleIdOk() (*string, bool) {
+func (o *BulkInviteEntry) GetRoleIdOk() (*string, bool) {
 	if o == nil || IsNil(o.RoleId) {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *OrganizationInviteRequest) GetRoleIdOk() (*string, bool) {
 }
 
 // HasRoleId returns a boolean if a field has been set.
-func (o *OrganizationInviteRequest) HasRoleId() bool {
+func (o *BulkInviteEntry) HasRoleId() bool {
 	if o != nil && !IsNil(o.RoleId) {
 		return true
 	}
@@ -98,11 +98,11 @@ func (o *OrganizationInviteRequest) HasRoleId() bool {
 }
 
 // SetRoleId gets a reference to the given string and assigns it to the RoleId field.
-func (o *OrganizationInviteRequest) SetRoleId(v string) {
+func (o *BulkInviteEntry) SetRoleId(v string) {
 	o.RoleId = &v
 }
 
-func (o OrganizationInviteRequest) MarshalJSON() ([]byte, error) {
+func (o BulkInviteEntry) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -110,7 +110,7 @@ func (o OrganizationInviteRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OrganizationInviteRequest) ToMap() (map[string]interface{}, error) {
+func (o BulkInviteEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["email"] = o.Email
 	if !IsNil(o.RoleId) {
@@ -124,7 +124,7 @@ func (o OrganizationInviteRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *OrganizationInviteRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *BulkInviteEntry) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -146,15 +146,15 @@ func (o *OrganizationInviteRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varOrganizationInviteRequest := _OrganizationInviteRequest{}
+	varBulkInviteEntry := _BulkInviteEntry{}
 
-	err = json.Unmarshal(data, &varOrganizationInviteRequest)
+	err = json.Unmarshal(data, &varBulkInviteEntry)
 
 	if err != nil {
 		return err
 	}
 
-	*o = OrganizationInviteRequest(varOrganizationInviteRequest)
+	*o = BulkInviteEntry(varBulkInviteEntry)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -167,38 +167,38 @@ func (o *OrganizationInviteRequest) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableOrganizationInviteRequest struct {
-	value *OrganizationInviteRequest
+type NullableBulkInviteEntry struct {
+	value *BulkInviteEntry
 	isSet bool
 }
 
-func (v NullableOrganizationInviteRequest) Get() *OrganizationInviteRequest {
+func (v NullableBulkInviteEntry) Get() *BulkInviteEntry {
 	return v.value
 }
 
-func (v *NullableOrganizationInviteRequest) Set(val *OrganizationInviteRequest) {
+func (v *NullableBulkInviteEntry) Set(val *BulkInviteEntry) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOrganizationInviteRequest) IsSet() bool {
+func (v NullableBulkInviteEntry) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOrganizationInviteRequest) Unset() {
+func (v *NullableBulkInviteEntry) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOrganizationInviteRequest(val *OrganizationInviteRequest) *NullableOrganizationInviteRequest {
-	return &NullableOrganizationInviteRequest{value: val, isSet: true}
+func NewNullableBulkInviteEntry(val *BulkInviteEntry) *NullableBulkInviteEntry {
+	return &NullableBulkInviteEntry{value: val, isSet: true}
 }
 
-func (v NullableOrganizationInviteRequest) MarshalJSON() ([]byte, error) {
+func (v NullableBulkInviteEntry) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableOrganizationInviteRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableBulkInviteEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

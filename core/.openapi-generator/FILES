@@ -22,6 +22,8 @@ docs/AgentQuickFilterI18n.md
 docs/AuthAPI.md
 docs/AuthenticatedResponse.md
 docs/BillingModel.md
+docs/BulkInviteEntry.md
+docs/BulkInviteResult.md
 docs/CredentialsResponse.md
 docs/EntitlementResponse.md
 docs/EntitlementsAPI.md
@@ -37,6 +39,8 @@ docs/MetricsAPI.md
 docs/OrganizationApiKeyPatchRequest.md
 docs/OrganizationApiKeyPostRequest.md
 docs/OrganizationApiKeyResponse.md
+docs/OrganizationBulkInviteRequest.md
+docs/OrganizationBulkInviteResponse.md
 docs/OrganizationCheckoutSessionResponse.md
 docs/OrganizationCreditsPaymentPostRequest.md
 docs/OrganizationCreditsPaymentResponse.md
@@ -99,6 +103,8 @@ model_agent_quick_filter.go
 model_agent_quick_filter_i18n.go
 model_authenticated_response.go
 model_billing_model.go
+model_bulk_invite_entry.go
+model_bulk_invite_result.go
 model_credentials_response.go
 model_entitlement_response.go
 model_error_code.go
@@ -111,6 +117,8 @@ model_member_post_request.go
 model_organization_api_key_patch_request.go
 model_organization_api_key_post_request.go
 model_organization_api_key_response.go
+model_organization_bulk_invite_request.go
+model_organization_bulk_invite_response.go
 model_organization_checkout_session_response.go
 model_organization_credits_payment_post_request.go
 model_organization_credits_payment_response.go

@@ -179,6 +179,12 @@
 
 * `ErrCodeOrganizationInviteSelfInvite` (value: `"organization_invite_self_invite"`)
 
+* `ErrCodeOrganizationInviteInvalidRole` (value: `"organization_invite_invalid_role"`)
+
+* `ErrCodeOrganizationInviteBulkSizeExceeded` (value: `"organization_invite_bulk_size_exceeded"`)
+
+* `ErrCodeOrganizationInviteEmailDuplicateInBatch` (value: `"organization_invite_email_duplicate_in_batch"`)
+
 * `ErrCodeOrganizationTransferIsPersonal` (value: `"organization_transfer_is_personal"`)
 
 * `ErrCodeOrganizationTransferIdenticalOwner` (value: `"organization_transfer_identical_owner"`)
@@ -204,6 +210,8 @@
 * `ErrCodeOrganizationInviteMemberExists` (value: `"organization_invite_member_exists"`)
 
 * `ErrCodeOrganizationInviteAcceptMemberExists` (value: `"organization_invite_accept_member_exists"`)
+
+* `ErrCodeOrganizationInviteRoleNotFound` (value: `"organization_invite_role_not_found"`)
 
 * `ErrCodeOrganizationSettingsExists` (value: `"organization_settings_exists"`)
 

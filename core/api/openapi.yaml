@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.10.5
+  version: 0.12.2
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -1010,6 +1010,72 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: organizationInvite
+  /v1/organizations/{id}/invites/bulk:
+    post:
+      description: |-
+        Invite up to the configured maximum number of users to an Organization in a single request.
+        Email format and batch shape are validated up-front: a malformed email, an empty or oversized
+        batch, or a seat-cap violation rejects the whole request (400). Per-entry business-rule failures
+        (duplicate email in batch, self-invite, already a member or already invited, invalid role) are
+        best-effort and reported individually in the results as rejected.
+      operationId: BulkInvite
+      parameters:
+      - description: id of the organization
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrganizationBulkInviteRequest"
+        description: organization bulk invite object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrganizationBulkInviteResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Organization Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+      security:
+      - ApiKey: []
+      summary: Bulk invite users to an Organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: organizationBulkInvite
   /v1/organizations/{id}/invites/{inviteId}:
     delete:
       description: Delete Organization Invite by ID
@@ -4355,6 +4421,40 @@ components:
       - BillingModelYearlySubscription
       - BillingModelCreditPack
       - BillingModelVaudSubscription
+    BulkInviteEntry:
+      example:
+        roleId: roleId
+        email: email
+      properties:
+        email:
+          type: string
+        roleId:
+          description: |-
+            RoleId validity is enforced by json.Unmarshal (uuid.UUID implements TextUnmarshaler); the validate
+            tag only gates presence.
+          type: string
+      required:
+      - email
+      type: object
+    BulkInviteResult:
+      example:
+        inviteId: inviteId
+        errorCode: errorCode
+        email: email
+        status: status
+      properties:
+        email:
+          type: string
+        errorCode:
+          type: string
+        inviteId:
+          type: string
+        status:
+          type: string
+      required:
+      - email
+      - status
+      type: object
     CredentialsResponse:
       example:
         otp_allowed: true
@@ -4468,6 +4568,9 @@ components:
       - organization_invite_email_mismatch
       - organization_invite_org_id_mismatch
       - organization_invite_self_invite
+      - organization_invite_invalid_role
+      - organization_invite_bulk_size_exceeded
+      - organization_invite_email_duplicate_in_batch
       - organization_transfer_is_personal
       - organization_transfer_identical_owner
       - product_type_invalid
@@ -4481,6 +4584,7 @@ components:
       - organization_invite_email_exists
       - organization_invite_member_exists
       - organization_invite_accept_member_exists
+      - organization_invite_role_not_found
       - organization_settings_exists
       - user_exists
       - user_role_exists
@@ -4575,6 +4679,9 @@ components:
       - ErrCodeOrganizationInviteEmailMismatch
       - ErrCodeOrganizationInviteOrgIdMismatch
       - ErrCodeOrganizationInviteSelfInvite
+      - ErrCodeOrganizationInviteInvalidRole
+      - ErrCodeOrganizationInviteBulkSizeExceeded
+      - ErrCodeOrganizationInviteEmailDuplicateInBatch
       - ErrCodeOrganizationTransferIsPersonal
       - ErrCodeOrganizationTransferIdenticalOwner
       - ErrCodeProductTypeInvalid
@@ -4588,6 +4695,7 @@ components:
       - ErrCodeOrganizationInviteEmailExists
       - ErrCodeOrganizationInviteMemberExists
       - ErrCodeOrganizationInviteAcceptMemberExists
+      - ErrCodeOrganizationInviteRoleNotFound
       - ErrCodeOrganizationSettingsExists
       - ErrCodeUserExists
       - ErrCodeUserRoleExists
@@ -4858,6 +4966,41 @@ components:
       - userId
       - userName
       type: object
+    OrganizationBulkInviteRequest:
+      example:
+        entries:
+        - roleId: roleId
+          email: email
+        - roleId: roleId
+          email: email
+      properties:
+        entries:
+          items:
+            $ref: "#/components/schemas/BulkInviteEntry"
+          minItems: 1
+          type: array
+      required:
+      - entries
+      type: object
+    OrganizationBulkInviteResponse:
+      example:
+        results:
+        - inviteId: inviteId
+          errorCode: errorCode
+          email: email
+          status: status
+        - inviteId: inviteId
+          errorCode: errorCode
+          email: email
+          status: status
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/BulkInviteResult"
+          type: array
+      required:
+      - results
+      type: object
     OrganizationCheckoutSessionResponse:
       example:
         url: url
@@ -5026,9 +5169,15 @@ components:
       type: object
     OrganizationInviteRequest:
       example:
+        roleId: roleId
         email: email
       properties:
         email:
+          type: string
+        roleId:
+          description: |-
+            RoleId validity is enforced by json.Unmarshal (uuid.UUID implements TextUnmarshaler); the validate
+            tag only gates presence.
           type: string
       required:
       - email
@@ -5040,6 +5189,7 @@ components:
         createdByName: createdByName
         createdBy: createdBy
         emailSent: true
+        roleId: roleId
         id: id
         email: email
         expiresAt: expiresAt
@@ -5060,6 +5210,8 @@ components:
         id:
           type: string
         organizationId:
+          type: string
+        roleId:
           type: string
         updatedAt:
           type: string
