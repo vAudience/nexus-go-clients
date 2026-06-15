@@ -129,6 +129,8 @@
 
 * `ErrCodeChatCompletionInProgress` (value: `"chat_completion_in_progress"`)
 
+* `ErrCodeChatCompletionCancelled` (value: `"chat_completion_cancelled"`)
+
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 
 * `ErrCodeFailedToEmbedText` (value: `"failed_to_embed_text"`)

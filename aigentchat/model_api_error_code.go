@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.31.8
+API version: 0.33.6
 Contact: contact@vaudience.ai
 */
 
@@ -84,6 +84,7 @@ const (
 	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
 	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
 	ErrCodeChatCompletionInProgress ApiErrorCode = "chat_completion_in_progress"
+	ErrCodeChatCompletionCancelled ApiErrorCode = "chat_completion_cancelled"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
@@ -205,6 +206,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"chat_completion_exceeds_max_input_tokens",
 	"chat_completion_exceeds_max_tool_calls",
 	"chat_completion_in_progress",
+	"chat_completion_cancelled",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",

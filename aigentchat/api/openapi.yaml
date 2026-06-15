@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.31.8
+  version: 0.33.6
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -2384,18 +2384,18 @@ paths:
         "204":
           content: {}
           description: No Content
-        "400":
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ApiError"
-          description: Bad Request
         "403":
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Forbidden
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not Found
         "500":
           content:
             '*/*':
@@ -8085,6 +8085,7 @@ components:
       - chat_completion_exceeds_max_input_tokens
       - chat_completion_exceeds_max_tool_calls
       - chat_completion_in_progress
+      - chat_completion_cancelled
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
@@ -8204,6 +8205,7 @@ components:
       - ErrCodeChatCompletionExceedsMaxInputTokens
       - ErrCodeChatCompletionExceedsMaxToolCalls
       - ErrCodeChatCompletionInProgress
+      - ErrCodeChatCompletionCancelled
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
