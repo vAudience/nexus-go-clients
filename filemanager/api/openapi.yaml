@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.4.6
+  version: 0.4.7
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
