@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AcceptedFileMimetypes** | Pointer to **[]string** |  | [optional] 
 **Actions** | **[]string** |  | 
 **Capabilities** | Pointer to **[]string** | Note: only set when returning the model (not stored at model level), derived from features | [optional] 
+**ChatMaxInputTokens** | Pointer to **int32** | Note: only set when returning the model (not stored at model level), derived from features. Reflects GetMaxInputTokensByCapability(AIModelCapabilityTextToTextStreaming) — streaming is the default chat path and both text-to-text capabilities expose the same input limit in practice. | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **DefaultHostingLocation** | Pointer to [**HostingLocation**](HostingLocation.md) |  | [optional] 
 **Deleted** | Pointer to **bool** |  | [optional] 
@@ -119,6 +120,31 @@ SetCapabilities sets Capabilities field to given value.
 `func (o *AIModel) HasCapabilities() bool`
 
 HasCapabilities returns a boolean if a field has been set.
+
+### GetChatMaxInputTokens
+
+`func (o *AIModel) GetChatMaxInputTokens() int32`
+
+GetChatMaxInputTokens returns the ChatMaxInputTokens field if non-nil, zero value otherwise.
+
+### GetChatMaxInputTokensOk
+
+`func (o *AIModel) GetChatMaxInputTokensOk() (*int32, bool)`
+
+GetChatMaxInputTokensOk returns a tuple with the ChatMaxInputTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChatMaxInputTokens
+
+`func (o *AIModel) SetChatMaxInputTokens(v int32)`
+
+SetChatMaxInputTokens sets ChatMaxInputTokens field to given value.
+
+### HasChatMaxInputTokens
+
+`func (o *AIModel) HasChatMaxInputTokens() bool`
+
+HasChatMaxInputTokens returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

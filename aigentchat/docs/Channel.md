@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ContextWindow** | Pointer to [**ChannelContextWindow**](ChannelContextWindow.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
@@ -36,6 +37,31 @@ will change when the set of required properties is changed
 NewChannelWithDefaults instantiates a new Channel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetContextWindow
+
+`func (o *Channel) GetContextWindow() ChannelContextWindow`
+
+GetContextWindow returns the ContextWindow field if non-nil, zero value otherwise.
+
+### GetContextWindowOk
+
+`func (o *Channel) GetContextWindowOk() (*ChannelContextWindow, bool)`
+
+GetContextWindowOk returns a tuple with the ContextWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContextWindow
+
+`func (o *Channel) SetContextWindow(v ChannelContextWindow)`
+
+SetContextWindow sets ContextWindow field to given value.
+
+### HasContextWindow
+
+`func (o *Channel) HasContextWindow() bool`
+
+HasContextWindow returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

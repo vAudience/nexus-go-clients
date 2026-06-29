@@ -77,6 +77,7 @@ docs/AuditTrail.md
 docs/AuditTrailMessage.md
 docs/AuditTrailsAPI.md
 docs/Channel.md
+docs/ChannelContextWindow.md
 docs/ChannelResults.md
 docs/ChannelWriteDto.md
 docs/ChannelsAPI.md
@@ -202,6 +203,7 @@ model_audio_transcription.go
 model_audit_trail.go
 model_audit_trail_message.go
 model_channel.go
+model_channel_context_window.go
 model_channel_results.go
 model_channel_write_dto.go
 model_chat_completion_cost_tracking_request.go

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.33.6
+API version: 0.34.5
 Contact: contact@vaudience.ai
 */
 
@@ -25,6 +25,8 @@ type AIModel struct {
 	Actions []string `json:"actions"`
 	// Note: only set when returning the model (not stored at model level), derived from features
 	Capabilities []string `json:"capabilities,omitempty"`
+	// Note: only set when returning the model (not stored at model level), derived from features. Reflects GetMaxInputTokensByCapability(AIModelCapabilityTextToTextStreaming) — streaming is the default chat path and both text-to-text capabilities expose the same input limit in practice.
+	ChatMaxInputTokens *int32 `json:"chat_max_input_tokens,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	DefaultHostingLocation *HostingLocation `json:"default_hosting_location,omitempty"`
 	Deleted *bool `json:"deleted,omitempty"`
@@ -164,6 +166,38 @@ func (o *AIModel) HasCapabilities() bool {
 // SetCapabilities gets a reference to the given []string and assigns it to the Capabilities field.
 func (o *AIModel) SetCapabilities(v []string) {
 	o.Capabilities = v
+}
+
+// GetChatMaxInputTokens returns the ChatMaxInputTokens field value if set, zero value otherwise.
+func (o *AIModel) GetChatMaxInputTokens() int32 {
+	if o == nil || IsNil(o.ChatMaxInputTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.ChatMaxInputTokens
+}
+
+// GetChatMaxInputTokensOk returns a tuple with the ChatMaxInputTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIModel) GetChatMaxInputTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.ChatMaxInputTokens) {
+		return nil, false
+	}
+	return o.ChatMaxInputTokens, true
+}
+
+// HasChatMaxInputTokens returns a boolean if a field has been set.
+func (o *AIModel) HasChatMaxInputTokens() bool {
+	if o != nil && !IsNil(o.ChatMaxInputTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetChatMaxInputTokens gets a reference to the given int32 and assigns it to the ChatMaxInputTokens field.
+func (o *AIModel) SetChatMaxInputTokens(v int32) {
+	o.ChatMaxInputTokens = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -863,6 +897,9 @@ func (o AIModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
 	}
+	if !IsNil(o.ChatMaxInputTokens) {
+		toSerialize["chat_max_input_tokens"] = o.ChatMaxInputTokens
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -971,6 +1008,7 @@ func (o *AIModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "accepted_file_mimetypes")
 		delete(additionalProperties, "actions")
 		delete(additionalProperties, "capabilities")
+		delete(additionalProperties, "chat_max_input_tokens")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "default_hosting_location")
 		delete(additionalProperties, "deleted")

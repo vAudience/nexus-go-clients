@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **OwnerOrganizationId** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
+**RequestInputTokens** | Pointer to **int32** |  | [optional] 
+**RequestOutputTokens** | Pointer to **int32** |  | [optional] 
+**RequestOverheadTokens** | Pointer to **int32** |  | [optional] 
 **ResponseToId** | Pointer to **string** |  | [optional] 
 **SenderConversationRole** | [**ConversationRole**](ConversationRole.md) |  | 
 **SenderId** | **string** |  | 
@@ -429,6 +432,81 @@ SetReferenceId sets ReferenceId field to given value.
 `func (o *AIgencyMessage) HasReferenceId() bool`
 
 HasReferenceId returns a boolean if a field has been set.
+
+### GetRequestInputTokens
+
+`func (o *AIgencyMessage) GetRequestInputTokens() int32`
+
+GetRequestInputTokens returns the RequestInputTokens field if non-nil, zero value otherwise.
+
+### GetRequestInputTokensOk
+
+`func (o *AIgencyMessage) GetRequestInputTokensOk() (*int32, bool)`
+
+GetRequestInputTokensOk returns a tuple with the RequestInputTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestInputTokens
+
+`func (o *AIgencyMessage) SetRequestInputTokens(v int32)`
+
+SetRequestInputTokens sets RequestInputTokens field to given value.
+
+### HasRequestInputTokens
+
+`func (o *AIgencyMessage) HasRequestInputTokens() bool`
+
+HasRequestInputTokens returns a boolean if a field has been set.
+
+### GetRequestOutputTokens
+
+`func (o *AIgencyMessage) GetRequestOutputTokens() int32`
+
+GetRequestOutputTokens returns the RequestOutputTokens field if non-nil, zero value otherwise.
+
+### GetRequestOutputTokensOk
+
+`func (o *AIgencyMessage) GetRequestOutputTokensOk() (*int32, bool)`
+
+GetRequestOutputTokensOk returns a tuple with the RequestOutputTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestOutputTokens
+
+`func (o *AIgencyMessage) SetRequestOutputTokens(v int32)`
+
+SetRequestOutputTokens sets RequestOutputTokens field to given value.
+
+### HasRequestOutputTokens
+
+`func (o *AIgencyMessage) HasRequestOutputTokens() bool`
+
+HasRequestOutputTokens returns a boolean if a field has been set.
+
+### GetRequestOverheadTokens
+
+`func (o *AIgencyMessage) GetRequestOverheadTokens() int32`
+
+GetRequestOverheadTokens returns the RequestOverheadTokens field if non-nil, zero value otherwise.
+
+### GetRequestOverheadTokensOk
+
+`func (o *AIgencyMessage) GetRequestOverheadTokensOk() (*int32, bool)`
+
+GetRequestOverheadTokensOk returns a tuple with the RequestOverheadTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestOverheadTokens
+
+`func (o *AIgencyMessage) SetRequestOverheadTokens(v int32)`
+
+SetRequestOverheadTokens sets RequestOverheadTokens field to given value.
+
+### HasRequestOverheadTokens
+
+`func (o *AIgencyMessage) HasRequestOverheadTokens() bool`
+
+HasRequestOverheadTokens returns a boolean if a field has been set.
 
 ### GetResponseToId
 

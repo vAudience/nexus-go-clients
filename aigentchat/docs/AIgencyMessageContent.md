@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FunctionCall** | Pointer to [**AIgencyFunctionCall**](AIgencyFunctionCall.md) |  | [optional] 
 **FunctionResponses** | Pointer to [**AIgencyFunctionResponse**](AIgencyFunctionResponse.md) |  | [optional] 
 **FunctionStatusUpdate** | Pointer to [**AIgencyFunctionStatusUpdate**](AIgencyFunctionStatusUpdate.md) |  | [optional] 
+**IsCancelled** | Pointer to **bool** |  | [optional] 
 **Text** | Pointer to **string** |  | [optional] 
 **TextMetaData** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
 **TextMimeType** | Pointer to **string** |  | [optional] 
@@ -132,6 +133,31 @@ SetFunctionStatusUpdate sets FunctionStatusUpdate field to given value.
 `func (o *AIgencyMessageContent) HasFunctionStatusUpdate() bool`
 
 HasFunctionStatusUpdate returns a boolean if a field has been set.
+
+### GetIsCancelled
+
+`func (o *AIgencyMessageContent) GetIsCancelled() bool`
+
+GetIsCancelled returns the IsCancelled field if non-nil, zero value otherwise.
+
+### GetIsCancelledOk
+
+`func (o *AIgencyMessageContent) GetIsCancelledOk() (*bool, bool)`
+
+GetIsCancelledOk returns a tuple with the IsCancelled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancelled
+
+`func (o *AIgencyMessageContent) SetIsCancelled(v bool)`
+
+SetIsCancelled sets IsCancelled field to given value.
+
+### HasIsCancelled
+
+`func (o *AIgencyMessageContent) HasIsCancelled() bool`
+
+HasIsCancelled returns a boolean if a field has been set.
 
 ### GetText
 

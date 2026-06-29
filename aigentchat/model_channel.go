@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.33.6
+API version: 0.34.5
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &Channel{}
 
 // Channel struct for Channel
 type Channel struct {
+	ContextWindow *ChannelContextWindow `json:"context_window,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id string `json:"id"`
@@ -58,6 +59,38 @@ func NewChannel(id string, name string, ownerId string, ownerOrganizationId stri
 func NewChannelWithDefaults() *Channel {
 	this := Channel{}
 	return &this
+}
+
+// GetContextWindow returns the ContextWindow field value if set, zero value otherwise.
+func (o *Channel) GetContextWindow() ChannelContextWindow {
+	if o == nil || IsNil(o.ContextWindow) {
+		var ret ChannelContextWindow
+		return ret
+	}
+	return *o.ContextWindow
+}
+
+// GetContextWindowOk returns a tuple with the ContextWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Channel) GetContextWindowOk() (*ChannelContextWindow, bool) {
+	if o == nil || IsNil(o.ContextWindow) {
+		return nil, false
+	}
+	return o.ContextWindow, true
+}
+
+// HasContextWindow returns a boolean if a field has been set.
+func (o *Channel) HasContextWindow() bool {
+	if o != nil && !IsNil(o.ContextWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextWindow gets a reference to the given ChannelContextWindow and assigns it to the ContextWindow field.
+func (o *Channel) SetContextWindow(v ChannelContextWindow) {
+	o.ContextWindow = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -454,6 +487,9 @@ func (o Channel) MarshalJSON() ([]byte, error) {
 
 func (o Channel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ContextWindow) {
+		toSerialize["context_window"] = o.ContextWindow
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -531,6 +567,7 @@ func (o *Channel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "context_window")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")

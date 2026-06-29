@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.33.6
+API version: 0.34.5
 Contact: contact@vaudience.ai
 */
 
@@ -36,6 +36,7 @@ const (
 	ErrCodeFailedToCreateDefaultAgents ApiErrorCode = "failed_to_create_default_agents"
 	ErrCodeFailedToDeleteAgent ApiErrorCode = "failed_to_delete_agent"
 	ErrCodeFailedToGetAgent ApiErrorCode = "failed_to_get_agent"
+	ErrCodeAgentAccessDenied ApiErrorCode = "agent_access_denied"
 	ErrCodeFailedToUpdateAgent ApiErrorCode = "failed_to_update_agent"
 	ErrCodeAgentInternalIdInvalid ApiErrorCode = "agent_internal_id_invalid"
 	ErrCodeAgentInternalIdConflict ApiErrorCode = "agent_internal_id_conflict"
@@ -75,19 +76,19 @@ const (
 	ErrCodeFailedToFetchChannel ApiErrorCode = "failed_to_fetch_channel"
 	ErrCodeFailedToFetchChannels ApiErrorCode = "failed_to_fetch_channels"
 	ErrCodeFailedToFetchSubscribed ApiErrorCode = "failed_to_fetch_subscribed_channels"
-	ErrCodeFailedToCreateChatContext ApiErrorCode = "failed_to_create_chat_context"
 	ErrCodeCapabilityNotAvailable ApiErrorCode = "capability_not_available"
 	ErrCodeNoMessagesFound ApiErrorCode = "no_messages_found"
 	ErrCodeInvalidRequestParameters ApiErrorCode = "invalid_request_parameters"
 	ErrCodeChatCompletionTooManyTempFiles ApiErrorCode = "chat_completion_too_many_temporary_files"
 	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
-	ErrCodeChatCompletionExceedsMaxInputTokens ApiErrorCode = "chat_completion_exceeds_max_input_tokens"
 	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
 	ErrCodeChatCompletionInProgress ApiErrorCode = "chat_completion_in_progress"
 	ErrCodeChatCompletionCancelled ApiErrorCode = "chat_completion_cancelled"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
+	ErrCodeExceedsMaxInputTokens ApiErrorCode = "exceeds_max_input_tokens"
+	ErrCodeFailedToCreateExecutionContext ApiErrorCode = "failed_to_create_execution_context"
 	ErrCodeInvalidFileID ApiErrorCode = "invalid_file_id"
 	ErrCodeFileNotFound ApiErrorCode = "file_not_found"
 	ErrCodeFileUploadCategoryMismatch ApiErrorCode = "file_upload_category_mismatch"
@@ -158,6 +159,7 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_create_default_agents",
 	"failed_to_delete_agent",
 	"failed_to_get_agent",
+	"agent_access_denied",
 	"failed_to_update_agent",
 	"agent_internal_id_invalid",
 	"agent_internal_id_conflict",
@@ -197,19 +199,19 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"failed_to_fetch_channel",
 	"failed_to_fetch_channels",
 	"failed_to_fetch_subscribed_channels",
-	"failed_to_create_chat_context",
 	"capability_not_available",
 	"no_messages_found",
 	"invalid_request_parameters",
 	"chat_completion_too_many_temporary_files",
 	"chat_completion_exceeds_total_temporary_file_size",
-	"chat_completion_exceeds_max_input_tokens",
 	"chat_completion_exceeds_max_tool_calls",
 	"chat_completion_in_progress",
 	"chat_completion_cancelled",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",
+	"exceeds_max_input_tokens",
+	"failed_to_create_execution_context",
 	"invalid_file_id",
 	"file_not_found",
 	"file_upload_category_mismatch",

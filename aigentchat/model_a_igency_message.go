@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.33.6
+API version: 0.34.5
 Contact: contact@vaudience.ai
 */
 
@@ -39,6 +39,9 @@ type AIgencyMessage struct {
 	OwnerOrganizationId string `json:"owner_organization_id"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	ReferenceId *string `json:"reference_id,omitempty"`
+	RequestInputTokens *int32 `json:"request_input_tokens,omitempty"`
+	RequestOutputTokens *int32 `json:"request_output_tokens,omitempty"`
+	RequestOverheadTokens *int32 `json:"request_overhead_tokens,omitempty"`
 	ResponseToId *string `json:"response_to_id,omitempty"`
 	SenderConversationRole ConversationRole `json:"sender_conversation_role"`
 	SenderId string `json:"sender_id"`
@@ -557,6 +560,102 @@ func (o *AIgencyMessage) SetReferenceId(v string) {
 	o.ReferenceId = &v
 }
 
+// GetRequestInputTokens returns the RequestInputTokens field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetRequestInputTokens() int32 {
+	if o == nil || IsNil(o.RequestInputTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.RequestInputTokens
+}
+
+// GetRequestInputTokensOk returns a tuple with the RequestInputTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetRequestInputTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.RequestInputTokens) {
+		return nil, false
+	}
+	return o.RequestInputTokens, true
+}
+
+// HasRequestInputTokens returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasRequestInputTokens() bool {
+	if o != nil && !IsNil(o.RequestInputTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestInputTokens gets a reference to the given int32 and assigns it to the RequestInputTokens field.
+func (o *AIgencyMessage) SetRequestInputTokens(v int32) {
+	o.RequestInputTokens = &v
+}
+
+// GetRequestOutputTokens returns the RequestOutputTokens field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetRequestOutputTokens() int32 {
+	if o == nil || IsNil(o.RequestOutputTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.RequestOutputTokens
+}
+
+// GetRequestOutputTokensOk returns a tuple with the RequestOutputTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetRequestOutputTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.RequestOutputTokens) {
+		return nil, false
+	}
+	return o.RequestOutputTokens, true
+}
+
+// HasRequestOutputTokens returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasRequestOutputTokens() bool {
+	if o != nil && !IsNil(o.RequestOutputTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestOutputTokens gets a reference to the given int32 and assigns it to the RequestOutputTokens field.
+func (o *AIgencyMessage) SetRequestOutputTokens(v int32) {
+	o.RequestOutputTokens = &v
+}
+
+// GetRequestOverheadTokens returns the RequestOverheadTokens field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetRequestOverheadTokens() int32 {
+	if o == nil || IsNil(o.RequestOverheadTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.RequestOverheadTokens
+}
+
+// GetRequestOverheadTokensOk returns a tuple with the RequestOverheadTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetRequestOverheadTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.RequestOverheadTokens) {
+		return nil, false
+	}
+	return o.RequestOverheadTokens, true
+}
+
+// HasRequestOverheadTokens returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasRequestOverheadTokens() bool {
+	if o != nil && !IsNil(o.RequestOverheadTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestOverheadTokens gets a reference to the given int32 and assigns it to the RequestOverheadTokens field.
+func (o *AIgencyMessage) SetRequestOverheadTokens(v int32) {
+	o.RequestOverheadTokens = &v
+}
+
 // GetResponseToId returns the ResponseToId field value if set, zero value otherwise.
 func (o *AIgencyMessage) GetResponseToId() string {
 	if o == nil || IsNil(o.ResponseToId) {
@@ -840,6 +939,15 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReferenceId) {
 		toSerialize["reference_id"] = o.ReferenceId
 	}
+	if !IsNil(o.RequestInputTokens) {
+		toSerialize["request_input_tokens"] = o.RequestInputTokens
+	}
+	if !IsNil(o.RequestOutputTokens) {
+		toSerialize["request_output_tokens"] = o.RequestOutputTokens
+	}
+	if !IsNil(o.RequestOverheadTokens) {
+		toSerialize["request_overhead_tokens"] = o.RequestOverheadTokens
+	}
 	if !IsNil(o.ResponseToId) {
 		toSerialize["response_to_id"] = o.ResponseToId
 	}
@@ -929,6 +1037,9 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "owner_organization_id")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "request_input_tokens")
+		delete(additionalProperties, "request_output_tokens")
+		delete(additionalProperties, "request_overhead_tokens")
 		delete(additionalProperties, "response_to_id")
 		delete(additionalProperties, "sender_conversation_role")
 		delete(additionalProperties, "sender_id")

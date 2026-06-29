@@ -33,6 +33,8 @@
 
 * `ErrCodeFailedToGetAgent` (value: `"failed_to_get_agent"`)
 
+* `ErrCodeAgentAccessDenied` (value: `"agent_access_denied"`)
+
 * `ErrCodeFailedToUpdateAgent` (value: `"failed_to_update_agent"`)
 
 * `ErrCodeAgentInternalIdInvalid` (value: `"agent_internal_id_invalid"`)
@@ -111,8 +113,6 @@
 
 * `ErrCodeFailedToFetchSubscribed` (value: `"failed_to_fetch_subscribed_channels"`)
 
-* `ErrCodeFailedToCreateChatContext` (value: `"failed_to_create_chat_context"`)
-
 * `ErrCodeCapabilityNotAvailable` (value: `"capability_not_available"`)
 
 * `ErrCodeNoMessagesFound` (value: `"no_messages_found"`)
@@ -122,8 +122,6 @@
 * `ErrCodeChatCompletionTooManyTempFiles` (value: `"chat_completion_too_many_temporary_files"`)
 
 * `ErrCodeChatCompletionExceedsTotalTempFileSize` (value: `"chat_completion_exceeds_total_temporary_file_size"`)
-
-* `ErrCodeChatCompletionExceedsMaxInputTokens` (value: `"chat_completion_exceeds_max_input_tokens"`)
 
 * `ErrCodeChatCompletionExceedsMaxToolCalls` (value: `"chat_completion_exceeds_max_tool_calls"`)
 
@@ -136,6 +134,10 @@
 * `ErrCodeFailedToEmbedText` (value: `"failed_to_embed_text"`)
 
 * `ErrCodeFailedToSearchExecutionLogs` (value: `"failed_to_search_execution_logs"`)
+
+* `ErrCodeExceedsMaxInputTokens` (value: `"exceeds_max_input_tokens"`)
+
+* `ErrCodeFailedToCreateExecutionContext` (value: `"failed_to_create_execution_context"`)
 
 * `ErrCodeInvalidFileID` (value: `"invalid_file_id"`)
 
