@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -28,6 +28,9 @@ const (
 	ErrCodeInvalidPayload ApiErrorCode = "invalid_payload"
 	ErrCodeInvalidEntity ApiErrorCode = "invalid_entity"
 	ErrCodeInvalidParams ApiErrorCode = "invalid_params"
+	ErrCodeInvalidAssignedCollections ApiErrorCode = "invalid_assigned_collections"
+	ErrCodeCollectionNotAccessible ApiErrorCode = "collection_not_accessible"
+	ErrCodeCollectionResolveUnavailable ApiErrorCode = "collection_resolve_unavailable"
 	ErrCodeInvalidDate ApiErrorCode = "invalid_date"
 	ErrCodeStartDateMustBeBeforeEndDate ApiErrorCode = "start_date_must_be_before_end_date"
 	ErrCodeAgentNotFound ApiErrorCode = "agent_not_found"
@@ -84,6 +87,8 @@ const (
 	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
 	ErrCodeChatCompletionInProgress ApiErrorCode = "chat_completion_in_progress"
 	ErrCodeChatCompletionCancelled ApiErrorCode = "chat_completion_cancelled"
+	ErrCodeImageGenerationInProgress ApiErrorCode = "image_generation_in_progress"
+	ErrCodeImageGenerationCancelled ApiErrorCode = "image_generation_cancelled"
 	ErrCodeFailedToCreateConnectionToken ApiErrorCode = "failed_to_create_connection_token"
 	ErrCodeFailedToEmbedText ApiErrorCode = "failed_to_embed_text"
 	ErrCodeFailedToSearchExecutionLogs ApiErrorCode = "failed_to_search_execution_logs"
@@ -151,6 +156,9 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_payload",
 	"invalid_entity",
 	"invalid_params",
+	"invalid_assigned_collections",
+	"collection_not_accessible",
+	"collection_resolve_unavailable",
 	"invalid_date",
 	"start_date_must_be_before_end_date",
 	"agent_not_found",
@@ -207,6 +215,8 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"chat_completion_exceeds_max_tool_calls",
 	"chat_completion_in_progress",
 	"chat_completion_cancelled",
+	"image_generation_in_progress",
+	"image_generation_cancelled",
 	"failed_to_create_connection_token",
 	"failed_to_embed_text",
 	"failed_to_search_execution_logs",

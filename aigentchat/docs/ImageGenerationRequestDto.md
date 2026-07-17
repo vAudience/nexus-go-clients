@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | **string** |  | 
 **AttachedFiles** | Pointer to **[]string** |  | [optional] 
+**GenerationId** | Pointer to **string** | GenerationID, if set, makes the generation cancellable under this caller-supplied id (unique per initiator while in progress). Restricted to [A-Za-z0-9._-] so it stays addressable as a single path segment by the cancel route. | [optional] 
 **Message** | **string** |  | 
 **Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 
@@ -72,6 +73,31 @@ SetAttachedFiles sets AttachedFiles field to given value.
 `func (o *ImageGenerationRequestDto) HasAttachedFiles() bool`
 
 HasAttachedFiles returns a boolean if a field has been set.
+
+### GetGenerationId
+
+`func (o *ImageGenerationRequestDto) GetGenerationId() string`
+
+GetGenerationId returns the GenerationId field if non-nil, zero value otherwise.
+
+### GetGenerationIdOk
+
+`func (o *ImageGenerationRequestDto) GetGenerationIdOk() (*string, bool)`
+
+GetGenerationIdOk returns a tuple with the GenerationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGenerationId
+
+`func (o *ImageGenerationRequestDto) SetGenerationId(v string)`
+
+SetGenerationId sets GenerationId field to given value.
+
+### HasGenerationId
+
+`func (o *ImageGenerationRequestDto) HasGenerationId() bool`
+
+HasGenerationId returns a boolean if a field has been set.
 
 ### GetMessage
 

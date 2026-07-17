@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.34.5
+  version: 0.39.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -360,6 +360,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Create a new agent
@@ -585,6 +591,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Update an agent
@@ -2018,6 +2030,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Create a new channel
@@ -2282,6 +2300,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Update a channel
@@ -2357,6 +2381,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Create a chat-completion
@@ -2523,6 +2553,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Create a streaming chat-completion
@@ -3192,6 +3228,9 @@ paths:
                   $ref: "#/components/schemas/AIgencyImage"
                 type: array
           description: OK
+        "204":
+          content: {}
+          description: Image generation was cancelled before any image was produced
         "400":
           content:
             application/json:
@@ -3216,6 +3255,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Conflict
         "500":
           content:
             application/json:
@@ -3228,6 +3273,46 @@ paths:
       tags:
       - Images
       x-codegen-request-body-name: request
+  /v1/organizations/{org_id}/images/cancel/{generation_id}:
+    post:
+      description: "Cancel an in-progress image generation identified by a caller-supplied\
+        \ generation id. Idempotent: a generation id with no in-progress generation\
+        \ belonging to the caller returns 204."
+      operationId: CancelImageGeneration
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: caller-supplied generation ID
+        in: path
+        name: generation_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: Cancel an image generation
+      tags:
+      - Images
   /v1/organizations/{org_id}/images/cost:
     post:
       description: Estimate the total costs for an image generation request before
@@ -4825,47 +4910,81 @@ components:
       - ""
       - function-calling
       - function-calling_streaming
-      - text-to-embedding
       - text-to-text
       - text-to-text_streaming
-      - text-to-image
+      - speech-to-text
+      - speech-to-text_streaming
+      - image-to-text
+      - pdf-to-text
+      - document-to-text
+      - video-to-text
+      - video-to-text_streaming
       - text-to-speech
       - text-to-speech_streaming
       - text-to-music
       - text-to-music_streaming
+      - text-to-image
       - text-to-video
       - text-to-video_streaming
+      - text-to-embedding
       - speech-to-embedding
-      - speech-to-text
-      - speech-to-text_streaming
       - image-to-embedding
-      - image-to-text
       - video-to-embedding
-      - video-to-text
-      - video-to-text_streaming
       type: string
+      x-enum-comments:
+        AIModelCapabilityDocumentToText: reserved for future non-PDF document inputs
+        AIModelCapabilityTextToMusicStreaming: Unused
+        AIModelCapabilityTextToSpeechStreaming: Unused
+        AIModelCapabilityTextToVideoStreaming: Unused
+        AIModelCapabilityVideoToTextStreaming: Unused
+      x-enum-descriptions:
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - reserved for future non-PDF document inputs
+      - ""
+      - Unused
+      - ""
+      - Unused
+      - ""
+      - Unused
+      - ""
+      - ""
+      - Unused
+      - ""
+      - ""
+      - ""
+      - ""
       x-enum-varnames:
       - AIModelCapabilityNil
       - AIModelCapabilityFunctionCalling
       - AIModelCapabilityFunctionCallingStreaming
-      - AIModelCapabilityTextToEmbedding
       - AIModelCapabilityTextToText
       - AIModelCapabilityTextToTextStreaming
-      - AIModelCapabilityTextToImage
+      - AIModelCapabilitySpeechToText
+      - AIModelCapabilitySpeechToTextStreaming
+      - AIModelCapabilityImageToText
+      - AIModelCapabilityPdfToText
+      - AIModelCapabilityDocumentToText
+      - AIModelCapabilityVideoToText
+      - AIModelCapabilityVideoToTextStreaming
       - AIModelCapabilityTextToSpeech
       - AIModelCapabilityTextToSpeechStreaming
       - AIModelCapabilityTextToMusic
       - AIModelCapabilityTextToMusicStreaming
+      - AIModelCapabilityTextToImage
       - AIModelCapabilityTextToVideo
       - AIModelCapabilityTextToVideoStreaming
+      - AIModelCapabilityTextToEmbedding
       - AIModelCapabilitySpeechToEmbedding
-      - AIModelCapabilitySpeechToText
-      - AIModelCapabilitySpeechToTextStreaming
       - AIModelCapabilityImageToEmbedding
-      - AIModelCapabilityImageToText
       - AIModelCapabilityVideoToEmbedding
-      - AIModelCapabilityVideoToText
-      - AIModelCapabilityVideoToTextStreaming
     AIModelConstraint:
       example:
         direction: input
@@ -4906,6 +5025,7 @@ components:
       - per-function-call
       - per-file-upload
       - conversion-per-page
+      - per-corpus-ingest
       type: string
       x-enum-varnames:
       - AIModelCostUnitInputPerMillionTokens
@@ -4922,6 +5042,7 @@ components:
       - AIModelCostUnitPerFunctionCall
       - AIModelCostUnitPerFileUpload
       - AIModelCostUnitConversionPerPage
+      - AIModelCostUnitPerCorpusIngest
     AIModelFeature:
       example:
         batch_cost_factor: 1.4658129805029452
@@ -7107,6 +7228,9 @@ components:
     Agent:
       example:
         add_tool_guidelines: true
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
@@ -7118,6 +7242,7 @@ components:
         default_file_upload_category: default_file_upload_category
         deleted: true
         description: description
+        has_assigned_collections: true
         i18n:
           key:
             description: description
@@ -7269,6 +7394,11 @@ components:
       properties:
         add_tool_guidelines:
           type: boolean
+        assigned_collection_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         assigned_tools:
           items:
             type: string
@@ -7291,6 +7421,12 @@ components:
         description:
           maxLength: 1024
           type: string
+        has_assigned_collections:
+          description: |-
+            HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) > 0) kept in sync at
+            every write so the orphaned-collection-assignments reconciliation job can query only
+            agents that actually hold an assignment, instead of scanning the whole population.
+          type: boolean
         i18n:
           additionalProperties:
             $ref: "#/components/schemas/AgentI18n"
@@ -7421,6 +7557,9 @@ components:
         offset: 6
         results:
         - add_tool_guidelines: true
+          assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
           assigned_tools:
           - assigned_tools
           - assigned_tools
@@ -7432,6 +7571,7 @@ components:
           default_file_upload_category: default_file_upload_category
           deleted: true
           description: description
+          has_assigned_collections: true
           i18n:
             key:
               description: description
@@ -7581,6 +7721,9 @@ components:
             - user_ids
             - user_ids
         - add_tool_guidelines: true
+          assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
           assigned_tools:
           - assigned_tools
           - assigned_tools
@@ -7592,6 +7735,7 @@ components:
           default_file_upload_category: default_file_upload_category
           deleted: true
           description: description
+          has_assigned_collections: true
           i18n:
             key:
               description: description
@@ -7798,6 +7942,9 @@ components:
     AgentWriteDto:
       example:
         add_tool_guidelines: true
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
@@ -7945,6 +8092,11 @@ components:
       properties:
         add_tool_guidelines:
           type: boolean
+        assigned_collection_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         assigned_tools:
           items:
             type: string
@@ -8072,6 +8224,9 @@ components:
       - invalid_payload
       - invalid_entity
       - invalid_params
+      - invalid_assigned_collections
+      - collection_not_accessible
+      - collection_resolve_unavailable
       - invalid_date
       - start_date_must_be_before_end_date
       - agent_not_found
@@ -8128,6 +8283,8 @@ components:
       - chat_completion_exceeds_max_tool_calls
       - chat_completion_in_progress
       - chat_completion_cancelled
+      - image_generation_in_progress
+      - image_generation_cancelled
       - failed_to_create_connection_token
       - failed_to_embed_text
       - failed_to_search_execution_logs
@@ -8193,6 +8350,9 @@ components:
       - ErrCodeInvalidPayload
       - ErrCodeInvalidEntity
       - ErrCodeInvalidParams
+      - ErrCodeInvalidAssignedCollections
+      - ErrCodeCollectionNotAccessible
+      - ErrCodeCollectionResolveUnavailable
       - ErrCodeInvalidDate
       - ErrCodeStartDateMustBeBeforeEndDate
       - ErrCodeAgentNotFound
@@ -8249,6 +8409,8 @@ components:
       - ErrCodeChatCompletionExceedsMaxToolCalls
       - ErrCodeChatCompletionInProgress
       - ErrCodeChatCompletionCancelled
+      - ErrCodeImageGenerationInProgress
+      - ErrCodeImageGenerationCancelled
       - ErrCodeFailedToCreateConnectionToken
       - ErrCodeFailedToEmbedText
       - ErrCodeFailedToSearchExecutionLogs
@@ -8910,6 +9072,9 @@ components:
       type: object
     Channel:
       example:
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
         context_window:
           anchor_message_id: anchor_message_id
           is_verified: true
@@ -8922,6 +9087,7 @@ components:
           updated_at: 5
         created_at: 5
         description: description
+        has_assigned_collections: true
         id: id
         is_org_public: true
         is_public: true
@@ -8933,7 +9099,13 @@ components:
         summary: summary
         type: type
         updated_at: 7
+        updated_by: updated_by
       properties:
+        assigned_collection_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         context_window:
           $ref: "#/components/schemas/ChannelContextWindow"
         created_at:
@@ -8942,6 +9114,12 @@ components:
         description:
           maxLength: 1024
           type: string
+        has_assigned_collections:
+          description: |-
+            HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) > 0) kept in sync at
+            every write so the orphaned-collection-assignments reconciliation job can query only
+            channels that actually hold an assignment, instead of scanning the whole population.
+          type: boolean
         id:
           maxLength: 64
           minLength: 1
@@ -8976,6 +9154,10 @@ components:
         updated_at:
           format: int64
           type: integer
+        updated_by:
+          maxLength: 64
+          minLength: 1
+          type: string
       required:
       - id
       - name
@@ -9028,7 +9210,10 @@ components:
         limit: 0
         offset: 6
         results:
-        - context_window:
+        - assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          context_window:
             anchor_message_id: anchor_message_id
             is_verified: true
             max_input_tokens: 0
@@ -9040,6 +9225,7 @@ components:
             updated_at: 5
           created_at: 5
           description: description
+          has_assigned_collections: true
           id: id
           is_org_public: true
           is_public: true
@@ -9051,7 +9237,11 @@ components:
           summary: summary
           type: type
           updated_at: 7
-        - context_window:
+          updated_by: updated_by
+        - assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          context_window:
             anchor_message_id: anchor_message_id
             is_verified: true
             max_input_tokens: 0
@@ -9063,6 +9253,7 @@ components:
             updated_at: 5
           created_at: 5
           description: description
+          has_assigned_collections: true
           id: id
           is_org_public: true
           is_public: true
@@ -9074,6 +9265,7 @@ components:
           summary: summary
           type: type
           updated_at: 7
+          updated_by: updated_by
         total_results: 1
       properties:
         limit:
@@ -9094,6 +9286,9 @@ components:
       type: object
     ChannelWriteDto:
       example:
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
         description: description
         is_org_public: true
         is_public: true
@@ -9102,6 +9297,11 @@ components:
         service_channel: true
         summary: summary
       properties:
+        assigned_collection_ids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         description:
           maxLength: 1024
           type: string
@@ -9162,6 +9362,7 @@ components:
       example:
         max_files: 0
         max_total_file_size: 6
+        max_total_multimodal_file_size: 1
       properties:
         max_files:
           format: int
@@ -9169,10 +9370,16 @@ components:
         max_total_file_size:
           format: int64
           type: integer
+        max_total_multimodal_file_size:
+          format: int64
+          type: integer
       type: object
     ChatCompletionRequestDto:
       example:
         agent_id: agent_id
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
         attached_files:
         - attached_files
         - attached_files
@@ -9199,6 +9406,15 @@ components:
       properties:
         agent_id:
           type: string
+        assigned_collection_ids:
+          description: |-
+            AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored
+            implies accessible. At completion time the ids are re-evaluated per requesting user+org by
+            resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them
+            to accessible deepr corpora with 400/403/503 semantics.
+          items:
+            type: string
+          type: array
         attached_files:
           items:
             type: string
@@ -9407,8 +9623,12 @@ components:
         ai_model_id: ai_model_id
         ai_model_service_id: ai_model_service_id
         channel_id: channel_id
+        corpus_id: corpus_id
         created_at: 0
+        currency: currency
+        document_id: document_id
         execution_id: execution_id
+        file_id: file_id
         final_cost_in_euro: 6.027456183070403
         id: id
         message_id: message_id
@@ -9438,10 +9658,22 @@ components:
           type: string
         channel_id:
           type: string
+        corpus_id:
+          description: |-
+            NOTE: corpus-ingest cost tracking — interim. The execution-log store is being
+            refactored into a dedicated service; these fields will move with it. The per-attempt
+            report id (deepr job id) is carried in ExecutionID and used as the idempotency key.
+          type: string
         created_at:
           format: int64
           type: integer
+        currency:
+          type: string
+        document_id:
+          type: string
         execution_id:
+          type: string
+        file_id:
           type: string
         final_cost_in_euro:
           format: double
@@ -9478,8 +9710,12 @@ components:
           ai_model_id: ai_model_id
           ai_model_service_id: ai_model_service_id
           channel_id: channel_id
+          corpus_id: corpus_id
           created_at: 0
+          currency: currency
+          document_id: document_id
           execution_id: execution_id
+          file_id: file_id
           final_cost_in_euro: 6.027456183070403
           id: id
           message_id: message_id
@@ -9504,8 +9740,12 @@ components:
           ai_model_id: ai_model_id
           ai_model_service_id: ai_model_service_id
           channel_id: channel_id
+          corpus_id: corpus_id
           created_at: 0
+          currency: currency
+          document_id: document_id
           execution_id: execution_id
+          file_id: file_id
           final_cost_in_euro: 6.027456183070403
           id: id
           message_id: message_id
@@ -9760,6 +10000,7 @@ components:
         attached_files:
         - attached_files
         - attached_files
+        generation_id: generation_id
         message: message
         parameters: "{}"
       properties:
@@ -9769,6 +10010,13 @@ components:
           items:
             type: string
           type: array
+        generation_id:
+          description: |-
+            GenerationID, if set, makes the generation cancellable under this caller-supplied id
+            (unique per initiator while in progress). Restricted to [A-Za-z0-9._-] so it stays
+            addressable as a single path segment by the cancel route.
+          maxLength: 128
+          type: string
         message:
           type: string
         parameters:

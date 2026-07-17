@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MaxFiles** | Pointer to **int32** |  | [optional] 
 **MaxTotalFileSize** | Pointer to **int64** |  | [optional] 
+**MaxTotalMultimodalFileSize** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetMaxTotalFileSize sets MaxTotalFileSize field to given value.
 `func (o *ChatCompletionFileSettings) HasMaxTotalFileSize() bool`
 
 HasMaxTotalFileSize returns a boolean if a field has been set.
+
+### GetMaxTotalMultimodalFileSize
+
+`func (o *ChatCompletionFileSettings) GetMaxTotalMultimodalFileSize() int64`
+
+GetMaxTotalMultimodalFileSize returns the MaxTotalMultimodalFileSize field if non-nil, zero value otherwise.
+
+### GetMaxTotalMultimodalFileSizeOk
+
+`func (o *ChatCompletionFileSettings) GetMaxTotalMultimodalFileSizeOk() (*int64, bool)`
+
+GetMaxTotalMultimodalFileSizeOk returns a tuple with the MaxTotalMultimodalFileSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxTotalMultimodalFileSize
+
+`func (o *ChatCompletionFileSettings) SetMaxTotalMultimodalFileSize(v int64)`
+
+SetMaxTotalMultimodalFileSize sets MaxTotalMultimodalFileSize field to given value.
+
+### HasMaxTotalMultimodalFileSize
+
+`func (o *ChatCompletionFileSettings) HasMaxTotalMultimodalFileSize() bool`
+
+HasMaxTotalMultimodalFileSize returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

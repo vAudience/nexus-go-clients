@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,24 +24,26 @@ const (
 	AIModelCapabilityNil AIModelCapability = ""
 	AIModelCapabilityFunctionCalling AIModelCapability = "function-calling"
 	AIModelCapabilityFunctionCallingStreaming AIModelCapability = "function-calling_streaming"
-	AIModelCapabilityTextToEmbedding AIModelCapability = "text-to-embedding"
 	AIModelCapabilityTextToText AIModelCapability = "text-to-text"
 	AIModelCapabilityTextToTextStreaming AIModelCapability = "text-to-text_streaming"
-	AIModelCapabilityTextToImage AIModelCapability = "text-to-image"
+	AIModelCapabilitySpeechToText AIModelCapability = "speech-to-text"
+	AIModelCapabilitySpeechToTextStreaming AIModelCapability = "speech-to-text_streaming"
+	AIModelCapabilityImageToText AIModelCapability = "image-to-text"
+	AIModelCapabilityPdfToText AIModelCapability = "pdf-to-text"
+	AIModelCapabilityDocumentToText AIModelCapability = "document-to-text"
+	AIModelCapabilityVideoToText AIModelCapability = "video-to-text"
+	AIModelCapabilityVideoToTextStreaming AIModelCapability = "video-to-text_streaming"
 	AIModelCapabilityTextToSpeech AIModelCapability = "text-to-speech"
 	AIModelCapabilityTextToSpeechStreaming AIModelCapability = "text-to-speech_streaming"
 	AIModelCapabilityTextToMusic AIModelCapability = "text-to-music"
 	AIModelCapabilityTextToMusicStreaming AIModelCapability = "text-to-music_streaming"
+	AIModelCapabilityTextToImage AIModelCapability = "text-to-image"
 	AIModelCapabilityTextToVideo AIModelCapability = "text-to-video"
 	AIModelCapabilityTextToVideoStreaming AIModelCapability = "text-to-video_streaming"
+	AIModelCapabilityTextToEmbedding AIModelCapability = "text-to-embedding"
 	AIModelCapabilitySpeechToEmbedding AIModelCapability = "speech-to-embedding"
-	AIModelCapabilitySpeechToText AIModelCapability = "speech-to-text"
-	AIModelCapabilitySpeechToTextStreaming AIModelCapability = "speech-to-text_streaming"
 	AIModelCapabilityImageToEmbedding AIModelCapability = "image-to-embedding"
-	AIModelCapabilityImageToText AIModelCapability = "image-to-text"
 	AIModelCapabilityVideoToEmbedding AIModelCapability = "video-to-embedding"
-	AIModelCapabilityVideoToText AIModelCapability = "video-to-text"
-	AIModelCapabilityVideoToTextStreaming AIModelCapability = "video-to-text_streaming"
 )
 
 // All allowed values of AIModelCapability enum
@@ -49,24 +51,26 @@ var AllowedAIModelCapabilityEnumValues = []AIModelCapability{
 	"",
 	"function-calling",
 	"function-calling_streaming",
-	"text-to-embedding",
 	"text-to-text",
 	"text-to-text_streaming",
-	"text-to-image",
+	"speech-to-text",
+	"speech-to-text_streaming",
+	"image-to-text",
+	"pdf-to-text",
+	"document-to-text",
+	"video-to-text",
+	"video-to-text_streaming",
 	"text-to-speech",
 	"text-to-speech_streaming",
 	"text-to-music",
 	"text-to-music_streaming",
+	"text-to-image",
 	"text-to-video",
 	"text-to-video_streaming",
+	"text-to-embedding",
 	"speech-to-embedding",
-	"speech-to-text",
-	"speech-to-text_streaming",
 	"image-to-embedding",
-	"image-to-text",
 	"video-to-embedding",
-	"video-to-text",
-	"video-to-text_streaming",
 }
 
 func (v *AIModelCapability) UnmarshalJSON(src []byte) error {

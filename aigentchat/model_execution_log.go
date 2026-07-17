@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -24,8 +24,13 @@ type ExecutionLog struct {
 	AiModelId *string `json:"ai_model_id,omitempty"`
 	AiModelServiceId *string `json:"ai_model_service_id,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
+	// NOTE: corpus-ingest cost tracking — interim. The execution-log store is being refactored into a dedicated service; these fields will move with it. The per-attempt report id (deepr job id) is carried in ExecutionID and used as the idempotency key.
+	CorpusId *string `json:"corpus_id,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
+	Currency *string `json:"currency,omitempty"`
+	DocumentId *string `json:"document_id,omitempty"`
 	ExecutionId *string `json:"execution_id,omitempty"`
+	FileId *string `json:"file_id,omitempty"`
 	FinalCostInEuro *float64 `json:"final_cost_in_euro,omitempty"`
 	Id *string `json:"id,omitempty"`
 	MessageId *string `json:"message_id,omitempty"`
@@ -184,6 +189,38 @@ func (o *ExecutionLog) SetChannelId(v string) {
 	o.ChannelId = &v
 }
 
+// GetCorpusId returns the CorpusId field value if set, zero value otherwise.
+func (o *ExecutionLog) GetCorpusId() string {
+	if o == nil || IsNil(o.CorpusId) {
+		var ret string
+		return ret
+	}
+	return *o.CorpusId
+}
+
+// GetCorpusIdOk returns a tuple with the CorpusId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetCorpusIdOk() (*string, bool) {
+	if o == nil || IsNil(o.CorpusId) {
+		return nil, false
+	}
+	return o.CorpusId, true
+}
+
+// HasCorpusId returns a boolean if a field has been set.
+func (o *ExecutionLog) HasCorpusId() bool {
+	if o != nil && !IsNil(o.CorpusId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCorpusId gets a reference to the given string and assigns it to the CorpusId field.
+func (o *ExecutionLog) SetCorpusId(v string) {
+	o.CorpusId = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *ExecutionLog) GetCreatedAt() int64 {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -216,6 +253,70 @@ func (o *ExecutionLog) SetCreatedAt(v int64) {
 	o.CreatedAt = &v
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *ExecutionLog) GetCurrency() string {
+	if o == nil || IsNil(o.Currency) {
+		var ret string
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetCurrencyOk() (*string, bool) {
+	if o == nil || IsNil(o.Currency) {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *ExecutionLog) HasCurrency() bool {
+	if o != nil && !IsNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+func (o *ExecutionLog) SetCurrency(v string) {
+	o.Currency = &v
+}
+
+// GetDocumentId returns the DocumentId field value if set, zero value otherwise.
+func (o *ExecutionLog) GetDocumentId() string {
+	if o == nil || IsNil(o.DocumentId) {
+		var ret string
+		return ret
+	}
+	return *o.DocumentId
+}
+
+// GetDocumentIdOk returns a tuple with the DocumentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetDocumentIdOk() (*string, bool) {
+	if o == nil || IsNil(o.DocumentId) {
+		return nil, false
+	}
+	return o.DocumentId, true
+}
+
+// HasDocumentId returns a boolean if a field has been set.
+func (o *ExecutionLog) HasDocumentId() bool {
+	if o != nil && !IsNil(o.DocumentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocumentId gets a reference to the given string and assigns it to the DocumentId field.
+func (o *ExecutionLog) SetDocumentId(v string) {
+	o.DocumentId = &v
+}
+
 // GetExecutionId returns the ExecutionId field value if set, zero value otherwise.
 func (o *ExecutionLog) GetExecutionId() string {
 	if o == nil || IsNil(o.ExecutionId) {
@@ -246,6 +347,38 @@ func (o *ExecutionLog) HasExecutionId() bool {
 // SetExecutionId gets a reference to the given string and assigns it to the ExecutionId field.
 func (o *ExecutionLog) SetExecutionId(v string) {
 	o.ExecutionId = &v
+}
+
+// GetFileId returns the FileId field value if set, zero value otherwise.
+func (o *ExecutionLog) GetFileId() string {
+	if o == nil || IsNil(o.FileId) {
+		var ret string
+		return ret
+	}
+	return *o.FileId
+}
+
+// GetFileIdOk returns a tuple with the FileId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExecutionLog) GetFileIdOk() (*string, bool) {
+	if o == nil || IsNil(o.FileId) {
+		return nil, false
+	}
+	return o.FileId, true
+}
+
+// HasFileId returns a boolean if a field has been set.
+func (o *ExecutionLog) HasFileId() bool {
+	if o != nil && !IsNil(o.FileId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileId gets a reference to the given string and assigns it to the FileId field.
+func (o *ExecutionLog) SetFileId(v string) {
+	o.FileId = &v
 }
 
 // GetFinalCostInEuro returns the FinalCostInEuro field value if set, zero value otherwise.
@@ -526,11 +659,23 @@ func (o ExecutionLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
 	}
+	if !IsNil(o.CorpusId) {
+		toSerialize["corpus_id"] = o.CorpusId
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
+	}
+	if !IsNil(o.DocumentId) {
+		toSerialize["document_id"] = o.DocumentId
+	}
 	if !IsNil(o.ExecutionId) {
 		toSerialize["execution_id"] = o.ExecutionId
+	}
+	if !IsNil(o.FileId) {
+		toSerialize["file_id"] = o.FileId
 	}
 	if !IsNil(o.FinalCostInEuro) {
 		toSerialize["final_cost_in_euro"] = o.FinalCostInEuro
@@ -582,8 +727,12 @@ func (o *ExecutionLog) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ai_model_id")
 		delete(additionalProperties, "ai_model_service_id")
 		delete(additionalProperties, "channel_id")
+		delete(additionalProperties, "corpus_id")
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "document_id")
 		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "file_id")
 		delete(additionalProperties, "final_cost_in_euro")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "message_id")

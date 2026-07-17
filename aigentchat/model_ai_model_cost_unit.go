@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -35,6 +35,7 @@ const (
 	AIModelCostUnitPerFunctionCall AIModelCostUnit = "per-function-call"
 	AIModelCostUnitPerFileUpload AIModelCostUnit = "per-file-upload"
 	AIModelCostUnitConversionPerPage AIModelCostUnit = "conversion-per-page"
+	AIModelCostUnitPerCorpusIngest AIModelCostUnit = "per-corpus-ingest"
 )
 
 // All allowed values of AIModelCostUnit enum
@@ -53,6 +54,7 @@ var AllowedAIModelCostUnitEnumValues = []AIModelCostUnit{
 	"per-function-call",
 	"per-file-upload",
 	"conversion-per-page",
+	"per-corpus-ingest",
 }
 
 func (v *AIModelCostUnit) UnmarshalJSON(src []byte) error {

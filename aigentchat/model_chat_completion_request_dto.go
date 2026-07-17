@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,8 @@ var _ MappedNullable = &ChatCompletionRequestDto{}
 // ChatCompletionRequestDto struct for ChatCompletionRequestDto
 type ChatCompletionRequestDto struct {
 	AgentId *string `json:"agent_id,omitempty"`
+	// AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them to accessible deepr corpora with 400/403/503 semantics.
+	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
 	ContinueInstructionOnMaxTokens *string `json:"continue_instruction_on_max_tokens,omitempty"`
@@ -93,6 +95,38 @@ func (o *ChatCompletionRequestDto) HasAgentId() bool {
 // SetAgentId gets a reference to the given string and assigns it to the AgentId field.
 func (o *ChatCompletionRequestDto) SetAgentId(v string) {
 	o.AgentId = &v
+}
+
+// GetAssignedCollectionIds returns the AssignedCollectionIds field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetAssignedCollectionIds() []string {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedCollectionIds
+}
+
+// GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetAssignedCollectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		return nil, false
+	}
+	return o.AssignedCollectionIds, true
+}
+
+// HasAssignedCollectionIds returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasAssignedCollectionIds() bool {
+	if o != nil && !IsNil(o.AssignedCollectionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedCollectionIds gets a reference to the given []string and assigns it to the AssignedCollectionIds field.
+func (o *ChatCompletionRequestDto) SetAssignedCollectionIds(v []string) {
+	o.AssignedCollectionIds = v
 }
 
 // GetAttachedFiles returns the AttachedFiles field value if set, zero value otherwise.
@@ -612,6 +646,9 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AgentId) {
 		toSerialize["agent_id"] = o.AgentId
 	}
+	if !IsNil(o.AssignedCollectionIds) {
+		toSerialize["assigned_collection_ids"] = o.AssignedCollectionIds
+	}
 	if !IsNil(o.AttachedFiles) {
 		toSerialize["attached_files"] = o.AttachedFiles
 	}
@@ -702,6 +739,7 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
+		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "attached_files")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "continue_instruction_on_max_tokens")

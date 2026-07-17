@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,9 +21,12 @@ var _ MappedNullable = &Channel{}
 
 // Channel struct for Channel
 type Channel struct {
+	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	ContextWindow *ChannelContextWindow `json:"context_window,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
 	Description *string `json:"description,omitempty"`
+	// HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) > 0) kept in sync at every write so the orphaned-collection-assignments reconciliation job can query only channels that actually hold an assignment, instead of scanning the whole population.
+	HasAssignedCollections *bool `json:"has_assigned_collections,omitempty"`
 	Id string `json:"id"`
 	IsOrgPublic *bool `json:"is_org_public,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -35,6 +38,7 @@ type Channel struct {
 	Summary *string `json:"summary,omitempty"`
 	Type *string `json:"type,omitempty"`
 	UpdatedAt *int64 `json:"updated_at,omitempty"`
+	UpdatedBy *string `json:"updated_by,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -59,6 +63,38 @@ func NewChannel(id string, name string, ownerId string, ownerOrganizationId stri
 func NewChannelWithDefaults() *Channel {
 	this := Channel{}
 	return &this
+}
+
+// GetAssignedCollectionIds returns the AssignedCollectionIds field value if set, zero value otherwise.
+func (o *Channel) GetAssignedCollectionIds() []string {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedCollectionIds
+}
+
+// GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Channel) GetAssignedCollectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		return nil, false
+	}
+	return o.AssignedCollectionIds, true
+}
+
+// HasAssignedCollectionIds returns a boolean if a field has been set.
+func (o *Channel) HasAssignedCollectionIds() bool {
+	if o != nil && !IsNil(o.AssignedCollectionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedCollectionIds gets a reference to the given []string and assigns it to the AssignedCollectionIds field.
+func (o *Channel) SetAssignedCollectionIds(v []string) {
+	o.AssignedCollectionIds = v
 }
 
 // GetContextWindow returns the ContextWindow field value if set, zero value otherwise.
@@ -155,6 +191,38 @@ func (o *Channel) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Channel) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetHasAssignedCollections returns the HasAssignedCollections field value if set, zero value otherwise.
+func (o *Channel) GetHasAssignedCollections() bool {
+	if o == nil || IsNil(o.HasAssignedCollections) {
+		var ret bool
+		return ret
+	}
+	return *o.HasAssignedCollections
+}
+
+// GetHasAssignedCollectionsOk returns a tuple with the HasAssignedCollections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Channel) GetHasAssignedCollectionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasAssignedCollections) {
+		return nil, false
+	}
+	return o.HasAssignedCollections, true
+}
+
+// HasHasAssignedCollections returns a boolean if a field has been set.
+func (o *Channel) HasHasAssignedCollections() bool {
+	if o != nil && !IsNil(o.HasAssignedCollections) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasAssignedCollections gets a reference to the given bool and assigns it to the HasAssignedCollections field.
+func (o *Channel) SetHasAssignedCollections(v bool) {
+	o.HasAssignedCollections = &v
 }
 
 // GetId returns the Id field value
@@ -477,6 +545,38 @@ func (o *Channel) SetUpdatedAt(v int64) {
 	o.UpdatedAt = &v
 }
 
+// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
+func (o *Channel) GetUpdatedBy() string {
+	if o == nil || IsNil(o.UpdatedBy) {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedBy
+}
+
+// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Channel) GetUpdatedByOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdatedBy) {
+		return nil, false
+	}
+	return o.UpdatedBy, true
+}
+
+// HasUpdatedBy returns a boolean if a field has been set.
+func (o *Channel) HasUpdatedBy() bool {
+	if o != nil && !IsNil(o.UpdatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedBy gets a reference to the given string and assigns it to the UpdatedBy field.
+func (o *Channel) SetUpdatedBy(v string) {
+	o.UpdatedBy = &v
+}
+
 func (o Channel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -487,6 +587,9 @@ func (o Channel) MarshalJSON() ([]byte, error) {
 
 func (o Channel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AssignedCollectionIds) {
+		toSerialize["assigned_collection_ids"] = o.AssignedCollectionIds
+	}
 	if !IsNil(o.ContextWindow) {
 		toSerialize["context_window"] = o.ContextWindow
 	}
@@ -495,6 +598,9 @@ func (o Channel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.HasAssignedCollections) {
+		toSerialize["has_assigned_collections"] = o.HasAssignedCollections
 	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.IsOrgPublic) {
@@ -520,6 +626,9 @@ func (o Channel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if !IsNil(o.UpdatedBy) {
+		toSerialize["updated_by"] = o.UpdatedBy
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -567,9 +676,11 @@ func (o *Channel) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "context_window")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "has_assigned_collections")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "is_org_public")
 		delete(additionalProperties, "is_public")
@@ -581,6 +692,7 @@ func (o *Channel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "summary")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "updated_by")
 		o.AdditionalProperties = additionalProperties
 	}
 

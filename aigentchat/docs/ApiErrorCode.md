@@ -17,6 +17,12 @@
 
 * `ErrCodeInvalidParams` (value: `"invalid_params"`)
 
+* `ErrCodeInvalidAssignedCollections` (value: `"invalid_assigned_collections"`)
+
+* `ErrCodeCollectionNotAccessible` (value: `"collection_not_accessible"`)
+
+* `ErrCodeCollectionResolveUnavailable` (value: `"collection_resolve_unavailable"`)
+
 * `ErrCodeInvalidDate` (value: `"invalid_date"`)
 
 * `ErrCodeStartDateMustBeBeforeEndDate` (value: `"start_date_must_be_before_end_date"`)
@@ -128,6 +134,10 @@
 * `ErrCodeChatCompletionInProgress` (value: `"chat_completion_in_progress"`)
 
 * `ErrCodeChatCompletionCancelled` (value: `"chat_completion_cancelled"`)
+
+* `ErrCodeImageGenerationInProgress` (value: `"image_generation_in_progress"`)
+
+* `ErrCodeImageGenerationCancelled` (value: `"image_generation_cancelled"`)
 
 * `ErrCodeFailedToCreateConnectionToken` (value: `"failed_to_create_connection_token"`)
 

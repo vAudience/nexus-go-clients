@@ -4,12 +4,84 @@ All URIs are relative to *https://aigentchat.dev.ai.vaud.one*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CancelImageGeneration**](ImagesAPI.md#CancelImageGeneration) | **Post** /v1/organizations/{org_id}/images/cancel/{generation_id} | Cancel an image generation
 [**CreateImages**](ImagesAPI.md#CreateImages) | **Post** /v1/organizations/{org_id}/images | Generates a number of images
 [**CreateImagesCosts**](ImagesAPI.md#CreateImagesCosts) | **Post** /v1/organizations/{org_id}/images/cost | Get the total costs of an image generation request.
 [**DeleteImage**](ImagesAPI.md#DeleteImage) | **Delete** /v1/organizations/{org_id}/images/{id} | Delete an image
 [**GetImage**](ImagesAPI.md#GetImage) | **Get** /v1/organizations/{org_id}/images/{image_id} | Get an image
 [**ListImages**](ImagesAPI.md#ListImages) | **Get** /v1/organizations/{org_id}/images | List images
 
+
+
+## CancelImageGeneration
+
+> CancelImageGeneration(ctx, orgId, generationId).Execute()
+
+Cancel an image generation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	generationId := "generationId_example" // string | caller-supplied generation ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ImagesAPI.CancelImageGeneration(context.Background(), orgId, generationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.CancelImageGeneration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+**generationId** | **string** | caller-supplied generation ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelImageGenerationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateImages

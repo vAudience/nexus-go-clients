@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &AgentWriteDto{}
 // AgentWriteDto struct for AgentWriteDto
 type AgentWriteDto struct {
 	AddToolGuidelines *bool `json:"add_tool_guidelines,omitempty"`
+	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
@@ -98,6 +99,38 @@ func (o *AgentWriteDto) HasAddToolGuidelines() bool {
 // SetAddToolGuidelines gets a reference to the given bool and assigns it to the AddToolGuidelines field.
 func (o *AgentWriteDto) SetAddToolGuidelines(v bool) {
 	o.AddToolGuidelines = &v
+}
+
+// GetAssignedCollectionIds returns the AssignedCollectionIds field value if set, zero value otherwise.
+func (o *AgentWriteDto) GetAssignedCollectionIds() []string {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedCollectionIds
+}
+
+// GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentWriteDto) GetAssignedCollectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		return nil, false
+	}
+	return o.AssignedCollectionIds, true
+}
+
+// HasAssignedCollectionIds returns a boolean if a field has been set.
+func (o *AgentWriteDto) HasAssignedCollectionIds() bool {
+	if o != nil && !IsNil(o.AssignedCollectionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedCollectionIds gets a reference to the given []string and assigns it to the AssignedCollectionIds field.
+func (o *AgentWriteDto) SetAssignedCollectionIds(v []string) {
+	o.AssignedCollectionIds = v
 }
 
 // GetAssignedTools returns the AssignedTools field value if set, zero value otherwise.
@@ -913,6 +946,9 @@ func (o AgentWriteDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AddToolGuidelines) {
 		toSerialize["add_tool_guidelines"] = o.AddToolGuidelines
 	}
+	if !IsNil(o.AssignedCollectionIds) {
+		toSerialize["assigned_collection_ids"] = o.AssignedCollectionIds
+	}
 	if !IsNil(o.AssignedTools) {
 		toSerialize["assigned_tools"] = o.AssignedTools
 	}
@@ -1011,6 +1047,7 @@ func (o *AgentWriteDto) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "add_tool_guidelines")
+		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")

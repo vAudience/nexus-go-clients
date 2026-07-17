@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AddToolGuidelines** | Pointer to **bool** |  | [optional] 
+**AssignedCollectionIds** | Pointer to **[]string** |  | [optional] 
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
@@ -74,6 +75,31 @@ SetAddToolGuidelines sets AddToolGuidelines field to given value.
 `func (o *AgentWriteDto) HasAddToolGuidelines() bool`
 
 HasAddToolGuidelines returns a boolean if a field has been set.
+
+### GetAssignedCollectionIds
+
+`func (o *AgentWriteDto) GetAssignedCollectionIds() []string`
+
+GetAssignedCollectionIds returns the AssignedCollectionIds field if non-nil, zero value otherwise.
+
+### GetAssignedCollectionIdsOk
+
+`func (o *AgentWriteDto) GetAssignedCollectionIdsOk() (*[]string, bool)`
+
+GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedCollectionIds
+
+`func (o *AgentWriteDto) SetAssignedCollectionIds(v []string)`
+
+SetAssignedCollectionIds sets AssignedCollectionIds field to given value.
+
+### HasAssignedCollectionIds
+
+`func (o *AgentWriteDto) HasAssignedCollectionIds() bool`
+
+HasAssignedCollectionIds returns a boolean if a field has been set.
 
 ### GetAssignedTools
 

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AddToolGuidelines** | Pointer to **bool** |  | [optional] 
+**AssignedCollectionIds** | Pointer to **[]string** |  | [optional] 
 **AssignedTools** | Pointer to **[]string** |  | [optional] 
 **AttachedFileIds** | Pointer to **[]string** |  | [optional] 
 **AvatarUrl** | Pointer to **string** |  | [optional] 
@@ -12,6 +13,7 @@ Name | Type | Description | Notes
 **DefaultFileUploadCategory** | Pointer to **string** |  | [optional] 
 **Deleted** | Pointer to **bool** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**HasAssignedCollections** | Pointer to **bool** | HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) &gt; 0) kept in sync at every write so the orphaned-collection-assignments reconciliation job can query only agents that actually hold an assignment, instead of scanning the whole population. | [optional] 
 **I18n** | Pointer to [**map[string]AgentI18n**](AgentI18n.md) |  | [optional] 
 **Id** | **string** |  | 
 **IgnoreIncomingOverwrite** | Pointer to **bool** |  | [optional] 
@@ -84,6 +86,31 @@ SetAddToolGuidelines sets AddToolGuidelines field to given value.
 `func (o *Agent) HasAddToolGuidelines() bool`
 
 HasAddToolGuidelines returns a boolean if a field has been set.
+
+### GetAssignedCollectionIds
+
+`func (o *Agent) GetAssignedCollectionIds() []string`
+
+GetAssignedCollectionIds returns the AssignedCollectionIds field if non-nil, zero value otherwise.
+
+### GetAssignedCollectionIdsOk
+
+`func (o *Agent) GetAssignedCollectionIdsOk() (*[]string, bool)`
+
+GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedCollectionIds
+
+`func (o *Agent) SetAssignedCollectionIds(v []string)`
+
+SetAssignedCollectionIds sets AssignedCollectionIds field to given value.
+
+### HasAssignedCollectionIds
+
+`func (o *Agent) HasAssignedCollectionIds() bool`
+
+HasAssignedCollectionIds returns a boolean if a field has been set.
 
 ### GetAssignedTools
 
@@ -259,6 +286,31 @@ SetDescription sets Description field to given value.
 `func (o *Agent) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetHasAssignedCollections
+
+`func (o *Agent) GetHasAssignedCollections() bool`
+
+GetHasAssignedCollections returns the HasAssignedCollections field if non-nil, zero value otherwise.
+
+### GetHasAssignedCollectionsOk
+
+`func (o *Agent) GetHasAssignedCollectionsOk() (*bool, bool)`
+
+GetHasAssignedCollectionsOk returns a tuple with the HasAssignedCollections field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAssignedCollections
+
+`func (o *Agent) SetHasAssignedCollections(v bool)`
+
+SetHasAssignedCollections sets HasAssignedCollections field to given value.
+
+### HasHasAssignedCollections
+
+`func (o *Agent) HasHasAssignedCollections() bool`
+
+HasHasAssignedCollections returns a boolean if a field has been set.
 
 ### GetI18n
 

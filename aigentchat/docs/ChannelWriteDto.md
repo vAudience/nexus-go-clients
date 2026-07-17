@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AssignedCollectionIds** | Pointer to **[]string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **IsOrgPublic** | Pointer to **bool** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewChannelWriteDtoWithDefaults instantiates a new ChannelWriteDto object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAssignedCollectionIds
+
+`func (o *ChannelWriteDto) GetAssignedCollectionIds() []string`
+
+GetAssignedCollectionIds returns the AssignedCollectionIds field if non-nil, zero value otherwise.
+
+### GetAssignedCollectionIdsOk
+
+`func (o *ChannelWriteDto) GetAssignedCollectionIdsOk() (*[]string, bool)`
+
+GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedCollectionIds
+
+`func (o *ChannelWriteDto) SetAssignedCollectionIds(v []string)`
+
+SetAssignedCollectionIds sets AssignedCollectionIds field to given value.
+
+### HasAssignedCollectionIds
+
+`func (o *ChannelWriteDto) HasAssignedCollectionIds() bool`
+
+HasAssignedCollectionIds returns a boolean if a field has been set.
 
 ### GetDescription
 

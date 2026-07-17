@@ -8,8 +8,12 @@ Name | Type | Description | Notes
 **AiModelId** | Pointer to **string** |  | [optional] 
 **AiModelServiceId** | Pointer to **string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
+**CorpusId** | Pointer to **string** | NOTE: corpus-ingest cost tracking — interim. The execution-log store is being refactored into a dedicated service; these fields will move with it. The per-attempt report id (deepr job id) is carried in ExecutionID and used as the idempotency key. | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
+**Currency** | Pointer to **string** |  | [optional] 
+**DocumentId** | Pointer to **string** |  | [optional] 
 **ExecutionId** | Pointer to **string** |  | [optional] 
+**FileId** | Pointer to **string** |  | [optional] 
 **FinalCostInEuro** | Pointer to **float64** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **MessageId** | Pointer to **string** |  | [optional] 
@@ -138,6 +142,31 @@ SetChannelId sets ChannelId field to given value.
 
 HasChannelId returns a boolean if a field has been set.
 
+### GetCorpusId
+
+`func (o *ExecutionLog) GetCorpusId() string`
+
+GetCorpusId returns the CorpusId field if non-nil, zero value otherwise.
+
+### GetCorpusIdOk
+
+`func (o *ExecutionLog) GetCorpusIdOk() (*string, bool)`
+
+GetCorpusIdOk returns a tuple with the CorpusId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCorpusId
+
+`func (o *ExecutionLog) SetCorpusId(v string)`
+
+SetCorpusId sets CorpusId field to given value.
+
+### HasCorpusId
+
+`func (o *ExecutionLog) HasCorpusId() bool`
+
+HasCorpusId returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *ExecutionLog) GetCreatedAt() int64`
@@ -163,6 +192,56 @@ SetCreatedAt sets CreatedAt field to given value.
 
 HasCreatedAt returns a boolean if a field has been set.
 
+### GetCurrency
+
+`func (o *ExecutionLog) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *ExecutionLog) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *ExecutionLog) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *ExecutionLog) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### GetDocumentId
+
+`func (o *ExecutionLog) GetDocumentId() string`
+
+GetDocumentId returns the DocumentId field if non-nil, zero value otherwise.
+
+### GetDocumentIdOk
+
+`func (o *ExecutionLog) GetDocumentIdOk() (*string, bool)`
+
+GetDocumentIdOk returns a tuple with the DocumentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentId
+
+`func (o *ExecutionLog) SetDocumentId(v string)`
+
+SetDocumentId sets DocumentId field to given value.
+
+### HasDocumentId
+
+`func (o *ExecutionLog) HasDocumentId() bool`
+
+HasDocumentId returns a boolean if a field has been set.
+
 ### GetExecutionId
 
 `func (o *ExecutionLog) GetExecutionId() string`
@@ -187,6 +266,31 @@ SetExecutionId sets ExecutionId field to given value.
 `func (o *ExecutionLog) HasExecutionId() bool`
 
 HasExecutionId returns a boolean if a field has been set.
+
+### GetFileId
+
+`func (o *ExecutionLog) GetFileId() string`
+
+GetFileId returns the FileId field if non-nil, zero value otherwise.
+
+### GetFileIdOk
+
+`func (o *ExecutionLog) GetFileIdOk() (*string, bool)`
+
+GetFileIdOk returns a tuple with the FileId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileId
+
+`func (o *ExecutionLog) SetFileId(v string)`
+
+SetFileId sets FileId field to given value.
+
+### HasFileId
+
+`func (o *ExecutionLog) HasFileId() bool`
+
+HasFileId returns a boolean if a field has been set.
 
 ### GetFinalCostInEuro
 

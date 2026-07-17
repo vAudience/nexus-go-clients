@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AssignedCollectionIds** | Pointer to **[]string** |  | [optional] 
 **ContextWindow** | Pointer to [**ChannelContextWindow**](ChannelContextWindow.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**HasAssignedCollections** | Pointer to **bool** | HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) &gt; 0) kept in sync at every write so the orphaned-collection-assignments reconciliation job can query only channels that actually hold an assignment, instead of scanning the whole population. | [optional] 
 **Id** | **string** |  | 
 **IsOrgPublic** | Pointer to **bool** |  | [optional] 
 **IsPublic** | Pointer to **bool** |  | [optional] 
@@ -18,6 +20,7 @@ Name | Type | Description | Notes
 **Summary** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **int64** |  | [optional] 
+**UpdatedBy** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -37,6 +40,31 @@ will change when the set of required properties is changed
 NewChannelWithDefaults instantiates a new Channel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAssignedCollectionIds
+
+`func (o *Channel) GetAssignedCollectionIds() []string`
+
+GetAssignedCollectionIds returns the AssignedCollectionIds field if non-nil, zero value otherwise.
+
+### GetAssignedCollectionIdsOk
+
+`func (o *Channel) GetAssignedCollectionIdsOk() (*[]string, bool)`
+
+GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedCollectionIds
+
+`func (o *Channel) SetAssignedCollectionIds(v []string)`
+
+SetAssignedCollectionIds sets AssignedCollectionIds field to given value.
+
+### HasAssignedCollectionIds
+
+`func (o *Channel) HasAssignedCollectionIds() bool`
+
+HasAssignedCollectionIds returns a boolean if a field has been set.
 
 ### GetContextWindow
 
@@ -112,6 +140,31 @@ SetDescription sets Description field to given value.
 `func (o *Channel) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetHasAssignedCollections
+
+`func (o *Channel) GetHasAssignedCollections() bool`
+
+GetHasAssignedCollections returns the HasAssignedCollections field if non-nil, zero value otherwise.
+
+### GetHasAssignedCollectionsOk
+
+`func (o *Channel) GetHasAssignedCollectionsOk() (*bool, bool)`
+
+GetHasAssignedCollectionsOk returns a tuple with the HasAssignedCollections field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAssignedCollections
+
+`func (o *Channel) SetHasAssignedCollections(v bool)`
+
+SetHasAssignedCollections sets HasAssignedCollections field to given value.
+
+### HasHasAssignedCollections
+
+`func (o *Channel) HasHasAssignedCollections() bool`
+
+HasHasAssignedCollections returns a boolean if a field has been set.
 
 ### GetId
 
@@ -367,6 +420,31 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *Channel) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
+
+### GetUpdatedBy
+
+`func (o *Channel) GetUpdatedBy() string`
+
+GetUpdatedBy returns the UpdatedBy field if non-nil, zero value otherwise.
+
+### GetUpdatedByOk
+
+`func (o *Channel) GetUpdatedByOk() (*string, bool)`
+
+GetUpdatedByOk returns a tuple with the UpdatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedBy
+
+`func (o *Channel) SetUpdatedBy(v string)`
+
+SetUpdatedBy sets UpdatedBy field to given value.
+
+### HasUpdatedBy
+
+`func (o *Channel) HasUpdatedBy() bool`
+
+HasUpdatedBy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

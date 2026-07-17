@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | Pointer to **string** |  | [optional] 
+**AssignedCollectionIds** | Pointer to **[]string** | AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them to accessible deepr corpora with 400/403/503 semantics. | [optional] 
 **AttachedFiles** | Pointer to **[]string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
 **ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
@@ -65,6 +66,31 @@ SetAgentId sets AgentId field to given value.
 `func (o *ChatCompletionRequestDto) HasAgentId() bool`
 
 HasAgentId returns a boolean if a field has been set.
+
+### GetAssignedCollectionIds
+
+`func (o *ChatCompletionRequestDto) GetAssignedCollectionIds() []string`
+
+GetAssignedCollectionIds returns the AssignedCollectionIds field if non-nil, zero value otherwise.
+
+### GetAssignedCollectionIdsOk
+
+`func (o *ChatCompletionRequestDto) GetAssignedCollectionIdsOk() (*[]string, bool)`
+
+GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedCollectionIds
+
+`func (o *ChatCompletionRequestDto) SetAssignedCollectionIds(v []string)`
+
+SetAssignedCollectionIds sets AssignedCollectionIds field to given value.
+
+### HasAssignedCollectionIds
+
+`func (o *ChatCompletionRequestDto) HasAssignedCollectionIds() bool`
+
+HasAssignedCollectionIds returns a boolean if a field has been set.
 
 ### GetAttachedFiles
 

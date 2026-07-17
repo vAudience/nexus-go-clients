@@ -22,6 +22,20 @@ func Test_aigentchat_ImagesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ImagesAPIService CancelImageGeneration", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+		var generationId string
+
+		httpRes, err := apiClient.ImagesAPI.CancelImageGeneration(context.Background(), orgId, generationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ImagesAPIService CreateImages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &ChatCompletionFileSettings{}
 type ChatCompletionFileSettings struct {
 	MaxFiles *int32 `json:"max_files,omitempty"`
 	MaxTotalFileSize *int64 `json:"max_total_file_size,omitempty"`
+	MaxTotalMultimodalFileSize *int64 `json:"max_total_multimodal_file_size,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +109,38 @@ func (o *ChatCompletionFileSettings) SetMaxTotalFileSize(v int64) {
 	o.MaxTotalFileSize = &v
 }
 
+// GetMaxTotalMultimodalFileSize returns the MaxTotalMultimodalFileSize field value if set, zero value otherwise.
+func (o *ChatCompletionFileSettings) GetMaxTotalMultimodalFileSize() int64 {
+	if o == nil || IsNil(o.MaxTotalMultimodalFileSize) {
+		var ret int64
+		return ret
+	}
+	return *o.MaxTotalMultimodalFileSize
+}
+
+// GetMaxTotalMultimodalFileSizeOk returns a tuple with the MaxTotalMultimodalFileSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionFileSettings) GetMaxTotalMultimodalFileSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.MaxTotalMultimodalFileSize) {
+		return nil, false
+	}
+	return o.MaxTotalMultimodalFileSize, true
+}
+
+// HasMaxTotalMultimodalFileSize returns a boolean if a field has been set.
+func (o *ChatCompletionFileSettings) HasMaxTotalMultimodalFileSize() bool {
+	if o != nil && !IsNil(o.MaxTotalMultimodalFileSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxTotalMultimodalFileSize gets a reference to the given int64 and assigns it to the MaxTotalMultimodalFileSize field.
+func (o *ChatCompletionFileSettings) SetMaxTotalMultimodalFileSize(v int64) {
+	o.MaxTotalMultimodalFileSize = &v
+}
+
 func (o ChatCompletionFileSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -123,6 +156,9 @@ func (o ChatCompletionFileSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MaxTotalFileSize) {
 		toSerialize["max_total_file_size"] = o.MaxTotalFileSize
+	}
+	if !IsNil(o.MaxTotalMultimodalFileSize) {
+		toSerialize["max_total_multimodal_file_size"] = o.MaxTotalMultimodalFileSize
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -148,6 +184,7 @@ func (o *ChatCompletionFileSettings) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "max_files")
 		delete(additionalProperties, "max_total_file_size")
+		delete(additionalProperties, "max_total_multimodal_file_size")
 		o.AdditionalProperties = additionalProperties
 	}
 

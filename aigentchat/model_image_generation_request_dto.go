@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -23,6 +23,8 @@ var _ MappedNullable = &ImageGenerationRequestDto{}
 type ImageGenerationRequestDto struct {
 	AgentId string `json:"agent_id"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
+	// GenerationID, if set, makes the generation cancellable under this caller-supplied id (unique per initiator while in progress). Restricted to [A-Za-z0-9._-] so it stays addressable as a single path segment by the cancel route.
+	GenerationId *string `json:"generation_id,omitempty"`
 	Message string `json:"message"`
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -105,6 +107,38 @@ func (o *ImageGenerationRequestDto) SetAttachedFiles(v []string) {
 	o.AttachedFiles = v
 }
 
+// GetGenerationId returns the GenerationId field value if set, zero value otherwise.
+func (o *ImageGenerationRequestDto) GetGenerationId() string {
+	if o == nil || IsNil(o.GenerationId) {
+		var ret string
+		return ret
+	}
+	return *o.GenerationId
+}
+
+// GetGenerationIdOk returns a tuple with the GenerationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageGenerationRequestDto) GetGenerationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.GenerationId) {
+		return nil, false
+	}
+	return o.GenerationId, true
+}
+
+// HasGenerationId returns a boolean if a field has been set.
+func (o *ImageGenerationRequestDto) HasGenerationId() bool {
+	if o != nil && !IsNil(o.GenerationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenerationId gets a reference to the given string and assigns it to the GenerationId field.
+func (o *ImageGenerationRequestDto) SetGenerationId(v string) {
+	o.GenerationId = &v
+}
+
 // GetMessage returns the Message field value
 func (o *ImageGenerationRequestDto) GetMessage() string {
 	if o == nil {
@@ -175,6 +209,9 @@ func (o ImageGenerationRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AttachedFiles) {
 		toSerialize["attached_files"] = o.AttachedFiles
 	}
+	if !IsNil(o.GenerationId) {
+		toSerialize["generation_id"] = o.GenerationId
+	}
 	toSerialize["message"] = o.Message
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
@@ -225,6 +262,7 @@ func (o *ImageGenerationRequestDto) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "agent_id")
 		delete(additionalProperties, "attached_files")
+		delete(additionalProperties, "generation_id")
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "parameters")
 		o.AdditionalProperties = additionalProperties

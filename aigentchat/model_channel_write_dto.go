@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -20,6 +20,7 @@ var _ MappedNullable = &ChannelWriteDto{}
 
 // ChannelWriteDto struct for ChannelWriteDto
 type ChannelWriteDto struct {
+	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	Description *string `json:"description,omitempty"`
 	IsOrgPublic *bool `json:"is_org_public,omitempty"`
 	IsPublic *bool `json:"is_public,omitempty"`
@@ -47,6 +48,38 @@ func NewChannelWriteDto() *ChannelWriteDto {
 func NewChannelWriteDtoWithDefaults() *ChannelWriteDto {
 	this := ChannelWriteDto{}
 	return &this
+}
+
+// GetAssignedCollectionIds returns the AssignedCollectionIds field value if set, zero value otherwise.
+func (o *ChannelWriteDto) GetAssignedCollectionIds() []string {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedCollectionIds
+}
+
+// GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChannelWriteDto) GetAssignedCollectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		return nil, false
+	}
+	return o.AssignedCollectionIds, true
+}
+
+// HasAssignedCollectionIds returns a boolean if a field has been set.
+func (o *ChannelWriteDto) HasAssignedCollectionIds() bool {
+	if o != nil && !IsNil(o.AssignedCollectionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedCollectionIds gets a reference to the given []string and assigns it to the AssignedCollectionIds field.
+func (o *ChannelWriteDto) SetAssignedCollectionIds(v []string) {
+	o.AssignedCollectionIds = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -283,6 +316,9 @@ func (o ChannelWriteDto) MarshalJSON() ([]byte, error) {
 
 func (o ChannelWriteDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AssignedCollectionIds) {
+		toSerialize["assigned_collection_ids"] = o.AssignedCollectionIds
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -326,6 +362,7 @@ func (o *ChannelWriteDto) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "is_org_public")
 		delete(additionalProperties, "is_public")

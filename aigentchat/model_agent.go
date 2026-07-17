@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.34.5
+API version: 0.39.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &Agent{}
 // Agent struct for Agent
 type Agent struct {
 	AddToolGuidelines *bool `json:"add_tool_guidelines,omitempty"`
+	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	AssignedTools []string `json:"assigned_tools,omitempty"`
 	AttachedFileIds []string `json:"attached_file_ids,omitempty"`
 	AvatarUrl *string `json:"avatar_url,omitempty"`
@@ -29,6 +30,8 @@ type Agent struct {
 	DefaultFileUploadCategory *string `json:"default_file_upload_category,omitempty"`
 	Deleted *bool `json:"deleted,omitempty"`
 	Description *string `json:"description,omitempty"`
+	// HasAssignedCollections is a derived flag (len(AssignedCollectionIDs) > 0) kept in sync at every write so the orphaned-collection-assignments reconciliation job can query only agents that actually hold an assignment, instead of scanning the whole population.
+	HasAssignedCollections *bool `json:"has_assigned_collections,omitempty"`
 	I18n *map[string]AgentI18n `json:"i18n,omitempty"`
 	Id string `json:"id"`
 	IgnoreIncomingOverwrite *bool `json:"ignore_incoming_overwrite,omitempty"`
@@ -116,6 +119,38 @@ func (o *Agent) HasAddToolGuidelines() bool {
 // SetAddToolGuidelines gets a reference to the given bool and assigns it to the AddToolGuidelines field.
 func (o *Agent) SetAddToolGuidelines(v bool) {
 	o.AddToolGuidelines = &v
+}
+
+// GetAssignedCollectionIds returns the AssignedCollectionIds field value if set, zero value otherwise.
+func (o *Agent) GetAssignedCollectionIds() []string {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedCollectionIds
+}
+
+// GetAssignedCollectionIdsOk returns a tuple with the AssignedCollectionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetAssignedCollectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedCollectionIds) {
+		return nil, false
+	}
+	return o.AssignedCollectionIds, true
+}
+
+// HasAssignedCollectionIds returns a boolean if a field has been set.
+func (o *Agent) HasAssignedCollectionIds() bool {
+	if o != nil && !IsNil(o.AssignedCollectionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedCollectionIds gets a reference to the given []string and assigns it to the AssignedCollectionIds field.
+func (o *Agent) SetAssignedCollectionIds(v []string) {
+	o.AssignedCollectionIds = v
 }
 
 // GetAssignedTools returns the AssignedTools field value if set, zero value otherwise.
@@ -340,6 +375,38 @@ func (o *Agent) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Agent) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetHasAssignedCollections returns the HasAssignedCollections field value if set, zero value otherwise.
+func (o *Agent) GetHasAssignedCollections() bool {
+	if o == nil || IsNil(o.HasAssignedCollections) {
+		var ret bool
+		return ret
+	}
+	return *o.HasAssignedCollections
+}
+
+// GetHasAssignedCollectionsOk returns a tuple with the HasAssignedCollections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Agent) GetHasAssignedCollectionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasAssignedCollections) {
+		return nil, false
+	}
+	return o.HasAssignedCollections, true
+}
+
+// HasHasAssignedCollections returns a boolean if a field has been set.
+func (o *Agent) HasHasAssignedCollections() bool {
+	if o != nil && !IsNil(o.HasAssignedCollections) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasAssignedCollections gets a reference to the given bool and assigns it to the HasAssignedCollections field.
+func (o *Agent) SetHasAssignedCollections(v bool) {
+	o.HasAssignedCollections = &v
 }
 
 // GetI18n returns the I18n field value if set, zero value otherwise.
@@ -1211,6 +1278,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AddToolGuidelines) {
 		toSerialize["add_tool_guidelines"] = o.AddToolGuidelines
 	}
+	if !IsNil(o.AssignedCollectionIds) {
+		toSerialize["assigned_collection_ids"] = o.AssignedCollectionIds
+	}
 	if !IsNil(o.AssignedTools) {
 		toSerialize["assigned_tools"] = o.AssignedTools
 	}
@@ -1231,6 +1301,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.HasAssignedCollections) {
+		toSerialize["has_assigned_collections"] = o.HasAssignedCollections
 	}
 	if !IsNil(o.I18n) {
 		toSerialize["i18n"] = o.I18n
@@ -1354,6 +1427,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "add_tool_guidelines")
+		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "assigned_tools")
 		delete(additionalProperties, "attached_file_ids")
 		delete(additionalProperties, "avatar_url")
@@ -1361,6 +1435,7 @@ func (o *Agent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "default_file_upload_category")
 		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "has_assigned_collections")
 		delete(additionalProperties, "i18n")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "ignore_incoming_overwrite")
