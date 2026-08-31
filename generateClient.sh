@@ -3,15 +3,16 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR" || exit 1
 
 PACKAGE="$1"
-BASE_URL="$2"
+BASE_URL="${2%/}"
 if [ -z "$PACKAGE" ] || [ -z "$BASE_URL" ]; then
   echo "Usage: $0 <package-name> <base-url>"
   exit 1
 fi
 
-# The package name doubles as the output directory that gets rm -rf'd below
-if ! echo "$PACKAGE" | grep -qE '^[a-z][a-z0-9_-]*$'; then
-  echo "Invalid package name '${PACKAGE}'. Expected lowercase [a-z][a-z0-9_-]*."
+# The package name doubles as the output directory that gets rm -rf'd below and
+# as the Go package clause, where a hyphen would not compile
+if ! echo "$PACKAGE" | grep -qE '^[a-z][a-z0-9_]*$'; then
+  echo "Invalid package name '${PACKAGE}'. Expected lowercase [a-z][a-z0-9_]*."
   exit 1
 fi
 
@@ -33,7 +34,7 @@ fi
 echo "Generating ${PACKAGE} client v${VERSION}"
 
 rm -rf "$PACKAGE"
-openapi-generator generate \
+if ! openapi-generator generate \
   -o "$PACKAGE" \
   -i "${BASE_URL}/info/docs/doc.json" \
   -g go \
@@ -41,13 +42,19 @@ openapi-generator generate \
   --additional-properties packageVersion="$VERSION" \
   --additional-properties disallowAdditionalPropertiesIfNotPresent=false \
   --git-user-id vaudience \
-  --git-repo-id "nexus-go-clients/${PACKAGE}"
+  --git-repo-id "nexus-go-clients/${PACKAGE}"; then
+  echo "Generation failed for ${PACKAGE}. Exiting without committing."
+  exit 1
+fi
 
 cd "$PACKAGE" || exit 1
 rm -f .travis.yml
 rm -f git_push.sh
-go get github.com/stretchr/testify/assert
-go mod tidy
+# A partial module would otherwise be committed and tagged as a release
+if ! go get github.com/stretchr/testify/assert || ! go mod tidy; then
+  echo "Go module setup failed for ${PACKAGE}. Exiting without committing."
+  exit 1
+fi
 
 cd "$SCRIPT_DIR" || exit 1
 
