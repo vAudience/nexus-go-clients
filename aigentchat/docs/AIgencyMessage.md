@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Attachments** | [**AIgencyMessageFileList**](AIgencyMessageFileList.md) | Note: deprecated, but we need to keep it for backward compatibility or do a message data migration | 
 **ChannelId** | **string** |  | 
 **ChannelName** | **string** |  | 
+**ClientMessageId** | Pointer to **string** | ClientMessageID is the caller-supplied idempotency key of the chat-completion request that produced this message, stored verbatim on the user message only — never on the assistant reply. readxs must stay \&quot;*\&quot;: the SSE frame is filtered once with the sender&#39;s access list and then broadcast to every subscriber, so an owner-scoped field would reach some clients but not others. | [optional] 
 **Content** | [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | 
 **ContinuationInstructions** | Pointer to [**ToolContinuationInstructions**](ToolContinuationInstructions.md) |  | [optional] 
 **CreatedAt** | **int64** |  | 
@@ -152,6 +153,31 @@ and a boolean to check if the value has been set.
 
 SetChannelName sets ChannelName field to given value.
 
+
+### GetClientMessageId
+
+`func (o *AIgencyMessage) GetClientMessageId() string`
+
+GetClientMessageId returns the ClientMessageId field if non-nil, zero value otherwise.
+
+### GetClientMessageIdOk
+
+`func (o *AIgencyMessage) GetClientMessageIdOk() (*string, bool)`
+
+GetClientMessageIdOk returns a tuple with the ClientMessageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientMessageId
+
+`func (o *AIgencyMessage) SetClientMessageId(v string)`
+
+SetClientMessageId sets ClientMessageId field to given value.
+
+### HasClientMessageId
+
+`func (o *AIgencyMessage) HasClientMessageId() bool`
+
+HasClientMessageId returns a boolean if a field has been set.
 
 ### GetContent
 

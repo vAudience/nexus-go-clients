@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.39.0
+API version: 0.42.2
 Contact: contact@vaudience.ai
 */
 
@@ -27,6 +27,8 @@ type AIgencyMessage struct {
 	Attachments AIgencyMessageFileList `json:"attachments"`
 	ChannelId string `json:"channel_id"`
 	ChannelName string `json:"channel_name"`
+	// ClientMessageID is the caller-supplied idempotency key of the chat-completion request that produced this message, stored verbatim on the user message only — never on the assistant reply. readxs must stay \"*\": the SSE frame is filtered once with the sender's access list and then broadcast to every subscriber, so an owner-scoped field would reach some clients but not others.
+	ClientMessageId *string `json:"client_message_id,omitempty"`
 	Content AIgencyMessageContentList `json:"content"`
 	ContinuationInstructions *ToolContinuationInstructions `json:"continuation_instructions,omitempty"`
 	CreatedAt int64 `json:"created_at"`
@@ -206,6 +208,38 @@ func (o *AIgencyMessage) GetChannelNameOk() (*string, bool) {
 // SetChannelName sets field value
 func (o *AIgencyMessage) SetChannelName(v string) {
 	o.ChannelName = v
+}
+
+// GetClientMessageId returns the ClientMessageId field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetClientMessageId() string {
+	if o == nil || IsNil(o.ClientMessageId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientMessageId
+}
+
+// GetClientMessageIdOk returns a tuple with the ClientMessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetClientMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientMessageId) {
+		return nil, false
+	}
+	return o.ClientMessageId, true
+}
+
+// HasClientMessageId returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasClientMessageId() bool {
+	if o != nil && !IsNil(o.ClientMessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientMessageId gets a reference to the given string and assigns it to the ClientMessageId field.
+func (o *AIgencyMessage) SetClientMessageId(v string) {
+	o.ClientMessageId = &v
 }
 
 // GetContent returns the Content field value
@@ -911,6 +945,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["attachments"] = o.Attachments
 	toSerialize["channel_id"] = o.ChannelId
 	toSerialize["channel_name"] = o.ChannelName
+	if !IsNil(o.ClientMessageId) {
+		toSerialize["client_message_id"] = o.ClientMessageId
+	}
 	toSerialize["content"] = o.Content
 	if !IsNil(o.ContinuationInstructions) {
 		toSerialize["continuation_instructions"] = o.ContinuationInstructions
@@ -1025,6 +1062,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "channel_id")
 		delete(additionalProperties, "channel_name")
+		delete(additionalProperties, "client_message_id")
 		delete(additionalProperties, "content")
 		delete(additionalProperties, "continuation_instructions")
 		delete(additionalProperties, "created_at")

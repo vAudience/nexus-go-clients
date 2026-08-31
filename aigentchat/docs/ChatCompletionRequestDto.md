@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AgentId** | Pointer to **string** |  | [optional] 
-**AssignedCollectionIds** | Pointer to **[]string** | AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them to accessible deepr corpora with 400/403/503 semantics. | [optional] 
+**AssignedCollectionIds** | Pointer to **[]string** | AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves the usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the file manager is unreachable. | [optional] 
 **AttachedFiles** | Pointer to **[]string** |  | [optional] 
 **ChannelId** | Pointer to **string** |  | [optional] 
+**ClientMessageId** | Pointer to **string** | ClientMessageID is an opaque caller-generated id (a UUID in practice) that is stored on the user message and acts as an idempotency key: sending it again returns the messages of the first request instead of starting a second completion. | [optional] 
 **ContinueInstructionOnMaxTokens** | Pointer to **string** |  | [optional] 
 **ContinueOnMaxTokens** | Pointer to **bool** |  | [optional] 
 **ExpireMessages** | Pointer to **bool** |  | [optional] 
@@ -141,6 +142,31 @@ SetChannelId sets ChannelId field to given value.
 `func (o *ChatCompletionRequestDto) HasChannelId() bool`
 
 HasChannelId returns a boolean if a field has been set.
+
+### GetClientMessageId
+
+`func (o *ChatCompletionRequestDto) GetClientMessageId() string`
+
+GetClientMessageId returns the ClientMessageId field if non-nil, zero value otherwise.
+
+### GetClientMessageIdOk
+
+`func (o *ChatCompletionRequestDto) GetClientMessageIdOk() (*string, bool)`
+
+GetClientMessageIdOk returns a tuple with the ClientMessageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientMessageId
+
+`func (o *ChatCompletionRequestDto) SetClientMessageId(v string)`
+
+SetClientMessageId sets ClientMessageId field to given value.
+
+### HasClientMessageId
+
+`func (o *ChatCompletionRequestDto) HasClientMessageId() bool`
+
+HasClientMessageId returns a boolean if a field has been set.
 
 ### GetContinueInstructionOnMaxTokens
 

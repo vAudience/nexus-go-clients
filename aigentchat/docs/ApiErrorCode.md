@@ -19,8 +19,6 @@
 
 * `ErrCodeInvalidAssignedCollections` (value: `"invalid_assigned_collections"`)
 
-* `ErrCodeCollectionNotAccessible` (value: `"collection_not_accessible"`)
-
 * `ErrCodeCollectionResolveUnavailable` (value: `"collection_resolve_unavailable"`)
 
 * `ErrCodeInvalidDate` (value: `"invalid_date"`)
@@ -132,6 +130,10 @@
 * `ErrCodeChatCompletionExceedsMaxToolCalls` (value: `"chat_completion_exceeds_max_tool_calls"`)
 
 * `ErrCodeChatCompletionInProgress` (value: `"chat_completion_in_progress"`)
+
+* `ErrCodeChatCompletionClaimHeld` (value: `"chat_completion_claim_held"`)
+
+* `ErrCodeInvalidClientMessageID` (value: `"invalid_client_message_id"`)
 
 * `ErrCodeChatCompletionCancelled` (value: `"chat_completion_cancelled"`)
 

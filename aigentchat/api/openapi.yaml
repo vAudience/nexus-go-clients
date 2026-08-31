@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.39.0
+  version: 0.42.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -2482,6 +2482,69 @@ paths:
       security:
       - ApiKey: []
       summary: Get file settings for chat completions
+      tags:
+      - ChatCompletions
+  /v1/organizations/{org_id}/completions/status/{client_message_id}:
+    get:
+      description: |-
+        Reports what happened to the chat-completion request sent under a client_message_id:
+        `found` (the message pair exists, the assistant message may still be in progress),
+        `pending` (accepted and still being prepared, retry after retry_after_ms) or `unseen`
+        (never accepted — the client may restore its draft). All three are 200 responses.
+      operationId: GetChatCompletionStatus
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: client message ID sent with the completion request
+        in: path
+        name: client_message_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompletionStatus"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get the status of a chat-completion request
       tags:
       - ChatCompletions
   /v1/organizations/{org_id}/completions/stream:
@@ -5946,6 +6009,7 @@ components:
         attachments: "{}"
         channel_id: channel_id
         channel_name: channel_name
+        client_message_id: client_message_id
         content:
           data:
           - file:
@@ -6154,6 +6218,16 @@ components:
         channel_name:
           maxLength: 255
           minLength: 1
+          type: string
+        client_message_id:
+          description: |-
+            ClientMessageID is the caller-supplied idempotency key of the chat-completion request that
+            produced this message, stored verbatim on the user message only — never on the assistant
+            reply. readxs must stay "*": the SSE frame is filtered once with the sender's access list and
+            then broadcast to every subscriber, so an owner-scoped field would reach some clients but not
+            others.
+          maxLength: 128
+          minLength: 8
           type: string
         content:
           $ref: "#/components/schemas/AIgencyMessageContentList"
@@ -6551,6 +6625,7 @@ components:
           attachments: "{}"
           channel_id: channel_id
           channel_name: channel_name
+          client_message_id: client_message_id
           content:
             data:
             - file:
@@ -6742,6 +6817,7 @@ components:
           attachments: "{}"
           channel_id: channel_id
           channel_name: channel_name
+          client_message_id: client_message_id
           content:
             data:
             - file:
@@ -7231,6 +7307,9 @@ components:
         assigned_collection_ids:
         - assigned_collection_ids
         - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
@@ -7397,6 +7476,7 @@ components:
         assigned_collection_ids:
           items:
             type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         assigned_tools:
@@ -7558,6 +7638,9 @@ components:
         results:
         - add_tool_guidelines: true
           assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          - assigned_collection_ids
           - assigned_collection_ids
           - assigned_collection_ids
           assigned_tools:
@@ -7722,6 +7805,9 @@ components:
             - user_ids
         - add_tool_guidelines: true
           assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          - assigned_collection_ids
           - assigned_collection_ids
           - assigned_collection_ids
           assigned_tools:
@@ -7945,6 +8031,9 @@ components:
         assigned_collection_ids:
         - assigned_collection_ids
         - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
         assigned_tools:
         - assigned_tools
         - assigned_tools
@@ -8095,6 +8184,7 @@ components:
         assigned_collection_ids:
           items:
             type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         assigned_tools:
@@ -8225,7 +8315,6 @@ components:
       - invalid_entity
       - invalid_params
       - invalid_assigned_collections
-      - collection_not_accessible
       - collection_resolve_unavailable
       - invalid_date
       - start_date_must_be_before_end_date
@@ -8282,6 +8371,8 @@ components:
       - chat_completion_exceeds_total_temporary_file_size
       - chat_completion_exceeds_max_tool_calls
       - chat_completion_in_progress
+      - chat_completion_claim_held
+      - invalid_client_message_id
       - chat_completion_cancelled
       - image_generation_in_progress
       - image_generation_cancelled
@@ -8351,7 +8442,6 @@ components:
       - ErrCodeInvalidEntity
       - ErrCodeInvalidParams
       - ErrCodeInvalidAssignedCollections
-      - ErrCodeCollectionNotAccessible
       - ErrCodeCollectionResolveUnavailable
       - ErrCodeInvalidDate
       - ErrCodeStartDateMustBeBeforeEndDate
@@ -8408,6 +8498,8 @@ components:
       - ErrCodeChatCompletionExceedsTotalTempFileSize
       - ErrCodeChatCompletionExceedsMaxToolCalls
       - ErrCodeChatCompletionInProgress
+      - ErrCodeChatCompletionClaimHeld
+      - ErrCodeInvalidClientMessageID
       - ErrCodeChatCompletionCancelled
       - ErrCodeImageGenerationInProgress
       - ErrCodeImageGenerationCancelled
@@ -9075,6 +9167,9 @@ components:
         assigned_collection_ids:
         - assigned_collection_ids
         - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
         context_window:
           anchor_message_id: anchor_message_id
           is_verified: true
@@ -9104,6 +9199,7 @@ components:
         assigned_collection_ids:
           items:
             type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         context_window:
@@ -9213,6 +9309,9 @@ components:
         - assigned_collection_ids:
           - assigned_collection_ids
           - assigned_collection_ids
+          - assigned_collection_ids
+          - assigned_collection_ids
+          - assigned_collection_ids
           context_window:
             anchor_message_id: anchor_message_id
             is_verified: true
@@ -9239,6 +9338,9 @@ components:
           updated_at: 7
           updated_by: updated_by
         - assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          - assigned_collection_ids
           - assigned_collection_ids
           - assigned_collection_ids
           context_window:
@@ -9289,6 +9391,9 @@ components:
         assigned_collection_ids:
         - assigned_collection_ids
         - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
         description: description
         is_org_public: true
         is_public: true
@@ -9300,6 +9405,7 @@ components:
         assigned_collection_ids:
           items:
             type: string
+          maxItems: 64
           type: array
           uniqueItems: true
         description:
@@ -9380,10 +9486,14 @@ components:
         assigned_collection_ids:
         - assigned_collection_ids
         - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
+        - assigned_collection_ids
         attached_files:
         - attached_files
         - attached_files
         channel_id: channel_id
+        client_message_id: client_message_id
         continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
         continue_on_max_tokens: true
         expire_messages: true
@@ -9410,16 +9520,27 @@ components:
           description: |-
             AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored
             implies accessible. At completion time the ids are re-evaluated per requesting user+org by
-            resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them
-            to accessible deepr corpora with 400/403/503 semantics.
+            resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves the
+            usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the
+            file manager is unreachable.
           items:
             type: string
+          maxItems: 64
           type: array
+          uniqueItems: true
         attached_files:
           items:
             type: string
           type: array
         channel_id:
+          type: string
+        client_message_id:
+          description: |-
+            ClientMessageID is an opaque caller-generated id (a UUID in practice) that is stored on the
+            user message and acts as an idempotency key: sending it again returns the messages of the
+            first request instead of starting a second completion.
+          maxLength: 128
+          minLength: 8
           type: string
         continue_instruction_on_max_tokens:
           type: string
@@ -9463,6 +9584,412 @@ components:
           type: object
       required:
       - message
+      type: object
+    CompletionStatus:
+      example:
+        channel_id: channel_id
+        client_message_id: client_message_id
+        messages:
+        - ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          attachments: "{}"
+          channel_id: channel_id
+          channel_name: channel_name
+          client_message_id: client_message_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                file_name: file_name
+                file_size: 0
+                id: id
+                llm_input_type: llm_input_type
+                meta_data: "{}"
+                mime_type: mime_type
+                upload_category: upload_category
+                url: url
+              function_call:
+                arguments: "{}"
+                function_name: function_name
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                continuation_instructions:
+                  continuation_function_call: continuation_function_call
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                function_name: function_name
+                id: id
+                is_error: true
+                result: result
+                result_files:
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              function_status_update:
+                id: id
+                updates:
+                - message: message
+                  meta_data: "{}"
+                - message: message
+                  meta_data: "{}"
+              is_cancelled: true
+              text: text
+              text_meta_data:
+                key: "{}"
+              text_mime_type: text_mime_type
+              thinking:
+                content: content
+                is_redacted: true
+                signature: signature
+              type: text
+            - file:
+                embedded_content: embedded_content
+                file_name: file_name
+                file_size: 0
+                id: id
+                llm_input_type: llm_input_type
+                meta_data: "{}"
+                mime_type: mime_type
+                upload_category: upload_category
+                url: url
+              function_call:
+                arguments: "{}"
+                function_name: function_name
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                continuation_instructions:
+                  continuation_function_call: continuation_function_call
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                function_name: function_name
+                id: id
+                is_error: true
+                result: result
+                result_files:
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              function_status_update:
+                id: id
+                updates:
+                - message: message
+                  meta_data: "{}"
+                - message: message
+                  meta_data: "{}"
+              is_cancelled: true
+              text: text
+              text_meta_data:
+                key: "{}"
+              text_mime_type: text_mime_type
+              thinking:
+                content: content
+                is_redacted: true
+                signature: signature
+              type: text
+            full_text: full_text
+            full_text_mime_type: full_text_mime_type
+          continuation_instructions:
+            continuation_function_call: continuation_function_call
+            continuation_id: continuation_id
+            human_input_prompt: human_input_prompt
+          created_at: 0
+          error:
+            error_code: ""
+            message: message
+            original_status_code: 1
+            status_code: 5
+          execution_id: execution_id
+          feature_usage:
+          - capability: ""
+            cost_items:
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+          - capability: ""
+            cost_items:
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+          finish_reason: ""
+          id: id
+          meta_data: "{}"
+          owner_organization_id: owner_organization_id
+          parameters: "{}"
+          reference_id: reference_id
+          request_input_tokens: 6
+          request_output_tokens: 1
+          request_overhead_tokens: 5
+          response_to_id: response_to_id
+          sender_conversation_role: "{}"
+          sender_id: sender_id
+          sender_name: sender_name
+          state: state
+          token_count: 5
+          token_direction: "{}"
+          type: "{}"
+          updated_at: 2
+        - ai_model_id: ai_model_id
+          ai_service_id: ai_service_id
+          attachments: "{}"
+          channel_id: channel_id
+          channel_name: channel_name
+          client_message_id: client_message_id
+          content:
+            data:
+            - file:
+                embedded_content: embedded_content
+                file_name: file_name
+                file_size: 0
+                id: id
+                llm_input_type: llm_input_type
+                meta_data: "{}"
+                mime_type: mime_type
+                upload_category: upload_category
+                url: url
+              function_call:
+                arguments: "{}"
+                function_name: function_name
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                continuation_instructions:
+                  continuation_function_call: continuation_function_call
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                function_name: function_name
+                id: id
+                is_error: true
+                result: result
+                result_files:
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              function_status_update:
+                id: id
+                updates:
+                - message: message
+                  meta_data: "{}"
+                - message: message
+                  meta_data: "{}"
+              is_cancelled: true
+              text: text
+              text_meta_data:
+                key: "{}"
+              text_mime_type: text_mime_type
+              thinking:
+                content: content
+                is_redacted: true
+                signature: signature
+              type: text
+            - file:
+                embedded_content: embedded_content
+                file_name: file_name
+                file_size: 0
+                id: id
+                llm_input_type: llm_input_type
+                meta_data: "{}"
+                mime_type: mime_type
+                upload_category: upload_category
+                url: url
+              function_call:
+                arguments: "{}"
+                function_name: function_name
+                id: id
+                tool_function_id: tool_function_id
+              function_responses:
+                continuation_instructions:
+                  continuation_function_call: continuation_function_call
+                  continuation_id: continuation_id
+                  human_input_prompt: human_input_prompt
+                function_name: function_name
+                id: id
+                is_error: true
+                result: result
+                result_files:
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                - embedded_content: embedded_content
+                  file_name: file_name
+                  file_size: 0
+                  id: id
+                  llm_input_type: llm_input_type
+                  meta_data: "{}"
+                  mime_type: mime_type
+                  upload_category: upload_category
+                  url: url
+                result_meta_data: "{}"
+                tool_function_id: tool_function_id
+              function_status_update:
+                id: id
+                updates:
+                - message: message
+                  meta_data: "{}"
+                - message: message
+                  meta_data: "{}"
+              is_cancelled: true
+              text: text
+              text_meta_data:
+                key: "{}"
+              text_mime_type: text_mime_type
+              thinking:
+                content: content
+                is_redacted: true
+                signature: signature
+              type: text
+            full_text: full_text
+            full_text_mime_type: full_text_mime_type
+          continuation_instructions:
+            continuation_function_call: continuation_function_call
+            continuation_id: continuation_id
+            human_input_prompt: human_input_prompt
+          created_at: 0
+          error:
+            error_code: ""
+            message: message
+            original_status_code: 1
+            status_code: 5
+          execution_id: execution_id
+          feature_usage:
+          - capability: ""
+            cost_items:
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+          - capability: ""
+            cost_items:
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+            - cost_per_unit_in_euro: 9.301444243932576
+              cost_unit: null
+              description: description
+              long_context_cost_per_unit_in_euro: 3.616076749251911
+              resulting_cost_in_euro: 2.027123023002322
+              used_units: 4.145608029883936
+          finish_reason: ""
+          id: id
+          meta_data: "{}"
+          owner_organization_id: owner_organization_id
+          parameters: "{}"
+          reference_id: reference_id
+          request_input_tokens: 6
+          request_output_tokens: 1
+          request_overhead_tokens: 5
+          response_to_id: response_to_id
+          sender_conversation_role: "{}"
+          sender_id: sender_id
+          sender_name: sender_name
+          state: state
+          token_count: 5
+          token_direction: "{}"
+          type: "{}"
+          updated_at: 2
+        retry_after_ms: 0
+        state: state
+      properties:
+        channel_id:
+          type: string
+        client_message_id:
+          type: string
+        messages:
+          items:
+            $ref: "#/components/schemas/AIgencyMessage"
+          type: array
+        retry_after_ms:
+          format: int64
+          type: integer
+        state:
+          type: string
       type: object
     ConnectionTokenResponse:
       example:

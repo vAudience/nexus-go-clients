@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.39.0
+API version: 0.42.2
 Contact: contact@vaudience.ai
 */
 
@@ -29,7 +29,6 @@ const (
 	ErrCodeInvalidEntity ApiErrorCode = "invalid_entity"
 	ErrCodeInvalidParams ApiErrorCode = "invalid_params"
 	ErrCodeInvalidAssignedCollections ApiErrorCode = "invalid_assigned_collections"
-	ErrCodeCollectionNotAccessible ApiErrorCode = "collection_not_accessible"
 	ErrCodeCollectionResolveUnavailable ApiErrorCode = "collection_resolve_unavailable"
 	ErrCodeInvalidDate ApiErrorCode = "invalid_date"
 	ErrCodeStartDateMustBeBeforeEndDate ApiErrorCode = "start_date_must_be_before_end_date"
@@ -86,6 +85,8 @@ const (
 	ErrCodeChatCompletionExceedsTotalTempFileSize ApiErrorCode = "chat_completion_exceeds_total_temporary_file_size"
 	ErrCodeChatCompletionExceedsMaxToolCalls ApiErrorCode = "chat_completion_exceeds_max_tool_calls"
 	ErrCodeChatCompletionInProgress ApiErrorCode = "chat_completion_in_progress"
+	ErrCodeChatCompletionClaimHeld ApiErrorCode = "chat_completion_claim_held"
+	ErrCodeInvalidClientMessageID ApiErrorCode = "invalid_client_message_id"
 	ErrCodeChatCompletionCancelled ApiErrorCode = "chat_completion_cancelled"
 	ErrCodeImageGenerationInProgress ApiErrorCode = "image_generation_in_progress"
 	ErrCodeImageGenerationCancelled ApiErrorCode = "image_generation_cancelled"
@@ -157,7 +158,6 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"invalid_entity",
 	"invalid_params",
 	"invalid_assigned_collections",
-	"collection_not_accessible",
 	"collection_resolve_unavailable",
 	"invalid_date",
 	"start_date_must_be_before_end_date",
@@ -214,6 +214,8 @@ var AllowedApiErrorCodeEnumValues = []ApiErrorCode{
 	"chat_completion_exceeds_total_temporary_file_size",
 	"chat_completion_exceeds_max_tool_calls",
 	"chat_completion_in_progress",
+	"chat_completion_claim_held",
+	"invalid_client_message_id",
 	"chat_completion_cancelled",
 	"image_generation_in_progress",
 	"image_generation_cancelled",

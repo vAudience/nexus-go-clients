@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.39.0
+API version: 0.42.2
 Contact: contact@vaudience.ai
 */
 
@@ -22,10 +22,12 @@ var _ MappedNullable = &ChatCompletionRequestDto{}
 // ChatCompletionRequestDto struct for ChatCompletionRequestDto
 type ChatCompletionRequestDto struct {
 	AgentId *string `json:"agent_id,omitempty"`
-	// AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves them to accessible deepr corpora with 400/403/503 semantics.
+	// AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves the usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the file manager is unreachable.
 	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
+	// ClientMessageID is an opaque caller-generated id (a UUID in practice) that is stored on the user message and acts as an idempotency key: sending it again returns the messages of the first request instead of starting a second completion.
+	ClientMessageId *string `json:"client_message_id,omitempty"`
 	ContinueInstructionOnMaxTokens *string `json:"continue_instruction_on_max_tokens,omitempty"`
 	ContinueOnMaxTokens *bool `json:"continue_on_max_tokens,omitempty"`
 	ExpireMessages *bool `json:"expire_messages,omitempty"`
@@ -191,6 +193,38 @@ func (o *ChatCompletionRequestDto) HasChannelId() bool {
 // SetChannelId gets a reference to the given string and assigns it to the ChannelId field.
 func (o *ChatCompletionRequestDto) SetChannelId(v string) {
 	o.ChannelId = &v
+}
+
+// GetClientMessageId returns the ClientMessageId field value if set, zero value otherwise.
+func (o *ChatCompletionRequestDto) GetClientMessageId() string {
+	if o == nil || IsNil(o.ClientMessageId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientMessageId
+}
+
+// GetClientMessageIdOk returns a tuple with the ClientMessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatCompletionRequestDto) GetClientMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientMessageId) {
+		return nil, false
+	}
+	return o.ClientMessageId, true
+}
+
+// HasClientMessageId returns a boolean if a field has been set.
+func (o *ChatCompletionRequestDto) HasClientMessageId() bool {
+	if o != nil && !IsNil(o.ClientMessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientMessageId gets a reference to the given string and assigns it to the ClientMessageId field.
+func (o *ChatCompletionRequestDto) SetClientMessageId(v string) {
+	o.ClientMessageId = &v
 }
 
 // GetContinueInstructionOnMaxTokens returns the ContinueInstructionOnMaxTokens field value if set, zero value otherwise.
@@ -655,6 +689,9 @@ func (o ChatCompletionRequestDto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChannelId) {
 		toSerialize["channel_id"] = o.ChannelId
 	}
+	if !IsNil(o.ClientMessageId) {
+		toSerialize["client_message_id"] = o.ClientMessageId
+	}
 	if !IsNil(o.ContinueInstructionOnMaxTokens) {
 		toSerialize["continue_instruction_on_max_tokens"] = o.ContinueInstructionOnMaxTokens
 	}
@@ -742,6 +779,7 @@ func (o *ChatCompletionRequestDto) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assigned_collection_ids")
 		delete(additionalProperties, "attached_files")
 		delete(additionalProperties, "channel_id")
+		delete(additionalProperties, "client_message_id")
 		delete(additionalProperties, "continue_instruction_on_max_tokens")
 		delete(additionalProperties, "continue_on_max_tokens")
 		delete(additionalProperties, "expire_messages")

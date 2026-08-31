@@ -78,4 +78,19 @@ func Test_aigentchat_ChatCompletionsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ChatCompletionsAPIService GetChatCompletionStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var orgId string
+		var clientMessageId string
+
+		resp, httpRes, err := apiClient.ChatCompletionsAPI.GetChatCompletionStatus(context.Background(), orgId, clientMessageId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

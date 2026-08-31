@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CreateChatCompletion**](ChatCompletionsAPI.md#CreateChatCompletion) | **Post** /v1/organizations/{org_id}/completions | Create a chat-completion
 [**CreateChatCompletionStreaming**](ChatCompletionsAPI.md#CreateChatCompletionStreaming) | **Post** /v1/organizations/{org_id}/completions/stream | Create a streaming chat-completion
 [**GetChatCompletionFileSettings**](ChatCompletionsAPI.md#GetChatCompletionFileSettings) | **Get** /v1/organizations/{org_id}/completions/file-settings | Get file settings for chat completions
+[**GetChatCompletionStatus**](ChatCompletionsAPI.md#GetChatCompletionStatus) | **Get** /v1/organizations/{org_id}/completions/status/{client_message_id} | Get the status of a chat-completion request
 
 
 
@@ -281,6 +282,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ChatCompletionFileSettings**](ChatCompletionFileSettings.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetChatCompletionStatus
+
+> CompletionStatus GetChatCompletionStatus(ctx, orgId, clientMessageId).Execute()
+
+Get the status of a chat-completion request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/vaudience/nexus-go-clients/aigentchat"
+)
+
+func main() {
+	orgId := "orgId_example" // string | organization ID
+	clientMessageId := "clientMessageId_example" // string | client message ID sent with the completion request
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ChatCompletionsAPI.GetChatCompletionStatus(context.Background(), orgId, clientMessageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ChatCompletionsAPI.GetChatCompletionStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetChatCompletionStatus`: CompletionStatus
+	fmt.Fprintf(os.Stdout, "Response from `ChatCompletionsAPI.GetChatCompletionStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orgId** | **string** | organization ID | 
+**clientMessageId** | **string** | client message ID sent with the completion request | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetChatCompletionStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**CompletionStatus**](CompletionStatus.md)
 
 ### Authorization
 

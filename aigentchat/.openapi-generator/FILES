@@ -85,6 +85,7 @@ docs/ChatCompletionCostTrackingRequest.md
 docs/ChatCompletionFileSettings.md
 docs/ChatCompletionRequestDto.md
 docs/ChatCompletionsAPI.md
+docs/CompletionStatus.md
 docs/ConnectionTokenResponse.md
 docs/ConnectionTokensAPI.md
 docs/ConversationRole.md
@@ -209,6 +210,7 @@ model_channel_write_dto.go
 model_chat_completion_cost_tracking_request.go
 model_chat_completion_file_settings.go
 model_chat_completion_request_dto.go
+model_completion_status.go
 model_connection_token_response.go
 model_conversation_role.go
 model_cost_estimation.go
