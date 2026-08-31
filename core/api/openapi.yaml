@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: Vaudience AI Core API
-  version: 0.12.2
+  version: 0.20.2
 servers:
 - url: https://core.dev.ai.vaud.one/
 tags:
@@ -208,6 +208,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/AuthenticatedResponse"
           description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Server or Database Internal Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Identity provider unavailable
       summary: Authenticated
       tags:
       - Auth
@@ -284,12 +296,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Session expired
         "500":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Server or Database Internal Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Identity provider unavailable
       summary: Refresh
       tags:
       - Auth
@@ -3491,7 +3515,7 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Organization Not Found
+          description: Organization Subscription Not Found
         "500":
           content:
             '*/*':
@@ -4317,18 +4341,18 @@ components:
   schemas:
     AgentFilterOptions:
       example:
-        q: q
-        visibility: visibility
+        addPredefinedAgents: true
         modelIds:
         - modelIds
         - modelIds
+        q: q
         systemTags:
         - systemTags
         - systemTags
-        addPredefinedAgents: true
         tags:
         - tags
         - tags
+        visibility: visibility
       properties:
         addPredefinedAgents:
           type: boolean
@@ -4351,23 +4375,23 @@ components:
       type: object
     AgentQuickFilter:
       example:
-        name: name
-        options:
-          q: q
-          visibility: visibility
-          modelIds:
-          - modelIds
-          - modelIds
-          systemTags:
-          - systemTags
-          - systemTags
-          addPredefinedAgents: true
-          tags:
-          - tags
-          - tags
         i18n:
           key:
             name: name
+        name: name
+        options:
+          addPredefinedAgents: true
+          modelIds:
+          - modelIds
+          - modelIds
+          q: q
+          systemTags:
+          - systemTags
+          - systemTags
+          tags:
+          - tags
+          - tags
+          visibility: visibility
       properties:
         i18n:
           additionalProperties:
@@ -4388,10 +4412,10 @@ components:
     AuthenticatedResponse:
       example:
         authenticated: true
-        tokenExpiresInSec: 0
-        name: name
-        userId: userId
         email: email
+        name: name
+        tokenExpiresInSec: 0
+        userId: userId
         username: username
       properties:
         authenticated:
@@ -4423,8 +4447,8 @@ components:
       - BillingModelVaudSubscription
     BulkInviteEntry:
       example:
-        roleId: roleId
         email: email
+        roleId: roleId
       properties:
         email:
           type: string
@@ -4438,9 +4462,9 @@ components:
       type: object
     BulkInviteResult:
       example:
-        inviteId: inviteId
-        errorCode: errorCode
         email: email
+        errorCode: errorCode
+        inviteId: inviteId
         status: status
       properties:
         email:
@@ -4480,11 +4504,13 @@ components:
       type: object
     ErrorCode:
       enum:
+      - api_key_roles_not_allowed
       - permission_denied
       - request_body_invalid
       - request_queries_invalid
       - unknown
       - unauthorized
+      - auth_session_expired
       - user_email_not_in_token
       - user_id_not_in_token
       - validation_failed
@@ -4541,6 +4567,11 @@ components:
       - association_role_in_use
       - association_member_has_role
       - association_member_has_not_role
+      - association_role_permissions_not_assignable
+      - association_role_is_owner_role
+      - organization_role_not_in_organization
+      - team_not_in_organization
+      - role_unknown
       - organization_has_subscription
       - organization_has_subscription_plan
       - organization_has_subscription_price
@@ -4576,6 +4607,9 @@ components:
       - product_type_invalid
       - product_disabled
       - product_not_allowed_for_trial
+      - product_role_not_assignable
+      - subscription_checkout_disabled
+      - subscription_plan_switch_disabled
       - stripe_signature_header_missing
       - stripe_event_construction_failed
       - stripe_disabled
@@ -4591,11 +4625,13 @@ components:
       - 2fa_disabled
       type: string
       x-enum-varnames:
+      - ErrCodeApiKeyRolesNotAllowed
       - ErrCodePermissionDenied
       - ErrCodeRequestBodyInvalid
       - ErrCodeRequestQueriesInvalid
       - ErrCodeUnknown
       - ErrCodeUnauthorized
+      - ErrCodeAuthSessionExpired
       - ErrCodeUserEmailNotInToken
       - ErrCodeUserIdNotInToken
       - ErrCodeValidationFailed
@@ -4652,6 +4688,11 @@ components:
       - ErrCodeAssociationRoleInUse
       - ErrCodeAssociationMemberHasRole
       - ErrCodeAssociationMemberHasNotRole
+      - ErrCodeAssociationRolePermissionsNotAssignable
+      - ErrCodeAssociationRoleIsOwnerRole
+      - ErrCodeOrganizationRoleNotInOrganization
+      - ErrCodeTeamNotInOrganization
+      - ErrCodeRoleUnknown
       - ErrCodeOrganizationHasSubscription
       - ErrCodeOrganizationHasSubscriptionPlan
       - ErrCodeOrganizationHasSubscriptionPrice
@@ -4687,6 +4728,9 @@ components:
       - ErrCodeProductTypeInvalid
       - ErrCodeProductDisabled
       - ErrCodeProductNotAllowedForTrial
+      - ErrCodeProductRoleNotAssignable
+      - ErrCodeSubscriptionCheckoutDisabled
+      - ErrCodeSubscriptionPlanSwitchDisabled
       - ErrCodeStripeSignatureHeaderMissing
       - ErrCodeStripeEventConstructionFailed
       - ErrCodeStripeDisabled
@@ -4715,7 +4759,7 @@ components:
       type: object
     ErrorResponse:
       example:
-        code: permission_denied
+        code: api_key_roles_not_allowed
         details:
         - field: field
           tag: tag
@@ -4754,13 +4798,13 @@ components:
       type: object
     MemberDeleteResponse:
       example:
-        resourcesTransferred:
-        - resourcesTransferred
-        - resourcesTransferred
         id: id
         resourcesDeleted:
         - resourcesDeleted
         - resourcesDeleted
+        resourcesTransferred:
+        - resourcesTransferred
+        - resourcesTransferred
       properties:
         id:
           type: string
@@ -4795,18 +4839,18 @@ components:
       type: object
     OrganizationApiKeyPatchRequest:
       example:
+        name: name
+        organizationRoleId: organizationRoleId
         requiresRotation: true
         roleIds:
         - roleIds
         - roleIds
-        name: name
-        userFullName: userFullName
-        userEmail: userEmail
-        userName: userName
-        organizationRoleId: organizationRoleId
         teamIds:
         - teamIds
         - teamIds
+        userEmail: userEmail
+        userFullName: userFullName
+        userName: userName
       properties:
         name:
           minLength: 1
@@ -4816,6 +4860,11 @@ components:
         requiresRotation:
           type: boolean
         roleIds:
+          description: |-
+            Replaces the attached global roles. Requires the manage-api-key-roles:organizations permission
+            (vaudience staff only) whenever the field is present, an empty array included — clearing roles
+            is a staff action too. Product roles are never assignable: the active subscription's role is
+            attached automatically. Omit the field entirely to leave the roles untouched.
           items:
             type: string
           type: array
@@ -4834,17 +4883,17 @@ components:
       type: object
     OrganizationApiKeyPostRequest:
       example:
+        name: name
+        organizationRoleId: organizationRoleId
         roleIds:
         - roleIds
         - roleIds
-        name: name
-        userFullName: userFullName
-        userEmail: userEmail
-        userName: userName
-        organizationRoleId: organizationRoleId
         teamIds:
         - teamIds
         - teamIds
+        userEmail: userEmail
+        userFullName: userFullName
+        userName: userName
       properties:
         name:
           minLength: 1
@@ -4852,6 +4901,11 @@ components:
         organizationRoleId:
           type: string
         roleIds:
+          description: |-
+            Global roles to attach. Requires the manage-api-key-roles:organizations permission (vaudience
+            staff only) whenever the field is present, an empty array included. Product roles are never
+            assignable: the active subscription's role is attached automatically. Omit the field entirely
+            to create a key without extra roles.
           items:
             type: string
           type: array
@@ -4876,44 +4930,44 @@ components:
     OrganizationApiKeyResponse:
       example:
         apiKey: apiKey
-        teams:
-        - organizationId: organizationId
+        apiKeyHint: apiKeyHint
+        createdAt: createdAt
+        createdBy: createdBy
+        id: id
+        name: name
+        organizationId: organizationId
+        organizationRole:
           createdAt: createdAt
-          name: name
+          defaultMemberRole: true
           id: id
-          updatedAt: updatedAt
-        - organizationId: organizationId
-          createdAt: createdAt
           name: name
-          id: id
+          organizationId: organizationId
           updatedAt: updatedAt
         roles:
         - createdAt: createdAt
-          name: name
           id: id
+          name: name
           updatedAt: updatedAt
         - createdAt: createdAt
-          name: name
           id: id
+          name: name
           updatedAt: updatedAt
-        userFullName: userFullName
-        userName: userName
-        userId: userId
-        organizationId: organizationId
-        createdAt: createdAt
-        apiKeyHint: apiKeyHint
-        createdBy: createdBy
-        organizationRole:
+        teams:
+        - createdAt: createdAt
+          id: id
+          name: name
           organizationId: organizationId
-          createdAt: createdAt
-          defaultMemberRole: true
-          name: name
-          id: id
           updatedAt: updatedAt
-        name: name
-        userEmail: userEmail
-        id: id
+        - createdAt: createdAt
+          id: id
+          name: name
+          organizationId: organizationId
+          updatedAt: updatedAt
         updatedAt: updatedAt
+        userEmail: userEmail
+        userFullName: userFullName
+        userId: userId
+        userName: userName
       properties:
         apiKey:
           type: string
@@ -4969,10 +5023,10 @@ components:
     OrganizationBulkInviteRequest:
       example:
         entries:
-        - roleId: roleId
-          email: email
-        - roleId: roleId
-          email: email
+        - email: email
+          roleId: roleId
+        - email: email
+          roleId: roleId
       properties:
         entries:
           items:
@@ -4985,13 +5039,13 @@ components:
     OrganizationBulkInviteResponse:
       example:
         results:
-        - inviteId: inviteId
+        - email: email
           errorCode: errorCode
-          email: email
+          inviteId: inviteId
           status: status
-        - inviteId: inviteId
+        - email: email
           errorCode: errorCode
-          email: email
+          inviteId: inviteId
           status: status
       properties:
         results:
@@ -5022,14 +5076,14 @@ components:
       type: object
     OrganizationCreditsPaymentResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
-        totalAmount: 6
         credits: 0.8008281904610115
-        name: name
+        creditsBudgetUpdated: true
         currency: currency
         id: id
-        creditsBudgetUpdated: true
+        name: name
+        organizationId: organizationId
+        totalAmount: 6
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5073,28 +5127,28 @@ components:
     OrganizationDetailsResponse:
       example:
         organization:
-          owner: owner
           createdAt: createdAt
-          name: name
           id: id
+          name: name
+          owner: owner
           updatedAt: updatedAt
         subscription:
-          trialEnd: trialEnd
-          productId: productId
-          currentPeriodEnd: currentPeriodEnd
           active: true
-          seats: 0
-          trial: true
-          organizationId: organizationId
-          createdAt: createdAt
-          totalAmount: 1
-          seatsTaken: 6
           cancelAtPeriodEnd: true
-          name: name
+          createdAt: createdAt
           currency: currency
+          currentPeriodEnd: currentPeriodEnd
           id: id
+          name: name
+          organizationId: organizationId
+          productId: productId
           productType: payment
+          seats: 0
+          seatsTaken: 6
           status: status
+          totalAmount: 1
+          trial: true
+          trialEnd: trialEnd
           updatedAt: updatedAt
       properties:
         organization:
@@ -5106,56 +5160,56 @@ components:
       type: object
     OrganizationDetailsResultsResponse:
       example:
-        totalResults: 5
         results:
         - organization:
-            owner: owner
             createdAt: createdAt
-            name: name
             id: id
+            name: name
+            owner: owner
             updatedAt: updatedAt
           subscription:
-            trialEnd: trialEnd
-            productId: productId
-            currentPeriodEnd: currentPeriodEnd
             active: true
-            seats: 0
-            trial: true
-            organizationId: organizationId
-            createdAt: createdAt
-            totalAmount: 1
-            seatsTaken: 6
             cancelAtPeriodEnd: true
-            name: name
+            createdAt: createdAt
             currency: currency
+            currentPeriodEnd: currentPeriodEnd
             id: id
+            name: name
+            organizationId: organizationId
+            productId: productId
             productType: payment
+            seats: 0
+            seatsTaken: 6
             status: status
+            totalAmount: 1
+            trial: true
+            trialEnd: trialEnd
             updatedAt: updatedAt
         - organization:
-            owner: owner
             createdAt: createdAt
-            name: name
             id: id
+            name: name
+            owner: owner
             updatedAt: updatedAt
           subscription:
-            trialEnd: trialEnd
-            productId: productId
-            currentPeriodEnd: currentPeriodEnd
             active: true
-            seats: 0
-            trial: true
-            organizationId: organizationId
-            createdAt: createdAt
-            totalAmount: 1
-            seatsTaken: 6
             cancelAtPeriodEnd: true
-            name: name
+            createdAt: createdAt
             currency: currency
+            currentPeriodEnd: currentPeriodEnd
             id: id
+            name: name
+            organizationId: organizationId
+            productId: productId
             productType: payment
+            seats: 0
+            seatsTaken: 6
             status: status
+            totalAmount: 1
+            trial: true
+            trialEnd: trialEnd
             updatedAt: updatedAt
+        totalResults: 5
       properties:
         results:
           items:
@@ -5169,8 +5223,8 @@ components:
       type: object
     OrganizationInviteRequest:
       example:
-        roleId: roleId
         email: email
+        roleId: roleId
       properties:
         email:
           type: string
@@ -5184,15 +5238,15 @@ components:
       type: object
     OrganizationInviteResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
-        createdByName: createdByName
         createdBy: createdBy
-        emailSent: true
-        roleId: roleId
-        id: id
+        createdByName: createdByName
         email: email
+        emailSent: true
         expiresAt: expiresAt
+        id: id
+        organizationId: organizationId
+        roleId: roleId
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5228,37 +5282,37 @@ components:
       type: object
     OrganizationMemberResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
-        createdByName: createdByName
         createdBy: createdBy
-        organizationRole:
-          organizationId: organizationId
-          createdAt: createdAt
-          defaultMemberRole: true
-          name: name
-          id: id
-          updatedAt: updatedAt
+        createdByName: createdByName
         id: id
-        user:
-          createdAt: createdAt
-          fullname: fullname
-          id: id
-          email: email
-          updatedAt: updatedAt
-          username: username
         invitedAt: invitedAt
+        organizationId: organizationId
         organizationOwner: true
         organizationProductRoles:
         - createdAt: createdAt
-          name: name
           id: id
+          name: name
           updatedAt: updatedAt
         - createdAt: createdAt
-          name: name
           id: id
+          name: name
+          updatedAt: updatedAt
+        organizationRole:
+          createdAt: createdAt
+          defaultMemberRole: true
+          id: id
+          name: name
+          organizationId: organizationId
           updatedAt: updatedAt
         updatedAt: updatedAt
+        user:
+          createdAt: createdAt
+          email: email
+          fullname: fullname
+          id: id
+          updatedAt: updatedAt
+          username: username
       properties:
         createdAt:
           type: string
@@ -5299,9 +5353,9 @@ components:
       type: object
     OrganizationMemberSettingsPatchRequest:
       example:
-        imageDefaultAgentId: imageDefaultAgentId
-        embeddingDefaultAgentId: embeddingDefaultAgentId
         chatDefaultAgentId: chatDefaultAgentId
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        imageDefaultAgentId: imageDefaultAgentId
       properties:
         chatDefaultAgentId:
           type: string
@@ -5312,13 +5366,13 @@ components:
       type: object
     OrganizationMemberSettingsResponse:
       example:
-        organizationId: organizationId
+        chatDefaultAgentId: chatDefaultAgentId
         createdAt: createdAt
-        imageDefaultAgentId: imageDefaultAgentId
         embeddingDefaultAgentId: embeddingDefaultAgentId
         id: id
-        chatDefaultAgentId: chatDefaultAgentId
+        imageDefaultAgentId: imageDefaultAgentId
         memberId: memberId
+        organizationId: organizationId
         updatedAt: updatedAt
       properties:
         chatDefaultAgentId:
@@ -5375,10 +5429,10 @@ components:
       type: object
     OrganizationResponse:
       example:
-        owner: owner
         createdAt: createdAt
-        name: name
         id: id
+        name: name
+        owner: owner
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5400,18 +5454,18 @@ components:
       type: object
     OrganizationResultsResponse:
       example:
-        totalResults: 0
         results:
-        - owner: owner
-          createdAt: createdAt
-          name: name
+        - createdAt: createdAt
           id: id
-          updatedAt: updatedAt
-        - owner: owner
-          createdAt: createdAt
           name: name
-          id: id
+          owner: owner
           updatedAt: updatedAt
+        - createdAt: createdAt
+          id: id
+          name: name
+          owner: owner
+          updatedAt: updatedAt
+        totalResults: 0
       properties:
         results:
           items:
@@ -5425,11 +5479,11 @@ components:
       type: object
     OrganizationRoleReducedResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
         defaultMemberRole: true
-        name: name
         id: id
+        name: name
+        organizationId: organizationId
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5454,14 +5508,14 @@ components:
       type: object
     OrganizationRoleResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
         defaultMemberRole: true
+        id: id
+        name: name
+        organizationId: organizationId
         permissions:
         - permissions
         - permissions
-        name: name
-        id: id
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5491,21 +5545,21 @@ components:
       type: object
     OrganizationSettingsPatchRequest:
       example:
-        imageDefaultAgentId: imageDefaultAgentId
-        chatAllowedHostingLocations:
-        - chatAllowedHostingLocations
-        - chatAllowedHostingLocations
         audioAllowedHostingLocations:
         - audioAllowedHostingLocations
         - audioAllowedHostingLocations
+        chatAllowedHostingLocations:
+        - chatAllowedHostingLocations
+        - chatAllowedHostingLocations
+        chatDefaultAgentId: chatDefaultAgentId
+        embeddingAllowedHostingLocations:
+        - embeddingAllowedHostingLocations
+        - embeddingAllowedHostingLocations
         embeddingDefaultAgentId: embeddingDefaultAgentId
         imageAllowedHostingLocations:
         - imageAllowedHostingLocations
         - imageAllowedHostingLocations
-        embeddingAllowedHostingLocations:
-        - embeddingAllowedHostingLocations
-        - embeddingAllowedHostingLocations
-        chatDefaultAgentId: chatDefaultAgentId
+        imageDefaultAgentId: imageDefaultAgentId
         toolsAllowedHostingLocations:
         - toolsAllowedHostingLocations
         - toolsAllowedHostingLocations
@@ -5553,59 +5607,59 @@ components:
       type: object
     OrganizationSettingsResponse:
       example:
-        imageDefaultAgentId: imageDefaultAgentId
-        embeddingDefaultAgentId: embeddingDefaultAgentId
-        embeddingAllowedHostingLocations:
-        - embeddingAllowedHostingLocations
-        - embeddingAllowedHostingLocations
-        chatDefaultAgentId: chatDefaultAgentId
-        chatAgentQuickFilters:
-        - name: name
-          options:
-            q: q
-            visibility: visibility
-            modelIds:
-            - modelIds
-            - modelIds
-            systemTags:
-            - systemTags
-            - systemTags
-            addPredefinedAgents: true
-            tags:
-            - tags
-            - tags
-          i18n:
-            key:
-              name: name
-        - name: name
-          options:
-            q: q
-            visibility: visibility
-            modelIds:
-            - modelIds
-            - modelIds
-            systemTags:
-            - systemTags
-            - systemTags
-            addPredefinedAgents: true
-            tags:
-            - tags
-            - tags
-          i18n:
-            key:
-              name: name
-        organizationId: organizationId
-        createdAt: createdAt
-        chatAllowedHostingLocations:
-        - chatAllowedHostingLocations
-        - chatAllowedHostingLocations
         audioAllowedHostingLocations:
         - audioAllowedHostingLocations
         - audioAllowedHostingLocations
+        chatAgentQuickFilters:
+        - i18n:
+            key:
+              name: name
+          name: name
+          options:
+            addPredefinedAgents: true
+            modelIds:
+            - modelIds
+            - modelIds
+            q: q
+            systemTags:
+            - systemTags
+            - systemTags
+            tags:
+            - tags
+            - tags
+            visibility: visibility
+        - i18n:
+            key:
+              name: name
+          name: name
+          options:
+            addPredefinedAgents: true
+            modelIds:
+            - modelIds
+            - modelIds
+            q: q
+            systemTags:
+            - systemTags
+            - systemTags
+            tags:
+            - tags
+            - tags
+            visibility: visibility
+        chatAllowedHostingLocations:
+        - chatAllowedHostingLocations
+        - chatAllowedHostingLocations
+        chatDefaultAgentId: chatDefaultAgentId
+        createdAt: createdAt
+        embeddingAllowedHostingLocations:
+        - embeddingAllowedHostingLocations
+        - embeddingAllowedHostingLocations
+        embeddingDefaultAgentId: embeddingDefaultAgentId
+        id: id
         imageAllowedHostingLocations:
         - imageAllowedHostingLocations
         - imageAllowedHostingLocations
-        id: id
+        imageDefaultAgentId: imageDefaultAgentId
+        organizationId: organizationId
         toolsAllowedHostingLocations:
         - toolsAllowedHostingLocations
         - toolsAllowedHostingLocations
@@ -5657,8 +5711,8 @@ components:
       type: object
     OrganizationSubscriptionPatchRequest:
       example:
-        seats: 1
         periodEnd: 2024-12-24
+        seats: 1
       properties:
         periodEnd:
           example: 2024-12-24
@@ -5671,9 +5725,9 @@ components:
       type: object
     OrganizationSubscriptionPostRequest:
       example:
+        periodEnd: 2024-12-24
         productId: vaudEnterprise
         seats: 1
-        periodEnd: 2024-12-24
       properties:
         periodEnd:
           example: 2024-12-24
@@ -5681,6 +5735,11 @@ components:
         productId:
           enum:
           - vaudEnterprise
+          - vaudMercury
+          - vaudVenus
+          - vaudMars
+          - vaudJupiter
+          - vaudSaturn
           type: string
         seats:
           minimum: 1
@@ -5691,22 +5750,22 @@ components:
       type: object
     OrganizationSubscriptionResponse:
       example:
-        trialEnd: trialEnd
-        productId: productId
-        currentPeriodEnd: currentPeriodEnd
         active: true
-        seats: 0
-        trial: true
-        organizationId: organizationId
-        createdAt: createdAt
-        totalAmount: 1
-        seatsTaken: 6
         cancelAtPeriodEnd: true
-        name: name
+        createdAt: createdAt
         currency: currency
+        currentPeriodEnd: currentPeriodEnd
         id: id
+        name: name
+        organizationId: organizationId
+        productId: productId
         productType: payment
+        seats: 0
+        seatsTaken: 6
         status: status
+        totalAmount: 1
+        trial: true
+        trialEnd: trialEnd
         updatedAt: updatedAt
       properties:
         active:
@@ -5765,8 +5824,8 @@ components:
       type: object
     PriceTierResponse:
       example:
-        upTo: 2
         unitAmount: 5
+        upTo: 2
       properties:
         unitAmount:
           description: price per seat in smallest currency unit (e.g. cents)
@@ -5778,12 +5837,12 @@ components:
     ProductI18nResponse:
       example:
         badge: badge
+        bannerText: bannerText
+        description: description
         features:
         - features
         - features
-        bannerText: bannerText
         name: name
-        description: description
         priceSupplement: priceSupplement
       properties:
         badge:
@@ -5803,41 +5862,41 @@ components:
       type: object
     ProductResponse:
       example:
-        bannerTooltip: bannerTooltip
-        tiers:
-        - upTo: 2
-          unitAmount: 5
-        - upTo: 2
-          unitAmount: 5
-        trialDays: 7
-        billingModel: monthlySubscription
-        displayOrder: 0
-        description: description
-        maxSeats: 6
-        type: payment
-        priceSupplement: priceSupplement
-        i18n:
-          key:
-            badge: badge
-            features:
-            - features
-            - features
-            bannerText: bannerText
-            name: name
-            description: description
-            priceSupplement: priceSupplement
         badge: badge
+        bannerColor: bannerColor
+        bannerText: bannerText
+        bannerTooltip: bannerTooltip
+        billingModel: monthlySubscription
+        currency: currency
+        description: description
+        disabled: true
+        displayOrder: 0
         features:
         - features
         - features
-        price: 5
-        bannerText: bannerText
+        i18n:
+          key:
+            badge: badge
+            bannerText: bannerText
+            description: description
+            features:
+            - features
+            - features
+            name: name
+            priceSupplement: priceSupplement
+        id: id
+        maxSeats: 6
         minSeats: 1
         name: name
-        currency: currency
-        disabled: true
-        id: id
-        bannerColor: bannerColor
+        price: 5
+        priceSupplement: priceSupplement
+        tiers:
+        - unitAmount: 5
+          upTo: 2
+        - unitAmount: 5
+          upTo: 2
+        trialDays: 7
+        type: payment
       properties:
         badge:
           type: string
@@ -5922,10 +5981,13 @@ components:
     RolePatchRequest:
       example:
         defaultMemberRole: true
+        name: name
         permissions:
         - permissions
         - permissions
-        name: name
+        - permissions
+        - permissions
+        - permissions
       properties:
         defaultMemberRole:
           type: boolean
@@ -5933,18 +5995,27 @@ components:
           minLength: 1
           type: string
         permissions:
+          description: |-
+            Replaces the role's permissions, under the same allow-list and de-duplication as
+            RolePostRequest. Omit the field or send null to leave the stored permissions untouched; an empty
+            array is refused. (Maintainers: see the "Permissions validate-tag contract" comment in
+            organizations_association_permissions.go before changing the validate tag.)
           items:
             type: string
+          maxItems: 200
           minItems: 1
           type: array
       type: object
     RolePostRequest:
       example:
         defaultMemberRole: true
+        name: name
         permissions:
         - permissions
         - permissions
-        name: name
+        - permissions
+        - permissions
+        - permissions
       properties:
         defaultMemberRole:
           type: boolean
@@ -5952,8 +6023,13 @@ components:
           minLength: 1
           type: string
         permissions:
+          description: |-
+            Permissions the role grants. An organization may grant only the permissions its owner holds, plus
+            the org-admin and org-member struct-access levels; anything else is refused. Duplicates are
+            removed, so the stored array can differ from the one posted.
           items:
             type: string
+          maxItems: 200
           minItems: 1
           type: array
       required:
@@ -5963,8 +6039,8 @@ components:
     RoleReducedResponse:
       example:
         createdAt: createdAt
-        name: name
         id: id
+        name: name
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -5984,11 +6060,11 @@ components:
     RoleResponse:
       example:
         createdAt: createdAt
+        id: id
+        name: name
         permissions:
         - permissions
         - permissions
-        name: name
-        id: id
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -6022,25 +6098,25 @@ components:
       type: object
     TeamMemberResponse:
       example:
-        teamOwner: true
         createdAt: createdAt
+        id: id
         teamId: teamId
+        teamOwner: true
         teamRole:
           createdAt: createdAt
           defaultMemberRole: true
-          teamId: teamId
-          name: name
           id: id
+          name: name
+          teamId: teamId
           updatedAt: updatedAt
-        id: id
+        updatedAt: updatedAt
         user:
           createdAt: createdAt
+          email: email
           fullname: fullname
           id: id
-          email: email
           updatedAt: updatedAt
           username: username
-        updatedAt: updatedAt
       properties:
         createdAt:
           type: string
@@ -6090,10 +6166,10 @@ components:
       type: object
     TeamReducedResponse:
       example:
-        organizationId: organizationId
         createdAt: createdAt
-        name: name
         id: id
+        name: name
+        organizationId: organizationId
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -6115,51 +6191,51 @@ components:
       type: object
     TeamResponse:
       example:
+        createdAt: createdAt
+        id: id
+        members:
+        - createdAt: createdAt
+          id: id
+          teamId: teamId
+          teamOwner: true
+          teamRole:
+            createdAt: createdAt
+            defaultMemberRole: true
+            id: id
+            name: name
+            teamId: teamId
+            updatedAt: updatedAt
+          updatedAt: updatedAt
+          user:
+            createdAt: createdAt
+            email: email
+            fullname: fullname
+            id: id
+            updatedAt: updatedAt
+            username: username
+        - createdAt: createdAt
+          id: id
+          teamId: teamId
+          teamOwner: true
+          teamRole:
+            createdAt: createdAt
+            defaultMemberRole: true
+            id: id
+            name: name
+            teamId: teamId
+            updatedAt: updatedAt
+          updatedAt: updatedAt
+          user:
+            createdAt: createdAt
+            email: email
+            fullname: fullname
+            id: id
+            updatedAt: updatedAt
+            username: username
+        metaId: metaId
+        name: name
         organizationId: organizationId
         owner: owner
-        createdAt: createdAt
-        metaId: metaId
-        members:
-        - teamOwner: true
-          createdAt: createdAt
-          teamId: teamId
-          teamRole:
-            createdAt: createdAt
-            defaultMemberRole: true
-            teamId: teamId
-            name: name
-            id: id
-            updatedAt: updatedAt
-          id: id
-          user:
-            createdAt: createdAt
-            fullname: fullname
-            id: id
-            email: email
-            updatedAt: updatedAt
-            username: username
-          updatedAt: updatedAt
-        - teamOwner: true
-          createdAt: createdAt
-          teamId: teamId
-          teamRole:
-            createdAt: createdAt
-            defaultMemberRole: true
-            teamId: teamId
-            name: name
-            id: id
-            updatedAt: updatedAt
-          id: id
-          user:
-            createdAt: createdAt
-            fullname: fullname
-            id: id
-            email: email
-            updatedAt: updatedAt
-            username: username
-          updatedAt: updatedAt
-        name: name
-        id: id
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -6194,9 +6270,9 @@ components:
       example:
         createdAt: createdAt
         defaultMemberRole: true
-        teamId: teamId
-        name: name
         id: id
+        name: name
+        teamId: teamId
         updatedAt: updatedAt
       properties:
         createdAt:
@@ -6222,9 +6298,9 @@ components:
     UserResponse:
       example:
         createdAt: createdAt
+        email: email
         fullname: fullname
         id: id
-        email: email
         updatedAt: updatedAt
         username: username
       properties:
@@ -6250,20 +6326,20 @@ components:
       type: object
     UserResultsResponse:
       example:
-        totalResults: 0
         results:
         - createdAt: createdAt
+          email: email
           fullname: fullname
           id: id
-          email: email
           updatedAt: updatedAt
           username: username
         - createdAt: createdAt
+          email: email
           fullname: fullname
           id: id
-          email: email
           updatedAt: updatedAt
           username: username
+        totalResults: 0
       properties:
         results:
           items:
@@ -6278,10 +6354,10 @@ components:
     UserRoleResponse:
       example:
         createdAt: createdAt
-        roleId: roleId
         id: id
-        userId: userId
+        roleId: roleId
         updatedAt: updatedAt
+        userId: userId
       properties:
         createdAt:
           type: string
@@ -6302,6 +6378,8 @@ components:
       type: object
     UserSettingsPatchRequest:
       example:
+        colorScheme: auto
+        language: ""
         onboardingCompletedTours:
         - onboardingCompletedTours
         - onboardingCompletedTours
@@ -6309,10 +6387,7 @@ components:
         - onboardingCompletedTours
         - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
-        onboardingDone: true
-        language: ""
         onboardingState: pending
-        colorScheme: auto
       properties:
         colorScheme:
           enum:
@@ -6331,8 +6406,6 @@ components:
             type: string
           maxItems: 100
           type: array
-        onboardingDone:
-          type: boolean
         onboardingHoldUntil:
           type: string
         onboardingState:
@@ -6344,6 +6417,8 @@ components:
       type: object
     UserSettingsPostRequest:
       example:
+        colorScheme: auto
+        language: en
         onboardingCompletedTours:
         - onboardingCompletedTours
         - onboardingCompletedTours
@@ -6351,11 +6426,8 @@ components:
         - onboardingCompletedTours
         - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
-        onboardingDone: true
-        language: en
         onboardingState: pending
         userId: userId
-        colorScheme: auto
       properties:
         colorScheme:
           enum:
@@ -6373,8 +6445,6 @@ components:
             type: string
           maxItems: 100
           type: array
-        onboardingDone:
-          type: boolean
         onboardingHoldUntil:
           type: string
         onboardingState:
@@ -6391,16 +6461,15 @@ components:
       type: object
     UserSettingsResponse:
       example:
+        colorScheme: colorScheme
+        id: id
+        language: language
         onboardingCompletedTours:
         - onboardingCompletedTours
         - onboardingCompletedTours
         onboardingHoldUntil: onboardingHoldUntil
-        onboardingDone: true
-        language: language
-        id: id
         onboardingState: onboardingState
         userId: userId
-        colorScheme: colorScheme
       properties:
         colorScheme:
           type: string
@@ -6412,8 +6481,6 @@ components:
           items:
             type: string
           type: array
-        onboardingDone:
-          type: boolean
         onboardingHoldUntil:
           type: string
         onboardingState:

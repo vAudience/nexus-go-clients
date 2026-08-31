@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultMemberRole** | Pointer to **bool** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**Permissions** | Pointer to **[]string** |  | [optional] 
+**Permissions** | Pointer to **[]string** | Replaces the role&#39;s permissions, under the same allow-list and de-duplication as RolePostRequest. Omit the field or send null to leave the stored permissions untouched; an empty array is refused. (Maintainers: see the \&quot;Permissions validate-tag contract\&quot; comment in organizations_association_permissions.go before changing the validate tag.) | [optional] 
 
 ## Methods
 

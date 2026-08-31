@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **OrganizationRoleId** | Pointer to **string** |  | [optional] 
 **RequiresRotation** | Pointer to **bool** |  | [optional] 
-**RoleIds** | Pointer to **[]string** |  | [optional] 
+**RoleIds** | Pointer to **[]string** | Replaces the attached global roles. Requires the manage-api-key-roles:organizations permission (vaudience staff only) whenever the field is present, an empty array included — clearing roles is a staff action too. Product roles are never assignable: the active subscription&#39;s role is attached automatically. Omit the field entirely to leave the roles untouched. | [optional] 
 **TeamIds** | Pointer to **[]string** |  | [optional] 
 **UserEmail** | Pointer to **string** |  | [optional] 
 **UserFullName** | Pointer to **string** |  | [optional] 

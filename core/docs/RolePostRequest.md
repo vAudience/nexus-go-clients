@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DefaultMemberRole** | Pointer to **bool** |  | [optional] 
 **Name** | **string** |  | 
-**Permissions** | **[]string** |  | 
+**Permissions** | **[]string** | Permissions the role grants. An organization may grant only the permissions its owner holds, plus the org-admin and org-member struct-access levels; anything else is refused. Duplicates are removed, so the stored array can differ from the one posted. | 
 
 ## Methods
 

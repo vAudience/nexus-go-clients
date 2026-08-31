@@ -3,6 +3,8 @@
 ## Enum
 
 
+* `ErrCodeApiKeyRolesNotAllowed` (value: `"api_key_roles_not_allowed"`)
+
 * `ErrCodePermissionDenied` (value: `"permission_denied"`)
 
 * `ErrCodeRequestBodyInvalid` (value: `"request_body_invalid"`)
@@ -12,6 +14,8 @@
 * `ErrCodeUnknown` (value: `"unknown"`)
 
 * `ErrCodeUnauthorized` (value: `"unauthorized"`)
+
+* `ErrCodeAuthSessionExpired` (value: `"auth_session_expired"`)
 
 * `ErrCodeUserEmailNotInToken` (value: `"user_email_not_in_token"`)
 
@@ -125,6 +129,16 @@
 
 * `ErrCodeAssociationMemberHasNotRole` (value: `"association_member_has_not_role"`)
 
+* `ErrCodeAssociationRolePermissionsNotAssignable` (value: `"association_role_permissions_not_assignable"`)
+
+* `ErrCodeAssociationRoleIsOwnerRole` (value: `"association_role_is_owner_role"`)
+
+* `ErrCodeOrganizationRoleNotInOrganization` (value: `"organization_role_not_in_organization"`)
+
+* `ErrCodeTeamNotInOrganization` (value: `"team_not_in_organization"`)
+
+* `ErrCodeRoleUnknown` (value: `"role_unknown"`)
+
 * `ErrCodeOrganizationHasSubscription` (value: `"organization_has_subscription"`)
 
 * `ErrCodeOrganizationHasSubscriptionPlan` (value: `"organization_has_subscription_plan"`)
@@ -194,6 +208,12 @@
 * `ErrCodeProductDisabled` (value: `"product_disabled"`)
 
 * `ErrCodeProductNotAllowedForTrial` (value: `"product_not_allowed_for_trial"`)
+
+* `ErrCodeProductRoleNotAssignable` (value: `"product_role_not_assignable"`)
+
+* `ErrCodeSubscriptionCheckoutDisabled` (value: `"subscription_checkout_disabled"`)
+
+* `ErrCodeSubscriptionPlanSwitchDisabled` (value: `"subscription_plan_switch_disabled"`)
 
 * `ErrCodeStripeSignatureHeaderMissing` (value: `"stripe_signature_header_missing"`)
 

@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **Language** | Pointer to **string** |  | [optional] 
 **OnboardingCompletedTours** | Pointer to **[]string** |  | [optional] 
-**OnboardingDone** | Pointer to **bool** |  | [optional] 
 **OnboardingHoldUntil** | Pointer to **string** |  | [optional] 
 **OnboardingState** | Pointer to **string** |  | [optional] 
 **UserId** | **string** |  | 
@@ -121,31 +120,6 @@ SetOnboardingCompletedTours sets OnboardingCompletedTours field to given value.
 `func (o *UserSettingsResponse) HasOnboardingCompletedTours() bool`
 
 HasOnboardingCompletedTours returns a boolean if a field has been set.
-
-### GetOnboardingDone
-
-`func (o *UserSettingsResponse) GetOnboardingDone() bool`
-
-GetOnboardingDone returns the OnboardingDone field if non-nil, zero value otherwise.
-
-### GetOnboardingDoneOk
-
-`func (o *UserSettingsResponse) GetOnboardingDoneOk() (*bool, bool)`
-
-GetOnboardingDoneOk returns a tuple with the OnboardingDone field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOnboardingDone
-
-`func (o *UserSettingsResponse) SetOnboardingDone(v bool)`
-
-SetOnboardingDone sets OnboardingDone field to given value.
-
-### HasOnboardingDone
-
-`func (o *UserSettingsResponse) HasOnboardingDone() bool`
-
-HasOnboardingDone returns a boolean if a field has been set.
 
 ### GetOnboardingHoldUntil
 
