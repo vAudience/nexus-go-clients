@@ -25,3 +25,5 @@ To regenerate a client, run its generation script. The script will generate the 
 ./generateAigentChatClient.sh
 ./generateFileManagerClient.sh
 ```
+
+The version comes from the service's own `/info/version` endpoint and is stamped into the generated package, so the package version, the git tag, and the running service always report the same version. The scripts are thin wrappers around `generateClient.sh`, which takes a package name and a service base URL.
