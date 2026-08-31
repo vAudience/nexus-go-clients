@@ -243,7 +243,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	modelCapabilities := "modelCapabilities_example" // string | Comma separated list of model capabilities to filter by, e.g. text-to-text,image-to-text (optional)
+	modelCapabilities := "modelCapabilities_example" // string | Comma-separated model capabilities the caller supports (e.g. text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories the caller fully supports (all of a category's target capabilities); omit to list every category. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiGetFileUploadCategoriesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **modelCapabilities** | **string** | Comma separated list of model capabilities to filter by, e.g. text-to-text,image-to-text | 
+ **modelCapabilities** | **string** | Comma-separated model capabilities the caller supports (e.g. text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories the caller fully supports (all of a category&#39;s target capabilities); omit to list every category. | 
 
 ### Return type
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ## UploadFile
 
-> FileUploadResponse UploadFile(ctx, orgId, category).File(file).ForUserId(forUserId).Metadata(metadata).Execute()
+> FileUploadResponse UploadFile(ctx, orgId, category).File(file).ForUserId(forUserId).CollectionId(collectionId).Metadata(metadata).Execute()
 
 Upload a file
 
@@ -394,11 +394,12 @@ func main() {
 	category := "category_example" // string | category ID
 	file := os.NewFile(1234, "some_file") // *os.File | File to upload
 	forUserId := "forUserId_example" // string | User ID to upload the file for (optional)
+	collectionId := "collectionId_example" // string | Collection ID to upload into (required for the collection_file category) (optional)
 	metadata := map[string]interface{}{ ... } // map[string]interface{} | Metadata for the uploaded file (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FilesAPI.UploadFile(context.Background(), orgId, category).File(file).ForUserId(forUserId).Metadata(metadata).Execute()
+	resp, r, err := apiClient.FilesAPI.UploadFile(context.Background(), orgId, category).File(file).ForUserId(forUserId).CollectionId(collectionId).Metadata(metadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FilesAPI.UploadFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -428,6 +429,7 @@ Name | Type | Description  | Notes
 
  **file** | ***os.File** | File to upload | 
  **forUserId** | **string** | User ID to upload the file for | 
+ **collectionId** | **string** | Collection ID to upload into (required for the collection_file category) | 
  **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Metadata for the uploaded file | 
 
 ### Return type

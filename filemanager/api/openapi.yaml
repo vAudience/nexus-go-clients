@@ -6,10 +6,12 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.4.7
+  version: 0.22.0
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
+- description: anything related to the Collections route
+  name: Collections
 - description: anything related to the Files route
   name: Files
 - description: anything related to the Files Metadata route
@@ -166,12 +168,30 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Too Many Requests
         "500":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Delete a file
@@ -483,6 +503,666 @@ paths:
       summary: Get file metadata by path
       tags:
       - Files Metadata
+  /v1/organizations/{org_id}/collections:
+    post:
+      description: "Create a private, user-owned collection. A deepr corpus is provisioned\
+        \ for it. Rejected with 409 once the caller already owns the maximum number\
+        \ of collections allowed in the org (see the /collections/settings endpoint)."
+      operationId: CreateCollection
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionCreateRequest"
+        description: Collection create request
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Service Unavailable
+      security:
+      - ApiKey: []
+      summary: Create a collection
+      tags:
+      - Collections
+      x-codegen-request-body-name: collectionCreateRequest
+  /v1/organizations/{org_id}/collections/me:
+    get:
+      description: "List the collections owned by the authenticated user in the organization.\
+        \ Supports pagination, name search (q), filtering to explicit collection ids\
+        \ (ids), and sorting by name."
+      operationId: ListMyCollections
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: pagination offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: pagination limit
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: sort column
+        in: query
+        name: sort
+        schema:
+          enum:
+          - name
+          type: string
+      - description: sort order
+        in: query
+        name: order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: case-insensitive partial match on collection name
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: "collection ids to restrict the listing to, comma-separated (?ids=a,b)\
+          \ or repeated (?ids=a&ids=b) -- both are accepted (max 100 distinct, AND-ed\
+          \ with q); unknown or non-owned ids are simply absent, and offset/limit\
+          \ still apply"
+        explode: false
+        in: query
+        name: ids
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List my collections
+      tags:
+      - Collections
+  /v1/organizations/{org_id}/collections/settings:
+    get:
+      description: "Return the client-facing constraints for collections: accepted\
+        \ MIME types, per-file size range, the upload category to use, the per-user,\
+        \ per-org total-collections storage and token quotas, and both collection-count\
+        \ caps — per org and per user across all orgs. Settings only — no current\
+        \ usage."
+      operationId: GetCollectionSettings
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionSettings"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: Get collection settings
+      tags:
+      - Collections
+  /v1/organizations/{org_id}/collections/{collection_id}:
+    delete:
+      description: Delete a collection and its processor corpus
+      operationId: DeleteCollection
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Service Unavailable
+      security:
+      - ApiKey: []
+      summary: Delete a collection
+      tags:
+      - Collections
+    get:
+      description: Get a single collection owned by the authenticated user
+      operationId: GetCollection
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get a collection
+      tags:
+      - Collections
+    patch:
+      description: Update a collection's name and/or description. The processor set
+        cannot be changed.
+      operationId: UpdateCollection
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionUpdateRequest"
+        description: Collection update request
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Update a collection
+      tags:
+      - Collections
+      x-codegen-request-body-name: collectionUpdateRequest
+  /v1/organizations/{org_id}/collections/{collection_id}/files:
+    get:
+      description: "List the files belonging to a collection owned by the authenticated\
+        \ user. Per-file processing status for the collection's enabled processors\
+        \ (v1: deepr) is always included. Supports pagination, original-file-name\
+        \ search (q), and sorting."
+      operationId: ListCollectionFiles
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      - description: pagination offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: pagination limit
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: sort column
+        in: query
+        name: sort
+        schema:
+          enum:
+          - created_at
+          - file_name
+          - file_size
+          - original_file_name
+          type: string
+      - description: sort order
+        in: query
+        name: order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: case-insensitive partial match on original file name
+        in: query
+        name: q
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionFileListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: List a collection's files
+      tags:
+      - Collections
+  /v1/organizations/{org_id}/collections/{collection_id}/files/{file_id}:
+    get:
+      description: "Get a single file's metadata within a collection owned by the\
+        \ authenticated user. Per-file processing status for the collection's enabled\
+        \ processors (v1: deepr) is always included."
+      operationId: GetCollectionFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      - description: file ID
+        in: path
+        name: file_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionFileResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+      security:
+      - ApiKey: []
+      summary: Get a collection file
+      tags:
+      - Collections
+  /v1/organizations/{org_id}/collections/{collection_id}/files/{file_id}/retry:
+    post:
+      description: Re-trigger processing for a file whose current processing status
+        is failed. Rejected if the file is not in a failed state or the collection
+        has no processor enabled.
+      operationId: RetryCollectionFile
+      parameters:
+      - description: organization ID
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: collection ID
+        in: path
+        name: collection_id
+        required: true
+        schema:
+          type: string
+      - description: file ID
+        in: path
+        name: file_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "202":
+          content: {}
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Service Unavailable
+      security:
+      - ApiKey: []
+      summary: Retry processing a failed collection file
+      tags:
+      - Collections
   /v1/organizations/{org_id}/files/categories:
     get:
       description: Get file upload categories
@@ -494,8 +1174,10 @@ paths:
         required: true
         schema:
           type: string
-      - description: "Comma separated list of model capabilities to filter by, e.g.\
-          \ text-to-text,image-to-text"
+      - description: "Comma-separated model capabilities the caller supports (e.g.\
+          \ text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories\
+          \ the caller fully supports (all of a category's target capabilities); omit\
+          \ to list every category."
         in: query
         name: model_capabilities
         schema:
@@ -641,18 +1323,48 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict
         "413":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Request Entity Too Large
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Too Many Requests
         "500":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Internal Server Error
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Gateway
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Service Unavailable
       security:
       - ApiKey: []
       summary: Upload a file
@@ -660,6 +1372,436 @@ paths:
       - Files
 components:
   schemas:
+    CollectionCreateRequest:
+      example:
+        description: description
+        name: name
+      properties:
+        description:
+          maxLength: 1024
+          type: string
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - name
+      type: object
+    CollectionFileListResponse:
+      example:
+        collection:
+          created_at: created_at
+          description: description
+          file_count: 0
+          id: id
+          last_file_added_at: last_file_added_at
+          name: name
+          processors: "{}"
+          status_breakdown:
+            key: null
+          token_count: 6
+          total_size: 1
+          updated_at: updated_at
+        files:
+        - collection_id: collection_id
+          created_at: created_at
+          expires_at: expires_at
+          file_llm_input_type: embedded
+          file_name: file_name
+          file_size: 0
+          file_storage_type: temp
+          id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          processing_status:
+            key:
+              error: error
+              error_code: error_code
+              metadata: "{}"
+              processed_at: processed_at
+              status: pending
+              token_count: 1
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        - collection_id: collection_id
+          created_at: created_at
+          expires_at: expires_at
+          file_llm_input_type: embedded
+          file_name: file_name
+          file_size: 0
+          file_storage_type: temp
+          id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          processing_status:
+            key:
+              error: error
+              error_code: error_code
+              metadata: "{}"
+              processed_at: processed_at
+              status: pending
+              token_count: 1
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        limit: 5
+        offset: 5
+        total: 2
+      properties:
+        collection:
+          $ref: "#/components/schemas/CollectionResponse"
+        files:
+          items:
+            $ref: "#/components/schemas/CollectionFileResponse"
+          type: array
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          format: int64
+          type: integer
+      type: object
+    CollectionFileResponse:
+      example:
+        collection_id: collection_id
+        created_at: created_at
+        expires_at: expires_at
+        file_llm_input_type: embedded
+        file_name: file_name
+        file_size: 0
+        file_storage_type: temp
+        id: id
+        metadata: "{}"
+        mime_type: mime_type
+        organization_id: organization_id
+        original_file_mime_type: original_file_mime_type
+        original_file_name: original_file_name
+        original_file_size: 6
+        original_file_storage_path: original_file_storage_path
+        original_file_url: original_file_url
+        processing_status:
+          key:
+            error: error
+            error_code: error_code
+            metadata: "{}"
+            processed_at: processed_at
+            status: pending
+            token_count: 1
+        storage_backend: storage_backend
+        storage_path: storage_path
+        team_id: team_id
+        updated_at: updated_at
+        upload_category: upload_category
+        url: url
+        user_id: user_id
+      properties:
+        collection_id:
+          type: string
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        file_llm_input_type:
+          enum:
+          - embedded
+          - multimodal
+          - reference
+          type: string
+        file_name:
+          type: string
+        file_size:
+          format: int64
+          type: integer
+        file_storage_type:
+          enum:
+          - temp
+          - public
+          - private-org
+          - private-org-user
+          - private-team
+          - collection
+          type: string
+        id:
+          type: string
+        metadata:
+          properties: {}
+          type: object
+        mime_type:
+          type: string
+        organization_id:
+          type: string
+        original_file_mime_type:
+          type: string
+        original_file_name:
+          type: string
+        original_file_size:
+          format: int64
+          type: integer
+        original_file_storage_path:
+          type: string
+        original_file_url:
+          type: string
+        processing_status:
+          additionalProperties:
+            $ref: "#/components/schemas/ProcessingStatus"
+          description: |-
+            ProcessingStatus is keyed by processor name (v1: "deepr"). Omitted when the
+            collection has no processor enabled. Each processor's status carries the
+            per-file deepr token_count.
+          type: object
+        storage_backend:
+          description: |-
+            StorageBackend is the backend that owns the file (local, s3). Additive and
+            omitempty so existing generated clients are unaffected.
+          type: string
+        storage_path:
+          type: string
+        team_id:
+          type: string
+        updated_at:
+          type: string
+        upload_category:
+          type: string
+        url:
+          type: string
+        user_id:
+          type: string
+      required:
+      - created_at
+      - file_llm_input_type
+      - file_name
+      - file_size
+      - file_storage_type
+      - id
+      - mime_type
+      - original_file_mime_type
+      - original_file_name
+      - original_file_size
+      - storage_path
+      - updated_at
+      - upload_category
+      - url
+      type: object
+    CollectionListResponse:
+      example:
+        collections:
+        - created_at: created_at
+          description: description
+          file_count: 0
+          id: id
+          last_file_added_at: last_file_added_at
+          name: name
+          processors: "{}"
+          status_breakdown:
+            key: null
+          token_count: 6
+          total_size: 1
+          updated_at: updated_at
+        - created_at: created_at
+          description: description
+          file_count: 0
+          id: id
+          last_file_added_at: last_file_added_at
+          name: name
+          processors: "{}"
+          status_breakdown:
+            key: null
+          token_count: 6
+          total_size: 1
+          updated_at: updated_at
+        limit: 0
+        offset: 6
+        summary:
+          total_collections: 1
+          total_collections_per_user: 5
+          total_files: 5
+          total_size: 2
+          total_tokens: 7
+        total: 9
+      properties:
+        collections:
+          items:
+            $ref: "#/components/schemas/CollectionResponse"
+          type: array
+        limit:
+          type: integer
+        offset:
+          type: integer
+        summary:
+          $ref: "#/components/schemas/CollectionSummary"
+        total:
+          format: int64
+          type: integer
+      type: object
+    CollectionResponse:
+      example:
+        created_at: created_at
+        description: description
+        file_count: 0
+        id: id
+        last_file_added_at: last_file_added_at
+        name: name
+        processors: "{}"
+        status_breakdown:
+          key: null
+        token_count: 6
+        total_size: 1
+        updated_at: updated_at
+      properties:
+        created_at:
+          type: string
+        description:
+          type: string
+        file_count:
+          format: int64
+          type: integer
+        id:
+          type: string
+        last_file_added_at:
+          description: |-
+            LastFileAddedAt is the creation time of the most recently added file in the
+            collection. Omitted when the collection has no files.
+          type: string
+        name:
+          type: string
+        processors:
+          description: |-
+            Processors maps each enabled processor to its resource id (read-only),
+            e.g. {"deepr": "corpus-abc"}.
+          properties: {}
+          type: object
+        status_breakdown:
+          additionalProperties:
+            $ref: "#/components/schemas/CollectionStatusBreakdown"
+          description: |-
+            StatusBreakdown is keyed by processor name (v1: "deepr"). Each value is a
+            per-status file count (e.g. {"pending": 5, "completed": 10}), derived from
+            corpus file statuses. Omitted when no processor is enabled.
+          type: object
+        token_count:
+          description: |-
+            TokenCount is the collection's deepr ingested-token usage. Fail-soft: 0 when
+            the collection has no provisioned corpus or the usage read is unavailable.
+          format: int64
+          type: integer
+        total_size:
+          format: int64
+          type: integer
+        updated_at:
+          type: string
+      required:
+      - created_at
+      - id
+      - name
+      - updated_at
+      type: object
+    CollectionSettings:
+      example:
+        accepted_mime_types:
+        - accepted_mime_types
+        - accepted_mime_types
+        file_upload_category: file_upload_category
+        max_collections_count: 0
+        max_collections_count_per_user: 6
+        max_collections_size: 1
+        max_collections_tokens: 5
+        max_file_size: 5
+        min_file_size: 2
+      properties:
+        accepted_mime_types:
+          items:
+            type: string
+          type: array
+        file_upload_category:
+          type: string
+        max_collections_count:
+          format: int64
+          type: integer
+        max_collections_count_per_user:
+          description: |-
+            MaxCollectionsCountPerUser caps the user's collections across all orgs, checked
+            on create alongside the per-org max_collections_count.
+          format: int64
+          type: integer
+        max_collections_size:
+          format: int64
+          type: integer
+        max_collections_tokens:
+          format: int64
+          type: integer
+        max_file_size:
+          format: int64
+          type: integer
+        min_file_size:
+          format: int64
+          type: integer
+      type: object
+    CollectionStatusBreakdown:
+      additionalProperties:
+        format: int64
+        type: integer
+      type: object
+    CollectionSummary:
+      example:
+        total_collections: 1
+        total_collections_per_user: 5
+        total_files: 5
+        total_size: 2
+        total_tokens: 7
+      properties:
+        total_collections:
+          format: int64
+          type: integer
+        total_collections_per_user:
+          description: |-
+            TotalCollectionsPerUser counts the user's collections across all orgs, so it
+            pairs with max_collections_count_per_user from /collections/settings. Every
+            other total here is scoped to this org.
+          format: int64
+          type: integer
+        total_files:
+          format: int64
+          type: integer
+        total_size:
+          format: int64
+          type: integer
+        total_tokens:
+          format: int64
+          type: integer
+      type: object
+    CollectionUpdateRequest:
+      example:
+        description: description
+        name: name
+      properties:
+        description:
+          maxLength: 1024
+          type: string
+        name:
+          maxLength: 255
+          type: string
+      type: object
     ErrorDetail:
       example:
         field: field
@@ -708,8 +1850,8 @@ components:
       type: object
     FileAccessTokenResponse:
       example:
-        url: url
         token: token
+        url: url
       properties:
         token:
           type: string
@@ -745,48 +1887,52 @@ components:
     FileMetadataBatchResponse:
       example:
         files:
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
-          file_name: file_name
+        - collection_id: collection_id
           created_at: created_at
-          original_file_size: 6
-          team_id: team_id
-          file_size: 0
-          url: url
-          file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
           expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
           file_llm_input_type: embedded
-          original_file_name: original_file_name
-          id: id
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
           file_name: file_name
-          created_at: created_at
-          original_file_size: 6
-          team_id: team_id
           file_size: 0
-          url: url
           file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
-          expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
-          file_llm_input_type: embedded
-          original_file_name: original_file_name
           id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        - collection_id: collection_id
+          created_at: created_at
+          expires_at: expires_at
+          file_llm_input_type: embedded
+          file_name: file_name
+          file_size: 0
+          file_storage_type: temp
+          id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
       properties:
         files:
           items:
@@ -797,52 +1943,56 @@ components:
       type: object
     FileMetadataListResponse:
       example:
-        total: 1
-        offset: 6
-        limit: 0
         files:
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
-          file_name: file_name
+        - collection_id: collection_id
           created_at: created_at
-          original_file_size: 6
-          team_id: team_id
-          file_size: 0
-          url: url
-          file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
           expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
           file_llm_input_type: embedded
-          original_file_name: original_file_name
-          id: id
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
           file_name: file_name
-          created_at: created_at
-          original_file_size: 6
-          team_id: team_id
           file_size: 0
-          url: url
           file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
-          expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
-          file_llm_input_type: embedded
-          original_file_name: original_file_name
           id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        - collection_id: collection_id
+          created_at: created_at
+          expires_at: expires_at
+          file_llm_input_type: embedded
+          file_name: file_name
+          file_size: 0
+          file_storage_type: temp
+          id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        limit: 0
+        offset: 6
+        total: 1
       properties:
         files:
           items:
@@ -862,28 +2012,32 @@ components:
       type: object
     FileMetadataResponse:
       example:
-        upload_category: upload_category
-        metadata: "{}"
-        original_file_url: original_file_url
-        file_name: file_name
+        collection_id: collection_id
         created_at: created_at
-        original_file_size: 6
-        team_id: team_id
-        file_size: 0
-        url: url
-        file_storage_type: temp
-        original_file_storage_path: original_file_storage_path
         expires_at: expires_at
-        updated_at: updated_at
-        mime_type: mime_type
-        storage_path: storage_path
-        user_id: user_id
-        original_file_mime_type: original_file_mime_type
-        organization_id: organization_id
         file_llm_input_type: embedded
-        original_file_name: original_file_name
+        file_name: file_name
+        file_size: 0
+        file_storage_type: temp
         id: id
+        metadata: "{}"
+        mime_type: mime_type
+        organization_id: organization_id
+        original_file_mime_type: original_file_mime_type
+        original_file_name: original_file_name
+        original_file_size: 6
+        original_file_storage_path: original_file_storage_path
+        original_file_url: original_file_url
+        storage_backend: storage_backend
+        storage_path: storage_path
+        team_id: team_id
+        updated_at: updated_at
+        upload_category: upload_category
+        url: url
+        user_id: user_id
       properties:
+        collection_id:
+          type: string
         created_at:
           type: string
         expires_at:
@@ -906,6 +2060,7 @@ components:
           - private-org
           - private-org-user
           - private-team
+          - collection
           type: string
         id:
           type: string
@@ -926,6 +2081,11 @@ components:
         original_file_storage_path:
           type: string
         original_file_url:
+          type: string
+        storage_backend:
+          description: |-
+            StorageBackend is the backend that owns the file (local, s3). Additive and
+            omitempty so existing generated clients are unaffected.
           type: string
         storage_path:
           type: string
@@ -957,13 +2117,13 @@ components:
       type: object
     FileUploadCategoryResponse:
       example:
-        min_file_size: 6
-        llm_input_type: llm_input_type
-        max_file_size: 0
         accepted_mime_types:
         - accepted_mime_types
         - accepted_mime_types
         category: category
+        llm_input_type: llm_input_type
+        max_file_size: 0
+        min_file_size: 6
       properties:
         accepted_mime_types:
           description: Upload category settings
@@ -984,48 +2144,52 @@ components:
     FileUploadResponse:
       example:
         files:
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
-          file_name: file_name
+        - collection_id: collection_id
           created_at: created_at
-          original_file_size: 6
-          team_id: team_id
-          file_size: 0
-          url: url
-          file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
           expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
           file_llm_input_type: embedded
-          original_file_name: original_file_name
-          id: id
-        - upload_category: upload_category
-          metadata: "{}"
-          original_file_url: original_file_url
           file_name: file_name
-          created_at: created_at
-          original_file_size: 6
-          team_id: team_id
           file_size: 0
-          url: url
           file_storage_type: temp
-          original_file_storage_path: original_file_storage_path
-          expires_at: expires_at
-          updated_at: updated_at
-          mime_type: mime_type
-          storage_path: storage_path
-          user_id: user_id
-          original_file_mime_type: original_file_mime_type
-          organization_id: organization_id
-          file_llm_input_type: embedded
-          original_file_name: original_file_name
           id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
+        - collection_id: collection_id
+          created_at: created_at
+          expires_at: expires_at
+          file_llm_input_type: embedded
+          file_name: file_name
+          file_size: 0
+          file_storage_type: temp
+          id: id
+          metadata: "{}"
+          mime_type: mime_type
+          organization_id: organization_id
+          original_file_mime_type: original_file_mime_type
+          original_file_name: original_file_name
+          original_file_size: 6
+          original_file_storage_path: original_file_storage_path
+          original_file_url: original_file_url
+          storage_backend: storage_backend
+          storage_path: storage_path
+          team_id: team_id
+          updated_at: updated_at
+          upload_category: upload_category
+          url: url
+          user_id: user_id
         id: id
       properties:
         files:
@@ -1052,6 +2216,53 @@ components:
           type: object
         status:
           type: string
+      type: object
+    ProcessingStatus:
+      example:
+        error: error
+        error_code: error_code
+        metadata: "{}"
+        processed_at: processed_at
+        status: pending
+        token_count: 1
+      properties:
+        error:
+          type: string
+        error_code:
+          description: |-
+            ErrorCode is the structured terminal error code for a failed file, drawn
+            from the same vocabulary as the `code` of an error response (e.g.
+            "corpus_token_quota_exceeded"), so the same condition reads identically
+            whether it surfaced as an HTTP error or as a status on a file. Two values
+            occur only here -- "corpus_processing_failed" and
+            "upstream_processing_failed" -- for failures the synchronous path can only
+            report as a generic 500; see corpusStatusOnlyCodes in corpus_errors.go.
+            Surfaced alongside Error so a token-quota failure is distinguishable from a
+            generic one. Omitted when absent.
+          type: string
+        metadata:
+          properties: {}
+          type: object
+        processed_at:
+          type: string
+        status:
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - disabled
+          - unavailable
+          type: string
+        token_count:
+          description: |-
+            TokenCount is the deepr-reported document token count for the file. Omitted
+            while the count has not been fetched yet or the file failed, and present only
+            once deepr reports one (typically on completion) — so a completed file may
+            still omit it. Distinct from the collection-level token_count on
+            CollectionResponse (the corpus-usage total, a different number).
+          format: int64
+          type: integer
       type: object
     ServiceStatus:
       example:
@@ -1080,6 +2291,10 @@ components:
           type: string
         for_user_id:
           description: User ID to upload the file for
+          type: string
+        collection_id:
+          description: Collection ID to upload into (required for the collection_file
+            category)
           type: string
         metadata:
           description: Metadata for the uploaded file

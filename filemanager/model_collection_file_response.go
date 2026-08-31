@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the FileMetadataResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FileMetadataResponse{}
+// checks if the CollectionFileResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CollectionFileResponse{}
 
-// FileMetadataResponse struct for FileMetadataResponse
-type FileMetadataResponse struct {
+// CollectionFileResponse struct for CollectionFileResponse
+type CollectionFileResponse struct {
 	CollectionId *string `json:"collection_id,omitempty"`
 	CreatedAt string `json:"created_at"`
 	ExpiresAt *string `json:"expires_at,omitempty"`
@@ -36,6 +36,8 @@ type FileMetadataResponse struct {
 	OriginalFileSize int64 `json:"original_file_size"`
 	OriginalFileStoragePath *string `json:"original_file_storage_path,omitempty"`
 	OriginalFileUrl *string `json:"original_file_url,omitempty"`
+	// ProcessingStatus is keyed by processor name (v1: \"deepr\"). Omitted when the collection has no processor enabled. Each processor's status carries the per-file deepr token_count.
+	ProcessingStatus *map[string]ProcessingStatus `json:"processing_status,omitempty"`
 	// StorageBackend is the backend that owns the file (local, s3). Additive and omitempty so existing generated clients are unaffected.
 	StorageBackend *string `json:"storage_backend,omitempty"`
 	StoragePath string `json:"storage_path"`
@@ -47,14 +49,14 @@ type FileMetadataResponse struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _FileMetadataResponse FileMetadataResponse
+type _CollectionFileResponse CollectionFileResponse
 
-// NewFileMetadataResponse instantiates a new FileMetadataResponse object
+// NewCollectionFileResponse instantiates a new CollectionFileResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, storagePath string, updatedAt string, uploadCategory string, url string) *FileMetadataResponse {
-	this := FileMetadataResponse{}
+func NewCollectionFileResponse(createdAt string, fileLlmInputType string, fileName string, fileSize int64, fileStorageType string, id string, mimeType string, originalFileMimeType string, originalFileName string, originalFileSize int64, storagePath string, updatedAt string, uploadCategory string, url string) *CollectionFileResponse {
+	this := CollectionFileResponse{}
 	this.CreatedAt = createdAt
 	this.FileLlmInputType = fileLlmInputType
 	this.FileName = fileName
@@ -72,16 +74,16 @@ func NewFileMetadataResponse(createdAt string, fileLlmInputType string, fileName
 	return &this
 }
 
-// NewFileMetadataResponseWithDefaults instantiates a new FileMetadataResponse object
+// NewCollectionFileResponseWithDefaults instantiates a new CollectionFileResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFileMetadataResponseWithDefaults() *FileMetadataResponse {
-	this := FileMetadataResponse{}
+func NewCollectionFileResponseWithDefaults() *CollectionFileResponse {
+	this := CollectionFileResponse{}
 	return &this
 }
 
 // GetCollectionId returns the CollectionId field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetCollectionId() string {
+func (o *CollectionFileResponse) GetCollectionId() string {
 	if o == nil || IsNil(o.CollectionId) {
 		var ret string
 		return ret
@@ -91,7 +93,7 @@ func (o *FileMetadataResponse) GetCollectionId() string {
 
 // GetCollectionIdOk returns a tuple with the CollectionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetCollectionIdOk() (*string, bool) {
+func (o *CollectionFileResponse) GetCollectionIdOk() (*string, bool) {
 	if o == nil || IsNil(o.CollectionId) {
 		return nil, false
 	}
@@ -99,7 +101,7 @@ func (o *FileMetadataResponse) GetCollectionIdOk() (*string, bool) {
 }
 
 // HasCollectionId returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasCollectionId() bool {
+func (o *CollectionFileResponse) HasCollectionId() bool {
 	if o != nil && !IsNil(o.CollectionId) {
 		return true
 	}
@@ -108,12 +110,12 @@ func (o *FileMetadataResponse) HasCollectionId() bool {
 }
 
 // SetCollectionId gets a reference to the given string and assigns it to the CollectionId field.
-func (o *FileMetadataResponse) SetCollectionId(v string) {
+func (o *CollectionFileResponse) SetCollectionId(v string) {
 	o.CollectionId = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *FileMetadataResponse) GetCreatedAt() string {
+func (o *CollectionFileResponse) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -124,7 +126,7 @@ func (o *FileMetadataResponse) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetCreatedAtOk() (*string, bool) {
+func (o *CollectionFileResponse) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,12 +134,12 @@ func (o *FileMetadataResponse) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *FileMetadataResponse) SetCreatedAt(v string) {
+func (o *CollectionFileResponse) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetExpiresAt() string {
+func (o *CollectionFileResponse) GetExpiresAt() string {
 	if o == nil || IsNil(o.ExpiresAt) {
 		var ret string
 		return ret
@@ -147,7 +149,7 @@ func (o *FileMetadataResponse) GetExpiresAt() string {
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetExpiresAtOk() (*string, bool) {
+func (o *CollectionFileResponse) GetExpiresAtOk() (*string, bool) {
 	if o == nil || IsNil(o.ExpiresAt) {
 		return nil, false
 	}
@@ -155,7 +157,7 @@ func (o *FileMetadataResponse) GetExpiresAtOk() (*string, bool) {
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasExpiresAt() bool {
+func (o *CollectionFileResponse) HasExpiresAt() bool {
 	if o != nil && !IsNil(o.ExpiresAt) {
 		return true
 	}
@@ -164,12 +166,12 @@ func (o *FileMetadataResponse) HasExpiresAt() bool {
 }
 
 // SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
-func (o *FileMetadataResponse) SetExpiresAt(v string) {
+func (o *CollectionFileResponse) SetExpiresAt(v string) {
 	o.ExpiresAt = &v
 }
 
 // GetFileLlmInputType returns the FileLlmInputType field value
-func (o *FileMetadataResponse) GetFileLlmInputType() string {
+func (o *CollectionFileResponse) GetFileLlmInputType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -180,7 +182,7 @@ func (o *FileMetadataResponse) GetFileLlmInputType() string {
 
 // GetFileLlmInputTypeOk returns a tuple with the FileLlmInputType field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetFileLlmInputTypeOk() (*string, bool) {
+func (o *CollectionFileResponse) GetFileLlmInputTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,12 +190,12 @@ func (o *FileMetadataResponse) GetFileLlmInputTypeOk() (*string, bool) {
 }
 
 // SetFileLlmInputType sets field value
-func (o *FileMetadataResponse) SetFileLlmInputType(v string) {
+func (o *CollectionFileResponse) SetFileLlmInputType(v string) {
 	o.FileLlmInputType = v
 }
 
 // GetFileName returns the FileName field value
-func (o *FileMetadataResponse) GetFileName() string {
+func (o *CollectionFileResponse) GetFileName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -204,7 +206,7 @@ func (o *FileMetadataResponse) GetFileName() string {
 
 // GetFileNameOk returns a tuple with the FileName field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetFileNameOk() (*string, bool) {
+func (o *CollectionFileResponse) GetFileNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -212,12 +214,12 @@ func (o *FileMetadataResponse) GetFileNameOk() (*string, bool) {
 }
 
 // SetFileName sets field value
-func (o *FileMetadataResponse) SetFileName(v string) {
+func (o *CollectionFileResponse) SetFileName(v string) {
 	o.FileName = v
 }
 
 // GetFileSize returns the FileSize field value
-func (o *FileMetadataResponse) GetFileSize() int64 {
+func (o *CollectionFileResponse) GetFileSize() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -228,7 +230,7 @@ func (o *FileMetadataResponse) GetFileSize() int64 {
 
 // GetFileSizeOk returns a tuple with the FileSize field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetFileSizeOk() (*int64, bool) {
+func (o *CollectionFileResponse) GetFileSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -236,12 +238,12 @@ func (o *FileMetadataResponse) GetFileSizeOk() (*int64, bool) {
 }
 
 // SetFileSize sets field value
-func (o *FileMetadataResponse) SetFileSize(v int64) {
+func (o *CollectionFileResponse) SetFileSize(v int64) {
 	o.FileSize = v
 }
 
 // GetFileStorageType returns the FileStorageType field value
-func (o *FileMetadataResponse) GetFileStorageType() string {
+func (o *CollectionFileResponse) GetFileStorageType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -252,7 +254,7 @@ func (o *FileMetadataResponse) GetFileStorageType() string {
 
 // GetFileStorageTypeOk returns a tuple with the FileStorageType field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetFileStorageTypeOk() (*string, bool) {
+func (o *CollectionFileResponse) GetFileStorageTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -260,12 +262,12 @@ func (o *FileMetadataResponse) GetFileStorageTypeOk() (*string, bool) {
 }
 
 // SetFileStorageType sets field value
-func (o *FileMetadataResponse) SetFileStorageType(v string) {
+func (o *CollectionFileResponse) SetFileStorageType(v string) {
 	o.FileStorageType = v
 }
 
 // GetId returns the Id field value
-func (o *FileMetadataResponse) GetId() string {
+func (o *CollectionFileResponse) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -276,7 +278,7 @@ func (o *FileMetadataResponse) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetIdOk() (*string, bool) {
+func (o *CollectionFileResponse) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -284,12 +286,12 @@ func (o *FileMetadataResponse) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *FileMetadataResponse) SetId(v string) {
+func (o *CollectionFileResponse) SetId(v string) {
 	o.Id = v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetMetadata() map[string]interface{} {
+func (o *CollectionFileResponse) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]interface{}
 		return ret
@@ -299,7 +301,7 @@ func (o *FileMetadataResponse) GetMetadata() map[string]interface{} {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetMetadataOk() (map[string]interface{}, bool) {
+func (o *CollectionFileResponse) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]interface{}{}, false
 	}
@@ -307,7 +309,7 @@ func (o *FileMetadataResponse) GetMetadataOk() (map[string]interface{}, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasMetadata() bool {
+func (o *CollectionFileResponse) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -316,12 +318,12 @@ func (o *FileMetadataResponse) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
-func (o *FileMetadataResponse) SetMetadata(v map[string]interface{}) {
+func (o *CollectionFileResponse) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
 // GetMimeType returns the MimeType field value
-func (o *FileMetadataResponse) GetMimeType() string {
+func (o *CollectionFileResponse) GetMimeType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -332,7 +334,7 @@ func (o *FileMetadataResponse) GetMimeType() string {
 
 // GetMimeTypeOk returns a tuple with the MimeType field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetMimeTypeOk() (*string, bool) {
+func (o *CollectionFileResponse) GetMimeTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -340,12 +342,12 @@ func (o *FileMetadataResponse) GetMimeTypeOk() (*string, bool) {
 }
 
 // SetMimeType sets field value
-func (o *FileMetadataResponse) SetMimeType(v string) {
+func (o *CollectionFileResponse) SetMimeType(v string) {
 	o.MimeType = v
 }
 
 // GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetOrganizationId() string {
+func (o *CollectionFileResponse) GetOrganizationId() string {
 	if o == nil || IsNil(o.OrganizationId) {
 		var ret string
 		return ret
@@ -355,7 +357,7 @@ func (o *FileMetadataResponse) GetOrganizationId() string {
 
 // GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOrganizationIdOk() (*string, bool) {
+func (o *CollectionFileResponse) GetOrganizationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.OrganizationId) {
 		return nil, false
 	}
@@ -363,7 +365,7 @@ func (o *FileMetadataResponse) GetOrganizationIdOk() (*string, bool) {
 }
 
 // HasOrganizationId returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasOrganizationId() bool {
+func (o *CollectionFileResponse) HasOrganizationId() bool {
 	if o != nil && !IsNil(o.OrganizationId) {
 		return true
 	}
@@ -372,12 +374,12 @@ func (o *FileMetadataResponse) HasOrganizationId() bool {
 }
 
 // SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *FileMetadataResponse) SetOrganizationId(v string) {
+func (o *CollectionFileResponse) SetOrganizationId(v string) {
 	o.OrganizationId = &v
 }
 
 // GetOriginalFileMimeType returns the OriginalFileMimeType field value
-func (o *FileMetadataResponse) GetOriginalFileMimeType() string {
+func (o *CollectionFileResponse) GetOriginalFileMimeType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -388,7 +390,7 @@ func (o *FileMetadataResponse) GetOriginalFileMimeType() string {
 
 // GetOriginalFileMimeTypeOk returns a tuple with the OriginalFileMimeType field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOriginalFileMimeTypeOk() (*string, bool) {
+func (o *CollectionFileResponse) GetOriginalFileMimeTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -396,12 +398,12 @@ func (o *FileMetadataResponse) GetOriginalFileMimeTypeOk() (*string, bool) {
 }
 
 // SetOriginalFileMimeType sets field value
-func (o *FileMetadataResponse) SetOriginalFileMimeType(v string) {
+func (o *CollectionFileResponse) SetOriginalFileMimeType(v string) {
 	o.OriginalFileMimeType = v
 }
 
 // GetOriginalFileName returns the OriginalFileName field value
-func (o *FileMetadataResponse) GetOriginalFileName() string {
+func (o *CollectionFileResponse) GetOriginalFileName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -412,7 +414,7 @@ func (o *FileMetadataResponse) GetOriginalFileName() string {
 
 // GetOriginalFileNameOk returns a tuple with the OriginalFileName field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOriginalFileNameOk() (*string, bool) {
+func (o *CollectionFileResponse) GetOriginalFileNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -420,12 +422,12 @@ func (o *FileMetadataResponse) GetOriginalFileNameOk() (*string, bool) {
 }
 
 // SetOriginalFileName sets field value
-func (o *FileMetadataResponse) SetOriginalFileName(v string) {
+func (o *CollectionFileResponse) SetOriginalFileName(v string) {
 	o.OriginalFileName = v
 }
 
 // GetOriginalFileSize returns the OriginalFileSize field value
-func (o *FileMetadataResponse) GetOriginalFileSize() int64 {
+func (o *CollectionFileResponse) GetOriginalFileSize() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -436,7 +438,7 @@ func (o *FileMetadataResponse) GetOriginalFileSize() int64 {
 
 // GetOriginalFileSizeOk returns a tuple with the OriginalFileSize field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOriginalFileSizeOk() (*int64, bool) {
+func (o *CollectionFileResponse) GetOriginalFileSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -444,12 +446,12 @@ func (o *FileMetadataResponse) GetOriginalFileSizeOk() (*int64, bool) {
 }
 
 // SetOriginalFileSize sets field value
-func (o *FileMetadataResponse) SetOriginalFileSize(v int64) {
+func (o *CollectionFileResponse) SetOriginalFileSize(v int64) {
 	o.OriginalFileSize = v
 }
 
 // GetOriginalFileStoragePath returns the OriginalFileStoragePath field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetOriginalFileStoragePath() string {
+func (o *CollectionFileResponse) GetOriginalFileStoragePath() string {
 	if o == nil || IsNil(o.OriginalFileStoragePath) {
 		var ret string
 		return ret
@@ -459,7 +461,7 @@ func (o *FileMetadataResponse) GetOriginalFileStoragePath() string {
 
 // GetOriginalFileStoragePathOk returns a tuple with the OriginalFileStoragePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOriginalFileStoragePathOk() (*string, bool) {
+func (o *CollectionFileResponse) GetOriginalFileStoragePathOk() (*string, bool) {
 	if o == nil || IsNil(o.OriginalFileStoragePath) {
 		return nil, false
 	}
@@ -467,7 +469,7 @@ func (o *FileMetadataResponse) GetOriginalFileStoragePathOk() (*string, bool) {
 }
 
 // HasOriginalFileStoragePath returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasOriginalFileStoragePath() bool {
+func (o *CollectionFileResponse) HasOriginalFileStoragePath() bool {
 	if o != nil && !IsNil(o.OriginalFileStoragePath) {
 		return true
 	}
@@ -476,12 +478,12 @@ func (o *FileMetadataResponse) HasOriginalFileStoragePath() bool {
 }
 
 // SetOriginalFileStoragePath gets a reference to the given string and assigns it to the OriginalFileStoragePath field.
-func (o *FileMetadataResponse) SetOriginalFileStoragePath(v string) {
+func (o *CollectionFileResponse) SetOriginalFileStoragePath(v string) {
 	o.OriginalFileStoragePath = &v
 }
 
 // GetOriginalFileUrl returns the OriginalFileUrl field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetOriginalFileUrl() string {
+func (o *CollectionFileResponse) GetOriginalFileUrl() string {
 	if o == nil || IsNil(o.OriginalFileUrl) {
 		var ret string
 		return ret
@@ -491,7 +493,7 @@ func (o *FileMetadataResponse) GetOriginalFileUrl() string {
 
 // GetOriginalFileUrlOk returns a tuple with the OriginalFileUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetOriginalFileUrlOk() (*string, bool) {
+func (o *CollectionFileResponse) GetOriginalFileUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.OriginalFileUrl) {
 		return nil, false
 	}
@@ -499,7 +501,7 @@ func (o *FileMetadataResponse) GetOriginalFileUrlOk() (*string, bool) {
 }
 
 // HasOriginalFileUrl returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasOriginalFileUrl() bool {
+func (o *CollectionFileResponse) HasOriginalFileUrl() bool {
 	if o != nil && !IsNil(o.OriginalFileUrl) {
 		return true
 	}
@@ -508,12 +510,44 @@ func (o *FileMetadataResponse) HasOriginalFileUrl() bool {
 }
 
 // SetOriginalFileUrl gets a reference to the given string and assigns it to the OriginalFileUrl field.
-func (o *FileMetadataResponse) SetOriginalFileUrl(v string) {
+func (o *CollectionFileResponse) SetOriginalFileUrl(v string) {
 	o.OriginalFileUrl = &v
 }
 
+// GetProcessingStatus returns the ProcessingStatus field value if set, zero value otherwise.
+func (o *CollectionFileResponse) GetProcessingStatus() map[string]ProcessingStatus {
+	if o == nil || IsNil(o.ProcessingStatus) {
+		var ret map[string]ProcessingStatus
+		return ret
+	}
+	return *o.ProcessingStatus
+}
+
+// GetProcessingStatusOk returns a tuple with the ProcessingStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CollectionFileResponse) GetProcessingStatusOk() (*map[string]ProcessingStatus, bool) {
+	if o == nil || IsNil(o.ProcessingStatus) {
+		return nil, false
+	}
+	return o.ProcessingStatus, true
+}
+
+// HasProcessingStatus returns a boolean if a field has been set.
+func (o *CollectionFileResponse) HasProcessingStatus() bool {
+	if o != nil && !IsNil(o.ProcessingStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetProcessingStatus gets a reference to the given map[string]ProcessingStatus and assigns it to the ProcessingStatus field.
+func (o *CollectionFileResponse) SetProcessingStatus(v map[string]ProcessingStatus) {
+	o.ProcessingStatus = &v
+}
+
 // GetStorageBackend returns the StorageBackend field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetStorageBackend() string {
+func (o *CollectionFileResponse) GetStorageBackend() string {
 	if o == nil || IsNil(o.StorageBackend) {
 		var ret string
 		return ret
@@ -523,7 +557,7 @@ func (o *FileMetadataResponse) GetStorageBackend() string {
 
 // GetStorageBackendOk returns a tuple with the StorageBackend field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetStorageBackendOk() (*string, bool) {
+func (o *CollectionFileResponse) GetStorageBackendOk() (*string, bool) {
 	if o == nil || IsNil(o.StorageBackend) {
 		return nil, false
 	}
@@ -531,7 +565,7 @@ func (o *FileMetadataResponse) GetStorageBackendOk() (*string, bool) {
 }
 
 // HasStorageBackend returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasStorageBackend() bool {
+func (o *CollectionFileResponse) HasStorageBackend() bool {
 	if o != nil && !IsNil(o.StorageBackend) {
 		return true
 	}
@@ -540,12 +574,12 @@ func (o *FileMetadataResponse) HasStorageBackend() bool {
 }
 
 // SetStorageBackend gets a reference to the given string and assigns it to the StorageBackend field.
-func (o *FileMetadataResponse) SetStorageBackend(v string) {
+func (o *CollectionFileResponse) SetStorageBackend(v string) {
 	o.StorageBackend = &v
 }
 
 // GetStoragePath returns the StoragePath field value
-func (o *FileMetadataResponse) GetStoragePath() string {
+func (o *CollectionFileResponse) GetStoragePath() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -556,7 +590,7 @@ func (o *FileMetadataResponse) GetStoragePath() string {
 
 // GetStoragePathOk returns a tuple with the StoragePath field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetStoragePathOk() (*string, bool) {
+func (o *CollectionFileResponse) GetStoragePathOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -564,12 +598,12 @@ func (o *FileMetadataResponse) GetStoragePathOk() (*string, bool) {
 }
 
 // SetStoragePath sets field value
-func (o *FileMetadataResponse) SetStoragePath(v string) {
+func (o *CollectionFileResponse) SetStoragePath(v string) {
 	o.StoragePath = v
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetTeamId() string {
+func (o *CollectionFileResponse) GetTeamId() string {
 	if o == nil || IsNil(o.TeamId) {
 		var ret string
 		return ret
@@ -579,7 +613,7 @@ func (o *FileMetadataResponse) GetTeamId() string {
 
 // GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetTeamIdOk() (*string, bool) {
+func (o *CollectionFileResponse) GetTeamIdOk() (*string, bool) {
 	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
@@ -587,7 +621,7 @@ func (o *FileMetadataResponse) GetTeamIdOk() (*string, bool) {
 }
 
 // HasTeamId returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasTeamId() bool {
+func (o *CollectionFileResponse) HasTeamId() bool {
 	if o != nil && !IsNil(o.TeamId) {
 		return true
 	}
@@ -596,12 +630,12 @@ func (o *FileMetadataResponse) HasTeamId() bool {
 }
 
 // SetTeamId gets a reference to the given string and assigns it to the TeamId field.
-func (o *FileMetadataResponse) SetTeamId(v string) {
+func (o *CollectionFileResponse) SetTeamId(v string) {
 	o.TeamId = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *FileMetadataResponse) GetUpdatedAt() string {
+func (o *CollectionFileResponse) GetUpdatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -612,7 +646,7 @@ func (o *FileMetadataResponse) GetUpdatedAt() string {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetUpdatedAtOk() (*string, bool) {
+func (o *CollectionFileResponse) GetUpdatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -620,12 +654,12 @@ func (o *FileMetadataResponse) GetUpdatedAtOk() (*string, bool) {
 }
 
 // SetUpdatedAt sets field value
-func (o *FileMetadataResponse) SetUpdatedAt(v string) {
+func (o *CollectionFileResponse) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
 // GetUploadCategory returns the UploadCategory field value
-func (o *FileMetadataResponse) GetUploadCategory() string {
+func (o *CollectionFileResponse) GetUploadCategory() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -636,7 +670,7 @@ func (o *FileMetadataResponse) GetUploadCategory() string {
 
 // GetUploadCategoryOk returns a tuple with the UploadCategory field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetUploadCategoryOk() (*string, bool) {
+func (o *CollectionFileResponse) GetUploadCategoryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -644,12 +678,12 @@ func (o *FileMetadataResponse) GetUploadCategoryOk() (*string, bool) {
 }
 
 // SetUploadCategory sets field value
-func (o *FileMetadataResponse) SetUploadCategory(v string) {
+func (o *CollectionFileResponse) SetUploadCategory(v string) {
 	o.UploadCategory = v
 }
 
 // GetUrl returns the Url field value
-func (o *FileMetadataResponse) GetUrl() string {
+func (o *CollectionFileResponse) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -660,7 +694,7 @@ func (o *FileMetadataResponse) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetUrlOk() (*string, bool) {
+func (o *CollectionFileResponse) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -668,12 +702,12 @@ func (o *FileMetadataResponse) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *FileMetadataResponse) SetUrl(v string) {
+func (o *CollectionFileResponse) SetUrl(v string) {
 	o.Url = v
 }
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *FileMetadataResponse) GetUserId() string {
+func (o *CollectionFileResponse) GetUserId() string {
 	if o == nil || IsNil(o.UserId) {
 		var ret string
 		return ret
@@ -683,7 +717,7 @@ func (o *FileMetadataResponse) GetUserId() string {
 
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileMetadataResponse) GetUserIdOk() (*string, bool) {
+func (o *CollectionFileResponse) GetUserIdOk() (*string, bool) {
 	if o == nil || IsNil(o.UserId) {
 		return nil, false
 	}
@@ -691,7 +725,7 @@ func (o *FileMetadataResponse) GetUserIdOk() (*string, bool) {
 }
 
 // HasUserId returns a boolean if a field has been set.
-func (o *FileMetadataResponse) HasUserId() bool {
+func (o *CollectionFileResponse) HasUserId() bool {
 	if o != nil && !IsNil(o.UserId) {
 		return true
 	}
@@ -700,11 +734,11 @@ func (o *FileMetadataResponse) HasUserId() bool {
 }
 
 // SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *FileMetadataResponse) SetUserId(v string) {
+func (o *CollectionFileResponse) SetUserId(v string) {
 	o.UserId = &v
 }
 
-func (o FileMetadataResponse) MarshalJSON() ([]byte, error) {
+func (o CollectionFileResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -712,7 +746,7 @@ func (o FileMetadataResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
+func (o CollectionFileResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CollectionId) {
 		toSerialize["collection_id"] = o.CollectionId
@@ -742,6 +776,9 @@ func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginalFileUrl) {
 		toSerialize["original_file_url"] = o.OriginalFileUrl
 	}
+	if !IsNil(o.ProcessingStatus) {
+		toSerialize["processing_status"] = o.ProcessingStatus
+	}
 	if !IsNil(o.StorageBackend) {
 		toSerialize["storage_backend"] = o.StorageBackend
 	}
@@ -763,7 +800,7 @@ func (o FileMetadataResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *CollectionFileResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -798,15 +835,15 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFileMetadataResponse := _FileMetadataResponse{}
+	varCollectionFileResponse := _CollectionFileResponse{}
 
-	err = json.Unmarshal(data, &varFileMetadataResponse)
+	err = json.Unmarshal(data, &varCollectionFileResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FileMetadataResponse(varFileMetadataResponse)
+	*o = CollectionFileResponse(varCollectionFileResponse)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -827,6 +864,7 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "original_file_size")
 		delete(additionalProperties, "original_file_storage_path")
 		delete(additionalProperties, "original_file_url")
+		delete(additionalProperties, "processing_status")
 		delete(additionalProperties, "storage_backend")
 		delete(additionalProperties, "storage_path")
 		delete(additionalProperties, "team_id")
@@ -840,38 +878,38 @@ func (o *FileMetadataResponse) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableFileMetadataResponse struct {
-	value *FileMetadataResponse
+type NullableCollectionFileResponse struct {
+	value *CollectionFileResponse
 	isSet bool
 }
 
-func (v NullableFileMetadataResponse) Get() *FileMetadataResponse {
+func (v NullableCollectionFileResponse) Get() *CollectionFileResponse {
 	return v.value
 }
 
-func (v *NullableFileMetadataResponse) Set(val *FileMetadataResponse) {
+func (v *NullableCollectionFileResponse) Set(val *CollectionFileResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFileMetadataResponse) IsSet() bool {
+func (v NullableCollectionFileResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFileMetadataResponse) Unset() {
+func (v *NullableCollectionFileResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFileMetadataResponse(val *FileMetadataResponse) *NullableFileMetadataResponse {
-	return &NullableFileMetadataResponse{value: val, isSet: true}
+func NewNullableCollectionFileResponse(val *CollectionFileResponse) *NullableCollectionFileResponse {
+	return &NullableCollectionFileResponse{value: val, isSet: true}
 }
 
-func (v NullableFileMetadataResponse) MarshalJSON() ([]byte, error) {
+func (v NullableCollectionFileResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFileMetadataResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableCollectionFileResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
