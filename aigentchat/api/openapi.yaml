@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.42.2
+  version: 0.47.0
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -9520,7 +9520,7 @@ components:
           description: |-
             AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored
             implies accessible. At completion time the ids are re-evaluated per requesting user+org by
-            resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves the
+            resolveAccessibleCorpora (invoked via applyAssignedCollectionCorpora), which resolves the
             usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the
             file manager is unreachable.
           items:

@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.42.2
+API version: 0.47.0
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &ChatCompletionRequestDto{}
 // ChatCompletionRequestDto struct for ChatCompletionRequestDto
 type ChatCompletionRequestDto struct {
 	AgentId *string `json:"agent_id,omitempty"`
-	// AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpusIDs (invoked via applyAssignedCollectionCorpora), which resolves the usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the file manager is unreachable.
+	// AssignedCollectionIDs is accepted and stored UNVERIFIED at this layer; do NOT assume stored implies accessible. At completion time the ids are re-evaluated per requesting user+org by resolveAccessibleCorpora (invoked via applyAssignedCollectionCorpora), which resolves the usable ones to deepr corpora, skips the rest, and fails the completion (503) only when the file manager is unreachable.
 	AssignedCollectionIds []string `json:"assigned_collection_ids,omitempty"`
 	AttachedFiles []string `json:"attached_files,omitempty"`
 	ChannelId *string `json:"channel_id,omitempty"`
