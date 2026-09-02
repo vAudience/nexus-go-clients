@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.1
+API version: 0.47.2
 Contact: contact@vaudience.ai
 */
 
@@ -27,7 +27,7 @@ type AIgencyMessageContent struct {
 	FunctionStatusUpdate *AIgencyFunctionStatusUpdate `json:"function_status_update,omitempty"`
 	IsCancelled *bool `json:"is_cancelled,omitempty"`
 	Text *string `json:"text,omitempty"`
-	TextMetaData map[string]map[string]interface{} `json:"text_meta_data,omitempty"`
+	TextMetaData map[string]interface{} `json:"text_meta_data,omitempty"`
 	TextMimeType *string `json:"text_mime_type,omitempty"`
 	Thinking *AIgencyThinking `json:"thinking,omitempty"`
 	Type AIgencyMessageContentType `json:"type"`
@@ -247,9 +247,9 @@ func (o *AIgencyMessageContent) SetText(v string) {
 }
 
 // GetTextMetaData returns the TextMetaData field value if set, zero value otherwise.
-func (o *AIgencyMessageContent) GetTextMetaData() map[string]map[string]interface{} {
+func (o *AIgencyMessageContent) GetTextMetaData() map[string]interface{} {
 	if o == nil || IsNil(o.TextMetaData) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.TextMetaData
@@ -257,9 +257,9 @@ func (o *AIgencyMessageContent) GetTextMetaData() map[string]map[string]interfac
 
 // GetTextMetaDataOk returns a tuple with the TextMetaData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessageContent) GetTextMetaDataOk() (map[string]map[string]interface{}, bool) {
+func (o *AIgencyMessageContent) GetTextMetaDataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.TextMetaData) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.TextMetaData, true
 }
@@ -273,8 +273,8 @@ func (o *AIgencyMessageContent) HasTextMetaData() bool {
 	return false
 }
 
-// SetTextMetaData gets a reference to the given map[string]map[string]interface{} and assigns it to the TextMetaData field.
-func (o *AIgencyMessageContent) SetTextMetaData(v map[string]map[string]interface{}) {
+// SetTextMetaData gets a reference to the given map[string]interface{} and assigns it to the TextMetaData field.
+func (o *AIgencyMessageContent) SetTextMetaData(v map[string]interface{}) {
 	o.TextMetaData = v
 }
 

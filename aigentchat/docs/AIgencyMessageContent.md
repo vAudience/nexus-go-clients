@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **FunctionStatusUpdate** | Pointer to [**AIgencyFunctionStatusUpdate**](AIgencyFunctionStatusUpdate.md) |  | [optional] 
 **IsCancelled** | Pointer to **bool** |  | [optional] 
 **Text** | Pointer to **string** |  | [optional] 
-**TextMetaData** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**TextMetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **TextMimeType** | Pointer to **string** |  | [optional] 
 **Thinking** | Pointer to [**AIgencyThinking**](AIgencyThinking.md) |  | [optional] 
 **Type** | [**AIgencyMessageContentType**](AIgencyMessageContentType.md) |  | 
@@ -186,20 +186,20 @@ HasText returns a boolean if a field has been set.
 
 ### GetTextMetaData
 
-`func (o *AIgencyMessageContent) GetTextMetaData() map[string]map[string]interface{}`
+`func (o *AIgencyMessageContent) GetTextMetaData() map[string]interface{}`
 
 GetTextMetaData returns the TextMetaData field if non-nil, zero value otherwise.
 
 ### GetTextMetaDataOk
 
-`func (o *AIgencyMessageContent) GetTextMetaDataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *AIgencyMessageContent) GetTextMetaDataOk() (*map[string]interface{}, bool)`
 
 GetTextMetaDataOk returns a tuple with the TextMetaData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTextMetaData
 
-`func (o *AIgencyMessageContent) SetTextMetaData(v map[string]map[string]interface{})`
+`func (o *AIgencyMessageContent) SetTextMetaData(v map[string]interface{})`
 
 SetTextMetaData sets TextMetaData field to given value.
 

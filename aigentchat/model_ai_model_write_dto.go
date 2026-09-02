@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.1
+API version: 0.47.2
 Contact: contact@vaudience.ai
 */
 
@@ -35,7 +35,7 @@ type AIModelWriteDto struct {
 	ModelStats *AIModelStats `json:"model_stats,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ParameterDefinitions map[string]interface{} `json:"parameter_definitions,omitempty"`
-	Parameters map[string]map[string]interface{} `json:"parameters,omitempty"`
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
 	ServiceHostLocations []HostingLocation `json:"service_host_locations,omitempty"`
 	ServiceId *string `json:"service_id,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -541,9 +541,9 @@ func (o *AIModelWriteDto) SetParameterDefinitions(v map[string]interface{}) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *AIModelWriteDto) GetParameters() map[string]map[string]interface{} {
+func (o *AIModelWriteDto) GetParameters() map[string]interface{} {
 	if o == nil || IsNil(o.Parameters) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Parameters
@@ -551,9 +551,9 @@ func (o *AIModelWriteDto) GetParameters() map[string]map[string]interface{} {
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIModelWriteDto) GetParametersOk() (map[string]map[string]interface{}, bool) {
+func (o *AIModelWriteDto) GetParametersOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Parameters) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Parameters, true
 }
@@ -567,8 +567,8 @@ func (o *AIModelWriteDto) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given map[string]map[string]interface{} and assigns it to the Parameters field.
-func (o *AIModelWriteDto) SetParameters(v map[string]map[string]interface{}) {
+// SetParameters gets a reference to the given map[string]interface{} and assigns it to the Parameters field.
+func (o *AIModelWriteDto) SetParameters(v map[string]interface{}) {
 	o.Parameters = v
 }
 

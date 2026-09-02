@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **ModelStats** | Pointer to [**AIModelStats**](AIModelStats.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ParameterDefinitions** | Pointer to **map[string]interface{}** |  | [optional] 
-**Parameters** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
 **ServiceHostLocations** | Pointer to [**[]HostingLocation**](HostingLocation.md) |  | [optional] 
 **ServiceId** | Pointer to **string** |  | [optional] 
 
@@ -419,20 +419,20 @@ HasParameterDefinitions returns a boolean if a field has been set.
 
 ### GetParameters
 
-`func (o *AIModelWriteDto) GetParameters() map[string]map[string]interface{}`
+`func (o *AIModelWriteDto) GetParameters() map[string]interface{}`
 
 GetParameters returns the Parameters field if non-nil, zero value otherwise.
 
 ### GetParametersOk
 
-`func (o *AIModelWriteDto) GetParametersOk() (*map[string]map[string]interface{}, bool)`
+`func (o *AIModelWriteDto) GetParametersOk() (*map[string]interface{}, bool)`
 
 GetParametersOk returns a tuple with the Parameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParameters
 
-`func (o *AIModelWriteDto) SetParameters(v map[string]map[string]interface{})`
+`func (o *AIModelWriteDto) SetParameters(v map[string]interface{})`
 
 SetParameters sets Parameters field to given value.
 

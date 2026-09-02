@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.47.1
+  version: 0.47.2
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -5693,8 +5693,7 @@ components:
           speed: 0
         name: name
         parameter_definitions: "{}"
-        parameters:
-          key: "{}"
+        parameters: "{}"
         service_host_locations:
         - null
         - null
@@ -5744,8 +5743,7 @@ components:
           properties: {}
           type: object
         parameters:
-          additionalProperties:
-            type: object
+          properties: {}
           type: object
         service_host_locations:
           items:
@@ -6066,8 +6064,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -6128,8 +6125,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -6374,8 +6370,7 @@ components:
             meta_data: "{}"
         is_cancelled: true
         text: text
-        text_meta_data:
-          key: "{}"
+        text_meta_data: "{}"
         text_mime_type: text_mime_type
         thinking:
           content: content
@@ -6396,8 +6391,7 @@ components:
         text:
           type: string
         text_meta_data:
-          additionalProperties:
-            type: object
+          properties: {}
           type: object
         text_mime_type:
           type: string
@@ -6465,8 +6459,7 @@ components:
               meta_data: "{}"
           is_cancelled: true
           text: text
-          text_meta_data:
-            key: "{}"
+          text_meta_data: "{}"
           text_mime_type: text_mime_type
           thinking:
             content: content
@@ -6527,8 +6520,7 @@ components:
               meta_data: "{}"
           is_cancelled: true
           text: text
-          text_meta_data:
-            key: "{}"
+          text_meta_data: "{}"
           text_mime_type: text_mime_type
           thinking:
             content: content
@@ -6682,8 +6674,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -6744,8 +6735,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -6874,8 +6864,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -6936,8 +6925,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -7091,8 +7079,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -7153,8 +7140,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -8660,8 +8646,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -8722,8 +8707,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -8813,8 +8797,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -8875,8 +8858,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -8980,8 +8962,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -9042,8 +9023,7 @@ components:
                 meta_data: "{}"
             is_cancelled: true
             text: text
-            text_meta_data:
-              key: "{}"
+            text_meta_data: "{}"
             text_mime_type: text_mime_type
             thinking:
               content: content
@@ -9652,8 +9632,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -9714,8 +9693,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -9844,8 +9822,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
@@ -9906,8 +9883,7 @@ components:
                   meta_data: "{}"
               is_cancelled: true
               text: text
-              text_meta_data:
-                key: "{}"
+              text_meta_data: "{}"
               text_mime_type: text_mime_type
               thinking:
                 content: content
