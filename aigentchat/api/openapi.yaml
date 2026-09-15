@@ -10,7 +10,7 @@ info:
     url: https://www.vaudience.ai
   termsOfService: https://www.vaudience.ai/terms-of-use/
   title: vAudience AIgentChat API
-  version: 0.47.2
+  version: 0.49.3
 servers:
 - url: https://aigentchat.dev.ai.vaud.one/
 tags:
@@ -3432,7 +3432,7 @@ paths:
       tags:
       - Images
       x-codegen-request-body-name: request
-  /v1/organizations/{org_id}/images/{id}:
+  /v1/organizations/{org_id}/images/{image_id}:
     delete:
       description: Delete an image by its ID
       operationId: DeleteImage
@@ -3445,7 +3445,7 @@ paths:
           type: string
       - description: Image ID
         in: path
-        name: id
+        name: image_id
         required: true
         schema:
           type: string
@@ -3491,7 +3491,6 @@ paths:
       summary: Delete an image
       tags:
       - Images
-  /v1/organizations/{org_id}/images/{image_id}:
     get:
       description: Get an image by its ID
       operationId: GetImage
@@ -3515,6 +3514,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/AIgencyImage"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -6142,6 +6159,7 @@ components:
         error:
           error_code: ""
           message: message
+          mid_stream: true
           original_status_code: 1
           status_code: 5
         execution_id: execution_id
@@ -6192,6 +6210,7 @@ components:
         token_direction: "{}"
         type: "{}"
         updated_at: 2
+        used_credits: 7.061401241503109
       properties:
         ai_model_id:
           maxLength: 64
@@ -6256,7 +6275,11 @@ components:
           minLength: 1
           type: string
         parameters:
-          properties: {}
+          allOf:
+          - $ref: "#/components/schemas/AIgencyMessageCompletionParameters"
+          description: |-
+            CompletionParameters is the effective completion configuration that produced this message pair; set on
+            both messages of a pair, nil for messages not created by a chat completion.
           type: object
         reference_id:
           maxLength: 64
@@ -6297,6 +6320,15 @@ components:
         updated_at:
           format: int64
           type: integer
+        used_credits:
+          description: |-
+            UsedCredits is the execution log's recorded billing amount for this turn (1 credit == 1 EUR): its
+            FinalCostInEuro, including multipliers and the minimal-cost floor. The log is recorded even when the
+            budget debit itself fails, so this is what the turn was billed, not proof that the debit succeeded.
+            Set only on the assistant message once tracked (success and cancel); 0 on the user message and on
+            error paths.
+          format: double
+          type: number
       required:
       - ai_model_id
       - ai_service_id
@@ -6313,6 +6345,87 @@ components:
       - token_direction
       - type
       - updated_at
+      type: object
+    AIgencyMessageCompletionParameters:
+      example:
+        agent_id: agent_id
+        assigned_collection_ids:
+        - assigned_collection_ids
+        - assigned_collection_ids
+        continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+        continue_on_max_tokens: true
+        deepr_tool_auto_activated: true
+        model_host_location: ""
+        model_parameters: "{}"
+        selected_tools:
+        - selected_tools
+        - selected_tools
+        set_message_history_ids:
+        - set_message_history_ids
+        - set_message_history_ids
+        stream: true
+        tool_configs: "{}"
+        tool_function_ids:
+        - tool_function_ids
+        - tool_function_ids
+        use_channel_messages_as_history: true
+        use_tools: true
+        var_replacements:
+          key: var_replacements
+      properties:
+        agent_id:
+          type: string
+        assigned_collection_ids:
+          description: |-
+            AssignedCollectionIDs is the merged collection set the completion tried to resolve
+            (ChatCompletionRequest.MergedCollectionIDs); the corpora they resolved to are in ToolConfigs.
+          items:
+            type: string
+          type: array
+        continue_instruction_on_max_tokens:
+          type: string
+        continue_on_max_tokens:
+          type: boolean
+        deepr_tool_auto_activated:
+          type: boolean
+        model_host_location:
+          $ref: "#/components/schemas/HostingLocation"
+        model_parameters:
+          properties: {}
+          type: object
+        selected_tools:
+          description: "SelectedTools is the effective selection, after resolveAgentToolDefaults\
+            \ and deepr auto-activation."
+          items:
+            type: string
+          type: array
+        set_message_history_ids:
+          items:
+            type: string
+          type: array
+        stream:
+          type: boolean
+        tool_configs:
+          description: |-
+            ToolConfigs is the effective runtime config per delivered tool id (ExecutionContextBase.BuildToolConfig),
+            e.g. the deepr tool's resolved corpus_ids. Tools without any config are omitted.
+          properties: {}
+          type: object
+        tool_function_ids:
+          description: |-
+            ToolFunctionIDs are the functions actually delivered to the model (ExecutionContextBase.ToolFunctions).
+            A selected tool that is unannounced, invisible to the org or outside its hosting locations is absent.
+          items:
+            type: string
+          type: array
+        use_channel_messages_as_history:
+          type: boolean
+        use_tools:
+          type: boolean
+        var_replacements:
+          additionalProperties:
+            type: string
+          type: object
       type: object
     AIgencyMessageContent:
       example:
@@ -6752,6 +6865,7 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           execution_id: execution_id
@@ -6802,6 +6916,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
         - ai_model_id: ai_model_id
           ai_service_id: ai_service_id
           attachments: "{}"
@@ -6942,6 +7057,7 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           execution_id: execution_id
@@ -6992,6 +7108,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
         total_results: 0
       properties:
         results:
@@ -7150,7 +7267,31 @@ components:
           full_text: full_text
           full_text_mime_type: full_text_mime_type
         meta_data: "{}"
-        parameters: "{}"
+        parameters:
+          agent_id: agent_id
+          assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+          continue_on_max_tokens: true
+          deepr_tool_auto_activated: true
+          model_host_location: ""
+          model_parameters: "{}"
+          selected_tools:
+          - selected_tools
+          - selected_tools
+          set_message_history_ids:
+          - set_message_history_ids
+          - set_message_history_ids
+          stream: true
+          tool_configs: "{}"
+          tool_function_ids:
+          - tool_function_ids
+          - tool_function_ids
+          use_channel_messages_as_history: true
+          use_tools: true
+          var_replacements:
+            key: var_replacements
         reference_id: reference_id
         response_to_id: response_to_id
         sender_conversation_role: "{}"
@@ -7179,8 +7320,7 @@ components:
           properties: {}
           type: object
         parameters:
-          properties: {}
-          type: object
+          $ref: "#/components/schemas/AIgencyMessageCompletionParameters"
         reference_id:
           maxLength: 64
           minLength: 1
@@ -8264,13 +8404,25 @@ components:
       example:
         error_code: ""
         message: message
+        mid_stream: true
         original_status_code: 1
         status_code: 5
       properties:
         error_code:
           $ref: "#/components/schemas/ApiErrorCode"
         message:
+          description: |-
+            Message is the client-facing summary of the failure, derived from ErrorCode by
+            ClientMessageForAiServiceErrorCode. It never carries provider text: it is persisted on the
+            message, fanned out over SSE and written into HTTP error bodies.
           type: string
+        mid_stream:
+          description: |-
+            MidStream is true when the provider failed after at least one delta of this call had already
+            been delivered to the streaming callback. The content the client saw cannot be retracted, so
+            AIgent never retries such an error, whatever its StatusCode. An in-band provider error on an
+            already-open stream carries the stream's own HTTP status (typically 200) in OriginalStatusCode.
+          type: boolean
         original_status_code:
           type: integer
         status_code:
@@ -8720,13 +8872,38 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           finish_reason: ""
           id: id
           meta_data: "{}"
           owner_organization_id: owner_organization_id
-          parameters: "{}"
+          parameters:
+            agent_id: agent_id
+            assigned_collection_ids:
+            - assigned_collection_ids
+            - assigned_collection_ids
+            continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+            continue_on_max_tokens: true
+            deepr_tool_auto_activated: true
+            model_host_location: ""
+            model_parameters: "{}"
+            selected_tools:
+            - selected_tools
+            - selected_tools
+            set_message_history_ids:
+            - set_message_history_ids
+            - set_message_history_ids
+            stream: true
+            tool_configs: "{}"
+            tool_function_ids:
+            - tool_function_ids
+            - tool_function_ids
+            use_channel_messages_as_history: true
+            use_tools: true
+            var_replacements:
+              key: var_replacements
           reference_id: reference_id
           response_to_id: response_to_id
           sender_conversation_role: "{}"
@@ -8737,6 +8914,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
         - ai_model_id: ai_model_id
           ai_service_id: ai_service_id
           channel_id: channel_id
@@ -8871,13 +9049,38 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           finish_reason: ""
           id: id
           meta_data: "{}"
           owner_organization_id: owner_organization_id
-          parameters: "{}"
+          parameters:
+            agent_id: agent_id
+            assigned_collection_ids:
+            - assigned_collection_ids
+            - assigned_collection_ids
+            continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+            continue_on_max_tokens: true
+            deepr_tool_auto_activated: true
+            model_host_location: ""
+            model_parameters: "{}"
+            selected_tools:
+            - selected_tools
+            - selected_tools
+            set_message_history_ids:
+            - set_message_history_ids
+            - set_message_history_ids
+            stream: true
+            tool_configs: "{}"
+            tool_function_ids:
+            - tool_function_ids
+            - tool_function_ids
+            use_channel_messages_as_history: true
+            use_tools: true
+            var_replacements:
+              key: var_replacements
           reference_id: reference_id
           response_to_id: response_to_id
           sender_conversation_role: "{}"
@@ -8888,6 +9091,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
       properties:
         channel_id:
           maxLength: 64
@@ -9036,13 +9240,38 @@ components:
         error:
           error_code: ""
           message: message
+          mid_stream: true
           original_status_code: 1
           status_code: 5
         finish_reason: ""
         id: id
         meta_data: "{}"
         owner_organization_id: owner_organization_id
-        parameters: "{}"
+        parameters:
+          agent_id: agent_id
+          assigned_collection_ids:
+          - assigned_collection_ids
+          - assigned_collection_ids
+          continue_instruction_on_max_tokens: continue_instruction_on_max_tokens
+          continue_on_max_tokens: true
+          deepr_tool_auto_activated: true
+          model_host_location: ""
+          model_parameters: "{}"
+          selected_tools:
+          - selected_tools
+          - selected_tools
+          set_message_history_ids:
+          - set_message_history_ids
+          - set_message_history_ids
+          stream: true
+          tool_configs: "{}"
+          tool_function_ids:
+          - tool_function_ids
+          - tool_function_ids
+          use_channel_messages_as_history: true
+          use_tools: true
+          var_replacements:
+            key: var_replacements
         reference_id: reference_id
         response_to_id: response_to_id
         sender_conversation_role: "{}"
@@ -9053,6 +9282,7 @@ components:
         token_direction: "{}"
         type: "{}"
         updated_at: 2
+        used_credits: 7.061401241503109
       properties:
         ai_model_id:
           maxLength: 64
@@ -9091,8 +9321,7 @@ components:
           minLength: 1
           type: string
         parameters:
-          properties: {}
-          type: object
+          $ref: "#/components/schemas/AIgencyMessageCompletionParameters"
         reference_id:
           maxLength: 64
           type: string
@@ -9126,6 +9355,9 @@ components:
         updated_at:
           format: int64
           type: integer
+        used_credits:
+          format: double
+          type: number
       required:
       - ai_model_id
       - ai_service_id
@@ -9710,6 +9942,7 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           execution_id: execution_id
@@ -9760,6 +9993,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
         - ai_model_id: ai_model_id
           ai_service_id: ai_service_id
           attachments: "{}"
@@ -9900,6 +10134,7 @@ components:
           error:
             error_code: ""
             message: message
+            mid_stream: true
             original_status_code: 1
             status_code: 5
           execution_id: execution_id
@@ -9950,6 +10185,7 @@ components:
           token_direction: "{}"
           type: "{}"
           updated_at: 2
+          used_credits: 7.061401241503109
         retry_after_ms: 0
         state: state
       properties:

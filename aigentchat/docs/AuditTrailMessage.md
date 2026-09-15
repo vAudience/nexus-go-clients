@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **OwnerOrganizationId** | **string** |  | 
-**Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**Parameters** | Pointer to [**AIgencyMessageCompletionParameters**](AIgencyMessageCompletionParameters.md) |  | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
 **ResponseToId** | Pointer to **string** |  | [optional] 
 **SenderConversationRole** | [**ConversationRole**](ConversationRole.md) |  | 
@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **TokenDirection** | [**TokenDirection**](TokenDirection.md) |  | 
 **Type** | [**AIgencyMessageType**](AIgencyMessageType.md) |  | 
 **UpdatedAt** | **int64** |  | 
+**UsedCredits** | Pointer to **float64** |  | [optional] 
 
 ## Methods
 
@@ -283,20 +284,20 @@ SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
 ### GetParameters
 
-`func (o *AuditTrailMessage) GetParameters() map[string]interface{}`
+`func (o *AuditTrailMessage) GetParameters() AIgencyMessageCompletionParameters`
 
 GetParameters returns the Parameters field if non-nil, zero value otherwise.
 
 ### GetParametersOk
 
-`func (o *AuditTrailMessage) GetParametersOk() (*map[string]interface{}, bool)`
+`func (o *AuditTrailMessage) GetParametersOk() (*AIgencyMessageCompletionParameters, bool)`
 
 GetParametersOk returns a tuple with the Parameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParameters
 
-`func (o *AuditTrailMessage) SetParameters(v map[string]interface{})`
+`func (o *AuditTrailMessage) SetParameters(v AIgencyMessageCompletionParameters)`
 
 SetParameters sets Parameters field to given value.
 
@@ -525,6 +526,31 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
+
+### GetUsedCredits
+
+`func (o *AuditTrailMessage) GetUsedCredits() float64`
+
+GetUsedCredits returns the UsedCredits field if non-nil, zero value otherwise.
+
+### GetUsedCreditsOk
+
+`func (o *AuditTrailMessage) GetUsedCreditsOk() (*float64, bool)`
+
+GetUsedCreditsOk returns a tuple with the UsedCredits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedCredits
+
+`func (o *AuditTrailMessage) SetUsedCredits(v float64)`
+
+SetUsedCredits sets UsedCredits field to given value.
+
+### HasUsedCredits
+
+`func (o *AuditTrailMessage) HasUsedCredits() bool`
+
+HasUsedCredits returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorCode** | [**ApiErrorCode**](ApiErrorCode.md) |  | 
-**Message** | **string** |  | 
+**Message** | **string** | Message is the client-facing summary of the failure, derived from ErrorCode by ClientMessageForAiServiceErrorCode. It never carries provider text: it is persisted on the message, fanned out over SSE and written into HTTP error bodies. | 
+**MidStream** | Pointer to **bool** | MidStream is true when the provider failed after at least one delta of this call had already been delivered to the streaming callback. The content the client saw cannot be retracted, so AIgent never retries such an error, whatever its StatusCode. An in-band provider error on an already-open stream carries the stream&#39;s own HTTP status (typically 200) in OriginalStatusCode. | [optional] 
 **OriginalStatusCode** | **int32** |  | 
 **StatusCode** | **int32** |  | 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetMessage sets Message field to given value.
 
+
+### GetMidStream
+
+`func (o *AiServiceError) GetMidStream() bool`
+
+GetMidStream returns the MidStream field if non-nil, zero value otherwise.
+
+### GetMidStreamOk
+
+`func (o *AiServiceError) GetMidStreamOk() (*bool, bool)`
+
+GetMidStreamOk returns a tuple with the MidStream field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMidStream
+
+`func (o *AiServiceError) SetMidStream(v bool)`
+
+SetMidStream sets MidStream field to given value.
+
+### HasMidStream
+
+`func (o *AiServiceError) HasMidStream() bool`
+
+HasMidStream returns a boolean if a field has been set.
 
 ### GetOriginalStatusCode
 

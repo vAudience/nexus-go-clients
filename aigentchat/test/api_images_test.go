@@ -69,9 +69,9 @@ func Test_aigentchat_ImagesAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var orgId string
-		var id string
+		var imageId string
 
-		resp, httpRes, err := apiClient.ImagesAPI.DeleteImage(context.Background(), orgId, id).Execute()
+		resp, httpRes, err := apiClient.ImagesAPI.DeleteImage(context.Background(), orgId, imageId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

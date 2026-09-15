@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -90,7 +90,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/0.47.2/go",
+		UserAgent:        "OpenAPI-Generator/0.49.3/go",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{

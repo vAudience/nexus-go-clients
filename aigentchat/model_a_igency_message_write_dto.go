@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -27,7 +27,7 @@ type AIgencyMessageWriteDto struct {
 	ChannelName string `json:"channel_name"`
 	Content *AIgencyMessageContentList `json:"content,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
-	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	Parameters *AIgencyMessageCompletionParameters `json:"parameters,omitempty"`
 	ReferenceId *string `json:"reference_id,omitempty"`
 	ResponseToId *string `json:"response_to_id,omitempty"`
 	SenderConversationRole ConversationRole `json:"sender_conversation_role"`
@@ -223,19 +223,19 @@ func (o *AIgencyMessageWriteDto) SetMetaData(v map[string]interface{}) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *AIgencyMessageWriteDto) GetParameters() map[string]interface{} {
+func (o *AIgencyMessageWriteDto) GetParameters() AIgencyMessageCompletionParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret map[string]interface{}
+		var ret AIgencyMessageCompletionParameters
 		return ret
 	}
-	return o.Parameters
+	return *o.Parameters
 }
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessageWriteDto) GetParametersOk() (map[string]interface{}, bool) {
+func (o *AIgencyMessageWriteDto) GetParametersOk() (*AIgencyMessageCompletionParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Parameters, true
 }
@@ -249,9 +249,9 @@ func (o *AIgencyMessageWriteDto) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given map[string]interface{} and assigns it to the Parameters field.
-func (o *AIgencyMessageWriteDto) SetParameters(v map[string]interface{}) {
-	o.Parameters = v
+// SetParameters gets a reference to the given AIgencyMessageCompletionParameters and assigns it to the Parameters field.
+func (o *AIgencyMessageWriteDto) SetParameters(v AIgencyMessageCompletionParameters) {
+	o.Parameters = &v
 }
 
 // GetReferenceId returns the ReferenceId field value if set, zero value otherwise.

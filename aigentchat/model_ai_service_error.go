@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -22,7 +22,10 @@ var _ MappedNullable = &AiServiceError{}
 // AiServiceError struct for AiServiceError
 type AiServiceError struct {
 	ErrorCode ApiErrorCode `json:"error_code"`
+	// Message is the client-facing summary of the failure, derived from ErrorCode by ClientMessageForAiServiceErrorCode. It never carries provider text: it is persisted on the message, fanned out over SSE and written into HTTP error bodies.
 	Message string `json:"message"`
+	// MidStream is true when the provider failed after at least one delta of this call had already been delivered to the streaming callback. The content the client saw cannot be retracted, so AIgent never retries such an error, whatever its StatusCode. An in-band provider error on an already-open stream carries the stream's own HTTP status (typically 200) in OriginalStatusCode.
+	MidStream *bool `json:"mid_stream,omitempty"`
 	OriginalStatusCode int32 `json:"original_status_code"`
 	StatusCode int32 `json:"status_code"`
 	AdditionalProperties map[string]interface{}
@@ -99,6 +102,38 @@ func (o *AiServiceError) SetMessage(v string) {
 	o.Message = v
 }
 
+// GetMidStream returns the MidStream field value if set, zero value otherwise.
+func (o *AiServiceError) GetMidStream() bool {
+	if o == nil || IsNil(o.MidStream) {
+		var ret bool
+		return ret
+	}
+	return *o.MidStream
+}
+
+// GetMidStreamOk returns a tuple with the MidStream field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiServiceError) GetMidStreamOk() (*bool, bool) {
+	if o == nil || IsNil(o.MidStream) {
+		return nil, false
+	}
+	return o.MidStream, true
+}
+
+// HasMidStream returns a boolean if a field has been set.
+func (o *AiServiceError) HasMidStream() bool {
+	if o != nil && !IsNil(o.MidStream) {
+		return true
+	}
+
+	return false
+}
+
+// SetMidStream gets a reference to the given bool and assigns it to the MidStream field.
+func (o *AiServiceError) SetMidStream(v bool) {
+	o.MidStream = &v
+}
+
 // GetOriginalStatusCode returns the OriginalStatusCode field value
 func (o *AiServiceError) GetOriginalStatusCode() int32 {
 	if o == nil {
@@ -159,6 +194,9 @@ func (o AiServiceError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["error_code"] = o.ErrorCode
 	toSerialize["message"] = o.Message
+	if !IsNil(o.MidStream) {
+		toSerialize["mid_stream"] = o.MidStream
+	}
 	toSerialize["original_status_code"] = o.OriginalStatusCode
 	toSerialize["status_code"] = o.StatusCode
 
@@ -209,6 +247,7 @@ func (o *AiServiceError) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "error_code")
 		delete(additionalProperties, "message")
+		delete(additionalProperties, "mid_stream")
 		delete(additionalProperties, "original_status_code")
 		delete(additionalProperties, "status_code")
 		o.AdditionalProperties = additionalProperties

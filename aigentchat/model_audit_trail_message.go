@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -32,7 +32,7 @@ type AuditTrailMessage struct {
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	Parameters *AIgencyMessageCompletionParameters `json:"parameters,omitempty"`
 	ReferenceId *string `json:"reference_id,omitempty"`
 	ResponseToId *string `json:"response_to_id,omitempty"`
 	SenderConversationRole ConversationRole `json:"sender_conversation_role"`
@@ -43,6 +43,7 @@ type AuditTrailMessage struct {
 	TokenDirection TokenDirection `json:"token_direction"`
 	Type AIgencyMessageType `json:"type"`
 	UpdatedAt int64 `json:"updated_at"`
+	UsedCredits *float64 `json:"used_credits,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -368,19 +369,19 @@ func (o *AuditTrailMessage) SetOwnerOrganizationId(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *AuditTrailMessage) GetParameters() map[string]interface{} {
+func (o *AuditTrailMessage) GetParameters() AIgencyMessageCompletionParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret map[string]interface{}
+		var ret AIgencyMessageCompletionParameters
 		return ret
 	}
-	return o.Parameters
+	return *o.Parameters
 }
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditTrailMessage) GetParametersOk() (map[string]interface{}, bool) {
+func (o *AuditTrailMessage) GetParametersOk() (*AIgencyMessageCompletionParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Parameters, true
 }
@@ -394,9 +395,9 @@ func (o *AuditTrailMessage) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given map[string]interface{} and assigns it to the Parameters field.
-func (o *AuditTrailMessage) SetParameters(v map[string]interface{}) {
-	o.Parameters = v
+// SetParameters gets a reference to the given AIgencyMessageCompletionParameters and assigns it to the Parameters field.
+func (o *AuditTrailMessage) SetParameters(v AIgencyMessageCompletionParameters) {
+	o.Parameters = &v
 }
 
 // GetReferenceId returns the ReferenceId field value if set, zero value otherwise.
@@ -671,6 +672,38 @@ func (o *AuditTrailMessage) SetUpdatedAt(v int64) {
 	o.UpdatedAt = v
 }
 
+// GetUsedCredits returns the UsedCredits field value if set, zero value otherwise.
+func (o *AuditTrailMessage) GetUsedCredits() float64 {
+	if o == nil || IsNil(o.UsedCredits) {
+		var ret float64
+		return ret
+	}
+	return *o.UsedCredits
+}
+
+// GetUsedCreditsOk returns a tuple with the UsedCredits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuditTrailMessage) GetUsedCreditsOk() (*float64, bool) {
+	if o == nil || IsNil(o.UsedCredits) {
+		return nil, false
+	}
+	return o.UsedCredits, true
+}
+
+// HasUsedCredits returns a boolean if a field has been set.
+func (o *AuditTrailMessage) HasUsedCredits() bool {
+	if o != nil && !IsNil(o.UsedCredits) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedCredits gets a reference to the given float64 and assigns it to the UsedCredits field.
+func (o *AuditTrailMessage) SetUsedCredits(v float64) {
+	o.UsedCredits = &v
+}
+
 func (o AuditTrailMessage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -719,6 +752,9 @@ func (o AuditTrailMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["token_direction"] = o.TokenDirection
 	toSerialize["type"] = o.Type
 	toSerialize["updated_at"] = o.UpdatedAt
+	if !IsNil(o.UsedCredits) {
+		toSerialize["used_credits"] = o.UsedCredits
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -797,6 +833,7 @@ func (o *AuditTrailMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "token_direction")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "used_credits")
 		o.AdditionalProperties = additionalProperties
 	}
 

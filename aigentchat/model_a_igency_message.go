@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -39,7 +39,8 @@ type AIgencyMessage struct {
 	Id string `json:"id"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
 	OwnerOrganizationId string `json:"owner_organization_id"`
-	Parameters map[string]interface{} `json:"parameters,omitempty"`
+	// CompletionParameters is the effective completion configuration that produced this message pair; set on both messages of a pair, nil for messages not created by a chat completion.
+	Parameters *AIgencyMessageCompletionParameters `json:"parameters,omitempty"`
 	ReferenceId *string `json:"reference_id,omitempty"`
 	RequestInputTokens *int32 `json:"request_input_tokens,omitempty"`
 	RequestOutputTokens *int32 `json:"request_output_tokens,omitempty"`
@@ -53,6 +54,8 @@ type AIgencyMessage struct {
 	TokenDirection TokenDirection `json:"token_direction"`
 	Type AIgencyMessageType `json:"type"`
 	UpdatedAt int64 `json:"updated_at"`
+	// UsedCredits is the execution log's recorded billing amount for this turn (1 credit == 1 EUR): its FinalCostInEuro, including multipliers and the minimal-cost floor. The log is recorded even when the budget debit itself fails, so this is what the turn was billed, not proof that the debit succeeded. Set only on the assistant message once tracked (success and cancel); 0 on the user message and on error paths.
+	UsedCredits *float64 `json:"used_credits,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -531,19 +534,19 @@ func (o *AIgencyMessage) SetOwnerOrganizationId(v string) {
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *AIgencyMessage) GetParameters() map[string]interface{} {
+func (o *AIgencyMessage) GetParameters() AIgencyMessageCompletionParameters {
 	if o == nil || IsNil(o.Parameters) {
-		var ret map[string]interface{}
+		var ret AIgencyMessageCompletionParameters
 		return ret
 	}
-	return o.Parameters
+	return *o.Parameters
 }
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AIgencyMessage) GetParametersOk() (map[string]interface{}, bool) {
+func (o *AIgencyMessage) GetParametersOk() (*AIgencyMessageCompletionParameters, bool) {
 	if o == nil || IsNil(o.Parameters) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Parameters, true
 }
@@ -557,9 +560,9 @@ func (o *AIgencyMessage) HasParameters() bool {
 	return false
 }
 
-// SetParameters gets a reference to the given map[string]interface{} and assigns it to the Parameters field.
-func (o *AIgencyMessage) SetParameters(v map[string]interface{}) {
-	o.Parameters = v
+// SetParameters gets a reference to the given AIgencyMessageCompletionParameters and assigns it to the Parameters field.
+func (o *AIgencyMessage) SetParameters(v AIgencyMessageCompletionParameters) {
+	o.Parameters = &v
 }
 
 // GetReferenceId returns the ReferenceId field value if set, zero value otherwise.
@@ -930,6 +933,38 @@ func (o *AIgencyMessage) SetUpdatedAt(v int64) {
 	o.UpdatedAt = v
 }
 
+// GetUsedCredits returns the UsedCredits field value if set, zero value otherwise.
+func (o *AIgencyMessage) GetUsedCredits() float64 {
+	if o == nil || IsNil(o.UsedCredits) {
+		var ret float64
+		return ret
+	}
+	return *o.UsedCredits
+}
+
+// GetUsedCreditsOk returns a tuple with the UsedCredits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AIgencyMessage) GetUsedCreditsOk() (*float64, bool) {
+	if o == nil || IsNil(o.UsedCredits) {
+		return nil, false
+	}
+	return o.UsedCredits, true
+}
+
+// HasUsedCredits returns a boolean if a field has been set.
+func (o *AIgencyMessage) HasUsedCredits() bool {
+	if o != nil && !IsNil(o.UsedCredits) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedCredits gets a reference to the given float64 and assigns it to the UsedCredits field.
+func (o *AIgencyMessage) SetUsedCredits(v float64) {
+	o.UsedCredits = &v
+}
+
 func (o AIgencyMessage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1000,6 +1035,9 @@ func (o AIgencyMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize["token_direction"] = o.TokenDirection
 	toSerialize["type"] = o.Type
 	toSerialize["updated_at"] = o.UpdatedAt
+	if !IsNil(o.UsedCredits) {
+		toSerialize["used_credits"] = o.UsedCredits
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1087,6 +1125,7 @@ func (o *AIgencyMessage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "token_direction")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "used_credits")
 		o.AdditionalProperties = additionalProperties
 	}
 

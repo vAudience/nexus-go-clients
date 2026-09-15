@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
 **OwnerOrganizationId** | **string** |  | 
-**Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**Parameters** | Pointer to [**AIgencyMessageCompletionParameters**](AIgencyMessageCompletionParameters.md) | CompletionParameters is the effective completion configuration that produced this message pair; set on both messages of a pair, nil for messages not created by a chat completion. | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
 **RequestInputTokens** | Pointer to **int32** |  | [optional] 
 **RequestOutputTokens** | Pointer to **int32** |  | [optional] 
@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **TokenDirection** | [**TokenDirection**](TokenDirection.md) |  | 
 **Type** | [**AIgencyMessageType**](AIgencyMessageType.md) |  | 
 **UpdatedAt** | **int64** |  | 
+**UsedCredits** | Pointer to **float64** | UsedCredits is the execution log&#39;s recorded billing amount for this turn (1 credit &#x3D;&#x3D; 1 EUR): its FinalCostInEuro, including multipliers and the minimal-cost floor. The log is recorded even when the budget debit itself fails, so this is what the turn was billed, not proof that the debit succeeded. Set only on the assistant message once tracked (success and cancel); 0 on the user message and on error paths. | [optional] 
 
 ## Methods
 
@@ -411,20 +412,20 @@ SetOwnerOrganizationId sets OwnerOrganizationId field to given value.
 
 ### GetParameters
 
-`func (o *AIgencyMessage) GetParameters() map[string]interface{}`
+`func (o *AIgencyMessage) GetParameters() AIgencyMessageCompletionParameters`
 
 GetParameters returns the Parameters field if non-nil, zero value otherwise.
 
 ### GetParametersOk
 
-`func (o *AIgencyMessage) GetParametersOk() (*map[string]interface{}, bool)`
+`func (o *AIgencyMessage) GetParametersOk() (*AIgencyMessageCompletionParameters, bool)`
 
 GetParametersOk returns a tuple with the Parameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParameters
 
-`func (o *AIgencyMessage) SetParameters(v map[string]interface{})`
+`func (o *AIgencyMessage) SetParameters(v AIgencyMessageCompletionParameters)`
 
 SetParameters sets Parameters field to given value.
 
@@ -728,6 +729,31 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
+
+### GetUsedCredits
+
+`func (o *AIgencyMessage) GetUsedCredits() float64`
+
+GetUsedCredits returns the UsedCredits field if non-nil, zero value otherwise.
+
+### GetUsedCreditsOk
+
+`func (o *AIgencyMessage) GetUsedCreditsOk() (*float64, bool)`
+
+GetUsedCreditsOk returns a tuple with the UsedCredits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedCredits
+
+`func (o *AIgencyMessage) SetUsedCredits(v float64)`
+
+SetUsedCredits sets UsedCredits field to given value.
+
+### HasUsedCredits
+
+`func (o *AIgencyMessage) HasUsedCredits() bool`
+
+HasUsedCredits returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

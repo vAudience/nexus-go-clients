@@ -3,7 +3,7 @@ vAudience AIgentChat API
 
 chat and api server for AIgents
 
-API version: 0.47.2
+API version: 0.49.3
 Contact: contact@vaudience.ai
 */
 
@@ -525,7 +525,7 @@ type ApiDeleteImageRequest struct {
 	ctx context.Context
 	ApiService *ImagesAPIService
 	orgId string
-	id string
+	imageId string
 }
 
 func (r ApiDeleteImageRequest) Execute() (*AIgencyImage, *http.Response, error) {
@@ -539,15 +539,15 @@ Delete an image by its ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param orgId organization ID
- @param id Image ID
+ @param imageId Image ID
  @return ApiDeleteImageRequest
 */
-func (a *ImagesAPIService) DeleteImage(ctx context.Context, orgId string, id string) ApiDeleteImageRequest {
+func (a *ImagesAPIService) DeleteImage(ctx context.Context, orgId string, imageId string) ApiDeleteImageRequest {
 	return ApiDeleteImageRequest{
 		ApiService: a,
 		ctx: ctx,
 		orgId: orgId,
-		id: id,
+		imageId: imageId,
 	}
 }
 
@@ -566,9 +566,9 @@ func (a *ImagesAPIService) DeleteImageExecute(r ApiDeleteImageRequest) (*AIgency
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{org_id}/images/{id}"
+	localVarPath := localBasePath + "/v1/organizations/{org_id}/images/{image_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"org_id"+"}", url.PathEscape(parameterValueToString(r.orgId, "orgId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"image_id"+"}", url.PathEscape(parameterValueToString(r.imageId, "imageId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -801,6 +801,39 @@ func (a *ImagesAPIService) GetImageExecute(r ApiGetImageRequest) (*AIgencyImage,
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError

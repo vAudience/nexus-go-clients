@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CancelImageGeneration**](ImagesAPI.md#CancelImageGeneration) | **Post** /v1/organizations/{org_id}/images/cancel/{generation_id} | Cancel an image generation
 [**CreateImages**](ImagesAPI.md#CreateImages) | **Post** /v1/organizations/{org_id}/images | Generates a number of images
 [**CreateImagesCosts**](ImagesAPI.md#CreateImagesCosts) | **Post** /v1/organizations/{org_id}/images/cost | Get the total costs of an image generation request.
-[**DeleteImage**](ImagesAPI.md#DeleteImage) | **Delete** /v1/organizations/{org_id}/images/{id} | Delete an image
+[**DeleteImage**](ImagesAPI.md#DeleteImage) | **Delete** /v1/organizations/{org_id}/images/{image_id} | Delete an image
 [**GetImage**](ImagesAPI.md#GetImage) | **Get** /v1/organizations/{org_id}/images/{image_id} | Get an image
 [**ListImages**](ImagesAPI.md#ListImages) | **Get** /v1/organizations/{org_id}/images | List images
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ## DeleteImage
 
-> AIgencyImage DeleteImage(ctx, orgId, id).Execute()
+> AIgencyImage DeleteImage(ctx, orgId, imageId).Execute()
 
 Delete an image
 
@@ -250,11 +250,11 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	id := "id_example" // string | Image ID
+	imageId := "imageId_example" // string | Image ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ImagesAPI.DeleteImage(context.Background(), orgId, id).Execute()
+	resp, r, err := apiClient.ImagesAPI.DeleteImage(context.Background(), orgId, imageId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.DeleteImage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**id** | **string** | Image ID | 
+**imageId** | **string** | Image ID | 
 
 ### Other Parameters
 

@@ -49,6 +49,7 @@ docs/AIgencyFunctionStatusUpdateData.md
 docs/AIgencyImage.md
 docs/AIgencyImageResults.md
 docs/AIgencyMessage.md
+docs/AIgencyMessageCompletionParameters.md
 docs/AIgencyMessageContent.md
 docs/AIgencyMessageContentList.md
 docs/AIgencyMessageContentType.md
@@ -166,6 +167,7 @@ model_a_igency_function_status_update_data.go
 model_a_igency_image.go
 model_a_igency_image_results.go
 model_a_igency_message.go
+model_a_igency_message_completion_parameters.go
 model_a_igency_message_content.go
 model_a_igency_message_content_list.go
 model_a_igency_message_content_type.go

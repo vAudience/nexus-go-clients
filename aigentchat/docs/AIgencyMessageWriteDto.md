@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ChannelName** | **string** |  | 
 **Content** | Pointer to [**AIgencyMessageContentList**](AIgencyMessageContentList.md) |  | [optional] 
 **MetaData** | Pointer to **map[string]interface{}** |  | [optional] 
-**Parameters** | Pointer to **map[string]interface{}** |  | [optional] 
+**Parameters** | Pointer to [**AIgencyMessageCompletionParameters**](AIgencyMessageCompletionParameters.md) |  | [optional] 
 **ReferenceId** | Pointer to **string** |  | [optional] 
 **ResponseToId** | Pointer to **string** |  | [optional] 
 **SenderConversationRole** | [**ConversationRole**](ConversationRole.md) |  | 
@@ -168,20 +168,20 @@ HasMetaData returns a boolean if a field has been set.
 
 ### GetParameters
 
-`func (o *AIgencyMessageWriteDto) GetParameters() map[string]interface{}`
+`func (o *AIgencyMessageWriteDto) GetParameters() AIgencyMessageCompletionParameters`
 
 GetParameters returns the Parameters field if non-nil, zero value otherwise.
 
 ### GetParametersOk
 
-`func (o *AIgencyMessageWriteDto) GetParametersOk() (*map[string]interface{}, bool)`
+`func (o *AIgencyMessageWriteDto) GetParametersOk() (*AIgencyMessageCompletionParameters, bool)`
 
 GetParametersOk returns a tuple with the Parameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParameters
 
-`func (o *AIgencyMessageWriteDto) SetParameters(v map[string]interface{})`
+`func (o *AIgencyMessageWriteDto) SetParameters(v AIgencyMessageCompletionParameters)`
 
 SetParameters sets Parameters field to given value.
 
