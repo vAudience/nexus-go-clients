@@ -36,7 +36,20 @@ if [ ! -f "$2" ]; then
   echo "No spec file at '$2'." >&2
   exit 1
 fi
-SPEC="$(cd "$(dirname "$2")" && pwd)/$(basename "$2")"
+SPEC="$(cd "$(dirname "$2")" && pwd -P)/$(basename "$2")"
+
+# The rest runs in the repository, so the version check and the generation
+# read the same openapitools.json, also through npx.
+ROOT="$(cd "$(dirname "$0")" && pwd -P)"
+cd "$ROOT"
+
+# <part>/ is replaced below, so the spec can't be inside it.
+case "$SPEC" in
+  "$ROOT/$PART"/*)
+    echo "The spec '$2' is inside ${PART}/, which is replaced: copy it out of the part first." >&2
+    exit 1
+    ;;
+esac
 
 for BIN in go "${GENERATOR[0]}"; do
   if ! command -v "$BIN" > /dev/null; then
@@ -50,7 +63,6 @@ if [ "$FOUND" != "$GENERATOR_VERSION" ]; then
   exit 1
 fi
 
-cd "$(dirname "$0")"
 echo "Generating ${PART} v${VERSION} from ${SPEC}"
 rm -rf "$PART"
 "${GENERATOR[@]}" generate \
