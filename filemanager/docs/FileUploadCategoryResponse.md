@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AcceptedMimeTypes** | Pointer to **[]string** | Upload category settings | [optional] 
-**Category** | Pointer to **string** |  | [optional] 
-**LlmInputType** | Pointer to **string** |  | [optional] 
-**MaxFileSize** | Pointer to **int64** |  | [optional] 
-**MinFileSize** | Pointer to **int64** |  | [optional] 
+**AcceptedMimeTypes** | Pointer to **[]string** | MIME types a file uploaded to this category may have. The type is detected from the file&#39;s content, and from its extension only where content detection is inconclusive (e.g. .docx, .md); the request&#39;s Content-Type is not used. Any other type is rejected with 400 invalid_file_upload_mime_type. | [optional] 
+**Category** | Pointer to **string** | Name of the category, used as the {category} path segment of POST /v1/organizations/{org_id}/files/{category}. | [optional] 
+**LlmInputType** | Pointer to **string** | How a chat passes a file of this category to the model: reference (the message carries only a link to the stored file), embedded (the file is converted to markdown and its content embedded in the message), or multimodal (the file is sent to the model as native multimodal input, such as an image or audio). | [optional] 
+**MaxFileSize** | Pointer to **int64** | Largest accepted file size in bytes, inclusive; a larger file is rejected with 413 invalid_file_upload_size. | [optional] 
+**MinFileSize** | Pointer to **int64** | Smallest accepted file size in bytes, inclusive; a smaller file is rejected with 413 invalid_file_upload_size. | [optional] 
 
 ## Methods
 

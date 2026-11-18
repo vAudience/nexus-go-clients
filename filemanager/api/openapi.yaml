@@ -6,7 +6,7 @@ info:
     name: LicenseRef-Copyrighted
     url: https://www.vaudience.ai
   title: vAudience AI File Manager API
-  version: 0.25.1
+  version: 0.26.0
 servers:
 - url: https://file-manager.dev.ai.vaud.one/
 tags:
@@ -1165,7 +1165,18 @@ paths:
       - Collections
   /v1/organizations/{org_id}/files/categories:
     get:
-      description: Get file upload categories
+      description: "List the upload categories. An upload category is a named set\
+        \ of processing settings that an upload is validated and processed with: the\
+        \ MIME types and file size range it accepts, its processing steps and where\
+        \ the file is stored. A category's category value is the {category} path segment\
+        \ of POST /v1/organizations/{org_id}/files/{category}. Without model_capabilities,\
+        \ every category is returned, in a fixed server-defined order. With model_capabilities,\
+        \ a category is returned only if the caller sends all of its target capabilities\
+        \ (the model capabilities its content needs, which are not part of the response).\
+        \ Categories without target capabilities are never returned. At most one category\
+        \ per llm_input_type is returned: the one with the most target capabilities,\
+        \ or on a tie the one the server defines first. The result is ordered by the\
+        \ categories' server-defined rank, then by category name."
       operationId: GetFileUploadCategories
       parameters:
       - description: organization ID
@@ -1174,10 +1185,12 @@ paths:
         required: true
         schema:
           type: string
-      - description: "Comma-separated model capabilities the caller supports (e.g.\
-          \ text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories\
-          \ the caller fully supports (all of a category's target capabilities); omit\
-          \ to list every category."
+      - description: "Comma-separated model capabilities the caller's model supports:\
+          \ text-to-text, image-to-text, speech-to-text, pdf-to-text. document-to-text\
+          \ and video-to-text are accepted, but no category requires them yet. Entries\
+          \ are trimmed and empty entries ignored. When set, the list is filtered\
+          \ as the endpoint description explains (all target capabilities required,\
+          \ at most one category per llm_input_type). Omit it to list every category."
         in: query
         name: model_capabilities
         schema:
@@ -1280,7 +1293,9 @@ paths:
         required: true
         schema:
           type: string
-      - description: category ID
+      - description: "upload category, one of the category values returned by GET\
+          \ /v1/organizations/{org_id}/files/categories; an unknown category returns\
+          \ 404"
         in: path
         name: category
         required: true
@@ -2126,18 +2141,32 @@ components:
         min_file_size: 6
       properties:
         accepted_mime_types:
-          description: Upload category settings
+          description: "MIME types a file uploaded to this category may have. The\
+            \ type is detected from the file's content, and from its extension only\
+            \ where content detection is inconclusive (e.g. .docx, .md); the request's\
+            \ Content-Type is not used. Any other type is rejected with 400 invalid_file_upload_mime_type."
           items:
             type: string
           type: array
         category:
+          description: "Name of the category, used as the {category} path segment\
+            \ of POST /v1/organizations/{org_id}/files/{category}."
           type: string
         llm_input_type:
+          description: "How a chat passes a file of this category to the model: reference\
+            \ (the message carries only a link to the stored file), embedded (the\
+            \ file is converted to markdown and its content embedded in the message),\
+            \ or multimodal (the file is sent to the model as native multimodal input,\
+            \ such as an image or audio)."
           type: string
         max_file_size:
+          description: "Largest accepted file size in bytes, inclusive; a larger file\
+            \ is rejected with 413 invalid_file_upload_size."
           format: int64
           type: integer
         min_file_size:
+          description: "Smallest accepted file size in bytes, inclusive; a smaller\
+            \ file is rejected with 413 invalid_file_upload_size."
           format: int64
           type: integer
       type: object
