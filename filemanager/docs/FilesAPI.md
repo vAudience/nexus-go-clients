@@ -243,7 +243,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	modelCapabilities := "modelCapabilities_example" // string | Comma-separated model capabilities the caller supports (e.g. text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories the caller fully supports (all of a category's target capabilities); omit to list every category. (optional)
+	modelCapabilities := "modelCapabilities_example" // string | Comma-separated model capabilities the caller's model supports: text-to-text, image-to-text, speech-to-text, pdf-to-text. document-to-text and video-to-text are accepted, but no category requires them yet. Entries are trimmed and empty entries ignored. When set, the list is filtered as the endpoint description explains (all target capabilities required, at most one category per llm_input_type). Omit it to list every category. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -273,7 +273,7 @@ Other parameters are passed through a pointer to a apiGetFileUploadCategoriesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **modelCapabilities** | **string** | Comma-separated model capabilities the caller supports (e.g. text-to-text,image-to-text,speech-to-text,pdf-to-text). Returns only categories the caller fully supports (all of a category&#39;s target capabilities); omit to list every category. | 
+ **modelCapabilities** | **string** | Comma-separated model capabilities the caller&#39;s model supports: text-to-text, image-to-text, speech-to-text, pdf-to-text. document-to-text and video-to-text are accepted, but no category requires them yet. Entries are trimmed and empty entries ignored. When set, the list is filtered as the endpoint description explains (all target capabilities required, at most one category per llm_input_type). Omit it to list every category. | 
 
 ### Return type
 
@@ -391,7 +391,7 @@ import (
 
 func main() {
 	orgId := "orgId_example" // string | organization ID
-	category := "category_example" // string | category ID
+	category := "category_example" // string | upload category, one of the category values returned by GET /v1/organizations/{org_id}/files/categories; an unknown category returns 404
 	file := os.NewFile(1234, "some_file") // *os.File | File to upload
 	forUserId := "forUserId_example" // string | User ID to upload the file for (optional)
 	collectionId := "collectionId_example" // string | Collection ID to upload into (required for the collection_file category) (optional)
@@ -416,7 +416,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgId** | **string** | organization ID | 
-**category** | **string** | category ID | 
+**category** | **string** | upload category, one of the category values returned by GET /v1/organizations/{org_id}/files/categories; an unknown category returns 404 | 
 
 ### Other Parameters
 
